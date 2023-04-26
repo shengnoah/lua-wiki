@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/%E5%9C%A8Mac%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%B0%86%E9%BB%98%E8%AE%A4%E7%9A%84GCC%E5%88%87%E6%8D%A2%E5%88%B0LLVM%E7%9A%84Clang/"><span class="title">在Mac系统上将默认的GCC切换到LLVM的Clang</span></a><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85Conda%E7%9A%84%E6%AD%A5%E9%AA%A4/"><span class="title">CentOS8下安装Conda的步骤</span></a><a class="item title" href="/2023/04/26/%E5%9C%A8Mac%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%B0%86%E9%BB%98%E8%AE%A4%E7%9A%84GCC%E5%88%87%E6%8D%A2%E5%88%B0LLVM%E7%9A%84Clang/"><span class="title">在Mac系统上将默认的GCC切换到LLVM的Clang</span></a><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,10 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/go6.4.html">
+  <div class="post-list post"><a class="post-card post " href="/go6.3.html">
+<article class="md-text"><h2 class="post-title">go6.3</h2><div class="excerpt"><p>6.3 通道并发编程的挑战主要在于数据共享。如果你的go协程没有共享数据，你就不需要担心同步他们。但是，对于所有的系统，这不是一个选择。实际上，很多系统以完全相反的目标构建：在多个请求中共享数据。内存缓存或者数据库都是这方面的好例子。这正变得越来越流行的事实。
+通道通过解决数据共享问题，让并发编程变得更加清晰。通道是一个通信管道，它用于go协程之间传递数据。换句话说，go协程可以通过通道，传...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go6.4.html">
 <article class="md-text"><h2 class="post-title">go6.4</h2><div class="excerpt"><p>6.4 继续之前如果你才开始进入并发编程的世界，它看起来似乎势不可挡。它绝对需要非常多的关注。go目标就在于让并发更容易。
 go协程很有效的抽象了我们需要并发执行的代码。通道通过消除共享数据，帮助我们消除了一些当数据共享时导致的严重bug。这不仅仅是消除bug，但是它改变了我们如何进行并发编程。你可以认为是通过信息传递实现并发编程，而不是那些容易出错的代码。
 话虽如此，我仍然在广泛使用syn...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
@@ -182,13 +185,10 @@ http://creativecommons.org/licenses/by-nc...</p></div><div class="meta cap"><spa
 
 你也许觉得奇怪，这样做有什么用。接口可以使你的代码从具体的实现中去耦。例如，我们可以会有很多种类型的loggers：
 123type SqlLogger struct &#123; ... &#125;t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go4.1.html">
-<article class="md-text"><h2 class="post-title">go4.1</h2><div class="excerpt"><p>4.1 包为了理解更复杂的库和组织系统，我们需要学习包。在go语言中，包名和你的go语言工作空间的目录结构有关。如果我们想要构建一个购物系统，我们开始可能以shopping作为包名，并将源代码放入$GOPATH/src/shopping。
-我们不想把一切东西都放入这个文件夹中。例如，可能我想在它自己的文件夹隔离一些数据库逻辑。要达到此目的，我们可以在$GOPATH/src/shopping中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>
-  <a class="extend prev" rel="prev" href="/page/142/"></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/141/">141</a><a class="page-number" href="/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/page/144/">144</a><a class="page-number" href="/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/144/"></a>
+  <a class="extend prev" rel="prev" href="/page/142/"></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/141/">141</a><a class="page-number" href="/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/page/144/">144</a><a class="page-number" href="/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/page/183/">183</a><a class="extend next" rel="next" href="/page/144/"></a>
   </div>
 
 
