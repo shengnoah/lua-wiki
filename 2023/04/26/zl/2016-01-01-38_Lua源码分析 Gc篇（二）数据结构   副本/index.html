@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua源码分析 Gc篇（二）数据结构   副本 - Lua教程</title>
+
+  
+    <meta name="description" content="[TOC]  这是这个gc系列的第二篇，这一篇主要讲GC用到的数据结构，有助于理解gc的，所以放在前面   栈就是我们平时写代码接触最多的lua_State。在实现上是用一个数组实现的。每个成员类型是TValue，看下文详细介绍。这里不打算详细介绍栈的结构和内容，只会介绍和gc相关的一些内容，主要是帮助我们更好的理解lua的gc。  定义 下面是lua_State的定义，会看到栈的身影，top和b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua源码分析 Gc篇（二）数据结构   副本">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-38_Lua%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%20Gc%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20%20%20%E5%89%AF%E6%9C%AC/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="[TOC]  这是这个gc系列的第二篇，这一篇主要讲GC用到的数据结构，有助于理解gc的，所以放在前面   栈就是我们平时写代码接触最多的lua_State。在实现上是用一个数组实现的。每个成员类型是TValue，看下文详细介绍。这里不打算详细介绍栈的结构和内容，只会介绍和gc相关的一些内容，主要是帮助我们更好的理解lua的gc。  定义 下面是lua_State的定义，会看到栈的身影，top和b">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.267Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.267Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua源码分析 Gc篇（二）数据结构   副本</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E5%9B%BE"><span class="toc-text">简单的图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%94%E7%96%91%E8%A7%A3%E6%83%91"><span class="toc-text">答疑解惑</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua源码分析 Gc篇（二）数据结构   副本</span></h1>
+<p>[TOC]</p>
+
+<p>这是这个gc系列的第二篇，这一篇主要讲GC用到的数据结构，有助于理解gc的，所以放在前面</p>
+
+
+<p>栈就是我们平时写代码接触最多的lua_State。在实现上是用一个数组实现的。每个成员类型是TValue，看下文详细介绍。这里不打算详细介绍栈的结构和内容，只会介绍和gc相关的一些内容，主要是帮助我们更好的理解lua的gc。</p>
+
+<h2 id="定义">定义</h2>
+<p>下面是lua_State的定义，会看到栈的身影，top和base指针。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct lua_State &#123;
+  CommonHeader;
+  lu_byte status;
+  StkId top;  /* first free slot in the stack */
+  StkId base;  /* base of current function */
+  global_State *l_G;
+  CallInfo *ci;  /* call info for current function */
+  const Instruction *savedpc;  /* `savedpc&#39; of current function */
+  StkId stack_last;  /* last free slot in the stack */
+  StkId stack;  /* stack base */
+  CallInfo *end_ci;  /* points after end of ci array*/
+  CallInfo *base_ci;  /* array of CallInfo&#39;s */
+  int stacksize;
+  int size_ci;  /* size of array `base_ci&#39; */
+  unsigned short nCcalls;  /* number of nested C calls */
+  lu_byte hookmask;
+  lu_byte allowhook;
+  int basehookcount;
+  int hookcount;
+  lua_Hook hook;
+  TValue l_gt;  /* table of globals */
+  TValue env;  /* temporary place for environments */
+  GCObject *openupval;  /* list of open upvalues in this stack */
+  GCObject *gclist;
+  struct lua_longjmp *errorJmp;  /* current error recover point */
+  ptrdiff_t errfunc;  /* current error handling function (stack index) */
+&#125;;
+</code></pre></div></div>
+
+<h2 id="简单的图">简单的图</h2>
+
+<p></p>
+
+<p>至于base/top和stack/stack_last、以及base_ci/end_ci之间的关系和区别就不打算详细介绍了。主要是lua的指令操作的实现，以及函数调用的时候也要用到栈，只是他们在这个数组的不同区间。</p>
+
+<h1 id="2栈元素tvalue">2.栈元素TValue</h1>
+<p>这个类型是给栈用的，前面说过栈其实是一个TValue的数组。</p>
+
+<h2 id="定义-1">定义</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef union &#123;
+  GCObject *gc;
+  void *p;
+  lua_Number n;
+  int b;
+&#125; Value;
+
+<p>#define TValuefields    Value value; int tt<br>typedef struct lua_TValue &#123;<br>  TValuefields;<br>&#125; TValue;<br></code></pre></div></div></p>
+<h2 id="说明">说明</h2>
+<ul>
+  <li>TValue，是Value加了一个类型</li>
+</ul>
+
+<p>类型定义：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+** basic types
+*/
+#define LUA_TNONE        (-1)
+#define LUA_TNIL        0
+#define LUA_TBOOLEAN        1
+#define LUA_TLIGHTUSERDATA    2
+#define LUA_TNUMBER        3
+#define LUA_TSTRING        4
+#define LUA_TTABLE        5
+#define LUA_TFUNCTION        6
+#define LUA_TUSERDATA        7
+#define LUA_TTHREAD        8
+</code></pre></div></div>
+
+<ul>
+  <li>可以看到存放真正值的是这是一个union结构</li>
+  <li>用过lua的都知道，lua是一种动态类型语言，所有值都是first-class的。所以代码层就是这个Value</li>
+  <li>简单介绍一下union中成员的含义</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>成员</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GCObject *gc</td>
+      <td>所有的需要gc的对象都是用的这个成员，所以本系列文章只关注这个成员就好了</td>
+    </tr>
+    <tr>
+      <td>void *p</td>
+      <td>存放lightuserdata</td>
+    </tr>
+    <tr>
+      <td>lua_Number n</td>
+      <td>数值类型，这里也可以看出来lua里面用到的整形浮点型都是用这个存储的，就是double类型</td>
+    </tr>
+    <tr>
+      <td>int b</td>
+      <td>bool类型</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>看代码：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// bool类型的宏
+#define setbvalue(obj,x) 
+  &#123; TValue *i_o=(obj); i_o-&gt;value.b=(x); i_o-&gt;tt=LUA_TBOOLEAN; &#125;
+// table类型的宏
+#define sethvalue(L,obj,x) 
+  &#123; TValue *i_o=(obj); 
+    i_o-&gt;value.gc=cast(GCObject *, (x)); i_o-&gt;tt=LUA_TTABLE; 
+    checkliveness(G(L),i_o); &#125;
+</code></pre></div></div>
+
+<h1 id="3gc对象">3.GC对象</h1>
+<p>gc对象就是指lua里面需要被回收的对象，类型是在LUA_TSTRING（4）到LUA_TTHREAD（8）之间（准确来说还有扩展的类型）。开始看的时候，难免会有疑问，lua里面的所有对象不都是放在栈里面的吗？这个gc对象是个什么的存在？</p>
+
+<h2 id="定义-2">定义</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>union GCObject &#123;
+  GCheader gch;
+  union TString ts;
+  union Udata u;
+  union Closure cl;
+  struct Table h;
+  struct Proto p;
+  struct UpVal uv;
+  struct lua_State th;  /* thread */
+&#125;;
+
+<p>&#x2F;&#x2F; head<br>#define CommonHeader    GCObject *next; lu_byte tt; lu_byte marked<br></code></pre></div></div></p>
+<h2 id="说明-1">说明</h2>
+
+<ul>
+  <li>这是一个union结构体</li>
+  <li><strong>这里必须提醒注意下这个GCheader</strong>，可以看到前面一个GCheader gch的定义，是跟类型无关的。后面在解答上面疑问的时候，一并说明一下。这个CommonHeader实现了一个链表结构(next)，也指明了这个对象的类型(tt)，以及颜色(marked)。</li>
+  <li>会看到除了前面的基本类型之外，多了几个可以回收的类型</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+** Extra tags for non-values
+*/
+#define LUA_TPROTO    (LAST_TAG+1)
+#define LUA_TUPVAL    (LAST_TAG+2)
+#define LUA_TDEADKEY    (LAST_TAG+3)
+</code></pre></div></div>
+
+<h1 id="4gc链表">4.gc链表</h1>
+<p>这个链表是记录了lua里面所有的可回收对象，另外注意这是一个单向链表。正因为是单向链表，为了效率，才不会去整个遍历一遍，才会再增加扫描的链表等，这些后面篇章详细介绍。</p>
+
+<h2 id="定义-3">定义</h2>
+
+<p>这个链表的指针是放在global_State中<em>rootgc</em>中的。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+** `global state&#39;, shared by all threads of this state
+*/
+typedef struct global_State &#123;
+  stringtable strt;  /* hash table for strings */
+  lua_Alloc frealloc;  /* function to reallocate memory */
+  void *ud;         /* auxiliary data to `frealloc&#39; */
+  lu_byte currentwhite;
+  lu_byte gcstate;  /* state of garbage collector */
+  int sweepstrgc;  /* position of sweep in `strt&#39; */
+  GCObject *rootgc;  /* list of all collectable objects */
+  GCObject **sweepgc;  /* position of sweep in `rootgc&#39; */
+  GCObject *gray;  /* list of gray objects */
+  GCObject *grayagain;  /* list of objects to be traversed atomically */
+  GCObject *weak;  /* list of weak tables (to be cleared) */
+  GCObject *tmudata;  /* last element of list of userdata to be GC */
+  Mbuffer buff;  /* temporary buffer for string concatentation */
+  lu_mem GCthreshold;
+  lu_mem totalbytes;  /* number of bytes currently allocated */
+  lu_mem estimate;  /* an estimate of number of bytes actually in use */
+  lu_mem gcdept;  /* how much GC is `behind schedule&#39; */
+  int gcpause;  /* size of pause between successive GCs */
+  int gcstepmul;  /* GC `granularity&#39; */
+  lua_CFunction panic;  /* to be called in unprotected errors */
+  TValue l_registry;
+  struct lua_State *mainthread;
+  UpVal uvhead;  /* head of double-linked list of all open upvalues */
+  struct Table *mt[NUM_TAGS];  /* metatables for basic types */
+  TString *tmname[TM_N];  /* array with tag-method names */
+&#125; global_State;
+</code></pre></div></div>
+
+<p>这个结构放了所有关于gc的内容(对着后面的注释看一下)：</p>
+
+<ul>
+  <li>currentwhite：这个就是<a href="">第一篇</a>中提到的gc流程中的当前白色，如果清理阶段某个对象是otherwhite，那么他就会被清理掉</li>
+  <li>gcstate：控制gc流程的，后面流程中说的状态就是记录在这里</li>
+  <li>rootgc：前面刚提到过，所有可回收的gc对象单向链表</li>
+  <li>gray：为了gc的效率增加的一个gc链表</li>
+  <li>grayagain：为了实现增量式gc，过程中处理中断问题的一个链表</li>
+  <li>GCthreshold，totalbytes，estimate，gcdept，gcpause：这几个单次gc相关的控制或者状态量，直接关系到lua提供的接口<em>collectgarbage</em></li>
+  <li>另外一些是全局的一些变量的定义，metatable等。这些跟gc扫描不会遍历整个gc链表有关系。</li>
+</ul>
+
+<h1 id="5栈和gc链表的关系">5.栈和gc链表的关系</h1>
+<p>栈没有细说，但是他和gc链表的关系必须详细说明一下。如下图所示</p>
+
+<p></p>
+
+<h2 id="答疑解惑">答疑解惑</h2>
+<p>就着问题，说一下栈和gc链表之间的关系。</p>
+
+<ul>
+  <li>1.GCObject的存在</li>
+</ul>
+
+<p>这里就需要了解gc链表和栈中元素的关系。lua的栈是一个数组，里面真正存放了lua里面的所有对象。gc链表存放了lua所有的可回收对象，而事实上gc链表存放的只是所有可回收对象的指针，真正的对象还是以TValue（GCObject* gc成员）的形式放在lua栈中的。当然，对象真正的内容是在堆上（需要自己回收）。而栈和gc链表中存在的只是真实对象的指针，不同类型的结构不一样，所以以这种方式才能存在一起管理</p>
+
+<ul>
+  <li>2.怎么做到的？</li>
+</ul>
+
+<p>前面提到了CommonHead，它在栈和gc链表关系中起了关键的作用。有相同的头部，所以可以通过强制转换在TValue和GCObject直接为了当时需要进行切换.看源码更清晰了，能够转换为GCObject的结构体都是必须包含这个头部的，需要GC的结构都要添加这个头部，如下所所示：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//
+struct lua_State &#123;
+  CommonHeader;
+
+<p>&#x2F;&#x2F;<br>typedef struct Table &#123;<br>  CommonHeader;</p>
+<p>&#x2F;&#x2F;<br>typedef struct UpVal &#123;<br>  CommonHeader;</p>
+<p>&#x2F;&#x2F;<br>typedef struct Proto &#123;<br>  CommonHeader;</p>
+<p>&#x2F;&#x2F;<br>typedef union Udata &#123;<br>  L_Umaxalign dummy;  &#x2F;* ensures maximum alignment for &#96;local&#39; udata *&#x2F;<br>  struct &#123;<br>    CommonHeader;</p>
+<p>typedef union TString &#123;<br>  L_Umaxalign dummy;  &#x2F;* ensures maximum alignment for strings *&#x2F;<br>  struct &#123;<br>    CommonHeader;<br></code></pre></div></div></p>
+<h1 id="总结">总结</h1>
+<ul>
+  <li>这里并没有把所有的结构体都解释一遍，userdata，upvalue相关的都是比较细节的东西，可以单独看相关的内容，在全局理解的情况下根据自身特性去看也会很容易明白</li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-389_Lua%E4%B9%8BTable%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">Lua之Table个人总结</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-390_PIL.9Lua%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/">PIL.9Lua中的闭包</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

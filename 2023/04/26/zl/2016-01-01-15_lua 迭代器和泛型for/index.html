@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua 迭代器和泛型for - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;h2 id&#x3D;&quot;迭代器和闭包&quot;&gt;迭代器和闭包&lt;&#x2F;h2&gt;     迭代器可以遍历集合的每一个元素，在lua中常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。   迭代器需要保留上一次成功调用的状态和下一次成功调用的状态，也就是它知道来自于哪里和将要前往哪里。闭包可以实现这个任务。   闭包是一个内部函数，它可以访问一个或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua 迭代器和泛型for">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-15_lua%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E6%B3%9B%E5%9E%8Bfor/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;h2 id&#x3D;&quot;迭代器和闭包&quot;&gt;迭代器和闭包&lt;&#x2F;h2&gt;     迭代器可以遍历集合的每一个元素，在lua中常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。   迭代器需要保留上一次成功调用的状态和下一次成功调用的状态，也就是它知道来自于哪里和将要前往哪里。闭包可以实现这个任务。   闭包是一个内部函数，它可以访问一个或">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.246Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.246Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua 迭代器和泛型for</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8Bfor"><span class="toc-text">泛型for</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8Bfor%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-text">泛型for的执行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pairs"><span class="toc-text">pairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ipairs"><span class="toc-text">ipairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#next"><span class="toc-text">next</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua 迭代器和泛型for</span></h1>
+<pre><code>          &lt;h2 id=&quot;迭代器和闭包&quot;&gt;迭代器和闭包&lt;/h2&gt;
+</code></pre>
+<ol>
+  <li>迭代器可以遍历集合的每一个元素，在lua中常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。</li>
+  <li>迭代器需要保留上一次成功调用的状态和下一次成功调用的状态，也就是它知道来自于哪里和将要前往哪里。闭包可以实现这个任务。</li>
+  <li>闭包是一个内部函数，它可以访问一个或者多个外部函数的局部变量。每次闭包成功调用后这些局部变量都保存他们的值(状态)。</li>
+  <li>所以一个典型的闭包结构包含两个函数：一个是闭包自己，另一个是工厂（创建闭包的函数）</li>
+</ol>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">--一个简单的迭代器输出table的元素</span>
+<span class="kd">local</span> <span class="k">function</span> <span class="nf">list_iter</span><span class="p">(</span> <span class="n">t</span> <span class="p">)</span>
+    <span class="c1">--list_iter是工厂函数</span>
+    <span class="kd">local</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="kd">local</span> <span class="n">n</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">getn</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="c1">--在这里，t、i、n 都属于闭包外部的局部变量</span>
+    <span class="c1">--返回闭包函数</span>
+    <span class="k">return</span> <span class="k">function</span> <span class="p">(</span>  <span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="k">then</span>
+            <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<p><span class="kd">local</span> <span class="n">t</span> <span class="o">&#x3D;</span> <span class="p">&#123;</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">&#125;</span><br><span class="kd">local</span> <span class="n">iter</span> <span class="o">&#x3D;</span> <span class="n">list_iter</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><br><span class="k">while</span> <span class="kc">true</span> <span class="k">do</span><br>    <span class="kd">local</span> <span class="n">m</span> <span class="o">&#x3D;</span> <span class="n">iter</span><span class="p">()</span><br>    <span class="k">if</span> <span class="n">m</span> <span class="o">&#x3D;&#x3D;</span> <span class="kc">nil</span> <span class="k">then</span><br>        <span class="k">break</span><br>    <span class="k">end</span><br>    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><br><span class="k">end</span><br><span class="c1">–输出 10 20 30</span><br></code></pre></div></div></p>
+<h2 id="泛型for">泛型for</h2>
+
+<p>泛型for在自己内部保存迭代函数，实际上它保存三个值：<strong>迭代函数、状态常量、控制变量</strong>。</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">&lt;</span><span class="n">var</span><span class="o">-</span><span class="n">list</span><span class="o">&gt;</span> <span class="k">in</span> <span class="o">&lt;</span><span class="n">exp</span><span class="o">-</span><span class="n">list</span><span class="o">&gt;</span> <span class="k">do</span>
+    <span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="k">end</span>
+<span class="o">&lt;</span><span class="n">var</span><span class="o">-</span><span class="n">list</span><span class="o">&gt;</span><span class="err">是以一个或多个逗号分隔的变量名列表，</span><span class="o">&lt;</span><span class="n">exp</span><span class="o">-</span><span class="n">list</span><span class="o">&gt;</span><span class="err">是以一个或多个逗号分隔的表达式列表，通常情况下</span><span class="n">exp</span><span class="o">-</span><span class="n">list</span><span class="err">只有一个值：迭代工厂的调用</span>
+
+<p><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">do</span><br>    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><br><span class="k">end</span><br><span class="n">k</span><span class="err">，</span><span class="n">v</span> <span class="err">为变量列表，</span><span class="nb">pairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="err">为表达式列表</span><br></code></pre></div></div></p>
+<h3 id="泛型for的执行过程">泛型for的执行过程</h3>
+
+<ul>
+  <li>初始化，计算in后面表达式的值，表达式应该返回泛型for需要的三个值：迭代函数、状态常量、控制变量；如果返回值不够三个用nil补齐，多出则忽略。</li>
+  <li>将状态变量和控制变量作为参数调用迭代函数（注意：对于for结构来说，状态常量没有用处，仅仅在初始化的时候获取值并传递给迭代函数）。</li>
+  <li>将迭代函数返回的值赋给变量列表。</li>
+  <li>如果返回的第一个值为nil，循环结束，否则执行循环体。</li>
+  <li>回到第二步再次调用迭代函数。</li>
+</ul>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">var1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">varn</span> <span class="k">in</span> <span class="n">exp</span><span class="o">-</span><span class="n">list</span> <span class="k">do</span>
+    <span class="n">block</span>
+<span class="k">end</span>
+<span class="err">等价于</span>
+<span class="k">do</span>
+    <span class="kd">local</span> <span class="n">_f</span><span class="p">,</span> <span class="n">_s</span><span class="p">,</span> <span class="n">_var</span> <span class="o">=</span> <span class="n">exp</span><span class="o">-</span><span class="n">list</span>
+    <span class="c1">--_f 是迭代函数，_s 是状态常量，_var 控制变量</span>
+    <span class="k">while</span> <span class="kc">true</span> <span class="k">do</span>
+        <span class="kd">local</span> <span class="n">var1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">varn</span> <span class="o">=</span> <span class="n">_f</span><span class="p">(</span><span class="n">_s</span><span class="p">,</span> <span class="n">_var</span><span class="p">)</span>
+        <span class="n">_var</span> <span class="o">=</span> <span class="n">var1</span>
+        <span class="k">if</span> <span class="n">_var</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">then</span>
+            <span class="k">break</span>
+        <span class="k">end</span>
+        <span class="n">block</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<p><span class="c1">–简单例子</span><br><span class="kd">local</span> <span class="k">function</span> <span class="nf">square</span><span class="p">(</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span> <span class="p">)</span><br>    <span class="k">if</span> <span class="n">state</span> <span class="o">&lt;&#x3D;</span> <span class="n">control</span> <span class="k">then</span><br>        <span class="k">return</span><br>    <span class="k">end</span><br>    <span class="n">control</span> <span class="o">&#x3D;</span> <span class="n">control</span> <span class="o">+</span> <span class="mi">1</span><br>    <span class="k">return</span> <span class="n">control</span><span class="p">,</span> <span class="n">control</span><span class="o">*</span><span class="n">control</span><br><span class="k">end</span><br><span class="c1">– 一开始 state &#x3D; 9， control &#x3D; 0，</span><br><span class="c1">– state不变，而控制变量 control 等于square的第一个返回值，不断累加 1</span><br><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="k">in</span> <span class="n">square</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span> <span class="k">do</span><br>    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><br>    <span class="k">if</span> <span class="n">k</span> <span class="o">&#x3D;&#x3D;</span> <span class="kc">nil</span> <span class="k">then</span><br>        <span class="k">break</span><br>    <span class="k">end</span><br><span class="k">end</span><br></code></pre></div></div></p>
+<h3 id="pairs">pairs</h3>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nf">pairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">function</span> <span class="p">(</span> <span class="n">tbl</span><span class="p">,</span> <span class="n">k</span> <span class="p">)</span>
+        <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">tbl</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"iter "</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="k">then</span>
+            <span class="k">return</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span>
+        <span class="k">end</span>
+    <span class="k">end</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="k">end</span>
+
+<p><span class="kd">local</span> <span class="n">tt</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br><span class="n">tt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="mi">1</span><br><span class="n">tt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="mi">2</span><br><span class="n">tt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="kc">nil</span><br><span class="n">tt</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="mi">4</span></p>
+<p><span class="c1">–for k,v in pairs(tt) do</span><br><span class="c1">–	print(k,v)</span><br><span class="c1">–end</span></p>
+<p><span class="k">do</span><br>    <span class="kd">local</span> <span class="n">_f</span><span class="p">,</span> <span class="n">_s</span><span class="p">,</span> <span class="n">_var</span> <span class="o">&#x3D;</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tt</span><span class="p">)</span> <span class="c1">– _f 是迭代函数，_s 是状态变量，要迭代的对象，即传入的tt，_var 是控制变量</span><br>    <span class="k">while</span> <span class="kc">true</span> <span class="k">do</span><br>        <span class="kd">local</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">&#x3D;</span> <span class="n">_f</span><span class="p">(</span><span class="n">_s</span><span class="p">,</span> <span class="n">_var</span><span class="p">)</span>  <span class="c1">–执行迭代函数，返回 k,v，迭代结束时两个都是nil</span><br>        <span class="nb">print</span><span class="p">(</span><span class="s2">“call iter :”</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><br>        <span class="n">_var</span> <span class="o">&#x3D;</span> <span class="n">k</span>	<span class="c1">–刷新控制变量</span><br>        <span class="k">if</span> <span class="n">_var</span> <span class="o">&#x3D;&#x3D;</span> <span class="kc">nil</span> <span class="k">then</span><br>            <span class="k">break</span><br>        <span class="k">end</span><br>        <span class="nb">print</span><span class="p">(</span><span class="s2">“call block :”</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><br>    <span class="k">end</span><br><span class="k">end</span></p>
+<p><span class="c1">–输出</span><br><span class="cm">–[[<br>iterator :      1       1<br>call iter :     1       1<br>call block :    1       1<br>iterator :      2       2<br>call iter :     2       2<br>call block :    2       2<br>iterator :      4       4<br>call iter :     4       4<br>call block :    4       4<br>iterator :      nil     nil<br>call iter :     nil     nil<br>]]</span><br></code></pre></div></div></p>
+<h3 id="ipairs">ipairs</h3>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">tt</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="n">tt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">tt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">tt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="n">tt</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+
+<p><span class="k">function</span> <span class="nf">ipairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><br>    <span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><br>        <span class="n">i</span> <span class="o">&#x3D;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><br>        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">then</span><br>            <span class="c1">–从这里可以看出，tt[4]不会被输出了，某个下标的元素不存在就会中断</span><br>            <span class="nb">print</span><span class="p">(</span><span class="s2">“iterator : “</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><br>            <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><br>        <span class="k">end</span><br>    <span class="k">end</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">0</span><br><span class="k">end</span></p>
+<p><span class="c1">– for i,v in ipairs(tt) do</span><br><span class="c1">– 	print(i,v)</span><br><span class="c1">– end</span></p>
+<p><span class="k">do</span><br>    <span class="kd">local</span> <span class="n">_f</span><span class="p">,</span> <span class="n">_s</span><span class="p">,</span> <span class="n">_var</span> <span class="o">&#x3D;</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">tt</span><span class="p">)</span>	<span class="c1">–_f 是迭代函数，_s 是状态变量，要迭代的对象，即传入的tt，_var 是控制变量</span><br>    <span class="k">while</span> <span class="kc">true</span> <span class="k">do</span><br>        <span class="kd">local</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="o">&#x3D;</span> <span class="n">_f</span><span class="p">(</span><span class="n">_s</span><span class="p">,</span> <span class="n">_var</span><span class="p">)</span><br>        <span class="nb">print</span><span class="p">(</span><span class="s2">“call iter : “</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><br>        <span class="n">_var</span> <span class="o">&#x3D;</span> <span class="n">i</span><br>        <span class="k">if</span> <span class="n">_var</span> <span class="o">&#x3D;&#x3D;</span> <span class="kc">nil</span> <span class="k">then</span><br>            <span class="k">break</span><br>        <span class="k">end</span><br>        <span class="nb">print</span><span class="p">(</span><span class="s2">“call block : “</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><br>    <span class="k">end</span><br><span class="k">end</span></p>
+<p><span class="c1">–输出</span><br><span class="cm">–[[<br>iterator :      1       1<br>call iter :     1       1<br>call block :    1       1<br>iterator :      2       2<br>call iter :     2       2<br>call block :    2       2<br>call iter :     nil     nil<br>]]</span><br></code></pre></div></div></p>
+<h3 id="next">next</h3>
+
+<p>next 函数原型是 <strong>next( table [ , index] )</strong></p>
+
+<p>table 是要遍历的表</p>
+
+<p>index ：next返回的值即是index索引的下一个值，当index为nil时，将返回第一个索引的值，当索引号为最后一个索引或者表为空时返回nil</p>
+
+<p>常用 <strong>next(table)</strong> 是否返回nil来判断表是否是空表</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">a</span> <span class="o">=</span> <span class="p">&#123;</span><span class="n">a</span> <span class="o">=</span> <span class="s2">"a"</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="s2">"b"</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s2">"c"</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="s2">"d"</span><span class="p">&#125;</span>
+<span class="kd">local</span> <span class="n">value</span>
+<span class="k">while</span> <span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">do</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="k">end</span>
+
+<p><span class="c1">–输出</span><br><span class="cm">–[[<br>a       a<br>d       d<br>c       c<br>b       b<br>]]</span><br></code></pre></div></div></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-161_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">Programming in Lua(Thrid Edition)笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-159_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">Programming in Lua(Thrid Edition)笔记</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

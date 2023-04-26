@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Linux 下 lua 开发环境安装及安装 luafilesystem - Lua教程</title>
+
+  
+    <meta name="description" content="火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。 最近一直再折腾这个，干脆就稍微整理下。以防后面继续跳坑！ 安装： 1.先安装 lua 的相关依赖安装 C 开发环境由于 gcc 包需要依赖 binutils 和 cpp 包，另外 make 包也是在编译中常用的，所以一共需要 9 个包来完成安装，因此我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 下 lua 开发环境安装及安装 luafilesystem">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-112_Linux%20%E4%B8%8B%20lua%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AE%89%E8%A3%85%20luafilesystem/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。 最近一直再折腾这个，干脆就稍微整理下。以防后面继续跳坑！ 安装： 1.先安装 lua 的相关依赖安装 C 开发环境由于 gcc 包需要依赖 binutils 和 cpp 包，另外 make 包也是在编译中常用的，所以一共需要 9 个包来完成安装，因此我们">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.lua.org/images/lua.gif">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.237Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.237Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.lua.org/images/lua.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Linux 下 lua 开发环境安装及安装 luafilesystem</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%88%E5%AE%89%E8%A3%85-lua-%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="toc-text">1.先安装 lua 的相关依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85-lua5-1-5"><span class="toc-text">2.安装  lua5.1.5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85-luarocks"><span class="toc-text">3、安装  luarocks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85-luafilesystem"><span class="toc-text">4、安装  luafilesystem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">5、测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%94%99%E8%AF%AF%EF%BC%9A"><span class="toc-text">出现过的错误：</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.237Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Linux 下 lua 开发环境安装及安装 luafilesystem</span></h1>
+<p>火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://www.lua.org/images/lua.gif" alt=""/><br/><br/>最近一直再折腾这个，干脆就稍微整理下。以防后面继续跳坑！</p>
+<p>安装：</p>
+<h3 id="1-先安装-lua-的相关依赖"><a href="#1-先安装-lua-的相关依赖" class="headerlink" title="1.先安装 lua 的相关依赖"></a>1.先安装 lua 的相关依赖</h3><p>安装 C 开发环境<br/>由于 gcc 包需要依赖 binutils 和 cpp 包，另外 make 包也是在编译中常用的，所以一共需要 9 个包来完成安装，因此我们只需要执行 9 条指令即可：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line">gcc：命令未找到（解决方法）</span><br/><span class="line">yum install cpp</span><br/><span class="line">yum install binutils</span><br/><span class="line">yum install glibc</span><br/><span class="line">yum install glibc-kernheaders</span><br/><span class="line">yum install glibc-common</span><br/><span class="line">yum install glibc-devel</span><br/><span class="line">yum install gcc</span><br/><span class="line">yum install make</span><br/><span class="line">yum install readline-devel</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="2-安装-lua5-1-5"><a href="#2-安装-lua5-1-5" class="headerlink" title="2.安装  lua5.1.5"></a>2.安装  lua5.1.5</h3><p>下载地址：<a href="http://www.lua.org/ftp/" target="_blank" rel="noopener noreferrer">http://www.lua.org/ftp/</a></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/></pre></td><td class="code"><pre><span class="line">tar -zxvf lua-5.1.5.tar.gz</span><br/><span class="line">cd lua-5.1.5</span><br/><span class="line">vi Makefile</span><br/><span class="line">设置 INSTALL_TOP= /usr/local/lua</span><br/><span class="line">make linux</span><br/><span class="line">make test</span><br/><span class="line">make install</span><br/><span class="line">rm -rf  /usr/bin/lua</span><br/><span class="line">ln -s /usr/local/lua/bin/lua /usr/bin/lua</span><br/><span class="line">ln -s /usr/local/lua/share/lua /usr/share/lua</span><br/><span class="line"></span><br/><span class="line">设置环境变量：</span><br/><span class="line">vim /etc/profile</span><br/><span class="line"></span><br/><span class="line">添加：</span><br/><span class="line">export LUA_HOME=/usr/local/lua</span><br/><span class="line">export PATH=$PATH:$LUA_HOME/bin</span><br/><span class="line"></span><br/><span class="line">环境变量生效：</span><br/><span class="line">source /etc/profile</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="3、安装-luarocks"><a href="#3、安装-luarocks" class="headerlink" title="3、安装  luarocks"></a>3、安装  luarocks</h3><p>是一个 Lua 包管理器，基于 Lua 语言开发，提供一个命令行的方式来管理 Lua 包依赖、安装第三方 Lua 包等。</p>
+<p>地址： <a href="https://github.com/luarocks/luarocks" target="_blank" rel="noopener noreferrer">https://github.com/luarocks/luarocks</a></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/></pre></td><td class="code"><pre><span class="line">使用 luarocks-2.2.1 版本在我机器上没有问题，但是使用 luarocks-2.4.2 出现问题</span><br/><span class="line"></span><br/><span class="line">wget http://luarocks.org/releases/luarocks-2.2.1.tar.gz</span><br/><span class="line"></span><br/><span class="line">tar -zxvf luarocks-2.2.1.tar.gz</span><br/><span class="line"></span><br/><span class="line">cd luarocks-2.2.1</span><br/><span class="line"></span><br/><span class="line">./configure --with-lua=/usr/local --with-lua-include=/usr/local/lua/include</span><br/><span class="line"></span><br/><span class="line">设置环境变量：</span><br/><span class="line"></span><br/><span class="line">export LUA_LUAROCKS_PATH=/usr/local/luarocks-2.2.1</span><br/><span class="line">export PATH=$PATH:$LUA_LUAROCKS_PATH</span><br/><span class="line"></span><br/><span class="line">make &amp; make install</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="4、安装-luafilesystem"><a href="#4、安装-luafilesystem" class="headerlink" title="4、安装  luafilesystem"></a>4、安装  luafilesystem</h3><p>是一个用于 lua 进行文件访问的库，可以支持 lua 5.1 和 lua5.2，且是跨平台的，在为 lua 安装 lfs 之前需要先安装luarocks。因为自己的需求刚好需要这模块。</p>
+<p>地址：<a href="https://github.com/keplerproject/luafilesystem" target="_blank" rel="noopener noreferrer">https://github.com/keplerproject/luafilesystem</a></p>
+<p>文档： <a href="http://keplerproject.github.io/luafilesystem/index.html" target="_blank" rel="noopener noreferrer">http://keplerproject.github.io/luafilesystem/index.html</a></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">luarocks install luafilesystem</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a>5、测试</h3><p>测试 lua 是否安装成功</p>
+<p><code>lua -v</code></p>
+<p>结果：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio</span><br/></pre></td></tr></tbody></table></figure>
+<p>测试 luafilesystem 是否安装成功</p>
+<p>a.lua</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/></pre></td><td class="code"><pre><span class="line">local lfs = require&#34;lfs&#34;</span><br/><span class="line"></span><br/><span class="line">function Rreturn(filePath)</span><br/><span class="line">        local time = os.date(&#34;%a, %d %b %Y %X GMT&#34;, lfs.attributes(filePath).modification)</span><br/><span class="line">        --打印文件的修改时间</span><br/><span class="line">        print(time)</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">Rreturn(&#34;/opt/lua/a.txt&#34;)</span><br/></pre></td></tr></tbody></table></figure>
+<p>a.txt</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">a</span><br/><span class="line">b</span><br/><span class="line">c</span><br/></pre></td></tr></tbody></table></figure>
+<p>运行：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">lua  a.lua</span><br/></pre></td></tr></tbody></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">Tue, 12 Sep 2017 18:43:13 GMT</span><br/></pre></td></tr></tbody></table></figure>
+<p>出现打印出时间的结果就意味着已经安装好了。</p>
+<hr/>
+<p>当然以上这是在 Linux 安装的， Windows 上的其实比这还简单了，但是安装 luafilesystem 的话需要自己去下载个 lfs.dll ，然后把这个放到 lua 的安装路径去。很简单的，这里就不细说了。</p>
+<h3 id="出现过的错误："><a href="#出现过的错误：" class="headerlink" title="出现过的错误："></a>出现过的错误：</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/></pre></td><td class="code"><pre><span class="line">[root@n1 lua-5.1.5]# make linux test</span><br/><span class="line">cd src &amp;&amp; make linux</span><br/><span class="line">make[1]: Entering directory `/opt/lua-5.1.5/src&#39;</span><br/><span class="line">make all MYCFLAGS=-DLUA_USE_LINUX MYLIBS=&#34;-Wl,-E -ldl -lreadline -lhistory -lncurses&#34;</span><br/><span class="line">make[2]: Entering directory `/opt/lua-5.1.5/src&#39;</span><br/><span class="line">gcc -O2 -Wall -DLUA_USE_LINUX   -c -o lapi.o lapi.c</span><br/><span class="line">make[2]: gcc：命令未找到</span><br/><span class="line">make[2]: *** [lapi.o] 错误 127</span><br/><span class="line">make[2]: Leaving directory `/opt/lua-5.1.5/src&#39;</span><br/><span class="line">make[1]: *** [linux] 错误 2</span><br/><span class="line">make[1]: Leaving directory `/opt/lua-5.1.5/src&#39;</span><br/><span class="line">make: *** [linux] 错误 2</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>原因</strong>：最开始的那些依赖没安装</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg" alt=""/></p>
+
+      
+
+<pre><code>  &lt;!-- &lt;div&gt;
+          &lt;img src=&quot;/img/wx.jpg&quot;  style=&quot;margin: 0 auto;&quot; /&gt;
+      &lt;/div&gt; --&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1129_lua%E7%9A%84continue%E5%AE%9E%E7%8E%B0/">lua的continue实现</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1130_lua%20ide%20%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">lua ide 开发工具</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

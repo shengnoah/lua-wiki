@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua - Lua教程</title>
+
+  
+    <meta name="description" content="Lua 巴西里约热内卢天主教大学 1993年 脚本语言  标准 C 语言   官网： www.lua.org  搭建环境          编译官方源码（windews 编译相对较繁琐，要有编译程序，比如 vs，windows 建议使用 LuaForWindows 安装包；linux 和 macos 相对简单，在下载的源源文件的 doc 中有编译步骤）  &lt;p&gt;&lt;a hre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-524_Lua/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua 巴西里约热内卢天主教大学 1993年 脚本语言  标准 C 语言   官网： www.lua.org  搭建环境          编译官方源码（windews 编译相对较繁琐，要有编译程序，比如 vs，windows 建议使用 LuaForWindows 安装包；linux 和 macos 相对简单，在下载的源源文件的 doc 中有编译步骤）  &lt;p&gt;&lt;a hre">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.280Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.280Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="toc-text">搭建环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E5%92%8C%E7%BC%96%E8%AF%91%E5%99%A8"><span class="toc-text">解释器和编译器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%A6%E5%AE%9A"><span class="toc-text">约定</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua</span></h1>
+<blockquote>
+  <p>Lua 巴西里约热内卢天主教大学 1993年 脚本语言  标准 C 语言</p>
+</blockquote>
+
+<p>官网： <a target="_blank" rel="noopener" href="http://www.lua.org/">www.lua.org</a></p>
+
+<h4 id="搭建环境">搭建环境</h4>
+
+<ul>
+  <li>
+    <p>编译官方源码（windews 编译相对较繁琐，要有编译程序，比如 vs，windows 建议使用 LuaForWindows 安装包；linux 和 macos 相对简单，在下载的源源文件的 doc 中有编译步骤）</p>
+
+<pre><code>&lt;p&gt;&lt;a href=&quot;http://www.lua.org/download.html&quot;&gt;http://www.lua.org/download.html&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+  </li>
+  <li>
+    <p>下载编译好的文件直接安装（可能版本比较旧）</p>
+  </li>
+  <li>
+    <p>使用第三方的 IDE</p>
+  </li>
+</ul>
+
+<h4 id="解释器和编译器">解释器和编译器</h4>
+
+<p>个人理解，解释器类似于 Java 中的 java 命令，可以直接使用 java className 差不多，只不过 java 得先编译，而 Lua 不用先编译（边编译边执行），直接执行 lua fileName 。Lua 的编译器就和 Java 的编译器类一样了，都是编译成二进制文件。</p>
+
+<h4 id="约定">约定</h4>
+
+<ul>
+  <li>
+    <p>Chunks 和 Blocks</p>
+
+<pre><code>&lt;blockquote&gt;
+  &lt;p&gt;Block: A block is a list of statements, which are executed sequentially&lt;/p&gt;
+
+  &lt;p&gt;Chunk: The unit of compilation of Lua is called a &lt;em&gt;chunk&lt;/em&gt;. Syntactically, a chunk is simply a block&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Block 是一个或多个顺序执行的语句，Chunk 是 Lua 的一个编译单元（可以是一个 Lua 文件，一系列语法集合等），在语法结构上 Chunk 仅仅是一个 Block。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chunk ::= &#123;stat [&amp;#39;;&amp;#39;]&#125; -- chunk 可以是一个语句，可以是多个语句集合，还可以是函数，比如一个文件（文件中可能有比较复杂的操作），或者交互模式下的一行命令（一行命令也可能有很多的操作）
+</code></pre>
+<p>stat ::&#x3D; do black end – do … end 之间的部分被称为一个 block<br>chunk ::&#x3D; block – Syntactically, a chunk is simply a block<br></code></pre></div>    </div><br>  </li><br>  <li><br>    <p>命名</p></p>
+<pre><code>&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Names&lt;/em&gt; (also called &lt;em&gt;identifiers&lt;/em&gt;) in Lua can be any string of letters, digits, and underscores, not beginning with a digit and not being a reserved word. Identifiers are used to name variables, table fields, and labels.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Lua is a case-sensitive language.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Lua 大小写敏感&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;保留字：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; and       break     do        else      elseif    end
+</code></pre>
+<p> false     for       function  goto      if        in<br> local     nil       not       or        repeat    return<br> then      true      until     while<br></code></pre></div>    </div><br>    <p>尽量不要声明以下滑线开头，有一个或多个大写字母的变量名称，类似 _VERSION 等，这些 Lua 可能内置了全局变量。一切皆变量，没有赋值前，所有的变量都是 nil，包括不存在的变量。</p><br>  </li><br>  <li><br>    <p>变量</p></p>
+<pre><code>&lt;blockquote&gt;
+  &lt;p&gt;Variables are places that store values. There are three kinds of variables in Lua: global variables, local variables, and table fields.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;全局变量，局部变量，表域&lt;/p&gt;
+
+&lt;div class=&quot;language-lua highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- 不使用 local 声明的变量都是全局变量(函数的形式参数是特殊的局部变量)&lt;/span&gt;
+</code></pre>
+<p><span class="n">a</span> <span class="o">&#x3D;</span> <span class="mi">5</span> <span class="c1">– global</span><br><span class="kd">local</span> <span class="n">b</span> <span class="o">&#x3D;</span> <span class="mi">5</span> <span class="c1">– local</span></p>
+<p><span class="k">function</span> <span class="nf">t</span><span class="p">()</span><br>    <span class="n">c</span> <span class="o">&#x3D;</span> <span class="mi">5</span> <span class="c1">– global</span><br>    <span class="kd">local</span> <span class="n">d</span> <span class="o">&#x3D;</span> <span class="mi">5</span> <span class="c1">– local</span><br><span class="k">end</span><br><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="c1">–&gt; 5, nil</span></p>
+<p><span class="k">do</span><br>    <span class="n">e</span> <span class="o">&#x3D;</span> <span class="mi">5</span> <span class="c1">– global</span><br>    <span class="kd">local</span> <span class="n">f</span> <span class="o">&#x3D;</span> <span class="mi">5</span> <span class="c1">– local</span><br><span class="k">end</span><br><span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="c1">–&gt; 5, nil</span><br></code></pre></div>    </div><br>  </li><br>  <li><br>    <p>注释</p></p>
+<pre><code>&lt;p&gt;单行：&lt;code class=&quot;highlighter-rouge&quot;&gt;--&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;多行：&lt;code class=&quot;highlighter-rouge&quot;&gt;--[[ --]]&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-lua highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- 单行注释&lt;/span&gt;
+</code></pre>
+<p><span class="cm">–[[<br>    多行注释<br>–]]</span><br></code></pre></div>    </div><br>  </li><br>  <li><br>    <p>命令行操作</p></p>
+<pre><code>&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lua [options] [script [args]] &lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;-e：直接执行命令 &lt;code class=&quot;highlighter-rouge&quot;&gt;lua -e &amp;#34;print(_VERSION)&amp;#34;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;-l：加载文件&lt;/p&gt;
+
+&lt;p&gt;-i：进入交互模式&lt;/p&gt;
+</code></pre>
+  </li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-523_lua%E6%94%AF%E6%8C%81init64/">lua支持init64</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-525_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BString/">Lua源码阅读：基本数据类型String</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

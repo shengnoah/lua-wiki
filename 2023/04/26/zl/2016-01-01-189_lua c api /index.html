@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua c api - Lua教程</title>
+
+  
+    <meta name="description" content="一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C&#x2F;C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C&#x2F;C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 进程示例 #include &lt;stdio.h&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua c api">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-189_lua%20c%20api%20/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C&#x2F;C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C&#x2F;C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 进程示例 #include &lt;stdio.h&amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.248Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.249Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua c api</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E6%A6%82%E8%BF%B0"><span class="toc-text">一 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%A4%BA%E4%BE%8B"><span class="toc-text">二 示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%9B%E7%A8%8B%E7%A4%BA%E4%BE%8B"><span class="toc-text">1. 进程示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B0%83%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2. 调用示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-text">三 函数说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-lual_error"><span class="toc-text">1. luaL_error
+</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">四 参考资料</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua c api</span></h1>
+   <h2 id="一-概述">一 概述</h2> <p>很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 <code class="highlighter-rouge">C/C++</code> 开发稳定的框架，调用针对不同业务开发的 <code class="highlighter-rouge">Lua</code> 函数可以实现需求。其实从 <code class="highlighter-rouge">C/C++</code> 调用 <code class="highlighter-rouge">Lua</code> 函数非常简单，<strong>调用时将 <code class="highlighter-rouge">Lua</code> 函数压入栈、将函数参数压入栈，调用 <code class="highlighter-rouge">lua_pcall</code> 完成调用；调用后从栈获得调用函数返回结果</strong>。</p> <h2 id="二-示例">二 示例</h2> <h3 id="1-进程示例">1. 进程示例</h3> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+</span>
+<span class="cp">#include "lua.h"
+#include "lauxlib.h"
+#include "lualib.h"
+</span>
+<span class="cm">/******************************************************************************
+ * 函数结构体定义
+ ******************************************************************************/</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">function_buf_s</span> <span class="p">&#123;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>  <span class="c1">// 函数名
+</span>    <span class="kt">int</span> <span class="n">nargs</span><span class="p">;</span>   <span class="c1">// 参数数量
+</span>    <span class="kt">int</span> <span class="n">nret</span><span class="p">;</span>    <span class="c1">// 返回值数量
+</span>    <span class="kt">char</span> <span class="o">*</span><span class="n">chunk</span><span class="p">;</span> <span class="c1">// 函数体
+</span><span class="p">&#125;</span> <span class="n">function_buf</span><span class="p">;</span>
+
+<p><span class="c1">&#x2F;&#x2F; 此处 function 不应该使用 function f() … end 方式编写，写出的函数其实不会被执行<br></span><span class="k">static</span> <span class="n">function_buf</span><br><span class="n">lua_function</span><span class="p">[]</span> <span class="o">&#x3D;</span> <span class="p">&#123;</span><br>    <span class="p">&#123;</span><span class="s">“sayhi”</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><br>     <span class="s">“local name &#x3D; …</span><span class="se">n</span><span class="s">“</span><br>     <span class="s">“return string.format(‘hi %s!’, name)</span><span class="se">n</span><span class="s">“</span><br>    <span class="p">&#125;,</span><br>    <span class="p">&#123;</span><span class="s">“echo”</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><br>     <span class="s">“function echo(msg)</span><span class="se">n</span><span class="s">“</span><br>     <span class="s">“    return msg</span><span class="se">n</span><span class="s">“</span><br>     <span class="s">“end</span><span class="se">n</span><span class="s">“</span><br>     <span class="s">“local msg &#x3D; …</span><span class="se">n</span><span class="s">“</span><br>     <span class="s">“return echo(msg)</span><span class="se">n</span><span class="s">“</span><br>    <span class="p">&#125;,</span><br>    <span class="p">&#123;</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="nb">NULL</span><span class="p">&#125;</span><br><span class="p">&#125;;</span></p>
+<p><span class="k">static</span> <span class="kt">int</span><br><span class="nf">sayHi</span><span class="p">(</span><span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span><span class="p">)</span> <span class="p">&#123;</span></p>
+<pre><code>&lt;span class=&quot;n&quot;&gt;function_buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lua_function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;luaL_loadbuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+                          &lt;span class=&quot;n&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;luaL_error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;call loadbuffer fail ret:%d, code:%s&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+                      &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&#125;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;lua_pushstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;lua&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lua_pcall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;luaL_error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;lua_pcall fail ret:%d %s&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+                      &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lua_tostring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&#125;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 输出类型
+</code></pre>
+<p></span>    <span class="n">printf</span><span class="p">(</span><span class="s">“typename %s</span><span class="se">n</span><span class="s">“</span><span class="p">,</span> <span class="n">luaL_typename</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span></p>
+<pre><code>&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lua_isstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;luaL_error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;lua_pcall ret not string&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&#125;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 函数执行结果在栈中，取出来再放入栈
+</code></pre>
+<p></span>    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">&#x3D;</span> <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span><br>    <span class="n">lua_pop</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span><br>    <span class="n">lua_pushfstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">“sayhi say:%s”</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span><br>    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span><br><span class="p">}</span></p>
+<p><span class="cm">&#x2F;******************************************************************************</p>
+<ul>
+<li><p>通用入口函数</p>
+</li>
+<li><p>调用时首先将函数名压入栈，之后是其他参数<br> ******************************************************************************&#x2F;</span><br><span class="k">static</span> <span class="kt">int</span><br><span class="nf">common_entry</span><span class="p">(</span><span class="n">lua_State</span> <span class="o"><em></span><span class="n">L</span><span class="p">)</span> <span class="p">{</span><br> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">lua_isstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span><br> <span class="k">return</span> <span class="n">luaL_error</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">“first arg should be function name, string type”</span><span class="p">);</span><br> <span class="p">}</span><br> <span class="k">const</span> <span class="kt">char</span> <span class="o"></em></span> <span class="n">function_name</span> <span class="o">&#x3D;</span> <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span></p>
+<p> <span class="n">function_buf</span> <span class="o">*</span><span class="n">function</span> <span class="o">&#x3D;</span> <span class="n">lua_function</span><span class="p">;</span></p>
+<p> <span class="k">for</span> <span class="p">(;</span><span class="n">function</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span> <span class="n">function</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><br> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">function</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">function_name</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span><br> <span class="p">}</span><br> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">function</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span><br> <span class="k">return</span> <span class="n">luaL_error</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">“not found:%s function in array”</span><span class="p">,</span> <span class="n">function_name</span><span class="p">);</span><br> <span class="p">}</span></p>
+<p> <span class="kt">int</span> <span class="n">ret</span> <span class="o">&#x3D;</span> <span class="n">luaL_loadbuffer</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">function</span><span class="o">-&gt;</span><span class="n">chunk</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">function</span><span class="o">-&gt;</span><span class="n">chunk</span><span class="p">),</span><br>                       <span class="n">function</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span><br> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="p">{</span><br> <span class="k">return</span> <span class="n">luaL_error</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">“call loadbuffer fail ret:%d, code:%s”</span><span class="p">,</span><br>                   <span class="n">ret</span><span class="p">,</span> <span class="n">function</span><span class="o">-&gt;</span><span class="n">chunk</span><span class="p">);</span><br> <span class="p">}</span></p>
+<p> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span><br> <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">&#x3D;</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;&#x3D;</span> <span class="n">function</span><span class="o">-&gt;</span><span class="n">nargs</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><br> <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span><br> <span class="p">}</span></p>
+<p> <span class="n">ret</span> <span class="o">&#x3D;</span> <span class="n">lua_pcall</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">function</span><span class="o">-&gt;</span><span class="n">nargs</span><span class="p">,</span> <span class="n">function</span><span class="o">-&gt;</span><span class="n">nret</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span><br> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!&#x3D;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><br> <span class="k">return</span> <span class="n">luaL_error</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">“lua_pcall fail ret:%d %s”</span><span class="p">,</span><br>                   <span class="n">ret</span><span class="p">,</span> <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span><br> <span class="p">}</span></p>
+<p> <span class="kt">int</span> <span class="n">nret</span> <span class="o">&#x3D;</span> <span class="n">function</span><span class="o">-&gt;</span><span class="n">nret</span><span class="p">;</span></p>
+<p> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">&#x3D;-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;&#x3D;</span> <span class="o">-</span><span class="n">nret</span><span class="p">;</span> <span class="n">i</span><span class="o">–</span><span class="p">){</span><br> <span class="n">printf</span><span class="p">(</span><span class="s">“ret:%d is:%s</span><span class="se">n</span><span class="s">“</span><span class="p">,</span> <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span><br> <span class="p">}</span></p>
+<p> <span class="k">return</span> <span class="n">nret</span><span class="p">;</span></p>
+</li>
+</ul>
+<p><span class="p">}</span></p>
+<p><span class="k">static</span> <span class="k">const</span><br><span class="k">struct</span> <span class="n">luaL_reg</span> <span class="n">call_function_lib</span><span class="p">[]</span> <span class="o">&#x3D;</span> <span class="p">{</span><br>    <span class="p">{</span><span class="s">“sayHi”</span><span class="p">,</span> <span class="n">sayHi</span><span class="p">},</span><br>    <span class="p">{</span><span class="s">“common_entry”</span><span class="p">,</span> <span class="n">common_entry</span><span class="p">},</span><br>    <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">}</span><br><span class="p">};</span></p>
+<p><span class="cm">&#x2F;******************************************************************************</p>
+<ul>
+<li>注册函数<br>******************************************************************************&#x2F;</span><br><span class="kt">int</span><br><span class="nf">luaopen_call_function</span><span class="p">(</span><span class="n">lua_State</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span><br>  <span class="n">luaL_openlib</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="s">“call_function”</span><span class="p">,</span> <span class="n">call_function_lib</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span><br>  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span><br><span class="p">}</span><br></code></pre></div></div> <p>进程中有两个示例，<code class="highlighter-rouge">sayHi</code> 函数接收一个 <code class="highlighter-rouge">string</code> 参数并返回一个 <code class="highlighter-rouge">string</code> 参数；<code class="highlighter-rouge">common_entry</code> 函数可以根据函数名选择相应的函数体进行执行，更加灵活。</p> <p><strong>在函数定义中需要注意，<code class="highlighter-rouge">luaL_loadbuffer</code> 系列函数会将字符串当做进程段载入并放在栈顶，但是并未执行函数。如果载入的代码段是 <code class="highlighter-rouge">function f()…end</code> 格式，使用 <code class="highlighter-rouge">lua_pcall</code> 调用代码段时函数 <code class="highlighter-rouge">f</code> 仅做了定义，未执行函数体。</strong></p> <h3 id="2-调用示例">2. 调用示例</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>/usr/local/lua5.1.5/bin/lua <span class="nt">-e</span> <span class="s2">"require 'call_function'; ret = call_function.sayHi('lua'); print(ret)"</span><br>typename string<br>sayhi say:hi lua!</li>
+</ul>
+<p><span class="nv">$ </span>/usr/local/lua5.1.5/bin/lua <span class="nt">-e</span> <span class="s2">"require 'call_function'; ret = call_function.common_entry('echo','lua is cool'); print(ret)"</span><br>ret:1 is:lua is cool<br>lua is cool<br></code></pre></div></div> <h2 id="三-函数说明">三 函数说明</h2> <h3 id="1-lual_error">1. <code class="highlighter-rouge">luaL_error</code></p>
+</h3> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">luaL_error</span> <span class="p">(</span><span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">fmt</span><span class="p">,</span> <span class="p">...);</span>
+</code></pre></div></div> <p>触发错误，并使用 <code class="highlighter-rouge">fmt</code> 与后续参数格式化输出错误消息字符串。<code class="highlighter-rouge">luaL_error</code> 函数并不会退出，通常的是否用法为：</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">luaL_error</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</code></pre></div></div> <h2 id="四-参考资料">四 参考资料</h2> <p>-<a target="_blank" rel="noopener" href="https://www.lua.org/pil/25.2.html">programming in lua</a></p> <p>-<a target="_blank" rel="noopener" href="https://www.lua.org/manual/5.1/manual.html#luaL_loadbuffer">lua 5.1 手册</a></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-185_%5BLua/">Lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-188_luajava%E7%9A%84%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E8%BE%93%E5%87%BA/">luajava的错误信息输出</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

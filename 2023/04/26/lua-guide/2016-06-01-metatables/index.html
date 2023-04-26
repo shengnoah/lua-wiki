@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>元表 - Lua教程</title>
+
+  
+    <meta name="description" content="Lua 元表正如其名，元表也是表。不过，将元表与表相关联后，我们就可以通过设置元表的键和相关方法来改变表的行为。元方法的功能十分强大，使用元方法可以实现很多的功能，比如：        修改表的操作符功能或为操作符添加新功能（译注：如果您学过 C++ 之类的面向对象的语言，应该比较好理解，其实它实现的是操作的重载）。     使用元表中的 __index 方法，我们可以实现在表中查找键不存在时转而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="元表">
+<meta property="og:url" content="https://lua.ren/2023/04/26/lua-guide/2016-06-01-metatables/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua 元表正如其名，元表也是表。不过，将元表与表相关联后，我们就可以通过设置元表的键和相关方法来改变表的行为。元方法的功能十分强大，使用元方法可以实现很多的功能，比如：        修改表的操作符功能或为操作符添加新功能（译注：如果您学过 C++ 之类的面向对象的语言，应该比较好理解，其实它实现的是操作的重载）。     使用元表中的 __index 方法，我们可以实现在表中查找键不存在时转而">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.092Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.092Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="LUA教程">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">元表</span></div><div class="widget-body fs14"><div class="doc-tree active"></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/lua-guide/">lua_guide</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>元表</span></h1>
+<h1 id="Lua-元表"><a href="#Lua-元表" class="headerlink" title="Lua 元表"></a>Lua 元表</h1><p>正如其名，元表也是表。不过，将元表与表相关联后，我们就可以通过设置元表的键和相关方法来改变表的行为。元方法的功能十分强大，使用元方法可以实现很多的功能，比如：  </p>
+<ul>
+    <li>修改表的操作符功能或为操作符添加新功能（译注：如果您学过 C++ 之类的面向对象的语言，应该比较好理解，其实它实现的是操作的重载）。</li>
+    <li>使用元表中的 __index 方法，我们可以实现在表中查找键不存在时转而在元表中查找键值的功能。</li>
+</ul>  
+
+<p>Lua 提供了两个十分重要的用来处理元表的方法，如下：  </p>
+<ul>
+    <li>setmetatable(table,metatable):此方法用于为一个表设置元表。</li>
+    <li>getmetatable(table)：此方法用于获取表的元表对象。</li>
+</ul>  
+
+<p>首先，让我们看一下如何将一个表设置为另一个表的元表。示例如下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mytable = &#123;&#125;</span><br><span class="line">mymetatable = &#123;&#125;</span><br><span class="line">setmetatable(mytable,mymetatable)</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">上面的代码可以简写成如下的一行代码：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mytable &#x3D; setmetatable({},{})</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## __index  </span><br><span class="line"></span><br><span class="line">下面的例子中，我们实现了在表中查找键不存在时转而在元表中查找该键的功能：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mytable &#x3D; setmetatable({key1 &#x3D; “value1”}, {<br>  __index &#x3D; function(mytable, key)<br>    if key &#x3D;&#x3D; “key2” then<br>      return “metatablevalue”<br>    else<br>      return mytable[key]<br>    end<br>  end<br>})</p>
+<p>print(mytable.key1,mytable.key2)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的程序，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>value1	metatablevalue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">接下来逐步解释上面例子运行的过程：  </span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li&gt;表 mytable 为 &#123;key = &quot;values1&quot;&#125;&lt;/li&gt;</span><br><span class="line">	&lt;li&gt;为 mytable 设置了一个元表，该元表的键 __index 存储了一个函数，我们称这个函数为元方法。&lt;/li&gt;</span><br><span class="line">	&lt;li&gt;这个元方法的工作也十分简单。它仅查找索引 “key2”,如果找到该索引值，则返回 &quot;metatablevalue&quot;,否则返回 mytable 中索引对应的值。&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">上面的程序同样可以简化成如下的形式：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mytable &#x3D; setmetatable({key1 &#x3D; “value1”}, { __index &#x3D; { key2 &#x3D; “metatablevalue” } })<br>print(mytable.key1,mytable.key2)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## __newindex  </span><br><span class="line"></span><br><span class="line">为元表添加 __newindex 后，当访问的键在表中不存在时，此时添加新键值对的行为将由此元方法（__newindex）定义。下面的例子中，如果访问的索引在表中不存在则在元表中新加该索引值（注意，是添加在另外一个表 mymetatable 中而非在原表 mytable 中。），具体代码如下(译注：请注意此处 __newindex 的值并非一个方法而是一个表。)：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mymetatable &#x3D; {}<br>mytable &#x3D; setmetatable({key1 &#x3D; “value1”}, { __newindex &#x3D; mymetatable })</p>
+<p>print(mytable.key1)</p>
+<p>mytable.newkey &#x3D; “new value 2”<br>print(mytable.newkey,mymetatable.newkey)</p>
+<p>mytable.key1 &#x3D; “new  value 1”<br>print(mytable.key1,mymetatable.newkey1)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">执行上面的程序，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>value1<br>nil	new value 2<br>new  value 1	nil</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">可以看出，在上面的程序中，如果键存在于主表中，只会简单更新相应的键值。而如果键不在表中时，会在另外的表 mymetatable 中添加该键值对。  </span><br><span class="line">在接下来这个例子中，我们用 rawset 函数在相同的表（主表）中更新键值，而不再是将新的键添加到另外的表中。代码如下所示：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mytable &#x3D; setmetatable({key1 &#x3D; “value1”}, {<br>  __newindex &#x3D; function(mytable, key, value)<br>        rawset(mytable, key, “&quot;“..value..”&quot;“)</p>
+<p>  end<br>})</p>
+<p>mytable.key1 &#x3D; “new value”<br>mytable.key2 &#x3D; 4</p>
+<p>print(mytable.key1,mytable.key2)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">执行上面的程序，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>new value	“4”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rawset 函数设置值时不会使用元表中的 __newindex 元方法。同样的，Lua 中也存的一个 rawget 方法，该方法访问表中键值时也不会调用 __index 的元方法。  </span><br><span class="line"></span><br><span class="line">## 为表添加操作符行为  </span><br><span class="line"></span><br><span class="line">使用 + 操作符完成两个表组合的方法如下所示（译注：可以看出重载的意思了）：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mytable &#x3D; setmetatable({ 1, 2, 3 }, {<br>  __add &#x3D; function(mytable, newtable)<br>    for i &#x3D; 1, table.maxn(newtable) do<br>      table.insert(mytable, table.maxn(mytable)+1,newtable[i])<br>    end<br>    return mytable<br>  end<br>})</p>
+<p>secondtable &#x3D; {4,5,6}</p>
+<p>mytable &#x3D; mytable + secondtable<br>for k,v in ipairs(mytable) do<br>print(k,v)<br>end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">执行上面的的程序，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>1	1<br>2	2<br>3	3<br>4	4<br>5	5<br>6	6</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">元表中 __add 键用于修改加法操作符的行为。其它操作对应的元表中的键值如下表所示。  </span><br><span class="line"></span><br><span class="line">&lt;table&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;th&gt;键&lt;/th&gt;</span><br><span class="line">		&lt;th&gt;描述&lt;/th&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__add&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变加法操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__sub&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变减法操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__mul&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变乘法操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__div&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变除法操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__mod&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变模除操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__unm&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变一元减操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__concat&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变连接操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__eq&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变等于操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__lt&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变小于操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">	&lt;tr&gt;</span><br><span class="line">		&lt;td&gt;__le&lt;/td&gt;</span><br><span class="line">		&lt;td&gt;改变小于等于操作符的行为。&lt;/td&gt;</span><br><span class="line">	&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;  </span><br><span class="line"></span><br><span class="line">## __call  </span><br><span class="line"></span><br><span class="line">使用 __call 可以使表具有像函数一样可调用的特性。下面的例子中涉及两个表，主表 mytable 和 传入的实参表结构 newtable，程序完成两个表中值的求和。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mytable &#x3D; setmetatable({10}, {<br>  __call &#x3D; function(mytable, newtable)<br>    sum &#x3D; 0<br>    for i &#x3D; 1, table.maxn(mytable) do<br>        sum &#x3D; sum + mytable[i]<br>    end<br>    for i &#x3D; 1, table.maxn(newtable) do<br>        sum &#x3D; sum + newtable[i]<br>    end<br>    return sum<br>  end<br>})<br>newtable &#x3D; {10,20,30}<br>print(mytable(newtable))</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的代码，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>70</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## __tostring  </span><br><span class="line"></span><br><span class="line">要改变 print 语句的行为，我们需要用到 __tostring 元方法。下面是一个简单的例子：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>mytable &#x3D; setmetatable({ 10, 20, 30 }, {<br>  __tostring &#x3D; function(mytable)<br>    sum &#x3D; 0<br>    for k, v in pairs(mytable) do<br>        sum &#x3D; sum + v<br>    end<br>    return “The sum of values in the table is “ .. sum<br>  end<br>})<br>print(mytable)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的代码，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The sum of values in the table is 60</p>
+<pre><code>
+如果你完全掌握了元表的用法，你就可以实现很多看上面很复杂的操作。如果不使用元表，就不仅仅是看上去很复杂了，而是真的非常复杂。所以，多做一些使用元表的练习，并熟练掌握所有元表的可选项，这会让你受益匪浅。
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/lua-guide/2016-06-01-math-library/">Lua数学函数库</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/lua-guide/2016-06-01-modules/">Lua模块</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

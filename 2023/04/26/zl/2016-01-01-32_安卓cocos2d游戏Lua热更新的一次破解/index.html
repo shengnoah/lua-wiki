@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>安卓cocos2d游戏Lua热更新的一次破解 - Lua教程</title>
+
+  
+    <meta name="description" content="lua热更新           lua、luac、luaJIT三种文件的关系       逆向                   1. 解压apk                           2. 反编译工具               3.分析待破解文件                                   4.逆向分析           5.解密文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓cocos2d游戏Lua热更新的一次破解">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-32_%E5%AE%89%E5%8D%93cocos2d%E6%B8%B8%E6%88%8FLua%E7%83%AD%E6%9B%B4%E6%96%B0%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A0%B4%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="lua热更新           lua、luac、luaJIT三种文件的关系       逆向                   1. 解压apk                           2. 反编译工具               3.分析待破解文件                                   4.逆向分析           5.解密文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf730c1c278.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf730d569ab.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf730eb0aac.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf73107dda8.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf731155938.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf731268d6b.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf731406310.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf73151d24d.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf73163b096.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf7317191d8.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf7318240fa.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf73193dcaa.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf731a71172.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf731b6a486.jpg">
+<meta property="og:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf731c54609.jpg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.262Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.262Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.dazhuanlan.com/2019/11/28/5ddf730c1c278.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">安卓cocos2d游戏Lua热更新的一次破解</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lualuacluajit%E4%B8%89%E7%A7%8D%E6%96%87%E4%BB%B6%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">lua、luac、luaJIT三种文件的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%86%E5%90%91"><span class="toc-text">逆向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A7%A3%E5%8E%8Bapk"><span class="toc-text">1. 解压apk</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8F%8D%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7"><span class="toc-text">2. 反编译工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E5%88%86%E6%9E%90%E5%BE%85%E7%A0%B4%E8%A7%A3%E6%96%87%E4%BB%B6"><span class="toc-text">3.分析待破解文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E9%80%86%E5%90%91%E5%88%86%E6%9E%90"><span class="toc-text">4.逆向分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E8%A7%A3%E5%AF%86%E6%96%87%E4%BB%B6"><span class="toc-text">5.解密文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%A7%A3%E5%AF%86lua%E6%96%87%E4%BB%B6"><span class="toc-text">1. 解密lua文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%A7%A3%E5%AF%86package%E5%8C%85"><span class="toc-text">2. 解密package包</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>安卓cocos2d游戏Lua热更新的一次破解</span></h1>
+<ul id="markdown-toc">
+  <li><a href="#lua热更新" id="markdown-toc-lua热更新">lua热更新</a>    <ul>
+      <li><a href="#lualuacluajit三种文件的关系" id="markdown-toc-lualuacluajit三种文件的关系">lua、luac、luaJIT三种文件的关系</a></li>
+      <li><a href="#逆向" id="markdown-toc-逆向">逆向</a>        <ul>
+          <li><a href="#1-解压apk" id="markdown-toc-1-解压apk">1. 解压apk</a>            <ul>
+              <li><a href="#2-反编译工具" id="markdown-toc-2-反编译工具">2. 反编译工具</a></li>
+              <li><a href="#3分析待破解文件" id="markdown-toc-3分析待破解文件">3.分析待破解文件</a></li>
+            </ul>
+          </li>
+          <li><a href="#4逆向分析" id="markdown-toc-4逆向分析">4.逆向分析</a></li>
+          <li><a href="#5解密文件" id="markdown-toc-5解密文件">5.解密文件</a>            <ul>
+              <li><a href="#1-解密lua文件" id="markdown-toc-1-解密lua文件">1. 解密lua文件</a></li>
+              <li><a href="#2-解密package包" id="markdown-toc-2-解密package包">2. 解密package包</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#小结" id="markdown-toc-小结">小结</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+
+<p>   
+很多游戏和软件都是用了lua热更新技术，以前对lua热更新不太熟悉，前段时间刚好帮同事个小忙就研究了一下，很多都是比较浅显，有错误还要读者指出。lua作为热更新包还是有很多优势的，首先lua性能算是比较高的，虽然比着C的性能还差一些，但是相当不错。其次lua比较好写，对于迭代比较高的一些游戏业务或者其他需要反复开发的业务都很适合。另外lua很容易内嵌到C语言中，简直是无缝结合，所以很多厂商用lua脚本来写那些需要快速迭代的业务。</p>
+
+<h2 id="lualuacluajit三种文件的关系">lua、luac、luaJIT三种文件的关系</h2>
+
+<p>   
+基于lua的更新包一般有三种文件：lua、luac、luaJIT。lua是明文代码，直接用记事本就能打开；luac是lua编译后的字节码，文件头为</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0x1B 0x4C 0x75 0x61 0x51
+</code></pre></div></div>
+
+<p>   
+lua虚拟机能够直接解析lua和luac脚本文件；而luaJIT是另一个lua的实现版本，JIT是指Just-In-Time(即时解析运行)，luaJIT比lua和luac更加高效，文件头是</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0x1B 0x4C 0x4A。 
+</code></pre></div></div>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf730c1c278.jpg" alt="字节码标识"/></p>
+
+<p>   
+一般情况加，厂商是不会直接来把lua脚本明文加载到apk包内的，因为apk包很容易解开拿到lua明文。厂商一般会使用三种方式来加密lua脚本</p>
+
+<ul>
+  <li>加密lua脚本，在加载lua脚本前来解密lua脚本，最后运行lua脚本。</li>
+  <li>首先编译lua脚本生成luac字节码，然后再加密字节码，最后在加载前解密然后加载字节码。</li>
+  <li>最后是修改lua虚拟机中的opcode的顺序，有点像重新映射lua虚拟机执行指令。</li>
+</ul>
+
+<p>   
+好啦！基本层面介绍完开始实战。首先拿游戏开刀因为很多游戏都是用cocos2d开发的，cocos2d自带lua接口方便开发，所以很多游戏的业务逻辑都是在lua脚本里面，所以第一时间拿到lua脚本基本就是成功了一大半。</p>
+
+<h2 id="逆向">逆向</h2>
+
+<h3 id="1-解压apk">1. 解压apk</h3>
+
+<p>   
+下载待解密apk包，具体哪款我就不具体指出了，简单粗暴把apk包用解压工具直接解压，一般情况下会得到文件夹结构</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf730d569ab.jpg" alt="文件夹结构"/></p>
+
+<p>一般lib目录里面是存放的打包的整个游戏的动态库，如图所示：</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf730eb0aac.jpg" alt="lua库"/></p>
+
+<p>下一步就要对这个动态库进行挖矿了，里面有所有想要的东西。</p>
+
+<h4 id="2-反编译工具">2. 反编译工具</h4>
+
+<p>   
+反编译工具还是挺多的，我使用的IDAQ这个工具，很好用推荐。直接可以将静态库和动态库进行反编译，得到内部各个段的数据，同时IDAQ工具可以将反编译的汇编代码逆编译到C语言，虽然只是部分近似C语言代码，但是对于逆向已经是非常完美的工具。</p>
+
+<ol>
+  <li>
+    <p>对于找到的lua动态库进行反编译。使用这个工具是很简单的。教程不细说了，google一下。反编译后的汇编界面如下图所示：</p>
+
+<pre><code>&lt;p&gt;&lt;img src=&quot;https://img.dazhuanlan.com/2019/11/28/5ddf730fcf9ab.jpg&quot; alt=&quot;反编译汇编区&quot;/&gt;&lt;/p&gt;
+</code></pre>
+  </li>
+</ol>
+
+<h4 id="3分析待破解文件">3.分析待破解文件</h4>
+
+<p>   
+在apk的解压包内开始找apk可能加载的lua文件。一般apk的文件会在assets目录下，尽情的找吧！首先找到了一些.lua后缀的文件，很明显这可能是主要的lua程序入口。</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf73107dda8.jpg" alt="lua"/></p>
+
+<p>继续翻找又找到了一些package包，看起来很想游戏的加载包。</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf731155938.jpg" alt="package包"/></p>
+
+<p>首先我们尝试打开.lua文件。</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf731268d6b.jpg" alt="lua包"/></p>
+
+<p>不出所料加密了，很沮丧，没事加密了才有挑战。我们尝试打开package包看看，</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf731406310.jpg" alt="pakeage"/></p>
+
+<p>同样加密了，但是我们对比了多个package包，发现首字母都是]6这两个字符，这说明有可能说明未加密的数据前面是有一个固定的头的，这让我想起了压缩包格式，常见的zip，tar，tar.gz,rar等压缩包其实都有固定的标识。当然很多厂商也确实会把文件先打成压缩包，毕竟会节省一部分空间。现在就比较尴尬了。我们是不知道这个文件是用的什么算法加密的，秘钥也不知道。我们该想办法得到加密方式和秘钥。</p>
+
+<h3 id="4逆向分析">4.逆向分析</h3>
+
+<p>   
+前面讲过，lua加载无外乎哪几种方式，但是不管什么方式最后在运行时都要lua代码或者字节码。所以我们要想办法找到解密文件的地方。</p>
+
+<p>首先我们要了解cocos2d引擎加载lua脚本的过程，这样我们才能顺着整个路径走。google到cocos启动的入口函数和普通常规代码在AppDelegate.cpp文件下如下：</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">AppDelegate</span><span class="o">::</span><span class="n">applicationDidFinishLaunching</span><span class="p">()</span>
+<span class="p">&#123;</span>
+    <span class="c1">// set default FPS
+</span>    <span class="n">Director</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setAnimationInterval</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">60.0</span><span class="n">f</span><span class="p">);</span>
+
+<pre><code>&lt;span class=&quot;c1&quot;&gt;// register lua module
+</code></pre>
+<p></span>    <span class="k">auto</span> <span class="n">engine</span> <span class="o">&#x3D;</span> <span class="n">LuaEngine</span><span class="o">::</span><span class="n">getInstance</span><span class="p">();</span><br>    <span class="n">ScriptEngineManager</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setScriptEngine</span><span class="p">(</span><span class="n">engine</span><span class="p">);</span><br>    <span class="n">lua_State</span><span class="o">*</span> <span class="n">L</span> <span class="o">&#x3D;</span> <span class="n">engine</span><span class="o">-&gt;</span><span class="n">getLuaStack</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getLuaState</span><span class="p">();</span><br>    <span class="n">lua_module_register</span><span class="p">(</span><span class="n">L</span><span class="p">);</span></p>
+<pre><code>&lt;span class=&quot;n&quot;&gt;register_all_packages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;LuaStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getLuaStack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setXXTEAKeyAndSign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#34;2dxLua&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#34;2dxLua&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;XXTEA&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#34;XXTEA&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//register custom function
+</code></pre>
+<p></span>    <span class="c1">&#x2F;&#x2F;LuaStack* stack &#x3D; engine-&gt;getLuaStack();<br></span>    <span class="c1">&#x2F;&#x2F;register_custom_function(stack-&gt;getLuaState());<br></span><br><span class="cp">#if (COCOS2D_DEBUG &gt; 0) &amp;&amp; (CC_CODE_IDE_DEBUG_SUPPORT &gt; 0)<br></span>    <span class="c1">&#x2F;&#x2F; NOTE:Please don&#39;t remove this call if you want to debug with Cocos Code IDE<br></span>    <span class="k">auto</span> <span class="n">runtimeEngine</span> <span class="o">&#x3D;</span> <span class="n">RuntimeEngine</span><span class="o">::</span><span class="n">getInstance</span><span class="p">();</span><br>    <span class="n">runtimeEngine</span><span class="o">-&gt;</span><span class="n">addRuntime</span><span class="p">(</span><span class="n">RuntimeLuaImpl</span><span class="o">::</span><span class="n">create</span><span class="p">(),</span> <span class="n">kRuntimeEngineLua</span><span class="p">);</span><br>    <span class="n">runtimeEngine</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span><br><span class="cp">#else<br></span><span class="c1">&#x2F;&#x2F;默认调用src&#x2F;main.lua代码<br></span>    <span class="k">if</span> <span class="p">(</span><span class="n">engine</span><span class="o">-&gt;</span><span class="n">executeScriptFile</span><span class="p">(</span><span class="s">&amp;#34;src&#x2F;main.lua&amp;#34;</span><span class="p">))</span><br>    <span class="p">{</span><br>        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span><br>    <span class="p">}</span><br><span class="cp">#endif<br></span><br>    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span><br><span class="p">}</span><br></code></pre></div></div></p>
+<p>逻辑通熟易懂，可以看到入口函数applicationDidFinishLaunching                                                                                    中完成初始化lua虚拟机完成后，然后调用了main.lua进入业务逻辑。所以可以顺着这条路走下去。
+在IDAQ的函数栏查找applicationDidFinishLaunching函数。然后反编译生成代码。</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf73151d24d.jpg" alt="反编译"/></p>
+
+<p>好了就要按着耐心查找入口代码了，先分析MainManagerCpp::setupLuaBinding(v13, v11);这句话还是在初始化lua引擎的工作，说明加载理论上用在在这句话后面，好吧小哥开始找吧！最终找到了这个函数：这个是设置秘钥的函数，后面的长字符串就是秘钥。</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf73163b096.jpg" alt=""/></p>
+
+<p>有了秘钥肯定有地方调用解密，好吧，继续查找发现了这个函数</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf7317191d8.jpg" alt=""/></p>
+
+<p>继续点击进去发现了这个关键字rc4：</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf7318240fa.jpg" alt=""/></p>
+
+<p>到这地方基本就很清楚了，该代码在加载lua文件的时候先解密了文件，使用了rc4加解密算法，秘钥是上面的字符串，是不是很激动。</p>
+
+<h3 id="5解密文件">5.解密文件</h3>
+
+<h4 id="1-解密lua文件">1. 解密lua文件</h4>
+
+<p>有了秘钥和加密方式，那就开始左手解密，<a target="_blank" rel="noopener" href="http://blog.csdn.net/lc_910927/article/details/37599161">rc4流加密算法</a>介绍可以看一下，秘钥长度可变，上面获取的秘钥是128位的秘钥。rc4的加解密算法网上可以拿到实现，rc4加密算法，加密一次是加密，再次加密就是解密，很有意思，拿到算法实现直接写一个加解密工具。对上面的文件进行解密。获取到main.lua文件解密后的代码截图：</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf73193dcaa.jpg" alt="解密文件"/></p>
+
+<p>有没有很激动。</p>
+
+<h4 id="2-解密package包">2. 解密package包</h4>
+
+<p>同样对pakeage包进行解密，获得原始二进制文件，打开文件还是乱码，如下图：</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf731a71172.jpg" alt=""/></p>
+
+<p>但是注意箭头处的两个字符PK这两个字符，ASCII字符值为0x50,0x4B,通过查询文件压缩头发现zip压缩的头表示符为0x04034b50，<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_4c3591bd0100zzm6.html">zip文件格式</a>，随即确定为zip压缩格式，直接按zip文件解压得到了一下文件结构：</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf731b6a486.jpg" alt=""/></p>
+
+<p>作为lua文件直接打开得到包内核心lua业务代码，转账银行代码：</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://img.dazhuanlan.com/2019/11/28/5ddf731c54609.jpg" alt=""/></p>
+
+<p>好了至此，全部文件解密，可以一窥核心逻辑代码，想怎么修改就怎么修改。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>本文详细介绍了如果逆向一个基于lua热更新游戏的包，获取了整个解密后的lua代码。如果你收本文启发可以尝试破解其他游戏，关闭碰撞检测来个子弹穿墙没问题，哈哈，切记任何破解违法行为与本作者无关，只供交流学习。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-330_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Lua学习笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-333_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8C%87%E4%BB%A4/">Lua源码阅读：表操作的指令</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

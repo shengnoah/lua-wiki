@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua 笔记 string_table_function知识点 - Lua教程</title>
+
+  
+    <meta name="description" content="本文涉及到一些关于string、table和function的细碎知识点，一些常用操作的背后逻辑。本文是用于记录一次技术分享，部分内容与之前的一篇Lua的笔记有重叠。 本文参考和使用的lua源码基于Lua 5.3.5，编写的lua脚本运行于OSX系统，使用的是64位的lua运行库。  评估方法纯lua侧的对于代码执行耗时的评估和执行过程中产生的堆内存的分析。 时间分析对应于cpu负载，借助os.c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua 笔记 string_table_function知识点">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-803_Lua%20%E7%AC%94%E8%AE%B0%20string_table_function%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="本文涉及到一些关于string、table和function的细碎知识点，一些常用操作的背后逻辑。本文是用于记录一次技术分享，部分内容与之前的一篇Lua的笔记有重叠。 本文参考和使用的lua源码基于Lua 5.3.5，编写的lua脚本运行于OSX系统，使用的是64位的lua运行库。  评估方法纯lua侧的对于代码执行耗时的评估和执行过程中产生的堆内存的分析。 时间分析对应于cpu负载，借助os.c">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.308Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.308Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua 笔记 string_table_function知识点</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="toc-text">评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%88%86%E6%9E%90"><span class="toc-text">时间分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90"><span class="toc-text">空间分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E7%9A%84lua%E7%B1%BB%E5%9E%8B"><span class="toc-text">通用的lua类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">值类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GC%E4%BF%A1%E6%81%AF"><span class="toc-text">GC信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string"><span class="toc-text">string</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="toc-text">结构和定义</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua 笔记 string_table_function知识点</span></h1>
+<p>本文涉及到一些关于<code>string</code>、<code>table</code>和<code>function</code>的细碎知识点，一些常用操作的背后逻辑。本文是用于记录一次技术分享，部分内容与<a href="../2018-09-13-lua-notes-03">之前的一篇Lua的笔记</a>有重叠。</p>
+<p>本文参考和使用的lua源码基于Lua 5.3.5，编写的lua脚本运行于OSX系统，使用的是64位的lua运行库。</p>
+
+<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><p>纯lua侧的对于代码执行耗时的评估和执行过程中产生的堆内存的分析。</p>
+<h4 id="时间分析"><a href="#时间分析" class="headerlink" title="时间分析"></a>时间分析</h4><p>对应于cpu负载，借助<code>os.clock()</code>函数，以下是一个示例：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a, b</span><br/><span class="line">a = <span class="built_in">os</span>.<span class="built_in">clock</span>()</span><br/><span class="line"></span><br/><span class="line">b = <span class="built_in">os</span>.<span class="built_in">clock</span>()</span><br/><span class="line"><span class="built_in">print</span>(b-a)</span><br/></pre></td></tr></tbody></table></figure>
+<h4 id="空间分析"><a href="#空间分析" class="headerlink" title="空间分析"></a>空间分析</h4><p>对应于内存占用，借助<code>collectgarbage()</code>函数，这个函数传入不同的参数可以对lua的gc机制进行不同的操作控制，具体不再展开，这里主要是对堆内存的占用进行评估，用到的是以下的一套组合三连，即先强制一轮完整的gc（<code>collect</code>），然后禁用gc（<code>stop</code>），在执行完一些待测试的代码之后获取对内存占用的千字节数（<code>count</code>）：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;collect&#34;</span>)</span><br/><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;stop&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">collectgarbage</span>(<span class="string">&#34;count&#34;</span>))</span><br/></pre></td></tr></tbody></table></figure>
+<p>来一个简单的gc演示，三次获取堆内存，分配前、分配后、gc后：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;collect&#34;</span>)</span><br/><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;stop&#34;</span>)</span><br/><span class="line"><span class="keyword">local</span> a = <span class="built_in">collectgarbage</span>(<span class="string">&#34;count&#34;</span>) * <span class="number">1024</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> t = {}</span><br/><span class="line">t = <span class="literal">nil</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> b = <span class="built_in">collectgarbage</span>(<span class="string">&#34;count&#34;</span>) * <span class="number">1024</span></span><br/><span class="line"></span><br/><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;collect&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> c = <span class="built_in">collectgarbage</span>(<span class="string">&#34;count&#34;</span>) * <span class="number">1024</span></span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;before alloc &#34;</span> .. a)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;after alloc &#34;</span> .. b)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;after collect &#34;</span> .. c)</span><br/></pre></td></tr></tbody></table></figure>
+<p>上边输出的内容，a和c是相等的，b会多出来56个字节（这是一个空表的内存占用）。</p>
+<h3 id="通用的lua类型"><a href="#通用的lua类型" class="headerlink" title="通用的lua类型"></a>通用的lua类型</h3><h4 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h4><p>Lua中通用的值类型，<code>TValue</code>，使用一个联合体保存数据，和一个枚举值区分该值的类型，定义在<code>lobject.h</code>第100行：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** Union of all Lua values</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> Value {</span><br/><span class="line">  GCObject *gc;    <span class="comment">/* collectable objects */</span></span><br/><span class="line">  <span class="keyword">void</span> *p;         <span class="comment">/* light userdata */</span></span><br/><span class="line">  <span class="keyword">int</span> b;           <span class="comment">/* booleans */</span></span><br/><span class="line">  lua_CFunction f; <span class="comment">/* light C functions */</span></span><br/><span class="line">  lua_Integer i;   <span class="comment">/* integer numbers */</span></span><br/><span class="line">  lua_Number n;    <span class="comment">/* float numbers */</span></span><br/><span class="line">} Value;</span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>  {</span></span><br/><span class="line">  TValuefields;</span><br/><span class="line">} TValue;</span><br/></pre></td></tr></tbody></table></figure>
+<h4 id="GC信息"><a href="#GC信息" class="headerlink" title="GC信息"></a>GC信息</h4><p>gc相关的通用数据，table、string和function都是受gc管理的类型，它们的结构中都是以一个<code>CommonHeader</code>开始，其定义如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** Common type for all collectable objects</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GCObject</span> <span class="title">GCObject</span>;</span></span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** Common Header for all collectable objects (in macro form, to be</span></span><br/><span class="line"><span class="comment">** included in other objects)</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CommonHeader  GCObject *next; lu_byte tt; lu_byte marked</span></span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** Common type has only the common header</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GCObject</span> {</span></span><br/><span class="line">  CommonHeader;</span><br/><span class="line">};</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><p>先从一段简单短Lua代码开始，尝试得到一个空字符串<code>&#34;&#34;</code>所占用的堆内存：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;collect&#34;</span>)</span><br/><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;stop&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- -------------------------------------------------------</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> before = <span class="built_in">collectgarbage</span>(<span class="string">&#34;count&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> s = <span class="built_in">table</span>.<span class="built_in">concat</span>({})</span><br/><span class="line"><span class="built_in">collectgarbage</span>(<span class="string">&#34;collect&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- -------------------------------------------------------</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> after = <span class="built_in">collectgarbage</span>(<span class="string">&#34;count&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(<span class="number">1024</span> * (after - before))</span><br/></pre></td></tr></tbody></table></figure>
+<p>输出25，即一个空字符串会产生25字节的堆内存。此处之所以使用<code>table.concat(&#123;&#125;)</code>而不是直接使用<code>&#34;&#34;</code>，是因为代码中直接存在的字面字符串不会再单独分配堆内存。</p>
+<p>来看一看一个空字符串的25个字节分别是什么内容，并以此为基础计算任意一个字符串占用的内存。</p>
+<h4 id="结构和定义"><a href="#结构和定义" class="headerlink" title="结构和定义"></a>结构和定义</h4><p>字符串的类型的定义在lobject.h第303行。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** Header for string value; string bytes follow the end of this structure</span></span><br/><span class="line"><span class="comment">** (aligned according to &#39;UTString&#39;; see next).</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TString</span> {</span></span><br/><span class="line">  CommonHeader;</span><br/><span class="line">  lu_byte extra;  <span class="comment">/* reserved words for short strings; &#34;has hash&#34; for longs */</span></span><br/><span class="line">  lu_byte shrlen;  <span class="comment">/* length for short strings */</span></span><br/><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> hash;</span><br/><span class="line">  <span class="keyword">union</span> {</span><br/><span class="line">    <span class="keyword">size_t</span> lnglen;  <span class="comment">/* length for long strings */</span></span><br/><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TString</span> *<span class="title">hnext</span>;</span>  <span class="comment">/* linked list for hash table */</span></span><br/><span class="line">  } u;</span><br/><span class="line">} TString;</span><br/></pre></td></tr></tbody></table></figure>
+<p>为确保内存对齐使用结构体<code>UTString</code>又套了一层：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** Ensures that address after this type is always fully aligned.</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> UTString {</span><br/><span class="line">  L_Umaxalign dummy;  <span class="comment">/* ensures maximum alignment for strings */</span></span><br/><span class="line">  TString tsv;</span><br/><span class="line">} UTString;</span><br/></pre></td></tr></tbody></table></figure>
+<p>在<code>lstring.c</code>中有创建字符串的函数：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** creates a new string object</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="function"><span class="keyword">static</span> TString *<span class="title">createstrobj</span> <span class="params">(lua_State *L, <span class="keyword">size_t</span> l, <span class="keyword">int</span> tag, <span class="keyword">unsigned</span> <span class="keyword">int</span> h)</span> </span>{</span><br/><span class="line">  TString *ts;</span><br/><span class="line">  GCObject *o;</span><br/><span class="line">  <span class="keyword">size_t</span> totalsize;  <span class="comment">/* total size of TString object */</span></span><br/><span class="line">  totalsize = sizelstring(l);</span><br/><span class="line">  o = luaC_newobj(L, tag, totalsize);</span><br/><span class="line">  ts = gco2ts(o);</span><br/><span class="line">  ts-&gt;hash = h;</span><br/><span class="line">  ts-&gt;extra = <span class="number">0</span>;</span><br/><span class="line">  getstr(ts)[l] = <span class="string">&#39;
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-821_Lua%E5%92%8CC++%E7%9A%84%E4%BA%A4%E4%BA%92%20/">Lua和C++的交互</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-807_evaluate(input_sentence)/">evaluate(input_sentence)</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

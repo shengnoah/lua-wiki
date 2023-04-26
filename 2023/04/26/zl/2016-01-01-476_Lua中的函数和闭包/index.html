@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua中的函数和闭包 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;div class&#x3D;&quot;wrap-content&quot;&gt;      &lt;p&gt;当Lua&lt;strong&gt;编译一个函数的时候，会产生一个prototype&lt;&#x2F;strong&gt;，这个prototype包含了这个函数的&lt;strong&gt;虚拟机器指令&lt;&#x2F;strong&gt;、&lt;strong&gt;常量值&amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua中的函数和闭包">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-476_Lua%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E9%97%AD%E5%8C%85/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;div class&#x3D;&quot;wrap-content&quot;&gt;      &lt;p&gt;当Lua&lt;strong&gt;编译一个函数的时候，会产生一个prototype&lt;&#x2F;strong&gt;，这个prototype包含了这个函数的&lt;strong&gt;虚拟机器指令&lt;&#x2F;strong&gt;、&lt;strong&gt;常量值&amp;l">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hytc1106hwc.github.io/assets/lua/how-to-write-c-functions/open-and-closed-upvalue.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.276Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.276Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hytc1106hwc.github.io/assets/lua/how-to-write-c-functions/open-and-closed-upvalue.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua中的函数和闭包</span></h1>
+<div class="page-content">
+    
+    
+<pre><code>&lt;div class=&quot;wrap-content&quot;&gt;
+  
+  &lt;p&gt;当Lua&lt;strong&gt;编译一个函数的时候，会产生一个prototype&lt;/strong&gt;，这个prototype包含了这个函数的&lt;strong&gt;虚拟机器指令&lt;/strong&gt;、&lt;strong&gt;常量值&lt;/strong&gt;和&lt;strong&gt;一些调试信息&lt;/strong&gt;。&lt;/p&gt;
+</code></pre>
+<p>在运行的时候，任何时候，<strong>Lua执行一个function…end表达式的时候，会为这个函数创建一个新的闭包（closure）</strong>。</p>
+
+<p>每一个闭包包含“<strong>两个引用和一个引用数组</strong>”：</p>
+
+<ul>
+  <li>对prototype的引用</li>
+  <li>对闭包环境的引用（这个环境是一个table，通过它可以查找全局变量）</li>
+  <li>对upvalue的引用构成的数组，可以通过这些引用来访问外部的local变量</li>
+</ul>
+
+<p>词法作用域和一流函数的结合为对外部的local变量的访问带来的困难。</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">add</span><span class="err">函数</span>                     <span class="err">调用过程</span>
+<span class="n">function</span> <span class="n">add</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>              <span class="n">add2</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">function</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>       <span class="nb">print</span><span class="p">(</span><span class="n">add2</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<blockquote>
+  <p>说明</p>
+
+  <p>在add2被调用的时候，函数体部分需要访问外部的local变量x。但是等到add2被调用的时候，创建add2的函数add已经返回了，如果变量x是在栈中被创建的，存储它的栈存储单元在函数返回时已经不存在了。</p>
+</blockquote>
+
+<p>大多数过程式语言，通过限制词法作用域（像Python语言），或不提供一流函数（像Pascal语言），或都限制两者（像C语言），来解决上面对访问外部变量的local变量困难的问题。研究表明，非纯正的函数式语言，像Scheme和ML语言，对闭包的编译技术创建了一大堆知识。但是这些努力并没有限制编译器的复杂度。比如，仅仅Bigloo的控制流分析，一种优化的scheme编译器，是Lua的实现的10倍大。</p>
+
+<p><strong>Lua使用一个叫做upvalue的结构来实现闭包</strong>。对任何外部的local变量的访问都是通过upvalue来进行的。upvalue原本指向变量所在的栈的槽位。当变量离开了作用域，变量会迁移到upvalue本身的槽位中。因为变量是间接通过upvalue中的指针访问的，这个迁移对任何读写变量的代码都是透明的。不像内部函数，声明变量的函数访问变量就像访问自己的local变量一样：直接在栈中。</p>
+
+<p><strong>可变状态可以在闭包间正确地被共享，只要为每个变量创建至多一个upvalue结构，并在需要时重新利用它就行了</strong>。要确保这种唯一性，Lua保存了一个链表，这个链表包含了所有打开的upvalue（也就是说，这些upvalue仍然指向栈）。当Lua创建了一个闭包，会遍历所有外部的local变量。对于每个变量，如果能够在链表中找到一个打开的upvalue，就会重利用这个upvalue。否则，Lua会创建一个新的upvalue,并链接到这个upvalue。注意，搜索链表的时候，只会搜索部分节点，因为对于每个被内部函数使用的local变量，链表中至多有一个入口。一旦关闭的upvalue不再被任何闭包所使用，这个upvalue入口就会被当做垃圾回收。</p>
+
+<p>函数访问不属于自己的封闭函数，而属于某个外部函数的外部local变量是可能的。在这种情况下，即使闭包已经被创建，变量可能在栈中不存在。Lua通过使用flat closure解决了这个问题。使用flat closure，任何时候某个函数访问不在自己封闭函数中的外部变量，这个变量也会进入到封闭函数的闭包中。因此，当一个函数被初始化后，这个函数用到的所有闭包中的变量，要么在该函数的栈中，要么在该函数的闭包中。</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://hytc1106hwc.github.io/assets/lua/how-to-write-c-functions/open-and-closed-upvalue.png" alt="Upvalue开启与关闭时结构"/></p>
+
+<ul>
+  <li>
+    <p>相关资料</p>
+
+<pre><code>&lt;p&gt;Lua发起人向JUCS提交的论文 &lt;a href=&quot;https://hytc1106hwc.github.io/assets/attachments/The-Implementation%20-of-Lua-5.0.pdf&quot;&gt;[下载]&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+  </li>
+</ul>
+
+
+      
+      
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+<script type="text/javascript">
+    (function(){
+        var p = {
+            url:'https://hytc1106hwc.github.io/2018/01/30/functions-and-closures-in-lua.html',
+            showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+            desc:'',/*默认分享理由(可选)*/
+            summary:'Lua中的函数和闭包Lua中的函数与闭包的实现机制',/*分享摘要(可选)*/
+            title:'Lua中的函数和闭包',/*分享标题(可选)*/
+            site:'',/*分享来源 如：腾讯网(可选)*/
+            pics:'', /*分享图片的路径(可选)*/
+            style:'203',
+            width:98,
+            height:22
+        };
+        var s = [];
+        for(var i in p){
+            s.push(i + '=' + encodeURIComponent(p[i]||''));
+        }
+        $("div.page-share").append(['<a version="1.0" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank" rel="nofollow noopener noreferrer" >Qzone</a>'].join(''));
+        /*document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank" rel="noopener noreferrer">分享</a>'].join(''));*/
+    })();
+</script>
+<script src="/assets/js/jquery-qrcode-0.14.0.js"></script>
+<script type="text/javascript">
+    function showHideWechatCode(){
+        
+        var ops = {
+            // render method: 'canvas', 'image' or 'div'
+            render: 'canvas',
+
+            // version range somewhere in 1 .. 40
+            minVersion: 1,
+            maxVersion: 40,
+
+            // error correction level: 'L', 'M', 'Q' or 'H'
+            ecLevel: 'L',
+
+            // offset in pixel if drawn onto existing canvas
+            left: 1,
+            top: 1,
+
+            // size in pixel
+            size: 100,
+
+            // code color or image element
+            fill: '#000',
+
+            // background color or image element, null for transparent background
+            background: null,
+
+            // content
+            text: 'https://hytc1106hwc.github.io/2018/01/30/functions-and-closures-in-lua.html',
+
+            // corner radius relative to module width: 0.0 .. 0.5
+            radius: 0,
+
+            // quiet zone in modules
+            quiet: 0,
+
+            // modes
+            // 0: normal
+            // 1: label strip
+            // 2: label box
+            // 3: image strip
+            // 4: image box
+            mode: 0,
+
+            mSize: 0.1,
+            mPosX: 0.5,
+            mPosY: 0.5,
+
+            label: 'no label',
+            fontname: 'sans',
+            fontcolor: '#000',
+
+            image: null
+        };
+
+        if ($("div.weixin-container").hasClass("loaded"))
+        {
+            $("div.weixin-qrcode-img").empty();
+            $("div.weixin-container").removeClass("loaded")
+        }
+        else
+        {
+            $("div.weixin-qrcode").html('<div class="weixin-qrcode-img"></div>');
+            $("div.weixin-qrcode-img").qrcode(ops);
+            $("div.weixin-container").addClass("loaded");
+        }
+        
+        
+    }
+
+    (function(){
+        $("div.page-share").append('<a href="javascript:void(0)" onclick="showHideWechatCode()" rel="nofollow">WeChat</a>');
+    })();
+</script>
+
+<pre><code>  &lt;section class=&quot;comment-area&quot;&gt;
+</code></pre>
+  <div class="comment-wrapper">
+    
+    
+<pre><code>&lt;script&gt;
+  (function() &#123;
+      var d = document, s = d.createElement(&#39;script&#39;);
+      s.src = &#39;//mr-brown.disqus.com/embed.js&#39;;
+      s.setAttribute(&#39;data-timestamp&#39;, +new Date());
+      (d.head || d.body).appendChild(s);
+  &#125;)();
+&lt;/script&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+</code></pre>
+  </div>
+</section> 
+
+<pre><code>&lt;/div&gt; 
+</code></pre>
+  </div>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-481_Openrestry(Nginx+Lua)%E4%B9%8BWAF%E5%AE%9E%E7%8E%B0/">Openrestry(Nginx+Lua)之WAF实现</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-47_nginx+lua%E5%8A%A8%E6%80%81%E6%94%B9%E5%8F%98upstream/">nginx+lua动态改变upstream</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

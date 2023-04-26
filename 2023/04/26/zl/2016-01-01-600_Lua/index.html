@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua - Lua教程</title>
+
+  
+    <meta name="description" content="名称ngx_http_lua_module - 将Lua的功能嵌入到Nginx HTTP服务器中。 这个模块没有与Nginx源码一起发布。详见安装介绍 内容列表 名称 状态 版本 概要 描述  状态已经发布。 版本此文档基于2017年4月8日发布的ngx_lua v0.10.8。 概要123456789101112131415161718192021222324252627282930313233">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-600_Lua/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="名称ngx_http_lua_module - 将Lua的功能嵌入到Nginx HTTP服务器中。 这个模块没有与Nginx源码一起发布。详见安装介绍 内容列表 名称 状态 版本 概要 描述  状态已经发布。 版本此文档基于2017年4月8日发布的ngx_lua v0.10.8。 概要123456789101112131415161718192021222324252627282930313233">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.288Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.288Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E7%A7%B0"><span class="toc-text">名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E5%88%97%E8%A1%A8"><span class="toc-text">内容列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81"><span class="toc-text">状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC"><span class="toc-text">版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%A6%81"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8"><span class="toc-text">典型应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-text">Nginx兼容性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua</span></h1>
+<h2 id="名称"><a href="#名称" class="headerlink" title="名称"></a>名称</h2><p>ngx_http_lua_module - 将Lua的功能嵌入到Nginx HTTP服务器中。</p>
+<p>这个模块没有与Nginx源码一起发布。详见<a href="#">安装介绍</a></p>
+<h2 id="内容列表"><a href="#内容列表" class="headerlink" title="内容列表"></a>内容列表</h2><ul>
+<li><a href="#名称">名称</a></li>
+<li><a href="#状态">状态</a></li>
+<li><a href="#版本">版本</a></li>
+<li><a href="#概要">概要</a></li>
+<li><a href="#描述">描述</a></li>
+</ul>
+<h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><p>已经发布。</p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>此文档基于2017年4月8日发布的ngx_lua <a href="https://github.com/openresty/lua-nginx-module/tags" target="_blank" rel="external noopener noreferrer">v0.10.8</a>。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"># 设置纯lua外部库的搜索路径 (&#39;;;&#39; 是默认路径):</div><div class="line"> lua_package_path &#39;/foo/bar/?.lua;/blah/?.lua;;&#39;;</div><div class="line"></div><div class="line"> # 设置用C实现的Lua外部库的搜索路径 (也可以用 &#39;;;&#39;):</div><div class="line"> lua_package_cpath &#39;/bar/baz/?.so;/blah/blah/?.so;;&#39;;</div><div class="line"></div><div class="line"> server {</div><div class="line">     location /lua_content {</div><div class="line">         # MIME type determined by default_type:</div><div class="line">         default_type &#39;text/plain&#39;;</div><div class="line"></div><div class="line">         content_by_lua_block {</div><div class="line">             ngx.say(&#39;Hello,world!&#39;)</div><div class="line">         }</div><div class="line">     }</div><div class="line"></div><div class="line">     location /nginx_var {</div><div class="line">         # MIME type determined by default_type:</div><div class="line">         default_type &#39;text/plain&#39;;</div><div class="line"></div><div class="line">         # try access /nginx_var?a=hello,world</div><div class="line">         content_by_lua_block {</div><div class="line">             ngx.say(ngx.var.arg_a)</div><div class="line">         }</div><div class="line">     }</div><div class="line"></div><div class="line">     location = /request_body {</div><div class="line">         client_max_body_size 50k;</div><div class="line">         client_body_buffer_size 50k;</div><div class="line"></div><div class="line">         content_by_lua_block {</div><div class="line">             ngx.req.read_body()  -- explicitly read the req body</div><div class="line">             local data = ngx.req.get_body_data()</div><div class="line">             if data then</div><div class="line">                 ngx.say(&#34;body data:&#34;)</div><div class="line">                 ngx.print(data)</div><div class="line">                 return</div><div class="line">             end</div><div class="line"></div><div class="line">             -- body may get buffered in a temp file:</div><div class="line">             local file = ngx.req.get_body_file()</div><div class="line">             if file then</div><div class="line">                 ngx.say(&#34;body is in file &#34;, file)</div><div class="line">             else</div><div class="line">                 ngx.say(&#34;no body found&#34;)</div><div class="line">             end</div><div class="line">         }</div><div class="line">     }</div><div class="line"></div><div class="line">     # transparent non-blocking I/O in Lua via subrequests</div><div class="line">     # (well, a better way is to use cosockets)</div><div class="line">     location = /lua {</div><div class="line">         # MIME type determined by default_type:</div><div class="line">         default_type &#39;text/plain&#39;;</div><div class="line"></div><div class="line">         content_by_lua_block {</div><div class="line">             local res = ngx.location.capture(&#34;/some_other_location&#34;)</div><div class="line">             if res then</div><div class="line">                 ngx.say(&#34;status: &#34;, res.status)</div><div class="line">                 ngx.say(&#34;body:&#34;)</div><div class="line">                 ngx.print(res.body)</div><div class="line">             end</div><div class="line">         }</div><div class="line">     }</div><div class="line"></div><div class="line">     location = /foo {</div><div class="line">         rewrite_by_lua_block {</div><div class="line">             res = ngx.location.capture(&#34;/memc&#34;,</div><div class="line">                 { args = { cmd = &#34;incr&#34;, key = ngx.var.uri } }</div><div class="line">             )</div><div class="line">         }</div><div class="line"></div><div class="line">         proxy_pass http://blah.blah.com;</div><div class="line">     }</div><div class="line"></div><div class="line">     location = /mixed {</div><div class="line">         rewrite_by_lua_file /path/to/rewrite.lua;</div><div class="line">         access_by_lua_file /path/to/access.lua;</div><div class="line">         content_by_lua_file /path/to/content.lua;</div><div class="line">     }</div><div class="line"></div><div class="line">     # use nginx var in code path</div><div class="line">     # CAUTION: contents in nginx var must be carefully filtered,</div><div class="line">     # otherwise there&#39;ll be great security risk!</div><div class="line">     location ~ ^/app/([-_a-zA-Z0-9/]+) {</div><div class="line">         set $path $1;</div><div class="line">         content_by_lua_file /path/to/lua/app/root/$path.lua;</div><div class="line">     }</div><div class="line"></div><div class="line">     location / {</div><div class="line">        client_max_body_size 100k;</div><div class="line">        client_body_buffer_size 100k;</div><div class="line"></div><div class="line">        access_by_lua_block {</div><div class="line">            -- check the client IP address is in our black list</div><div class="line">            if ngx.var.remote_addr == &#34;132.5.72.3&#34; then</div><div class="line">                ngx.exit(ngx.HTTP_FORBIDDEN)</div><div class="line">            end</div><div class="line"></div><div class="line">            -- check if the URI contains bad words</div><div class="line">            if ngx.var.uri and</div><div class="line">                   string.match(ngx.var.request_body, &#34;evil&#34;)</div><div class="line">            then</div><div class="line">                return ngx.redirect(&#34;/terms_of_use.html&#34;)</div><div class="line">            end</div><div class="line"></div><div class="line">            -- tests passed</div><div class="line">        }</div><div class="line"></div><div class="line">        # proxy_pass/fastcgi_pass/etc settings</div><div class="line">     }</div><div class="line"> }</div></pre></td></tr></tbody></table></figure>
+<p><a href="#内容列表">回到内容列表</a></p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>通过标准的Lua5.1解释器或者<a href="http://luajit.org/luajit.html" target="_blank" rel="external noopener noreferrer">LuaJIT2.0/2.1</a>以及借助Nginx的子请求，此模块将Lua嵌入到Nginx中，允许将强大的Lua线程集成到Nginx事件模块中。</p>
+<p>与<a href="https://httpd.apache.org/docs/trunk/mod/mod_lua.html" target="_blank" rel="external noopener noreferrer">Apcache’s mod_lua</a>和<a href="http://redmine.lighttpd.net/wiki/1/Docs:ModMagnet" target="_blank" rel="external noopener noreferrer">Lighttpd’s mod_magnet</a>不同的是，使用此模块执行Lua代码，在网络传输中完全是非阻塞的，只要使用此模块提供的<a href="https://github.com/openresty/lua-nginx-module#nginx-api-for-lua" target="_blank" rel="external noopener noreferrer">Nginx API for Lua</a>来处理上游服务的请求，例如MySQL, PostgreSQL, Memcached,Redis 或上游Http web服务。</p>
+<p>至少以下Lua库和Nginx模块可以和ngx_lua模块一起使用:</p>
+<ul>
+<li><a href="https://github.com/openresty/lua-resty-memcached" target="_blank" rel="external noopener noreferrer">lua-resty-memcached</a></li>
+<li><a href="https://github.com/openresty/lua-resty-mysql" target="_blank" rel="external noopener noreferrer">lua-resty-mysql</a></li>
+<li><a href="https://github.com/openresty/lua-resty-redis" target="_blank" rel="external noopener noreferrer">lua-resty-redis</a></li>
+<li><a href="https://github.com/openresty/lua-resty-dns" target="_blank" rel="external noopener noreferrer">lua-resty-dns</a></li>
+<li><a href="https://github.com/openresty/lua-resty-upload" target="_blank" rel="external noopener noreferrer">lua-resty-upload</a></li>
+<li><a href="https://github.com/openresty/lua-resty-websocket" target="_blank" rel="external noopener noreferrer">lua-resty-websocket</a></li>
+<li><a href="https://github.com/openresty/lua-resty-lock" target="_blank" rel="external noopener noreferrer">lua-resty-lock</a></li>
+<li><a href="https://github.com/cloudflare/lua-resty-logger-socket" target="_blank" rel="external noopener noreferrer">lua-resty-logger-socket</a></li>
+<li><a href="https://github.com/openresty/lua-resty-lrucache" target="_blank" rel="external noopener noreferrer">lua-resty-lrucache</a></li>
+<li><a href="https://github.com/openresty/lua-resty-string" target="_blank" rel="external noopener noreferrer">lua-resty-string</a></li>
+<li><a href="http://github.com/openresty/memc-nginx-module" target="_blank" rel="external noopener noreferrer">ngx_memc</a></li>
+<li><a href="https://github.com/FRiCKLE/ngx_postgres" target="_blank" rel="external noopener noreferrer">ngx_postgres</a></li>
+<li><a href="http://github.com/openresty/redis2-nginx-module" target="_blank" rel="external noopener noreferrer">ngx_redis2</a></li>
+<li><a href="http://wiki.nginx.org/HttpRedisModule" target="_blank" rel="external noopener noreferrer">ngx_redis</a></li>
+<li><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html" target="_blank" rel="external noopener noreferrer">ngx_proxy</a></li>
+<li><a href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html" target="_blank" rel="external noopener noreferrer">ngx_fastcgi</a></li>
+</ul>
+<p>通过<a href="https://github.com/openresty/lua-nginx-module#ngxlocationcapture" target="_blank" rel="external noopener noreferrer">ngx.location.capture</a>或者<a href="https://github.com/openresty/lua-nginx-module#ngxlocationcapture_multi" target="_blank" rel="external noopener noreferrer">ngx.location.capture_multi</a>，几乎所有的Ngnix模块都可以与ngx_lua模块一起使用，但是我们建议使用lua-resty-*代替创建子请求去访问Nginx upstream模块，因为前者更加灵活且存储效率更高。</p>
+<p>在一个单独的nginx worker进程中，所有的请求共享一个Lua解释器或LuaJIT实例，但是请求上下文却是使用轻量级的Lua协程隔离。</p>
+<p>被加载的Lua模块保持在nginx worker级别使得只占用极小内存，即使在重负载下也是如此。</p>
+<p>这个模块被插入NGINX的“http”子系统，所以它仅仅支持Http家族中的晚期通信协议（例如HTTP0.9/1.0/1.1/2.0，WebSockets等等）。如果你想使用TCP协议与晚期版本客户端通信，你应该使用兼容Lua APi的<a href="https://github.com/openresty/stream-lua-nginx-module#readme" target="_blank" rel="external noopener noreferrer">ngx_stream_lua</a>模块。</p>
+<p><a href="#内容列表">回到TOC</a></p>
+<h2 id="典型应用"><a href="#典型应用" class="headerlink" title="典型应用"></a>典型应用</h2><p>仅仅列举一些:</p>
+<ul>
+<li>使用Lua处理各种nginx upstream输出(代理，dirzzle, postgres,redis, memcached,等等)</li>
+<li>在请求真正到达upstream后端之前，使用处理任意复杂的访问控制和安全检查</li>
+<li>使用随意方式操纵响应头</li>
+<li>从外部存储(例如redis, memcached,mysql,postgresql)获取后端信息,从而即时根据那些信息来选择访问哪个upstream后端</li>
+<li>在一个content handler中使用同步方式编写任意复杂的web应用，但是仍然使用非阻塞方式访问数据库后端和其他存储。</li>
+<li>使用Lua在重写阶段做非常复杂的URL调度</li>
+<li>使用Lua为Nginx的子请求和任意的location实现高级的缓存机制。</li>
+</ul>
+<p>作为模块，他允许将Nginx内的各种元素聚集在一起，并将Lua的优势暴露给用户，这种可能性是无限的。该模块提供了脚本的全部灵活性，同时在cpu时间以及内存占用方面，提供了与C语言同等级别的性能水平。当LusJIT2.x可用后尤其是如此。</p>
+<p>而其他的脚本语言通常难以实现此性能级别。</p>
+<p>Lua状态(Lua虚拟机实例)跨所有请求共享，通过一个单独的nginx worker进程处理以最小化内存占用。</p>
+<p><a href="#内容列表">回到TOC</a></p>
+<h2 id="Nginx兼容性"><a href="#Nginx兼容性" class="headerlink" title="Nginx兼容性"></a>Nginx兼容性</h2><p>该模块最新的版本兼容一下Nginx版本：</p>
+<ul>
+<li>1.11.x (last tested: 1.11.2)</li>
+<li>1.10.x</li>
+<li>1.9.x (last tested: 1.9.15)</li>
+<li>1.8.x</li>
+<li>1.7.x (last tested: 1.7.10)</li>
+<li>1.6.x</li>
+</ul>
+<p>Nginx cores低于1.6.0(包含)版本不再支持。</p>
+<p><a href="#内容列表">回到TOC</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-618_study_lua/">study_lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-603_Lua%20hash/">Lua hash</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

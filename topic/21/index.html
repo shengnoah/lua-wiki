@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Select 网络API - Lua教程</title>
+
+  
+    <meta name="description" content="Select 网络API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Select 网络API">
+<meta property="og:url" content="https://lua.ren/topic/21/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Select 网络API">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.107Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Select 网络API</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">【问题】</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">server.py</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">client.py</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">【API说明】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">【宏定义】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">【Select接口说明】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">【选读】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">【例子A：读取键盘输入的数据】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">【结尾】</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Select 网络API</span></h1>
+<h3>【问题】</h3>select,poll,epoll的区别是什么？
+select的并发处理是源于BSD系统的支持，poll是商业公司的unix版本SystemV 提供支持。epoll是在Linux 2.5+开始支持的。就像message queue都有BSD和SystemV版本的API。select是处理网络并发处理，与poll的区别是有文件句柄上线限制。poll不会因为打开文件的增多而降低效率。
+
+<p>【select功能概述】</p>
+<p><strong>一切复杂的问题都是简单问题叠加组合，引用一下英文文档原文。</strong><br>“This module provides access to the select() and poll() functions available in most operating systems, epoll() available on Linux 2.5+ and kqueue() available on most BSD. Note that on Windows, it only works for sockets; on other operating systems, it also works for other file types (in particular, on Unix, it works on pipes). It cannot be used on regular files to determine whether a file has grown since it was last read.”</p>
+<h5>server.py</h5>
+[code]
+import socket, select;
+import time;
+import os;
+
+<p>host &#x3D; “127.0.0.1”<br>port &#x3D; 1688</p>
+<p>s &#x3D; socket.socket(socket.AF_INET, socket.SOCK_STREAM)#通过指定第三个参数“IPPROTO_TCP&#x2F;IPPROTO_UDP”， 指定使用”TCP&#x2F;UDP”协议进行传输！<br>s.bind((host, port))<br>s.listen(5)</p>
+<p>while True:<br>        inputfds, outputfds, errorfds &#x3D; select.select([s,],[],[],5)<br>        if len(inputfds) !&#x3D;0:<br>                clientsock, clientaddr &#x3D; s.accept()<br>                buf &#x3D; clientsock.recv(8024)<br>                if len(buf) !&#x3D; 0:<br>                        print (buf)<br>                        clientsock.close() </p>
+<p>[&#x2F;code]</p>
+<h5>client.py</h5>
+[code]
+import socket, select
+host = "127.0.0.1"
+port = 1688
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((host, port))
+s.send("the Candy Web server on SAE of sina!")
+s.close()
+[/code]
+
+<h3>【API说明】</h3> 
+select的作用是“Waiting for I/O completion.”一般会和socket的API结合处理网络异步并发，但是也可以不和socket联系在一起应用。核心的API函数是select，结合几个关键的宏使用。FD_ZERO, FD_SET, FD_CLR，FD_ISSET。通过一套的函数和宏管理用户的文件描述符集合。（SETS）
+
+<p>英文文档总是能直戳这些宏的本质。<br>“ Four  macros  are provided to manipulate the sets.  FD_ZERO() clears a set.  FD_SET() and FD_CLR() respectively add and remove a given file descriptor from a set.  FD_ISSET() tests to see if a file descriptor is part of the set; this is useful after select() returns.<br>“</p>
+<h3>【宏定义】</h3>
+FD_ZERO():清空文件集。
+FD_SET():添加句柄到集合。
+FD_CLR():从集合中清除句柄。
+FD_ISSET():判断句柄是否在集合中。
+
+
+<h3>【Select接口说明】</h3>
+1.int n
+2.fd_set * readfds
+3.fd_set * writefds
+4.fd_set * exceptfds
+5.struct timeval * timeout
+timeout == NULL: 一直等待直到事件发生。
+timeout > 0: 按设定的大于0的时间值进行等待。
+timeout = 0: 没有时间等待，直接返回。
+
+
+<h3>【选读】</h3>
+<em>
+"select（I/O多工机制）
+定义函数 int select(int n,fd_set * readfds,fd_set * writefds,fd_set * exceptfds,struct timeval * timeout);
+函数说明 select()用来等待文件描述词状态的改变。参数n代表最大的文件描述词加1，参数readfds、writefds 和exceptfds 称为描述词组，是用来回传该描述词的读，写或例外的状况。底下的宏提供了处理这三种描述词组的方式:
+FD_CLR(inr fd,fd_set* set)；用来清除描述词组set中相关fd 的位
+FD_ISSET(int fd,fd_set *set)；用来测试描述词组set中相关fd 的位是否为真
+FD_SET（int fd,fd_set*set）；用来设置描述词组set中相关fd的位
+FD_ZERO（fd_set *set）；用来清除描述词组set的全部位"
+</em> 
+看到，“多工机制”和类似"是用来回传该描述词的读，写或例外的状况。"这种文字，直接就被干倒了，难道原文英语就这么晦涩不堪吗？残酷的阅读体验。
+
+
+
+<h3>【例子A：读取键盘输入的数据】</h3>
+
+<p>在Linux系统中，键盘设备也被标识为文件，找来一个例子，很简短的&#x2F;dev&#x2F;tty键盘设备和select的联合使用。这么做的目的，就是很单纯的演示select本身相关函数和使用。</p>
+<p>keyboard.c<br>[code]<br>#include&lt;stdio.h&gt;<br>#include&lt;stdlib.h&gt;<br>#include&lt;assert.h&gt;<br>#include&lt;fcntl.h&gt;<br>#include&lt;sys&#x2F;select.h&gt;</p>
+<p>int main(int argc, char **argv)<br>{<br>        int keyboard; &#x2F;&#x2F;键盘的文件句柄<br>        int ret,i;<br>        char c;<br>        fd_set readfd; &#x2F;&#x2F;读操作的集合的定义<br>        struct timeval timeout; &#x2F;&#x2F; 提供给select函数使用的，延时时间结构体，告知需要等待的时间长度<br>        keyboard &#x3D; open(“&#x2F;dev&#x2F;tty”, O_RDONLY | O_NONBLOCK);&#x2F;&#x2F;读取键盘缓冲区里的数据<br>        assert(keyboard&gt;0);<br>        while(1) &#x2F;&#x2F;主循环<br>        {<br>                timeout.tv_sec &#x3D; 1;  &#x2F;&#x2F; 等待的时间设定<br>                timeout.tv_usec &#x3D; 0;<br>                FD_ZERO(&amp;readfd); &#x2F;&#x2F; 初始化读操作集合。<br>                FD_SET(keyboard, &amp;readfd); &#x2F;&#x2F;把键盘文件句柄填入读文件集<br>                ret &#x3D; select(keyboard+1, &amp;readfd, NULL, NULL, &amp;timeout); &#x2F;&#x2F; 取得外部IO的状态数据<br>                if (FD_ISSET(keyboard, &amp;readfd)) &#x2F;&#x2F;判断读集合中的keyboard句柄是否准备好了，可以工作。<br>                {<br>                        i &#x3D; read(keyboard, &amp;c, 1); &#x2F;&#x2F;读取键盘文件<br>                        if (‘\n’ &#x3D;&#x3D; c)<br>                                continue;<br>                        printf(“input is %c\n”, c);<br>                        if (‘q’ &#x3D;&#x3D; c)<br>                                break;</p>
+<pre><code>            &#125;
+    &#125;
+</code></pre>
+<p>}<br>[&#x2F;code]</p>
+<p>server.cpp<br>client.cpp</p>
+<h3>【结尾】</h3>
+也许我应该长期的维护这个文档，回头看看对细节表述曾经放下的错误，对说的不是人话的地方，进行修改，并且围绕主题加入更高级的应用内容。
+
+
+<p>作者：小盛<br>注释：个人劳动成果，转载使用请注明本文作者及出处链接，谢谢合作！<br><a href="http://upblog.sinaapp.com/topic/21/python%E4%B8%8Ec-select-api%E7%9A%84%E5%AF%B9%E6%AF%94" target="_blank">Python与C++ select API的对比</a> </p>
+<p>参考文献：<br><a href="http://docs.python.org/2/library/select.html" target="_blank">Python官方文档</a></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/209/">Lapis框架如何“接受”和“返回”JSON数据</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/210/">setmetatable和__call</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

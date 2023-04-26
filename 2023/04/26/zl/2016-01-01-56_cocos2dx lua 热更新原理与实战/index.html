@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>cocos2dx lua 热更新原理与实战 - Lua教程</title>
+
+  
+    <meta name="description" content="首先，如果有过cocos2dx lua开发经验的朋友都知道，为什么使用Lua而不是C++,最重要的原因就是因为下面这三个原因  热更新(在线更新代码和资源) 比C++简单很多,入门和实战 轻量级，最小最轻的脚本语言  今天就从Lua热更新，捣鼓一下其中的原理，并具体实战一下！  什么是热更新？热更新也叫不停机更新，是在游戏服务器运行期间对游戏进行更新。实现不停机修正bug、修改游戏数据等操作。也可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cocos2dx lua 热更新原理与实战">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-56_cocos2dx%20lua%20%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="首先，如果有过cocos2dx lua开发经验的朋友都知道，为什么使用Lua而不是C++,最重要的原因就是因为下面这三个原因  热更新(在线更新代码和资源) 比C++简单很多,入门和实战 轻量级，最小最轻的脚本语言  今天就从Lua热更新，捣鼓一下其中的原理，并具体实战一下！  什么是热更新？热更新也叫不停机更新，是在游戏服务器运行期间对游戏进行更新。实现不停机修正bug、修改游戏数据等操作。也可">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.284Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.284Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">cocos2dx lua 热更新原理与实战</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%9F"><span class="toc-text">什么是热更新？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">热更新的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86"><span class="toc-text">热更新原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="toc-text">热更新实现细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E6%88%98"><span class="toc-text">热更新实战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E4%B8%8A%E6%9C%89%E6%8F%90%E5%88%B0%E4%B8%A4%E7%A7%8D%E7%83%AD%E6%9B%B4%E6%96%B0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">网上有提到两种热更新的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98"><span class="toc-text">具体代码实战</span></a></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.284Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>cocos2dx lua 热更新原理与实战</span></h1>
+<p>首先，如果有过cocos2dx lua开发经验的朋友都知道，为什么使用Lua而不是C++,最重要的原因就是因为下面这三个原因</p>
+<ul>
+<li>热更新(在线更新代码和资源)</li>
+<li>比C++简单很多,入门和实战</li>
+<li>轻量级，最小最轻的脚本语言</li>
+</ul>
+<p>今天就从Lua热更新，捣鼓一下其中的原理，并具体实战一下！</p>
+
+<h3 id="什么是热更新？"><a href="#什么是热更新？" class="headerlink" title="什么是热更新？"></a>什么是热更新？</h3><p>热更新也叫不停机更新，是在游戏服务器运行期间对游戏进行更新。实现不停机修正bug、修改游戏数据等操作。也可以这样讲：一辆车以时速150km跑着，突然爆胎了，然后司机告诉你，我不停车，你去把轮胎换了，小心点。</p>
+<h3 id="热更新的作用"><a href="#热更新的作用" class="headerlink" title="热更新的作用"></a>热更新的作用</h3><p>Lua模块热更新原理，能很好的支持代码热更新机制，是大部分选择要嵌入脚本语言的原因之一。好处很简单，脚本代码可以热更新的话，调试和线上解决问题都可以不用重启程序了，对开发效率有很大的帮助。</p>
+<h3 id="热更新原理"><a href="#热更新原理" class="headerlink" title="热更新原理"></a>热更新原理</h3><p>Lua内部提供了一个require函数，来实现模块的加载，它做的事情主要是以下几个：</p>
+<blockquote>
+<p>在registry[“_LOADED”]表中判断该模块是否已经加载过了，如果是则返回，避免重复加载某个模块代码。</p>
+</blockquote>
+<p>依次调用注册的loader来加载模块,将加载过的模块赋值给registry[“_LOADED”]表。</p>
+<p>而如果要实现Lua的代码热更新，其实也就是需要重新加载某个模块，因此就要想办法让Lua认为它之前没有加载过。查看Lua代码发现，registry[“_LOADED”]表，实际上对应的是package.loaded表，这在以下函数中有体现：</p>
+<pre><code>(loadlib.c)
+627 LUALIB_API int luaopen_package (lua_State *L) &#123;
+
+<p>655   &#x2F;* set field &#96;loaded&#39; *&#x2F;<br>656   luaL_findtable(L, LUA_REGISTRYINDEX, &amp;#34;_LOADED&amp;#34;, 2);<br>657   lua_setfield(L, -2, &amp;#34;loaded&amp;#34;);<br></code></pre><p>因此事情就很简单了，需要提供一个require_ex函数，可以理解为require的增强版，使用这个函数可以动态更新某个模块的代码:</p></p>
+<pre><code>function require_ex( _mname )
+print( string.format(&#34;require_ex = %s&#34;, _mname) )
+if package.loaded[_mname] then
+print( string.format(&#34;require_ex module[%s] reload&#34;, _mname))
+end
+package.loaded[_mname] = nil
+require( _mname )
+end
+</code></pre><p>这个函数做的事情一目了然。首先判断是否曾经加载过这个模块，如果有则打印一条日志表示需要重新加载某个模块，然后将该模块原来在表中注册的值赋空，然后再次调用require进行模块的加载和注册。</p>
+<h3 id="热更新实现细节"><a href="#热更新实现细节" class="headerlink" title="热更新实现细节"></a>热更新实现细节</h3><p>以上了解了Lua代码热更新的原理，但是还有一些细节需要提醒一下。</p>
+<ul>
+<li><p>如何组织你的项目中的Lua代码？</p>
+<ul>
+<li>我在qnode中使用的方式是，单独使用一个叫main.lua的文件调用require_ex函数来加载需要用到的lua模块，而Lua虚拟机创建之后执行的是这个文件，这样的话，当你需要热更新项目中的Lua代码时，只需要重新执行这个main.lua就行了。</li>
+</ul>
+</li>
+<li><p>如何通知热更新代码呢？</p>
+<ul>
+<li>我在qnode中使用的信号机制，当服务器收到USR1信号时，通知所有工作进程，由工作进程来重新对main.lua进行重新加载，这样就完成了lua代码的热更新，为此我写了一个简单的脚本reload.sh，就是根据当前qnode的服务器进程ID来对其发送USR1信号量的。</li>
+</ul>
+</li>
+<li><p>一般热更新的都是函数的实现，所以需要对全局变量做一些保护。</p>
+<ul>
+<li>比如当前某全局变量为100，表示某个操作已经进行了100次，它不能因为热更新重新置0，所以要对这些不能改变的全局变量做一个保护，最简单的方式就是这样:</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">a = a or 0</span><br/></pre></td></tr></tbody></table></figure>
+<p>很简单的原理，只有当前a这个变量没有初始值的时候才会赋值为0，而后面不管这个Lua文件被加载多少次，a都不会因为重新加载了Lua代码发生改变了。</p>
+<h3 id="热更新实战"><a href="#热更新实战" class="headerlink" title="热更新实战"></a>热更新实战</h3><p>其实我们平时开发中，可以用简单易懂的方式来理解热更新</p>
+<ul>
+<li><ol>
+<li>客户端向服务器发送请求，服务器告诉客户端，没更新，你是最新的啦，那就直接跳过喽</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>如果是告诉你有更新，那就要告诉我哪些需要更新对吧，你可能需要更新的东西，放在一个文件里，一并发送给客户端</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>客户端拿到这个文件，就一个一个去向服务器要，最后把要更新的内容都下载到本地了</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>cocos2dx-lua中有assetmanagerex的c++实现类，也有绑定到lua。</p>
+<blockquote>
+<p>3.10之前有缺陷，问题是当有文件下载失败时会陷入死循环，导致业务链断裂。不过网上有解决办法，可简单修改源码解决。<br/>建议把高于3.10版本以后的assetmanagerex代码移植到旧的3.x版本，也可以选择新项目使用3.10以后版本。</p>
+</blockquote>
+</blockquote>
+<h4 id="网上有提到两种热更新的方法"><a href="#网上有提到两种热更新的方法" class="headerlink" title="网上有提到两种热更新的方法"></a>网上有提到两种热更新的方法</h4><ul>
+<li><p>1.只存在一套资源，用一个文件记录所有文件的信息（文件名，路径，大小，MD5）。游戏启动时下载这个文件与本地文件MD5进行对比，不同的和新增的下载下来，没有的删掉。（最好再做个简要信息文件，因为资源多了记录文件信息的文件会有上百KB大小）</p>
+</li>
+<li><p>2.第二种存在多套资源，客户端每更新一个版本都会有一个内部版本号。更新服务端会有多套压缩包，如1.0-1.5， 1.1-1.5 ，1.2-1.5 ，1.3-1.5，1.4-1.5。此方法需要保留每个版本的文件资源，依次生成每一个版本到最新版本的增量压缩包（依据是文件名和MD5）</p>
+</li>
+</ul>
+<p>但是结合实战第一种和优点是方便管理，从始到终只有一套资源。缺点是玩家下载时流量多一点，因为没有压缩。第二种优点是玩家下载流量小，但每次升级需要保留历史版本为升级依据，版本越多越不好管理。</p>
+<h5 id="具体代码实战"><a href="#具体代码实战" class="headerlink" title="具体代码实战"></a>具体代码实战</h5><pre><code>local AutoUpdateScene = class(&#34;AutoUpdateScene&#34;, cc.load(&#34;mvc&#34;).ViewBase)
+
+<p>local manifestPath &#x3D; &amp;#34;project.manifest&amp;#34;<br>local storagePath &#x3D; &amp;#34;update&amp;#34;</p>
+<p>function AutoUpdateScene:onCreate()</p>
+<p>self._update_failed_count &#x3D; 0</p>
+<p>local layer  &#x3D; cc.Layer:create()</p>
+<p>local am &#x3D; nil</p>
+<p>local function onEnter()</p>
+<p>local ttfConfig &#x3D; &#123;&#125;<br>ttfConfig.fontFilePath &#x3D; &amp;#34;fonts&#x2F;arial.ttf&amp;#34;<br>ttfConfig.fontSize &#x3D; 80</p>
+<p>local  progress &#x3D; cc.Label:createWithTTF(ttfConfig, &amp;#34;0%&amp;#34;, cc.VERTICAL_TEXT_ALIGNMENT_CENTER)<br>progress:setPosition(cc.p(display.center.x, display.center.y + 50))<br>layer:addChild(progress)</p>
+<p>am &#x3D; cc.AssetsManagerEx:create(manifestPath, cc.FileUtils:getInstance():getWritablePath() .. storagePath)<br>am:retain()</p>
+<p>if not am:getLocalManifest():isLoaded() then<br>print(&amp;#34;Fail to update assets, step skipped.&amp;#34;)<br>self:onFail(&amp;#34;本地资源错误，请重新下载游戏。&amp;#34;)<br>else<br>local function onUpdateEvent(event)<br>local eventCode &#x3D; event:getEventCode()<br>print(&amp;#34;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; assetsmanagerex error code:&amp;#34;, eventCode)<br>–[[ cc.EventAssetsManagerEx.EventCode &#x3D; &#123;<br>ERROR_NO_LOCAL_MANIFEST &#x3D; 0,<br>ERROR_DOWNLOAD_MANIFEST &#x3D; 1,<br>ERROR_PARSE_MANIFEST &#x3D; 2,<br>NEW_VERSION_FOUND &#x3D; 3,<br>ALREADY_UP_TO_DATE &#x3D; 4,<br>UPDATE_PROGRESSION &#x3D; 5,<br>ASSET_UPDATED &#x3D; 6,<br>ERROR_UPDATING &#x3D; 7,<br>UPDATE_FINISHED &#x3D; 8,<br>UPDATE_FAILED &#x3D; 9,<br>ERROR_DECOMPRESS &#x3D; 10<br>&#125; ]]<br>if eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.ERROR_NO_LOCAL_MANIFEST then<br>print(&amp;#34;No local manifest file found, skip assets update.&amp;#34;)<br>self:onFail(string.format(&amp;#34;本地资源错误，请重新下载游戏。(错误码:%d)&amp;#34;, eventCode))<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.UPDATE_PROGRESSION then<br>local assetId &#x3D; event:getAssetId()<br>local percent &#x3D; event:getPercent()<br>local strInfo &#x3D; &amp;#34;&amp;#34;<br>if assetId &#x3D;&#x3D; cc.AssetsManagerExStatic.VERSION_ID then<br>strInfo &#x3D; string.format(&amp;#34;Version file: %d%%&amp;#34;, percent)<br>elseif assetId &#x3D;&#x3D; cc.AssetsManagerExStatic.MANIFEST_ID then<br>strInfo &#x3D; string.format(&amp;#34;Manifest file: %d%%&amp;#34;, percent)<br>else<br>strInfo &#x3D; string.format(&amp;#34;%d%%&amp;#34;, percent)<br>end<br>progress:setString(strInfo)<br>self:setLoadingProgress(event:getPercentByFile())<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.ERROR_DOWNLOAD_MANIFEST or<br>eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.ERROR_PARSE_MANIFEST then<br>print(&amp;#34;Fail to download manifest file, update skipped.&amp;#34;)<br>self:onFail(string.format(&amp;#34;更新失败，请检查网络配置。(错误码:%d)&amp;#34;, eventCode))<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.ALREADY_UP_TO_DATE or<br>eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.UPDATE_FINISHED then<br>print(&amp;#34;Update finished.&amp;#34;)<br>self:onSuccess()<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.ERROR_UPDATING then<br>print(&amp;#34;Asset &amp;#34;, event:getAssetId(), &amp;#34;, &amp;#34;, event:getMessage())<br>– self:onFail(string.format(&amp;#34;更新资源失败，请检查网络后重试。(%d)&amp;#34;, eventCode))<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.UPDATE_FAILED then<br>print(&amp;#34;Fail to download resource files.&amp;#34;)<br>self._update_failed_count &#x3D; self._update_failed_count + 1<br>if self._update_failed_count &lt;&#x3D; 3 then<br>print(&amp;#34;try again&amp;#34;)<br>am:downloadFailedAssets()<br>else<br>self:onFail(string.format(&amp;#34;更新失败，请检查网络配置。(错误码:%d)&amp;#34;, eventCode))<br>end<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.NEW_VERSION_FOUND then<br>print(&amp;#34;new version found.&amp;#34;)<br>–am:update()<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.ASSET_UPDATED then<br>print(&amp;#34;assets updated.&amp;#34;)<br>elseif eventCode &#x3D;&#x3D; cc.EventAssetsManagerEx.EventCode.ERROR_DECOMPRESS then<br>print(&amp;#34;decompress error.&amp;#34;)<br>end<br>end<br>local listener &#x3D; cc.EventListenerAssetsManagerEx:create(am, onUpdateEvent)<br>cc.Director:getInstance():getEventDispatcher():addEventListenerWithFixedPriority(listener, 1)</p>
+<p>am:update()<br>–am:checkUpdate()<br>end<br>end</p>
+<p>local function onExit()<br>am:release()<br>end</p>
+<p>local function onNodeEvent(event)<br>if &amp;#34;enter&amp;#34; &#x3D;&#x3D; event then<br>onEnter()<br>elseif &amp;#34;exit&amp;#34; &#x3D;&#x3D; event then<br>onExit()<br>end<br>end<br>layer:registerScriptHandler(onNodeEvent)</p>
+<p>self:addChild(layer)<br>end</p>
+<p>function AutoUpdateScene:onFail(msg)<br>print(&amp;#34;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; update fail &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&amp;#34;, msg)</p>
+<p>– 热更新失败处理<br>end</p>
+<p>function AutoUpdateScene:onSuccess()<br>print(&amp;#34;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; update success &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&amp;#34;)</p>
+<p>local writablePath &#x3D; cc.FileUtils:getInstance():getWritablePath()<br>package.path &#x3D; writablePath .. &amp;#34;update&#x2F;src&#x2F;?.lua;.&#x2F;?.lua;&amp;#34;</p>
+<p>– 启动热更新后的场景<br>end</p>
+<p>return AutoUpdateScene<br></code></pre><ul></p>
+<li>推荐<ul>
+<li><a href="https://blog.csdn.net/weixin_37730482/article/details/73299286" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/weixin_37730482/article/details/73299286</a></li>
+<li><a href="https://blog.csdn.net/qq_32319583/article/details/53223452" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/qq_32319583/article/details/53223452</a></li>
+<li><a href="https://blog.csdn.net/q277055799/article/details/8463835?utm_source=blogxgwz3****" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/q277055799/article/details/8463835?utm_source=blogxgwz3<em>**</em></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-568_Anguluar%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5(%E4%B8%80)/">Anguluar的基本基本概念(一)</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-570_ulua%E7%9A%84%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90%EF%BC%8Ccs%E5%92%8CLua%E7%9A%84%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8/">ulua的简单解析，cs和Lua的相互调用</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

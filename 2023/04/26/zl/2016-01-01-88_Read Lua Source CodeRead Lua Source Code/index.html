@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Read Lua Source CodeRead Lua Source Code - Lua教程</title>
+
+  
+    <meta name="description" content="Lua logo  介绍  Lua 应用比较广泛，主要是作为插件解释器。例如mysql proxy，VLC 等。Lua 源代码比较规范，代码也不长，2w 多行，分布也是比较均匀的，就想看一看，顺便在这里做个笔记。    lua 5.2.3 源码树  [will@iF8sg:~DOWN]% tree lua-5.2.3 lua-5.2.3 ├── Makefile ├── README ├── d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Read Lua Source CodeRead Lua Source Code">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-88_Read%20Lua%20Source%20CodeRead%20Lua%20Source%20Code/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua logo  介绍  Lua 应用比较广泛，主要是作为插件解释器。例如mysql proxy，VLC 等。Lua 源代码比较规范，代码也不长，2w 多行，分布也是比较均匀的，就想看一看，顺便在这里做个笔记。    lua 5.2.3 源码树  [will@iF8sg:~DOWN]% tree lua-5.2.3 lua-5.2.3 ├── Makefile ├── README ├── d">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oxnz.github.io//assets/lua.gif">
+<meta property="article:published_time" content="2023-04-26T05:16:12.315Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.315Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oxnz.github.io//assets/lua.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Read Lua Source CodeRead Lua Source Code</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lua-523-%E6%BA%90%E7%A0%81%E6%A0%91"><span class="toc-text">lua 5.2.3 源码树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">lua 5.2.3 代码量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">README</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">Makefile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">src&#x2F;Makefile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">luaconf.h</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">main</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.315Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Read Lua Source CodeRead Lua Source Code</span></h1>
+<p><a target="_blank" rel="noopener" href="https://www.lua.org/images/lua.gif"><img class="wp-image-1581 size-full lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://oxnz.github.io//assets/lua.gif" alt="Lua logo" width="128" height="128"/></a> Lua logo</p>
+
+<h2 id="介绍">介绍</h2>
+
+<p>Lua 应用比较广泛，主要是作为插件解释器。例如mysql proxy，VLC 等。Lua 源代码比较规范，代码也不长，2w 多行，分布也是比较均匀的，就想看一看，顺便在这里做个笔记。</p>
+
+
+
+<h2 id="lua-523-源码树">lua 5.2.3 源码树</h2>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="o">[</span>will@iF8sg:~DOWN]% tree lua-5.2.3
+lua-5.2.3
+├── Makefile
+├── README
+├── doc
+│   ├── contents.html
+│   ├── logo.gif
+│   ├── lua.1
+│   ├── lua.css
+│   ├── luac.1
+│   ├── manual.css
+│   ├── manual.html
+│   ├── osi-certified-72x60.png
+│   └── readme.html
+└── src
+    ├── Makefile
+    ├── lapi.c
+    ├── lapi.h
+    ├── lauxlib.c
+    ├── lauxlib.h
+    ├── lbaselib.c
+    ├── lbitlib.c
+    ├── lcode.c
+    ├── lcode.h
+    ├── lcorolib.c
+    ├── lctype.c
+    ├── lctype.h
+    ├── ldblib.c
+    ├── ldebug.c
+    ├── ldebug.h
+    ├── ldo.c
+    ├── ldo.h
+    ├── ldump.c
+    ├── lfunc.c
+    ├── lfunc.h
+    ├── lgc.c
+    ├── lgc.h
+    ├── linit.c
+    ├── liolib.c
+    ├── llex.c
+    ├── llex.h
+    ├── llimits.h
+    ├── lmathlib.c
+    ├── lmem.c
+    ├── lmem.h
+    ├── loadlib.c
+    ├── lobject.c
+    ├── lobject.h
+    ├── lopcodes.c
+    ├── lopcodes.h
+    ├── loslib.c
+    ├── lparser.c
+    ├── lparser.h
+    ├── lstate.c
+    ├── lstate.h
+    ├── lstring.c
+    ├── lstring.h
+    ├── lstrlib.c
+    ├── ltable.c
+    ├── ltable.h
+    ├── ltablib.c
+    ├── ltm.c
+    ├── ltm.h
+    ├── lua.c
+    ├── lua.h
+    ├── lua.hpp
+    ├── luac.c
+    ├── luaconf.h
+    ├── lualib.h
+    ├── lundump.c
+    ├── lundump.h
+    ├── lvm.c
+    ├── lvm.h
+    ├── lzio.c
+    └── lzio.h
+
+<p>2 directories, 71 files</code></pre></figure></p>
+<h2>lua 5.2.3 代码量</h2>
+<pre class="lang:default decode:true">[oxnz@iF8sg:tmp]% wc -l /Users/oxnz/Downloads/lua-5.2.3/src/*
+     187 /Users/oxnz/Downloads/lua-5.2.3/src/Makefile
+    1284 /Users/oxnz/Downloads/lua-5.2.3/src/lapi.c
+      24 /Users/oxnz/Downloads/lua-5.2.3/src/lapi.h
+     959 /Users/oxnz/Downloads/lua-5.2.3/src/lauxlib.c
+     212 /Users/oxnz/Downloads/lua-5.2.3/src/lauxlib.h
+     458 /Users/oxnz/Downloads/lua-5.2.3/src/lbaselib.c
+     212 /Users/oxnz/Downloads/lua-5.2.3/src/lbitlib.c
+     881 /Users/oxnz/Downloads/lua-5.2.3/src/lcode.c
+      83 /Users/oxnz/Downloads/lua-5.2.3/src/lcode.h
+     155 /Users/oxnz/Downloads/lua-5.2.3/src/lcorolib.c
+      52 /Users/oxnz/Downloads/lua-5.2.3/src/lctype.c
+      95 /Users/oxnz/Downloads/lua-5.2.3/src/lctype.h
+     398 /Users/oxnz/Downloads/lua-5.2.3/src/ldblib.c
+     593 /Users/oxnz/Downloads/lua-5.2.3/src/ldebug.c
+      34 /Users/oxnz/Downloads/lua-5.2.3/src/ldebug.h
+     681 /Users/oxnz/Downloads/lua-5.2.3/src/ldo.c
+      46 /Users/oxnz/Downloads/lua-5.2.3/src/ldo.h
+     173 /Users/oxnz/Downloads/lua-5.2.3/src/ldump.c
+     161 /Users/oxnz/Downloads/lua-5.2.3/src/lfunc.c
+      33 /Users/oxnz/Downloads/lua-5.2.3/src/lfunc.h
+    1220 /Users/oxnz/Downloads/lua-5.2.3/src/lgc.c
+     157 /Users/oxnz/Downloads/lua-5.2.3/src/lgc.h
+      67 /Users/oxnz/Downloads/lua-5.2.3/src/linit.c
+     666 /Users/oxnz/Downloads/lua-5.2.3/src/liolib.c
+     530 /Users/oxnz/Downloads/lua-5.2.3/src/llex.c
+      78 /Users/oxnz/Downloads/lua-5.2.3/src/llex.h
+     309 /Users/oxnz/Downloads/lua-5.2.3/src/llimits.h
+     279 /Users/oxnz/Downloads/lua-5.2.3/src/lmathlib.c
+      99 /Users/oxnz/Downloads/lua-5.2.3/src/lmem.c
+      57 /Users/oxnz/Downloads/lua-5.2.3/src/lmem.h
+     725 /Users/oxnz/Downloads/lua-5.2.3/src/loadlib.c
+     287 /Users/oxnz/Downloads/lua-5.2.3/src/lobject.c
+     607 /Users/oxnz/Downloads/lua-5.2.3/src/lobject.h
+     107 /Users/oxnz/Downloads/lua-5.2.3/src/lopcodes.c
+     288 /Users/oxnz/Downloads/lua-5.2.3/src/lopcodes.h
+     323 /Users/oxnz/Downloads/lua-5.2.3/src/loslib.c
+    1638 /Users/oxnz/Downloads/lua-5.2.3/src/lparser.c
+     119 /Users/oxnz/Downloads/lua-5.2.3/src/lparser.h
+     323 /Users/oxnz/Downloads/lua-5.2.3/src/lstate.c
+     228 /Users/oxnz/Downloads/lua-5.2.3/src/lstate.h
+     185 /Users/oxnz/Downloads/lua-5.2.3/src/lstring.c
+      46 /Users/oxnz/Downloads/lua-5.2.3/src/lstring.h
+    1019 /Users/oxnz/Downloads/lua-5.2.3/src/lstrlib.c
+     588 /Users/oxnz/Downloads/lua-5.2.3/src/ltable.c
+      45 /Users/oxnz/Downloads/lua-5.2.3/src/ltable.h
+     283 /Users/oxnz/Downloads/lua-5.2.3/src/ltablib.c
+      77 /Users/oxnz/Downloads/lua-5.2.3/src/ltm.c
+      57 /Users/oxnz/Downloads/lua-5.2.3/src/ltm.h
+     497 /Users/oxnz/Downloads/lua-5.2.3/src/lua.c
+     444 /Users/oxnz/Downloads/lua-5.2.3/src/lua.h
+       9 /Users/oxnz/Downloads/lua-5.2.3/src/lua.hpp
+     432 /Users/oxnz/Downloads/lua-5.2.3/src/luac.c
+     551 /Users/oxnz/Downloads/lua-5.2.3/src/luaconf.h
+      55 /Users/oxnz/Downloads/lua-5.2.3/src/lualib.h
+     258 /Users/oxnz/Downloads/lua-5.2.3/src/lundump.c
+      28 /Users/oxnz/Downloads/lua-5.2.3/src/lundump.h
+     867 /Users/oxnz/Downloads/lua-5.2.3/src/lvm.c
+      44 /Users/oxnz/Downloads/lua-5.2.3/src/lvm.h
+      76 /Users/oxnz/Downloads/lua-5.2.3/src/lzio.c
+      65 /Users/oxnz/Downloads/lua-5.2.3/src/lzio.h
+   20454 total
+</pre>
+<h2>README</h2>
+<pre class="lang:default decode:true">[oxnz@iF8sg:lua-5.2.3]% cat README
+
+<p>This is Lua 5.2.3, released on 11 Nov 2013.</p>
+<p>For installation instructions, license details, and<br>further information about Lua, see doc&#x2F;readme.html.</pre></p>
+<h2>Makefile</h2>
+<p>lua 的 Makefile 可以看得出是手写的，不是 autotools 自动生成的，所以还是仔细看一下编译过程，以便对 lua 有一个总体的了解。</p>
+<pre class="nums:true lang:Makefile decode:true">[oxnz@iF8sg:lua-5.2.3]% cat Makefile
+# Makefile for installing Lua
+# See doc/readme.html for installation and customization instructions.
+
+<h1 id="x3D-x3D-CHANGE-THE-SETTINGS-BELOW-TO-SUIT-YOUR-ENVIRONMENT-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D"><a href="#x3D-x3D-CHANGE-THE-SETTINGS-BELOW-TO-SUIT-YOUR-ENVIRONMENT-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D" class="headerlink" title="&#x3D;&#x3D; CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;"></a>&#x3D;&#x3D; CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</h1><h1 id="Your-platform-See-PLATS-for-possible-values"><a href="#Your-platform-See-PLATS-for-possible-values" class="headerlink" title="Your platform. See PLATS for possible values."></a>Your platform. See PLATS for possible values.</h1><p>PLAT&#x3D; none</p>
+<h1 id="Where-to-install-The-installation-starts-in-the-src-and-doc-directories"><a href="#Where-to-install-The-installation-starts-in-the-src-and-doc-directories" class="headerlink" title="Where to install. The installation starts in the src and doc directories,"></a>Where to install. The installation starts in the src and doc directories,</h1><h1 id="so-take-care-if-INSTALL-TOP-is-not-an-absolute-path-See-the-local-target"><a href="#so-take-care-if-INSTALL-TOP-is-not-an-absolute-path-See-the-local-target" class="headerlink" title="so take care if INSTALL_TOP is not an absolute path. See the local target."></a>so take care if INSTALL_TOP is not an absolute path. See the local target.</h1><h1 id="You-may-want-to-make-INSTALL-LMOD-and-INSTALL-CMOD-consistent-with"><a href="#You-may-want-to-make-INSTALL-LMOD-and-INSTALL-CMOD-consistent-with" class="headerlink" title="You may want to make INSTALL_LMOD and INSTALL_CMOD consistent with"></a>You may want to make INSTALL_LMOD and INSTALL_CMOD consistent with</h1><h1 id="LUA-ROOT-LUA-LDIR-and-LUA-CDIR-in-luaconf-h"><a href="#LUA-ROOT-LUA-LDIR-and-LUA-CDIR-in-luaconf-h" class="headerlink" title="LUA_ROOT, LUA_LDIR, and LUA_CDIR in luaconf.h."></a>LUA_ROOT, LUA_LDIR, and LUA_CDIR in luaconf.h.</h1><p>INSTALL_TOP&#x3D; &#x2F;usr&#x2F;local<br>INSTALL_BIN&#x3D; $(INSTALL_TOP)&#x2F;bin<br>INSTALL_INC&#x3D; $(INSTALL_TOP)&#x2F;include<br>INSTALL_LIB&#x3D; $(INSTALL_TOP)&#x2F;lib<br>INSTALL_MAN&#x3D; $(INSTALL_TOP)&#x2F;man&#x2F;man1<br>INSTALL_LMOD&#x3D; $(INSTALL_TOP)&#x2F;share&#x2F;lua&#x2F;$V<br>INSTALL_CMOD&#x3D; $(INSTALL_TOP)&#x2F;lib&#x2F;lua&#x2F;$V</p>
+<h1 id="How-to-install-If-your-install-program-does-not-support-amp-34-p-amp-34-then"><a href="#How-to-install-If-your-install-program-does-not-support-amp-34-p-amp-34-then" class="headerlink" title="How to install. If your install program does not support &amp;#34;-p&amp;#34;, then"></a>How to install. If your install program does not support &amp;#34;-p&amp;#34;, then</h1><h1 id="you-may-have-to-run-ranlib-on-the-installed-liblua-a"><a href="#you-may-have-to-run-ranlib-on-the-installed-liblua-a" class="headerlink" title="you may have to run ranlib on the installed liblua.a."></a>you may have to run ranlib on the installed liblua.a.</h1><p>INSTALL&#x3D; install -p<br>INSTALL_EXEC&#x3D; $(INSTALL) -m 0755<br>INSTALL_DATA&#x3D; $(INSTALL) -m 0644<br>#</p>
+<h1 id="If-you-don-39-t-have-amp-34-install-amp-34-you-can-use-amp-34-cp-amp-34-instead"><a href="#If-you-don-39-t-have-amp-34-install-amp-34-you-can-use-amp-34-cp-amp-34-instead" class="headerlink" title="If you don&#39;t have &amp;#34;install&amp;#34; you can use &amp;#34;cp&amp;#34; instead."></a>If you don&#39;t have &amp;#34;install&amp;#34; you can use &amp;#34;cp&amp;#34; instead.</h1><h1 id="INSTALL-x3D-cp-p"><a href="#INSTALL-x3D-cp-p" class="headerlink" title="INSTALL&#x3D; cp -p"></a>INSTALL&#x3D; cp -p</h1><h1 id="INSTALL-EXEC-x3D-INSTALL"><a href="#INSTALL-EXEC-x3D-INSTALL" class="headerlink" title="INSTALL_EXEC&#x3D; $(INSTALL)"></a>INSTALL_EXEC&#x3D; $(INSTALL)</h1><h1 id="INSTALL-DATA-x3D-INSTALL"><a href="#INSTALL-DATA-x3D-INSTALL" class="headerlink" title="INSTALL_DATA&#x3D; $(INSTALL)"></a>INSTALL_DATA&#x3D; $(INSTALL)</h1><h1 id="Other-utilities"><a href="#Other-utilities" class="headerlink" title="Other utilities."></a>Other utilities.</h1><p>MKDIR&#x3D; mkdir -p<br>RM&#x3D; rm -f</p>
+<h1 id="x3D-x3D-END-OF-USER-SETTINGS-–-NO-NEED-TO-CHANGE-ANYTHING-BELOW-THIS-LINE-x3D-x3D-x3D-x3D-x3D-x3D-x3D"><a href="#x3D-x3D-END-OF-USER-SETTINGS-–-NO-NEED-TO-CHANGE-ANYTHING-BELOW-THIS-LINE-x3D-x3D-x3D-x3D-x3D-x3D-x3D" class="headerlink" title="&#x3D;&#x3D; END OF USER SETTINGS – NO NEED TO CHANGE ANYTHING BELOW THIS LINE &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;"></a>&#x3D;&#x3D; END OF USER SETTINGS – NO NEED TO CHANGE ANYTHING BELOW THIS LINE &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</h1><h1 id="Convenience-platforms-targets"><a href="#Convenience-platforms-targets" class="headerlink" title="Convenience platforms targets."></a>Convenience platforms targets.</h1><p>PLATS&#x3D; aix ansi bsd freebsd generic linux macosx mingw posix solaris</p>
+<h1 id="What-to-install"><a href="#What-to-install" class="headerlink" title="What to install."></a>What to install.</h1><p>TO_BIN&#x3D; lua luac<br>TO_INC&#x3D; lua.h luaconf.h lualib.h lauxlib.h lua.hpp<br>TO_LIB&#x3D; liblua.a<br>TO_MAN&#x3D; lua.1 luac.1</p>
+<h1 id="Lua-version-and-release"><a href="#Lua-version-and-release" class="headerlink" title="Lua version and release."></a>Lua version and release.</h1><p>V&#x3D; 5.2<br>R&#x3D; $V.3</p>
+<h1 id="Targets-start-here"><a href="#Targets-start-here" class="headerlink" title="Targets start here."></a>Targets start here.</h1><p>all:	$(PLAT)</p>
+<p>$(PLATS) clean:<br>    cd src &amp;&amp; $(MAKE) $@</p>
+<p>test:	dummy<br>    src&#x2F;lua -v</p>
+<p>install: dummy<br>    cd src &amp;&amp; $(MKDIR) $(INSTALL_BIN) $(INSTALL_INC) $(INSTALL_LIB) $(INSTALL_MAN) $(INSTALL_LMOD) $(INSTALL_CMOD)<br>    cd src &amp;&amp; $(INSTALL_EXEC) $(TO_BIN) $(INSTALL_BIN)<br>    cd src &amp;&amp; $(INSTALL_DATA) $(TO_INC) $(INSTALL_INC)<br>    cd src &amp;&amp; $(INSTALL_DATA) $(TO_LIB) $(INSTALL_LIB)<br>    cd doc &amp;&amp; $(INSTALL_DATA) $(TO_MAN) $(INSTALL_MAN)</p>
+<p>uninstall:<br>    cd src &amp;&amp; cd $(INSTALL_BIN) &amp;&amp; $(RM) $(TO_BIN)<br>    cd src &amp;&amp; cd $(INSTALL_INC) &amp;&amp; $(RM) $(TO_INC)<br>    cd src &amp;&amp; cd $(INSTALL_LIB) &amp;&amp; $(RM) $(TO_LIB)<br>    cd doc &amp;&amp; cd $(INSTALL_MAN) &amp;&amp; $(RM) $(TO_MAN)</p>
+<p>local:<br>    $(MAKE) install INSTALL_TOP&#x3D;..&#x2F;install</p>
+<p>none:<br>    @echo &amp;#34;Please do &#39;make PLATFORM&#39; where PLATFORM is one of these:&amp;#34;<br>    @echo &amp;#34;   $(PLATS)&amp;#34;<br>    @echo &amp;#34;See doc&#x2F;readme.html for complete instructions.&amp;#34;</p>
+<h1 id="make-may-get-confused-with-test-x2F-and-install-x2F"><a href="#make-may-get-confused-with-test-x2F-and-install-x2F" class="headerlink" title="make may get confused with test&#x2F; and install&#x2F;"></a>make may get confused with test&#x2F; and install&#x2F;</h1><p>dummy:</p>
+<h1 id="echo-config-parameters"><a href="#echo-config-parameters" class="headerlink" title="echo config parameters"></a>echo config parameters</h1><p>echo:<br>    @cd src &amp;&amp; $(MAKE) -s echo<br>    @echo &amp;#34;PLAT&#x3D; $(PLAT)&amp;#34;<br>    @echo &amp;#34;V&#x3D; $V&amp;#34;<br>    @echo &amp;#34;R&#x3D; $R&amp;#34;<br>    @echo &amp;#34;TO_BIN&#x3D; $(TO_BIN)&amp;#34;<br>    @echo &amp;#34;TO_INC&#x3D; $(TO_INC)&amp;#34;<br>    @echo &amp;#34;TO_LIB&#x3D; $(TO_LIB)&amp;#34;<br>    @echo &amp;#34;TO_MAN&#x3D; $(TO_MAN)&amp;#34;<br>    @echo &amp;#34;INSTALL_TOP&#x3D; $(INSTALL_TOP)&amp;#34;<br>    @echo &amp;#34;INSTALL_BIN&#x3D; $(INSTALL_BIN)&amp;#34;<br>    @echo &amp;#34;INSTALL_INC&#x3D; $(INSTALL_INC)&amp;#34;<br>    @echo &amp;#34;INSTALL_LIB&#x3D; $(INSTALL_LIB)&amp;#34;<br>    @echo &amp;#34;INSTALL_MAN&#x3D; $(INSTALL_MAN)&amp;#34;<br>    @echo &amp;#34;INSTALL_LMOD&#x3D; $(INSTALL_LMOD)&amp;#34;<br>    @echo &amp;#34;INSTALL_CMOD&#x3D; $(INSTALL_CMOD)&amp;#34;<br>    @echo &amp;#34;INSTALL_EXEC&#x3D; $(INSTALL_EXEC)&amp;#34;<br>    @echo &amp;#34;INSTALL_DATA&#x3D; $(INSTALL_DATA)&amp;#34;</p>
+<h1 id="echo-pkg-config-data"><a href="#echo-pkg-config-data" class="headerlink" title="echo pkg-config data"></a>echo pkg-config data</h1><p>pc:<br>    @echo &amp;#34;version&#x3D;$R&amp;#34;<br>    @echo &amp;#34;prefix&#x3D;$(INSTALL_TOP)&amp;#34;<br>    @echo &amp;#34;libdir&#x3D;$(INSTALL_LIB)&amp;#34;<br>    @echo &amp;#34;includedir&#x3D;$(INSTALL_INC)&amp;#34;</p>
+<h1 id="list-targets-that-do-not-create-files-but-not-all-makes-understand-PHONY"><a href="#list-targets-that-do-not-create-files-but-not-all-makes-understand-PHONY" class="headerlink" title="list targets that do not create files (but not all makes understand .PHONY)"></a>list targets that do not create files (but not all makes understand .PHONY)</h1><p>.PHONY: all $(PLATS) clean test install local none dummy echo pecho lecho</p>
+<h1 id="end-of-Makefile"><a href="#end-of-Makefile" class="headerlink" title="(end of Makefile)"></a>(end of Makefile)</pre></h1><p><code>END OF USER SETTINGS</code>之前是一些配置项目。诸如指定平台，各部分安装目录和安装程序以及依赖的辅助程序等。之后列出了支持的平台，需要安装的各文件，版本号。最后到了熟悉的<code>all:</code>，其后面是 <code>$(PLAT)</code>，就是平台，但到此时为止还是 <code>none</code>。所以执行 <code>make</code> 会出现如下信息：</p>
+<pre class="lang:default decode:true">[oxnz@iF8sg:lua-5.2.3]% make
+Please do &#39;make PLATFORM&#39; where PLATFORM is one of these:
+   aix ansi bsd freebsd generic linux macosx mingw posix solaris
+See doc/readme.html for complete instructions.</pre>
+<p>告诉你选择一个列出的平台。整个 <code>Makefile</code> 比较直白，没有什么太高深的东西。由于我目前在使用 OS X 系统，所以这个根目录的 Makefile 最终的编译指令就是 <code>cd src &amp;&amp; make macosx</code>，所以我们去看看 <code>src</code> 目录下的 <code>Makefile</code>。</p>
+<h2>src/Makefile</h2>
+<p>由于这个 Makefile 略长，所以分割开来看好了。首先是用户设置：</p>
+<pre class="nums:true lang:default decode:true"># Makefile for building Lua
+# See ../doc/readme.html for installation and customization instructions.
+
+<h1 id="x3D-x3D-CHANGE-THE-SETTINGS-BELOW-TO-SUIT-YOUR-ENVIRONMENT-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-1"><a href="#x3D-x3D-CHANGE-THE-SETTINGS-BELOW-TO-SUIT-YOUR-ENVIRONMENT-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-x3D-1" class="headerlink" title="&#x3D;&#x3D; CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;"></a>&#x3D;&#x3D; CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</h1><h1 id="Your-platform-See-PLATS-for-possible-values-1"><a href="#Your-platform-See-PLATS-for-possible-values-1" class="headerlink" title="Your platform. See PLATS for possible values."></a>Your platform. See PLATS for possible values.</h1><p>PLAT&#x3D; none</p>
+<p>CC&#x3D; gcc<br>CFLAGS&#x3D; -O2 -Wall -DLUA_COMPAT_ALL $(SYSCFLAGS) $(MYCFLAGS)<br>LDFLAGS&#x3D; $(SYSLDFLAGS) $(MYLDFLAGS)<br>LIBS&#x3D; -lm $(SYSLIBS) $(MYLIBS)</p>
+<p>AR&#x3D; ar rcu<br>RANLIB&#x3D; ranlib<br>RM&#x3D; rm -f</p>
+<p>SYSCFLAGS&#x3D;<br>SYSLDFLAGS&#x3D;<br>SYSLIBS&#x3D;</p>
+<p>MYCFLAGS&#x3D;<br>MYLDFLAGS&#x3D;<br>MYLIBS&#x3D;<br>MYOBJS&#x3D;</p>
+<h1 id="x3D-x3D-END-OF-USER-SETTINGS-–-NO-NEED-TO-CHANGE-ANYTHING-BELOW-THIS-LINE-x3D-x3D-x3D-x3D-x3D-x3D-x3D-1"><a href="#x3D-x3D-END-OF-USER-SETTINGS-–-NO-NEED-TO-CHANGE-ANYTHING-BELOW-THIS-LINE-x3D-x3D-x3D-x3D-x3D-x3D-x3D-1" class="headerlink" title="&#x3D;&#x3D; END OF USER SETTINGS – NO NEED TO CHANGE ANYTHING BELOW THIS LINE &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;"></a>&#x3D;&#x3D; END OF USER SETTINGS – NO NEED TO CHANGE ANYTHING BELOW THIS LINE &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</pre></h1><p>其中指定了编译工具链及其参数。接着是一些变量定义：</p>
+<pre class="nums:true start-line:28 lang:default decode:true">PLATS= aix ansi bsd freebsd generic linux macosx mingw posix solaris
+
+<p>LUA_A&#x3D;	liblua.a<br>CORE_O&#x3D;	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o<br>    lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o<br>    ltm.o lundump.o lvm.o lzio.o<br>LIB_O&#x3D;	lauxlib.o lbaselib.o lbitlib.o lcorolib.o ldblib.o liolib.o<br>    lmathlib.o loslib.o lstrlib.o ltablib.o loadlib.o linit.o<br>BASE_O&#x3D; $(CORE_O) $(LIB_O) $(MYOBJS)</p>
+<p>LUA_T&#x3D;	lua<br>LUA_O&#x3D;	lua.o</p>
+<p>LUAC_T&#x3D;	luac<br>LUAC_O&#x3D;	luac.o</p>
+<p>ALL_O&#x3D; $(BASE_O) $(LUA_O) $(LUAC_O)<br>ALL_T&#x3D; $(LUA_A) $(LUA_T) $(LUAC_T)<br>ALL_A&#x3D; $(LUA_A)<br></pre></p>
+<p>说明了整个的<code>.o</code> 文件和<code>.a</code> 文件，下面是目标以及规则定义：</p>
+<pre class="start-line:47 nums:true lang:default decode:true"># Targets start here.
+default: $(PLAT)
+
+<p>all:	$(ALL_T)</p>
+<p>o:	$(ALL_O)</p>
+<p>a:	$(ALL_A)</p>
+<p>$(LUA_A): $(BASE_O)<br>    $(AR) $@ $(BASE_O)<br>    $(RANLIB) $@</p>
+<p>$(LUA_T): $(LUA_O) $(LUA_A)<br>    $(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_A) $(LIBS)</p>
+<p>$(LUAC_T): $(LUAC_O) $(LUA_A)<br>    $(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_A) $(LIBS)</p>
+<p>clean:<br>    $(RM) $(ALL_T) $(ALL_O)</p>
+<p>depend:<br>    @$(CC) $(CFLAGS) -MM l*.c</p>
+<p>echo:<br>    @echo &amp;#34;PLAT&#x3D; $(PLAT)&amp;#34;<br>    @echo &amp;#34;CC&#x3D; $(CC)&amp;#34;<br>    @echo &amp;#34;CFLAGS&#x3D; $(CFLAGS)&amp;#34;<br>    @echo &amp;#34;LDFLAGS&#x3D; $(SYSLDFLAGS)&amp;#34;<br>    @echo &amp;#34;LIBS&#x3D; $(LIBS)&amp;#34;<br>    @echo &amp;#34;AR&#x3D; $(AR)&amp;#34;<br>    @echo &amp;#34;RANLIB&#x3D; $(RANLIB)&amp;#34;<br>    @echo &amp;#34;RM&#x3D; $(RM)&amp;#34;</p>
+<h1 id="Convenience-targets-for-popular-platforms"><a href="#Convenience-targets-for-popular-platforms" class="headerlink" title="Convenience targets for popular platforms"></a>Convenience targets for popular platforms</h1><p>ALL&#x3D; all</p>
+<p>none:<br>    @echo &amp;#34;Please do &#39;make PLATFORM&#39; where PLATFORM is one of these:&amp;#34;<br>    @echo &amp;#34;   $(PLATS)&amp;#34;</p>
+<p>aix:<br>    $(MAKE) $(ALL) CC&#x3D;&amp;#34;xlc&amp;#34; CFLAGS&#x3D;&amp;#34;-O2 -DLUA_USE_POSIX -DLUA_USE_DLOPEN&amp;#34; SYSLIBS&#x3D;&amp;#34;-ldl&amp;#34; SYSLDFLAGS&#x3D;&amp;#34;-brtl -bexpall&amp;#34;</p>
+<p>ansi:<br>    $(MAKE) $(ALL) SYSCFLAGS&#x3D;&amp;#34;-DLUA_ANSI&amp;#34;</p>
+<p>bsd:<br>    $(MAKE) $(ALL) SYSCFLAGS&#x3D;&amp;#34;-DLUA_USE_POSIX -DLUA_USE_DLOPEN&amp;#34; SYSLIBS&#x3D;&amp;#34;-Wl,-E&amp;#34;</p>
+<p>freebsd:<br>    $(MAKE) $(ALL) SYSCFLAGS&#x3D;&amp;#34;-DLUA_USE_LINUX&amp;#34; SYSLIBS&#x3D;&amp;#34;-Wl,-E -lreadline&amp;#34;</p>
+<p>generic: $(ALL)</p>
+<p>linux:<br>    $(MAKE) $(ALL) SYSCFLAGS&#x3D;&amp;#34;-DLUA_USE_LINUX&amp;#34; SYSLIBS&#x3D;&amp;#34;-Wl,-E -ldl -lreadline&amp;#34;</p>
+<p>macosx:<br>    $(MAKE) $(ALL) SYSCFLAGS&#x3D;&amp;#34;-DLUA_USE_MACOSX&amp;#34; SYSLIBS&#x3D;&amp;#34;-lreadline&amp;#34; CC&#x3D;cc</p>
+<p>mingw:<br>    $(MAKE) &amp;#34;LUA_A&#x3D;lua52.dll&amp;#34; &amp;#34;LUA_T&#x3D;lua.exe&amp;#34;<br>    &amp;#34;AR&#x3D;$(CC) -shared -o&amp;#34; &amp;#34;RANLIB&#x3D;strip –strip-unneeded&amp;#34;<br>    &amp;#34;SYSCFLAGS&#x3D;-DLUA_BUILD_AS_DLL&amp;#34; &amp;#34;SYSLIBS&#x3D;&amp;#34; &amp;#34;SYSLDFLAGS&#x3D;-s&amp;#34; lua.exe<br>    $(MAKE) &amp;#34;LUAC_T&#x3D;luac.exe&amp;#34; luac.exe</p>
+<p>posix:<br>    $(MAKE) $(ALL) SYSCFLAGS&#x3D;&amp;#34;-DLUA_USE_POSIX&amp;#34;</p>
+<p>solaris:<br>    $(MAKE) $(ALL) SYSCFLAGS&#x3D;&amp;#34;-DLUA_USE_POSIX -DLUA_USE_DLOPEN&amp;#34; SYSLIBS&#x3D;&amp;#34;-ldl&amp;#34;</p>
+<h1 id="list-targets-that-do-not-create-files-but-not-all-makes-understand-PHONY-1"><a href="#list-targets-that-do-not-create-files-but-not-all-makes-understand-PHONY-1" class="headerlink" title="list targets that do not create files (but not all makes understand .PHONY)"></a>list targets that do not create files (but not all makes understand .PHONY)</h1><p>.PHONY: all $(PLATS) default o a clean depend echo none</p>
+<h1 id="DO-NOT-DELETE"><a href="#DO-NOT-DELETE" class="headerlink" title="DO NOT DELETE"></a>DO NOT DELETE</h1><p></pre></p>
+<p>最后是具体的<code>.o</code> 文件的依赖关系：</p>
+<pre class="start-line:125 nums:true lang:default decode:true">lapi.o: lapi.c lua.h luaconf.h lapi.h llimits.h lstate.h lobject.h ltm.h
+ lzio.h lmem.h ldebug.h ldo.h lfunc.h lgc.h lstring.h ltable.h lundump.h
+ lvm.h
+lauxlib.o: lauxlib.c lua.h luaconf.h lauxlib.h
+lbaselib.o: lbaselib.c lua.h luaconf.h lauxlib.h lualib.h
+lbitlib.o: lbitlib.c lua.h luaconf.h lauxlib.h lualib.h
+lcode.o: lcode.c lua.h luaconf.h lcode.h llex.h lobject.h llimits.h
+ lzio.h lmem.h lopcodes.h lparser.h ldebug.h lstate.h ltm.h ldo.h lgc.h
+ lstring.h ltable.h lvm.h
+lcorolib.o: lcorolib.c lua.h luaconf.h lauxlib.h lualib.h
+lctype.o: lctype.c lctype.h lua.h luaconf.h llimits.h
+ldblib.o: ldblib.c lua.h luaconf.h lauxlib.h lualib.h
+ldebug.o: ldebug.c lua.h luaconf.h lapi.h llimits.h lstate.h lobject.h
+ ltm.h lzio.h lmem.h lcode.h llex.h lopcodes.h lparser.h ldebug.h ldo.h
+ lfunc.h lstring.h lgc.h ltable.h lvm.h
+ldo.o: ldo.c lua.h luaconf.h lapi.h llimits.h lstate.h lobject.h ltm.h
+ lzio.h lmem.h ldebug.h ldo.h lfunc.h lgc.h lopcodes.h lparser.h
+ lstring.h ltable.h lundump.h lvm.h
+ldump.o: ldump.c lua.h luaconf.h lobject.h llimits.h lstate.h ltm.h
+ lzio.h lmem.h lundump.h
+lfunc.o: lfunc.c lua.h luaconf.h lfunc.h lobject.h llimits.h lgc.h
+ lstate.h ltm.h lzio.h lmem.h
+lgc.o: lgc.c lua.h luaconf.h ldebug.h lstate.h lobject.h llimits.h ltm.h
+ lzio.h lmem.h ldo.h lfunc.h lgc.h lstring.h ltable.h
+linit.o: linit.c lua.h luaconf.h lualib.h lauxlib.h
+liolib.o: liolib.c lua.h luaconf.h lauxlib.h lualib.h
+llex.o: llex.c lua.h luaconf.h lctype.h llimits.h ldo.h lobject.h
+ lstate.h ltm.h lzio.h lmem.h llex.h lparser.h lstring.h lgc.h ltable.h
+lmathlib.o: lmathlib.c lua.h luaconf.h lauxlib.h lualib.h
+lmem.o: lmem.c lua.h luaconf.h ldebug.h lstate.h lobject.h llimits.h
+ ltm.h lzio.h lmem.h ldo.h lgc.h
+loadlib.o: loadlib.c lua.h luaconf.h lauxlib.h lualib.h
+lobject.o: lobject.c lua.h luaconf.h lctype.h llimits.h ldebug.h lstate.h
+ lobject.h ltm.h lzio.h lmem.h ldo.h lstring.h lgc.h lvm.h
+lopcodes.o: lopcodes.c lopcodes.h llimits.h lua.h luaconf.h
+loslib.o: loslib.c lua.h luaconf.h lauxlib.h lualib.h
+lparser.o: lparser.c lua.h luaconf.h lcode.h llex.h lobject.h llimits.h
+ lzio.h lmem.h lopcodes.h lparser.h ldebug.h lstate.h ltm.h ldo.h lfunc.h
+ lstring.h lgc.h ltable.h
+lstate.o: lstate.c lua.h luaconf.h lapi.h llimits.h lstate.h lobject.h
+ ltm.h lzio.h lmem.h ldebug.h ldo.h lfunc.h lgc.h llex.h lstring.h
+ ltable.h
+lstring.o: lstring.c lua.h luaconf.h lmem.h llimits.h lobject.h lstate.h
+ ltm.h lzio.h lstring.h lgc.h
+lstrlib.o: lstrlib.c lua.h luaconf.h lauxlib.h lualib.h
+ltable.o: ltable.c lua.h luaconf.h ldebug.h lstate.h lobject.h llimits.h
+ ltm.h lzio.h lmem.h ldo.h lgc.h lstring.h ltable.h lvm.h
+ltablib.o: ltablib.c lua.h luaconf.h lauxlib.h lualib.h
+ltm.o: ltm.c lua.h luaconf.h lobject.h llimits.h lstate.h ltm.h lzio.h
+ lmem.h lstring.h lgc.h ltable.h
+lua.o: lua.c lua.h luaconf.h lauxlib.h lualib.h
+luac.o: luac.c lua.h luaconf.h lauxlib.h lobject.h llimits.h lstate.h
+ ltm.h lzio.h lmem.h lundump.h ldebug.h lopcodes.h
+lundump.o: lundump.c lua.h luaconf.h ldebug.h lstate.h lobject.h
+ llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h lstring.h lgc.h lundump.h
+lvm.o: lvm.c lua.h luaconf.h ldebug.h lstate.h lobject.h llimits.h ltm.h
+ lzio.h lmem.h ldo.h lfunc.h lgc.h lopcodes.h lstring.h ltable.h lvm.h
+lzio.o: lzio.c lua.h luaconf.h llimits.h lmem.h lstate.h lobject.h ltm.h
+ lzio.h
+</pre>
+<h2>luaconf.h</h2>
+<p>这个头文件中定义了一些设置信息，放在这里以便后续参考。</p>
+<pre class="lang:default decode:true">[oxnz@iF8sg:src]% grep @@ luaconf.h
+** Search for &#34;@@&#34; to find all configurable definitions.
+@@ LUA_ANSI controls the use of non-ansi features.
+@@ LUA_USE_POSIX includes all functionality listed as X/Open System
+@@ LUA_PATH_DEFAULT is the default path that Lua uses to look for
+@@ LUA_CPATH_DEFAULT is the default path that Lua uses to look for
+@@ LUA_DIRSEP is the directory separator (for submodules).
+@@ LUA_ENV is the name of the variable that holds the current
+@@ environment, used to access global names.
+@@ LUA_API is a mark for all core API functions.
+@@ LUALIB_API is a mark for all auxiliary library functions.
+@@ LUAMOD_API is a mark for all standard library opening functions.
+@@ LUAI_FUNC is a mark for all extern functions that are not to be
+@@ LUAI_DDEF and LUAI_DDEC are marks for all extern (const) variables
+@@ LUA_QL describes how error messages quote program elements.
+@@ LUA_IDSIZE gives the maximum size for the description of the source
+@@ luai_writestring/luai_writeline define how &#39;print&#39; prints its results.
+@@ luai_writestringerror defines how to print error messages.
+@@ LUAI_MAXSHORTLEN is the maximum length for short strings, that is,
+@@ LUA_COMPAT_ALL controls all compatibility options.
+@@ LUA_COMPAT_UNPACK controls the presence of global &#39;unpack&#39;.
+@@ LUA_COMPAT_LOADERS controls the presence of table &#39;package.loaders&#39;.
+@@ macro &#39;lua_cpcall&#39; emulates deprecated function lua_cpcall.
+@@ LUA_COMPAT_LOG10 defines the function &#39;log10&#39; in the math library.
+@@ LUA_COMPAT_LOADSTRING defines the function &#39;loadstring&#39; in the base
+@@ LUA_COMPAT_MAXN defines the function &#39;maxn&#39; in the table library.
+@@ The following macros supply trivial compatibility for some
+@@ LUA_COMPAT_MODULE controls compatibility with previous
+@@ LUAI_BITSINT defines the number of bits in an int.
+@@ LUA_INT32 is an signed integer with exactly 32 bits.
+@@ LUAI_UMEM is an unsigned integer big enough to count the total
+@@ LUAI_MEM is a signed integer big enough to count the total memory
+@@ LUAI_MAXSTACK limits the size of the Lua stack.
+@@ LUAL_BUFFERSIZE is the buffer size used by the lauxlib buffer system.
+@@ LUA_NUMBER is the type of numbers in Lua.
+@@ LUAI_UACNUMBER is the result of an &#39;usual argument conversion&#39;
+@@ LUA_NUMBER_SCAN is the format for reading numbers.
+@@ LUA_NUMBER_FMT is the format for writing numbers.
+@@ lua_number2str converts a number to a string.
+@@ LUAI_MAXNUMBER2STR is maximum size of previous conversion.
+@@ l_mathop allows the addition of an &#39;l&#39; or &#39;f&#39; to all math operations
+@@ lua_str2number converts a decimal numeric string to a number.
+@@ lua_strx2number converts an hexadecimal numeric string to a number.
+@@ The luai_num* macros define the primitive operations over numbers.
+@@ LUA_INTEGER is the integral type used by lua_pushinteger/lua_tointeger.
+@@ LUA_UNSIGNED is the integral type used by lua_pushunsigned/lua_tounsigned.
+@@ LUA_MSASMTRICK uses Microsoft assembler to avoid clashes with a
+@@ LUA_IEEE754TRICK uses a trick that should work on any machine
+@@ LUA_IEEELL extends the trick to LUA_INTEGER; should only be
+@@ LUA_IEEEENDIAN is the endianness of doubles in your machine
+@@ LUA_NANTRICK controls the use of a trick to pack all types into</pre>
+<h2>main</h2>
+<p>接下来就要进入 lua.c 文件中的 main 函数了，具体如下：</p>
+<pre class="lang:default decode:true">int main (int argc, char **argv) {
+  int status, result;
+  lua_State *L = luaL_newstate();  /* create state */
+  if (L == NULL) {
+    l_message(argv[0], &#34;cannot create state: not enough memory&#34;);
+    return EXIT_FAILURE;
+  }
+  /* call &#39;pmain&#39; in protected mode */
+  lua_pushcfunction(L, &amp;pmain);
+  lua_pushinteger(L, argc);  /* 1st argument */
+  lua_pushlightuserdata(L, argv); /* 2nd argument */
+  status = lua_pcall(L, 2, 1, 0);
+  result = lua_toboolean(L, -1);  /* get result */
+  finalreport(L, status);
+  lua_close(L);
+  return (result &amp;&amp; status == LUA_OK) ? EXIT_SUCCESS : EXIT_FAILURE;
+}</pre>
+<p><code>lua_State</code> 结构在<code>lstate.h</code> 中定义，如果创建失败，则错误退出。否则在保护模式(<code>protected mode</code>)中调用 <code>pmain</code>。接着传入 <code>argc</code> 与 <code>argv</code>，之后的<code>status = lua_pcall(L, 2, 1, 0);</code>中直接给出了2、1、0三个数字，对应到 lua.h 文件中得宏：</p>
+<pre class="lang:default decode:true">#define lua_pcall(L,n,r,f)  lua_pcallk(L, (n), (r), (f), 0, NULL)</pre>
+<p>可以看出，其实是调用了 <code>lua_pcallk(L, (2), (1), (0), 0, NULL)</code>。而看到下面的 <code>lua_pcallk</code> 定义就清楚了：</p>
+<pre class="lang:default decode:true">LUA_API int   (lua_pcallk) (lua_State *L, int nargs, int nresults, int errfunc,
+                            int ctx, lua_CFunction k);</pre>
+<p>其中2赋给了 <code>nargs</code>，1赋给了 <code>nresults</code>，0赋给了 <code>errfunc</code>，<code>ctx</code> 被上一个宏设置为0，<code>k</code> 设置为 <code>NULL</code>。最后获取结果，报告状态，关闭之前创建的 <code>L</code> 并退出。其中 <code>lua_pushcfunction(L, &amp;pmain);</code>被宏<code>#define lua_pushcfunction(L,f) lua_pushcclosure(L, (f), 0)</code>展开之后变成了 <code>lua_pushcclosure(L, (pmain), 0)</code>,而<code>lua_pushcclosure</code>的定义为<code>LUA_API void (lua_pushcclosure) (lua_State *L, lua_CFunction fn, int n);</code>纵观整个 <code>main</code>，真正开始做事的应该是 <code>lua_pcall</code> 函数，也就是 <code>lua_pcallk</code>，看其定义：</p>
+<pre class="lang:default decode:true">LUA_API int lua_pcallk (lua_State *L, int nargs, int nresults, int errfunc,
+                        int ctx, lua_CFunction k) {
+  struct CallS c;
+  int status;
+  ptrdiff_t func;
+  lua_lock(L);
+  api_check(L, k == NULL || !isLua(L-&gt;ci),
+    &#34;cannot use continuations inside hooks&#34;);
+  api_checknelems(L, nargs+1);
+  api_check(L, L-&gt;status == LUA_OK, &#34;cannot do calls on non-normal thread&#34;);
+  checkresults(L, nargs, nresults);
+  if (errfunc == 0)
+    func = 0;
+  else {
+    StkId o = index2addr(L, errfunc);
+    api_checkstackindex(L, errfunc, o);
+    func = savestack(L, o);
+  }
+  c.func = L-&gt;top - (nargs+1);  /* function to be called */
+  if (k == NULL || L-&gt;nny &gt; 0) {  /* no continuation or no yieldable? */
+    c.nresults = nresults;  /* do a &#39;conventional&#39; protected call */
+    status = luaD_pcall(L, f_call, &amp;c, savestack(L, c.func), func);
+  }
+  else {  /* prepare continuation (call is already protected by &#39;resume&#39;) */
+    CallInfo *ci = L-&gt;ci;
+    ci-&gt;u.c.k = k;  /* save continuation */
+    ci-&gt;u.c.ctx = ctx;  /* save context */
+    /* save information for error recovery */
+    ci-&gt;extra = savestack(L, c.func);
+    ci-&gt;u.c.old_allowhook = L-&gt;allowhook;
+    ci-&gt;u.c.old_errfunc = L-&gt;errfunc;
+    L-&gt;errfunc = func;
+    /* mark that function may do error recovery */
+    ci-&gt;callstatus |= CIST_YPCALL;
+    luaD_call(L, c.func, nresults, 1);  /* do the call */
+    ci-&gt;callstatus &amp;= ~CIST_YPCALL;
+    L-&gt;errfunc = ci-&gt;u.c.old_errfunc;
+    status = LUA_OK;  /* if it is here, there were no errors */
+  }
+  adjustresults(L, nresults);
+  lua_unlock(L);
+  return status;
+}</pre>
+<p>限于篇幅，近期会作后续更新。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-892_Lua%20%E5%AD%A6%E4%B9%A0%20chapter23%20/">Lua 学习 chapter23</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-893_Lua%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/">Lua知识回顾</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

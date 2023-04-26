@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua Module 实践 · Pan's paper - Lua教程</title>
+
+  
+    <meta name="description" content="最近用openresty写接口，每个接口都要要链接数据库，写一个通用的模块来实现，顺便学习下lua module的相关知识。  lua 模块Lua中的一个模块就是一个table，table元素包括变量，函数等。“因此创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table”。 123456789101112131415161718192021--">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua Module 实践 · Pan&#39;s paper">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-711_Lua%20Module%20%E5%AE%9E%E8%B7%B5%20%C2%B7%20Pan's%20paper/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="最近用openresty写接口，每个接口都要要链接数据库，写一个通用的模块来实现，顺便学习下lua module的相关知识。  lua 模块Lua中的一个模块就是一个table，table元素包括变量，函数等。“因此创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table”。 123456789101112131415161718192021--">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.299Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.299Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua Module 实践 · Pan's paper</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#lua-%E6%A8%A1%E5%9D%97"><span class="toc-text">lua 模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#require%E5%87%BD%E6%95%B0"><span class="toc-text">require函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-text">加载机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#openresty-%E5%AE%9E%E8%B7%B5"><span class="toc-text">openresty 实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEmodule%E8%B7%AF%E5%BE%84"><span class="toc-text">设置module路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1module"><span class="toc-text">设计module</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#yield"><span class="toc-text">yield</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%831%EF%BC%9A%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">参考1：设置环境变量的方式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%91%EF%BC%9A%E5%86%8D%E6%AC%A1%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%A4%B1%E6%95%88"><span class="toc-text">坑：再次打开终端环境变量失效</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua Module 实践 · Pan's paper</span></h1>
+<p>最近用openresty写接口，每个接口都要要链接数据库，写一个通用的模块来实现，顺便学习下lua module的相关知识。</p>
+
+<h3 id="lua-模块"><a href="#lua-模块" class="headerlink" title="lua 模块"></a>lua 模块</h3><p>Lua中的一个模块就是一个table，table元素包括变量，函数等。“因此创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table”。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="comment">-- 定义一个名为 module 的模块</span></span><br/><span class="line"><span class="built_in">module</span> = {}</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 定义一个常量</span></span><br/><span class="line"><span class="built_in">module</span>.constant = <span class="string">&#34;这是一个常量&#34;</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 定义一个函数</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">()</span></span></span><br/><span class="line">    <span class="built_in">io</span>.write(<span class="string">&#34;这是一个公有函数！n&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">func2</span><span class="params">()</span></span></span><br/><span class="line">    <span class="built_in">print</span>(<span class="string">&#34;这是一个私有函数！&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">module.func3</span><span class="params">()</span></span></span><br/><span class="line">    func2()</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">return</span> <span class="built_in">module</span></span><br/></pre></td></tr></tbody></table></figure>
+<h4 id="require函数"><a href="#require函数" class="headerlink" title="require函数"></a>require函数</h4><p>require函数用来加载模块。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#34;&lt;模块名&gt;&#34;</span>)</span><br/><span class="line"><span class="comment">-- 或</span></span><br/><span class="line"><span class="built_in">require</span><span class="string">&#34;&lt;模块名&gt;&#34;</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>也可以给模块一个别名，方便调用</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> m = <span class="built_in">require</span>(<span class="string">&#34;module&#34;</span>)</span><br/><span class="line"></span><br/><span class="line">m.func1</span><br/></pre></td></tr></tbody></table></figure>
+<h4 id="加载机制"><a href="#加载机制" class="headerlink" title="加载机制"></a>加载机制</h4><p>对于我们自定义的模块，并不是放在那个目录都行，require有一套自己的文件加载机制。</p>
+<blockquote>
+<p>require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA_PATH 的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化。</p>
+</blockquote>
+<p>如果我们设置LUA_PATH环境变量（参考1）</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">#LUA_PATH</span></span><br/><span class="line"><span class="built_in">export</span> LUA_PATH=<span class="string">&#34;~/lua/?.lua&#34;</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>那么调用 require(“module”) 时就会尝试打开以下文件目录去搜索目标。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line">/Users/dengjoe/lua/module.lua;</span><br/><span class="line">./module.lua</span><br/><span class="line">/usr/local/share/lua/5.1/module.lua</span><br/><span class="line">/usr/local/share/lua/5.1/module/init.lua</span><br/><span class="line">/usr/local/lib/lua/5.1/module.lua</span><br/><span class="line">/usr/local/lib/lua/5.1/module/init.lua</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="openresty-实践"><a href="#openresty-实践" class="headerlink" title="openresty 实践"></a>openresty 实践</h3><p>写一个链接数据库的module</p>
+<h4 id="设置module路径"><a href="#设置module路径" class="headerlink" title="设置module路径"></a>设置module路径</h4><p>在openresty中设置module路径的方式：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">lua_package_path <span class="string">&#39;lua/?.lua;/Users/zhangpan/Project/XinanServer/XinanServer/lua/module/?.lua;;&#39;</span>;</span><br/></pre></td></tr></tbody></table></figure>
+<p>其中<code>lua/?.lua;</code> 代表的绝对路径是 <code>~/lua/?.lua;</code>；后面一个是绝对路径。</p>
+<h4 id="设计module"><a href="#设计module" class="headerlink" title="设计module"></a>设计module</h4><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/></pre></td><td class="code"><pre><span class="line">xinandb = {}</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 创建数据库链接实例</span></span><br/><span class="line"><span class="keyword">local</span> mysql = <span class="built_in">require</span> <span class="string">&#34;resty.mysql&#34;</span></span><br/><span class="line"></span><br/><span class="line">xinandb.db = mysql:new()</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 连接数据库</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xinandb.connect</span><span class="params">()</span></span></span><br/><span class="line">     <span class="keyword">if</span> <span class="keyword">not</span> xinandb.db <span class="keyword">then</span></span><br/><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span></span><br/><span class="line">     <span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line">     <span class="keyword">local</span> ok, err, errno, sqlstate = (xinandb.db):connect {</span><br/><span class="line">                    host = <span class="string">&#34;127.0.0.1&#34;</span>,</span><br/><span class="line">                    port = <span class="number">3306</span>,</span><br/><span class="line">                    database = <span class="string">&#34;xinan&#34;</span>,</span><br/><span class="line">                    user = <span class="string">&#34;***&#34;</span>,</span><br/><span class="line">                    password = <span class="string">&#34;***&#34;</span>,</span><br/><span class="line">                    max_packet_size = <span class="number">1024</span> * <span class="number">1024</span> }</span><br/><span class="line">     <span class="keyword">return</span> ok               </span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">return</span> xinandb</span><br/></pre></td></tr></tbody></table></figure>
+<h4 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h4><p>这里遇到的一个问题：开始想创建db时就直接链接</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/></pre></td><td class="code"><pre><span class="line">xinandb.db = mysql:new()</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> ok, err, errno, sqlstate = (xinandb.db):connect {</span><br/><span class="line">                    host = <span class="string">&#34;127.0.0.1&#34;</span>,</span><br/><span class="line">                    port = <span class="number">3306</span>,</span><br/><span class="line">                    database = <span class="string">&#34;xinan&#34;</span>,</span><br/><span class="line">                    user = <span class="string">&#34;***&#34;</span>,</span><br/><span class="line">                    password = <span class="string">&#34;***&#34;</span>,</span><br/><span class="line">                    max_packet_size = <span class="number">1024</span> * <span class="number">1024</span> }</span><br/></pre></td></tr></tbody></table></figure>
+<p>这样就会报一个错误</p>
+<blockquote>
+<p>[error] 7091#0: *291 lua entry thread aborted: runtime error: attempt to yield across C-call boundary</p>
+</blockquote>
+<p>最终参考文章<a href="https://orchina.org/topic/50/view" target="_blank" rel="external noopener noreferrer">关于在config.lua中加入resolver包，出现跨界问题</a>解决。</p>
+<p>解决方式：把连接数据库操作封装在一个函数中供调用。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>使用就比较简单了，和其他一样</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 连接DB</span></span><br/><span class="line"><span class="keyword">local</span> xinandb = <span class="built_in">require</span>(<span class="string">&#34;xinandb&#34;</span>)</span><br/><span class="line"><span class="keyword">local</span> res = xinandb:connect()</span><br/><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span></span><br/><span class="line">	ngx.say(<span class="string">&#34;{&#34;errorCode&#34; : 1003, &#34;errorMessage&#34; : &#34;连接数据库错误&#34;}&#34;</span>)</span><br/><span class="line">	<span class="keyword">return</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="keyword">local</span> db = xinandb.db;</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><h4 id="参考1：设置环境变量的方式："><a href="#参考1：设置环境变量的方式：" class="headerlink" title="参考1：设置环境变量的方式："></a>参考1：设置环境变量的方式：</h4><blockquote>
+<p>如果没有 LUA_PATH 这个环境变量，也可以自定义设置，在当前用户根目录下打开 .profile文件（没有则创建，打开 .bashrc 文件也可以），例如把 “~/lua/“ 路径加入 LUA_PATH 环境变量里;</p>
+</blockquote>
+<p>然后执行</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.profile</span><br/></pre></td></tr></tbody></table></figure>
+<h4 id="坑：再次打开终端环境变量失效"><a href="#坑：再次打开终端环境变量失效" class="headerlink" title="坑：再次打开终端环境变量失效"></a>坑：再次打开终端环境变量失效</h4><p>用的是Mac系统，shell是zsh。按照上面的方式设置了环境变量后，关闭终端，再次打开后环境变量就失效了。</p>
+<p>解决方式：将LUA_PATH添加到.zshrc 执行</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br/></pre></td></tr></tbody></table></figure>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-713_In%20place%20iterative%20policy%20evaluation/">In place iterative policy evaluation</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-714_%E5%8D%81%E4%B8%83%E3%80%81%E8%80%83%E8%99%91%E4%BD%BF%E7%94%A8Lazy%20evaluation(%E7%BC%93%E5%BC%8F%E8%AF%84%E4%BC%B0)/">十七、考虑使用Lazy evaluation(缓式评估)</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

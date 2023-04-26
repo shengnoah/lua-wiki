@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua 编程之基本语法与数据类型 - Lua教程</title>
+
+  
+    <meta name="description" content="学习一门编程语言，必然需要先从它的语法开始，所以今天先来学习下 Lua 的基本语法。    首先一个就要说到注释了，一段程序无论编写得多好，少量的注释也是必要的。在 Lua 中的注释比其他的语言稍有不同。 1234567-- 多行注释--[[    print(&#39;多行注释里面的内容&#39;)    print(&#39;多行注释里面的内容2&#39;)--]]  这里还介绍一个技巧就是如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua 编程之基本语法与数据类型">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-691_Lua%20%E7%BC%96%E7%A8%8B%E4%B9%8B%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="学习一门编程语言，必然需要先从它的语法开始，所以今天先来学习下 Lua 的基本语法。    首先一个就要说到注释了，一段程序无论编写得多好，少量的注释也是必要的。在 Lua 中的注释比其他的语言稍有不同。 1234567-- 多行注释--[[    print(&#39;多行注释里面的内容&#39;)    print(&#39;多行注释里面的内容2&#39;)--]]  这里还介绍一个技巧就是如">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.297Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.297Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua 编程之基本语法与数据类型</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nil%EF%BC%88%E7%A9%BA%EF%BC%89"><span class="toc-text">nil（空）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#boolean%EF%BC%88%E5%B8%83%E5%B0%94%EF%BC%89"><span class="toc-text">boolean（布尔）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#number%EF%BC%88%E6%95%B0%E5%AD%97%EF%BC%89"><span class="toc-text">number（数字）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#string%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%89"><span class="toc-text">string（字符串）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#table%EF%BC%88%E8%A1%A8%EF%BC%89"><span class="toc-text">table（表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#function%EF%BC%88%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">function（函数）</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.297Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua 编程之基本语法与数据类型</span></h1>
+<p>学习一门编程语言，必然需要先从它的语法开始，所以今天先来学习下 Lua 的基本语法。</p>
+
+
+<hr/>
+<p>首先一个就要说到注释了，一段程序无论编写得多好，少量的注释也是必要的。在 Lua 中的注释比其他的语言稍有不同。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 多行注释</span></span><br/><span class="line"><span class="comment">--[[</span></span><br/><span class="line"><span class="comment">    print(&#39;多行注释里面的内容&#39;)</span></span><br/><span class="line"><span class="comment">    print(&#39;多行注释里面的内容2&#39;)</span></span><br/><span class="line"><span class="comment">--]]</span></span><br/></pre></td></tr></tbody></table></figure>
+
+<p>这里还介绍一个技巧就是如何解放多行注释里的内容呢，只需要这样：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 技巧</span></span><br/><span class="line"><span class="comment">---[[</span></span><br/><span class="line">    <span class="built_in">print</span>(<span class="string">&#39;多行注释里面的内容&#39;</span>)</span><br/><span class="line">    <span class="built_in">print</span>(<span class="string">&#39;多行注释里面的内容2&#39;</span>)</span><br/><span class="line"><span class="comment">--]]</span></span><br/></pre></td></tr></tbody></table></figure>
+
+<h1 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h1><hr/>
+<p>说完注释我们再来看 Lua 中的标识符，简单的描述就是，Lua 中的标识符都以字母开头（无论大小写）或者下划线开头，切记不要使用特殊字符（￥，@，%…）,而且 Lua 中是区分大小写的。<br/>列举一些正常的标识符：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">mohd         zara      abc     move_name    a_123</span><br/><span class="line">myname50     _temp     j       a23b9        retVal</span><br/></pre></td></tr></tbody></table></figure>
+
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><hr/>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/></pre></td><td class="code"><pre><span class="line">globalVar = <span class="string">&#39;全局变量，哪都用的到&#39;</span></span><br/><span class="line"><span class="keyword">local</span> localVar = <span class="string">&#39;局部变量，在局部范围可用，看它声明在哪&#39;</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> b = <span class="number">5</span>         <span class="comment">-- 局部变量</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 剧透下 函数</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">()</span></span></span><br/><span class="line">    c = <span class="number">5</span>           <span class="comment">-- 全局变量</span></span><br/><span class="line">    <span class="keyword">local</span> d = <span class="number">6</span>     <span class="comment">-- 局部变量</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line">func()</span><br/><span class="line"><span class="built_in">print</span>(c,d)          <span class="comment">--&gt; 5 nil</span></span><br/></pre></td></tr></tbody></table></figure>
+
+<h1 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h1><hr/>
+<p>我们在给变量起名的时候，往往会遇到变量名和语言内置的关键词重复了，而一般保留关键字是不能作为变量的，这里列举 Lua 中的关键词。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span>       <span class="keyword">break</span>     <span class="keyword">do</span>        <span class="keyword">else</span>      <span class="keyword">elseif</span></span><br/><span class="line"><span class="keyword">end</span>       <span class="literal">false</span>     <span class="keyword">for</span>       <span class="function"><span class="keyword">function</span>  <span class="title">if</span></span></span><br/><span class="line"><span class="function"><span class="title">in</span>        <span class="title">local</span>     <span class="title">nil</span>       <span class="title">not</span>       <span class="title">or</span></span></span><br/><span class="line"><span class="function"><span class="title">repeat</span>    <span class="title">return</span>    <span class="title">then</span>      <span class="title">true</span>      <span class="title">until</span>     <span class="title">while</span></span></span><br/></pre></td></tr></tbody></table></figure>
+
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><hr/>
+<p>在 Lua 中变量是不需要类型声明的，只需要为变量赋值就可以了，而 Lua 是有多种基本类型，主要如下：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line"><span class="literal">nil</span>       空类型，表示无效值，变量在被赋值前都是<span class="literal">nil</span>，将<span class="literal">nil</span>赋给一个全局变量等同将其删除</span><br/><span class="line">boolean   布尔类型，值为<span class="literal">true</span>/<span class="literal">false</span>，只有<span class="literal">nil</span>和<span class="literal">false</span>为“假”，其它如<span class="number">0</span>和<span class="string">&#34;&#34;</span>都是真，这一点要特别特别注意！</span><br/><span class="line">number    数字，值为实数，Lua默认为double，LuaJIT会根据上下文选择用整型或者浮点型存储</span><br/><span class="line"><span class="built_in">string</span>    字符串，支持单引号、双引号和长括号的方式</span><br/><span class="line"><span class="built_in">table</span>     表，关联数组</span><br/><span class="line"><span class="function"><span class="keyword">function</span>  函数</span></span><br/></pre></td></tr></tbody></table></figure>
+
+<h2 id="nil（空）"><a href="#nil（空）" class="headerlink" title="nil（空）"></a>nil（空）</h2><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">print</span>(<span class="built_in">type</span>(a))</span><br/><span class="line"><span class="literal">nil</span></span><br/><span class="line">&gt;</span><br/></pre></td></tr></tbody></table></figure>
+
+<h2 id="boolean（布尔）"><a href="#boolean（布尔）" class="headerlink" title="boolean（布尔）"></a>boolean（布尔）</h2><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- type 函数 是 Lua 中内置的可以测试变量或值的类型</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">true</span>))</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">false</span>))</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">nil</span>))</span><br/><span class="line"></span><br/><span class="line">boolean</span><br/><span class="line">boolean</span><br/><span class="line"><span class="literal">nil</span></span><br/></pre></td></tr></tbody></table></figure>
+
+<h2 id="number（数字）"><a href="#number（数字）" class="headerlink" title="number（数字）"></a>number（数字）</h2><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Lua 默认只有一种 number 类型就是 double，整数和浮点数类型都是 number</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">2</span>))</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">2.2</span>))</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">0.2</span>))</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">2e+1</span>))</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">0.2e-1</span>))</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">7.8263692594256e-06</span>))</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 输出结果</span></span><br/><span class="line">number</span><br/><span class="line">number</span><br/><span class="line">number</span><br/><span class="line">number</span><br/><span class="line">number</span><br/><span class="line">number</span><br/></pre></td></tr></tbody></table></figure>
+
+<h2 id="string（字符串）"><a href="#string（字符串）" class="headerlink" title="string（字符串）"></a>string（字符串）</h2><p>字符串可以是由单引号或者双引号来表示，当然也可以用方括号来表示。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&#39;字符串1&#39;</span></span><br/><span class="line">str2 = <span class="string">&#34;字符串2&#34;</span></span><br/><span class="line">str3 = <span class="string">[[</span></span><br/><span class="line"><span class="string">    这是一整块的字符串</span></span><br/><span class="line"><span class="string">    还可以换行</span></span><br/><span class="line"><span class="string">    哈哈</span></span><br/><span class="line"><span class="string">]]</span></span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(str1)</span><br/><span class="line"><span class="built_in">print</span>(str2)</span><br/><span class="line"><span class="built_in">print</span>(str3)</span><br/><span class="line"></span><br/><span class="line"><span class="comment">--输出结果</span></span><br/><span class="line">字符串<span class="number">1</span></span><br/><span class="line">字符串<span class="number">2</span></span><br/><span class="line">    这是一整块的字符串</span><br/><span class="line">    还可以换行</span><br/><span class="line">    哈哈</span><br/></pre></td></tr></tbody></table></figure>
+
+<h2 id="table（表）"><a href="#table（表）" class="headerlink" title="table（表）"></a>table（表）</h2><p>table 是一个关联数组也是一种有特殊索引的数组，当然 nil 不能作为索引。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 事例暂且不作过多说明，后续深入学习</span></span><br/><span class="line"><span class="comment">-- table 的 声明定义</span></span><br/><span class="line"><span class="keyword">local</span> t1 = {</span><br/><span class="line">    str = <span class="string">&#34;这是字符串&#34;</span>,</span><br/><span class="line">    t2 = {<span class="string">&#34;字符串1&#34;</span>,<span class="string">&#34;字符串2&#34;</span>,<span class="string">&#34;字符串3&#34;</span>},</span><br/><span class="line">    <span class="number">9000</span>,</span><br/><span class="line">    <span class="number">10000</span>,</span><br/><span class="line">    [<span class="number">8</span>] = <span class="number">8000</span>,</span><br/><span class="line">    [<span class="string">&#34;s&#34;</span>] = <span class="string">&#34;strs&#34;</span></span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(t1.str)</span><br/><span class="line"><span class="built_in">print</span>(t1.t2[<span class="number">3</span>])</span><br/><span class="line"><span class="built_in">print</span>(t1[<span class="number">2</span>])</span><br/><span class="line"><span class="built_in">print</span>(t1[<span class="number">8</span>])</span><br/><span class="line"><span class="built_in">print</span>(t1[<span class="string">&#34;s&#34;</span>])</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 输出结果</span></span><br/><span class="line">这是字符串</span><br/><span class="line">字符串<span class="number">3</span></span><br/><span class="line"><span class="number">10000</span></span><br/><span class="line"><span class="number">8000</span></span><br/><span class="line">strs</span><br/></pre></td></tr></tbody></table></figure>
+
+<h2 id="function（函数）"><a href="#function（函数）" class="headerlink" title="function（函数）"></a>function（函数）</h2><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 声明函数</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">( x,y )</span></span></span><br/><span class="line">    <span class="keyword">return</span> x + y;</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 存储函数在变量里</span></span><br/><span class="line">a = add;</span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(a(<span class="number">1</span>,<span class="number">1</span>))</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 输出结果</span></span><br/><span class="line"><span class="number">2</span></span><br/></pre></td></tr></tbody></table></figure>
+
+<p>Lua 的基本类型暂时学习这么多，后续针对不同的类型进行深入的学习。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-692_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%882%EF%BC%89/">Lua程序设计（2）</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-69_redis%E5%AD%A6%E4%B9%A05%20lua%E8%84%9A%E6%9C%AC%20%C2%B7%20%E8%80%81%E7%99%BD%E5%BC%80%E5%8F%91/">redis学习5 lua脚本 · 老白开发</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

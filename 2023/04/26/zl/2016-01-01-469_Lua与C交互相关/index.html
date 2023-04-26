@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua与C交互相关 - Lua教程</title>
+
+  
+    <meta name="description" content="C语言API总览。  C语言和Lua语言的两种交互形式：  C语言拥有控制权，而Lua语言被用作库，这种交互形式中的C代码被称为应用代码。 Lua语言拥有控制权，而C语言被用作库，此时的C代码被称为库代码。  应用代码和库代码都适用相同的API和Lua语言通信，这些API称为C API。 一个简单的独立解释器：1234567891011121314151617181920212223242526#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua与C交互相关">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-469_Lua%E4%B8%8EC%E4%BA%A4%E4%BA%92%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="C语言API总览。  C语言和Lua语言的两种交互形式：  C语言拥有控制权，而Lua语言被用作库，这种交互形式中的C代码被称为应用代码。 Lua语言拥有控制权，而C语言被用作库，此时的C代码被称为库代码。  应用代码和库代码都适用相同的API和Lua语言通信，这些API称为C API。 一个简单的独立解释器：1234567891011121314151617181920212223242526#">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.275Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.275Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua与C交互相关</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%8B%AC%E7%AB%8B%E8%A7%A3%E9%87%8A%E5%99%A8%EF%BC%9A"><span class="toc-text">一个简单的独立解释器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%EF%BC%9A"><span class="toc-text">栈：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%8B%E5%85%A5%E5%85%83%E7%B4%A0%EF%BC%9A"><span class="toc-text">压入元素：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%85%83%E7%B4%A0%EF%BC%9A"><span class="toc-text">查询元素：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8C-API%E8%BF%9B%E8%A1%8C%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A"><span class="toc-text">使用C API进行错误处理：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF%EF%BC%9A"><span class="toc-text">处理应用程序中的错误：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%BA%93%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF%EF%BC%9A"><span class="toc-text">处理库代码中的错误：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%EF%BC%9A"><span class="toc-text">内存分配：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pcall%EF%BC%9A"><span class="toc-text">pcall：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Lua%E4%B8%AD%E8%B0%83%E7%94%A8C%E8%AF%AD%E8%A8%80%EF%BC%9A"><span class="toc-text">在Lua中调用C语言：</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua与C交互相关</span></h1>
+<p>C语言API总览。</p>
+
+<p>C语言和Lua语言的两种交互形式：</p>
+<ol>
+<li>C语言拥有控制权，而Lua语言被用作库，这种交互形式中的C代码被称为应用代码。</li>
+<li>Lua语言拥有控制权，而C语言被用作库，此时的C代码被称为库代码。</li>
+</ol>
+<p>应用代码和库代码都适用相同的API和Lua语言通信，这些API称为C API。</p>
+<h3 id="一个简单的独立解释器："><a href="#一个简单的独立解释器：" class="headerlink" title="一个简单的独立解释器："></a>一个简单的独立解释器：</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br/><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&#34;lua.h&#34;</span></span></span><br/><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&#34;lauxlib.h&#34;</span></span></span><br/><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&#34;lualib.h&#34;</span></span></span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">int</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">  <span class="keyword">char</span> buff[<span class="number">256</span>];</span><br/><span class="line">  <span class="keyword">int</span> error;</span><br/><span class="line">  lua_State *L = luaL_newstate();				</span><br/><span class="line">  luaL_openlibs(L);											<span class="comment">/* 打开标准库 */</span></span><br/><span class="line">  </span><br/><span class="line">  <span class="keyword">while</span>(fgets(buuff,<span class="keyword">sizeof</span>(buff),<span class="built_in">stdin</span>) != <span class="literal">NULL</span>)</span><br/><span class="line">  {</span><br/><span class="line">    error = luaL_loadstring(L,buff) || lua_pcall(L,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br/><span class="line">    <span class="keyword">if</span>(error)</span><br/><span class="line">    {</span><br/><span class="line">      <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&#34;%sn&#34;</span>,lua_tostring(L,<span class="number">-1</span>));</span><br/><span class="line">      lua_pop(L,<span class="number">1</span>);											<span class="comment">/* 从栈中弹出错误信息 */</span></span><br/><span class="line">    }</span><br/><span class="line">  }</span><br/><span class="line">  </span><br/><span class="line">  lua_close(L);</span><br/><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>头文件lua.h声明了Lua提供的基础函数，其中包括创建新Lua环境的函数、调用Lua函数的函数、读写环境中的全局变量的函数，以及注册供Lua语言调用的新函数的函数，等等。其中声明的所有内容都有一个前缀lua_。</p>
+<p>头文件lauxlib.h声明了辅助库所提供的函数，其中所有的声明均以luaL_开头。</p>
+<p>头文件lualib.h中声明了用于打开这些库的函数。</p>
+<h3 id="栈："><a href="#栈：" class="headerlink" title="栈："></a>栈：</h3><p>Lua和C之间通信的主要组件是虚拟栈，几乎所有的API的调用都是在操作这个栈中的值，Lua和C之间所有的数据交换都是通过这个栈完成的，此外，还可以利用栈保存中间结果。</p>
+<p>为了解决<strong>动态类型和静态类型体系之间不匹配</strong>，以及<strong>自动内存管理和手动内存管理之间不匹配</strong>：Lua API中没有定义任何类似于lua_Value的类型，而是使用栈在Lua和C之间交换数据。栈中的每个元素都能保存Lua中任意类型的值。当我们想要从Lua中获取一个值时，只需调用Lua，Lua就会将指定的值压入栈中。当想要将一个值传给Lua时，首先要将这个值压入栈，然后调用Lua将其从栈中弹出即可。这需要每个C语言类型都有一个函数将其压入栈，还需要每个类型都有一个弹出的函数，但是避免了过多的组合，<strong>另外由于这个栈是Lua状态的一部分，因此垃圾收集器知道C语言正在使用哪些值。</strong></p>
+<h4 id="压入元素："><a href="#压入元素：" class="headerlink" title="压入元素："></a>压入元素：</h4><p>针对每一种能用C语言直接表示的Lua数据类型，C API中都有一个对应的压栈函数。</p>
+<p>对栈空间的检查可以使用int lua_checkstack(lua_State *L,int sz);这里，sz是我们所需的额外栈位置的数量，如果可能，函数 lua_checkstack 会增加栈的大小，以容纳所需的额外空间；否则该函数返回0。</p>
+<h4 id="查询元素："><a href="#查询元素：" class="headerlink" title="查询元素："></a>查询元素：</h4><p>第一个被压入栈的元素索引为1，第二个被压入的元素索引为2，依此类推。也可以使用负数索引来访问栈中的元素，栈顶的元素为-1，-2表示在它之前被压入栈中的元素。</p>
+<p>与Lua栈相关的函数游一系列，在此不做赘述。</p>
+<h3 id="使用C-API进行错误处理："><a href="#使用C-API进行错误处理：" class="headerlink" title="使用C API进行错误处理："></a>使用C API进行错误处理：</h3><h4 id="处理应用程序中的错误："><a href="#处理应用程序中的错误：" class="headerlink" title="处理应用程序中的错误："></a>处理应用程序中的错误：</h4><p>Lua语言通常通过长跳转来提示错误，但是如果没有相应的setjmp，解释器就无法进行长跳转。此时，API中的任何错误都会导致Lua调用紧急函数。当这个函数返回后，应用就会退出。</p>
+<p>要正确的处理应用代码中的错误，就必须通过Lua语言调用我们自己的代码，即在setjmp的上下文中运行代码。</p>
+<p>我们可以把C代码封装到一个函数F中，然后使用lua_pcall调用这个函数F，通过这种方式，我们的C代码会在保护模式下运行。即便发生内存分配失败，函数lua_pcall也会返回一个对应的错误码，使解释器能够保持一致的状态：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">foo</span><span class="params">(lua_State *L)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">	<span class="comment">//code to run in protected mode</span></span><br/><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">secure_foo</span><span class="params">(lua_State *L)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">	lua_pushcfunction(L,foo);</span><br/><span class="line">	<span class="keyword">return</span> (lua_pcall(L,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>) == <span class="number">0</span>)</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>无论发生什么，调用secure_foo时都会返回一个布尔值，来表示foo执行是否成功。</p>
+<h4 id="处理库代码中的错误："><a href="#处理库代码中的错误：" class="headerlink" title="处理库代码中的错误："></a>处理库代码中的错误：</h4><p>当C语言库中的函数检测到错误时，只需简单的调用lua_error即可。</p>
+<h3 id="内存分配："><a href="#内存分配：" class="headerlink" title="内存分配："></a>内存分配：</h3><p>Lua语言核心对内存分配不进行任何假设，只会通过一个分配函数来分配和释放内存，当用户创建lua状态时必须提供该函数。</p>
+<p>luaL_newstate是一个用默认分配函数来创建Lua状态的辅助函数。该默认分配函数使用了来自C语言标准函数库的标准函数malloc-realloc-free，对于大多数应用程序来说已经够了，但是，要完全控制Lua的内存分配也很容易，使用原始的lua_newstate来创建我们自己的Lua状态即可：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function">lua_State *<span class="title">lua_newstate</span><span class="params">(lua_Alloc f,<span class="keyword">void</span> *ud)</span></span></span><br/></pre></td></tr></tbody></table></figure>
+<p>该函数有两个参数：一个是分配函数，另一个是用户数据。用这种方式创建的Lua状态会通过调用f完成所有的内存分配和释放，甚至结构lua_State也是由f分配的。</p>
+<p>分配函数f必须满足lua_Alloc的类型声明：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> *(*lua_Alloc)(<span class="keyword">void</span> *ud,						<span class="comment">// 为lua_newstate所提供的用户数据</span></span><br/><span class="line">													 <span class="keyword">void</span> *ptr,						<span class="comment">// 正要被分配或者释放的块的地址</span></span><br/><span class="line">													 <span class="keyword">size_t</span> osize,				<span class="comment">// 原始块的大小</span></span><br/><span class="line">													 <span class="keyword">size_t</span> nsize);				<span class="comment">// 请求的块大小</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>如果ptr不是NULL，则lua会保证其之前被分配的大小就是osize。</p>
+<p>当nsize为0时，分配函数必须释放ptr指向的块并返回NULL，对应于所要求的大小为零的块。当ptr时NULL时，该函数必须分配并返回一个指定大小的块；如果无法分配指定的块，则必须返回NULL。</p>
+<h3 id="pcall："><a href="#pcall：" class="headerlink" title="pcall："></a>pcall：</h3><p>在调用函数lua_pcall时，第二个参数表示传递的参数数量，第三个参数是期望的结果数量，第四个参数代表错误处理函数。就像Lua语言的赋值一样，函数lua_pcall会根据所要求的数量来调整返回值的个数，即压入nil或丢弃多余的结果。在压入结果前，lua_pcall会把函数和其参数从栈中移除。当一个函数返回多个结果时，那么第一个结果最后被压入。</p>
+<h3 id="在Lua中调用C语言："><a href="#在Lua中调用C语言：" class="headerlink" title="在Lua中调用C语言："></a>在Lua中调用C语言：</h3><p>当Lua调用C函数时，我们必须注册该函数，即必须以一种恰当的方式为Lua提供该C函数的地址。Lua调用C函数时，也使用了一个与C语言调用Lua函数时相同类型的栈，C函数从栈中获取参数，并将结果压入栈中。</p>
+<p>这个栈不是一个全局结构；每个函数都有其私有的局部栈。当Lua调用一个C函数时，第一个参数总是位于这个局部栈中索引为1的位置。即使一个C函数调用了Lua代码，而且Lua代码又再次调用了同一个的C函数，这些调用每一个都只会看到本次调用自己的私有栈，其中索引为1的位置上就是第一个参数。</p>
+<p>所有在Lua中注册的函数都必须使用一个相同的原型，该原型就是定义在lua.h中的lua_CFunction：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*lua_CFunction)</span><span class="params">(lua_State *L)</span></span></span><br/></pre></td></tr></tbody></table></figure>
+<p>在Lua中，调用这个函数前，还必须通过lua_pushcfunction注册该函数。函数lua_pushcfunction会获取一个指向C函数的指针，然后在Lua中创建一个“function”类型，代表待注册的函数。一旦完成注册，C函数就可以像其他Lua函数一样行事了。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-472_Lua%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/">Lua类的实现思路</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-471_Lua%E6%A8%A1%E5%9D%97%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8LuaRocks/">Lua模块的包管理器LuaRocks</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>每周一论文：An Empirical Evaluation of In - Lua教程</title>
+
+  
+    <meta name="description" content="论文概要多版本并发控制(Multi-Version Concurrency Control，以下简称MVCC) 是当今数据库领域最流行的并发控制实现，MVCC 在最大化并发度的情况下尽可能保证事务的正确性，其好处有：  写不会阻塞读 只读事务无需数据库锁就能支持可重复读 可以很好地支持历史数据查询  MVCC 的关键在于首先假设数据库读写冲突不会很大，其次通过维护同一份数据的多个版本，是的事务之间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周一论文：An Empirical Evaluation of In">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-911_%E6%AF%8F%E5%91%A8%E4%B8%80%E8%AE%BA%E6%96%87%EF%BC%9AAn%20Empirical%20Evaluation%20of%20In/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="论文概要多版本并发控制(Multi-Version Concurrency Control，以下简称MVCC) 是当今数据库领域最流行的并发控制实现，MVCC 在最大化并发度的情况下尽可能保证事务的正确性，其好处有：  写不会阻塞读 只读事务无需数据库锁就能支持可重复读 可以很好地支持历史数据查询  MVCC 的关键在于首先假设数据库读写冲突不会很大，其次通过维护同一份数据的多个版本，是的事务之间">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-Databases.png">
+<meta property="og:image" content="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-CS.png">
+<meta property="og:image" content="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-Storage.png">
+<meta property="og:image" content="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-GC.png">
+<meta property="og:image" content="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-GC.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.317Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.317Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-Databases.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">每周一论文：An Empirical Evaluation of In</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E6%A6%82%E8%A6%81"><span class="toc-text">论文概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE"><span class="toc-text">并发控制协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MVTO"><span class="toc-text">MVTO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVOCC"><span class="toc-text">MVOCC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MV2PL"><span class="toc-text">MV2PL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSI"><span class="toc-text">SSI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AD%98%E5%82%A8"><span class="toc-text">多版本存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%85%E9%99%90%E8%BF%BD%E5%8A%A0%E5%AD%98%E5%82%A8-Append-Only"><span class="toc-text">仅限追加存储(Append-Only)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F%E5%AD%98%E5%82%A8-Time-Travel-Storage"><span class="toc-text">时序存储(Time-Travel Storage)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%85%E5%B7%AE%E5%BC%82%E5%AD%98%E5%82%A8-Delta-Storage"><span class="toc-text">仅差异存储(Delta Storage)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%8C%E7%BA%A7%E5%88%AB%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-Tuple-Level"><span class="toc-text">数据行级别垃圾回收(Tuple Level)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%BA%A7%E5%88%AB%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-Transaction-Level"><span class="toc-text">事务级别垃圾回收(Transaction Level)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86"><span class="toc-text">索引管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE-Primary-Key"><span class="toc-text">主键(Primary Key)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%AF%E7%B4%A2%E5%BC%95-Secondary-Indexes"><span class="toc-text">副索引(Secondary Indexes)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E8%80%85%E7%9A%84%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5"><span class="toc-text">作者的其他数据库文章链接</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.317Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>每周一论文：An Empirical Evaluation of In</span></h1>
+<h2 id="论文概要"><a href="#论文概要" class="headerlink" title="论文概要"></a>论文概要</h2><p>多版本并发控制(Multi-Version Concurrency Control，以下简称MVCC) 是当今数据库领域最流行的并发控制实现，MVCC 在最大化并发度的情况下尽可能保证事务的正确性，其好处有：</p>
+<ul>
+<li>写不会阻塞读</li>
+<li>只读事务无需数据库锁就能支持可重复读</li>
+<li>可以很好地支持历史数据查询</li>
+</ul>
+<p>MVCC 的关键在于首先假设数据库读写冲突不会很大，其次通过维护同一份数据的多个版本，是的事务之间的冲突尽可能小；当一个事务修改数据的时候，创建一个新的版本，当一个事务读数据的时候，返回最新版本数据；所有对于数据的修改都发生在事务的私有空间内，在提交的时候进行验证。</p>
+<p>当今主流的数据库基本都支持MVCC：<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-Databases.png" alt="MVCC Implementation"/></p>
+<p>本篇<a href="https://15721.courses.cs.cmu.edu/spring2018/papers/05-mvcc1/wu-vldb2017.pdf" target="_blank" rel="noopener noreferrer">论文</a>系统的总结了 MVCC 的技术要点，包括：</p>
+<ol>
+<li>并发控制协议</li>
+<li>多版本存储</li>
+<li>垃圾回收</li>
+<li>索引管理</li>
+</ol>
+<h2 id="并发控制协议"><a href="#并发控制协议" class="headerlink" title="并发控制协议"></a>并发控制协议</h2><h3 id="MVTO"><a href="#MVTO" class="headerlink" title="MVTO"></a>MVTO</h3><p>通过预先计算顺序的方式来控制并发；事务的读操作返回最新的没有被写锁锁定数据的版本；事务的写操作过程如下：</p>
+<ul>
+<li>当前没有活跃的事务锁定数据</li>
+<li>当前事务的事务编号大于最新数据中的读事务的事务编号</li>
+<li>如果这上述条件成立，那么创建一个新的数据版本</li>
+</ul>
+<h3 id="MVOCC"><a href="#MVOCC" class="headerlink" title="MVOCC"></a>MVOCC</h3><p>在 MVOCC 中，事务被分成三个阶段，分别是：</p>
+<ol>
+<li>读数据阶段，着这个阶段新的版本被创建出来。</li>
+<li>验证阶段，在这个阶段一个提交编号被分配给该事务，然后基于这个编号进行验证；</li>
+<li>提交阶段，完成提交。</li>
+</ol>
+<h3 id="MV2PL"><a href="#MV2PL" class="headerlink" title="MV2PL"></a>MV2PL</h3><p>顾名思义，MV2PL 是传统的两阶段锁在多版本并发控制中的应用；事务读写或者创建数据版本都需要获得对应的锁。</p>
+<h3 id="SSI"><a href="#SSI" class="headerlink" title="SSI"></a>SSI</h3><p>可串行化快照隔离(serializable snapshot isolation或SSI)是在快照隔离级别之上，支持串行化。PosgtreSQL 中实现了这种隔离级别，数据库通过维护一个串行的图移除事务并发造成的危险结构。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-CS.png" alt="MVCC-CS"/></p>
+<h2 id="多版本存储"><a href="#多版本存储" class="headerlink" title="多版本存储"></a>多版本存储</h2><p>数据库通过无锁指针链表维护多个版本，使得事务可以方便的读取特定版本的数据。<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-Storage.png" alt="MVCC Storage"/></p>
+<h3 id="仅限追加存储-Append-Only"><a href="#仅限追加存储-Append-Only" class="headerlink" title="仅限追加存储(Append-Only)"></a>仅限追加存储(Append-Only)</h3><ul>
+<li>所有的版本存储在同一个表空间</li>
+<li>更新的时候追加在版本链表上追加新节点</li>
+<li>链表可以以最旧到最新的方式组织，</li>
+<li>链表也可以以最新到最旧的方式组织，表头为最新版本</li>
+</ul>
+<h3 id="时序存储-Time-Travel-Storage"><a href="#时序存储-Time-Travel-Storage" class="headerlink" title="时序存储(Time-Travel Storage)"></a>时序存储(Time-Travel Storage)</h3><ul>
+<li>每次更新的时候将之前的版本放到旧表空间</li>
+<li>更新主表空间中的版本</li>
+</ul>
+<h3 id="仅差异存储-Delta-Storage"><a href="#仅差异存储-Delta-Storage" class="headerlink" title="仅差异存储(Delta Storage)"></a>仅差异存储(Delta Storage)</h3><ul>
+<li>每次更新近存储修改的部分，将其加入链表，主表空间存储当前版本</li>
+<li>通过旧的修改部分，可以创建旧版本</li>
+</ul>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-GC.png" alt="MVCC GC"/></p>
+<p>MVCC 在事务过程中不可避免的会产生很多的旧版本，这些旧版本会在下列情况下被回收</p>
+<ol>
+<li>对应的数据上没有活跃的事务</li>
+<li>某版本数据的创建事务被终止</li>
+</ol>
+<h3 id="数据行级别垃圾回收-Tuple-Level"><a href="#数据行级别垃圾回收-Tuple-Level" class="headerlink" title="数据行级别垃圾回收(Tuple Level)"></a>数据行级别垃圾回收(Tuple Level)</h3><p>通过检查数据来判断是否需要回收旧版本，有两种做法：</p>
+<ol>
+<li>启动一个后台线程进行数据行级的垃圾回收</li>
+<li>当事务操作数据行时，顺便做一些垃圾回收的事情</li>
+</ol>
+<h3 id="事务级别垃圾回收-Transaction-Level"><a href="#事务级别垃圾回收-Transaction-Level" class="headerlink" title="事务级别垃圾回收(Transaction Level)"></a>事务级别垃圾回收(Transaction Level)</h3><p>事务自己追踪旧版本，数据库管理系统不需要通过扫描数据行的方式来判断数据是否需要回收。</p>
+<h2 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h2><p>数据有多个版本，而索引只有一份，更新和维护多个版本的时候如何同步索引？<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-image-1258275666.cos.ap-chengdu.myqcloud.com/MVCC-GC.png" alt="MVCC GC"/></p>
+<h3 id="主键-Primary-Key"><a href="#主键-Primary-Key" class="headerlink" title="主键(Primary Key)"></a>主键(Primary Key)</h3><p>主键一般指向多版本链表头</p>
+<h3 id="副索引-Secondary-Indexes"><a href="#副索引-Secondary-Indexes" class="headerlink" title="副索引(Secondary Indexes)"></a>副索引(Secondary Indexes)</h3><p>有两种做法，逻辑指针和物理地址；前者通过增加一个中间层的方式实现，缩影指向该中间层，中间层指向数据的物理地址，避免应为多版本的物理地址改变引起的索引树的更新；后者索引直接指向数据物理地址。</p>
+<h2 id="作者的其他数据库文章链接"><a href="#作者的其他数据库文章链接" class="headerlink" title="作者的其他数据库文章链接"></a>作者的其他数据库文章链接</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://zhewuzhou.github.io/2018/08/07/SQL_as_universe_language_in_data_world/">SQL：数据世界的通用语</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhewuzhou.github.io/2018/09/13/SQL_Compilation_Technology_For_Performance/">数据库性能之翼：SQL 语句运行时编译</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhewuzhou.github.io/2018/09/25/Weekly-Paper-A-Survey-of-B-Tree-Locking-Techniques/">每周一论文：A Survey of B-Tree Locking Techniques</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhewuzhou.github.io/2018/09/29/Weekly-Paper-An-Empirical-Evalution-of-In-Memory-MVCC/">每周一论文：An Empirical Evaluation of In-Memory Multi-Version Concurrency Control</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhewuzhou.github.io/2018/10/18/Database-Indexes/">数据库索引数据结构总结</a></li>
+</ol>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-90_Lua%E5%85%83%E8%A1%A8/">Lua元表</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-912_redis%E7%BC%96%E5%86%99lua%E8%84%9A%E6%9C%AC/">redis编写lua脚本</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

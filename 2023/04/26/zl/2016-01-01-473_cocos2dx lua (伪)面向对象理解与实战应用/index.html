@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>cocos2dx lua (伪)面向对象理解与实战应用 - Lua教程</title>
+
+  
+    <meta name="description" content="面向对象      &gt;&gt; 把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class） &gt;&gt; 通过类的封装（encapsulation）隐藏内部细节 &gt;&gt; 通过继承（inheritance）实现类的特化（specialization）／泛化（generalization） &gt;&gt; 通过多态（polymorphism）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cocos2dx lua (伪)面向对象理解与实战应用">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-473_cocos2dx%20lua%20(%E4%BC%AA)%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="面向对象      &gt;&gt; 把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class） &gt;&gt; 通过类的封装（encapsulation）隐藏内部细节 &gt;&gt; 通过继承（inheritance）实现类的特化（specialization）／泛化（generalization） &gt;&gt; 通过多态（polymorphism）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.276Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.276Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">cocos2dx lua (伪)面向对象理解与实战应用</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-lua%E4%B8%AD%E7%9A%84%E7%B1%BB"><span class="toc-text">1.lua中的类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-lua%E4%B8%AD%E7%B1%BB%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">2.lua中类的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-text">3.类方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%B1%BB%E4%B8%8E%E5%85%83%E8%A1%A8%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-text">4.类与元表的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%88%9D%E6%AD%A5%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-text">1. 初步面向对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A8%A1%E6%8B%9F"><span class="toc-text">2. 面向对象模拟</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lua%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-text">Lua中的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%88%E6%9D%A5%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%B1%BB%EF%BC%8C"><span class="toc-text">先来定义一个基类，</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%90%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">子类的实现</span></a></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>cocos2dx lua (伪)面向对象理解与实战应用</span></h1>
+<blockquote>
+<p>面向对象    </p>
+</blockquote>
+<pre><code>&gt;&gt; 把一组数据结构和处理它们的方法组成对象（object），把相同行为的对象归纳为类（class）
+&gt;&gt; 通过类的封装（encapsulation）隐藏内部细节
+&gt;&gt; 通过继承（inheritance）实现类的特化（specialization）／泛化（generalization）
+&gt;&gt; 通过多态（polymorphism）实现基于对象类型的动态分派（dynamic dispatch）
+</code></pre>
+<h3 id="1-lua中的类"><a href="#1-lua中的类" class="headerlink" title="1.lua中的类"></a>1.lua中的类</h3><p>lua中其实是没有类的，有的只是表(table)，而类之间的继承也就是将父类的表连到了一起，派生类中没有找到的属性和方法就通过元表查找父类</p>
+<h3 id="2-lua中类的属性"><a href="#2-lua中类的属性" class="headerlink" title="2.lua中类的属性"></a>2.lua中类的属性</h3><pre><code>classA = &#123;width =10, height=10&#125;
+
+<p>classA&#x3D;&#123;&#125;</p>
+<p>classA.width&#x3D;10</p>
+<p>classA.height&#x3D;10<br></code></pre><p>两种方法都可以，通过点self.width统一调用</p></p>
+<h3 id="3-类方法"><a href="#3-类方法" class="headerlink" title="3.类方法"></a>3.类方法</h3><pre><code>[cpp] view plaincopy
+
+<p>function Box:collsion()<br>– 默认第一个参数隐藏传递self，可以通过self.xxx 调用属性和方法<br>end</p>
+<p>function Box.create(self)<br>–必须手动传递参数self,否则无法用self.xxx调用属性和方法<br>end<br></code></pre><h3 id="4-类与元表的用法"><a href="#4-类与元表的用法" class="headerlink" title="4.类与元表的用法"></a>4.类与元表的用法</h3><ul></p>
+<li>lua查找一个表元素时的规则，其实就是如下3个步骤:<ul>
+<li>4.1.在表中查找，如果找到，返回该元素，找不到则继续</li>
+<li>4.2.判断该表是否有元表，如果没有元表，返回nil，有元表则继续</li>
+<li>4.3.判断元表有没有<strong>index方法，如果</strong>index方法为nil，则返回nil；如果<strong>index方法是一个表，则重复1、2、3；如果</strong>index方法是一个函数，则返回该函数的返回值</li>
+</ul>
+</li>
+</ul>
+<p>在Lua中，函数的声明和调用可以用”:”和”.”，属性调用全部用点”.”</p>
+<blockquote>
+<p>我们知道，对象由属性和方法组成。LUA中最基本的结构是table，所以需要用table来描述对象的属性。</p>
+</blockquote>
+<p>lua中的function可以用来表示方法。那么LUA中的类可以通过table + function模拟出来。</p>
+<p>至于继承，可以通过metetable模拟出来（不推荐用，只模拟最基本的对象大部分时间够用了）。</p>
+<blockquote>
+<p>Lua中的表不仅在某种意义上是一种对象。像对象一样，表也有状态（成员变量）；也有与对象的值独立的本性，特别是拥有两个不同值的对象（table）代表两个不同的对象；一个对象在不同的时候也可以有不同的值，但他始终是一个对象；与对象类似，表的生命周期与其由什么创建、在哪创建没有关系。</p>
+</blockquote>
+<h5 id="1-初步面向对象"><a href="#1-初步面向对象" class="headerlink" title="1. 初步面向对象"></a>1. 初步面向对象</h5><pre><code>ObjectData = &#123;balance = 0&#125;
+
+<p>function ObjectData.count( v )<br>    – body<br>    print(&amp;#34;value is :&amp;#34;, v)<br>end</p>
+<p>a &#x3D; ObjectData<br>a.count(&amp;#34;iCocos&amp;#34;)<br>– value is :    iCocos<br></code></pre><h5 id="2-面向对象模拟"><a href="#2-面向对象模拟" class="headerlink" title="2. 面向对象模拟"></a>2. 面向对象模拟</h5><pre><code>ObjectData = &#123;balance = 100&#125;</p>
+<p>function ObjectData.count( self, v )<br>    self.balance = self.balance + v<br>    print(&#34;value is :&#34;, v, self.balance)<br>end</p>
+<p>a = ObjectData<br>a.count(a, 99) -- 传递self<br>-- value is :    99    199</p>
+<p>a:count(99) -- 不传self，直接把a作为self传递进入，<br>-- value is :    99    298<br></code></pre><h3 id="Lua中的继承"><a href="#Lua中的继承" class="headerlink" title="Lua中的继承"></a>Lua中的继承</h3><h5 id="先来定义一个基类，"><a href="#先来定义一个基类，" class="headerlink" title="先来定义一个基类，"></a>先来定义一个基类，</h5><p>使用前面讲的setmetatable来实现基本的元表</p></p>
+<pre><code>local _M = &#123;&#125;
+
+function _M:new(name)
+return setmetatable(&#123; name = name&#125;, &#123; __index = _M &#125;)
+end
+
+function _M:show()
+print(self.name .. &#34;: show in parent:&#34;)
+end
+
+function _M:hello(arg)
+print(self.name .. &#34;: hello in parent:&#34; .. tostring(arg))
+end
+
+return  _M
+</code></pre><h5 id="子类的实现"><a href="#子类的实现" class="headerlink" title="子类的实现"></a>子类的实现</h5><pre><code>local parent = require(&#34;parent&#34;)
+
+<p>local _M &#x3D; &#123;&#125;</p>
+<p>function _M:new()<br>local obj &#x3D; parent:new(&amp;#34;the child&amp;#34;)<br>local super_mt &#x3D; getmetatable(obj)<br>– 当方法在子类中查询不到时，再去父类中去查找。<br>setmetatable(_M, super_mt)<br>– 这样设置后，可以通过self.super.method(self, …) 调用父类的已被覆盖的方法。<br>obj.super &#x3D; setmetatable(&#123;&#125;, super_mt)<br>return setmetatable(obj, &#123; __index &#x3D; _M &#125;)<br>end</p>
+<p>– 覆盖父类的方法。<br>function _M:hello()<br>– 只能使用这种方法调用基类的方法。<br>self.super.hello(self, &amp;#34;call from child&amp;#34;)<br>print(tostring(self.name) .. &amp;#34;: hello in child&amp;#34;)<br>end</p>
+<p>return _M</p>
+<p>test.lua (使用)</p>
+<p>– local parent &#x3D; require(&amp;#34;parent&amp;#34;)<br>local child &#x3D; require(&amp;#34;child&amp;#34;)</p>
+<p>local c &#x3D; child:new()<br>– 从parent继承的show方法<br>c:show()<br>– child自己的方法。<br>c:hello()<br></code></pre><p>执行lua test.lua 后 输出：</p></p>
+<pre><code>the child: show in parent:
+the child: hello in parent:call from child
+the child: hello in child
+</code></pre><ul>
+<li>可以看到：<ul>
+<li>show是继承了父类的方法。</li>
+<li>hello是由子类覆盖了，并且在hello中调用了父类的hello方法。</li>
+</ul>
+</li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-474_Lua%E5%9F%BA%E7%A1%80/">Lua基础</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-478_Lua%E4%B8%AD%E5%85%B3%E4%BA%8Etable%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Lua中关于table对象引用传递的注意事项</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

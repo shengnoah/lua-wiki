@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>The Evaluation of Sentence Similarity - Lua教程</title>
+
+  
+    <meta name="description" content="I am trying to write my first english blog based on two reasons: First, the data set used in this blog is english; Second, I’d like to expand my reach and attract more audiences, although I should adm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Evaluation of Sentence Similarity">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-429_The%20Evaluation%20of%20Sentence%20Similarity/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="I am trying to write my first english blog based on two reasons: First, the data set used in this blog is english; Second, I’d like to expand my reach and attract more audiences, although I should adm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/e9a223b5ly1g1sqxx3vl0j219e07yaam.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/e9a223b5ly1g1swpqj9d0j20ps0h5t8z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/e9a223b5ly1g1swpqj9d0j20ps0h5t8z.jpg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.272Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.272Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/e9a223b5ly1g1sqxx3vl0j219e07yaam.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">The Evaluation of Sentence Similarity</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data"><span class="toc-text">Data</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Similarity-Methods"><span class="toc-text">Similarity Methods</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Baseline"><span class="toc-text">Baseline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Smooth-Inverse-Frequency"><span class="toc-text">Smooth Inverse Frequency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-Sentence-Encoder"><span class="toc-text">Google Sentence Encoder</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experiments"><span class="toc-text">Experiments</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-text">Results</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">复习笔记</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.272Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>The Evaluation of Sentence Similarity</span></h1>
+<p>I am trying to write my first english blog based on two reasons: First, the data set used in this blog is english; Second, I’d like to expand my reach and attract more audiences, although I should admit that nobody cares.</p>
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><p>Initially I want to use chinese corpus, but I cannot find a proper one. The data should sound like this one:</p>
+<blockquote>
+<p>word1    word2    similarity score<br/>阿拉伯人    阿拉伯    7.2<br/>畜产    农业    5.6<br/>垂涎    崇敬    3.4<br/>次序    秩序    4.7<br/>定心丸    药品    4.3<br/>房租    价格    5.2<br/>翡翠    宝石    6.7<br/>高科技    技术    7.5<br/>购入    购买    8.5<br/>观音    菩萨    8.2<br/>归并    合并    7.7</p>
+</blockquote>
+
+<p>not like this:</p>
+<blockquote>
+<p>为何我无法申请开通花呗信用卡收款    支付宝开通信用卡花呗收款不符合条件怎么回事    1<br/>花呗分期付款会影响使用吗    花呗分期有什么影响吗    0<br/>为什么我花呗没有临时额度    花呗没有临时额度怎么可以负    0<br/>能不能开花呗老兄    花呗逾期了还能开通    0<br/>我的怎么开通花呗收钱    这个花呗是个什么啥？我没开通 我怎么有账单    0<br/>蚂蚁借呗可以停掉么    蚂蚁借呗为什么给我关掉了    0<br/>我想把花呗功能关了    我去饭店吃饭，能用花呗支付吗    0<br/>为什么我借呗开通了又关闭了    为什么借呗存在风险    0<br/>支付宝被冻了花呗要怎么还    支付功能冻结了，花呗还不了怎么办    1</p>
+</blockquote>
+<p>If you can find the dataset where ‘similarity score’ is double, please donot hesitate to <a href="mailto:jiajizhengbuaa@gmail.com" target="_blank" rel="noopener noreferrer">email me.</a></p>
+<p>So, the choice has to be enlgish corpus. The dataset used in this experiment are <a href="http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark" target="_blank" rel="noopener noreferrer">STSbenchmark</a> and SICK data. The SICK data contains 10,000 sentence paris labeled with semantic relatedness and entailment relation.<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://ww1.sinaimg.cn/large/e9a223b5ly1g1sqxx3vl0j219e07yaam.jpg" alt=""/></p>
+<h2 id="Similarity-Methods"><a href="#Similarity-Methods" class="headerlink" title="Similarity Methods"></a>Similarity Methods</h2><h3 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h3><p>As the baseline, we just take the embedding of the words in sentence, and compute the average, weighted by frequency of each word.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="params">(sentences1, sentences2, model=None, use_stoplist=False, doc_freqs=None)</span>:</span></span><br/><span class="line">    <span class="keyword">if</span> doc_freqs <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br/><span class="line">        N = doc_freqs[<span class="string">&#34;NUM_DOCS&#34;</span>]</span><br/><span class="line"></span><br/><span class="line">    sims = []</span><br/><span class="line">    <span class="keyword">for</span> (sent1, sent2) <span class="keyword">in</span> zip(sentences1, sentences2):</span><br/><span class="line"></span><br/><span class="line">        tokens1 = sent1.tokens_without_stop <span class="keyword">if</span> use_stoplist <span class="keyword">else</span> sent1.tokens</span><br/><span class="line">        tokens2 = sent2.tokens_without_stop <span class="keyword">if</span> use_stoplist <span class="keyword">else</span> sent2.tokens</span><br/><span class="line"></span><br/><span class="line">        tokens1 = [token <span class="keyword">for</span> token <span class="keyword">in</span> tokens1 <span class="keyword">if</span> token <span class="keyword">in</span> model]</span><br/><span class="line">        tokens2 = [token <span class="keyword">for</span> token <span class="keyword">in</span> tokens2 <span class="keyword">if</span> token <span class="keyword">in</span> model]</span><br/><span class="line">l</span><br/><span class="line">        <span class="keyword">if</span> len(tokens1) == <span class="number">0</span> <span class="keyword">or</span> len(tokens2) == <span class="number">0</span>:</span><br/><span class="line">            sims.append(<span class="number">0</span>)</span><br/><span class="line">            <span class="keyword">continue</span></span><br/><span class="line"></span><br/><span class="line">        tokfreqs1 = Counter(tokens1)</span><br/><span class="line">        tokfreqs2 = Counter(tokens2)</span><br/><span class="line"></span><br/><span class="line">        weights1 = [tokfreqs1[token] * math.log(N / (doc_freqs.get(token, <span class="number">0</span>) + <span class="number">1</span>))</span><br/><span class="line">                    <span class="keyword">for</span> token <span class="keyword">in</span> tokfreqs1] <span class="keyword">if</span> doc_freqs <span class="keyword">else</span> <span class="keyword">None</span></span><br/><span class="line">        weights2 = [tokfreqs2[token] * math.log(N / (doc_freqs.get(token, <span class="number">0</span>) + <span class="number">1</span>))</span><br/><span class="line">                    <span class="keyword">for</span> token <span class="keyword">in</span> tokfreqs2] <span class="keyword">if</span> doc_freqs <span class="keyword">else</span> <span class="keyword">None</span></span><br/><span class="line"></span><br/><span class="line">        embedding1 = np.average([model[token] <span class="keyword">for</span> token <span class="keyword">in</span> tokfreqs1], axis=<span class="number">0</span>, weights=weights1).reshape(<span class="number">1</span>, <span class="number">-1</span>)</span><br/><span class="line">        embedding2 = np.average([model[token] <span class="keyword">for</span> token <span class="keyword">in</span> tokfreqs2], axis=<span class="number">0</span>, weights=weights2).reshape(<span class="number">1</span>, <span class="number">-1</span>)</span><br/><span class="line"></span><br/><span class="line">        sim = cosine_similarity(embedding1, embedding2)[<span class="number">0</span>][<span class="number">0</span>]</span><br/><span class="line">        sims.append(sim)</span><br/><span class="line"></span><br/><span class="line">    <span class="keyword">return</span> sims</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="Smooth-Inverse-Frequency"><a href="#Smooth-Inverse-Frequency" class="headerlink" title="Smooth Inverse Frequency"></a>Smooth Inverse Frequency</h3><p>The baseline, like we did before, is very simple and crude of computing sentence embedding. Word frequency cannot reliably reflect its importance to sentence, semantically speaking. Smooth Inverse Frequency (SIF) tries to solve this problem.</p>
+<ul>
+<li>SIF is very similar to the weighted average we used before, with the difference that it’s weighted by this formular.<br/>$$<br/>operatorname { SIF } ( w ) = frac { a } { ( a + p ( w ) )}<br/>$$<br/>where $a$ is a hyper-parameter (set to 0.001 by default) and $ p(w)$ is the estimated word frequency in the corpus. (这个权重和 TF或者 IDF 都是不相同的)</li>
+<li>we need to perform common component removal: subtract from the sentence embedding obtained above the first principal component of the matrix. This corrects for the influence of high-frequency words that have syntactic or dicourse function, such as ‘but’, ‘and’, etc. You can find more information from <a href="https://openreview.net/pdf?id=SyK00v5xx" target="_blank" rel="noopener noreferrer">this paper</a>. 因为这个的输入直接是句子，没有经过分词的处理，所以不免有 but and 这类的词汇出现。</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">remove_first_principal_component</span><span class="params">(X)</span>:</span></span><br/><span class="line">    svd = TruncatedSVD(n_components=<span class="number">1</span>, n_iter=<span class="number">7</span>, random_state=<span class="number">0</span>)</span><br/><span class="line">    svd.fit(X)</span><br/><span class="line">    pc = svd.components_</span><br/><span class="line">    XX = X - X.dot(pc.transpose()) * pc</span><br/><span class="line">    <span class="keyword">return</span> XX</span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_sif_benchmark</span><span class="params">(sentences1, sentences2, model, freqs={}, use_stoplist=False, a=<span class="number">0.001</span>)</span>:</span></span><br/><span class="line">    total_freq = sum(freqs.values())</span><br/><span class="line"></span><br/><span class="line">    embeddings = []</span><br/><span class="line"></span><br/><span class="line">    </span><br/><span class="line">    <span class="comment"># common component analysis.</span></span><br/><span class="line">    <span class="keyword">for</span> (sent1, sent2) <span class="keyword">in</span> zip(sentences1, sentences2):</span><br/><span class="line">        tokens1 = sent1.tokens_without_stop <span class="keyword">if</span> use_stoplist <span class="keyword">else</span> sent1.tokens</span><br/><span class="line">        tokens2 = sent2.tokens_without_stop <span class="keyword">if</span> use_stoplist <span class="keyword">else</span> sent2.tokens</span><br/><span class="line"></span><br/><span class="line">        tokens1 = [token <span class="keyword">for</span> token <span class="keyword">in</span> tokens1 <span class="keyword">if</span> token <span class="keyword">in</span> model]</span><br/><span class="line">        tokens2 = [token <span class="keyword">for</span> token <span class="keyword">in</span> tokens2 <span class="keyword">if</span> token <span class="keyword">in</span> model]</span><br/><span class="line"></span><br/><span class="line">        weights1 = [a / (a + freqs.get(token, <span class="number">0</span>) / total_freq) <span class="keyword">for</span> token <span class="keyword">in</span> tokens1]</span><br/><span class="line">        weights2 = [a / (a + freqs.get(token, <span class="number">0</span>) / total_freq) <span class="keyword">for</span> token <span class="keyword">in</span> tokens2]</span><br/><span class="line"></span><br/><span class="line">        embedding1 = np.average([model[token] <span class="keyword">for</span> token <span class="keyword">in</span> tokens1], axis=<span class="number">0</span>, weights=weights1)</span><br/><span class="line">        embedding2 = np.average([model[token] <span class="keyword">for</span> token <span class="keyword">in</span> tokens2], axis=<span class="number">0</span>, weights=weights2)</span><br/><span class="line"></span><br/><span class="line">        embeddings.append(embedding1)</span><br/><span class="line">        embeddings.append(embedding2)</span><br/><span class="line"></span><br/><span class="line">    embeddings = remove_first_principal_component(np.array(embeddings))</span><br/><span class="line">    sims = [cosine_similarity(embeddings[idx * <span class="number">2</span>].reshape(<span class="number">1</span>, <span class="number">-1</span>),</span><br/><span class="line">                              embeddings[idx * <span class="number">2</span> + <span class="number">1</span>].reshape(<span class="number">1</span>, <span class="number">-1</span>))[<span class="number">0</span>][<span class="number">0</span>]</span><br/><span class="line">            <span class="keyword">for</span> idx <span class="keyword">in</span> range(int(len(embeddings) / <span class="number">2</span>))]</span><br/><span class="line"></span><br/><span class="line">    <span class="keyword">return</span> sims</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="Google-Sentence-Encoder"><a href="#Google-Sentence-Encoder" class="headerlink" title="Google Sentence Encoder"></a>Google Sentence Encoder</h3><p><a href="https://github.com/facebookresearch/InferSent" target="_blank" rel="noopener noreferrer">InferSent</a> is a pre-trained encoder that produces sentence embedding, which opensourced by Facebook. <a href="https://tfhub.dev/google/universal-sentence-encoder/1" target="_blank" rel="noopener noreferrer">The Google Sentence Encoder</a> is Google’s answer to Facebook’s InferSent. In contrast to InferSent, the Google Sentence Encoder was trained on a combination of unsupervised data and supervised data (SNLI corpus), which tends to give better results.</p>
+<p>The codes can be used in <a href="https://colab.research.google.com/notebooks/welcome.ipynb#recent=true" target="_blank" rel="noopener noreferrer">Google Jupyter Notebook</a></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow_hub <span class="keyword">as</span> hub</span><br/><span class="line"></span><br/><span class="line">tf.logging.set_verbosity(tf.logging.ERROR)</span><br/><span class="line">embed = hub.Module(<span class="string">&#34;https://tfhub.dev/google/universal-sentence-encoder/1&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_gse_benchmark</span><span class="params">(sentences1, sentences2)</span>:</span></span><br/><span class="line">    sts_input1 = tf.placeholder(tf.string, shape=(<span class="keyword">None</span>))</span><br/><span class="line">    sts_input2 = tf.placeholder(tf.string, shape=(<span class="keyword">None</span>))</span><br/><span class="line"></span><br/><span class="line">    sts_encode1 = tf.nn.l2_normalize(embed(sts_input1))</span><br/><span class="line">    sts_encode2 = tf.nn.l2_normalize(embed(sts_input2))</span><br/><span class="line"></span><br/><span class="line">    sim_scores = tf.reduce_sum(tf.multiply(sts_encode1, sts_encode2), axis=<span class="number">1</span>)</span><br/><span class="line"></span><br/><span class="line">    <span class="keyword">with</span> tf.Session() <span class="keyword">as</span> session:</span><br/><span class="line">        session.run(tf.global_variables_initializer())</span><br/><span class="line">        session.run(tf.tables_initializer())</span><br/><span class="line"></span><br/><span class="line">        [gse_sims] = session.run(</span><br/><span class="line">            [sim_scores],</span><br/><span class="line">            feed_dict={</span><br/><span class="line">                sts_input1: [sent1.raw <span class="keyword">for</span> sent1 <span class="keyword">in</span> sentences1],</span><br/><span class="line">                sts_input2: [sent2.raw <span class="keyword">for</span> sent2 <span class="keyword">in</span> sentences2]</span><br/><span class="line">            })</span><br/><span class="line">    <span class="keyword">return</span> gse_sims</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_experiment</span><span class="params">(df, benchmarks)</span>:</span></span><br/><span class="line">    sentences1 = [Sentence(s) <span class="keyword">for</span> s <span class="keyword">in</span> df[<span class="string">&#39;sent_1&#39;</span>]]</span><br/><span class="line">    sentences2 = [Sentence(s) <span class="keyword">for</span> s <span class="keyword">in</span> df[<span class="string">&#39;sent_2&#39;</span>]]</span><br/><span class="line"></span><br/><span class="line">    pearson_cors, spearman_cors = [], []</span><br/><span class="line">    <span class="keyword">for</span> label, method <span class="keyword">in</span> benchmarks:</span><br/><span class="line">        sims = method(sentences1, sentences2)</span><br/><span class="line">        pearson_correlation = scipy.stats.pearsonr(sims, df[<span class="string">&#39;sim&#39;</span>])[<span class="number">0</span>]</span><br/><span class="line">        print(label, pearson_correlation)</span><br/><span class="line">        pearson_cors.append(pearson_correlation)</span><br/><span class="line">        spearman_correlation = scipy.stats.spearmanr(sims, df[<span class="string">&#39;sim&#39;</span>])[<span class="number">0</span>]</span><br/><span class="line">        spearman_cors.append(spearman_correlation)</span><br/><span class="line"></span><br/><span class="line">    <span class="keyword">return</span> pearson_cors, spearman_cors</span><br/></pre></td></tr></tbody></table></figure>
+<p>Helper function:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools <span class="keyword">as</span> ft</span><br/><span class="line"></span><br/><span class="line">benchmarks = [</span><br/><span class="line">    (<span class="string">&#34;AVG-GLOVE&#34;</span>, ft.partial(run_avg_benchmark, model=glove, use_stoplist=<span class="keyword">False</span>)),</span><br/><span class="line">    (<span class="string">&#34;AVG-GLOVE-STOP&#34;</span>, ft.partial(run_avg_benchmark, model=glove, use_stoplist=<span class="keyword">True</span>)),</span><br/><span class="line">    (<span class="string">&#34;AVG-GLOVE-TFIDF&#34;</span>, ft.partial(run_avg_benchmark, model=glove, use_stoplist=<span class="keyword">False</span>, doc_freqs=doc_frequencies)),</span><br/><span class="line">    (<span class="string">&#34;AVG-GLOVE-TFIDF-STOP&#34;</span>, ft.partial(run_avg_benchmark, model=glove, use_stoplist=<span class="keyword">True</span>, doc_freqs=doc_frequencies)),</span><br/><span class="line">    (<span class="string">&#34;SIF-W2V&#34;</span>, ft.partial(run_sif_benchmark, freqs=frequencies, model=word2vec, use_stoplist=<span class="keyword">False</span>)),</span><br/><span class="line">    (<span class="string">&#34;SIF-GLOVE&#34;</span>, ft.partial(run_sif_benchmark, freqs=frequencies, model=glove, use_stoplist=<span class="keyword">False</span>)),</span><br/><span class="line"></span><br/><span class="line">]</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br/><span class="line">plt.rcParams[<span class="string">&#39;figure.figsize&#39;</span>] = (<span class="number">20</span>,<span class="number">13</span>)</span><br/><span class="line">spearman[[<span class="string">&#39;AVG-GLOVE&#39;</span>, <span class="string">&#39;AVG-GLOVE-STOP&#39;</span>,<span class="string">&#39;AVG-GLOVE-TFIDF&#39;</span>, <span class="string">&#39;AVG-GLOVE-TFIDF-STOP&#39;</span>,<span class="string">&#39;GSE&#39;</span>]].plot(kind=<span class="string">&#34;bar&#34;</span>).legend(loc=<span class="string">&#34;lower left&#34;</span>)</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>Take Off</strong></p>
+<ul>
+<li>Smooth Inverse Frequency methods are better than baseline, no matter with word2vec or Glove embeddings.</li>
+<li>Google Sentence Encoder has the similar performance as Smooth Inverse Frequency.</li>
+<li>Using tf-idf weights does not help and using a stoplist looks like a reasonable choice.</li>
+</ul>
+<p>Pearson Correlation<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://ww1.sinaimg.cn/large/e9a223b5ly1g1swpqj9d0j20ps0h5t8z.jpg" alt=""/><br/>Spearman Correlation<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://ww1.sinaimg.cn/large/e9a223b5ly1g1swpqj9d0j20ps0h5t8z.jpg" alt=""/></p>
+<p>Full codes can be found in <a href="https://github.com/jijeng/sentence-similarity" target="_blank" rel="noopener noreferrer">here</a>.</p>
+<h2 id="复习笔记"><a href="#复习笔记" class="headerlink" title="复习笔记"></a>复习笔记</h2><ol>
+<li>TF-IDF 和 SIF三者的差别</li>
+</ol>
+<p>SIF的计算公式：<br/>$$<br/>operatorname { SIF } ( w ) = frac { a } { ( a + p ( w ) )}<br/>$$<br/>$a$ 是超参数，一般设置为0.001，保证…;  $p(w)$ 是word 在预料中出现的频数。</p>
+<p>TF 的计算公式：</p>
+<p>$$ 词频(TF) = 某个词在文章中出现的次数( 频数) $$</p>
+<p>可以进一步标准化（减少文章长度的影响）</p>
+<p>$$ 词频( TF) = frac{某次在文中出现的次数}{文章的总词语数} $$</p>
+<p>$$ 逆文档频率 (IDF) = log(frac{语料中的文档总数}{ 包含该词的文档数 +1}) $$ </p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-432_%5BLua/">Lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-433_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">Lua string 哈希碰撞</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

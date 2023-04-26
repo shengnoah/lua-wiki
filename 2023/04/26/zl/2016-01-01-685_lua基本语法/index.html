@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua基本语法 - Lua教程</title>
+
+  
+    <meta name="description" content="关键字1234and	break	do	else	elseifend	false	for	function	ifin	local	nil	not	orrepeat	return	then	true	until	while 运算 数字运算 12支持+，-，*，&#x2F;，…… 比如2^2 结果为4,2^4结果为16连接两个字符串，用&amp;#34;..&amp;#34;运算符  赋值运算 1234a,b,c,d&#x3D;1,2,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua基本语法">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-685_lua%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="关键字1234and	break	do	else	elseifend	false	for	function	ifin	local	nil	not	orrepeat	return	then	true	until	while 运算 数字运算 12支持+，-，*，&#x2F;，…… 比如2^2 结果为4,2^4结果为16连接两个字符串，用&amp;#34;..&amp;#34;运算符  赋值运算 1234a,b,c,d&#x3D;1,2,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.296Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.296Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua基本语法</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">关键字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E7%AE%97"><span class="toc-text">运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5"><span class="toc-text">条件判断语句</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%93%E6%9E%84"><span class="toc-text">常用结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#lua%E8%A1%A8%E7%A9%BA%E5%88%A4%E6%96%AD"><span class="toc-text">lua表空判断</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MetaTable%E5%92%8CMetaMethod"><span class="toc-text">MetaTable和MetaMethod</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.296Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua基本语法</span></h1>
+<h5 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a><b>关键字</b></h5><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line">and	break	do	else	elseif</span><br/><span class="line">end	false	for	function	if</span><br/><span class="line">in	local	nil	not	or</span><br/><span class="line">repeat	return	then	true	until	while</span><br/></pre></td></tr></tbody></table></figure>
+<h5 id="运算"><a href="#运算" class="headerlink" title="运算"></a><b>运算</b></h5><ul>
+<li><p>数字运算</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">支持+，-，*，/，…… 比如2^2 结果为4,2^4结果为16</span><br/><span class="line">连接两个字符串，用&#34;..&#34;运算符</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>赋值运算</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line">a,b,c,d=1,2,3,4  --多变量一起赋值</span><br/><span class="line">a,b=b,a --交换变量功能</span><br/><span class="line">在默认情况下，变量是全局的。如果需要使用局部变量，使用关键字loacal</span><br/><span class="line">local a,b,c =1,2,3 --a,b,c都是局部变量</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>逻辑运算</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/></pre></td><td class="code"><pre><span class="line">and,or,not</span><br/><span class="line">在lua 中，只有false和nil被计算为false,其他数据都被计算为true,0也是true</span><br/><span class="line">and和or 的运算结果不是true和false,而是和它的两个操作数相关</span><br/><span class="line"></span><br/><span class="line">a and b :如果a为false,则返回a,否则返回b</span><br/><span class="line">a or  b :如果a为true,则返回a,否则返回b</span><br/><span class="line"></span><br/><span class="line">模拟c语言中的语句：x=a?b:c,在lua中，可以写成：x=a and b or c都是局部变量</span><br/><span class="line">有用的语句：x=x or v,相当于： if not x then x=v end</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h5 id="条件判断语句"><a href="#条件判断语句" class="headerlink" title="条件判断语句"></a><b>条件判断语句</b></h5><ul>
+<li><p>if</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line">if condition then</span><br/><span class="line">		...</span><br/><span class="line">elseif condition then</span><br/><span class="line">		... else ...</span><br/><span class="line">end</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>repeat</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">repeat ... until condition</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>while</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line">while condition</span><br/><span class="line">do</span><br/><span class="line">	...</span><br/><span class="line">end</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>for</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/></pre></td><td class="code"><pre><span class="line">for var=v1,vn,step</span><br/><span class="line">do</span><br/><span class="line">	...</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">for var1,var2,... varn in table</span><br/><span class="line">do</span><br/><span class="line">	...</span><br/><span class="line">end</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>闭包</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/></pre></td><td class="code"><pre><span class="line">eg one.</span><br/><span class="line">function newCounter()</span><br/><span class="line">	local i=0</span><br/><span class="line">	return function()  -- anonymous function</span><br/><span class="line">		i=i+1</span><br/><span class="line">			return i</span><br/><span class="line">	end</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">c1=newCounter()</span><br/><span class="line">print(c1()) --&gt;1</span><br/><span class="line">print(c1()) --&gt;2</span><br/><span class="line"></span><br/><span class="line">eg two.</span><br/><span class="line">function myPower(x)</span><br/><span class="line">	return function(y) return y^x end</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">power2=myPower(2)</span><br/><span class="line">power3=myPower(3)</span><br/><span class="line"></span><br/><span class="line">print(power2(4)) </span><br/><span class="line">print(power3(5))</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h5 id="常用结构"><a href="#常用结构" class="headerlink" title="常用结构"></a><b>常用结构</b></h5><ul>
+<li>table<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/></pre></td><td class="code"><pre><span class="line">table 是lua的重要数据类型</span><br/><span class="line">table 类似于 python中的字典</span><br/><span class="line">table 只能通过构造式来创建</span><br/><span class="line"></span><br/><span class="line">lua code</span><br/><span class="line"></span><br/><span class="line">tab={a=10,b=20,c=30,d=40}</span><br/><span class="line">print(tab[&#34;a&#34;])</span><br/><span class="line"></span><br/><span class="line">comment:</span><br/><span class="line">a)table中的每项要求是 key=value的形式</span><br/><span class="line">b)key只能是字符串，这里的a,b,c,d都是字符串，但是不能加引号</span><br/><span class="line">c)通过key来访问table的值，这时候 a必须加引号</span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line">tab={10,m=20,11,12,13}</span><br/><span class="line">print(tab[1]) =10</span><br/><span class="line">print(tab[2]) =11</span><br/><span class="line">print(tab[3]) =12</span><br/><span class="line">print(tab[4]) =13</span><br/><span class="line"></span><br/><span class="line">get table length</span><br/><span class="line">print(table.getn(tab))  -&gt; 4</span><br/><span class="line">print(#tab)             -&gt; 4</span><br/><span class="line"></span><br/><span class="line">for k,v in pairs(tab) do</span><br/><span class="line">		print(k,&#34;:&#34;,v)</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">1:10</span><br/><span class="line">2:11</span><br/><span class="line">3:12</span><br/><span class="line">4:13</span><br/><span class="line">m:20</span><br/><span class="line"></span><br/><span class="line">注释：</span><br/><span class="line">a)省略key,会自动以1开始编号，并跳过设置过的key</span><br/><span class="line">b)获取表长度，只有当表使用1自动编号开始，可以获取</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h5 id="lua表空判断"><a href="#lua表空判断" class="headerlink" title="lua表空判断"></a><b>lua表空判断</b></h5><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line">local a ={}</span><br/><span class="line">判断table a是否为空，有提供api table.maxn(a) 或 #a 获取表a长度，</span><br/><span class="line">该情况只针对key为数字且安装递增方式。</span><br/><span class="line"></span><br/><span class="line">对于自定义key的情况下，获取表长度会失败，可通过lua内置next函数解决</span><br/></pre></td></tr></tbody></table></figure>
+<h5 id="MetaTable和MetaMethod"><a href="#MetaTable和MetaMethod" class="headerlink" title="MetaTable和MetaMethod"></a><b>MetaTable和MetaMethod</b></h5><p>MetaTable和MetaMethod是lua中的重要语法，MetaTable用来做类似C++重载操作符的功能</p>
+<p>假如有两个函数：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">fraction_a ={numerator=2,denominator=3}</span><br/><span class="line">fraction_b ={numerator=4,denominator=7}</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>如果要实现分数见相加：2/3+4/7,执行fraction_a+fraction_b会报错<br/>如果使用MetaTable,则如下<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/></pre></td><td class="code"><pre><span class="line">fraction_op={}</span><br/><span class="line">function fraction_op.__add(f1,f2)</span><br/><span class="line">	ret = {}</span><br/><span class="line">	ret.numerator=f1.numerator*f2.denominator+f2.numerator*f1.denominator</span><br/><span class="line">	ret.denominator=f1.denominator*f2.denominator</span><br/><span class="line">	return ret</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">setmetatable(fraction_a,fraction_op)</span><br/><span class="line">setmetatable(fraction_a,fraction_op)</span><br/><span class="line"></span><br/><span class="line">fraction_s = fraction_a + fraction_b</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>至于__add是MetaMethod,这是lua内建约定的，还有如下的MetaMethod：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line">__add(a,b)  	对应a+b</span><br/><span class="line">__sub(a,b)  	对应a-b</span><br/><span class="line">__mul(a,b)		对应a*b</span><br/><span class="line">__div(a,b)		对应a/b</span><br/><span class="line">__mod(a,b)		对应a%b</span><br/><span class="line">__pow(a,b)		对应a^b </span><br/><span class="line">__unm(a)		对应-a</span><br/><span class="line">__concat(a,b) 	对应a .. b</span><br/><span class="line">__len(a)		对应#a</span><br/><span class="line">__eq(a,b)		对应a==b</span><br/><span class="line">__lt(a,b)		对应a&lt;b</span><br/><span class="line">__le(a,b)   	对应a&lt;=b</span><br/><span class="line">__index(a,b) 	对应a.b</span><br/><span class="line">__newindex(a,b,c)		对应a.b=c</span><br/><span class="line">__call(a,...)		对应a(...)</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p><a href="http://www.codingnow.com/2000/download/lua_manual.html" target="_blank" rel="noopener noreferrer">Lua 5.1 参考手册</a><br/><a href="http://17173ops.com/2013/11/01/17173-ngx-lua-manual.shtml#toc9" target="_blank" rel="noopener noreferrer">lua基本语法</a><br/><a href="http://book.luaer.cn/" target="_blank" rel="noopener noreferrer">Programming in Lua</a></p>
+<hr/>
+<p>您的鼓励是我写作最大的动力</p>
+<p>俗话说，投资效率是最好的投资。 如果您感觉我的文章质量不错，读后收获很大，预计能为您提高 10% 的工作效率，不妨小额捐助我一下，让我有动力继续写出更多好文章。</p>
+
+                            
+<pre><code>                          &lt;div id=&quot;donate_guide&quot; class=&quot;donate_bar center &quot;&gt;
+                          &lt;a href=&quot;http://mypay-1253516637.costj.myqcloud.com/2000.jpg&quot; title=&quot;支付宝打赏&quot; class=&quot;fancybox&quot; rel=&quot;article0&quot; style=&quot;float:left;margin-left:25%;margin-right:2px;&quot;&gt;
+                          &lt;img src=&quot;http://mypay-1253516637.costj.myqcloud.com/2000.jpg&quot; title=&quot;支付宝打赏&quot; height=&quot;164px&quot; width=&quot;164px&quot;/&gt;
+                          &lt;/a&gt; 
+                          &lt;/div&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-682_%E9%80%9A%E8%BF%87lua%E6%A0%88%E4%BA%86%E8%A7%A3lua%E4%B8%8Ec%E7%9A%84%E4%BA%A4%E4%BA%92/">通过lua栈了解lua与c的交互</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-687_lua%E5%9F%BA%E7%A1%80/">lua基础</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

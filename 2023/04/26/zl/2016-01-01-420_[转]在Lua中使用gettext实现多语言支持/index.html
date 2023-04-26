@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>在Lua中使用gettext实现多语言支持 - Lua教程</title>
+
+  
+    <meta name="description" content="本文系转载，原文链接：http:&#x2F;&#x2F;zengrong.net&#x2F;post&#x2F;1986.htm感谢原作者无私分享。 在Lua中使用gettext实现多语言支持 2016-06-07更新：加入gettext包含的工具简介。   GNU gettext 是一套优秀的国际化工具。在 linux 中被大量采用。wordpress 也使用 gettext 实现多语言支持。 本文介绍如何在 quick-cocos2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Lua中使用gettext实现多语言支持">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-420_[%E8%BD%AC]%E5%9C%A8Lua%E4%B8%AD%E4%BD%BF%E7%94%A8gettext%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="本文系转载，原文链接：http:&#x2F;&#x2F;zengrong.net&#x2F;post&#x2F;1986.htm感谢原作者无私分享。 在Lua中使用gettext实现多语言支持 2016-06-07更新：加入gettext包含的工具简介。   GNU gettext 是一套优秀的国际化工具。在 linux 中被大量采用。wordpress 也使用 gettext 实现多语言支持。 本文介绍如何在 quick-cocos2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sgamerw.github.io/poedit4.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit5.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit6.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit7.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit1.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit2.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit3.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit8.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit9.png">
+<meta property="og:image" content="https://sgamerw.github.io/poedit10.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.271Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.271Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sgamerw.github.io/poedit4.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">在Lua中使用gettext实现多语言支持</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#gettext-%E7%AE%80%E4%BB%8B"><span class="toc-text">gettext 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Poedit-%E7%AE%80%E4%BB%8B"><span class="toc-text">Poedit 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Poedit-%E7%94%9F%E6%88%90%E5%92%8C%E7%BF%BB%E8%AF%91-PO-%E6%96%87%E4%BB%B6"><span class="toc-text">使用 Poedit 生成和翻译 PO 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E8%AE%BE%E7%BD%AE"><span class="toc-text">软件设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%AE%BE%E7%BD%AE"><span class="toc-text">项目设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%E6%BA%90%E7%A0%81"><span class="toc-text">解析源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90-MO-%E6%96%87%E4%BB%B6"><span class="toc-text">生成 MO 文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8-Lua-%E4%B8%AD%E8%A7%A3%E6%9E%90-MO-%E6%96%87%E4%BB%B6"><span class="toc-text">在 Lua 中解析 MO 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E8%8C%83%E4%BE%8B"><span class="toc-text">综合范例</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>在Lua中使用gettext实现多语言支持</span></h1>
+<p>本文系<strong>转载</strong>，原文链接：<a href="http://zengrong.net/post/1986.htm" target="_blank" rel="external noopener noreferrer">http://zengrong.net/post/1986.htm</a><br/>感谢原作者无私分享。</p>
+<p><a href="http://zengrong.net/post/1986.htm" target="_blank" rel="external noopener noreferrer">在Lua中使用gettext实现多语言支持</a></p>
+<p><strong>2016-06-07更新</strong>：加入gettext包含的工具简介。</p>
+<hr/>
+
+<p><a href="http://www.gnu.org/software/gettext/" target="_blank" rel="external noopener noreferrer">GNU gettext</a> 是一套优秀的国际化工具。在 linux 中被大量采用。wordpress 也使用 gettext 实现多语言支持。</p>
+<p>本文介绍如何在 quick-cocos2d-x 中使用 gettext 做多语言支持。同时介绍多语言翻译工具 <a href="http://www.poedit.net" target="_blank" rel="external noopener noreferrer">poedit</a> 对 Lua 语言的支持。</p>
+<h2 id="gettext-简介"><a href="#gettext-简介" class="headerlink" title="gettext 简介"></a>gettext 简介</h2><p>gettext 是一套工具集的名称。这套工具集包含 xgettext/msginit/msgfmt 等一套建立模版(POT)、创建PO文件和编译MO文件的工具。</p>
+<p>gettext 包含的工具如下：</p>
+<ul>
+<li>xgettext 从源码中生成POT模版或直接生成PO文件；</li>
+<li>msginit 基于POT文件生成待翻译的PO文件；</li>
+<li>msgfmt 将PO文件编译成二进制的MO文件；</li>
+<li>msgunfmt 顾名思义，将MO文件反编译成PO文件；</li>
+<li>msgmerge 将POT模版文件与PO文件合并。用于在源码更新之后将新的待翻译内容更新到已经翻译的PO文件中；</li>
+<li>msgcat 将多个PO文件合并在一起。</li>
+</ul>
+<p>使用 gettext 需要涉及这样几个概念：</p>
+<ul>
+<li>源码<br/>程序的源代码，本文中是 lua 文件；</li>
+<li>POT 文件<br/>从源码中扫描得到的翻译模版文件，原始语言取决于源码字符串中使用的自然语言，建议使用英文。纯文本格式；</li>
+<li>PO 文件<br/>根据 POT 文件建立的各种语言版本的待翻译文件，其中包含原始语言和被翻译的目标语言。纯文本格式；</li>
+<li>MO 文件<br/>供最终软件实际使用的文件，使用 PO 编译而成。二进制格式。</li>
+</ul>
+<p>一般的工作流程是这样的：</p>
+<ol>
+<li>在源码中使用约定的语法来书写字符串，C语言默认是 <code>gettext(&#34;my text&#34;)</code>。在本文中，将使用 <code>_(&#34;my text&#34;)</code> ；</li>
+<li>使用 xgettext 从源码中扫描出需要翻译的文本，建立 POT 文件；</li>
+<li>使用 msginit 命令根据 POT 文件建立 PO 文件。或者直接在上一步也可以直接建立 PO 文件；</li>
+<li>进行人工翻译（当然也可以进行机器翻译），翻译的结果保存在 PO 文件中；</li>
+<li>使用 msgfmt 命令将 PO 文件编译成 MO 文件；</li>
+<li>在程序中实现调用命令，本文中是 <code>_</code> 函数，这个函数将读取并解析 MO 文件，根据调用的原始语言文本返回翻译之后的文本。</li>
+</ol>
+<h2 id="Poedit-简介"><a href="#Poedit-简介" class="headerlink" title="Poedit 简介"></a>Poedit 简介</h2><p>gettext 提供的工具集都是基于命令行的，有些程序员并不习惯命令行。它也没有提供用于翻译工作者的对照翻译工具。</p>
+<p>而 <a href="http://www.poedit.net" target="_blank" rel="external noopener noreferrer">Poedit</a> 则提供了一切。</p>
+<p>Poedit 可以从源码中提取文本生成 PO 文件，也提供了一个GUI界面用于对照翻译。它还可以直接生成最终的 MO 文件。</p>
+<p>当然，在GUI之后，它依然是使用 gettext 来处理的，但这些具体的细节被隐藏了。</p>
+<h2 id="使用-Poedit-生成和翻译-PO-文件"><a href="#使用-Poedit-生成和翻译-PO-文件" class="headerlink" title="使用 Poedit 生成和翻译 PO 文件"></a>使用 Poedit 生成和翻译 PO 文件</h2><h3 id="软件设置"><a href="#软件设置" class="headerlink" title="软件设置"></a>软件设置</h3><p>1.开启 Poedit，执行 File - Preferences 命令，填入自己的个人信息。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit4.png" alt="Preferences"/></p>
+<p>2.切换到 Editor tab，选中 Automatically compile .mo file on save 和 Show summary after catalog update 两项。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit5.png" alt="Editor"/></p>
+<p>3.切换到 Parsers tab，这里提供了几种源码解析器，但默认没有Lua。我们下面将加入Lua源码解析。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit6.png" alt="Parses"/></p>
+<p>4.点击 New 新建一个源码解析器，进行如下图的设置。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit7.png" alt="Parse setup"/></p>
+<p>这些设置基本上与 C/C++ 的设置一致，只是修改了扩展名支持以及 Parser command 栏位。在 xgettext 命令的参数中，-C 就是 –language=C 的简写。</p>
+<p>接下来将新建一个项目进行设置。</p>
+<h3 id="项目设置"><a href="#项目设置" class="headerlink" title="项目设置"></a>项目设置</h3><p>1.执行 File - New catelog… 命令，在 Translation properties tab 中加入自己的信息。这里的 Language 选项只是个显示选项而已，并不能决定你使用的是何种语言，也不和刚才的软件设置中的 Parsers 相关。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit1.png" alt="Translation properties"/></p>
+<p>2.设定源代码路径，这个非常重要。</p>
+<p>我采用 quick 默认的目录风格，所有的源码放在 scripts 中。同时我建立了一个新的 i18n 目录，这个目录与 scripts 目录同级。生成的 PO 文件将保存在这个目录中。</p>
+<p>那么对于当前正在编辑的 PO 文件来说， Base path 就应该设置成 <code>..scripts</code> ， 下面的 Paths 就应该加入 . 这个路径。注意在 Windows 下， Base path 的路径分隔符必须采用 Windows 的格式（反斜杠  ），而不应该使用 / 。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit2.png" alt="Sources paths"/></p>
+<p>3.设定源代码关键词</p>
+<p>前面我们已经确定了自己的关键词，那就是 <code>_</code> 。当然我们也可以使用 C 语言的默认关键词 <code>gettext</code> ，但那样未免长了一点。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit3.png" alt="Sources paths"/></p>
+<p>4.设定完毕后，将项目保存为 <code>i18n/zh_CN.po</code> ，请注意我上面强调过的第2步。</p>
+<h3 id="解析源码"><a href="#解析源码" class="headerlink" title="解析源码"></a>解析源码</h3><p>一切设定成功之后，直接按下主界面上的 <code>Update</code> 按钮即可解析源码。Poedit 会将源码中解析到的使用 <code>_(&#34;my text&#34;)</code> 格式的关键词，将其中的字符串提取处理显示在主界面中。</p>
+<p>我们可以在主界面中对关键词进行翻译。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit8.png" alt="main scene"/></p>
+<p>如果源码有更新，再次单击 <code>Update</code> 按钮重新解析源码。这是如果解析到新的字符串，或者有字符串不再使用，Poedit都会进行提示。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit9.png" alt="New string"/><br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://sgamerw.github.io/poedit10.png" alt="Obsolete string"/></p>
+<p>需要注意的一点是，在 Lua 的注释中不要包含半角的单引号。</p>
+<p>这是由于 Lua 的注释使用 – 符号，而 C 语言使用 // ，所以 gettext 会认为 Lua 中的注释是代码的一部分而不会忽略解析。在一般情况没有什么问题，但如果在注释中包含了半角的单引号（这是在 C 语言中代表字面值），gettext 就会认为语法错误因此产生解析错误。</p>
+<h3 id="生成-MO-文件"><a href="#生成-MO-文件" class="headerlink" title="生成 MO 文件"></a>生成 MO 文件</h3><p>在软件设置中，我们设置了在保存项目的时候自动生成 MO 文件，所以这点不用操心了。生成的 MO 文件与 PO 文件在相同的目录。</p>
+<h2 id="在-Lua-中解析-MO-文件"><a href="#在-Lua-中解析-MO-文件" class="headerlink" title="在 Lua 中解析 MO 文件"></a>在 Lua 中解析 MO 文件</h2><p>MO 是个二进制格式的文件，我们的程序在读取它的时候，需要分析 <a href="http://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/MO-Files.html" target="_blank" rel="external noopener noreferrer">它的结构</a> ，将它解析成 <code>原始文本 - 翻译文本</code> 的键值对形式，供我们使用。</p>
+<p>许多语言中已经包含了 MO 文件的解析库，但是 Lua 没有。所以我们需要自己写一个。</p>
+<p>不过 <a href="http://lua-users.org/lists/lua-l/2010-04/msg00005.html" target="_blank" rel="external noopener noreferrer">J.J?rgen von Bargen</a> 已经完成了这件事，我将他的代码进行了简单封装，将其放在我的 lua 库中了，名称是 <a href="https://github.com/zrong/lua#Gettext" target="_blank" rel="external noopener noreferrer">utils.Gettext</a>。</p>
+<p>由于要支持跨平台的原因，读取 MO 文件采用的是 CCFileUtils ，如果要在其他环境中使用，可以改用 io 库。我在 <code>Gettext._getFileData</code> 中保留了使用 io 库的代码，只是将其注释了。</p>
+<h2 id="综合范例"><a href="#综合范例" class="headerlink" title="综合范例"></a>综合范例</h2><p>使用这种方法，MO 文件会被解析成功一个 table 返回：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> mo_data=<span class="built_in">assert</span>(<span class="built_in">require</span>(<span class="string">&#34;utils.Gettext&#34;</span>).loadMOFromFile(<span class="string">&#34;res/zh_CN.mo&#34;</span>))</div><div class="line"><span class="built_in">print</span>(mo_data[<span class="string">&#34;Hello World!&#34;</span>])</div><div class="line"></div><div class="line"><span class="built_in">print</span>(mo_data[<span class="string">&#34;Foobar&#34;</span>])</div><div class="line"><span class="comment">-- nil</span></div></pre></td></tr></tbody></table></figure>
+<p>更通用的方法是这样：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">_ = <span class="built_in">assert</span>(<span class="built_in">require</span>(<span class="string">&#34;utils.Gettext&#34;</span>).gettextFromFile(<span class="string">&#34;res/zh_CN.mo&#34;</span>))</div><div class="line"><span class="built_in">print</span>(_(<span class="string">&#34;Hello World!&#34;</span>))</div></pre></td></tr></tbody></table></figure>
+<p>在我的游戏中，则是这样使用的：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LANG = <span class="string">&#34;res/zh_CN.mo&#34;</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">(__text)</span></span></div><div class="line">    <span class="keyword">return</span> __text</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="keyword">if</span> CCFileUtils:sharedFileUtils():isFileExist(LANG) <span class="keyword">then</span></div><div class="line">    _ = <span class="built_in">assert</span>(<span class="built_in">require</span>(<span class="string">&#34;utils.Gettext&#34;</span>).gettextFromFile(LANG))</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></tbody></table></figure>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-419_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">Lua string hash 算法</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-423_leetcode150.Evaluate%20Reverse%20Polish%20Notation/">leetcode150.Evaluate Reverse Polish Notation</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

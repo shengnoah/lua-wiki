@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>梦幻手游部分Luac反编译失败的解决方法 - Lua教程</title>
+
+  
+    <meta name="description" content="这一篇是去年学习破解梦幻西游手游lua代码时记录的一些问题，今天将其整理并共享出来，所以不一定适合现在版本的梦幻手游，大家还是以参考为目的呗。lua相关的文章（共4篇）到此也写完了，如果以后还有新的东西会继续更新，接下来会写几篇关于2018 腾讯游戏安全竞赛的详细分析，敬请期待。 十二处bug修复  当时反编译梦幻西游手游时遇到的问题大约有12个，修改完基本上可以完美复现lua源码，这里用的l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="梦幻手游部分Luac反编译失败的解决方法">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-285_%E6%A2%A6%E5%B9%BB%E6%89%8B%E6%B8%B8%E9%83%A8%E5%88%86Luac%E5%8F%8D%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="这一篇是去年学习破解梦幻西游手游lua代码时记录的一些问题，今天将其整理并共享出来，所以不一定适合现在版本的梦幻手游，大家还是以参考为目的呗。lua相关的文章（共4篇）到此也写完了，如果以后还有新的东西会继续更新，接下来会写几篇关于2018 腾讯游戏安全竞赛的详细分析，敬请期待。 十二处bug修复  当时反编译梦幻西游手游时遇到的问题大约有12个，修改完基本上可以完美复现lua源码，这里用的l">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.258Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.258Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">梦幻手游部分Luac反编译失败的解决方法</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E4%B8%80"><span class="toc-text">修复一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E4%BA%8C"><span class="toc-text">修复二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E4%B8%89"><span class="toc-text">修复三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%9B%9B"><span class="toc-text">修复四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E4%BA%94"><span class="toc-text">修复五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%85%AD"><span class="toc-text">修复六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E4%B8%83"><span class="toc-text">修复七</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%85%AB"><span class="toc-text">修复八</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E4%B9%9D"><span class="toc-text">修复九</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%8D%81"><span class="toc-text">修复十</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>梦幻手游部分Luac反编译失败的解决方法</span></h1>
+<p>  这一篇是去年学习破解梦幻西游手游lua代码时记录的一些问题，今天将其整理并共享出来，所以不一定适合现在版本的梦幻手游，大家还是以参考为目的呗。lua相关的文章（共4篇）到此也写完了，如果以后还有新的东西会继续更新，接下来会写几篇关于2018 腾讯游戏安全竞赛的详细分析，敬请期待。</p>
+<h1 id="十二处bug修复"><a href="#十二处bug修复" class="headerlink" title="十二处bug修复"></a>十二处bug修复</h1><p>  当时反编译梦幻西游手游时遇到的问题大约有12个，修改完基本上可以完美复现lua源码，这里用的luadec5.1版本。</p>
+<h2 id="修复一"><a href="#修复一" class="headerlink" title="修复一"></a>修复一</h2><p>  <strong>问题1：</strong> 由于梦幻手游lua的opcode是被修改过的，之前的解决方案是找到梦幻的opcode，替换掉反编译工具的原opcode，并且修改opmode，再进行反编译。问题是部分测试的结果是可以的，但是当对整个手游的luac字节码反编译时，会出现各种错误，原因是luadec5.1 在很多地方都默认了opcode的顺序，并进行了特殊处理，所以需要找到这些特殊处理的地方一一修改。不过这样很麻烦，从而想到另外一种方式，不修改原来的opcode和opmode，而是在luadec解析到字节码的时候，将opcode还原成原来的opcode。</p>
+<p>  <strong>解决1：</strong> 定位到解析code的位置在  lundump.c –&gt; LoadFunction –&gt; LoadCode （位置不唯一，可以看上一篇腾讯比赛的修复），当执行完LoadCode函数的时候，f变量则指向了code的结构，在这之后执行自己写的函数ConvertCode函数，如下：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">void</span> <span class="params">(Proto *f)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">        <span class="keyword">int</span> pnOpTbl[] = { <span class="number">3</span>,<span class="number">13</span>,<span class="number">18</span>,<span class="number">36</span>,<span class="number">27</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">25</span>,<span class="number">34</span>,<span class="number">2</span>,<span class="number">32</span>,<span class="number">15</span>,<span class="number">30</span>,<span class="number">16</span>,<span class="number">31</span>,<span class="number">9</span>,<span class="number">26</span>,<span class="number">24</span>,<span class="number">29</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">28</span>,<span class="number">4</span>,<span class="number">17</span>,<span class="number">33</span>,<span class="number">0</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">5</span>,<span class="number">14</span>,<span class="number">8</span>,<span class="number">19</span>,<span class="number">35</span>,<span class="number">12</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">37</span> };</span><br/><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> pc = <span class="number">0</span>; pc &lt; f-&gt;sizecode; pc++)</span><br/><span class="line">        {</span><br/><span class="line">               Instruction i = f-&gt;code[pc];</span><br/><span class="line">               OpCode o = GET_OPCODE(i);</span><br/><span class="line">               SET_OPCODE(i, pnOpTbl[o]);</span><br/><span class="line">               f-&gt;code[pc] = i;</span><br/><span class="line">        }</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+
+<h2 id="修复二"><a href="#修复二" class="headerlink" title="修复二"></a>修复二</h2><p>  <strong>问题2：</strong> 在文件头部 反编译出现错误  – DECOMPILER ERROR: Overwrote pending register.</p>
+<p>  <strong>解决2：</strong> 分析发现，原来是解析OP_VARARG错误导致的。OP_VARARG主要的作用是复制B-1个参数到A寄存器中，而反编译工具复制了B个参数，多了一个。修改后的代码如下：<br/></p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/></pre></td><td class="code"><pre><span class="line">...</span><br/><span class="line">         <span class="keyword">case</span> OP_VARARG: <span class="comment">// Lua5.1 specific.</span></span><br/><span class="line">         {</span><br/><span class="line">            <span class="keyword">int</span> i;</span><br/><span class="line">            <span class="comment">/*</span></span><br/><span class="line"><span class="comment">             * Read ... into register.</span></span><br/><span class="line"><span class="comment">             */</span></span><br/><span class="line">            <span class="keyword">if</span> (b==<span class="number">0</span>) {</span><br/><span class="line">                TRY(Assign(F, REGISTER(a), <span class="string">&#34;...&#34;</span>, a, <span class="number">0</span>, <span class="number">1</span>));</span><br/><span class="line">            } <span class="keyword">else</span> {</span><br/><span class="line">                 </span><br/><span class="line">                 <span class="comment">// for(i = 0;i&lt;b;i++) {</span></span><br/><span class="line">                 <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; b<span class="number">-1</span>; i++) {</span><br/><span class="line">                      TRY(Assign(F, REGISTER(a+i), <span class="string">&#34;...&#34;</span>, a+i, <span class="number">0</span>, <span class="number">1</span>));</span><br/><span class="line">                 }</span><br/><span class="line">           }</span><br/><span class="line">           <span class="keyword">break</span>;</span><br/><span class="line">         }</span><br/><span class="line">...</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="修复三"><a href="#修复三" class="headerlink" title="修复三"></a>修复三</h2><p>  <strong>问题3：</strong> 在解析table出现反编译错误  – DECOMPILER ERROR: Confused about usage of 。registers!</p>
+<p>  <strong>解决3：</strong> 分析发现，这里的OP_NEWTABLE 的c参数表示hash table中key的大小，而反编译代码中将c参数进行了错误转换，导致解析错误，修改代码如下：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="comment">//#define fb2int(x)    (((x) &amp; 7) &lt;&lt; ((x) &gt;&gt; 3))</span></span><br/><span class="line"></span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="修复四"><a href="#修复四" class="headerlink" title="修复四"></a>修复四</h2><p>  <strong>问题4：</strong> 反编译工具出错并且退出。</p>
+<p>  <strong>解决4：</strong> 跟踪发现是在AddToTable函数中，当keyed为0时会调用PrintTable，而PrintTable释放了table，下次再调用table时内存访问失败，修改代码如下：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddToTable</span><span class="params">(Function* F, DecTable * tbl, <span class="keyword">char</span> *value, <span class="keyword">char</span> *key)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">   DecTableItem *item;</span><br/><span class="line">   List *type;</span><br/><span class="line">   <span class="keyword">int</span> index;</span><br/><span class="line">   <span class="keyword">if</span> (key == <span class="literal">NULL</span>) {</span><br/><span class="line">      type = &amp;(tbl-&gt;numeric);</span><br/><span class="line">      index = tbl-&gt;topNumeric;</span><br/><span class="line">      tbl-&gt;topNumeric++;</span><br/><span class="line">   } <span class="keyword">else</span> {</span><br/><span class="line">      type = &amp;(tbl-&gt;keyed);</span><br/><span class="line">      tbl-&gt;used++;</span><br/><span class="line">      index = <span class="number">0</span>;</span><br/><span class="line">   }</span><br/><span class="line">   item = NewTableItem(value, index, key);</span><br/><span class="line">   AddToList(type, (ListItem *) item);</span><br/><span class="line">   <span class="comment">// <span class="doctag">FIXME:</span> should work with arrays, too</span></span><br/><span class="line">   </span><br/><span class="line">   <span class="comment">// if(tbl-&gt;keyedSize == tbl-&gt;used &amp;&amp; tbl-&gt;arraySize == 0){</span></span><br/><span class="line">   <span class="keyword">if</span> (tbl-&gt;keyedSize != <span class="number">0</span> &amp;&amp; tbl-&gt;keyedSize == tbl-&gt;used &amp;&amp; tbl-&gt;arraySize == <span class="number">0</span>) {</span><br/><span class="line">      PrintTable(F, tbl-&gt;reg, <span class="number">0</span>);</span><br/><span class="line">      <span class="keyword">if</span> (error)</span><br/><span class="line">         <span class="keyword">return</span>;</span><br/><span class="line">   }</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="修复五"><a href="#修复五" class="headerlink" title="修复五"></a>修复五</h2><p>   <strong>问题5：</strong> 当函数是多值返回结果并且赋值于多个变量时反编译错误，情况如下（lua反汇编）：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line"><span class="number">21</span> [-]: GETGLOBAL R0 K9        ; R0 := memoryStatMap</span><br/><span class="line"><span class="number">22</span> [-]: GETGLOBAL R1 K9        ; R1 := memoryStatMap</span><br/><span class="line"><span class="number">23</span> [-]: GETGLOBAL R2 K2        ; R2 := <span class="built_in">preload</span></span><br/><span class="line"><span class="number">24</span> [-]: GETTABLE  R2 R2 K3     ; R2 := R2[<span class="string">&#34;utils&#34;</span>]</span><br/><span class="line"><span class="number">25</span> [-]: GETTABLE  R2 R2 K16    ; R2 := R2[<span class="string">&#34;getCocosStat&#34;</span>]</span><br/><span class="line"><span class="number">26</span> [-]: CALL      R2 <span class="number">1</span> <span class="number">3</span>       ; R2,R3 := R2()</span><br/><span class="line"><span class="number">27</span> [-]: SETTABLE  R1 K15 R3    ; R1[<span class="string">&#34;cocosTextureBytes&#34;</span>] := R3</span><br/><span class="line"><span class="number">28</span> [-]: SETTABLE  R0 K14 R2    ; R0[<span class="string">&#34;cocosTextureCnt&#34;</span>] := R2</span><br/></pre></td></tr></tbody></table></figure>
+<p>  当上面的代码解析到27行时，从寄存器去取R3时报错，原因是前面的call返回多值时，只是在F-&gt;Rcall中进行了标记，没有在寄存器中标记，编译的结果应该为：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">memoryStatMap.cocosTextureCnt, memoryStatMap.cocosTextureBytes = preload.utils.getCocosStat()</span><br/></pre></td></tr></tbody></table></figure>
+<p>   <strong>解决5：</strong> 当reg为空时并且Rcall不为空，增加一个return more的标记，修改2个函数：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">RegisterOrConstant</span><span class="params">(Function * F, <span class="keyword">int</span> r)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">   <span class="keyword">if</span> (IS_CONSTANT(r)) {</span><br/><span class="line">      <span class="keyword">return</span> DecompileConstant(F-&gt;f, r - <span class="number">256</span>); <span class="comment">// <span class="doctag">TODO:</span> Lua5.1 specific. Should change to MSR!!!</span></span><br/><span class="line">   } <span class="keyword">else</span> {</span><br/><span class="line">      <span class="keyword">char</span> *copy;</span><br/><span class="line">      <span class="keyword">char</span> *reg = GetR(F, r);</span><br/><span class="line">      <span class="keyword">if</span> (error)</span><br/><span class="line">         <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br/><span class="line"></span><br/><span class="line">        </span><br/><span class="line">        <span class="comment">// if(){}</span></span><br/><span class="line">        <span class="keyword">if</span> (reg == <span class="literal">NULL</span> &amp;&amp; F-&gt;Rcall[r] != <span class="number">0</span>)</span><br/><span class="line">        {</span><br/><span class="line">            reg = <span class="string">&#34;return more&#34;</span>;</span><br/><span class="line">        }</span><br/><span class="line">      </span><br/><span class="line">      copy = <span class="built_in">malloc</span>(<span class="built_in">strlen</span>(reg) + <span class="number">1</span>);</span><br/><span class="line">      <span class="built_in">strcpy</span>(copy, reg);</span><br/><span class="line">      <span class="keyword">return</span> copy;</span><br/><span class="line">   }</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OutputAssignments</span><span class="params">(Function * F)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">   <span class="keyword">int</span> i, srcs, size;</span><br/><span class="line">   StringBuffer *vars;</span><br/><span class="line">   StringBuffer *exps;</span><br/><span class="line">   <span class="keyword">if</span> (!SET_IS_EMPTY(F-&gt;tpend))</span><br/><span class="line">      <span class="keyword">return</span>;</span><br/><span class="line">   vars = StringBuffer_new(<span class="literal">NULL</span>);</span><br/><span class="line">   exps = StringBuffer_new(<span class="literal">NULL</span>);</span><br/><span class="line">   size = SET_CTR(F-&gt;vpend);</span><br/><span class="line">   srcs = <span class="number">0</span>;</span><br/><span class="line">   <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; i++) {</span><br/><span class="line">      <span class="keyword">int</span> r = F-&gt;vpend-&gt;regs[i];</span><br/><span class="line">      <span class="keyword">if</span> (!(r == <span class="number">-1</span> || PENDING(r))) {</span><br/><span class="line">         SET_ERROR(F,<span class="string">&#34;Attempted to generate an assignment, but got confused about usage of registers&#34;</span>);</span><br/><span class="line">         <span class="keyword">return</span>;</span><br/><span class="line">      }</span><br/><span class="line"></span><br/><span class="line">      <span class="keyword">if</span> (i &gt; <span class="number">0</span>)</span><br/><span class="line">         StringBuffer_prepend(vars, <span class="string">&#34;, &#34;</span>);</span><br/><span class="line">      StringBuffer_prepend(vars, F-&gt;vpend-&gt;dests[i]);</span><br/><span class="line"></span><br/><span class="line">      <span class="keyword">if</span> (F-&gt;vpend-&gt;srcs[i] &amp;&amp; (srcs &gt; <span class="number">0</span> || (srcs == <span class="number">0</span> &amp;&amp; <span class="built_in">strcmp</span>(F-&gt;vpend-&gt;srcs[i], <span class="string">&#34;nil&#34;</span>) != <span class="number">0</span>) || i == size<span class="number">-1</span>)) {</span><br/><span class="line">                 </span><br/><span class="line">                 <span class="comment">// if()</span></span><br/><span class="line">                 <span class="keyword">if</span> (<span class="built_in">strcmp</span>(F-&gt;vpend-&gt;srcs[i], <span class="string">&#34;return more&#34;</span>) != <span class="number">0</span>)</span><br/><span class="line">                 {</span><br/><span class="line">                         <span class="keyword">if</span> (srcs &gt; <span class="number">0</span>)</span><br/><span class="line">                                StringBuffer_prepend(exps, <span class="string">&#34;, &#34;</span>);</span><br/><span class="line">                         StringBuffer_prepend(exps, F-&gt;vpend-&gt;srcs[i]);</span><br/><span class="line">                         srcs++;</span><br/><span class="line">                }</span><br/><span class="line">      }</span><br/><span class="line"></span><br/><span class="line">   }</span><br/><span class="line">...</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="修复六"><a href="#修复六" class="headerlink" title="修复六"></a>修复六</h2><p>  <strong>问题6：</strong> 当函数只有一个renturn的时候会反编译错误。</p>
+<p>  <strong>解决6：</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/></pre></td><td class="code"><pre><span class="line"> <span class="keyword">case</span> OP_RETURN:</span><br/><span class="line">{</span><br/><span class="line">    ...</span><br/><span class="line">    </span><br/><span class="line">    <span class="comment">// 新增的if</span></span><br/><span class="line">    <span class="keyword">if</span> (pc != <span class="number">0</span>)</span><br/><span class="line">    {</span><br/><span class="line">        <span class="keyword">for</span> (i = a; i &lt; limit; i++) {</span><br/><span class="line">                <span class="keyword">char</span>* istr;</span><br/><span class="line">                <span class="keyword">if</span> (i &gt; a)</span><br/><span class="line">                        StringBuffer_add(str, <span class="string">&#34;, &#34;</span>);</span><br/><span class="line">                istr = GetR(F, i);</span><br/><span class="line">                TRY(StringBuffer_add(str, istr));</span><br/><span class="line">        }</span><br/><span class="line">        TRY(AddStatement(F, str));</span><br/><span class="line">    }</span><br/><span class="line">    <span class="keyword">break</span>;      </span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="修复七"><a href="#修复七" class="headerlink" title="修复七"></a>修复七</h2><p>  <strong>问题7：</strong> 部分table初始化会出错。</p>
+<p>  <strong>解决7：</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">GetR</span><span class="params">(Function * F, <span class="keyword">int</span> r)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">   <span class="keyword">if</span> (IS_TABLE(r)) {</span><br/><span class="line">     </span><br/><span class="line">        <span class="keyword">return</span> <span class="string">&#34;{ }&#34;</span>;</span><br/><span class="line">    <span class="comment">//  PrintTable(F, r, 0);</span></span><br/><span class="line">    <span class="comment">//  if (error) return NULL;</span></span><br/><span class="line">   }</span><br/><span class="line">...</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="修复八"><a href="#修复八" class="headerlink" title="修复八"></a>修复八</h2><p>  <strong>问题8：</strong> 可变参数部分解析出错，但是工具反编译时是不报错误的。</p>
+<p>  <strong>解决8：</strong> is_vararg为7时，F-&gt;freeLocal多加了一次：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="keyword">if</span> (f-&gt;is_vararg==<span class="number">7</span>) {</span><br/><span class="line">   TRY(DeclareVariable(F, <span class="string">&#34;arg&#34;</span>, F-&gt;freeLocal));</span><br/><span class="line">   F-&gt;freeLocal++;</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line"><span class="comment">// 修改if为else if</span></span><br/><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ((f-&gt;is_vararg&amp;<span class="number">2</span>) &amp;&amp; (functionnum!=<span class="number">0</span>)) {</span><br/><span class="line">   F-&gt;freeLocal++;</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="修复九"><a href="#修复九" class="headerlink" title="修复九"></a>修复九</h2><p>  <strong>问题9：</strong> 反编译工具输出的中文为url类型的字符（类似 “230176148231150151230156175”），不是中文。</p>
+<p>  <strong>解决9：</strong> 在proto.c文件中的DecompileString函数中，注释掉default 转换字符串的函数：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">DecompileString</span><span class="params">(<span class="keyword">const</span> Proto * f, <span class="keyword">int</span> n)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">...</span><br/><span class="line">        <span class="keyword">default</span>:</span><br/><span class="line">              <span class="comment">//add by littleNA</span></span><br/><span class="line"><span class="comment">//            if (*s &lt; 32 || *s &gt; 127) {</span></span><br/><span class="line"><span class="comment">//               char* pos = &amp;(ret[p]);</span></span><br/><span class="line"><span class="comment">//               sprintf(pos, &#34;\%d&#34;, *s);</span></span><br/><span class="line"><span class="comment">//               p += strlen(pos);</span></span><br/><span class="line"><span class="comment">//            } else {</span></span><br/><span class="line">               ret[p++] = *s;</span><br/><span class="line"><span class="comment">//            }</span></span><br/><span class="line">            <span class="keyword">break</span>;</span><br/><span class="line">...</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>  然后再下面3处增加判断的约束条件，因为中文字符的话，char字节是负数，这样isalpha和isalnum函数就会出错，所以增加约束条件，小于等于127：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MakeIndex</span><span class="params">(Function * F, StringBuffer * str, <span class="keyword">char</span>* rstr, <span class="keyword">int</span> self)</span></span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">...</span><br/><span class="line">   <span class="keyword">int</span> dot = <span class="number">0</span>;</span><br/><span class="line">   <span class="comment">/*</span></span><br/><span class="line"><span class="comment">    * see if index can be expressed without quotes</span></span><br/><span class="line"><span class="comment">    */</span></span><br/><span class="line">   <span class="keyword">if</span> (rstr[<span class="number">0</span>] == <span class="string">&#39;&#34;&#39;</span>) {</span><br/><span class="line"></span><br/><span class="line">      </span><br/><span class="line">      <span class="comment">// (unsigned char)(rstr[1]) &lt;= 127 &amp;&amp;</span></span><br/><span class="line">      <span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(rstr[<span class="number">1</span>]) &lt;= <span class="number">127</span> &amp;&amp; <span class="built_in">isalpha</span>(rstr[<span class="number">1</span>]) || rstr[<span class="number">1</span>] == <span class="string">&#39;_&#39;</span>) {</span><br/><span class="line">         <span class="keyword">char</span> *at = rstr + <span class="number">1</span>;</span><br/><span class="line">         dot = <span class="number">1</span>;</span><br/><span class="line">         <span class="keyword">while</span> (*at != <span class="string">&#39;&#34;&#39;</span>) {</span><br/><span class="line"></span><br/><span class="line">            <span class="comment">// add by littleNA</span></span><br/><span class="line">            <span class="comment">// *(unsigned char*)at &lt;= 127 &amp;&amp;</span></span><br/><span class="line">            <span class="keyword">if</span> (*(<span class="keyword">unsigned</span> <span class="keyword">char</span>*)at &lt;= <span class="number">127</span> &amp;&amp; !<span class="built_in">isalnum</span>(*at) &amp;&amp; *at != <span class="string">&#39;_&#39;</span>) {</span><br/><span class="line">               dot = <span class="number">0</span>;</span><br/><span class="line">               <span class="keyword">break</span>;</span><br/><span class="line">            }</span><br/><span class="line">            at++;</span><br/><span class="line">         }</span><br/><span class="line">      }</span><br/><span class="line">   }</span><br/><span class="line">....</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line">...</span><br/><span class="line">    <span class="keyword">case</span> OP_TAILCALL:</span><br/><span class="line">    {</span><br/><span class="line">               <span class="comment">// add by littleNA</span></span><br/><span class="line">               <span class="comment">// (unsigned char)(*at) &lt;= 127 &amp;&amp;</span></span><br/><span class="line">               <span class="keyword">while</span> (at &gt; astr &amp;&amp; ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(*at) &lt;= <span class="number">127</span> &amp;&amp; <span class="built_in">isalpha</span>(*at) || *at == <span class="string">&#39;_&#39;</span>)) {</span><br/><span class="line">                  at--;</span><br/><span class="line">               }</span><br/><span class="line">    }</span><br/><span class="line">...</span><br/></pre></td></tr></tbody></table></figure>
+<h2 id="修复十"><a href="#修复十" class="headerlink" title="修复十"></a>修复十</h2><p>  <strong>问题10：</strong> 反汇编失败。因为一些文件中含有很长的字符串，导致sprintf函数调用失败。</p>
+<p>  <strong>解决10：</strong> 增加缓存的大小：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">luaU_disassemble</span><span class="params">(<span class="keyword">const</span> Proto* fwork,
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-286_evaluation%20and%20selection%20%C2%B7%20ngc7293's%20blog/">evaluation and selection · ngc7293's blog</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-288_Lua%20Learning%20Notes/">Lua Learning Notes</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

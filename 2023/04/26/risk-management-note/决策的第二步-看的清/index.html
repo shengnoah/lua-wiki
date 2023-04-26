@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua教程</title>
+
+  
+    <meta name="description" content="决策的核心问题-看得清前文提到解决“看得清”这个问题，也就是解决数据的理解问题，分为2个子问题：  能否制定合理的核心指标，从而化繁为简、提高运营效率？ 能否建立合理、灵活、快速的可视化体系，从而提高人的理解？  制定合理的业务核心指标   名称 适用业务 目的    请求量 大部分业务 检测高频攻击   各端请求比例 大部分业务 检测针对某一个端的高频攻击   二次验证通过率 启用二次验证的业务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua教程">
+<meta property="og:url" content="https://lua.ren/2023/04/26/risk-management-note/%E5%86%B3%E7%AD%96%E7%9A%84%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E7%9C%8B%E7%9A%84%E6%B8%85/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="决策的核心问题-看得清前文提到解决“看得清”这个问题，也就是解决数据的理解问题，分为2个子问题：  能否制定合理的核心指标，从而化繁为简、提高运营效率？ 能否建立合理、灵活、快速的可视化体系，从而提高人的理解？  制定合理的业务核心指标   名称 适用业务 目的    请求量 大部分业务 检测高频攻击   各端请求比例 大部分业务 检测针对某一个端的高频攻击   二次验证通过率 启用二次验证的业务">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lua.ren/images/world-clock.jpg">
+<meta property="og:image" content="https://lua.ren/images/timezone-map.jpg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.224Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.224Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lua.ren/images/world-clock.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E5%AE%9A%E5%90%88%E7%90%86%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%A0%B8%E5%BF%83%E6%8C%87%E6%A0%87"><span class="toc-text">制定合理的业务核心指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%90%88%E7%90%86%E3%80%81%E7%81%B5%E6%B4%BB%E3%80%81%E5%BF%AB%E9%80%9F%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96%E4%BD%93%E7%B3%BB"><span class="toc-text">建立合理、灵活、快速的可视化体系</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.224Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+
+<h1 id="决策的核心问题-看得清"><a href="#决策的核心问题-看得清" class="headerlink" title="决策的核心问题-看得清"></a>决策的核心问题-看得清</h1><p>前文提到解决“看得清”这个问题，也就是解决数据的理解问题，分为2个子问题：</p>
+<ol>
+<li>能否制定合理的核心指标，从而化繁为简、提高运营效率？</li>
+<li>能否建立合理、灵活、快速的可视化体系，从而提高人的理解？</li>
+</ol>
+<h3 id="制定合理的业务核心指标"><a href="#制定合理的业务核心指标" class="headerlink" title="制定合理的业务核心指标"></a>制定合理的业务核心指标</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>适用业务</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求量</td>
+<td>大部分业务</td>
+<td>检测高频攻击</td>
+</tr>
+<tr>
+<td>各端请求比例</td>
+<td>大部分业务</td>
+<td>检测针对某一个端的高频攻击</td>
+</tr>
+<tr>
+<td>二次验证通过率</td>
+<td>启用二次验证的业务</td>
+<td>检测暴力破解验证的情况、检测二次验证是否有故障等</td>
+</tr>
+<tr>
+<td>密码错误率</td>
+<td>密码验证业务（例如密码登录）</td>
+<td>检测暴力破解</td>
+</tr>
+<tr>
+<td>参数（例如User-Agent）伪造率</td>
+<td>大部分业务</td>
+<td>检测请求伪造</td>
+</tr>
+<tr>
+<td>某个近实时聚类算法的结果</td>
+<td>个别业务</td>
+<td>检测某个模式的流量是否异常</td>
+</tr>
+</tbody></table>
+<p>上面列了几个常见的指标，我们应该选择看哪个指标呢？</p>
+<p>都看可以吗？当然可以，但是没必要。在爱奇艺我设计了一个系统叫“深度分析”，说起来也简单，就是输入一批用户，看这批用户在爱奇艺所有的行为指标。最后结果有好几页。要是每个统计认真看过去，可能要花3-5分钟才能看完。实际上如果真的是攻击，靠其中1-3个指标就已经可以大致定性了。</p>
+<p>如果我们称这1-3个指标为核心指标，那是哪几个呢？答案是要看是什么业务风险，不同业务不一样。例如密码尝试次数和错误率是一个不常用的指标，绝大多数问题不会考虑这个指标。但是在撞库问题中，就成了核心的指标，需要重点关照。</p>
+<p>所以对于你自己的业务，要思考一下你最关心什么，哪些指标可以带来更多信息。然后把重心放在这些核心指标上。</p>
+<p>其他指标就不需要了吗？不是的，在给出最终判定前，最好再花一点时间看看其他指标。主要是为了看看还有没有别的可能，避免确认偏误(Confirmation Bias)、后见之明偏误(Hindsight Bias)等心理偏误。</p>
+<blockquote>
+<p>It is easier to construct a coherent story when you know little, when there are fewer pieces to fit into the puzzle. Our comforting conviction that the world makes sense rests on a secure foundation: our almost unlimited ability to ignore our ignorance.</p>
+<p>Kahneman. Thinking, Fast and Slow</p>
+</blockquote>
+<h3 id="建立合理、灵活、快速的可视化体系"><a href="#建立合理、灵活、快速的可视化体系" class="headerlink" title="建立合理、灵活、快速的可视化体系"></a>建立合理、灵活、快速的可视化体系</h3><p>当你确定了业务风险，量化并制定出了核心指标，于是就可以利用机器对业务进行自动化分析和监控了。但是除了让机器理解你的问题，人也得理解。这个时候可视化能力就很重要了。</p>
+<p>可视化不仅可以加快对数据的接受速度，也可以加深对数据的理解。</p>
+<p>拿当前世界各地的时间信息为例，普通的表格可以提供完整的信息。通过筛选也可以快速找到某个城市的时间。但是却很难宏观的理解数据，发现城市和城市之间的关系。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/world-clock.jpg" alt="世界时间"></p>
+<p>将信息通过时区地图可视化出来之后，就变得更容易理解。例如你可以看到中国全境采用的是北京时间。但是美国本土区分了好几个时间。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/timezone-map.jpg" alt="时区地图"></p>
+<p>关于可视化，我建议使用一些BI工具提升效率，例如</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.bdp.cn/home.html">BDP</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tableau.com/">Tableau</a></li>
+<li><a target="_blank" rel="noopener" href="https://superset.incubator.apache.org/">Apache Superset</a></li>
+</ul>
+<p>只有BI工具方便还不够，如果BI工具依赖的引擎不够快也是没用的，所以接下来着重说一下大数据工具，例如Hive、Spark、Kylin、Impala之类的。对于重要的指标，如果想加快分析的速度，可以从3个方面入手：</p>
+<ol>
+<li>内存换时间，例如使用Spark、Impala这里基于内存的分析引擎。内存比硬盘贵，但是速度快</li>
+<li>空间换时间，例如Kylin</li>
+<li>提升工具的使用性（人力换时间），例如Zeppelin</li>
+</ol>
+<p>这里主要从工具角度来介绍，首先是因为方法论较为抽象，一下难以理解，工具是方法论的具象化延伸，易于理解和落地；其次是提升工具确实可以大幅提升效率。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/risk-management-note/%E5%86%B3%E7%AD%96%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%9C%8B%E5%BE%97%E8%A7%81/">2023-04-26</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/risk-management-note/%E5%88%A9%E7%9B%8A/">2023-04-26</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

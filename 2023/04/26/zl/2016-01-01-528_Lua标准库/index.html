@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua标准库 - Lua教程</title>
+
+  
+    <meta name="description" content="string库概念lua解释器对字符串支持有限，一个程序可以创建字符并连接字符串，但是不能截取子串，检查字符串的大小，内容等，操作字符串的功能基本来自string库 lua5.1中字符串库的所有函数如下    函数 描述 示例 结果     len 计算字符串长度 string.len(“abcd”) 4   rep 返回字符串s的n个拷贝 string.rep(“abcd”,2) abcdabc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua标准库">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-528_Lua%E6%A0%87%E5%87%86%E5%BA%93/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="string库概念lua解释器对字符串支持有限，一个程序可以创建字符并连接字符串，但是不能截取子串，检查字符串的大小，内容等，操作字符串的功能基本来自string库 lua5.1中字符串库的所有函数如下    函数 描述 示例 结果     len 计算字符串长度 string.len(“abcd”) 4   rep 返回字符串s的n个拷贝 string.rep(“abcd”,2) abcdabc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.280Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.280Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua标准库</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#string%E5%BA%93%E6%A6%82%E5%BF%B5"><span class="toc-text">string库概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string-len"><span class="toc-text">string.len</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string-format"><span class="toc-text">string.format</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string-find"><span class="toc-text">string.find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string-gsub"><span class="toc-text">string.gsub</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua标准库</span></h1>
+<h3 id="string库概念"><a href="#string库概念" class="headerlink" title="string库概念"></a>string库概念</h3><p>lua解释器对字符串支持有限，一个程序可以创建字符并连接字符串，但是不能截取子串，检查字符串的大小，内容等，操作字符串的功能基本来自string库</p>
+<p>lua5.1中字符串库的所有函数如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">len</td>
+<td style="text-align:center">计算字符串长度</td>
+<td style="text-align:center">string.len(“abcd”)</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">rep</td>
+<td style="text-align:center">返回字符串s的n个拷贝</td>
+<td style="text-align:center">string.rep(“abcd”,2)</td>
+<td style="text-align:center">abcdabcd</td>
+</tr>
+<tr>
+<td style="text-align:center">lower</td>
+<td style="text-align:center">返回字符串全部字母大写</td>
+<td style="text-align:center">string.lower(“AbcD”)</td>
+<td style="text-align:center">abcd</td>
+</tr>
+<tr>
+<td style="text-align:center">upper</td>
+<td style="text-align:center">返回字符串全部字母小写</td>
+<td style="text-align:center">string.upper(“AbcD”)</td>
+<td style="text-align:center">ABCD</td>
+</tr>
+<tr>
+<td style="text-align:center">format</td>
+<td style="text-align:center">返回一个类似printf的格式化字符串</td>
+<td style="text-align:center">string.format(“the value is:%d”,4)</td>
+<td style="text-align:center">the value is:4</td>
+</tr>
+<tr>
+<td style="text-align:center">sub</td>
+<td style="text-align:center">返回i到n的字符串</td>
+<td style="text-align:center">string.sub(“abcd”,2)</td>
+<td style="text-align:center">bcd</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">string.sub(“abcd”,-2)</td>
+<td style="text-align:center">cd</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">string.sub(“abcd”,2,-2)</td>
+<td style="text-align:center">bc</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">string.sub(“abcd”,2,3)</td>
+<td style="text-align:center">bc</td>
+</tr>
+<tr>
+<td style="text-align:center">find</td>
+<td style="text-align:center">在字符串中查找</td>
+<td style="text-align:center">string.find(“cdcdcdcd”,”ab”)</td>
+<td style="text-align:center">nil</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">string.find(“cdcdcdcd”,”cd”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">string.find(“cdcdcdcd”,”cd”,7)</td>
+<td style="text-align:center">7 8</td>
+</tr>
+<tr>
+<td style="text-align:center">gsub</td>
+<td style="text-align:center">在字符串中替换</td>
+<td style="text-align:center">string.gsub(“abcdabcd”,”a”,”z”);</td>
+<td style="text-align:center">zbcdzbcd 2</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">string.gsub(“aaaa”,”a”,”z”,3);</td>
+<td style="text-align:center">zzza 3</td>
+</tr>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">返回字符的整数形式</td>
+<td style="text-align:center">string.byte(“ABCD”,4)</td>
+<td style="text-align:center">68</td>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">将整型数字转成字符并连接</td>
+<td style="text-align:center">string.char(97,98,99,100)</td>
+<td style="text-align:center">abcd</td>
+</tr>
+</tbody>
+</table>
+<p>String库中还可以结合基本的模式串进行应用：</p>
+<p>【基本模式串】可以匹配一个特定字符集合内任何字符的模式项</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符类</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">任意字符</td>
+<td style="text-align:center">string.find(“”,”.”)</td>
+<td style="text-align:center">nil</td>
+</tr>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:center">空白符</td>
+<td style="text-align:center">string.find(“ab cd”,”%s%s”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%S</td>
+<td style="text-align:center">非空白符</td>
+<td style="text-align:center">string.find(“ab cd”,”%S%S”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center">%p</td>
+<td style="text-align:center">标点字符</td>
+<td style="text-align:center">string.find(“ab,.cd”,”%p%p”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%P</td>
+<td style="text-align:center">非标点字符</td>
+<td style="text-align:center">string.find(“ab,.cd”,”%P%P”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">控制字符</td>
+<td style="text-align:center">string.find(“abcdtn”,”%c%c”)</td>
+<td style="text-align:center">5 6</td>
+</tr>
+<tr>
+<td style="text-align:center">%C</td>
+<td style="text-align:center">非控制字符</td>
+<td style="text-align:center">string.find(“tnabcd”,”%C%C”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%d</td>
+<td style="text-align:center">数字</td>
+<td style="text-align:center">string.find(“abcd12”,”%d%d”)</td>
+<td style="text-align:center">5 6</td>
+</tr>
+<tr>
+<td style="text-align:center">%D</td>
+<td style="text-align:center">非数字</td>
+<td style="text-align:center">string.find(“12abcd”,”%D%D”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%x</td>
+<td style="text-align:center">十六进制数字</td>
+<td style="text-align:center">string.find(“efgh”,”%x%x”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center">%X</td>
+<td style="text-align:center">非十六进制数字</td>
+<td style="text-align:center">string.find(“efgh”,”%X%X”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%a</td>
+<td style="text-align:center">字母</td>
+<td style="text-align:center">string.find(“AB12”,”%a%a”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center">%A</td>
+<td style="text-align:center">非字母</td>
+<td style="text-align:center">string.find(“AB12”,”%A%A”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%l</td>
+<td style="text-align:center">小写字母</td>
+<td style="text-align:center">string.find(“ABab”,”%l%l”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%L</td>
+<td style="text-align:center">大写字母</td>
+<td style="text-align:center">string.find(“ABab”,”%L%L”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center">%u</td>
+<td style="text-align:center">大写字母</td>
+<td style="text-align:center">string.find(“ABab”,”%u%u”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center">%U</td>
+<td style="text-align:center">非大写字母</td>
+<td style="text-align:center">string.find(“ABab”,”%U%U”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+<tr>
+<td style="text-align:center">%w</td>
+<td style="text-align:center">字母和数字</td>
+<td style="text-align:center">string.find(“a1()”,”%w%w”)</td>
+<td style="text-align:center">1 2</td>
+</tr>
+<tr>
+<td style="text-align:center">%W</td>
+<td style="text-align:center">非字母和数字</td>
+<td style="text-align:center">string.find(“a1()”,”%W%W”)</td>
+<td style="text-align:center">3 4</td>
+</tr>
+</tbody>
+</table>
+<p>【转义字符%】</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">转义字符</td>
+<td style="text-align:center">string.find(“abc%..”,”%%”)</td>
+<td style="text-align:center">4 4</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">string.find(“abc..d”,”%.%.”)</td>
+<td style="text-align:center">4 5</td>
+</tr>
+</tbody>
+</table>
+<p>LUA中【模式修饰符】</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">匹配前一字符1次或多次</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">匹配前一字符0次或多次</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">匹配前一字符0次或多次</td>
+</tr>
+<tr>
+<td style="text-align:center">？</td>
+<td style="text-align:center">匹配前一字符0次或1次</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">匹配目标串的开始部分</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">匹配目标串的结尾部分</td>
+</tr>
+</tbody>
+</table>
+<h3 id="string-len"><a href="#string-len" class="headerlink" title="string.len"></a>string.len</h3><p>string.len(s)返回字符串s的长度<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> sString = <span class="string">&#34;321dlkoinmlda&#34;</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;sString字符串的长度为：&#34;</span>..<span class="built_in">string</span>.<span class="built_in">len</span>(sString))     </span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="string-format"><a href="#string-format" class="headerlink" title="string.format"></a>string.format</h3><p>string.format(s,i)和C语言的printf几乎一模一样，十进制d 十六进制x 八进制o 浮点数f<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">pi</span> = <span class="number">3.014159625</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&#34;pi = %.4f&#34;</span>,<span class="built_in">pi</span>))     <span class="comment">--pi = 3.0142</span></span><br/><span class="line">d=<span class="number">5</span>;m=<span class="number">11</span>;y=<span class="number">1990</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&#34;%02d/%02d/%04d&#34;</span>),d,m,y)     <span class="comment">-- 05/11/1990</span></span><br/><span class="line">tag,title = <span class="string">&#34;hi&#34;</span>,<span class="string">&#34;a title&#34;</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&#34;&lt;%s&gt;%s&lt;%s&gt;&#34;</span>),tag,title,tag)     <span class="comment">--&lt;hi&gt;a title&lt;hi&gt;</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>结合模式串达到最优使用<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> s = <span class="string">&#34;hello theee %d world~~~ %s&#34;</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(s,<span class="number">100</span>,<span class="string">&#34;!!!!&#34;</span>))     <span class="comment">-- hello theee 100 world~~~ !!!!</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="string-find"><a href="#string-find" class="headerlink" title="string.find"></a>string.find</h3><p>string.find(s.i)查找字符串s中i字符串的对应的位置，返回的是起始和结束索引值<br/>s:目标串<br/>i:搜索匹配的字符串<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line">s = <span class="string">&#34;hello world&#34;</span></span><br/><span class="line">i,j = <span class="built_in">string</span>.<span class="built_in">find</span>(s,<span class="string">&#34;hello&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(i,j)     <span class="comment">-- 1 5</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(s,i,j))     <span class="comment">-- hello(把s字符串从i到j出截取出来)</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">find</span>(s,<span class="string">&#34;world&#34;</span>))     <span class="comment">-- 7 11</span></span><br/><span class="line">i,j = <span class="built_in">string</span>.<span class="built_in">find</span>(s,<span class="string">&#34;l&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(i,j)     <span class="comment">--3 3</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">find</span>(s,<span class="string">&#34;lll&#34;</span>))     <span class="comment">-- nil</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="string-gsub"><a href="#string-gsub" class="headerlink" title="string.gsub"></a>string.gsub</h3><p>string.gsub(s,i,j)<br/>s:目标字符（要被操作的字符串）<br/>i:模式串（即将被替换掉的字符串）<br/>j:替换串（新的，要替换i的字符串）<br/>只有一个返回值，就是被替换完成后的最终字符串<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&#34;Lua is cute&#34;</span>,<span class="string">&#34;cute&#34;</span>,<span class="string">&#34;greet&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(s)     <span class="comment">-- Lua is great</span></span><br/><span class="line">s = <span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&#34;all lii&#34;</span>,<span class="string">&#34;l&#34;</span>,<span class="string">&#34;x&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(s)     <span class="comment">-- axx xii</span></span><br/><span class="line">s = stirng.<span class="built_in">gsub</span>(<span class="string">&#34;Lua is greet&#34;</span>,<span class="string">&#34;perl&#34;</span>,<span class="string">&#34;tcl&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(s)     <span class="comment">-- Lua is greet</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>可以匹配一个特定字符集合内任何字符的模式项<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(stirng.<span class="built_in">gsub</span>(<span class="string">&#34;hello,up-down!&#34;</span>,<span class="string">&#34;%A&#34;</span>,<span class="string">&#34;.&#34;</span>))     <span class="comment">-- hello.up.down.</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-527_org.springframework.expression.spel.SpelEvaluation/">SpelEvaluationException</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-521_Lua/">Lua</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

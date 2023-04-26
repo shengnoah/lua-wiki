@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>LUA正则表达 - Lua教程</title>
+
+  
+    <meta name="description" content="##LUA正则表达 规则 x: (where x is not one of the magic characters ^$()%.[]*+-?) represents the character x itself. .: (a dot) represents all characters. %a: represents all letters. %c: represents all contro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LUA正则表达">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-284_LUA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="##LUA正则表达 规则 x: (where x is not one of the magic characters ^$()%.[]*+-?) represents the character x itself. .: (a dot) represents all characters. %a: represents all letters. %c: represents all contro">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.258Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.258Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">LUA正则表达</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%99"><span class="toc-text">规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">常用函数</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>LUA正则表达</span></h1>
+<p>##LUA正则表达</p>
+<h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><ul>
+<li>x: (where x is not one of the magic characters ^$()%.[]*+-?) represents the character x itself.</li>
+<li>.: (a dot) represents all characters.</li>
+<li>%a: represents all letters.</li>
+<li>%c: represents all control characters.</li>
+<li>%d: represents all digits.</li>
+<li>%l: represents all lowercase letters.</li>
+<li>%p: represents all punctuation characters.</li>
+<li>%s: represents all space characters.</li>
+<li>%u: represents all uppercase letters.</li>
+<li>%w: represents all alphanumeric characters.</li>
+<li>%x: represents all hexadecimal digits.</li>
+<li>%z: represents the character with representation 0.</li>
+<li>%x: (where x is any non-alphanumeric character) represents the character x</li>
+</ul>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p><code>string.gsub (s, pattern, repl [, n])</code></p>
+<ul>
+<li>s 目标字符串</li>
+<li>pattern 规则（也就是上面的那些）</li>
+<li>repl 替换字符串 最常用的是 作为string ex: “” 或者 “%n” 这里n可以是1-9 %几的意思就是匹配到的第几组也可以理解为第几个括号里匹配到的内容</li>
+<li>n就是要执行几次正则匹配替换</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/></pre></td><td class="code"><pre><span class="line">s=&#34;先来最基础简单的&#34;</span><br/><span class="line">x = string.gsub(s,&#34;基础简单&#34;,&#34;复杂困难&#34;) --将&#34;基础简单&#34;替换成&#34;复杂困难&#34;</span><br/><span class="line">--&gt; x = &#34;先来最复杂困难的&#34;</span><br/><span class="line"></span><br/><span class="line">s=&#34;多次替换数字123,多次替换数字321&#34;</span><br/><span class="line">x = string.gsub(s,&#34;%d+&#34;,&#34;lalala&#34;) --将数字替换成&#34;lalala&#34;</span><br/><span class="line">--&gt; x = &#34;多次替换数字lalala,多次替换数字lalala&#34;</span><br/><span class="line"></span><br/><span class="line">s=&#34;本末&amp;倒置，开始=逆转&#34;</span><br/><span class="line">x = string.gsub(s,&#34;(.+)&amp;(.+)，(.+)=(.+)&#34;,&#34;%3%2%4%1&#34;) --一次匹配下返回括号内四个值，并且排列后替换整个字符串</span><br/><span class="line">--&gt; x = &#34;开始倒置逆转本末&#34;</span><br/><span class="line"></span><br/><span class="line">%1-%4相当于临时变量，将临时变量赋予括号内的值并且将整个字符串替换成临时排列后的变量。</span><br/><span class="line">%1 = 本末，%2 = 倒置，%3=开始，%4=逆转，而%0则是等于整个字符串：本末&amp;倒置，开始=逆转</span><br/><span class="line">***从这里看出来了规则里的括号()就是%n的替换第几个括号就是n几***</span><br/><span class="line"></span><br/><span class="line">s=&#34;hello string test world&#34;</span><br/><span class="line">x = string.gsub(s,&#34;(%w+)%s*(%w+)&#34;,&#34;%1&#34;,1) --一次匹配返回两个值，将这两个替换成第一个值，只执行一次</span><br/><span class="line">--&gt; x = &#34;hello test world&#34;</span><br/><span class="line">这里最后的参数是1那么表示这次正则替换我们只执行一次，什么是执行一次呢？</span><br/><span class="line">这里&#34;hello string test world&#34;我们定义的查找规则是&#34;(%w+)%s*(%w+)&#34;也就是 &#34;字符空格字符&#34; </span><br/><span class="line">那我们按照规则去s里查找一次得到的结果是找到了并且返回了&#34;hello string&#34;。这，对这就是一次了。如果我们不填1或者写成2那就是要全匹配完或者匹配两次，就会再从s串里接着找，这次我们找到的是&#34;test world&#34;。对的，这就是第二次了。然后每次执行括号里的就是%n，所以上面定义的只执行一次匹配替换，那么我们就按照上面说的执行一次的结果来：</span><br/><span class="line">1次的结果是&#34;hello string&#34;然后%1对照&#34;(%w+)%s*(%w+)&#34;第一个括号是 hello %2是 string</span><br/><span class="line">然后repl是&#34;%1&#34;也就是替换的字符串是%1也就是hello，那么结果有了，就是把这第一次找到的hello string 替换为hello 然后我们不进行往后的正则查找匹配替换了，到此为止。所以结果就是hello test world。</span><br/><span class="line"></span><br/><span class="line">s=&#34;hello string test world&#34;</span><br/><span class="line">x = string.gsub(s,&#34;(%w+)%s*(%w+)&#34;,&#34;%0 %0&#34;,1) --匹配成功后将多复制一次，只执行一次</span><br/><span class="line">--&gt; x = &#34;hello string hello string test world&#34;</span><br/><span class="line">这个同理如上，只不过 repl变成了&#34;%0 %0&#34;其实就是连着输出两次的意思没啥的</span><br/><span class="line">这里匹配查找一次的结果是:</span><br/><span class="line">%1=hello %2=string %0就是连起来 hello string</span><br/><span class="line">然后repl是&#34;%0 %0&#34; 那么就是 hello string hello string</span><br/><span class="line">所以结果就是把第一次匹配到的内容 hello string 变成了 hello string hello string</span><br/><span class="line">那么此时的s变成了&#34;hello string hello string test world&#34;</span><br/></pre></td></tr></tbody></table></figure>
+
+<hr/>
+<p><code>string.match (s, pattern [, init])</code></p>
+<ul>
+<li>s 目标字符串</li>
+<li>pattern 查询匹配规则</li>
+<li>可选init表示匹配字符串的起始索引默认为1<br/>在字符串s中匹配pattern，如果匹配失败返回nil。否则，当pattern中没有分组时，返回第一个匹配到的子串；<strong>当pattern中有分组时，返回第一个匹配到子串的分组，多个分组就返回多个</strong>。
+也就是当有小括号()分组的时候就有多个返回值了</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">s, func = string.match(&#34;static bool getBoolean(const char *key, bool defaultValue = false);&#34;, &#34;(.+[ *])([^ ]+)[ ]*%(&#34;)</span><br/><span class="line">print(s, func)</span><br/></pre></td></tr></tbody></table></figure>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-298_lua%E7%94%A8%E6%B3%952/">lua用法2</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-286_evaluation%20and%20selection%20%C2%B7%20ngc7293's%20blog/">evaluation and selection · ngc7293's blog</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

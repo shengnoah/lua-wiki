@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua教程</title>
+
+  
+    <meta name="description" content="什么是 JIT ？自从 OpenResty 1.5.8.1 版本之后，默认捆绑的 Lua 解释器就被替换成了 LuaJIT ，而不在是标准 Lua。单从名字上，我们就可以直接看到这个新的解释器多了一个 JIT，接下来我们就一起来聊聊这个 JIT 是个什么东东。 我们先来看一下 LuaJIT 官方站点的解释： LuaJIT is a Just-In-Time Compilerfor the Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua教程">
+<meta property="og:url" content="https://lua.ren/what_jit.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="什么是 JIT ？自从 OpenResty 1.5.8.1 版本之后，默认捆绑的 Lua 解释器就被替换成了 LuaJIT ，而不在是标准 Lua。单从名字上，我们就可以直接看到这个新的解释器多了一个 JIT，接下来我们就一起来聊聊这个 JIT 是个什么东东。 我们先来看一下 LuaJIT 官方站点的解释： LuaJIT is a Just-In-Time Compilerfor the Lua">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.129Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.129Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="openresty">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets"></div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+
+<h1 id="什么是-JIT-？"><a href="#什么是-JIT-？" class="headerlink" title="什么是 JIT ？"></a>什么是 JIT ？</h1><p>自从 OpenResty 1.5.8.1 版本之后，默认捆绑的 Lua 解释器就被替换成了 LuaJIT ，而不在是标准 Lua。单从名字上，我们就可以直接看到这个新的解释器多了一个 <code>JIT</code>，接下来我们就一起来聊聊这个 <code>JIT</code> 是个什么东东。</p>
+<p>我们先来看一下 LuaJIT 官方站点的解释： LuaJIT is a Just-In-Time Compilerfor the Lua programming language。</p>
+<p>肯定有读者可能要问了，什么 Just-In-Time ？他的中文名称是即时编译器，是一个把程序字节码（包括需要被解释的指令的程序）转换成可以直接发送给处理器的指令的程序。</p>
+<p>还没听懂？说的再直白一些，就是把 Lua 代码直接解释成 CPU 可以执行的指令，要知道原本 Lua 代码是只能在 Lua 虚拟机中运行，现在突然有办法让 Lua 代码一次编译后直接运行在 CPU 上，效率自然更胜一筹。</p>
+<p>给这个 JIT 吹了半天，实用效果怎样？大家看下面例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">➜ cat test.lua</span><br><span class="line">local s = [[aaaaaabbbbbbbcccccccccccddddddddddddeeeeeeeeeeeee</span><br><span class="line">fffffffffffffffffggggggggggggggaaaaaaaaaaabbbbbbbbbbbbbb</span><br><span class="line">ccccccccccclllll]]</span><br><span class="line"></span><br><span class="line">for i=1,10000 do</span><br><span class="line">    for j=1,10000 do</span><br><span class="line">        string.find(s, &quot;ll&quot;, 1, true)</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">➜ time luajit test.lua</span><br><span class="line">5.19s user</span><br><span class="line">0.03s system</span><br><span class="line"><span class="meta prompt_">96% </span><span class="language-bash">cpu</span></span><br><span class="line">5.392 total</span><br><span class="line"></span><br><span class="line">➜  time lua test.lua</span><br><span class="line">9.20s user</span><br><span class="line">0.02s system</span><br><span class="line"><span class="meta prompt_">99% </span><span class="language-bash">cpu</span></span><br><span class="line">9.270 total</span><br></pre></td></tr></table></figure>
+
+<p>本例子可以看到效率相差大约 9.2&#x2F;5.19 ≈ 1.77 倍，换句话说标准 Lua 需要 177% 的时间才能完成同样的工作。估计大家觉得这个还不过瘾，再看下面示例代码：</p>
+<blockquote>
+<p>文件 test.lua：</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> loop_count = <span class="built_in">tonumber</span>(<span class="built_in">arg</span>[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">local</span> fun_pair = <span class="string">&quot;ipairs&quot;</span> == <span class="built_in">arg</span>[<span class="number">2</span>] <span class="keyword">and</span> <span class="built_in">ipairs</span> <span class="keyword">or</span> <span class="built_in">pairs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> t = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>,<span class="number">100</span> <span class="keyword">do</span></span><br><span class="line">    t[i] = i</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>,loop_count <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">for</span> j=<span class="number">1</span>,<span class="number">1000</span> <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> fun_pair(t) <span class="keyword">do</span></span><br><span class="line">            <span class="comment">--</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>执行参数</th>
+<th>执行结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>time lua test.lua 1000 ipairs</td>
+<td>3.96s user 0.02s system 98% cpu 4.039 total</td>
+</tr>
+<tr>
+<td>time lua test.lua 1000 pairs</td>
+<td>3.97s user 0.01s system 99% cpu 3.992 total</td>
+</tr>
+<tr>
+<td>time luajit test.lua 1000 ipairs</td>
+<td>0.10s user 0.00s system 95% cpu 0.113 total</td>
+</tr>
+<tr>
+<td>time luajit test.lua 10000 ipairs</td>
+<td>0.98s user 0.00s system 99% cpu 0.991 total</td>
+</tr>
+<tr>
+<td>time luajit test.lua 1000 pairs</td>
+<td>1.54s user 0.01s system 99% cpu 1.559 total</td>
+</tr>
+</tbody></table>
+<p>从这个执行结果中，大致可以总结出下面几个观点：</p>
+<ul>
+<li>在标准 Lua 解释器中，使用 ipairs 或 pairs 没有区别。</li>
+<li>对于 pairs 方式，LuaJIT 的性能大约是标准 Lua 的 4 倍。</li>
+<li>对于 ipairs 方式，LuaJIT 的性能大约是标准 Lua 的 40 倍。</li>
+</ul>
+<p>本书中曾多次提及，尽量使用支持可以被 JIT 编译的 API。到底有哪些 API 是可以被 JIT 编译呢？我们的参考来来源是哪里呢？LuaJIT 的官方地址：<a target="_blank" rel="noopener" href="http://wiki.luajit.org/NYI">http://wiki.luajit.org/NYI</a>，需要最新动态的同学，不妨多看看这个地址的内容。下面我们把重要的几个库是否支持 JIT 的点罗列一下。</p>
+<h3 id="基础库的支持情况"><a href="#基础库的支持情况" class="headerlink" title="基础库的支持情况"></a>基础库的支持情况</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>编译?</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>assert</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>collectgarbage</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>dofile</td>
+<td>never</td>
+<td></td>
+</tr>
+<tr>
+<td>error</td>
+<td>never</td>
+<td></td>
+</tr>
+<tr>
+<td>getfenv</td>
+<td>2.1 partial</td>
+<td>只有 getfenv(0) 能编译</td>
+</tr>
+<tr>
+<td>getmetatable</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>ipairs</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>load</td>
+<td>never</td>
+<td></td>
+</tr>
+<tr>
+<td>loadfile</td>
+<td>never</td>
+<td></td>
+</tr>
+<tr>
+<td>loadstring</td>
+<td>never</td>
+<td></td>
+</tr>
+<tr>
+<td>next</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>pairs</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>pcall</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>print</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>rawequal</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>rawget</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>rawlen (5.2)</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>rawset</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>select</td>
+<td>partial</td>
+<td>第一个参数是静态变量的时候可以编译</td>
+</tr>
+<tr>
+<td>setfenv</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>setmetatable</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>tonumber</td>
+<td>partial</td>
+<td>不能编译非10进制，非预期的异常输入</td>
+</tr>
+<tr>
+<td>tostring</td>
+<td>partial</td>
+<td>只能编译：字符串、数字、布尔、nil 以及支持 __tostring元方法的类型</td>
+</tr>
+<tr>
+<td>type</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>unpack</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>xpcall</td>
+<td>yes</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="字符串库"><a href="#字符串库" class="headerlink" title="字符串库"></a>字符串库</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>编译?</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>string.byte</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>string.char</td>
+<td>2.1</td>
+<td></td>
+</tr>
+<tr>
+<td>string.dump</td>
+<td>never</td>
+<td></td>
+</tr>
+<tr>
+<td>string.find</td>
+<td>2.1 partial</td>
+<td>只有字符串样式查找（没有样式）</td>
+</tr>
+<tr>
+<td>string.format</td>
+<td>2.1 partial</td>
+<td>不支持 %p 或 非字符串参数的 %s</td>
+</tr>
+<tr>
+<td>string.gmatch</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>string.gsub</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>string.len</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>string.lower</td>
+<td>2.1</td>
+<td></td>
+</tr>
+<tr>
+<td>string.match</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>string.rep</td>
+<td>2.1</td>
+<td></td>
+</tr>
+<tr>
+<td>string.reverse</td>
+<td>2.1</td>
+<td></td>
+</tr>
+<tr>
+<td>string.sub</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>string.upper</td>
+<td>2.1</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="表"><a href="#表" class="headerlink" title="表"></a>表</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>编译?</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>table.concat</td>
+<td>2.1</td>
+<td></td>
+</tr>
+<tr>
+<td>table.foreach</td>
+<td>no</td>
+<td>2.1: 内部编译，但还没有外放</td>
+</tr>
+<tr>
+<td>table.foreachi</td>
+<td>2.1</td>
+<td></td>
+</tr>
+<tr>
+<td>table.getn</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>table.insert</td>
+<td>partial</td>
+<td>只有 push 操作</td>
+</tr>
+<tr>
+<td>table.maxn</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>table.pack (5.2)</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>table.remove</td>
+<td>2.1</td>
+<td>部分，只有 pop 操作</td>
+</tr>
+<tr>
+<td>table.sort</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>table.unpack (5.2)</td>
+<td>no</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="math-库"><a href="#math-库" class="headerlink" title="math 库"></a>math 库</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>编译?</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>math.abs</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.acos</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.asin</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.atan</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.atan2</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.ceil</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.cos</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.cosh</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.deg</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.exp</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.floor</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.fmod</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>math.frexp</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>math.ldexp</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.log</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.log10</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.max</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.min</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.modf</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.pow</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.rad</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.random</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.randomseed</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td>math.sin</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.sinh</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.sqrt</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.tan</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td>math.tanh</td>
+<td>yes</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>其他还有 IO、Bit、FFI、Coroutine、OS、Package、Debug、JIT 等目录分类，使用频率相对较低，在这里就不逐一罗列，需要的同学可以到 <a target="_blank" rel="noopener" href="http://wiki.luajit.org/NYI">http://wiki.luajit.org/NYI</a> 查看。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/table_library.html">2023-04-26</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/time_date_function.html">2023-04-26</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

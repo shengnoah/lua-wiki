@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua 与 C 交互 - Lua教程</title>
+
+  
+    <meta name="description" content="lua和C交互的核心就是lua栈，lua和C的所有数据交互都是通过lua栈来完成的。  一. C调用luaC调用lua很简单，通常C以lua作为配置脚本，在运行时读取脚本数据，主要步骤：  加载脚本    luaL_loadfile  运行脚本  lua_pcall  获取数据  lua_getglobal ….  使用数据  lua_tostring lua_pcall …  二. 在lua脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua 与 C 交互">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-793_lua%20%E4%B8%8E%20C%20%E4%BA%A4%E4%BA%92/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="lua和C交互的核心就是lua栈，lua和C的所有数据交互都是通过lua栈来完成的。  一. C调用luaC调用lua很简单，通常C以lua作为配置脚本，在运行时读取脚本数据，主要步骤：  加载脚本    luaL_loadfile  运行脚本  lua_pcall  获取数据  lua_getglobal ….  使用数据  lua_tostring lua_pcall …  二. 在lua脚本">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.307Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.307Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua 与 C 交互</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-C%E8%B0%83%E7%94%A8lua"><span class="toc-text">一. C调用lua</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%9C%A8lua%E8%84%9A%E6%9C%AC%E4%B8%AD%E8%B0%83%E7%94%A8C%EF%BC%9A"><span class="toc-text">二. 在lua脚本中调用C：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%B0%86C%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%BA%93%EF%BC%8C%E4%B8%BAlua%E6%89%80%E7%94%A8"><span class="toc-text">三. 将C函数封装为一个库，为lua所用</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.307Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua 与 C 交互</span></h1>
+<p>lua和C交互的核心就是lua栈，lua和C的所有数据交互都是通过lua栈来完成的。</p>
+
+<h3 id="一-C调用lua"><a href="#一-C调用lua" class="headerlink" title="一. C调用lua"></a>一. C调用lua</h3><p>C调用lua很简单，通常C以lua作为配置脚本，在运行时读取脚本数据，主要步骤：</p>
+<ol>
+<li>加载脚本    luaL_loadfile </li>
+<li>运行脚本  lua_pcall </li>
+<li>获取数据  lua_getglobal …. </li>
+<li>使用数据  lua_tostring lua_pcall …</li>
+</ol>
+<h3 id="二-在lua脚本中调用C："><a href="#二-在lua脚本中调用C：" class="headerlink" title="二. 在lua脚本中调用C："></a>二. 在lua脚本中调用C：</h3><p>在C程序中，使用lua作为脚本，但是要在运行脚本时，访问C中定义的一些变量或函数。</p>
+<ol>
+<li>将C变量或函数(遵从指定函数原型，见下面三 Step 1)push到lua栈中</li>
+<li>通过lua_setglobal为当前lua栈顶的函数或变量命名，这样在lua中可通过该名字完成对变量或函数的使用</li>
+<li>之后可在加载的lua脚本中使用C变量或函数</li>
+</ol>
+<h3 id="三-将C函数封装为一个库，为lua所用"><a href="#三-将C函数封装为一个库，为lua所用" class="headerlink" title="三. 将C函数封装为一个库，为lua所用"></a>三. 将C函数封装为一个库，为lua所用</h3><p>将C函数编译为动态库文件，这样可以在lua主程序中，加载这个库文件，并使用其中的C函数。</p>
+<p><strong>Step 1</strong>. 在mylib.c中定义给lua调用的C函数 函数原型为： int (lua_State*)<br/>如：</p>
+<pre><code>static int c_addsub(lua_State* L)
+&#123;
+    double a = luaL_checknumber(L,1); // 获取参数1
+    double b = luaL_checknumber(L,2); // 获取参数2
+    lua_pushnumber(L, a+b); // 压入返回值1
+    lua_pushnumber(L, a-b); // 压入返回值2
+    return 2; // 两个返回值
+&#125;
+</code></pre><p><strong>Step 2</strong>. 在mylib.c中定义一个注册函数，用于lua在加载C动态库时，调用该函数完成对库中所导出的C函数的注册。<br/>如：</p>
+<pre><code>// 将C模块中要导出的C函数放入到luaL_Reg结构体数组内
+static const struct luaL_Reg l[] = &#123;
+    &#123;&#34;addsub&#34;, c_addsub&#125;,
+    &#123;NULL, NULL&#125; // 以NULL标识结束
+&#125;;
+
+<p>&#x2F;&#x2F; 该函数在导入C库时调用 完成对库中导出的函数的注册<br>&#x2F;&#x2F; 必须是non-static<br>int luaopen_mylib(lua_State* L)<br>&#123;<br>    &#x2F;&#x2F; 完成实际的注册工作<br>    &#x2F;&#x2F; 注册方式一: luaL_openlib(lua_State* L, const char* name, const luaL_Reg* l, int nup)<br>    &#x2F;&#x2F;   L : lua_State<br>    &#x2F;&#x2F; name: 表明该C库被加载后，所导出的函数位于哪一个全局table之下<br>    &#x2F;&#x2F;       这里是&amp;#34;clib&amp;#34; 那么之后lua中通过clib.addsub完成对C函数的调用<br>    &#x2F;&#x2F;   l : 要导出的函数的lua_Reg结构体数组<br>    &#x2F;&#x2F;         luaL_openlib自动将该数组内的name-function对注册并填充到第二参数指定的table下<br>    &#x2F;&#x2F; nup : upvalue的个数，如果不为0，则注册的所有函数都共享这些upvalues<br>    luaL_openlib(L, &amp;#34;clib&amp;#34;, l, 0);</p>
+<pre><code>// 注册方式二: luaL_newlibtable + luaL_setfuncs (等价于lua_newlib)
+// luaL_newlibtable(L, l);
+// luaL_setfuncs(L, l, 0);
+// 前两句等价于：
+// luaL_newlib(L, l);
+
+// 将包含name-cfunction键值对的table返回给lua
+return 1;
+</code></pre>
+<p>}<br></code></pre><p>注意上面方式一和方式二的主要区别：前者(luaL_openlib)为name-cfunction对在lua中注册了一个名字(“clib”)。而后者(luaL_newlib)没有，它只是将这个table返回给了lua。可在lua层通过赋值为其命名。自然，通过 <code>luaL_openlib</code> 和 <code>return 1</code>可以将name-cfuncton对注册到两个lua table下。</p></p>
+<p>关于luaL_openlib函数，在官方文档中没有找到它，lua5.2文档中给出的是luaL_newlibtable和lua_setfuncs等新API用以替代以前的luaL_register，而事实上根据前面lua和C交互的基本元素，我们可以自己实现一个类似lua_openlib的注册函数：</p>
+<pre><code>int luaopen_mylib(lua_State* L)
+&#123;
+    // luaL_openlib(L, &#34;clib&#34;, clib, 0);
+    int i = 0;
+    lua_newtable(L); // push a new table
+    while(clib[i].name != NULL)
+    &#123;
+        lua_pushstring(L, clib[i].name); // push name
+        lua_pushcfunction(L, clib[i].func); // push function
+        lua_settable(L, -3); // table[name] = function
+        ++i;
+    &#125;
+    lua_setglobal(L, &#34;clib&#34;); // set table name
+    return 1;        
+&#125;
+</code></pre><p>因此实际上将C作为动态库和前面二中的交互核心是一样的，只是将C作为动态库时，需要提供一个”入口函数”，用以在加载该动态库后执行，完成对库中所有导出函数的注册。</p>
+<p><strong>Step 3</strong>. 将相关C文件编译成动态链接库:</p>
+<p>需要说明的是Mac OS X需要使用gcc将mylualib.c编译为动态库，编译选项不同于Linux。<br/>具体编译命令（粗体部分不同于Linux，如果不使用这些选项，liblua将会被编译到so文件中并引起“multiple lua vms detected”错误， bundle是Mac使用的文件格式）：</p>
+<p>gcc -c mylib.c</p>
+<p>gcc -O2 <strong>-bundle -undefined dynamic_lookup</strong> -o mylib.so mylib.o</p>
+<p><strong>Step 4</strong>. 在lua中加载C动态库</p>
+<p>方式一 : 使用 loadlib</p>
+<pre><code>--加载C动态库 并将luaopen_mylib函数 导出到mylib变量中
+mylib = loadlib(&#34;./mylib.so&#34;, &#34;luaopen_mylib&#34;) 
+
+<p>–调用mylib() 将执行lua_openmylib函数 完成对C动态库中所有导出函数的注册<br>–将C中返回的name-cfunction table赋给clualib变量<br>clualib &#x3D; mylib()</p>
+<p>–通过clualib完成C函数的调用<br>sum, diff &#x3D; clualib.addsub(5.6, 2.4);</p>
+<p>–针对于Step 2中的注册方式一，还可以通过luaL_openlib中传入的clib来使用C函数<br>sum, diff &#x3D; clib.addsub(5.6, 2.4)<br></code></pre><p>loadlib会读取动态库文件的符号表，得到luaopen_mylib函数的实现，并导出到mylib变量中，通过执行mylib()，即可执行luaopen_mylib完成对整个C库导出函数的注册。luaopen_mylib将注册完成后的name-cfunction对返回给lua，lua可以通过<code>clualib = mylib()</code>为这个注册完成之后的table命名。之后可通过clualib调用C函数。</p></p>
+<p>另外，luaL_openlib函数可以直接导出name-cfunction对并为其在lua中注册一个名字，因此通过clib也可以完成对C函数的调用。</p>
+<p>方式二 : 使用 require</p>
+<pre><code>clualib = require(&#34;mylib&#34;)
+
+<p>sum,diff &#x3D; clualib.addsub(5.6, 2.4)</p>
+<p>– 对于luaL_openlib完成的注册，仍然可以通过clib来访问C函数<br>sum, diff &#x3D; clib.addsub(5.6, 2.4)<br></code></pre><p>require的工作原理：</p></p>
+<p>当你在脚本中使用require加载一个模块xxx的时候，首先它会在Lua的环境路径中寻找以xxx命名的DLL，如果找到了，则会在这个DLL中寻找luaopen_xxx的函数用于加载模块。我们只需要将自己需要导出给Lua调用的C内容通过这个函数导出就可以了。</p>
+<p>比如我们通过require(“mylib”)来导入模块，lua找到mylib.so库文件，并查找luaopen_mylib函数，然后调用该函数。因此我们需要注意两点：</p>
+<ol>
+<li>设置好库文件路径 确保库文件存在 </li>
+<li>确保库定义了luaopen_mylib函数(而不像前一个方法一样，可以通过loadlib函数手动指定入口函数)</li>
+</ol>
+<p>require的优势在于自动化，而loadlib方式则更加灵活，loadlib可以指定注册函数名字，注册函数可以无需按照luaopen_xxx格式命名。</p>
+<p>在一些库中，使用require(“mylib.core”)之类的格式来导入C模块，没有任何库文件时，通过require的报错可以看到其查找路径和规则：</p>
+<pre><code>lua: testmylib.lua:1: module &#39;mylib.core&#39; not found:
+no field package.preload[&#39;mylib.core&#39;]
+no file &#39;/usr/local/share/lua/5.2/mylib/core.lua&#39;
+no file &#39;/usr/local/share/lua/5.2/mylib/core/init.lua&#39;
+no file &#39;/usr/local/lib/lua/5.2/mylib/core.lua&#39;
+no file &#39;/usr/local/lib/lua/5.2/mylib/core/init.lua&#39;
+no file &#39;./mylib/core.lua&#39;
+no file &#39;/usr/local/lib/lua/5.2/mylib/core.so&#39;
+no file &#39;/usr/local/lib/lua/5.2/loadall.so&#39;
+no file &#39;./mylib/core.so&#39;
+no file &#39;/usr/local/lib/lua/5.2/mylib.so&#39;
+no file &#39;/usr/local/lib/lua/5.2/loadall.so&#39;
+no file &#39;./mylib.so&#39;
+</code></pre><p>先查找 PATH/mylib/core.so 如果没有，则直接使用 PATH/mylib.so。而C中的导出函数命名则必须为: luaopen_mylib_core(lua_State* L)。 </p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-794_Lua%E8%BF%AD%E4%BB%A3%E5%99%A8/">Lua迭代器</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-796_%5BLua%5D%20lua%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7%20/">lua性能优化技巧</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

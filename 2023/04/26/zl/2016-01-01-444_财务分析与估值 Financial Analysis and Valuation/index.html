@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>财务分析与估值 Financial Analysis and Valuation - Lua教程</title>
+
+  
+    <meta name="description" content="入门别放弃。  企业的价值评估和资产评估是两个不同的概念。 估值——对企业或股权进行估值的过程。 价值组成&#x2F;来源：主营业务、非经营性净资产——&gt;企业价值 ——&gt;价值分配：负债、其他资本索取权、普通股权益 两类思路：  贴现现金流方法：通过企业创造的（或者股东能够获得的）未来收益进行估值。 乘数法：通过与其他同类型企业的比较进行估值。  资金的时间价值：今天的一块钱 !&#x3D; 明天的一块钱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="财务分析与估值 Financial Analysis and Valuation">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-444_%E8%B4%A2%E5%8A%A1%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%B0%E5%80%BC%20Financial%20Analysis%20and%20Valuation/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="入门别放弃。  企业的价值评估和资产评估是两个不同的概念。 估值——对企业或股权进行估值的过程。 价值组成&#x2F;来源：主营业务、非经营性净资产——&gt;企业价值 ——&gt;价值分配：负债、其他资本索取权、普通股权益 两类思路：  贴现现金流方法：通过企业创造的（或者股东能够获得的）未来收益进行估值。 乘数法：通过与其他同类型企业的比较进行估值。  资金的时间价值：今天的一块钱 !&#x3D; 明天的一块钱">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.273Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.273Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">财务分析与估值 Financial Analysis and Valuation</span></div><div class="widget-body fs14"><div class="doc-tree active"></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>财务分析与估值 Financial Analysis and Valuation</span></h1>
+<blockquote>
+<p>入门别放弃。<br/></p>
+</blockquote>
+<p>企业的价值评估和资产评估是两个不同的概念。</p>
+<p>估值——对企业或股权进行估值的过程。</p>
+<p>价值组成/来源：主营业务、非经营性净资产——&gt;企业价值 ——&gt;价值分配：负债、其他资本索取权、普通股权益</p>
+<p>两类思路：</p>
+<ul>
+<li><strong>贴现现金流方法</strong>：通过企业创造的（或者股东能够获得的）未来收益进行估值。</li>
+<li><strong>乘数法</strong>：通过与其他同类型企业的比较进行估值。</li>
+</ul>
+<p>资金的时间价值：今天的一块钱 != 明天的一块钱 ，不同时间获得的钱不能简单相加</p>
+<p>贴现：将未来的钱折换成今天的钱<br/>现值=E/(1+r)t </p>
+<p><em>r为贴现率</em><br/>企业的价值 = E + E/(1+r) + E/(1+r)² + E/(1+r)³ + …… = E/r</p>
+<p>永续年金——自由现金流维持稳定增长/数额</p>
+<p>预期收益<br/>债权人 —— 利率<br/>股东 —— 机会成本</p>
+<p>风险与收益相伴相随</p>
+<p>股东预期收益/要求回报率：用行业平均盈利水平衡量股东要求公司给的回报 —— 权益资本成本</p>
+<p><em>加权平均资本成本wacc</em></p>
+<p>资本资产定价模型CAPM： E(Re) = Rf + β*（Rm - Rf）<br/>E(Re)权益资本的期望值<br/>Rf无风险收益率<br/>Rm市场收益率<br/>Rm-Rf风险溢价<br/>β反映某个公司与市场的相关性<br/>CAPM模型的含义：获得高收益的唯一途径是承担高风险（系统风险才会补偿，个体风险不会补偿）。</p>
+<p>估计股权价值——权益资本成本<br/>估计企业价值——加权平均资本成本wacc</p>
+<h1 id="预测报表"><a href="#预测报表" class="headerlink" title="预测报表"></a>预测报表</h1><p>投资活动</p>
+<ul>
+<li>step1：营业收入</li>
+<li>step2：营业成本，营业税金及附加，营业费用、管理费用</li>
+<li>step3：流动资产，固定资产，在建工程，无形资产</li>
+<li>step4：流动负债，长期负债，股本、资本公积</li>
+</ul>
+<p>投资活动</p>
+<ul>
+<li>step5：长期投资，财务费用、投资收益，营业外收支，所得税、净利润，盈余公积，未分配利润</li>
+<li>step5.5：现金，短期借款</li>
+<li>step6：现金流量表</li>
+</ul>
+<p>预测难点：营业收入的预测，长期投资的预测</p>
+<p>营业外收支：不具有持续性，预测数额0</p>
+<p>现金流量表附表——只针对经营活动现金流<br/>净利润 + （） - （） = 经营活动现金流</p>
+<p>利润跟现金流产生差异原因：<br/>1.净利润与经营利润的差异，调整与经营活动无关的收入和费用<br/>2.经营利润与经营现金流的差异</p>
+<ul>
+<li>影响利润不影响现金流的项目</li>
+<li>影响现金流不影响利润的项目</li>
+</ul>
+<p>step1：净利润——&gt;经营净利润<br/>净利润中不属于经营利润的项目：固定资产报废/处置净损益、公允价值变动损益、投资收益、财务费用<br/>调整方向：增加利润的项目应该减掉，减少利润的项目应该加上<br/>step2：经营净利润——&gt;经营现金流<br/>影响利润但不影响现金流的业务：当期计提的减值损失（扣除转回的）、固定资产折旧、无形资产摊销，上述项目都减少了利润，但不影响现金流<br/>调整方向：加上</p>
+<p>与利润无关但影响经营现金流的业务：资产、负债的变化，经营性应收、应付以及存货、递延所得税资产和负债的变动<br/>调整反向：应收款增加“吃掉现金”，应付款增加带来现金；减去资产增加，加上负债增加</p>
+<p>敏感性分析：收入增长、新增投资<br/>合理性分析</p>
+<p>收入预测本身更多是一个艺术过程。</p>
+<h1 id="自由现金流贴现模型估值"><a href="#自由现金流贴现模型估值" class="headerlink" title="自由现金流贴现模型估值"></a>自由现金流贴现模型估值</h1><p>股利贴现模型：普通股权益价值 = PV（股利） —— 很少用，存在循环论证</p>
+<p>权益现金流贴现模型——估计整体现金流:普通股权益价值 = PV（自由现金流 + 非经营现金流 - 负债现金流 - 其他资本索取权现金流） —— 很少用</p>
+<p>自由现金流贴现模型（DCF）：普通股权益价值 = PV（自由现金流） + 非经营性资产 - 负债 - 其他资本索取权<br/>现金流表 | ** | 自由现金流表</p>
+<ul>
+<li>| - | -<br/>经营现金流 | <strong> | 自由现金流<br/>投资现金流 | </strong> | 非经营性现金流<br/>融资现金流 | *<em> | 资本现金流<br/>净现金流 | </em>净现金流相等* | 净现金流</li>
+</ul>
+<p>NOPAT税后营业净利润<br/>营业收入 | 净利润</p>
+<ul>
+<li>| -<br/>-营业成本 | +资产减值的损失<br/>-营业费用 | -公允价值变动的收益<br/>-管理费用 | -投资收益<br/>-不含利息的税前经营利润 | -营业外收支<br/>-税收 | +少数股东损益<br/>=NOPAT | +税后利息费用（-收入）<br/>*** | =NOPAT</li>
+</ul>
+<p>NOPAT + 折旧 + 递延所得税增加 - 经营性流动资产增加 - 存货增加 + 经营性流动负债增加 - 资本性支出（固定资产增加+折旧） - 商誉投资（商誉增加+摊销） = FCF(自由现金流)</p>
+<p><em>一般预测三/五年，四年/六年之后自由现金流按永续年金计算</em></p>
+<p>调整后现值模型（APV）：普通股权益价值 = PV（无杠杆时的自由现金流）+ 杠杆带来的价值 + 非经营性净资产 - 负债 - 其他资本索取权</p>
+<p>剩余收益模型（RIM）：普通股权益价值 = 主营业务的账面价值 + PV（主营业务创造的剩余收益） + 非经营性净资产 - 负债 - 其他资本索取权</p>
+<h1 id="剩余收益模型估值与EVA估值"><a href="#剩余收益模型估值与EVA估值" class="headerlink" title="剩余收益模型估值与EVA估值"></a>剩余收益模型估值与EVA估值</h1><p>调整后的现值模型APV</p>
+<ul>
+<li>公司的负债可以减少税收</li>
+<li>杠杆的增加会增加公司的偿债风险</li>
+</ul>
+<p>clean surplus relationship<br/>$B_t$ = $B_t-1$ + $E_t$ - $d_t$ （$B_t$ 公司年末股东权益账面价值，$E_t$ t年公司净利润，$d_t$ 公司在t年的分红）<br/>$B_t$ - $B_t-1$ = $E_t$ - $d_t$ (公司年末年初的股东权益的账面价值差等于今年盈利减去今年分红)<br/>融资——反向分红；把直接计入资本公积项目调到利润表中</p>
+<p>$d_t$ = $E_t$ - （$B_t$ - $B_t-1$）</p>
+<p>$ROE_t$净资产报酬率<br/>$E_t$ = $ROE_t$ <em> $B_t-1$<br/>$B_t$ /(1+r) = [(1+r)-r] </em> $B_t$ /(1+r) =$B_t$ - $B_t$ * r/(1+r)</p>
+<p>竞争优势：技术水平高、成本低、品牌形象好、销售能力强</p>
+<p>EVA估值方法<br/>经营性净资产（投资资本）：只包括有息负债和股东权益</p>
+<h1 id="乘数法估值"><a href="#乘数法估值" class="headerlink" title="乘数法估值"></a>乘数法估值</h1><p>每股收益（EPS）：净利润/股数<br/>市盈率P/E = 每股股价/每股收益（EPS） ——通常用市盈率来表现一个公司估值水平的高低<br/>市净率 = 每股股价/每股账面的股东权益数额（净资产/股数）</p>
+<p>估计价格 = 可比公司的P/E * 目标公司的EPS</p>
+<p>可比公司：业务，增长前景，会计方法，盈余构成，资本结构</p>
+<p>g（增长率）不可比的处理：<br/>$PEG_COMP$ = $PE_COMP$ / $g_COMP$<br/>$P_TARGET$ = $PEG_COMP$ <em> $g_SNTARGET$ </em> $E_TARGET$</p>
+<p><em>PEG只适用于高增长，低增长仍使用PE</em></p>
+<p>财务杠杆不可比的处理：<br/>用无杠杆税前市盈率代替原先的市盈率</p>
+<p>会计方法不可比的处理：</p>
+<ul>
+<li>调整会计差异——净利润是会计处理方法最敏感的数据，营业收入会计处理方法最不敏感的数据；</li>
+<li>使用PS比率——使用以现金流为基础的比率，现金流本身对会计处理方法不敏感，P/E = 权益总市值 / EBITDA；</li>
+</ul>
+<p>对亏损公司进行估值：<br/>使用其他的价值驱动因素——企业注册用户的数量，网站点击率等</p>
+<p>对多元化企业的估值：<br/>把一个多元化企业拆分成若干个单业务公司进行估值（无杠杆税前市盈率）。</p>
+<p>市净率P/B = COMEQUITY / BV = COMEQUITY/E * E/BV</p>
+<p><del>估值过程有很大的随意性和主观性。</del></p>
+<p><strong>更准确的定性的判断是我们得到更准确定量结果的重要前提。</strong></p>
+<h1 id="对企业价值的再认识"><a href="#对企业价值的再认识" class="headerlink" title="对企业价值的再认识"></a>对企业价值的再认识</h1><p>经济利润是公司的实际收益超过预期收益的水平。</p>
+<p>价值根本来源于竞争优势，来自于企业比其他公司更有效利用自己资产，从而创造出更多实际回报。</p>
+<p>增长：ROE&gt;R，留存的收益才会创造价值<br/>真正驱动价值的增长一定是剩余收益的增长，价值的增长是实际收益超过预期收益的水平的增长</p>
+<p>市盈率：复权后价格计算的市盈率 (P+d)/E = 1 + 1/r<br/>P/E决定于当前与未来剩余收益的差异。</p>
+<p>市净率：P/B与当前的盈利水平无关，剩余收益的大小决定P/B。</p>
+<p>成熟企业：P/E低，P/B高<br/>高增长企业：P/E P/B都高 —— 低估<br/>复苏、重组的企业：P/E高 P/B低<br/>当前盈利不好，又没有增长潜力的公司：P/E P/B都低  —— 高估</p>
+<p>*B站指引av60687498</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-447_Nginx%E5%AE%89%E8%A3%85Lua%E6%A8%A1%E5%9D%97/">Nginx安装Lua模块</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-443_%E5%AF%B9LuaJIT%E5%88%B6%E4%BD%9C%E7%9A%84%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E5%8D%95%E4%BF%AE%E6%94%B9%EF%BC%88%E4%B8%80%EF%BC%89/">对LuaJIT制作的游戏的简单修改（一）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

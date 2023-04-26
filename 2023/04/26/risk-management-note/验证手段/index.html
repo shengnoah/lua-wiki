@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua教程</title>
+
+  
+    <meta name="description" content="验证手段验证用户身份是大部分网站很常见的功能，在登录、改密码、绑定手机、敏感信息操作时，我们都要求用户“证明自己是自己”。 验证手段最常见的是用户名密码登录，这里的用户名可以是手机、邮箱或者昵称。除此之外，本章再介绍一些其他的验证手段 动态密码登陆2013年-2015年流行一个理念：传统数字密码是落后的、不安全的、体验不好的。很多安全甲乙方公司都在提N年内消灭密码，创造一个没有密码的时代。提出了很">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua教程">
+<meta property="og:url" content="https://lua.ren/2023/04/26/risk-management-note/%E9%AA%8C%E8%AF%81%E6%89%8B%E6%AE%B5/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="验证手段验证用户身份是大部分网站很常见的功能，在登录、改密码、绑定手机、敏感信息操作时，我们都要求用户“证明自己是自己”。 验证手段最常见的是用户名密码登录，这里的用户名可以是手机、邮箱或者昵称。除此之外，本章再介绍一些其他的验证手段 动态密码登陆2013年-2015年流行一个理念：传统数字密码是落后的、不安全的、体验不好的。很多安全甲乙方公司都在提N年内消灭密码，创造一个没有密码的时代。提出了很">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lua.ren/images/smslogin.jpg">
+<meta property="og:image" content="https://lua.ren/images/qr-login.jpg">
+<meta property="og:image" content="https://lua.ren/images/2sv.jpg">
+<meta property="og:image" content="https://lua.ren/images/smsverification.jpg">
+<meta property="og:image" content="https://lua.ren/images/hardvcode.jpg">
+<meta property="og:image" content="https://lua.ren/images/12306verification.jpg">
+<meta property="og:image" content="https://lua.ren/images/funny12306.jpg">
+<meta property="og:image" content="https://lua.ren/images/jigsaw-verification.gif">
+<meta property="og:image" content="https://lua.ren/images/pic-click.gif">
+<meta property="og:image" content="https://lua.ren/images/icon-pick.jpg">
+<meta property="og:image" content="https://lua.ren/images/word-order.gif">
+<meta property="og:image" content="https://lua.ren/images/3d-picture-pick.gif">
+<meta property="og:image" content="https://lua.ren/images/3D-logic.gif">
+<meta property="article:published_time" content="2023-04-26T05:16:12.226Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.226Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lua.ren/images/smslogin.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%AF%86%E7%A0%81%E7%99%BB%E9%99%86"><span class="toc-text">动态密码登陆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95"><span class="toc-text">扫码登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E6%AD%A5%E9%AA%8C%E8%AF%81"><span class="toc-text">两步验证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E6%9C%BA%E9%AA%8C%E8%AF%81"><span class="toc-text">人机验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">字符验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%9B%BE%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">选图验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">滑动验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E7%82%B9%E9%80%89%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">文字点选验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E6%A0%87%E7%82%B9%E9%80%89%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">图标点选验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%BA%8F%E7%82%B9%E9%80%89%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">语序点选验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3D%E5%9B%BE%E7%89%87%E7%82%B9%E9%80%89%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">3D图片点选验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3D%E6%8E%A8%E7%90%86%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">3D推理验证码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%92%8C%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E7%9A%84%E5%B9%B3%E8%A1%A1"><span class="toc-text">安全和用户体验的平衡</span></a></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+
+<h1 id="验证手段"><a href="#验证手段" class="headerlink" title="验证手段"></a>验证手段</h1><p>验证用户身份是大部分网站很常见的功能，在登录、改密码、绑定手机、敏感信息操作时，我们都要求用户“证明自己是自己”。</p>
+<p>验证手段最常见的是用户名密码登录，这里的用户名可以是手机、邮箱或者昵称。除此之外，本章再介绍一些其他的验证手段</p>
+<h3 id="动态密码登陆"><a href="#动态密码登陆" class="headerlink" title="动态密码登陆"></a>动态密码登陆</h3><p>2013年-2015年流行一个理念：传统数字密码是落后的、不安全的、体验不好的。很多安全甲乙方公司都在提N年内消灭密码，创造一个没有密码的时代。提出了很多新的验证方式，例如指纹、声音、虹膜等生物特征。其中有些已经广泛普及，有些技术因为准确性不够仍处在实验室阶段，有些受限于硬件未能普及。</p>
+<p>截止2018年，很多大厂吹嘘的N年已经到了，可是并没有实现当时说的“消灭密码”。不过也不必较真，用户的验证过程确实有了很多改善。至于未来能不能消灭密码，也许可以吧。</p>
+<p>在这场消灭密码的运动中，越来越的公司开始使用动态密码验证（当时这并不是一个新东西）。也就是在登录的时候给用户手机发一个随机数字，用户不需要填密码，填这个数字就可以登录了。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/smslogin.jpg" alt="smslogin"></p>
+<p>动态密码是真真切切的让用户不需要记忆密码，极大改善了用户体验。可是企业还是会提供传统的用户名密码登陆，原因有3个：</p>
+<ol>
+<li>要求用户注册时绑定手机号（这个在国内不是大问题）</li>
+<li>短信如果有延迟，用户体验其实更差。如果收不到短信，那就更糟了</li>
+<li>对于大厂，短信费也很贵啊</li>
+</ol>
+<h3 id="扫码登录"><a href="#扫码登录" class="headerlink" title="扫码登录"></a>扫码登录</h3><p>扫二维码登录是国内大厂喜欢的电脑端验证手段，本质是用已验证的移动设备来认证电脑端的行为。</p>
+<p>使用扫码登录用户确实是不需要输入密码了，甚至连用户名都不需要输入。但是必须要下载相应的App，而且要授权App使用相机的权限。也许这可以提升用户体验，但是也不能强迫用户安装App。所以一般是作为用户名密码登录的补充，不作为唯一验证手段。</p>
+<p>下图是Bilibili的扫码登录<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/qr-login.jpg" alt="二维码登录"></p>
+<h3 id="两步验证"><a href="#两步验证" class="headerlink" title="两步验证"></a>两步验证</h3><p>两步验证(2-Step Verification)又叫双因子验证(2-Factor Verification)，简单理解就是除了用户名和密码，还要进行第二步验证。往往是网站向已绑定的手机号或者邮箱发送一串随机数字，用户在网站或者App上填写收到的数字。</p>
+<p>下图是Google的两步验证<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/2sv.jpg" alt="2sv"></p>
+<p>还有一个类似的思路叫上行短信验证（上面Google的例子是下行短信验证），页面上显示一串数字，请用户使用已绑定的手机向企业的号码发送这串数据。</p>
+<p>下图是网易的上行短信校验<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/smsverification.jpg" alt="sms"></p>
+<p>上行短信校验比较少见，个人认为是体验问题，用户要输入网站手机号（10位），又要输入随机数（6位），还要花用户1毛钱。体验不是一般差！</p>
+<h2 id="人机验证"><a href="#人机验证" class="headerlink" title="人机验证"></a>人机验证</h2><p>除了要验证用户名和密码是否正确，很多时候我们还需要进行人机识别。</p>
+<h3 id="字符验证码"><a href="#字符验证码" class="headerlink" title="字符验证码"></a>字符验证码</h3><p>最常见的是数字、字母的混合验证码。有效的前提假设是：机器无法识别图片上的数字和字母。实际上这个假设并不成立，现在的OCR技术对于数字和字母的识别率很高。于是大家又加上了中文、模糊、渐变色、扭曲、干扰线、重叠、噪点等手段来提高机器识别难度，这么做确实有效果，但是有时候连人眼都无法识别了，甚至导致过大量投诉。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/hardvcode.jpg" alt="hardvcode"></p>
+<h3 id="选图验证码"><a href="#选图验证码" class="headerlink" title="选图验证码"></a>选图验证码</h3><p>这几年出现了很多非字符的验证码，最有名的当属12306的选图片验证码。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/12306verification.jpg" alt="12306"></p>
+<p>刚上线的时候因为照片分辨率低，加上有一些生僻物品，引起了全网的吐槽，很多人着急抢票，却在验证码这一步耽误了很久。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/funny12306.jpg" alt="funny12306"></p>
+<h3 id="滑动验证码"><a href="#滑动验证码" class="headerlink" title="滑动验证码"></a>滑动验证码</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/jigsaw-verification.gif" alt="滑动验证码"></p>
+<h3 id="文字点选验证码"><a href="#文字点选验证码" class="headerlink" title="文字点选验证码"></a>文字点选验证码</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/pic-click.gif" alt="pic-click"></p>
+<h3 id="图标点选验证码"><a href="#图标点选验证码" class="headerlink" title="图标点选验证码"></a>图标点选验证码</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/icon-pick.jpg" alt="icon-pick"></p>
+<h3 id="语序点选验证码"><a href="#语序点选验证码" class="headerlink" title="语序点选验证码"></a>语序点选验证码</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/word-order.gif" alt="word-order"></p>
+<h3 id="3D图片点选验证码"><a href="#3D图片点选验证码" class="headerlink" title="3D图片点选验证码"></a>3D图片点选验证码</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/3d-picture-pick.gif" alt="3d-picture-pick"></p>
+<h3 id="3D推理验证码"><a href="#3D推理验证码" class="headerlink" title="3D推理验证码"></a>3D推理验证码</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/3D-logic.gif" alt="3D-logic"></p>
+<h2 id="安全和用户体验的平衡"><a href="#安全和用户体验的平衡" class="headerlink" title="安全和用户体验的平衡"></a>安全和用户体验的平衡</h2><p>这么多五花八门的验证码，有的难以攻破，有的已经有不少破解方案，那是不是我们始终用最难破解的就可以了（例如3D推理验证码）？</p>
+<p>这里你就需要考虑安全和用户体验的平衡了，3D推理验证码对于机器来说很难破解，因为涉及3D图像物体识别又涉及语义理解。但是这对于普通用户来说也需要花更长时间，对于知道3D推理验证码的用户来说需要大致8-10秒；对于很多第一次见的用户来说，可能完全不知道这是什么东西，选择直接关闭页面。</p>
+<p>解决这个平衡有2个思路：</p>
+<ol>
+<li>做测试验证哪个验证码更合适，例如 A&#x2F;B Testing</li>
+<li>依据风险动态升级</li>
+</ol>
+<p>依据风险动态升级可以理解为：低风险用体验更好的验证方式，高风险用更不容易破解的验证方式。平时用体验更好的验证方式，攻击期间用更不容易破解的验证方式。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1010_%5BLua/">Lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/risk-management-note/%E9%AB%98%E5%8D%B1%E5%90%8D%E5%8D%95/">2023-04-26</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>利用 nginx_lua 定制高效灵活的专属WAF - Lua教程</title>
+
+  
+    <meta name="description" content="0x01 什么是Lua123关于Lua,就不用多说了吧,想必朋友们应该也都非常熟悉了,众多脚本语言中的一种,不过相对于其它脚本来说,性能要略高一点在nginx中也提供了一个nginx_lua的模块,主要是为了方便用户,可以灵活的通过lua来扩展nginx功能,比如lua_waf有兴趣可自行深入了解,这里就不细说了,我们今天的重点主要还是想利用它来快速部署一个简易版的Waf 0x02 这里,我还是拿">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用 nginx_lua 定制高效灵活的专属WAF">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-745_%E5%88%A9%E7%94%A8%20nginx_lua%20%E5%AE%9A%E5%88%B6%E9%AB%98%E6%95%88%E7%81%B5%E6%B4%BB%E7%9A%84%E4%B8%93%E5%B1%9EWAF/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="0x01 什么是Lua123关于Lua,就不用多说了吧,想必朋友们应该也都非常熟悉了,众多脚本语言中的一种,不过相对于其它脚本来说,性能要略高一点在nginx中也提供了一个nginx_lua的模块,主要是为了方便用户,可以灵活的通过lua来扩展nginx功能,比如lua_waf有兴趣可自行深入了解,这里就不细说了,我们今天的重点主要还是想利用它来快速部署一个简易版的Waf 0x02 这里,我还是拿">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://klionsec.github.io//img/lua_info.png">
+<meta property="og:image" content="https://klionsec.github.io//img/lua_regx.png">
+<meta property="og:image" content="https://klionsec.github.io//img/lua_cmd.png">
+<meta property="og:image" content="https://klionsec.github.io//img/lua_code.png">
+<meta property="og:image" content="https://klionsec.github.io//img/lua_sqli.png">
+<meta property="og:image" content="https://klionsec.github.io//img/lua_xss.png">
+<meta property="og:image" content="https://klionsec.github.io//img/lua_log.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.302Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.302Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://klionsec.github.io//img/lua_info.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.302Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>利用 nginx_lua 定制高效灵活的专属WAF</span></h1>
+<p><br/><br/>0x01 什么是Lua<br/></p><figure class="highlight autohotkey"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">关于Lua,就不用多说了吧,想必朋友们应该也都非常熟悉了,众多脚本语言中的一种,不过相对于其它脚本来说,性能要略高一点</div><div class="line">在nginx中也提供了一个nginx_lua的模块,主要是为了方便用户,可以灵活的通过lua来扩展nginx功能,比如lu<span class="built_in">a_waf</span></div><div class="line">有兴趣可自行深入了解,这里就不细说了,我们今天的重点主要还是想利用它来快速部署一个简易版的Waf</div></pre></td></tr></tbody></table></figure><p></p>
+<p>0x02 这里,我还是拿之前已经编译好的lnmp环境来演示,因为等会儿要重新编译nginx,所以就直接把之前nginx的整个安装目录干掉,因为是源码编译安装的,所以也不会有啥残留[源码编译安装的好处],记得在干掉之前先把nginx服务停掉,配置文件[nginx.conf]也备份一下,方便等会儿再直接拿过来用<br/></p><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">php5</span><span class="selector-class">.5</span><span class="selector-class">.38</span> + <span class="selector-tag">mysql-5</span><span class="selector-class">.5</span><span class="selector-class">.32</span> + <span class="selector-tag">nginx-1</span><span class="selector-class">.12</span><span class="selector-class">.1</span> + <span class="selector-tag">centOS6</span><span class="selector-class">.8_x64</span></div></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="bash"> pkill nginx</span></div><div class="line"><span class="bash"> netstat -tulnp | grep <span class="string">&#34;80&#34;</span></span></div><div class="line"><span class="bash"> cp /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf /root/</span></div><div class="line"><span class="bash"> cp /usr/<span class="built_in">local</span>/nginx/conf/extra/bwapp.conf /root/</span></div></pre></td></tr></tbody></table></figure>
+
+<p>0x03 准备好所需的所有源码包,注意,这里的nginx尽量先不要用太高的版本,高版本自身还有些问题,在实际编译时错误的解决也比较周折,暂不推荐用<br/></p><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">LuaJIT-2</span><span class="selector-class">.0</span><span class="selector-class">.5</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span>				</div><div class="line"><span class="selector-tag">lua-nginx-module-0</span><span class="selector-class">.9</span><span class="selector-class">.13</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></div><div class="line"><span class="selector-tag">ngx_devel_kit-0</span><span class="selector-class">.2</span><span class="selector-class">.19</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></div><div class="line"><span class="selector-tag">nginx-1</span><span class="selector-class">.8</span><span class="selector-class">.1</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></div></pre></td></tr></tbody></table></figure><p></p>
+<p>0x04 编译安装 LuaJIT ,lua脚本的解释器,因为这里是64位系统,防止等会儿找不到库,所以就提前把它链到32位的库中<br/></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="bash"> tar xf LuaJIT-2.0.5.tar.gz</span></div><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> LuaJIT-2.0.5</span></div><div class="line"><span class="meta">#</span><span class="bash"> make &amp;&amp; make install</span></div><div class="line"><span class="meta">#</span><span class="bash"> ln -s /usr/<span class="built_in">local</span>/lib/libluajit-5.1.so.2 /lib64/libluajit-5.1.so.2</span></div><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&#34;LUAJIT_LIB=/usr/local/lib&#34;</span> &gt;&gt; /etc/profile</span></div><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&#34;LUAJIT_INC=/usr/local/include/luajit-2.0/&#34;</span> &gt;&gt; /etc/profile</span></div><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">source</span> /etc/profile</span></div></pre></td></tr></tbody></table></figure><p></p>
+<p>0x05 重新编译安装nginx,其实,我自己这里的依赖库本身是不用再装的,因为之前装nginx时已经都装过了,如果你是第一次全新安装nginx,可能还是要装一下<br/></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> wget http://nginx.org/download/nginx-1.8.1.tar.gz</span></div><div class="line"><span class="meta">#</span><span class="bash"> yum install pcre pcre-devel openssl openssl-devel -y</span></div><div class="line"><span class="meta">#</span><span class="bash"> useradd -s /sbin/nologin -M nginx</span></div><div class="line"><span class="meta">#</span><span class="bash"> tar xf ../lua-nginx-module-0.9.16.tar.gz</span></div><div class="line"><span class="meta">#</span><span class="bash"> tar xf ../ngx_devel_kit-0.2.19.tar.gz</span></div><div class="line"><span class="meta">#</span><span class="bash"> tar xf nginx-1.8.1.tar.gz</span></div><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> nginx-1.8.1</span></div><div class="line"><span class="meta">#</span><span class="bash"> ./configure --prefix=/usr/<span class="built_in">local</span>/nginx-1.8.1 --user=nginx --group=nginx --with-http_ssl_module --with-http_stub_status_module --with-http_gzip_static_module --with-file-aio --with-http_dav_module --add-module=./lua-nginx-module-0.9.16 --add-module=./ngx_devel_kit-0.2.19/</span></div><div class="line"><span class="meta">#</span><span class="bash"> make &amp;&amp; make install</span></div><div class="line"><span class="meta">#</span><span class="bash"> ln -s /usr/<span class="built_in">local</span>/nginx-1.8.1/ /usr/<span class="built_in">local</span>/nginx</span></div><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/conf/</span></div><div class="line"><span class="meta">#</span><span class="bash"> mv nginx.conf nginx.conf.bak &amp;&amp; egrep -v <span class="string">&#34;^$|#&#34;</span> nginx.conf.bak &gt;&gt; nginx.conf</span></div></pre></td></tr></tbody></table></figure><p></p>
+<p>0x06 重新配置nginx,在nginx中配置文件中加入以下语句,之后重启nginx,主要是为了测试lua是否可用<br/></p><figure class="highlight puppet"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">http</span> {</div><div class="line">    .....</div><div class="line">    log_format <span class="keyword">main</span> <span class="string">&#39;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span>  [<span class="variable">$time_local</span>]  &#39;</span></div><div class="line">    <span class="string">&#39; &#34;<span class="variable">$request</span>&#34; <span class="variable">$request_body</span> <span class="variable">$status</span>  <span class="variable">$body_bytes_sent</span>  &#39;</span></div><div class="line">    <span class="string">&#39; &#34;<span class="variable">$http_referer</span>&#34;  &#34;<span class="variable">$http_user_agent</span>&#34;  &#34;<span class="variable">$http_x_forwarded_for</span>&#34; &#39;</span>;</div><div class="line">	</div><div class="line">    server {</div><div class="line">    ....</div><div class="line">        location /lua {</div><div class="line">            default_type <span class="string">&#39;text/plain&#39;</span>;</div><div class="line">            content_by_lua <span class="string">&#39;ngx.say(&#34;Lua say Hello to you!&#34;)&#39;</span>;</div><div class="line">        }</div><div class="line">    ....</div><div class="line">    }</div><div class="line">    .....</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment"># /usr/local/nginx-1.8.1/sbin/nginx -t</span></div><div class="line"><span class="comment"># /usr/local/nginx-1.8.1/sbin/nginx</span></div></pre></td></tr></tbody></table></figure><p></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://klionsec.github.io//img/lua_info.png" alt=""/><br/></p>
+<p>0x07 在nginx主配置文件中加载lua_waf,具体配置如下<br/></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/loveshell/ngx_lua_waf.git</span></div><div class="line"><span class="meta">#</span><span class="bash"> cp -r ngx_lua_waf/ /usr/<span class="built_in">local</span>/nginx/conf/waf</span></div><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/conf/</span></div></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight puppet"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># vi nginx.conf</span></div><div class="line"></div><div class="line"><span class="keyword">http</span> {</div><div class="line">	....</div><div class="line">    lua_package_path <span class="string">&#34;/usr/local/nginx/conf/waf/?.lua&#34;</span>;</div><div class="line">    lua_shared_dict limit <span class="number">10</span>m;</div><div class="line">    init_by_lua_file  /usr/local/nginx/conf/waf/init.lua;</div><div class="line">    access_by_lua_file /usr/local/nginx/conf/waf/waf.lua;</div><div class="line">	....</div><div class="line">	</div><div class="line">	log_format <span class="keyword">main</span> <span class="string">&#39;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span>  [<span class="variable">$time_local</span>]  &#39;</span></div><div class="line">    <span class="string">&#39; &#34;<span class="variable">$request</span>&#34; <span class="variable">$request_body</span> <span class="variable">$status</span>  <span class="variable">$body_bytes_sent</span>  &#39;</span></div><div class="line">    <span class="string">&#39; &#34;<span class="variable">$http_referer</span>&#34;  &#34;<span class="variable">$http_user_agent</span>&#34;  &#34;<span class="variable">$http_x_forwarded_for</span>&#34; &#34;<span class="variable">$dm_cookie</span>&#34; &#39;</span>;</div><div class="line">	</div><div class="line">	<span class="literal">include</span> extra/bwapp.conf;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p>0x08 编辑waf配置,非常简单,从名字都能看出来是干啥的,非常简单<br/></p><figure class="highlight gradle"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># vi <span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>conf<span class="regexp">/waf/</span>config.lua</div></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">RulePath = <span class="string">&#34;/usr/local/nginx/conf/waf/wafconf/&#34;</span></div><div class="line">attacklog = <span class="string">&#34;on&#34;</span>		<span class="comment"># 开启日志记录</span></div><div class="line">logdir = <span class="string">&#34;/usr/local/nginx/logs/hack/&#34;</span></div><div class="line">UrlDeny=<span class="string">&#34;on&#34;</span>			<span class="comment"># 从url中拦截</span></div><div class="line">Redirect=<span class="string">&#34;on&#34;</span></div><div class="line">CookieMatch=<span class="string">&#34;on&#34;</span>		<span class="comment"># 从cookie中拦截</span></div><div class="line">postMatch=<span class="string">&#34;on&#34;</span>			<span class="comment"># 从post包中拦截</span></div><div class="line">whiteModule=<span class="string">&#34;on&#34;</span></div><div class="line">black_fileExt={<span class="string">&#34;php&#34;</span>,<span class="string">&#34;jsp&#34;</span>}	<span class="comment"># 黑名单后缀</span></div><div class="line">ipWhitelist={<span class="string">&#34;127.0.0.1&#34;</span>}	<span class="comment"># ip白名单</span></div><div class="line">ipBlocklist={<span class="string">&#34;1.0.0.1&#34;</span>}		<span class="comment"># ip黑名单</span></div><div class="line">CCDeny=<span class="string">&#34;on&#34;</span>			<span class="comment"># 开启防CC攻击</span></div><div class="line">CCrate=<span class="string">&#34;100/60&#34;</span></div><div class="line">html=[[</div><div class="line">&lt;center&gt;&lt;h1&gt;No sir! &lt;/h1&gt;&lt;/center&gt;</div><div class="line">]]</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> mkdir /usr/<span class="built_in">local</span>/nginx/logs/hack/</span></div><div class="line"><span class="meta">#</span><span class="bash"> chown -R nginx.nginx /usr/<span class="built_in">local</span>/nginx/logs/hack/	注意,这里一定要nginx可写,不然你会发现拦截不了,因为<span class="built_in">log</span>文件根本没法创建</span></div><div class="line"><span class="meta">#</span><span class="bash"> mkdir /usr/<span class="built_in">local</span>/nginx-1.8.1/conf/extra</span></div><div class="line"><span class="meta">#</span><span class="bash"> cp bwapp.conf /usr/<span class="built_in">local</span>/nginx/conf/extra/</span></div><div class="line"><span class="meta">#</span><span class="bash"> /usr/<span class="built_in">local</span>/nginx/sbin/nginx -t</span></div><div class="line"><span class="meta">#</span><span class="bash"> /usr/<span class="built_in">local</span>/nginx/sbin/nginx -s reload</span></div></pre></td></tr></tbody></table></figure>
+<p>0x09 最后,再来看看最核心的地方,规则目录,这里的规则和上面的配置项功能都是一一对应的,还是那句话,这里默认的规则如果实际用当然是远远不够的,不过好在,我们可以直接往里面写正则,这样就显得简单灵活多了<br/></p><figure class="highlight gradle"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ls <span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>conf<span class="regexp">/waf/</span>wafconf</div></pre></td></tr></tbody></table></figure><p></p>
+<p>参数正则,确实太简陋了,不过,好在定制空间非常大,而且lua相对比较简单,花费的时间周期也比较短<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://klionsec.github.io//img/lua_regx.png" alt=""/><br/></p>
+<p>尝试命令执行<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://klionsec.github.io//img/lua_cmd.png" alt=""/><br/></p>
+<p>尝试php代码执行<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://klionsec.github.io//img/lua_code.png" alt=""/><br/></p>
+<p>尝试sql注入<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://klionsec.github.io//img/lua_sqli.png" alt=""/><br/></p>
+<p>尝试 xss<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://klionsec.github.io//img/lua_xss.png" alt=""/><br/></p>
+<p>0x10 通过日志观察攻击行为,利用脚本绘制动态图实时显示到前端页面上<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://klionsec.github.io//img/lua_log.png" alt=""/><br/></p>
+<p>0x11 小结:<br/></p><figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">部署简单,灵活高效,可扩展性较强,后期会把自己加强版的正则给大家,待续....</div></pre></td></tr></tbody></table></figure><p></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-758_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">Programming in Lua(Thrid Edition)笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-746_lua/">lua</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

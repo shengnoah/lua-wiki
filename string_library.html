@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua教程</title>
+
+  
+    <meta name="description" content="String 库Lua 字符串库包含很多强大的字符操作函数。字符串库中的所有函数都导出在模块 string 中。在 Lua 5.1 中，它还将这些函数导出作为 string 类型的方法。这样假设要返回一个字符串转的大写形式，可以写成 ans &#x3D; string.upper(s) ,也能写成 ans &#x3D; s:upper()。为了避免与之前版本不兼容，此处使用前者。 Lua 字符串总是由字节构成的。Lu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua教程">
+<meta property="og:url" content="https://lua.ren/string_library.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="String 库Lua 字符串库包含很多强大的字符操作函数。字符串库中的所有函数都导出在模块 string 中。在 Lua 5.1 中，它还将这些函数导出作为 string 类型的方法。这样假设要返回一个字符串转的大写形式，可以写成 ans &#x3D; string.upper(s) ,也能写成 ans &#x3D; s:upper()。为了避免与之前版本不兼容，此处使用前者。 Lua 字符串总是由字节构成的。Lu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.129Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.129Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="openresty">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets"></div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+
+<h1 id="String-库"><a href="#String-库" class="headerlink" title="String 库"></a>String 库</h1><p>Lua 字符串库包含很多强大的字符操作函数。字符串库中的所有函数都导出在模块 string 中。在 Lua 5.1 中，它还将这些函数导出作为 string 类型的方法。这样假设要返回一个字符串转的大写形式，可以写成 <code>ans = string.upper(s)</code> ,也能写成 <code>ans = s:upper()</code>。为了避免与之前版本不兼容，此处使用前者。</p>
+<p>Lua 字符串总是由字节构成的。Lua 核心并不尝试理解具体的字符集编码（比如 GBK 和 UTF-8 这样的多字节字符编码）。</p>
+<p>需要特别注意的一点是，Lua 字符串内部用来标识各个组成字节的下标是从 1 开始的，这不同于像 C 和 Perl 这样的编程语言。这样数字符串位置的时候再也不用调整，对于非专业的开发者来说可能也是一个好事情，string.sub(str, 3, 7) 直接表示从第三个字符开始到第七个字符（含）为止的子串。</p>
+<h4 id="string-byte-s-i-j"><a href="#string-byte-s-i-j" class="headerlink" title="string.byte(s [, i [, j ]])"></a>string.byte(s [, i [, j ]])</h4><p>返回字符 s[i]、s[i + 1]、s[i + 2]、······、s[j] 所对应的 ASCII 码。<code>i</code> 的默认值为 1，即第一个字节,<code>j</code> 的默认值为 i 。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">byte</span>(<span class="string">&quot;abc&quot;</span>, <span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">byte</span>(<span class="string">&quot;abc&quot;</span>, <span class="number">3</span>)) <span class="comment">-- 缺少第三个参数，第三个参数默认与第二个相同，此时为 3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">byte</span>(<span class="string">&quot;abc&quot;</span>))    <span class="comment">-- 缺少第二个和第三个参数，此时这两个参数都默认为 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line"><span class="number">97</span>	<span class="number">98</span>	<span class="number">99</span></span><br><span class="line"><span class="number">99</span></span><br><span class="line"><span class="number">97</span></span><br></pre></td></tr></table></figure>
+
+<p>由于 <code>string.byte</code> 只返回整数，而并不像 <code>string.sub</code> 等函数那样（尝试）创建新的 Lua 字符串，<br>因此使用 <code>string.byte</code> 来进行字符串相关的扫描和分析是最为高效的，尤其是在被 LuaJIT 2 所 JIT 编译之后。</p>
+<h4 id="string-char-…"><a href="#string-char-…" class="headerlink" title="string.char (…)"></a>string.char (…)</h4><p>接收 0 个或更多的整数（整数范围 ：0~255）,返回这些整数所对应的 ASCII 码字符组成的字符串。当参数为空时，默认是一个 0。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">char</span>(<span class="number">96</span>, <span class="number">97</span>, <span class="number">98</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">char</span>())        <span class="comment">-- 参数为空，默认是一个0，</span></span><br><span class="line">                            <span class="comment">-- 你可以用string.byte(string.char())测试一下</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">char</span>(<span class="number">65</span>, <span class="number">66</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt; output</span></span><br><span class="line">`ab</span><br><span class="line"></span><br><span class="line">AB</span><br></pre></td></tr></table></figure>
+
+<p>此函数特别适合从具体的字节构造出二进制字符串。这经常比使用 <code>table.concat</code> 函数和 <code>..</code> 连接运算符更加高效。</p>
+<h4 id="string-upper-s"><a href="#string-upper-s" class="headerlink" title="string.upper(s)"></a>string.upper(s)</h4><p>接收一个字符串s，返回一个把所有小写字母变成大写字母的字符串。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">upper</span>(<span class="string">&quot;Hello Lua&quot;</span>))  <span class="comment">--&gt;output  HELLO LUA</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="string-lower-s"><a href="#string-lower-s" class="headerlink" title="string.lower(s)"></a>string.lower(s)</h4><p>接收一个字符串s，返回一个把所有大写字母变成小写字母的字符串。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">lower</span>(<span class="string">&quot;Hello Lua&quot;</span>))  <span class="comment">--&gt;output   hello lua</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="string-len-s"><a href="#string-len-s" class="headerlink" title="string.len(s)"></a>string.len(s)</h4><p>接收一个字符串，返回它的长度。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">len</span>(<span class="string">&quot;hello lua&quot;</span>)) <span class="comment">--&gt;output  9</span></span><br></pre></td></tr></table></figure>
+
+<p>使用此函数是不推荐的。应当总是使用 <code>#</code> 运算符来获取 Lua 字符串的长度。</p>
+<p>由于 Lua 字符串的长度是专门存放的，并不需要像 C 字符串那样即时计算，因此获取字符串长度的操作总是 <code>O(1)</code> 的时间复杂度。</p>
+<h4 id="string-find-s-p-init-plain"><a href="#string-find-s-p-init-plain" class="headerlink" title="string.find(s, p [, init [, plain]])"></a>string.find(s, p [, init [, plain]])</h4><p>在 s 字符串中第一次匹配 p 字符串。若匹配成功，则返回 p 字符串在 s 字符串中出现的开始位置和结束位置；若匹配失败，则返回 nil。<br>第三个参数 init 默认为 1，并且可以为负整数，当 init 为负数时，表示从 s 字符串的 string.len(s) + init 索引处开始向后匹配字符串 p 。<br>第四个参数默认为 false，当其为 true 时，只会把 p 看成一个字符串对待。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="built_in">find</span> = <span class="built_in">string</span>.<span class="built_in">find</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">find</span>(<span class="string">&quot;abc cba&quot;</span>, <span class="string">&quot;ab&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">find</span>(<span class="string">&quot;abc cba&quot;</span>, <span class="string">&quot;ab&quot;</span>, <span class="number">2</span>))     <span class="comment">-- 从索引为2的位置开始匹配字符串：ab</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">find</span>(<span class="string">&quot;abc cba&quot;</span>, <span class="string">&quot;ba&quot;</span>, <span class="number">-1</span>))    <span class="comment">-- 从索引为7的位置开始匹配字符串：ba</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">find</span>(<span class="string">&quot;abc cba&quot;</span>, <span class="string">&quot;ba&quot;</span>, <span class="number">-3</span>))    <span class="comment">-- 从索引为6的位置开始匹配字符串：ba</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">find</span>(<span class="string">&quot;abc cba&quot;</span>, <span class="string">&quot;(%a+)&quot;</span>, <span class="number">1</span>))  <span class="comment">-- 从索引为1处匹配最长连续且只含字母的字符串</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">find</span>(<span class="string">&quot;abc cba&quot;</span>, <span class="string">&quot;(%a+)&quot;</span>, <span class="number">1</span>, <span class="literal">true</span>)) <span class="comment">--从索引为1的位置开始匹配字符串：(%a+)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line"><span class="number">1</span>   <span class="number">2</span></span><br><span class="line"><span class="literal">nil</span></span><br><span class="line"><span class="literal">nil</span></span><br><span class="line"><span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">1</span>   <span class="number">3</span>   abc</span><br><span class="line"><span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+
+<p>对于 LuaJIT 这里有个性能优化点，对于 string.find 方法，当只有字符串查找匹配时，是可以被 JIT 编译器优化的，有关 JIT 可以编译优化清单，大家可以参考 <a target="_blank" rel="noopener" href="http://wiki.luajit.org/NYI">http://wiki.luajit.org/NYI</a> ，性能提升是非常明显的，通常是 100 倍量级。 这里有个的例子，大家可以参考 <a target="_blank" rel="noopener" href="https://groups.google.com/forum/m/#!topic/openresty-en/rwS88FGRsUI">https://groups.google.com/forum/m/#!topic&#x2F;openresty-en&#x2F;rwS88FGRsUI</a>。</p>
+<h4 id="string-format-formatstring-…"><a href="#string-format-formatstring-…" class="headerlink" title="string.format(formatstring, …)"></a>string.format(formatstring, …)</h4><p>按照格式化参数 formatstring，返回后面 <code>...</code> 内容的格式化版本。编写格式化字符串的规则与标准 c 语言中 printf 函数的规则基本相同：它由常规文本和指示组成，这些指示控制了每个参数应放到格式化结果的什么位置，及如何放入它们。一个指示由字符 <code>%</code> 加上一个字母组成，这些字母指定了如何格式化参数，例如 <code>d</code> 用于十进制数、<code>x</code>用于十六进制数、<code>o</code>用于八进制数、<code>f</code>用于浮点数、<code>s</code>用于字符串等。在字符<code>%</code>和字母之间可以再指定一些其他选项，用于控制格式的细节。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%.4f&quot;</span>, <span class="number">3.1415926</span>))     <span class="comment">-- 保留4位小数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%d %x %o&quot;</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">31</span>))<span class="comment">-- 十进制数31转换成不同进制</span></span><br><span class="line">d = <span class="number">29</span>; m = <span class="number">7</span>; y = <span class="number">2015</span>                     <span class="comment">-- 一行包含几个语句，用；分开</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%s %02d/%02d/%d&quot;</span>, <span class="string">&quot;today is:&quot;</span>, d, m, y))</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line"><span class="number">3.1416</span></span><br><span class="line"><span class="number">31</span> <span class="number">1</span>f <span class="number">37</span></span><br><span class="line">today is: <span class="number">29</span>/<span class="number">07</span>/<span class="number">2015</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="string-match-s-p-init"><a href="#string-match-s-p-init" class="headerlink" title="string.match(s, p [, init])"></a>string.match(s, p [, init])</h4><p>在字符串 s 中匹配（模式）字符串 p，若匹配成功，则返回目标字符串中与模式匹配的子串；否则返回 nil。第三个参数 init 默认为 1，并且可以为负整数，当 init 为负数时，表示从 s 字符串的 string.len(s) + init 索引处开始向后匹配字符串 p。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;hello lua&quot;</span>, <span class="string">&quot;lua&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;lua lua&quot;</span>, <span class="string">&quot;lua&quot;</span>, <span class="number">2</span>))  <span class="comment">--匹配后面那个lua</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;lua lua&quot;</span>, <span class="string">&quot;hello&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&quot;today is 27/7/2015&quot;</span>, <span class="string">&quot;%d+/%d+/%d+&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line">lua</span><br><span class="line">lua</span><br><span class="line"><span class="literal">nil</span></span><br><span class="line"><span class="number">27</span>/<span class="number">7</span>/<span class="number">2015</span></span><br></pre></td></tr></table></figure>
+
+<p><code>string.match</code> 目前并不能被 JIT 编译，应 <strong>尽量</strong> 使用 ngx_lua 模块提供的 <code>ngx.re.match</code> 等接口。</p>
+<h4 id="string-gmatch-s-p"><a href="#string-gmatch-s-p" class="headerlink" title="string.gmatch(s, p)"></a>string.gmatch(s, p)</h4><p>返回一个迭代器函数，通过这个迭代器函数可以遍历到在字符串s中出现模式串p的所有地方。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;hello world from Lua&quot;</span></span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&quot;%a+&quot;</span>) <span class="keyword">do</span>  <span class="comment">--匹配最长连续且只含字母的字符串</span></span><br><span class="line">    <span class="built_in">print</span>(w)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line">hello</span><br><span class="line">world</span><br><span class="line">from</span><br><span class="line">Lua</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t = &#123;&#125;</span><br><span class="line">s = <span class="string">&quot;from=world, to=Lua&quot;</span></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&quot;(%a+)=(%a+)&quot;</span>) <span class="keyword">do</span>  <span class="comment">--匹配两个最长连续且只含字母的</span></span><br><span class="line">    t[k] = v                                    <span class="comment">--字符串，它们之间用等号连接</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(t) <span class="keyword">do</span></span><br><span class="line"><span class="built_in">print</span> (k,v)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line">to      Lua</span><br><span class="line">from    world</span><br></pre></td></tr></table></figure>
+
+<p>此函数目前并不能被 LuaJIT 所 JIT 编译，而只能被解释执行。应 <strong>尽量</strong> 使用 ngx_lua 模块提供的 <code>ngx.re.gmatch</code> 等接口。</p>
+<h4 id="string-rep-s-n"><a href="#string-rep-s-n" class="headerlink" title="string.rep(s, n)"></a>string.rep(s, n)</h4><p>返回字符串s的n次拷贝。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">rep</span>(<span class="string">&quot;abc&quot;</span>, <span class="number">3</span>)) <span class="comment">--拷贝3次&quot;abc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output  abcabcabc</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="string-sub-s-i-j"><a href="#string-sub-s-i-j" class="headerlink" title="string.sub(s, i [, j])"></a>string.sub(s, i [, j])</h4><p>返回字符串 s 中，索引 i 到索引 j 之间的子字符串。当 j 缺省时，默认为 -1，也就是字符串 s 的最后位置。 i 可以为负数。当索引 i 在字符串 s 的位置在索引 j 的后面时，将返回一个空字符串。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;Hello Lua&quot;</span>, <span class="number">4</span>, <span class="number">7</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;Hello Lua&quot;</span>, <span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;Hello Lua&quot;</span>, <span class="number">2</span>, <span class="number">1</span>))    <span class="comment">--看到返回什么了吗</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">sub</span>(<span class="string">&quot;Hello Lua&quot;</span>, <span class="number">-3</span>, <span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line">lo L</span><br><span class="line">ello Lua</span><br><span class="line"></span><br><span class="line">Lua</span><br></pre></td></tr></table></figure>
+
+<p>如果你只是想对字符串中的单个字节进行检查，使用 <code>string.char</code> 函数通常会更为高效。</p>
+<h4 id="string-gsub-s-p-r-n"><a href="#string-gsub-s-p-r-n" class="headerlink" title="string.gsub(s, p, r [, n])"></a>string.gsub(s, p, r [, n])</h4><p>将目标字符串 s 中所有的子串 p 替换成字符串 r。可选参数 n，表示限制替换次数。返回值有两个，第一个是被替换后的字符串，第二个是替换了多少次。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;Lua Lua Lua&quot;</span>, <span class="string">&quot;Lua&quot;</span>, <span class="string">&quot;hello&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;Lua Lua Lua&quot;</span>, <span class="string">&quot;Lua&quot;</span>, <span class="string">&quot;hello&quot;</span>, <span class="number">2</span>)) <span class="comment">--指明第四个参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line">hello hello hello   <span class="number">3</span></span><br><span class="line">hello hello Lua     <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>此函数不能为 LuaJIT 所 JIT 编译，而只能被解释执行。一般我们推荐使用 ngx_lua 模块提供的 <code>ngx.re.gsub</code> 函数。</p>
+<h4 id="string-reverse-s"><a href="#string-reverse-s" class="headerlink" title="string.reverse (s)"></a>string.reverse (s)</h4><p>接收一个字符串s，返回这个字符串的反转。</p>
+<blockquote>
+<p>示例代码</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">reverse</span>(<span class="string">&quot;Hello Lua&quot;</span>))  <span class="comment">--&gt; output: auL olleH</span></span><br></pre></td></tr></table></figure>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/re.html">2023-04-26</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/table_library.html">2023-04-26</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

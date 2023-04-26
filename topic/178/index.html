@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>nil、null与ngx.null - Lua教程</title>
+
+  
+    <meta name="description" content="nil、null与ngx.null">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nil、null与ngx.null">
+<meta property="og:url" content="https://lua.ren/topic/178/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="nil、null与ngx.null">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.105Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">nil、null与ngx.null</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">问题分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">眼高手低</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">ngx.null是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">为什么要这么设计？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">幽灵般的nil</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>nil、null与ngx.null</span></h1>
+<h3>问题概述</h3> 
+
+<p>今天第一次在nginx+lua架构下，写了个需要操作Redis的后台接口，该接口的功能主要是接受客户端的json格式的post请求，实现对保存在redis中的任务插入、删除、查询等。虽然nginx，lua等都是刚接触，但这几个接口还是顺风顺水的坐下来了，不能忘了感谢春哥章亦春。</p>
+<p>在Redis中记录的任务其实很简单，每插入一个任务，就在redis中增加一个HASH结构，每次查询返回该SET的各个Field和对应的Value值，例如md5，filesize等。由于任务类型的不同，有的Field可能在该任务中不存在，此时在以json格式将查询结果返回时不应显示该Field。</p>
+<p>以md5域为例，在对当前任务以md5域执行hget后，应该对返回结果做一个判断，如果该HASH结构并没有设置md5这个域，则跳过，继续执行后面的逻辑，如果设置了md5域，则把该域的Value取出来，插入到结果table中，后续再作为json格式返回结果的一部分，返回给后台。</p>
+<p>测试时，却发现在某些域未设置时，查询结果中却仍然会把该域返回给查询调用者，但其Value部分是null。例如,执行下面的测试用例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d &quot;&#123;\&quot;queryfile\&quot;:[&#123;\&quot;url\&quot;:\&quot;/www.baidu.com/img/bdlogo.gif\&quot; &#125;]&#125;&quot; &quot;127.0.0.1/cjson&quot;</span><br></pre></td></tr></table></figure>
+<p>尽管对该任务而言，在插入时并没有设置md5域，但返回结果包含了md5域：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;result&quot;:[&#123;&quot;url&quot;:&quot;\/www.baidu.com\/img\/bdlogo.gif&quot;,&quot;result&quot;:0,&quot;md5&quot;:null,&quot;putflag&quot;:&quot;remote&quot;&#125;]&#125;</span><br></pre></td></tr></table></figure>
+<h3>问题分析</h3> 
+
+<p>看到这个现象，首先想到的当然是lua脚本中对执行hget md5操作的返回值判断失效了，我第一次是这么写的：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> md5,err=red:hget(tasklist,<span class="string">&quot;md5&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> md5 <span class="keyword">and</span>  md5 ~= <span class="string">&quot;&quot;</span>  <span class="keyword">then</span></span><br><span class="line">    tb.md5=md5</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>从后面的结果看，当md5值为空时，该判断条件并没有将其过滤掉，依然执行了tb.md5&#x3D;md5。由于redis模块也是调用春哥的lua-resty-redis，因此猜测是否春哥把redis查询结果中的空值用“null”字符串返回了，于是将上面的几行代码改为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> md5,err=red:hget(tasklist,<span class="string">&quot;md5&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> md5 <span class="keyword">and</span>  md5 ~= “null”  <span class="keyword">then</span></span><br><span class="line">    tb.md5=md5</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>仍然过滤失败，忽然眼前一亮，发现查询结果中显示的是”md5”:null,而非”md5”:”null”，上面这种猜测不攻自破。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">red:hget(tasklist,<span class="string">&quot;md5&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>肯定是返回了一个跟null相关的结果，但这个结果既不是nil，又不是空字符串，也不是”null”。再次猜测，该值类型可能不是string,虽然这个猜测看上去很奇怪，因为在设置了md5的情况下，其类型的确是string。于是在判断语句前面加了一句打印信息：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngx.say(<span class="string">&quot;type of null is &quot;</span>..<span class="built_in">type</span>(md5))</span><br></pre></td></tr></table></figure>
+
+<p>果然，这个”空值“并不是string类型，而是userdata类型，userdata类型当然跟字符串类型不会相等，所以上面的过滤条件不管设置成什么样子，都不会生效，永远会执行tb.md5&#x3D;md5。</p>
+<p>这样是找到原因了，但还未最终解决。既然当hget操作返回一个空值时，lua-resty-redis将其设置为一个userdata类型，那我们在代码里该如何过滤这种情况呢?本质问题就是，red:hget当查询resdis结果为空时，到底返回了什么？（不为空时，是string)</p>
+<p>这时候开源的好处就体现出来了，在<a target="_blank" rel="noopener" href="https://github.com/agentzh/lua-resty-redis%E9%87%8C%E6%89%AB%E4%BA%86%E4%B8%8Bredis.lua%E6%96%87%E4%BB%B6%EF%BC%8C%E5%8F%91%E7%8E%B0%E8%BF%94%E5%9B%9E%E7%9A%84%E6%98%AFngx.null%E3%80%82">https://github.com/agentzh/lua-resty-redis里扫了下redis.lua文件，发现返回的是ngx.null。</a></p>
+<p>恩，问题到这就解决了，将上面的过滤代码改为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> md5,err=red:hget(tasklist,<span class="string">&quot;md5&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> md5 <span class="keyword">and</span> md5 ~= null <span class="keyword">and</span> md5 ~= ngx.null  <span class="keyword">then</span></span><br><span class="line">    tb.md5=md5</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>就能保证返回结果里不会包含值为null的域了。</p>
+<h3>眼高手低</h3> 
+
+<p>回头看了一下lua-resty-redis的文档，发现关于上面的内容，在Readme里已经写的清清楚楚了，在<a target="_blank" rel="noopener" href="https://github.com/agentzh/lua-resty-redis/blob/master/README.markdown%E4%B8%AD%EF%BC%8C%E6%9C%89%E8%BF%99%E4%B9%88%E4%B8%80%E5%8F%A5%EF%BC%9A">https://github.com/agentzh/lua-resty-redis/blob/master/README.markdown中，有这么一句：</a></p>
+<blockquote>A non-nil Redis "bulk reply" results in a Lua string as the return value. A nil bulk reply results in a ngx.null return value.</blockquote> 
+
+
+<p>首先不应该是自责，而是再次赞一下agentzh的态度，业界标杆。</p>
+<h3>ngx.null是什么？</h3> 
+
+<p>那么ngx.null到底是什么东西呢？ 在<a target="_blank" rel="noopener" href="http://wiki.nginx.org/HttpLuaModule%E6%9C%89%E5%A6%82%E4%B8%8B%E8%AF%B4%E6%98%8E%EF%BC%9A">http://wiki.nginx.org/HttpLuaModule有如下说明：</a></p>
+<blockquote>The ngx.null constant is a NULL light userdata usually used to represent nil values in Lua tables etc and is similar to the lua-cjson library's cjson.null constant. This constant was first introduced in the v0.5.0rc5 release.</blockquote> 
+
+<p>ngx.null在print、ngx.print、ngx.log、ngx.say等函数中，有如下特点：</p>
+<blockquote>Lua nil arguments are accepted and result in literal "nil" strings while Lua booleans result in literal "true" or "false" strings. And the ngx.null constant will yield the "null" string output.</blockquote> 
+
+<h3>为什么要这么设计？</h3> 
+
+<p>lua-resty-redis中，为什么要把redis查询为空的情况返回一个userdata类型的ngx.null？直接返回nil不行吗？</p>
+<p>答案是不行，因为nil在lua中有其特殊意义，如果一个变量被设置为nil，就等于说该变量未定义，与无穷无尽的其他未定义的变量一样。那么，如果把redis查询为空的结果设置为nil，就无法把”查询为空”和“未定义”区分开来了，例如在一个table中，一个key对应一个value，如果将该value设置为nil，则相当让key凭空消失，这显然是不合理的。所以必须用一个userdata类型的独特的值来表示这种查询为空，但又不等同于未定义的变量，例如ngx.null。同样的情况想必在sql的lua模块中也会出现，用来处理记录中键值查询为空的情况。</p>
+<h3>幽灵般的nil</h3> 
+
+<p>这就要说道lua中神奇的nil了。nil是一种类型，该类型只有一个值，这个值也叫nil。改值的作用只有一个，表示一个变量不存在。跟C\C++等常规语言不同，”不存在“跟空、0完全是两个概念。在C语言中，一个字符串如果为空，那么它就只有一个为0的\nul结束符，如果对齐进行逻辑判断，则是假。<br>但lua中，只要一个变量不是nil类型或者是boolean类型中的false,则对它进行逻辑判断，结果是真，即使该值是一个数字0，或者是一个空字符串。</p>
+<p>编辑：糖果</p>
+<p>作者：strider<br>原文链接：<a target="_blank" rel="noopener" href="http://www.pureage.info/2013/09/02/125.html">http://www.pureage.info/2013/09/02/125.html</a></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/177/">LUA的#操作符,getn,maxn操作table的区别</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/179/">Lua源码赏析</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

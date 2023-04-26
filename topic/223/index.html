@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>在Heroku云上部署Lua应用 - Lua教程</title>
+
+  
+    <meta name="description" content="在Heroku云上部署Lua应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Heroku云上部署Lua应用">
+<meta property="og:url" content="https://lua.ren/topic/223/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="在Heroku云上部署Lua应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.108Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">在Heroku云上部署Lua应用</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">1.创建APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">2.描述依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">3.创建WEB服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">4.部署 Web Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">5.后续</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>在Heroku云上部署Lua应用</span></h1>
+<p>在Heroku云上部署Lua应用</p>
+<p>Running Lua on Heroku</p>
+<p>Posted February 05, 2012 by leafo (@moonscript) </p>
+<blockquote>Since the release of Heroku’s Cedar platform they've opened up the opportunity for users to run web applications on any stack. Using something called a buildpack we can describe a template for deploying any kind of application. I saw this as a great opportunity to try using Lua on a cloud hosting platform (for free).</blockquote> 
+
+<p>因为Heroku发布的Cedar平台，开放了为用户运行任意web应用的栈技术支持，buildpack使我们可以用模板来描述任意类型的应用部署，关键的是这东西,在云上运行lua还免费。</p>
+<blockquote>I put together heroku-buildpack-lua, a buildpack containing Lua 5.1 andLuaRocks (a Lua package manager) enable you to quickly deploy Lua along with any required dependencies that can be found on theLuaRocks server.</blockquote> 
+
+<p>我做了一个heroku-buidlparck-lua的构建包，包里有lua 5.1和luarocks（LUA包管理器），充许你快速的部署一个lua程序，并且任何相关的依赖，都可以在LuaRocsks服务器上找到。</p>
+<blockquote>Here’s a tutorial on getting a very simple app running:</blockquote> 
+下面的是运行一个简单app的教程。
+
+<p>Feb 12 2012 — I’ve updated the buildpack and this post to simplify the process.</p>
+<blockquote> 
+1.Creating An App
+2.Describing Dependencies
+3.Creating A Web Server
+4.Deploying The Web Server
+5.What’s Next?
+</blockquote> 
+
+<p>1.创建APP<br>2.描述依赖<br>3.创建一个WEB服务器<br>4.部署WEB服务器<br>5.后续</p>
+<h3>1.创建APP</h3> 
+Creating An App
+
+
+
+<blockquote>Assuming you've installed heroku we start by creating a new app:</blockquote> 
+
+<p>假设你已经安装了heroku,我们就开始创建一个应用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ heroku create --stack cedar --buildpack </span><br><span class="line">http://github.com/leafo/heroku-buildpack-lua.git</span><br></pre></td></tr></table></figure>
+
+<blockquote>Clone the repository it created and we're ready to begin. (stark-dust-4830 was the randomly generated name of my app, replace it with yours.)</blockquote> 
+
+<p>克隆分支，创建后我们开始读取。(stark-dust-4830是一个随机生成app名称)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git@heroku.com:stark-dusk-4830.git</span><br><span class="line">$cd stark-dust-4830</span><br></pre></td></tr></table></figure>
+
+
+<h3>2.描述依赖</h3> 
+Describing Dependencies
+
+
+<blockquote>Heroku manages a collection of app servers for us, called web dynos in their terminology. Each application server must expose itself to the outside world. This is done by running a web server on the dyno.</blockquote>  
+
+<p>Heroku为我们管理服务器上的应用集合， 术语叫做web dynos，每个应用服务必须对外界暴露自己，这是运行在dyno上的WEB服务。</p>
+<blockquote>The Xavante project is simple web server written in Lua with a couple dependencies.</blockquote> 
+Xavate project是一个简单的用lua弄的web服务，两依赖。
+
+
+<blockquote>Using LuaRocks bundled in the Lua buildpack, we can easily install Xavante and all its dependencies. We describe the dependencies of our Lua project by creating a rockspec for it.</blockquote> 
+
+<p>LuaRocks被绑定在lua级的buidlpack中， 我们可以很容易的安装Xavante和所有她的依赖， 我们创建一个rockkspec的文件来描述我们lua工程的依赖。</p>
+<blockquote>A rockspec is a special Lua file ending in .rockspec that describes meta-data about a Lua module. This meta-data includes things like the project name, the maintainer. It also holds any dependencies and how to build the module.</blockquote> 
+
+<p>rockspeck是一个特殊的扩名是.rockspec的lua文件，描述关于lua模块的头信息，这个头信息包括了像项目名、维护者，甚至任何的关于如何创建模块的所需的依赖信息。</p>
+<blockquote>The Lua buildpack understands the rockspec format, but only looks at the dependencies. Thus, for simplicity we'll only define the dependencies.
+Go ahead and create app.rockspec and place inside of it:</blockquote> 
+
+<p>Lua的构建包知道rockspec的格式，但是只能是依赖，我们的只能定义依赖，以下是之前创建的app.rockspec的内容。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- app.rockspec</span></span><br><span class="line">dependencies = &#123;</span><br><span class="line">  <span class="string">&quot;xavante&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>Xavante will be our only dependency. We're going to keep this tutorial short and leave out the web frameworks. Xavante’s API is flexible enough that it functions as a makeshift framework.</blockquote> 
+
+<p>Xavante 是我们唯一的依赖，我们这教程不使用lua web框架。Xavante的API很灵活，是够应付一般函数的简易框架。</p>
+<blockquote>If you commit and push, you'll see the buildpack fetch and build all the dependencies. There will be a lot of output, don’t be be concerned.</blockquote> 
+
+<p>如果你提交了代码，会看到build会取得重建所有的依赖，会有很多的输出，可无视。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add app.rockspec</span><br><span class="line">$ git commit -m &quot;init&quot;$ git push origin master</span><br></pre></td></tr></table></figure>
+
+<p>…</p>
+<p>—–&gt; Heroku receiving push<br>—–&gt; Fetching custom buildpack… done<br>—–&gt; Lua app detected<br>—–&gt; Copying lua to bin<br>—–&gt; Installing packages<br>Installing <a target="_blank" rel="noopener" href="http://www.luarocks.org/repositories/rocks/xavante-2.2.1-1.all.rock">http://www.luarocks.org/repositories/rocks/xavante-2.2.1-1.all.rock</a>…</p>
+<p>… output truncated …</p>
+<p>—–&gt; Discovering process types<br>       Procfile declares types -&gt; (none)<br>—–&gt; Compiled slug size is 292K<br>—–&gt; Launching… done, v5<br>       <a target="_blank" rel="noopener" href="http://stark-dusk-4830.herokuapp.com/">http://stark-dusk-4830.herokuapp.com</a> deployed to </p>
+<blockquote>Heroku</blockquote> 
+<blockquote>Our dependencies work, but we still haven’t set up a web server. This we'll do by writing some Lua.</blockquote> 
+
+<p>依赖配置好了，但还需要配置web服务器，那我们就用lua写点啥。</p>
+<h3>3.创建WEB服务</h3> 
+Creating A Web Server
+
+
+
+<blockquote>We'll use Xavante’s programmatic API to create and run our server through a simple Lua script
+
+<p>Create a file, web.lua, and place in it: </p>
+</blockquote> 
+
+<p>我们用Xavnate的可编程API来创建和运行我们的简单的lua脚本。<br>创建一个web.lua文件。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- web.lua</span></span><br><span class="line"><span class="built_in">require</span><span class="string">&quot;xavante&quot;</span></span><br><span class="line"><span class="built_in">require</span><span class="string">&quot;xavante.filehandler&quot;</span></span><br><span class="line"></span><br><span class="line">port =...</span><br><span class="line"></span><br><span class="line">xavante.HTTP &#123;</span><br><span class="line">  server = &#123; host =<span class="string">&quot;*&quot;</span>, port =<span class="built_in">tonumber</span>(port) &#125;,</span><br><span class="line">  defaultHost = &#123;</span><br><span class="line">    rules = &#123;</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">match</span> =<span class="string">&quot;/$&quot;</span>,</span><br><span class="line">        with =<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span></span></span><br><span class="line">          res.headers[<span class="string">&quot;Content-type&quot;</span>] =<span class="string">&quot;text/html&quot;</span></span><br><span class="line">          res.content =<span class="string">&quot;hello world, the time is: &quot;</span>..<span class="built_in">os</span>.<span class="built_in">date</span>()</span><br><span class="line">          <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      &#125;, &#123;</span><br><span class="line">        <span class="built_in">match</span> =<span class="string">&quot;.&quot;</span>,</span><br><span class="line">        with = xavante.filehandler,</span><br><span class="line">        params = &#123; baseDir =<span class="string">&quot;static/&quot;</span> &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">xavante.start()</span><br></pre></td></tr></table></figure>
+
+<blockquote>In this file we create a web server with two simple rules. If you go to the path / then we say hello and show the time. Otherwise, we default to trying to serve files from the static/ directory in our app.</blockquote> 
+
+<p>在这个文件，我们创建一个web服务和两个简单的规则。当你访问路径’&#x2F;‘时，<br>会显示 ‘say hello’的字样，并且显示时间信息，另外静态文件是放在当前app的static目录 。</p>
+<blockquote>Go ahead and create the static/ directory now, and put something inside of it like a favicon or a html file.</blockquote> 
+
+<p>继续，创建的 static目录 ，现在就可以把放一些图标和html文件放到里面。</p>
+<blockquote>If you have Xavante installed locally, we can test the app. (where 5000 is a port to bind to)</blockquote> 
+
+<p>如果Xavante被安装在本地，我们测下APP。（绑定的端口是5000）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ lua web.lua 5000</span><br><span class="line">Xavante started on port(s) 5000</span><br></pre></td></tr></table></figure>
+
+<blockquote>If not, go on to the next step.</blockquote> 
+如果不是，进入下一步。
+
+<h3>4.部署 Web Server</h3> 
+Deploying The Web Server
+
+
+<blockquote>Now that all the required code is written, the only thing left to do is to tell Heroku how to start it.</blockquote> 
+
+<p>现在所有的代码都写了，接下来唯一要做的是告诉Heroku如何开始。</p>
+<blockquote>Heroku uses something called a Procfile to list the commands needed to start things like web severs and workers. We only need a single web server.</blockquote> 
+Heroku使用了一个叫Procfile的文件，列出了web server要执行的命令任务，我们只需要一个单独的web 服务。
+
+<blockquote>Create a file called Procfile and place inside of it:</blockquote> 
+创建一个procfile文件。
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web: lua web.lua $PORT</span><br></pre></td></tr></table></figure>
+
+<blockquote>Now we're ready to deploy. Commit and push once again.</blockquote> 
+开始部署，再一次上传代码。
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -a -m &quot;...&quot;$ git push origin master</span><br></pre></td></tr></table></figure>
+
+<blockquote>We can check and see if our app is running by typing into the console:</blockquote> 
+使用命令行检查我们正在运行的app。
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ heroku ps</span><br></pre></td></tr></table></figure>
+
+<blockquote>You'll probably see nothing running! It’s because we deployed before without a Procfile. Tell Heroku to start up our web server:</blockquote> 
+
+<p>你也看到了，什么都没运行！ 因为之前的部署没有Procfile文件，来告诉Heroku是如何启动web服务的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ heroku scale web=1</span><br><span class="line">Scaling web processes... done, now running 1</span><br><span class="line"></span><br><span class="line">$ heroku ps</span><br><span class="line">Process  State       Command                </span><br><span class="line">-------  ----------  ---------------------  </span><br><span class="line">web.1    up for 16s  bin/lua web.lua $PORT</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>If you still see nothing running you'll have to debug. Run heroku logs to see if anything failed.</blockquote> 
+如果你还是看到什么也没运行，执行一下heroku logs，看一下有什么错误发生。
+
+<blockquote>Now our web server is running, navigate to the url of the app to see it live.
+Don’t forget to try out some of the static files you included.</blockquote> 
+
+<p>此刻我们的Web服务在运行了，跳到的Url 证明app在运行中，别忘了测试一下static目录下的文件。</p>
+<h3>5.后续</h3> 
+What’s Next?
+
+<blockquote>What we've created here is fairly primitive. There are a lot of opportunities for expanding:</blockquote> 
+
+<p>这篇比较糙，后续还有很多可以展开的题目 。</p>
+<blockquote>
+Use a Lua web framework like Orbit
+Talk to a SQL database with LuaSQL
+Talk to Redis with redis-lua
+Talk to CouchDB with luachia
+Make a website in MoonScript
+</blockquote> 
+
+<p>使用Orbit 这种Lua WEB框架。<br>探讨SQL数据库和LuaSQL<br>探讨Redis和redis-lua<br>探讨CouchDB和luachia<br>使用Moonscript创建站点。</p>
+<blockquote>It’s also worth reading the the Lua buildpack’s README because it explains how and where Lua and it’s packages are installed.</blockquote> 
+
+<p>更多有价值的信息可以看buildpack里面的README文件， 里面解释了lua和对应包是如何被安装的。</p>
+<p>leafo.net 2015 · Generated Fri Apr 8 14:00:07 2016 by Sitegen</p>
+<p>翻译：糖果</p>
+<p><a href="http://lua.ren/topic/223/%E5%9C%A8heroku%E5%9C%A8%E8%BF%90%E8%A1%8Clua" target="_blank">Lua On Heroku</a></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/148/">Python多分隔符号拆分字符串</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/226/">动态修改OpenResty的Conf配置文件（nginx-upsync-module）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

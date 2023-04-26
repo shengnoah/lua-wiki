@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>SWIFT之旅 - Lua教程</title>
+
+  
+    <meta name="description" content="SWIFT之旅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SWIFT之旅">
+<meta property="og:url" content="https://lua.ren/topic/53/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="SWIFT之旅">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.122Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>SWIFT之旅</span></h1>
+<p>对于一个新语言的第一个程序来说，比较传统的搞法是，在屏幕上，打印一行”hello,word” 。看看swift吧，一行语句就能搞定。</p>
+<p>println(“Hello, world”)<br>如果你之前玩过C或是Objective-C, Swift的这种语法你可能眼熟。这一行代码就完成了这个程序，你都不用提前引用那些像输入输出控制或是字符串那些乱七八糟的库。程序的代码的全局范围有效的，所以，你都不需要像main函数的那种东西，你甚至也不需要在每个语句的后面加上一个分号。</p>
+<p>这篇小文会提供给你足够的信息，给你秀一下，如何完成一个编程任务。如果有一些东西你暂时搞不懂，不用担心。几乎所有的细节介绍都会在本书的其他部分出现。</p>
+<p>提示：</p>
+<p>最好的经验就是，在Xcode中，打开本篇涉及到的例子代码，那样就允许你编辑代码，还可以立马的看到运行效果。</p>
+<p>简单的变量值<br>使用let关键字定义一个常量，使用var关键字定义一个变量。这个常量值不需要再编译的时候知道。但你必须进行一次赋值。就是说，你可以使用一个常量命名一个值，再很多的地方使用。</p>
+<p>var myVariable &#x3D; 42<br>myVariable &#x3D; 50<br>let myConstant &#x3D; 42</p>
+<p>无论是常量还是变量，都必须和你给他赋的值，保持相同的类型。可但是，你不需要总是显式的这么做。在创建常量或是变量的时候赋一个值，然后让编译器去推测类型。在上面的这个例子，编译器推测myVariable 是一个整形，因为她的初始化值是一个整数。</p>
+<p>如果初始化值，没有提供一个足够的信息（或是压根就没有初始化值），特殊的类型，使用引号在变量的后面进行标注。</p>
+<p>let implicitInteger &#x3D; 70<br>let implicitDouble &#x3D; 70.0<br>let explicitDouble: Double &#x3D; 70</p>
+<p>实践<br>显式的创建一个浮点类型的常量，并赋值4。</p>
+<p>变量时不能隐式的转换成其他类型的。 如果你需要转换一个值到不同的类型。显式的生成一个想要类型的实例。</p>
+<p>let label &#x3D; “The width is “<br>let width &#x3D; 94<br>let widthLabel &#x3D; label + String(width)<br>实践<br>把最后一行的String去掉，你猜你会得到一个什么错误？<br>有一个简单的方法包含一个字符串变量： 把值写到一对括号里，然后在双括号的前面写一个反斜杠，如下：</p>
+<p>let apples &#x3D; 3<br>let oranges &#x3D; 5<br>let appleSummary &#x3D; “I have (apples) apples.”<br>let fruitSummary &#x3D; “I have (apples + oranges) pieces of fruit.”<br>实践<br>使用()在字符串中包含一个浮点值和包含一个特定的名字。</p>
+<p>使用括号和中括号创建数组和字典。在中括号中写索引值或是键来访问他们的元素。</p>
+<p>var shoppingList &#x3D; [“catfish”, “water”, “tulips”, “blue paint”]<br>shoppingList[1] &#x3D; “bottle of water”<br>var occupations &#x3D; [<br>“Malcolm”: “Captain”,<br>“Kaylee”: “Mechanic”,<br>]<br>occupations[“Jayne”] &#x3D; “Public Relations”<br>下面是创建一个空数组和空字典的语法。</p>
+<p>let emptyArray &#x3D; String<a href=""></a><br>let emptyDictionary &#x3D; Dictionary&lt;String, Float&gt;()</p>
+<p>如果类型信息可以被推测出来，你可以写一个像[]的空数组和一个像[:]的空字典的例子。如果你想为一个函数设定形参变量。</p>
+<p>shoppingList &#x3D; [] &#x2F;&#x2F; Went shopping and bought everything.<br>控制流</p>
+<p>使用if和switch去创建条件判断语句，使用for-in,for,while和do-while去创建循环。括号周围都是条件或是循环变量选项，并且周围需要有大括号。</p>
+<p>let individualScores &#x3D; [75, 43, 103, 87, 12]<br>var teamScore &#x3D; 0<br>for score in individualScores {<br>if score &gt; 50 {<br>teamScore +&#x3D; 3<br>} else {<br>teamScore +&#x3D; 1<br>}<br>}<br>teamScore<br>在if判断语句中，条件必须是布尔型表达式，也就是说想if score {} 这种表达是错误的，不能隐式的和零进行比较。</p>
+<p>var optionalString: String? &#x3D; “Hello”<br>optionalString &#x3D;&#x3D; nil<br>var optionalName: String? &#x3D; “John Appleseed”<br>var greeting &#x3D; “Hello!”<br>if let name &#x3D; optionalName {<br>greeting &#x3D; “Hello, (name)”<br>}<br>你可以一起使用if和let语句，值的选项表达式。选项值要么包含一个值，要么包含nil去指向一个值。问好表达式是用值的类型区标记一个值得选项。</p>
+<p>实践<br>把optionName指向nil空，greeting的值会是多少？如果optionName指向了nil空，加上一个else分支，去设定不同的greeting值。</p>
+<p>如果条件值是空，条件表达式的结果是false假，并且会跳出大括号。其他情况，其他的条件值是被展开的，并且是用let赋值的常量，让展开的值在代码块之内。</p>
+<p>switchs 支持各种类型的语句和广泛的变量比较操作，而且不局限于整数和等值测试。</p>
+<p>let vegetable &#x3D; “red pepper”<br>switch vegetable {<br>case “celery”:<br>let vegetableComment &#x3D; “Add some raisins and make ants on a log.”<br>case “cucumber”, “watercress”:<br>let vegetableComment &#x3D; “That would make a good tea sandwich.”<br>case let x where x.hasSuffix(“pepper”):<br>let vegetableComment &#x3D; “Is it a spicy (x)?”<br>default:<br>let vegetableComment &#x3D; “Everything tastes good in soup.”<br>}</p>
+<p>实践<br>如果把default分支去掉，你会得到一个什么错误那？</p>
+<p>如果在switch case 段内，匹配执行了相应的代码，不会继续执行其他分子段的代码。所以这个不需要在每个switch分子段内，显式的声明break语句。</p>
+<p>你会使用for-in语句去迭代字典数据结构， 只要提供key-value简直值所对应的主键。</p>
+<p>let interestingNumbers &#x3D; [<br>“Prime”: [2, 3, 5, 7, 11, 13],<br>“Fibonacci”: [1, 1, 2, 3, 5, 8],<br>“Square”: [1, 4, 9, 16, 25],<br>]<br>var largest &#x3D; 0<br>for (kind, numbers) in interestingNumbers {<br>for number in numbers {<br>if number &gt; largest {<br>largest &#x3D; number<br>}<br>}<br>}<br>largest</p>
+<p>实践</p>
+<p>添加一个变量去跟踪最大值，并且得到那个最大值。</p>
+<p>使用while语句去重复的执行代码，直到循环条件发生了变更。循环条件的判断也可以再结尾出现，但可以确定的是，这种情况下，循环至少要执行一次。</p>
+<p>var n &#x3D; 2<br>while n &lt; 100 {<br>n &#x3D; n * 2<br>}<br>n<br>var m &#x3D; 2<br>do {<br>m &#x3D; m * 2<br>} while m &lt; 100<br>m<br>你仍然可以使用数字索引的说话呢方式，给出一个索引的范围值去显式的初始化，还有循环条件和递增的步长， 下面的两个循环异曲同工。</p>
+<p>var firstForLoop &#x3D; 0<br>for i in 0..3 {<br>firstForLoop +&#x3D; i<br>}<br>firstForLoop<br>var secondForLoop &#x3D; 0<br>for var i &#x3D; 0; i &lt; 3; ++i {<br>secondForLoop +&#x3D; 1<br>}<br>secondForLoop<br>使用..指定上限值范围，使用…指定一个区间的值。</p>
+<p>函数与闭包</p>
+<p>使用func进行函数声明，调用函数使用下面的名字，使用括号内参数列表。使用-&gt;符号来去本函数的返回类型。</p>
+<p>func greet(name: String, day: String) -&gt; String {<br>return “Hello (name), today is (day).”<br>}<br>greet(“Bob”, “Tuesday”)<br>实践</p>
+<p>消除参数day, 添加一个包含今天午餐的特别需求在函数 中。</p>
+<p>使用一个复数的元组作为函数返回值。</p>
+<p>func getGasPrices() -&gt; (Double, Double, Double) {<br>return (3.59, 3.69, 3.79)<br>}<br>getGasPrices()<br>函数也可以使用可变长参数， 作为一个数组集合传入值。</p>
+<p>func sumOf(numbers: Int…) -&gt; Int {<br>var sum &#x3D; 0<br>for number in numbers {<br>sum +&#x3D; number<br>}<br>return sum<br>}<br>sumOf()<br>sumOf(42, 597, 12)<br>实践</p>
+<p>写一个函数，计算函数参数的平均值。</p>
+<p>在swift中，函数式可以嵌套的， 被嵌套函数可以使用嵌套函数中的变量。你可以使用嵌套函数组织一个长的或是复杂的代码块。</p>
+<p>func returnFifteen() -&gt; Int {<br>var y &#x3D; 10<br>func add() {<br>y +&#x3D; 5<br>}<br>add()<br>return y<br>}<br>returnFifteen()<br>嵌套函数都是首类类型， 就是说嵌套函数可以使用被嵌套函数的结果作为函数返回值。</p>
+<p>func makeIncrementer() -&gt; (Int -&gt; Int) {<br>func addOne(number: Int) -&gt; Int {<br>return 1 + number<br>}<br>return addOne<br>}<br>var increment &#x3D; makeIncrementer()<br>increment(7)<br>函数可以作为函数的参数。并共享形参。</p>
+<p>func hasAnyMatches(list: Int[], condition: Int -&gt; Bool) -&gt; Bool {<br>for item in list {<br>if condition(item) {<br>return true<br>}<br>}<br>return false<br>}<br>func lessThanTen(number: Int) -&gt; Bool {<br>return number &lt; 10<br>}<br>var numbers &#x3D; [20, 19, 7, 12]<br>hasAnyMatches(numbers, lessThanTen)<br>函数其实是一种特殊的函数分支， 你可以写一个没有名字的分子语句块，并用大括号括起来， 使用in关键字来区别函数块的参数和返回值。</p>
+<p>numbers.map({<br>(number: Int) -&gt; Int in<br>let result &#x3D; 3 * number<br>return result<br>})<br>实践</p>
+<p>重写这段closure封闭代码为所有的奇数返回零。</p>
+<p>你有一些列的选项让封闭块写的更简洁。如果一个封闭代码块的类型已知，比如一个回调授权，你可以省略参数的类型，他是一个返回类型，或是两个，单体封闭段代码隐式的返回他们自己的段。</p>
+<p>numbers.map({ number in 3 * number }<br> 你而引用参数名称代替数字，在短的闭包段中，这种办法很灵。</p>
+<p>把闭包作为最后一个参数传给函数，可以在后面的大括号立即出现。</p>
+<p>sort([1, 5, 3, 12, 2]) { $0 &gt; $1 }<br>对象和类</p>
+<p>使用class关键字创建一个新类。只要在同类的上下文中，类属性的声明的方式和一个变量或是常量是相同的。函数方法同理。</p>
+<p>class Shape {<br>var numberOfSides &#x3D; 0<br>func simpleDescription() -&gt; String {<br>return “A shape with (numberOfSides) sides.”<br>}<br>}<br>实践</p>
+<p>创建一个常量属性，在类中添加一个有参数的方法。</p>
+<p>通过在类名的后面紧跟一个括号来生成类的实例。使用点语法规则去访问类的属性方法。</p>
+<p>var shape &#x3D; Shape()<br>shape.numberOfSides &#x3D; 7<br>var shapeDescription &#x3D; shape.simpleDescription()<br>这个版本的Shape类貌似少了写东西，引用一个初始化方法去设定类，当类的实例创建的时候，使用init方法完成初始化设定工作。</p>
+<p>class NamedShape {<br>var numberOfSides: Int &#x3D; 0<br>var name: String<br>init(name: String) {<br>self.name &#x3D; name<br>}<br>func simpleDescription() -&gt; String {<br>return “A shape with (numberOfSides) sides.”<br>}<br>}<br>注意self如果初始化name参数。在类的实例创建的时候去执行初始化方法。每个属性都需要赋值，要么在类中直接声明赋值（例如: 变量numberOfSide）要么通过初始化方法初始化。（例如：变量name）</p>
+<p>如果想在类销毁的时候，去做一些终了清理动作,那就使用deinit方法去实现。</p>
+<p>子类的名称放到父类名称的前面，用分号隔开。子类不一定有父类，其实你也可以省略父类。</p>
+<p>子类方法覆盖父类方法实现，使用override方法，没有ovverride，编译器会检测一个错误，编译器也检测子类是否覆盖了父类。</p>
+<p>class Square: NamedShape {<br>var sideLength: Double<br>init(sideLength: Double, name: String) {<br>self.sideLength &#x3D; sideLength<br>super.init(name: name)<br>numberOfSides &#x3D; 4<br>}<br>func area() -&gt; Double {<br>return sideLength * sideLength<br>}<br>override func simpleDescription() -&gt; String {<br>return “A square with sides of length (sideLength).”<br>}<br>}<br>let test &#x3D; Square(sideLength: 5.2, name: “my test square”)<br>test.area()<br>test.simpleDescription()<br>创建一个NamedShape的子类Circle,使用初始化器初始化radius属性，在Circle类中实现area和describe方法。</p>
+<p>使用脚手架方法设定和读取属性值。</p>
+<p>class EquilateralTriangle: NamedShape {<br>var sideLength: Double &#x3D; 0.0<br>init(sideLength: Double, name: String) {<br>self.sideLength &#x3D; sideLength<br>super.init(name: name)<br>numberOfSides &#x3D; 3<br>}<br>var perimeter: Double {<br>get {<br>return 3.0 * sideLength<br>}<br>set {<br>sideLength &#x3D; newValue &#x2F; 3.0<br>}<br>}<br>override func simpleDescription() -&gt; String {<br>return “An equilateral triagle with sides of length (sideLength).”<br>}<br>}<br>var triangle &#x3D; EquilateralTriangle(sideLength: 3.1, name: “a triangle”)<br>triangle.perimeter<br>triangle.perimeter &#x3D; 9.9<br>triangle.sideLength<br>perimeter设定，有一个显式的名称 newValue.  你可以提供隐式名字在set代码段的括号范围内。</p>
+<p>注意，初始化EquilateralTriange类分3步：</p>
+<ol>
+<li>声明子类，设定属性值。</li>
+</ol>
+<p>2.调用父类的初始化函数。</p>
+<p>3.改变父类的属性值，额外的设置工作使用，getters 和 setters方法。</p>
+<p>如果你不需要计算，但是仍然需要在set新变量之前或之后执行代码，使用willSet和didSet.例如， 例如， 计算三角的边长和计算矩形的边长相同。</p>
+<p>类的方法和函数有一个很重的区别。函数的参数名只在函数中使用， 方法在调用的时候可以使用缺省值，在方法的调用过程中，函数有相同的参数名称，你可以再方法内指定别名。</p>
+<p>class Counter {<br>var count: Int &#x3D; 0<br>func incrementBy(amount: Int, numberOfTimes times: Int) {<br>count +&#x3D; amount * times<br>}<br>}<br>var counter &#x3D; Counter()<br>counter.incrementBy(2, numberOfTimes: 7)<br>形参是否可写？之前的操作想一个方法，属性和下标。如果之前的值是nil, 每个变量后都有一个？ 无视并且整个表达式的的值都是nil, 其他情况，选项值是展开的，每个后面都？作用于整个展开值。在两种情况，整个表达式的值都是选项值。</p>
+<p>let optionalSquare: Square? &#x3D; Square(sideLength: 2.5, name: “optional square”)<br>let sideLength &#x3D; optionalSquare?.sideLength<br>枚举和结构体</p>
+<p>使用eum去创建一个枚举。像类和其他名称类型， 枚举有一个方法和她关联。</p>
+<p>enum Rank: Int {<br>case Ace &#x3D; 1<br>case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten<br>case Jack, Queen, King<br>func simpleDescription() -&gt; String {<br>switch self {<br>case .Ace:<br>return “ace”<br>case .Jack:<br>return “jack”<br>case .Queen:<br>return “queen”<br>case .King:<br>return “king”<br>default:<br>return String(self.toRaw())<br>}<br>}<br>}<br>let ace &#x3D; Rank.Ace<br>let aceRawValue &#x3D; ace.toRaw()<br>实践</p>
+<p>写个函数，使用他们的RAW值 比较两个rank值。</p>
+<p>以上的例子，raw值类型是一个整形枚举值，你可以只指定第一个RAW值，raw值得赋值是哟顺序的，你也可以使用字符串和浮点数枚举值。</p>
+<p>使用toRaw和fromRaw函数去在raw值和枚举值间进行转换。</p>
+<p>if let convertedRank &#x3D; Rank.fromRaw(3) {<br>let threeDescription &#x3D; convertedRank.simpleDescription()<br>}<br>枚举的成员变量是一个实际的数值，写raw值得方式，不仅仅是一种，事实上，没有意义的raw值得这种情况，你不能只提供一个。</p>
+<p>enum Suit {<br>case Spades, Hearts, Diamonds, Clubs<br>func simpleDescription() -&gt; String {<br>switch self {<br>case .Spades:<br>return “spades”<br>case .Hearts:<br>return “hearts”<br>case .Diamonds:<br>return “diamonds”<br>case .Clubs:<br>return “clubs”<br>}<br>}<br>}<br>let hearts &#x3D; Suit.Hearts<br>let heartsDescription &#x3D; hearts.simpleDescription()<br>实践</p>
+<p>添加一个color方法到Suit中，返回一个黑桃和黑梅花，返回一个红心和红方片。</p>
+<p>注意，两种方法应用上面的红桃成员，当给hearts赋一个常量，枚举成员Suit, Hearts是原名引用，因为常量没有显式指定类型。在switch分支判断内，枚举使用简写形式，Hearts因为slef的值是已知的，如果类型已知，你尅在任何的时候使用简写形式。</p>
+<p>使用struct关键之创建结构体。结构体是支持许多相同类型的类，包括方法和初始值化器。类和结构体之间最大的的区别是结构体在你的代码中是传值得，而类是传引用的。</p>
+<p>struct Card {<br>var rank: Rank<br>var suit: Suit<br>func simpleDescription() -&gt; String {<br>return “The (rank.simpleDescription()) of (suit.simpleDescription())”<br>}<br>}<br>let threeOfSpades &#x3D; Card(rank: .Three, suit: .Spades)<br>let threeOfSpadesDescription &#x3D; threeOfSpades.simpleDescription()<br>实践</p>
+<p>添加一个创建一个完成扑克牌方法，一个卡时候各种组合情况。</p>
+<p>一个枚举成员可以给一个枚举实例赋值，相同的枚举成员可以赋予不同的值。你创建一个实例的时候，提供一个赋值。管理安置和rawv值是不同的，一个枚举的raw值可以赋予所有的实例，你定义一个枚举然后赋一个raw值。</p>
+<p>例如，考虑从服务器上请求日出日落时间需求，服务器要么返回一个有效信息，要么返回一个错误信息。</p>
+<p>enum ServerResponse {<br>case Result(String, String)<br>case Error(String)<br>}<br>let success &#x3D; ServerResponse.Result(“6:00 am”, “8:09 pm”)<br>let failure &#x3D; ServerResponse.Error(“Out of cheese.”)<br>switch success {<br>case let .Result(sunrise, sunset):<br>let serverResponse &#x3D; “Sunrise is at (sunrise) and sunset is at (sunset).”<br>case let .Error(error):<br>let serverResponse &#x3D; “Failure… (error)”<br>}<br>实践<br>添加第三个服务器相应分支。<br>注意如何从ServerResponse截取日出和日落的日期，如另一个想匹配的分支。<br>协议与扩展<br>使用protocol关键字声明一个协议。<br>protocol ExampleProtocol {<br>var simpleDescription: String { get }<br>mutating func adjust()<br>}<br>类，枚举，结构体都可以采用协议。</p>
+<p>class SimpleClass: ExampleProtocol {<br>var simpleDescription: String &#x3D; “A very simple class.”<br>var anotherProperty: Int &#x3D; 69105<br>func adjust() {<br>simpleDescription +&#x3D; “ Now 100% adjusted.”<br>}<br>}<br>var a &#x3D; SimpleClass()<br>a.adjust()<br>let aDescription &#x3D; a.simpleDescription<br>struct SimpleStructure: ExampleProtocol {<br>var simpleDescription: String &#x3D; “A simple structure”<br>mutating func adjust() {<br>simpleDescription +&#x3D; “ (adjusted)”<br>}<br>}<br>var b &#x3D; SimpleStructure()<br>b.adjust()<br>let bDescription &#x3D; b.simpleDescription</p>
+<p>class SimpleClass: ExampleProtocol {<br>var simpleDescription: String &#x3D; “A very simple class.”<br>var anotherProperty: Int &#x3D; 69105<br>func adjust() {<br>simpleDescription +&#x3D; “ Now 100% adjusted.”<br>}<br>}<br>var a &#x3D; SimpleClass()<br>a.adjust()<br>let aDescription &#x3D; a.simpleDescription<br>struct SimpleStructure: ExampleProtocol {<br>var simpleDescription: String &#x3D; “A simple structure”<br>mutating func adjust() {<br>simpleDescription +&#x3D; “ (adjusted)”<br>}<br>}<br>var b &#x3D; SimpleStructure()<br>b.adjust()<br>let bDescription &#x3D; b.simpleDescription<br>实践<br>写一个枚举来遵循一个协议。<br>提示：使用mutating关键字声明SimpleStructure去标示一个可以修改结构体的方法。SimpleClass不需要任何的方法mutating标示，因为类的方法总是可以改变类的属性。<br>使用extension添加一个已存在的类型，就一个新的方法可以计算属性，你可以使用一个扩展添加一个协议来适应一个新类型，在任何的地方声明，甚至从框架中引入一个类型。<br>extension Int: ExampleProtocol {<br>var simpleDescription: String {<br>return “The number (self)”<br>}<br>mutating func adjust() {<br>self +&#x3D; 42<br>}<br>}<br>7.simpleDescription<br>实践</p>
+<p>写一个double的扩展类型，添加absoluteValue绝对值属性。</p>
+<p>你可以使用协议名称想任何其他的名字类型，例如， 创建一个有不同类型但是遵循一个单独协议的对象集合。当你的工作变量时一个协议类型，方法外的协议定义是不可变的。</p>
+<p>let protocolValue: ExampleProtocol &#x3D; a<br>protocolValue.simpleDescription<br>&#x2F;&#x2F; protocolValue.anotherProperty &#x2F;&#x2F; Uncomment to see the error<br>虽然protocolValue是SimpleClass的实时类型，编译器协商一个ExampleProtocol类型，就是说你不能偶然的访问实现了一个辅助协议的类的方法和属性。</p>
+<p>泛型</p>
+<p>在尖括号内写名字来创建泛型函数或类型。</p>
+<p>func repeat<ItemType>(item: ItemType, times: Int) -&gt; ItemType[] {<br>var result &#x3D; ItemType<a href=""></a><br>for i in 0..times {<br>result +&#x3D; item<br>}<br>return result<br>}<br>repeat(“knock”, 4)<br>你可以创泛型方法，泛型函数， 如类，枚举，结构体。</p>
+<p>&#x2F;&#x2F; Reimplement the Swift standard library’s optional type<br>enum OptionalValue<T> {<br>case None<br>case Some(T)<br>}<br>var possibleInteger: OptionalValue<Int> &#x3D; .None<br>possibleInteger &#x3D; .Some(100)<br>使用where关键字在类型名称的后面，指定一个列表需求，例如， 需要一个实现协议类型， 需要实现两个相同的类型，或是需要一个类有特定的父类。</p>
+<p>func anyCommonElements &lt;T, U where T: Sequence, U: Sequence, T.GeneratorType.Element: Equatable, T.GeneratorType.Element &#x3D;&#x3D; U.GeneratorType.Element&gt; (lhs: T, rhs: U) -&gt; Bool {<br>for lhsItem in lhs {<br>for rhsItem in rhs {<br>if lhsItem &#x3D;&#x3D; rhsItem {<br>return true<br>}<br>}<br>}<br>return false<br>}<br>anyCommonElements([1, 2, 3], [3])<br>实践</p>
+<p>修改anyCommonElments函数，让函数返回一个有任意两个序列的数组。</p>
+<p>这种简单的情况，你可以省略where关键字，在引号的后面简单的写一个协议或是类名。<TEquatable>的写法，等同于<T where T: Equatable>。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/49/">二分查找</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/5/">通过进程信息，检查内存泄露。</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

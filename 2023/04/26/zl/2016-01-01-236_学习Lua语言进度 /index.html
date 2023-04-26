@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>学习Lua语言进度 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;h3 id&#x3D;&quot;时间2016年8月11日-天气晴sunny&quot;&gt;时间:2016年8月11日 天气:晴:sunny:&lt;&#x2F;h3&gt;  Author:冬之晓:dizzy_face: Email: 347916416@qq.com MyAppearance:         今天上午，陈博士过来找我，问我学习Lua语言学习的进度。说了惭愧，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习Lua语言进度">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-236_%E5%AD%A6%E4%B9%A0Lua%E8%AF%AD%E8%A8%80%E8%BF%9B%E5%BA%A6%20/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;h3 id&#x3D;&quot;时间2016年8月11日-天气晴sunny&quot;&gt;时间:2016年8月11日 天气:晴:sunny:&lt;&#x2F;h3&gt;  Author:冬之晓:dizzy_face: Email: 347916416@qq.com MyAppearance:         今天上午，陈博士过来找我，问我学习Lua语言学习的进度。说了惭愧，我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/Dongzhixiao/PictureCache/raw/master/MyPicture.JPG">
+<meta property="article:published_time" content="2023-04-26T05:16:12.253Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.253Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Dongzhixiao/PictureCache/raw/master/MyPicture.JPG">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">学习Lua语言进度</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#author%E5%86%AC%E4%B9%8B%E6%99%93dizzy_face"><span class="toc-text">Author:冬之晓:dizzy_face:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#email-347916416qqcom"><span class="toc-text">Email: 347916416@qq.com</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#myappearance-"><span class="toc-text">MyAppearance: </span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E8%8A%82%E6%8C%87%E7%A4%BA%E5%91%BD%E4%BB%A4"><span class="toc-text">小节指示命令</span></a></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.253Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>学习Lua语言进度</span></h1>
+<pre><code>            &lt;h3 id=&quot;时间2016年8月11日-天气晴sunny&quot;&gt;时间:2016年8月11日 天气:晴:sunny:&lt;/h3&gt;
+</code></pre>
+<h5 id="author冬之晓dizzy_face">Author:冬之晓:dizzy_face:</h5>
+<h5 id="email-347916416qqcom">Email: 347916416@qq.com</h5>
+<h5 id="myappearance-">MyAppearance: <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github.com/Dongzhixiao/PictureCache/raw/master/MyPicture.JPG" alt="MyAppearance" title="我的头像"></h5>
+<hr>
+
+<pre>
+    今天上午，陈博士过来找我，问我学习Lua语言学习的进度。说了惭愧，我最近一
+直在看C++那一块的源代码，而且发现代码里面的注释块做的不好，因此研究了一下文档
+的标准写法。并且在读代码的同时将里面的注释顺便改成标准格式，但是这样就耽误了Lu
+a语言的学习进度。为了赶上下来的任务，我需要每天抽出一段时间来进行Lua语言的学习
+了。但是文档的内容还没有完全学完，因此这几天晚上继续文档学习，完成之后会研究一
+段Lua语言。
+</pre>
+
+<h4 id="小节指示命令">小节指示命令</h4>
+
+<p><strong>小节指示命令都比较常用，要多多学习！</strong></p>
+
+<ul>
+  <li>@attention { attention text }</li>
+</ul>
+
+<p>开始一个可输入需要处理信息的段落，次段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@attention</code>命令将被组合到一个单独的段落中，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@attention</code>将终止。</p>
+
+<ul>
+  <li>@author { list of authors }</li>
+</ul>
+
+<p>开始一个可输入一个或者多个作者名的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@author</code>命令将被组合到一个单独的段落中，每个作者描述都将开启一个新行，另外一个   <code class="highlighter-rouge">@author</code>命令可能会有若干个作者，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@author</code>将终止。例如：</p>
+
+<pre><code class="language-C++">/*!  
+ *  @brief     Pretty nice class. 
+ *  @details   This class is used to demonstrate a number of section commands. 
+ *  @author    John Doe 
+ *  @author    Jan Doe 
+ *  @version   4.1a *  date      1990-2011 
+ *  @pre       First initialize the system.
+ *  @bug       Not all memory is freed when deleting an object of this class. 
+ *  @warning   Improper use can crash your application
+ *  @copyright GNU Public License. 
+ */
+class SomeNiceClass &#123;&#125;;
+</code></pre>
+
+<ul>
+  <li>@authors { list of authors }</li>
+</ul>
+
+<p>同<code class="highlighter-rouge">@author</code>等价</p>
+
+<ul>
+  <li>@brief { brief description }</li>
+</ul>
+
+<p>开始一个作为简明描述的段落，在文档页的起始部分可使用类和文档的简明描述的列表，可在细节描述的前端和成员声明处放置类成员和文档成员的简明描述。一个简明描述可能需要若干行(尽管建议它保持简明的风格)。当遇到一个空白行或者是其他的小节命令，那么简明描述将终止。如果出现多个<code class="highlighter-rouge">@brief</code>命令，那么它们将被组合在一起。查看命令<code class="highlighter-rouge">@authhor</code>的例子。等同于命令<code class="highlighter-rouge">@short</code></p>
+
+<ul>
+  <li>@bug { bug description }</li>
+</ul>
+
+<p>开始一个可报告一个或多个bug的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@bug</code>命令将被组合到一个单独的段落中，每个bug都将开启一个新行，另外一个   <code class="highlighter-rouge">@bug</code>命令可能会有若干个bug，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@bug</code>将终止。查看命令<code class="highlighter-rouge">@authhor</code>的例子。</p>
+
+<ul>
+  <li>@cond [(section-label)]</li>
+</ul>
+
+<p>开始一个带条件的小节，使用命令<code class="highlighter-rouge">@endcond</code>来终止该小节，通常在其他的注释块中可查找到<code class="highlighter-rouge">@endcond</code>。此对命令的目的是，(条件化)在处理中将一部分文档排除。</p>
+
+<p>小节将包含在命令<code class="highlighter-rouge">@cond</code>和<code class="highlighter-rouge">@endcond</code>之间，并将小节的标号加入到配置选项<code class="highlighter-rouge">ENABLED_SECTIONS </code>中，如果标号被忽略，该小节也将在处理中被无条件忽略。</p>
+
+<p>在注释块中的条件小节，可使用一个<code class="highlighter-rouge">@if...@endif</code>块。</p>
+
+<p>条件小节能被嵌套，在这种情况下，如果它和嵌套的小节都包含在其中，那么只有被嵌套的小节才会显示。例如：</p>
+
+<pre><code class="language-C++">/** An interface */
+class Intf
+&#123;
+  public:
+    /** A method */
+    virtual void func() = 0;
+
+    /// @cond TEST
+
+    /** A method used for testing */
+    virtual void test() = 0;
+
+    /// @endcond
+&#125;;
+
+/// @cond DEV
+/*
+ *  The implementation of the interface
+ */
+class Implementation : public Intf
+&#123;
+  public:
+    void func();
+
+    /// @cond TEST
+    void test();
+    /// @endcond
+
+    /// @cond
+    /** This method is obsolete and does
+     *  not show up in the documentation.
+     */
+    void obsolete();
+    /// @endcond
+&#125;;
+
+/// @endcond
+</code></pre>
+
+<ul>
+  <li>@copyright { copyright description }</li>
+</ul>
+
+<p>开始描述一个实体的版权的段落，这个段落收到约束，这个段落的内容没有特殊的内部结构。查看命令<code class="highlighter-rouge">@authhor</code>的例子。</p>
+
+<ul>
+  <li>@date { date description }</li>
+</ul>
+
+<p>开始一个可可输入一个或多个日期的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@date</code>命令将被组合到一个单独的段落中，每个date都将开启一个新行，另外一个   <code class="highlighter-rouge">@date</code>命令可能会有若干个date，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@date</code>将终止。查看命令<code class="highlighter-rouge">@authhor</code>的例子。</p>
+
+<ul>
+  <li>@deprecated { description }</li>
+</ul>
+
+<p>开始一个指示文档块是否弃用的段落，可用于描述替代方法，预定生命周期等</p>
+
+<ul>
+  <li>@details { detailed description }</li>
+</ul>
+
+<p>如同<code class="highlighter-rouge">@brief</code>开始一个简明描述，<code class="highlighter-rouge">@details</code>将开始一个细节描述，你也可以开始一个新段落(加入空白行)，而无需加入命令<code class="highlighter-rouge">@details</code>。</p>
+
+<ul>
+  <li>@else</li>
+</ul>
+
+<p>开始一个条件小节，如果前一个条件小节无效。前一个小节可使用命令<code class="highlighter-rouge">@if,@ifnot,@elseif</code>开始。</p>
+
+<ul>
+  <li>@elseif (section-label)</li>
+</ul>
+
+<p>开始一个条件小节，如果前一个条件小节无效。当条件小节默认为无效时，你必须放置该命令的<code class="highlighter-rouge">section-label</code>到配置标记<code class="highlighter-rouge">ENABLED_SECTIONS</code>中使得命令<code class="highlighter-rouge">@elseif</code>有效。条件块可以嵌套，如果所有嵌套的条件都有效，那么也只有做内层的嵌套小节才会被读取。</p>
+
+<ul>
+  <li>@endcond</li>
+</ul>
+
+<p>结束一个由<code class="highlighter-rouge">@cond</code>开始的条件小节。</p>
+
+<ul>
+  <li>@endif</li>
+</ul>
+
+<p>结束一个由<code class="highlighter-rouge">@if或@ifnot</code>开始的条件小节，每个<code class="highlighter-rouge">@if或@ifnot</code>只能一一对应匹配之后的<code class="highlighter-rouge">@endif</code>。</p>
+
+<ul>
+  <li>@exception <exception-object> { exception description }</exception-object></li>
+</ul>
+
+<p>为一个名字为<code class="highlighter-rouge">&lt;exception-object&gt;</code>异常对象而开始一个描述，其次是此异常的描述。不会去检查是否存在这个异常对象。段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@exception</code>命令将被组合到一个单独的段落中，每个参数的描述都将开启一个新行，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@exception</code>将终止。
+与<code class="highlighter-rouge">@exception</code>一样。</p>
+
+<ul>
+  <li>@if (section-label)</li>
+</ul>
+
+<p>开始一个条件化的文档小节，并使用一个匹配的命令<code class="highlighter-rouge">@endif</code>结束。当条件小节默认为无效时，你必须放置该命令的<code class="highlighter-rouge">section-label</code>到配置标记<code class="highlighter-rouge">ENABLED_SECTIONS</code>中使得命令<code class="highlighter-rouge">@if</code>有效。条件块可以嵌套，如果所有嵌套的条件都有效，那么也只有做内层的嵌套小节才会被读取。例如：</p>
+
+<pre><code class="language-C++">/*! Unconditionally shown documentation.
+   *  if Cond1
+   *    Only included if Cond1 is set.
+   *  endif
+   *  if Cond2
+   *    Only included if Cond2 is set.
+   *    if Cond3
+   *      Only included if Cond2 and Cond3 are set.
+   *    endif
+   *    More text.
+   *  endif
+   *  Unconditional text.
+   */
+</code></pre>
+
+<p>如果你在alias中使用了条件命令，如果在两种语言中文档化一个类，你可以这样使用：</p>
+
+<pre><code class="language-C++">/*! english
+ *  This is English.
+ *  endenglish
+ *  dutch
+ *  Dit is Nederlands.
+ *  enddutch
+ */
+class Example
+&#123;
+&#125;;
+</code></pre>
+
+<p>一下是配置文档中的alias：</p>
+
+<pre><code class="language-C++">ALIASES  = "english=if english" 
+           "endenglish=endif" 
+           "dutch=if dutch" 
+           "enddutch=endif"
+</code></pre>
+
+<p>那么<code class="highlighter-rouge">ENABLED_SECTIONS</code>即可有效english也可有效dutch</p>
+
+<ul>
+  <li>@ifnot (section-label)</li>
+</ul>
+
+<p>开始一个条件化的文档小节，并使用一个匹配的命令<code class="highlighter-rouge">@endif</code>结束。当条件小节默认为有效时，你必须放置该命令的<code class="highlighter-rouge">section-label</code>到配置标记<code class="highlighter-rouge">ENABLED_SECTIONS</code>中使得命令<code class="highlighter-rouge">@ifnot</code>无效。</p>
+
+<ul>
+  <li>@invariant { description of invariant }</li>
+</ul>
+
+<p>开始一个可描述不变式的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@invariant</code>命令将被组合到一个单独的段落中，每个invariant描述都将开启一个新行，另外一个<code class="highlighter-rouge">@invariant</code>命令可能会有若干个不变式，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@exception</code>将终止。</p>
+
+<ul>
+  <li>@note { text }</li>
+</ul>
+
+<p>开始一个输入提示的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@note</code>命令将被组合到一个单独的段落中，每个note描述都将开启一个新行，另外一个<code class="highlighter-rouge">@note</code>命令可能会有若干个提示，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@note</code>将终止。查看<code class="highlighter-rouge">@par</code>命令的例子。</p>
+
+<ul>
+  <li>@par [(paragraph title)] { paragraph }</li>
+</ul>
+
+<p>如果一个段落标题已经给定，此命令将开始一个用户自定义的段头。段头将会占用一行，命令后的段头将会缩排。</p>
+
+<p>如果段落标题未给出，此命令将开始一个新段落，也可插入其他段落命令(如@param或@warning)来终止该命令。</p>
+
+<p>段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@par</code>将终止。例如：</p>
+
+<pre><code class="language-C++">/*! @class Par_Test 
+ * Normal text. 
+ * 
+ * @par User defined paragraph: 
+ * Contents of the paragraph. 
+ * 
+ * @par 
+ * New paragraph under the same heading. 
+ *
+ * @note 
+ * This note consists of two paragraphs. 
+ * This is the first paragraph. 
+ * 
+ * @par 
+ * And this is the second paragraph. 
+ *
+ * More normal text. 
+ */ 
+class Par_Test &#123;&#125;;
+</code></pre>
+
+<ul>
+  <li>@param [(dir)] <parameter-name> { parameter description }</parameter-name></li>
+</ul>
+
+<p>为一个名字为<code class="highlighter-rouge">&lt;parameter-name&gt;</code>函数参数开始一个参数描述，将会去检查是否存在。如果在函数声明或定义中，该参数(或其他参数)的文档丢失或未出现，将会给出一个警告。</p>
+
+<p><code class="highlighter-rouge">@param</code>命令有一个可选属性，能指定参数的方向属性，可为<code class="highlighter-rouge">into或out</code>，这有一个例子：</p>
+
+<pre><code class="language-C++">/*! * Copies bytes from a source memory area to a destination memory area, 
+ * where both areas may not overlap. 
+ * @param[out] dest The memory area to copy to.
+ * @param[in]  src  The memory area to copy from.
+ * @param[in]  n    The number of bytes to copy 
+ */void 
+memcpy(void *dest, const void *src, size_t n);
+</code></pre>
+
+<p>如果参数既可以输入也可输出，则使用[in,out]指定方向属性，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@param</code>命令将被组合到一个单独的段落中，每个参数描述都将开启一个新行，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@param</code>将终止。</p>
+
+<ul>
+  <li>@parblock</li>
+</ul>
+
+<p>不像那些评论单一段落的参数( @par, @param 和 @warning)，@parblock可以作为一个跨越多行段落描述的命令，并且以<code class="highlighter-rouge">endparblock</code>结束。例如：</p>
+
+<pre><code class="language-C++">/** Example of a param command with a description consisting of two paragraphs
+ *  param p 
+ *  parblock
+ *  First paragraph of the param description.
+ *
+ *  Second paragraph of the param description.
+ *  endparblock
+ *  Rest of the comment block continues.
+ */
+</code></pre>
+
+<ul>
+  <li>@endparblock</li>
+</ul>
+
+<p>结束一个以<code class="highlighter-rouge">@parblock</code>开头的段落块。</p>
+
+<ul>
+  <li>@tparam <template-parameter-name> { description }</template-parameter-name></li>
+</ul>
+
+<p>为一个名字为<code class="highlighter-rouge">&lt;template-parameter-name&gt;</code>类或函数模板参数开始一个模板参数描述，等同于<code class="highlighter-rouge">@cmdparam</code></p>
+
+<ul>
+  <li>@post { description of the postcondition }</li>
+</ul>
+
+<p>开始一个可描述的后置条件的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@post</code>命令将被组合到一个单独的段落中，每个后置描述都将开启一个新行，另外一个<code class="highlighter-rouge">@post</code>命令可能会有若干个提示，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@post</code>将终止。</p>
+
+<ul>
+  <li>@pre { description of the precondition }</li>
+</ul>
+
+<p>开始一个可描述的前置条件的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@pre</code>命令将被组合到一个单独的段落中，每个前置条件描述都将开启一个新行，另外一个<code class="highlighter-rouge">@pre</code>命令可能会有若干个提示，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@pre</code>将终止。</p>
+
+<ul>
+  <li>@remark { remark text }</li>
+</ul>
+
+<p>开始一个可输入一个或多个备注的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@remark</code>命令将被组合到一个单独的段落中，每个备注都将开启一个新行，另外一个<code class="highlighter-rouge">@remark</code>命令可能会有若干个提示，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@remark</code>将终止。</p>
+
+<ul>
+  <li>@remarks { remark text }</li>
+</ul>
+
+<p>同<code class="highlighter-rouge">@remark</code>。</p>
+
+<ul>
+  <li>@result { description of the result value }</li>
+</ul>
+
+<p>同<code class="highlighter-rouge">@return</code>。</p>
+
+<ul>
+  <li>@return { description of the return value }</li>
+</ul>
+
+<p>开始一个可输入一个或多个备注的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@remark</code>将终止。参考<code class="highlighter-rouge">@fn</code>命令中的例子。</p>
+
+<ul>
+  <li>@returns { description of the return value }</li>
+</ul>
+
+<p>同<code class="highlighter-rouge">@return</code>。</p>
+
+<ul>
+  <li>@retval <return value=""> { description }</return></li>
+</ul>
+
+<p>为一个名字为<code class="highlighter-rouge">&lt;return value&gt;</code>函数开始一个返回值的描述，段落的文本不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@retval</code>命令将被组合到一个单独的段落中，每个备注都将开启一个新行，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@retval</code>将终止。</p>
+
+<ul>
+  <li>@sa { references }</li>
+</ul>
+
+<p>为指定的类、函数、方法、变量、文档、URL的一个或多个交叉引用开始一个段落，使用<code class="highlighter-rouge">::或者#</code>作为类和它的一个成员的引用连接符来组合上述两个名称。在方法名称之后包含一个带括号的参数类型列表，用于若干个重载方法或者构造器的选择。</p>
+
+<ul>
+  <li>@see { references }</li>
+</ul>
+
+<p>为了兼容JavaDoc，等同于<code class="highlighter-rouge">@sa</code>。</p>
+
+<ul>
+  <li>@short { short description }</li>
+</ul>
+
+<p>同<code class="highlighter-rouge">@brief</code>。</p>
+
+<ul>
+  <li>@since { text }</li>
+</ul>
+
+<p>用于指定一个有效的版本和时间，<code class="highlighter-rouge">@since</code>之后的段落不会指定一个内部结构，所有视觉增强的命令可以放置到该段落中，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@since</code>将终止。</p>
+
+<ul>
+  <li>@test { paragraph describing a test case }</li>
+</ul>
+
+<p>开始一个可描述的测试用例的段落，此描述会添加这个测试用例到一个单独的测试列表中，而这两种描述将可交叉引用。在测试列表中的每一个测试用例的前端，都还有一个指明它出处的头。</p>
+
+<ul>
+  <li>@throw <exception-object> { exception description }</exception-object></li>
+</ul>
+
+<p>同<code class="highlighter-rouge">@exception</code>。</p>
+
+<ul>
+  <li>@throws <exception-object> { exception description }</exception-object></li>
+</ul>
+
+<p>同<code class="highlighter-rouge">@throw</code>。</p>
+
+<ul>
+  <li>@todo { paragraph describing what is to be done }</li>
+</ul>
+
+<p>开始一个可描述的todo条目的段落，此描述会添加这个条目到一个单独的todo列表中，而这两种描述将可交叉引用。在测试列表中的每一个测试用例的前端，都还有一个指明它出处的头。</p>
+
+<ul>
+  <li>@version { version number }</li>
+</ul>
+
+<p>开始一个可可输入一个或多个版本字符串的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@version</code>命令将被组合到一个单独的段落中，每个版本描述将开启一个新行，另外一个   <code class="highlighter-rouge">@version</code>命令可能会有若干个版本字符串，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@version</code>将终止。查看命令<code class="highlighter-rouge">@authhor</code>的例子。</p>
+
+<ul>
+  <li>@warning { warning message }</li>
+</ul>
+
+<p>开始一个可可输入一个或多个警告信息的段落，此段落将会缩排，段落的文本不会指定一个内部结构，所有视觉增强命令可以放置到该段落中，多个相邻的<code class="highlighter-rouge">@warning</code>命令将被组合到一个单独的段落中，每个版本描述将开启一个新行，另外一个   <code class="highlighter-rouge">@warning</code>命令可能会有若干个警告，当遇到一个空白行或者是其他的小节命令，那么<code class="highlighter-rouge">@warning</code>将终止。查看命令<code class="highlighter-rouge">@authhor</code>的例子。</p>
+
+<ul>
+  <li>@xrefitem <key> "(heading)" "(list title)" { text }</key></li>
+</ul>
+
+<p>此命令是一个类似于<code class="highlighter-rouge">@todo,@bug</code>的集合，用于创建用户自定义文本小节，它会在连接点与关联页面之间自动生成交叉引用，并且能搜集关联页面中的所有相同类型的小节。第一个参数<key>是一个表述小节类型的唯一标识，第二个参数是一个加了引号的字符串，它用于表述第四个参数放置文本下的小节头，为包含同一个标识的所有条目相关页面，第三个参数将作为一个标题来使用，一些已经预定义的标识：`todo,test,bug,deprecated`。</key></p>
+
+<p>想想如果使用<code class="highlighter-rouge">@xrefitem</code>命令和它运行后的结果，如果只考虑todo列表，它看上去更像是一个alias：</p>
+
+<p><code class="highlighter-rouge">xrefitem todo "Todo" "Todo List" </code></p>
+
+<p>为每个小节都将重复该命令的前三个参数，这使得它非常易错，该命令也可用于合并配置文档中的<code class="highlighter-rouge">ALIAES</code>选项，如果定义一个新命令<code class="highlighter-rouge">@reminder</code>，可添加一下内容到配置文档：</p>
+
+<p><code class="highlighter-rouge">ALIASES += "reminder=xrefitem reminders "Reminder" "Reminders"" </code></p>
+
+<p>注意：命令中第二和第三参数使用转义引号。</p>
+
+<p>万一参数”(heading)”是一个空字符串则没有heading生成。当和<code class="highlighter-rouge">@page</code>命令联合使用时这非常有用。例如：</p>
+
+<pre><code class="language-C++">/** @page my_errors My Errors
+ *  @brief Errors page
+ *
+ *  Errors page contents.
+ */
+
+/** error ERROR 101: in case a file can not be opened.
+    Check about file system read/write access. */
+#define MY_ERR_CANNOT_OPEN_FILE                   101
+
+/** error ERROR 102: in case a file can not be closed.
+    Check about file system read/write access. */
+#define MY_ERR_CANNOT_CLOSE_FILE                  102
+</code></pre>
+
+<p>里面的<code class="highlighter-rouge">@error</code>定义为：</p>
+
+<p><code class="highlighter-rouge">ALIASES += "error=xrefitem my_errors "" """</code></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-235_%E5%9F%BA%E4%BA%8EAndroLua_Pro%E7%9A%84Android%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/">基于AndroLua_Pro的Android开发代码示例</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-234_Lua%20%E4%B8%AD%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%20/">Lua 中的随机数</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

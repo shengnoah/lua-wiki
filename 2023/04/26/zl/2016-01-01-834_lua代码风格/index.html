@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua代码风格 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;&#x2F;header&gt; &lt;div class&#x3D;&quot;entry&quot;&gt;        &lt;h1 id&#x3D;&quot;目录&quot;&gt;&lt;a href&#x3D;&quot;#目录&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua代码风格">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-834_lua%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;&#x2F;header&gt; &lt;div class&#x3D;&quot;entry&quot;&gt;        &lt;h1 id&#x3D;&quot;目录&quot;&gt;&lt;a href&#x3D;&quot;#目录&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.310Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.310Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua代码风格</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%89%88%E5%BC%8F"><span class="toc-text">一、程序的版式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%A9%BA%E8%A1%8C"><span class="toc-text">1.1 空行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%A9%BA%E6%A0%BC"><span class="toc-text">1.2 空格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E9%95%BF%E8%A1%8C%E6%8B%86%E5%88%86"><span class="toc-text">1.3 长行拆分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E4%BD%BF%E7%94%A8%E7%BC%A9%E8%BF%9B"><span class="toc-text">1.4 使用缩进</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%94"><span class="toc-text">—</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-text">二、命名规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%85%B1%E6%80%A7%E8%A7%84%E5%88%99"><span class="toc-text">2.1 共性规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D"><span class="toc-text">2.2 文件命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%B1%BB%E7%9A%84%E5%91%BD%E5%90%8D"><span class="toc-text">2.3 类的命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D"><span class="toc-text">2.4 变量命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%B8%B8%E9%87%8F%EF%BC%8C%E4%BA%8B%E4%BB%B6%E5%90%8D%E7%9A%84%E5%91%BD%E5%90%8D"><span class="toc-text">2.5 常量，事件名的命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E6%9E%9A%E4%B8%BE%E7%9A%84%E5%91%BD%E5%90%8D"><span class="toc-text">2.6 枚举的命名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%94-1"><span class="toc-text">—</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0"><span class="toc-text">3.1 文件描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">3.2 文件中变量的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E7%B1%BB%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">3.3 类变量的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">3.4 函数参数的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E8%A7%84%E5%88%99"><span class="toc-text">3.5 函数的定义规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E6%B3%A8%E9%87%8A%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">3.6 注释的使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%94-2"><span class="toc-text">—</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BC%96%E7%A0%81%E6%8A%80%E5%B7%A7"><span class="toc-text">四、编码技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%BA%94%E8%AF%A5%E5%B0%BD%E9%87%8F%E4%BD%BF%E7%94%A8local%E5%8F%98%E9%87%8F%E8%80%8C%E9%9D%9Eglobal%E5%8F%98%E9%87%8F"><span class="toc-text">4.1 应该尽量使用local变量而非global变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%94-3"><span class="toc-text">—</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BB%A3%E7%A0%81%E5%BB%BA%E8%AE%AE"><span class="toc-text">五、代码建议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%BB%A3%E7%A0%81%E7%9A%84%E8%B0%83%E8%AF%95"><span class="toc-text">5.1 代码的调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="toc-text">5.2 复杂度和性能问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96%E6%80%9D%E8%80%83"><span class="toc-text">5.3 函数的优化思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E7%9A%84%E6%A3%80%E6%9F%A5"><span class="toc-text">5.4 提交代码的检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E8%A1%A8%E7%BB%93%E6%9E%84%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-text">5.5 表结构的引用</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.310Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua代码风格</span></h1>
+<header>
+      
+      
+
+  
+    
+  
+
+
+
+  
+  
+
+<div class="clear"></div>
+      
+<pre><code>&lt;/header&gt;
+&lt;div class=&quot;entry&quot;&gt;
+  
+    &lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h1&gt;&lt;ul&gt;
+</code></pre>
+<li><a href="#1">一、程序的版式</a><ul>
+<li><a href="#1.1">1.1 空行</a></li>
+<li><a href="#1.2">1.2 空格</a></li>
+<li><a href="#1.3">1.3 长行拆分</a></li>
+<li><a href="#1.4">1.4 使用缩进</a></li>
+</ul>
+</li>
+<li><a href="#2">二、命名规则</a><ul>
+<li><a href="#2.1">2.1 共性规则</a></li>
+<li><a href="#2.2">2.2 文件命名</a></li>
+<li><a href="#2.3">2.3 类的命名</a>    </li>
+<li><a href="#2.4">2.4 变量命名</a></li>
+<li><a href="#2.5">2.5 常量，事件名的命名</a></li>
+<li><a href="#2.5">2.5 枚举</a></li>
+</ul>
+</li>
+<li><a href="#2">三、文件组织</a><ul>
+<li><a href="#3.1">3.1 文件描述</a></li>
+<li><a href="#3.2">3.2 文件中变量的定义</a></li>
+<li><a href="#3.3">3.3 类变量的定义</a></li>
+<li><a href="#3.4">3.4 函数参数的定义</a></li>
+<li><a href="#3.5">3.5 函数的定义规则</a></li>
+<li><a href="#3.6">3.6 注释的使用</a></li>
+</ul>
+</li>
+<li><a href="#3">三、分隔和缩进</a><ul>
+<li><a href="#3.1">3.1 使用空行</a></li>
+<li><a href="#3.2">3.2 使用空格符</a></li>
+<li><a href="#3.3">3.3 使用换行符</a></li>
+<li><a href="#3.4">3.4 使用小括号</a></li>
+<li><a href="#3.5">3.5 使用缩进</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="#4">四、编程技巧</a><ul>
+<li><a href="#4.1">4.1 应该尽量使用local变量而非global变量</a></li>
+<li><a href="#4.2">4.2 临时变量的处理</a></li>
+<li><a href="#4.3">4.3 利用逻辑运算的短路效应</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="#5">五、代码建议</a><ul>
+<li><a href="#5.1">5.1 代码的调试</a></li>
+<li><a href="#5.2">5.2 复杂度和性能问题</a></li>
+<li><a href="#5.3">5.3 函数的优化思考</a></li>
+<li><a href="#5.4">5.4 提交代码的检查</a></li>
+<li><a href="#5.5">5.5 表结构的引用</a></li>
+</ul>
+</li>
+</ul>
+<p><span id="1"></span></p>
+<h2 id="一、程序的版式"><a href="#一、程序的版式" class="headerlink" title="一、程序的版式"></a>一、程序的版式</h2><blockquote>
+<p>Code is read much more often than it is written.</p>
+<p>Programming style is an art.</p>
+</blockquote>
+<p><span id="1.1"></span></p>
+<h3 id="1-1-空行"><a href="#1-1-空行" class="headerlink" title="1.1 空行"></a>1.1 空行</h3><ul>
+<li>需加空行：<ul>
+<li>函数之间都要加空行；</li>
+<li>函数内部代码概念与逻辑之间，逻辑段落小节之间，都应该加空行；</li>
+<li>注释行之前。</li>
+</ul>
+</li>
+<li>不加空行：<ul>
+<li>在一个函数体内，逻揖上密切相关的语句之间不加空行；</li>
+<li>多行注释解释参数的时候，注释之间不加空行。</li>
+</ul>
+</li>
+</ul>
+<p><span id="1.2"></span></p>
+<h3 id="1-2-空格"><a href="#1-2-空格" class="headerlink" title="1.2 空格"></a>1.2 空格</h3><ul>
+<li><p>需加空格：</p>
+<ul>
+<li>“<code>and</code>“，”<code>or</code>“等关键字前后留<code>一个</code>空格，便于辨析；</li>
+<li>逗号”<code>,</code>“后面要留<code>一个</code>空格；</li>
+<li>赋值操作符、比较操作符、算术操作符如”<code>=</code>“、 “<code>==</code>“、”<code>~=</code>“、”<code>&gt;=</code>“、”<code>&lt;=</code>“、”<code>&gt;</code>“、”<code>&lt;</code>“、”<code>+</code>“、”<code>-</code>“、”<code>*</code>“、”<code>/</code>“、”<code>%</code>“、”<code>^</code>“,等二元操作符的<code>前后</code>应当加空格；</li>
+<li><code>if</code>、<code>for</code>、<code>while</code>等关键字之后如果要加左括号”<code>(</code>“，关键字与左括号之间应留一个空格，以突出关键字；  </li>
+</ul>
+</li>
+<li><p>不加空格：</p>
+<ul>
+<li>函数名之后不要留空格，紧跟左括号”<code>(</code>“；</li>
+<li>左括号”<code>(</code>“ 向<code>后</code>紧跟，紧跟处不留空格；</li>
+<li>右括号”<code>)</code>“、逗号”<code>,</code>“、分号”<code>;</code>“，向<code>前</code>紧跟，紧跟处不留空格；</li>
+<li>字符串连接符”<code>..</code>“前后不加空格；</li>
+<li>“<code>:</code>“，”<code>.</code>“，”<code>[</code>“，”<code>]</code>“这类操作符前后不加空格；</li>
+</ul>
+</li>
+</ul>
+<pre><code>a &gt; b and a or b           -- 良好的风格
+a &gt; b  and a or  b         -- 不良的风格
+
+<p>local a, b, c, max         – 良好的风格<br>local a,b,c,max            – 不良的风格</p>
+<p>if a &gt; b then              – 良好的风格<br>    max &#x3D; a<br>end<br>if a&gt;b then max&#x3D;a end      – 不良的风格</p>
+<p>data &#x3D; dataTable[index]    – 良好的风格<br>data &#x3D; dataTable [ index ] – 不良的风格</p>
+<p>function(posX, posY)       – 良好的风格<br>function (posX,posY)       – 不良的风格<br></code></pre><p><span id="1.3"></span></p></p>
+<h3 id="1-3-长行拆分"><a href="#1-3-长行拆分" class="headerlink" title="1.3 长行拆分"></a>1.3 长行拆分</h3><ul>
+<li>代码行最大长度宜控制在70至80个字符以内。代码行不要过长，否则眼睛看不过来，也不便于打印；</li>
+<li><p>长表达式要在低优先级操作符处拆分成新行，操作符放在新行之首（以便突出操作符）。</p>
+<pre><code>-- 良好的风格
+local newBuindingBtn = UI.newButton(&#123;             
+    text = btnName,
+    x = self.x,
+    y = self.y,
+    parent = self, 
+    style = &#123;
+        normal = ResConfig.png.commonBtnBlue
+    &#125;
+&#125;)
+
+<p>– 不良的风格<br>local newBuindingBtn &#x3D; UI.newButton(&#123;text &#x3D; btnName,x &#x3D; self.x,y &#x3D; self.y,parent &#x3D; self, style &#x3D; &#123;normal &#x3D; ResConfig.png.commonBtnBlue&#125;&#125;)<br></code></pre></li></p>
+</ul>
+<pre><code>-- 良好的风格
+if veryLongerVariable1 &gt;= veryLongerVariable2
+    and veryLongerVariable3 &lt;= veryLongerVariable5
+    and veryLongerVariable4 &lt;= veryLongerVariable6 then
+    doo()
+end
+
+<p>– 不良的风格<br>if veryLongerVariable1 &gt;&#x3D; veryLongerVariable2 and veryLongerVariable3 &lt;&#x3D; veryLongerVariable5 and veryLongerVariable4 &lt;&#x3D; veryLongerVariable6 then<br>    doo()<br>end<br></code></pre><p><span id="1.4"></span></p></p>
+<h3 id="1-4-使用缩进"><a href="#1-4-使用缩进" class="headerlink" title="1.4 使用缩进"></a>1.4 使用缩进</h3><ul>
+<li>类中的成分</li>
+<li>方法体或语句块中的成分</li>
+<li>换行时的非起始行 </li>
+</ul>
+<h2 id="—"><a href="#—" class="headerlink" title="—"></a>—</h2><p><span id="2"></span></p>
+<h2 id="二、命名规则"><a href="#二、命名规则" class="headerlink" title="二、命名规则"></a>二、命名规则</h2><blockquote>
+<p>三思而命名。</p>
+</blockquote>
+<p><span id="2.1"></span></p>
+<h3 id="2-1-共性规则"><a href="#2-1-共性规则" class="headerlink" title="2.1 共性规则"></a>2.1 共性规则</h3><ul>
+<li>命名应当直观且可拼读，可望文知意；</li>
+<li>标识符的长度应当符合“min-length &amp;&amp; max-information”原则；</li>
+<li>采用英文单词或单词组合，英文单词不要复杂，但用词需准确，<code>切忌使用汉语拼音命名</code>；</li>
+<li>切勿为了避免命名过长而随意截取单词，以丢失可读性；</li>
+<li>所有命名都不要与－x已有的命名风格冲突，例如不要以CC，UI开头；</li>
+</ul>
+<p><span id="2.2"></span></p>
+<h3 id="2-2-文件命名"><a href="#2-2-文件命名" class="headerlink" title="2.2 文件命名"></a>2.2 文件命名</h3><ul>
+<li>所有Lua文件的命名时使用大驼峰法；</li>
+<li>根据文件的特性，一般以文件里的模块名或者类名作为同名文件名；</li>
+<li><p>确定命名前，请检查下，不要跟其他文件同名；</p>
+<pre><code>CCArmature.lua    -- 不良的风格
+UILayout.lua      -- 不良的风格
+</code></pre></li>
+</ul>
+<p><span id="2.3"></span></p>
+<h3 id="2-3-类的命名"><a href="#2-3-类的命名" class="headerlink" title="2.3 类的命名"></a>2.3 类的命名</h3><ul>
+<li>所有类命名时使用大驼峰法；</li>
+<li>类名一般由”名词”或”多名词”组成，不要简写；</li>
+<li><p>根据类的特性，加上相关的后缀或者前缀；</p>
+<pre><code>后缀：  
+管理类  Manager
+缓存类  Cache
+控制类  Controller
+模块    Module
+网络类  Proxy
+</code></pre></li>
+</ul>
+<p><span id="2.4"></span></p>
+<h3 id="2-4-变量命名"><a href="#2-4-变量命名" class="headerlink" title="2.4 变量命名"></a>2.4 变量命名</h3><ul>
+<li><p>通用规则</p>
+<ul>
+<li>使用 “名词” 或是 “形容词+名词” 命名；</li>
+<li>使用小驼峰法命名；</li>
+<li>为了可读性，尽量避免变量名中出现标号，如value1， value2；</li>
+<li>不要出现仅靠部分字母大小写区分的相似的变量；</li>
+<li>除非是局部变量功能等价全局变量，不然局部变量不要与已有的全局变量同名；</li>
+<li><p>尽量不要使用已有的类名作为变量名；</p>
+<pre><code>local data          -- 良好的风格  
+local oldData       -- 良好的风格 
+local newData       -- 良好的风格     
+local pairs = pairs -- 良好的风格
+
+<p>local posx,posX     – 不良的风格<br>local btn1,btn2     – 不良的风格<br>local TABLE &#x3D; &#123;&#125;    – 不良的风格<br>local uILabel       – 不良的风格<br></code></pre></li></p>
+</ul>
+</li>
+<li><p>类的成员变量</p>
+<ul>
+<li><p>类的成员变量以”self.”开头，以区分于局部变量；</p>
+<pre><code>例如:
+    function init()
+
+<pre><code>    self.mainPanel = false -- 常用格式
+
+    topPanel = false       -- 这样是全局变量，占用全局资源，而且难以区分于局部变量 
+    ...
+end
+</code></pre>
+<p></code></pre></li></p>
+</ul>
+</li>
+<li><p>全局变量</p>
+<ul>
+<li><p>全局变量使用双下划线(“<code>__</code>“)开头以及结尾，中间的命名以名词拼接，或”形容词＋名词”拼接，不同单词之间用（”<code>_</code>“）隔开；</p>
+<pre><code>例如：
+    __VERSION_CODE__ = &#34;1.0.0.0&#34;            
+</code></pre></li>
+</ul>
+</li>
+<li><p>局部变量</p>
+<ul>
+<li><p>M常用做模块里面表示模块本身</p>
+<pre><code>module(&#34;MainGame.Module.IntegrationTest.MapModule&#34;,package.seeall)
+
+<p>local M &#x3D; class(SceneView,&amp;#34;MapScene&amp;#34;)</p>
+<p>–数据的初始化<br>function M:init()<br>    …<br>end</p>
+<p>…<br>return M<br></code></pre><ul></p>
+<li><p>引用进来的类或模块，用大驼峰法命名，引用路径统一带括号；</p>
+<pre><code>module(&#34;MainGame.Module.IntegrationTest.MapModule&#34;,package.seeall)
+
+<p>local M &#x3D; class(SceneView,&amp;#34;MapScene&amp;#34;)<br>local Surface &#x3D; require(&amp;#34;xx.xx&amp;#34;)<br>local TestButtonPanel &#x3D; require(&amp;#34;xx&amp;#34;)<br>…<br></code></pre></li></p>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>临时变量</p>
+<ul>
+<li><p>常用下划线”_”作为可以忽略的变量</p>
+<pre><code>for _,v in ipairs(t) do print(v) end
+</code></pre><ul>
+<li><p>i,k,v,t常做临时变量</p>
+<pre><code>for k,v in pairs(t) ... end
+for i,v in ipairs(t) ... end
+mt.__newindex = function(t, k, v) ... end
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><span id="2.5"></span></p>
+<h3 id="2-5-常量，事件名的命名"><a href="#2-5-常量，事件名的命名" class="headerlink" title="2.5 常量，事件名的命名"></a>2.5 常量，事件名的命名</h3><ul>
+<li><p>常量，事件名所用单词均大写，单词用下划线(‘<code>_</code>‘)分割；</p>
+<pre><code>例如：
+    -- 常量 默认宽度
+    LIST_DEFAULT_WIDTH = 100
+
+<pre><code>-- 事件 添加到场景
+ADDED_TO_STAGE = getId() 
+</code></pre>
+<p></code></pre></li></p>
+</ul>
+<p><span id="2.6"></span></p>
+<h3 id="2-6-枚举的命名"><a href="#2-6-枚举的命名" class="headerlink" title="2.6 枚举的命名"></a>2.6 枚举的命名</h3><ul>
+<li>枚举名命名，与类名命名一致；</li>
+<li><p>枚举值命名，与常量，事件名的命名一致；</p>
+<pre><code>例如：
+    ControllerViewType = &#123;
+        SCENE = &#34;SCENE&#34;,
+        PANEL = &#34;PANEL&#34;,
+        POP =     &#34;POP&#34;,
+    &#125;
+</code></pre></li>
+</ul>
+<h2 id="—-1"><a href="#—-1" class="headerlink" title="—"></a>—</h2><p>##三、文件组织<br/><span id="3.1"></span></p>
+<h3 id="3-1-文件描述"><a href="#3-1-文件描述" class="headerlink" title="3.1 文件描述"></a>3.1 文件描述</h3><ul>
+<li><p>文件开头加上此文件的简要功能作用描述；</p>
+<pre><code>-- MapModule.lua
+--Author:xx
+--Email:xx@flamingo-inc.com
+--20xx年x月x日 xx:xx
+--Using:创建地图       
+module(&#34;MainGame.Module.IntegrationTest.MapModule&#34;,package.seeall)
+...
+</code></pre></li>
+</ul>
+<p><span id="3.2"></span></p>
+<h3 id="3-2-文件中变量的定义"><a href="#3-2-文件中变量的定义" class="headerlink" title="3.2 文件中变量的定义"></a>3.2 文件中变量的定义</h3><ul>
+<li><p>如果在文件中需要多次使用的某些导入文件，可以在文件开头用局部变量存储导入信息，而不是在每次使用的时候都重新导入一次；</p>
+<pre><code>例如:
+    ...
+    local Surface = require(&#34;xx.xx&#34;)
+    local TestButtonPanel = require(&#34;xx&#34;)
+
+<pre><code>function M:xx()
+    local testBtn = TestButtonPanel.newCC()
+    ...
+end
+
+function M:yy()
+    local panel = TestButtonPanel.newCC()
+    local surface = Surface.newCC()
+    ...
+end
+
+...
+</code></pre>
+<p></code></pre><p><span id="3.3"></span></p></p>
+<h3 id="3-3-类变量的定义"><a href="#3-3-类变量的定义" class="headerlink" title="3.3 类变量的定义"></a>3.3 类变量的定义</h3></li>
+<li>类中的成员变量需要在init中先声明，并赋予初始值，<code>不允许不声明直接使用</code>；</li>
+</ul>
+<p><span id="3.4"></span></p>
+<h3 id="3-4-函数参数的定义"><a href="#3-4-函数参数的定义" class="headerlink" title="3.4 函数参数的定义"></a>3.4 函数参数的定义</h3><ul>
+<li><p>所有函数的参数都用统一的params做参数，并加入如下格式的注释：</p>
+<pre><code>--[[
+    普通按钮 可缩放 scale9
+    @param #string text 按钮名称
+    @param #table style 按钮样式
+]]
+function UI.newButtonScale9(params)
+   ...
+end
+</code></pre></li>
+</ul>
+<p><span id="3.5"></span></p>
+<h3 id="3-5-函数的定义规则"><a href="#3-5-函数的定义规则" class="headerlink" title="3.5 函数的定义规则"></a>3.5 函数的定义规则</h3><ul>
+<li>函数的行数过长(大于 100 行)时,尽量拆分为多个子函数;</li>
+<li>函数中一些晦涩的部分,一定要加上注释；</li>
+</ul>
+<p><span id="2.6"></span></p>
+<h3 id="3-6-注释的使用"><a href="#3-6-注释的使用" class="headerlink" title="3.6 注释的使用"></a>3.6 注释的使用</h3><ul>
+<li>短小的注释用–；</li>
+<li>长注释用–[[]]；</li>
+</ul>
+<h2 id="—-2"><a href="#—-2" class="headerlink" title="—"></a>—</h2><p><span id="4"></span></p>
+<h2 id="四、编码技巧"><a href="#四、编码技巧" class="headerlink" title="四、编码技巧"></a>四、编码技巧</h2><p><span id="4.1"></span></p>
+<h3 id="4-1-应该尽量使用local变量而非global变量"><a href="#4-1-应该尽量使用local变量而非global变量" class="headerlink" title="4.1 应该尽量使用local变量而非global变量"></a>4.1 应该尽量使用<code>local</code>变量而非<code>global</code>变量</h3><ul>
+<li>全局变量实际是放入全局表中，每次调用是用传入变量名作为key去获取，而local变量是直接通过lua的堆栈访问的；</li>
+<li>推荐写法<ul>
+<li>在能用局部变量解决的地方，不要使用全局变量，这点很容易被忽略；    </li>
+<li>多次重复使用的全局接口，可以用局部变量保存下再使用，这样做有两个好处：<ul>
+<li>避免某些类型的全局变量被修改</li>
+<li>提高访问速度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>* 比如需要多重遍历操作一个大表：
+写法1:
+for k1,v1 in pairs(tbl) do
+    for k2,v2 in pairs(v1) do
+        ...    
+    end
+end
+
+<p>写法2:<br>do<br>    local pairs &#x3D; pairs<br>    for k1,v1 in pairs(tbl) do<br>        for k2,v2 in pairs(v1) do<br>            …<br>        end<br>    end<br>end</p>
+<p>– 由于pairs是一个全局变量应用的函数，所以写法2在这里有稍微效率上的提升，但要是单层遍历的没有这个效果了。</p>
+<ul>
+<li>当作常量来多次使用的全局变量可以存为局部变量使用<br>local playerName &#x3D; Cache.playerCache.username<br>…<br>local function itemTemplate(data)<br>  nameLabel:setText(playerName)<br>end</li>
+</ul>
+<p>local list &#x3D; NewList.newCC(,&#123;<br>    itemTemplate &#x3D; itemTemplate,<br>    …<br>&#125;)<br></code></pre><p><span id="4.2"></span>            </p></p>
+<p>###4.2 临时变量的处理</p>
+<ul>
+<li><p>字符串的连接 .. <br/><br/>由于字符串的管理机制，字符串在使用..连接时，会产生新的对象。由于lua在VM内对相同的string永远只保留一份唯一copy。</p>
+<pre><code>例如:
+local description ＝ &#34;&#34;
+for i = 1,20 do
+    description = description..&#34;xxx&#34;
+end
+-- 这样会生成21份string的copy，但实际上我们只需要最后那一份 
+</code></pre><p> 如果是轻量级的简单连接还是可以使用的，因为影响不大，但要是大量的类似拼接，推荐使用<code>string.format</code></p>
+</li>
+<li><p>类似于字符串的管理机制，表也存在类似的临时变量copy：</p>
+<pre><code>函数传参数
+function func(&#123;x,y&#125;)
+    ...
+end
+</code></pre><p>这种传参方式，每次都会生成一份copy，所以推荐以下的用法：</p>
+<pre><code>function func(x,y)
+    ...
+end
+
+<p>function func(&#123;posX &#x3D; x, posY &#x3D; y&#125;)<br>    …<br>end<br></code></pre></li></p>
+</ul>
+<p><span id="4.3"></span>        </p>
+<p>###4.3 利用逻辑运算的短路效应</p>
+<ul>
+<li><p>and or 的返回值是表达式中的左值或者右值，可用来简化代码</p>
+<pre><code>function foo(arg)
+    arg = arg or &#34;default&#34;
+    ...
+end
+
+<p>– 但要注意当赋值为bool值时候，容易出bug<br>a &#x3D; a or true  – 错误的写法，当 a 明确写为 false 的时候，也会被改变成 true 。<br>a &#x3D; a ~&#x3D; false – 正确的写法，当 a 为 nil 的时候，被赋值为 true ；而 false 则不变。<br></code></pre></li></p>
+<li><p>另外，巧妙使用 and or 还可以实现类似 C 语言中的 ?: 三元操作：</p>
+<pre><code>function max(a,b)
+    return a &gt; b and a or b
+end
+
+<p>– 这里相当于 return (a &gt; b) ? a : b;<br></code></pre></li></p>
+</ul>
+<h2 id="—-3"><a href="#—-3" class="headerlink" title="—"></a>—</h2><h2 id="五、代码建议"><a href="#五、代码建议" class="headerlink" title="五、代码建议"></a>五、代码建议</h2><p><span id="5.1"></span></p>
+<h3 id="5-1-代码的调试"><a href="#5-1-代码的调试" class="headerlink" title="5.1 代码的调试"></a>5.1 代码的调试</h3><ul>
+<li>用Luastudio工具调试，代替Sublime调试Lua代码；</li>
+</ul>
+<p><span id="5.2"></span></p>
+<h3 id="5-2-复杂度和性能问题"><a href="#5-2-复杂度和性能问题" class="headerlink" title="5.2 复杂度和性能问题"></a>5.2 复杂度和性能问题</h3><ul>
+<li>写代码时尽可能写的简单,考虑性能时先做好推断,看看能提升多少,增加的复杂度以及造成的代码晦涩有多严重,然后再决定如何做；</li>
+</ul>
+<p><span id="5.3"></span></p>
+<h3 id="5-3-函数的优化思考"><a href="#5-3-函数的优化思考" class="headerlink" title="5.3 函数的优化思考"></a>5.3 函数的优化思考</h3><ul>
+<li>开销大的函数，调用次数低的话，可以不做优化；</li>
+<li>开销较小的函数，但调用频率很高，则从如何降低调用频率以及减少函数的开销两个角度去思考优化；</li>
+</ul>
+<p><span id="5.4"></span></p>
+<h3 id="5-4-提交代码的检查"><a href="#5-4-提交代码的检查" class="headerlink" title="5.4 提交代码的检查"></a>5.4 提交代码的检查</h3><ul>
+<li>提交代码前，在svn commit中验证提交的代码，去掉或注释掉无关的代码，保证提交的代码无误；</li>
+</ul>
+<p><span id="5.5"></span></p>
+<h3 id="5-5-表结构的引用"><a href="#5-5-表结构的引用" class="headerlink" title="5.5 表结构的引用"></a>5.5 表结构的引用</h3><ul>
+<li>尽量减少表中的成员是另个表的引用；</li>
+</ul>
+<hr/>
+<p>参考资料：</p>
+<p>[1] <a href="https://ldb.googlecode.com/files/lua代码编写规范.pdf" target="_blank" rel="external noopener noreferrer">lua代码编写规范</a></p>
+<p>[2] <a href="http://lua-users.org/wiki/LuaStyleGuide" target="_blank" rel="external noopener noreferrer">Lua Style Guide</a></p>
+<p>[3] <a href="http://blog.codingnow.com/cloud/LuaTips" target="_blank" rel="external noopener noreferrer">Lua 编程技巧</a></p>
+<p>[4] <a href="http://www.codingnow.com/2000/download/lua_manual.html" target="_blank" rel="external noopener noreferrer">Lua 5.1 参考手册</a></p>
+
+      
+<pre><code>&lt;/div&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-835_lua/">lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-837_Erlang+Lua%E7%9A%84%E4%B8%80%E6%AC%A1%E9%87%8D%E6%9E%84/">Erlang+Lua的一次重构</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

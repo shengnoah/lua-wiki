@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>MoonScript Standard Library - Lua教程</title>
+
+  
+    <meta name="description" content="MoonScript标准库.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MoonScript Standard Library">
+<meta property="og:url" content="https://lua.ren/2023/04/26/2016-12-01-moonscript-standard-lib/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="MoonScript标准库.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.079Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.079Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="MoonScript官方文档">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">MoonScript Standard Library</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Printing-Functions"><span class="toc-text">Printing Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p-arg"><span class="toc-text">p(arg)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-Functions"><span class="toc-text">Table Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#run-with-scope-fn-scope-args"><span class="toc-text">run_with_scope(fn, scope, [args...])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#defaultbl-tbl-fn"><span class="toc-text">defaultbl([tbl,] fn)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend-arg1-arg2-rest"><span class="toc-text">extend(arg1, arg2, [rest...])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copy-tbl"><span class="toc-text">copy(tbl)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-x2F-Object-Functions"><span class="toc-text">Class&#x2F;Object Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#is-object-value"><span class="toc-text">is_object(value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type-value"><span class="toc-text">type(value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind-methods-obj"><span class="toc-text">bind_methods(obj)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mixin-obj-class-args"><span class="toc-text">mixin(obj, class, [args...])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mixin-object-obj-other-obj-method-names"><span class="toc-text">mixin_object(obj, other_obj, method_names)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mixin-table-a-b-names"><span class="toc-text">mixin_table(a, b, [names])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc-Functions"><span class="toc-text">Misc Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fold-items-fn"><span class="toc-text">fold(items, fn)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Debug-Functions"><span class="toc-text">Debug Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#debug-upvalue-fn-key-value"><span class="toc-text">debug.upvalue(fn, key[, value])</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Documents/">Documents</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.079Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>MoonScript Standard Library</span></h1>
+<p>{<br>  target: “reference&#x2F;standard_lib”<br>  template: “reference”<br>  title: “Standard Library”<br>  short_name: “stdlib”<br>}</p>
+<p>The MoonScript installation comes with a small kernel of functions that can be<br>used to perform various common things.</p>
+<p>The entire library is currently contained in a single object. We can bring this<br><code>moon</code> object into scope by requiring <code>&quot;moon&quot;</code>.</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">moon = <span class="built_in">require</span> <span class="string">&quot;moon&quot;</span></span><br><span class="line"><span class="comment">-- `moon.p` is the debug printer</span></span><br><span class="line">moon.p &#123; <span class="name">hello</span>: <span class="string">&quot;world&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>If you prefer to just inject all of the functions into the current scope, you<br>can require <code>&quot;moon.all&quot;</code> instead. The following has the same effect as above:</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span> <span class="string">&quot;moon.all&quot;</span></span><br><span class="line">p &#123; <span class="name">hello</span>: <span class="string">&quot;world&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>All of the functions are compatible with Lua in addition to MoonScript, but<br>some of them only make sense in the context of MoonScript.</p>
+<h1 id="MoonScript-Standard-Library"><a href="#MoonScript-Standard-Library" class="headerlink" title="MoonScript Standard Library"></a>MoonScript Standard Library</h1><p>This is an overview of all the included functions.<br>All of the examples assume that the standard library has been included with<br><code>require &quot;moon.all&quot;</code>.</p>
+<h2 id="Printing-Functions"><a href="#Printing-Functions" class="headerlink" title="Printing Functions"></a>Printing Functions</h2><h3 id="p-arg"><a href="#p-arg" class="headerlink" title="p(arg)"></a><code>p(arg)</code></h3><p>Prints a formatted version of an object. Excellent for inspecting the contents<br>of a table.</p>
+<h2 id="Table-Functions"><a href="#Table-Functions" class="headerlink" title="Table Functions"></a>Table Functions</h2><h3 id="run-with-scope-fn-scope-args"><a href="#run-with-scope-fn-scope-args" class="headerlink" title="run_with_scope(fn, scope, [args...])"></a><code>run_with_scope(fn, scope, [args...])</code></h3><p>Mutates the environment of function <code>fn</code> and runs the function with any extra<br>arguments in <code>args...</code>. Returns the result of the function.</p>
+<p>The environment of the function is set to a new table whose metatable will use<br><code>scope</code> to look up values. <code>scope</code> must be a table. If <code>scope</code> does not have an<br>entry for a value, it will fall back on the original environment.</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">my_env = &#123;</span><br><span class="line">  <span class="name">secret_function</span>: <span class="function">-&gt;</span> <span class="built_in">print</span> <span class="string">&quot;shhh this is secret&quot;</span></span><br><span class="line">  <span class="name">say_hi</span>: <span class="function">-&gt;</span> <span class="built_in">print</span> <span class="string">&quot;hi there!&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">say_hi</span> = -&gt;</span> <span class="built_in">print</span> <span class="string">&quot;I am a closure&quot;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">fn</span> = -&gt;</span></span><br><span class="line">  secret_function!</span><br><span class="line">  say_hi!</span><br><span class="line"></span><br><span class="line">run_with_scope fn, my_env</span><br></pre></td></tr></table></figure>
+
+
+<p>Note that any closure values will always take precedence against global name<br>lookups in the environment. In the example above, the <code>say_hi</code> in the<br>environment has been shadowed by the local variable <code>say_hi</code>.</p>
+<h3 id="defaultbl-tbl-fn"><a href="#defaultbl-tbl-fn" class="headerlink" title="defaultbl([tbl,] fn)"></a><code>defaultbl([tbl,] fn)</code></h3><p>Sets the <code>__index</code> of table <code>tbl</code> to use the function <code>fn</code> to generate table<br>values when a missing key is looked up.</p>
+<h3 id="extend-arg1-arg2-rest"><a href="#extend-arg1-arg2-rest" class="headerlink" title="extend(arg1, arg2, [rest...])"></a><code>extend(arg1, arg2, [rest...])</code></h3><p>Chains together a series of tables by their metatable’s <code>__index</code> property.<br>Overwrites the metatable of all objects except for the last with a new table<br>whose <code>__index</code> is set to the next table.</p>
+<p>Returns the first argument.</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123; <span class="name">hello</span>: <span class="string">&quot;world&quot;</span> &#125;</span><br><span class="line">b = &#123; <span class="name">okay</span>: <span class="string">&quot;sure&quot;</span> &#125;</span><br><span class="line"></span><br><span class="line">extend a, b</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> a.okay</span><br></pre></td></tr></table></figure>
+
+<h3 id="copy-tbl"><a href="#copy-tbl" class="headerlink" title="copy(tbl)"></a><code>copy(tbl)</code></h3><p>Creates a shallow copy of a table, equivalent to:</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">copy</span> = <span class="params">(arg)</span> -&gt;</span> &#123;k,v <span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span> self&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Class-x2F-Object-Functions"><a href="#Class-x2F-Object-Functions" class="headerlink" title="Class&#x2F;Object Functions"></a>Class&#x2F;Object Functions</h2><h3 id="is-object-value"><a href="#is-object-value" class="headerlink" title="is_object(value)"></a><code>is_object(value)</code></h3><p>Returns true if <code>value</code> is an instance of a MoonScript class, false otherwise.</p>
+<h3 id="type-value"><a href="#type-value" class="headerlink" title="type(value)"></a><code>type(value)</code></h3><p>If <code>value</code> is an instance of a MoonScript class, then return it’s class object.<br>Otherwise, return the result of calling Lua’s type method.</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">  <span class="literal">nil</span></span><br><span class="line"></span><br><span class="line">x = MyClass!</span><br><span class="line"><span class="built_in">assert</span> <span class="built_in">type</span>(x) == MyClass</span><br></pre></td></tr></table></figure>
+
+<h3 id="bind-methods-obj"><a href="#bind-methods-obj" class="headerlink" title="bind_methods(obj)"></a><code>bind_methods(obj)</code></h3><p>Takes an instance of an object, returns a proxy to the object whose methods can<br>be called without providing self as the first argument.</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">obj = SomeClass!</span><br><span class="line"></span><br><span class="line">bound_obj = bind_methods obj</span><br><span class="line"></span><br><span class="line"><span class="comment">-- following have the same effect</span></span><br><span class="line">obj\hello!</span><br><span class="line">bound_obj.hello!</span><br></pre></td></tr></table></figure>
+
+<p>It lazily creates and stores in the proxy table the bound methods when they<br>are first called.</p>
+<h3 id="mixin-obj-class-args"><a href="#mixin-obj-class-args" class="headerlink" title="mixin(obj, class, [args...])"></a><code>mixin(obj, class, [args...])</code></h3><p>Copies the methods of a class <code>cls</code> into the table <code>obj</code>, then calls the<br>constructor of the class with the <code>obj</code> as the receiver.</p>
+<p>In this example we add the functionality of <code>First</code> to an instance of <code>Second</code><br>without ever instancing <code>First</code>.</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">First</span></span></span><br><span class="line">  <span class="name">new</span>: <span class="function"><span class="params">(@var)</span> =&gt;</span></span><br><span class="line">  <span class="name">show_var</span>: <span class="function">=&gt;</span> <span class="built_in">print</span> <span class="string">&quot;var is:&quot;</span>, @var</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Second</span></span></span><br><span class="line">  <span class="name">new</span>: <span class="function">=&gt;</span></span><br><span class="line">    mixin self, First, <span class="string">&quot;hi&quot;</span></span><br><span class="line"></span><br><span class="line">a = Second!</span><br><span class="line">a\show_var!</span><br></pre></td></tr></table></figure>
+
+<p>Be weary of name collisions when mixing in other classes, names will be<br>overwritten.</p>
+<h3 id="mixin-object-obj-other-obj-method-names"><a href="#mixin-object-obj-other-obj-method-names" class="headerlink" title="mixin_object(obj, other_obj, method_names)"></a><code>mixin_object(obj, other_obj, method_names)</code></h3><p>Inserts into <code>obj</code> methods from <code>other_obj</code> whose names are listed in<br><code>method_names</code>. The inserted methods are bound methods that will run with<br><code>other_obj</code> as the receiver.</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> </span></span><br><span class="line">  <span class="name">add</span>: <span class="function"><span class="params">(item)</span> =&gt;</span> <span class="built_in">print</span> <span class="string">&quot;adding to&quot;</span>, self</span><br><span class="line">  <span class="name">remove</span>: <span class="function"><span class="params">(item)</span> =&gt;</span> <span class="built_in">print</span> <span class="string">&quot;removing from&quot;</span>, self</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Encapsulation</span></span></span><br><span class="line">  <span class="name">new</span>: <span class="function">=&gt;</span></span><br><span class="line">    @list = List!</span><br><span class="line">    mixin_object self, @list, &#123;<span class="string">&quot;add&quot;</span>, <span class="string">&quot;remove&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">e = Encapsulation!</span><br><span class="line">e.add <span class="string">&quot;something&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="mixin-table-a-b-names"><a href="#mixin-table-a-b-names" class="headerlink" title="mixin_table(a, b, [names])"></a><code>mixin_table(a, b, [names])</code></h3><p>Copies the elements of table <code>b</code> into table <code>a</code>. If names is provided, then<br>only those names are copied.</p>
+<h2 id="Misc-Functions"><a href="#Misc-Functions" class="headerlink" title="Misc Functions"></a>Misc Functions</h2><h3 id="fold-items-fn"><a href="#fold-items-fn" class="headerlink" title="fold(items, fn)"></a><code>fold(items, fn)</code></h3><p>Calls function <code>fn</code> repeatedly with the accumulated value and the current value<br>by iterating over <code>items</code>. The accumulated value is the result of the last call<br>to <code>fn</code>, or, in the base case, the first value. The current value is the value<br>being iterated over starting with the second item.</p>
+<p><code>items</code> is a normal array table.</p>
+<p>For example, to sum all numbers in a list:</p>
+<figure class="highlight moon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">numbers = &#123;<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">sum = fold numbers, <span class="function"><span class="params">(a,b)</span> -&gt;</span> a + b</span><br></pre></td></tr></table></figure>
+
+<h2 id="Debug-Functions"><a href="#Debug-Functions" class="headerlink" title="Debug Functions"></a>Debug Functions</h2><h3 id="debug-upvalue-fn-key-value"><a href="#debug-upvalue-fn-key-value" class="headerlink" title="debug.upvalue(fn, key[, value])"></a><code>debug.upvalue(fn, key[, value])</code></h3><p>Gets or sets the value of an upvalue for a function by name.</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/2017-02-21-moonscript-resty-http/">MoonScript如何使用RESTY-HTTP</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/2017-01-13-oo-of-moonscript/">MoonScript's Object</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

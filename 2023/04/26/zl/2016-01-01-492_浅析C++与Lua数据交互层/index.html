@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>浅析C++与Lua数据交互层 - Lua教程</title>
+
+  
+    <meta name="description" content="背景  ​	C++作为服务器端开发的主流语言，相比其他语言有明显的性能优势，但是它的技术门槛比较高，不支持热更新，无法进行迅速的需求迭代和线上问题的响应。另外，C++内存管理的特点，技术人员对指针的使用不当，可能会造成宕机。因此，现在越来越多的技术团队会选择在C++中嵌入脚本语言，C++提供底层支持，脚本语言进行业务逻辑的开发。这样的好处，一方面将开发人员进行划分，C++代码的维护只由核心人员进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析C++与Lua数据交互层">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-492_%E6%B5%85%E6%9E%90C++%E4%B8%8ELua%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E5%B1%82/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="背景  ​	C++作为服务器端开发的主流语言，相比其他语言有明显的性能优势，但是它的技术门槛比较高，不支持热更新，无法进行迅速的需求迭代和线上问题的响应。另外，C++内存管理的特点，技术人员对指针的使用不当，可能会造成宕机。因此，现在越来越多的技术团队会选择在C++中嵌入脚本语言，C++提供底层支持，脚本语言进行业务逻辑的开发。这样的好处，一方面将开发人员进行划分，C++代码的维护只由核心人员进行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.277Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.277Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">浅析C++与Lua数据交互层</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%B1%82%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85"><span class="toc-text">一层数据封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E6%8A%BD%E8%B1%A1%E6%93%8D%E4%BD%9C"><span class="toc-text">两个抽象操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-text">注册成员变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-text">注册成员函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">注册构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB"><span class="toc-text">注册继承关系</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>浅析C++与Lua数据交互层</span></h1>
+<h2 id="背景">背景</h2>
+
+<p>​	C++作为服务器端开发的主流语言，相比其他语言有明显的性能优势，但是它的技术门槛比较高，不支持热更新，无法进行迅速的需求迭代和线上问题的响应。另外，C++内存管理的特点，技术人员对指针的使用不当，可能会造成宕机。因此，现在越来越多的技术团队会选择在C++中嵌入脚本语言，C++提供底层支持，脚本语言进行业务逻辑的开发。这样的好处，一方面将开发人员进行划分，C++代码的维护只由核心人员进行。业务层的脚本代码开发，相对比较简单，可以交由经验比较浅的新人，甚至外包给其他团队；另外一方面，脚本语言的灵活性，可热更新，又弥补了C++的不足。</p>
+
+<p>​	Lua作为一门非常轻量的脚本语言，被大量的游戏团队使用。我们就来说一说，C++是如何与Lua进行数据交互的。</p>
+
+<p>​	已有的类似系统有LuaBinder、LuaTinker、CppToLua等。</p>
+
+<h2 id="基本原理">基本原理</h2>
+
+<p>​	Lua提供了虚拟栈的概念，C/C++可以通过push/pop从栈上逐一存取基本的数据类型，也可以通过pushcfunction/pushcclosure，将函数注册给Lua，供其调用。但对于C++来说，数据结构比较复杂，有类和对象的概念，类有成员变量和成员函数，类之间又有继承的关系。Lua的基本接口并无法支撑这么复杂的数据交互。我们要实现的数据交互层，就是为C++提供一套注册接口，方面将C++中的类、对象类型的变量、类的成员变量和成员函数注册到Lua中去，让Lua像访问原生数据一样访问它们。</p>
+
+<p>​       如下，在C++中定义了如下类A，并利用数据交互层提供的接口，将A类的成员变量和成员函数注册给Lua。然后，将A类型的对象ca注册到Lua的全局变量中，为了进行区分，命名为la。在Lua代码里，就可以通过la.x访问对象ca.x的变量，通过la:funcA(p1,p2,…)调用ca.funcA的函数了。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Class</span> <span class="n">A</span>
+<span class="p">&#123;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">A</span><span class="p">();</span>
+    <span class="o">~</span><span class="n">A</span><span class="p">();</span>
+    
+<pre><code>&lt;span class=&quot;n&quot;&gt;TypeX&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TypeY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;funcA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Param1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Param2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...);&lt;/span&gt;
+</code></pre>
+<p><span class="p">};</span></p>
+<p><span class="p">…</span><br><span class="n">registerClass</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;A&amp;#34;</span><span class="p">);</span> <span class="c1">&#x2F;&#x2F; L 为lua_State*类型<br></span><span class="n">registerClassFunction</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;funcA&amp;#34;</span><span class="p">,</span> <span class="n">A</span><span class="o">::</span><span class="n">funcA</span><span class="p">);</span><br><span class="n">registerClassMemberVariable</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;x&amp;#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">A</span><span class="o">::</span><span class="n">x</span><span class="p">);</span></p>
+<p><span class="n">A</span> <span class="n">ca</span><span class="p">;</span><br><span class="n">registerVariable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;la&amp;#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ca</span><span class="p">);</span><br></code></pre></div></div></p>
+<p>​	这背后的发生了什么？先来看一下<code class="highlighter-rouge">regiserClass</code>的实现，在Lua的全局环境中注册了名为name的表，并定义几个元方法，我们称这种表为类表。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="n">registerClass</span><span class="p">(</span><span class="n">lua_State</span><span class="o">*</span> <span class="n">L</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">&#123;</span>
+    <span class="n">ClassName</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">name</span><span class="p">(</span><span class="n">name</span><span class="p">);</span> <span class="c1">//注册类名
+</span>    
+    <span class="n">lua_newtable</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>
+    
+<pre><code>&lt;span class=&quot;n&quot;&gt;lua_pushstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;__name&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_pushstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_rawset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;lua_pushstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;__index&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_pushcclosure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;meta_get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_rawset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;lua_pushstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;__newindex&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_pushcclosure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;meta_set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_rawset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;lua_pushstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;__gc&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_pushcclosure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;destroyer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lua_rawset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;lua_setglobal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+</code></pre>
+<p><span class="p">}</span><br></code></pre></div></div></p>
+<p>当访问la.x时，会把la当作table，寻找table中key为”x”的值。la.x当作左值时会触发 <code class="highlighter-rouge">__newindex</code>元方法，当作右值时会触发 <code class="highlighter-rouge">__index</code>元方法。当la中没有找到key为”x”的值，就会去la的元表中进行查找。因此，需要将la的元表设置为A的类表。</p>
+
+<p>​	除了上面通过注册全局变量，Lua层还有另外两个途径访问C++类的对象：通过C++类的构造函数直接构造对象、通过其他对象的成员变量或者成员函数的返回值。三种途径的关键一步，都是将userdata的元表关联到注册给Lua的类表中。</p>
+
+<h3 id="一层数据封装">一层数据封装</h3>
+
+<p>​	Lua中的基本数据类型有number、string、table、function、userdata、thread。la本质上就是userdata，指向内存数据的一个指针，简单理解，可以认为是对象实例ca的地址，实际上，进行了一层封装。分别定义了ValueToUser<t>、PtrToUser<t>、RefToUser<t>三种类型，来处理值类型、指针类型和引用类型，它们都继承自UserBase。这样就可以将任意类型的值、指针、引用压入Lua虚拟栈中。注意到ValueToUser需要负责类型的创建和删除，PtrToUser和RefToUser只是持有对象的地址。</t></t></t></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">UserBase</span>
+<span class="p">&#123;</span>
+    <span class="n">UserBase</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span><span class="o">:</span> <span class="n">m_p</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="p">&#123;&#125;</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">UserBase</span><span class="p">();</span>
+    <span class="kt">void</span><span class="o">*</span> <span class="n">m_p</span><span class="p">;</span>
+<span class="p">&#125;;</span>
+
+<p><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span><br><span class="k">struct</span> <span class="n">ValueToUser</span><span class="o">:</span> <span class="n">UserBase</span><br><span class="p">&#123;</span><br>    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="p">…</span> <span class="n">Args</span><span class="o">&gt;</span><br>    <span class="n">ValueToUser</span><span class="p">(</span><span class="n">Args</span><span class="p">…</span> <span class="n">args</span><span class="p">)</span> <span class="o">:</span> <span class="n">UserBase</span><span class="p">(</span><span class="k">new</span> <span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)…))</span> <span class="p">&#123;&#125;</span></p>
+<pre><code>&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ValueToUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&#125;&lt;/span&gt;
+</code></pre>
+<p><span class="p">};</span></p>
+<p><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span><br><span class="k">struct</span> <span class="n">PtrToUser</span><span class="o">:</span> <span class="n">UserBase</span><br><span class="p">{</span><br>    <span class="n">PtrToUser</span><span class="p">(</span><span class="n">T</span><span class="o"><em></span> <span class="n">t</span><span class="p">)</span><span class="o">:</span> <span class="n">UserBase</span><span class="p">((</span><span class="kt">void</span><span class="o"></em></span><span class="p">)</span><span class="n">t</span><span class="p">)</span> <span class="p">{}</span><br><span class="p">};</span></p>
+<p><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span><br><span class="k">struct</span> <span class="n">RefToUser</span><span class="o">:</span> <span class="n">UserBase</span><br><span class="p">{</span><br>    <span class="n">RefToUser</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span> <span class="n">t</span><span class="p">)</span><span class="o">:</span> <span class="n">UserBase</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">)</span> <span class="p">{}</span><br><span class="p">};</span></p>
+<p></code></pre></div></div></p>
+<p>注意到registerClass中将destroyer<t>函数注册为__gc元方法，当Lua产生垃圾回收时，就会调用该方法：</t></p>
+
+<pre><code class="language-C++">template&lt;typame T&gt;
+int destroyer(lua_State* L)
+&#123;
+    ((UserBase*)lua_touserdata(L, -1))-&gt;~UserBase();
+    return 0; //告诉Lua该函数没有返回值
+&#125;
+</code></pre>
+
+<h3 id="两个抽象操作">两个抽象操作</h3>
+
+<p>定义两个操作：pushToLuaStack<t>可以将任意类型的数据压入Lua虚拟栈，getFromLuaStack<t>则可以从Lua虚拟栈中取出任意类型的数据。</t></t></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pushToLuaStack&lt;T&gt;
+                |
+                | EnumToLua&lt;T&gt; ---&gt; 将number类型压入栈
+                | ObjectToLua&lt;T&gt; ---&gt; | ValueToLua&lt;T&gt; ---&gt; 将ValueToUser&lt;T&gt;类型入栈
+                                      | PtrToLua&lt;T&gt;   ---&gt; 将PtrToUser&lt;T&gt;类型入栈
+                                      | RefToLua&lt;T&gt;   ---&gt; 将RefToUser&lt;T&gt;类型入栈 
+                                      &amp; 将T的类表作为刚压入栈的userdata的元表
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getFromLuaStack&lt;T&gt;
+                |
+                | LuaToEnum&lt;T&gt; ---&gt; 从栈上取出number类型变量
+                | LuaToObject&lt;T&gt; ----&gt; &amp; 1. user = LuaUserDataToType&lt;UserBase*&gt;::convert()
+                                       &amp; 2. VoidToType&lt;T&gt;(user-&gt;m_p)
+                                                   |
+                                                   | T如果是指针类型，VoidToPtr
+                                                   | T如果是引用类型，VoidToRef
+                                                   | T如果是值类型，  VoidToValue
+</code></pre></div></div>
+
+<h3 id="注册成员变量">注册成员变量</h3>
+
+<p>​	<code class="highlighter-rouge">registerClassMemberVariable&lt;A&gt;(L, &#34;x&#34;, &amp;A::x)</code>在类表中注册了key为”x”的键值对，值是一个void* 类型的userdata，实际是一个VariableBase类型的指针，利用运行时多态和模板，是可以达到反射的目的的。把任意类的任意成员变量，都抽象成VariableBase类，它只有两个虚函数接口，get用来把成员变量的值压入栈中，set用来取出栈上的值并赋给成员变量。VariableBase根据T和V派生出MemberVariable&lt;T, V&gt;类。MemberVariable&lt;T, V&gt;记录了成员变量在类中的偏移地址，同时具现了get和set这两个接口，因为有类型信息，可以知道从栈上取出是什么类型的值。</p>
+
+<pre><code class="language-C++">struct VariableBase
+&#123;
+    virtual void get(lua_State* L) = 0;
+    virtual void set(lua_State* L) = 0;
+&#125;;
+
+template&lt;typename T, typename V&gt;
+MemberVariable: VariableBase
+&#123;
+    V T::*_var;
+    
+    void get(lua_State* L)
+    &#123;
+        pushToLuaStack&lt;V&gt;(L, getFromLuaStack&lt;T*&gt;(L, 1)-&gt;*(_var));  //从栈底取出对象地址偏移到成员变量所在地址，将成员变量值压入栈中
+    &#125;
+    
+    void set(lua_State* L)
+    &#123;
+        getFromLuaStack&lt;T*&gt;(L, 1)-&gt;*(_var) = getFromLuaStack&lt;V&gt;(L, 3);
+    &#125;
+&#125;;
+
+int meta_get(lua_State* L)
+&#123;
+    lua_getmetatable(L, 1); // 将栈底的元表压栈，例子中就是la的类表A
+    lua_pusvalue(L, 2);     // 将栈底上面的元素，就是key复制压入栈；例子中就是&#34;x&#34;
+    lua_rawget(L, -2);      // 得到A[x]的值
+    
+    if(lua_isuserdata(L, -1))
+    &#123;
+        LuaUserDataToType&lt;VariableBase*&gt;::convert(L, -1)-&gt;get(L); //将栈底的userdata转
+        lua_remove(L, -2); // 将类表移出栈
+    &#125;
+    ...
+&#125;
+
+int meta_set(lua_State* L)
+&#123;
+    lua_getmetatable(L, 1); // 将栈底的元表压栈，例子中就是la的类表A
+    lua_pusvalue(L, 2);     // 将栈底上面的元素，就是key复制压入栈；例子中就是&#34;x&#34;
+    lua_rawget(L, -2);      // 得到A[x]的值
+    
+    if(lua_isuserdata(L, -1))
+    &#123;
+        LuaUserDataToType&lt;VariableBase*&gt;::convert(L, -1)-&gt;set(L);
+    &#125;
+    ...
+    lua_settop(L, 3);
+&#125;
+</code></pre>
+
+<h3 id="注册成员函数">注册成员函数</h3>
+
+<p>​	<code class="highlighter-rouge">registerClassFunction&lt;A&gt;(L, &#34;funcA&#34;, A::funcA)</code>做了什么？在类表中注册了key为”funcA”的键值对，值是一个闭包。<code class="highlighter-rouge">lua_pushcclosure(L，func, n)</code>函数允许将一个函数func压入栈的同时，指定它之前栈上的n个元素作为upvalue，这就是闭包的概念。这里的闭包是模版类MemberFunctionDelegate&lt;Ret, T, …Args&gt;的静态函数——call函数，upvalue是A::funcA的函数指针。模板类通过模板参数，将所属类T，返回值类型Ret，以及函数的参数列表的类型都记录下来。当la:funcA调用时，实际调用的是<code class="highlighter-rouge">MemberFunctionDelegate&lt;Ret, T, …Args&gt;::call</code>函数，Lua会将la(指向ca的指针)和函数的参数依次压入栈中。call的实现，首先从upvalue中取出成员函数指针，再从栈低到栈顶依次取出，ca的地址和A::funcA的各个参数，有了这些，就能真正地调用ca:funcA(p1,p2,…)，并将函数的返回值压入栈。</p>
+
+<pre><code class="language-C++">template&lt;typename RVal, typename T, typename ... Args&gt;
+struct MemberFunctionDelegate
+&#123;
+    static int call(lua_State* L)
+    &#123;
+        typedef RVal(T::*MemFunc)(Args ...);
+        MemFunc fun = getUpValue&lt;MemFunc&gt;(L); // 从upvalue中取出成员函数指针
+        
+        int index = 1;
+        T* t = getFromLuaStack&lt;T*&gt;(L, index++); //从栈底取出对象地址
+        pushToLuaStack(L, (t-&gt;*fun)(getFromLuaStack&lt;Args&gt;(L, index++)...));
+        
+        return 1;
+    &#125;
+&#125;;
+
+template&lt;typename RVal, typename T, typename ... Args&gt;
+pushFunctionDelegate(lua_State* L, RVal(T::*func)(Args...))
+&#123;
+    lua_pushcclosure(L, MemberFunctionDelegate&lt;RVal, T, Args...&gt;::call, 1);
+&#125;
+
+template&lt;typename T, typename F&gt;
+void registerClassFunction(lua_State* L, const char* name, F func)
+&#123;
+    push_meta(L, ClassName&lt;T&gt;::name());  // 将T的类表压入栈
+    if(lua_istable(L, -1))
+    &#123;
+        lua_pushstring(L, name);
+        new(lua_newuserdata(L, sizeof(F))) F(func); //成员函数指针作为upvalue
+        pushFunctionDelegate(L, func); 
+        lua_rawset(L, -3);
+    &#125;
+    lua_pop(L, 1);
+&#125;
+</code></pre>
+
+<h3 id="注册构造函数">注册构造函数</h3>
+
+<p>当我们在Lua中将表当作构造表达式使用时，例如t = T(…)，就会调用T的__call元方法。通过下面代码可以看到，注册的构造函数，其实创建了一个ValueToUser<t>类型的userdata，并将它的元表设为T的类表。</t></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span> <span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="kt">int</span> <span class="n">constructor</span><span class="p">(</span><span class="n">lua_State</span><span class="o">*</span> <span class="n">L</span><span class="p">)</span>
+<span class="p">&#123;</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">new</span><span class="p">(</span><span class="n">lua_newuserdata</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ValueToUser</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)))</span> <span class="n">ValueToUser</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">getFromLuaStack</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">index</span><span class="o">++</span><span class="p">)...);</span>
+    <span class="n">push_meta</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">ClassName</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">ClassType</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">Type</span><span class="o">&gt;::</span><span class="n">name</span><span class="p">());</span>
+    <span class="n">lua_setmetatable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">&#125;</span>
+<span class="p">...</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span> <span class="n">F</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">addClassConstructor</span><span class="p">(</span><span class="n">lua_State</span><span class="o">*</span> <span class="n">L</span><span class="p">,</span> <span class="n">F</span> <span class="n">func</span><span class="p">)</span>
+<span class="p">&#123;</span>
+    <span class="n">push_meta</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">ClassName</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">name</span><span class="p">());</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">lua_istable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="p">&#123;</span>
+        <span class="n">lua_newtable</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>
+        <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;__call&#34;</span><span class="p">);</span>
+        <span class="n">lua_pushcclosure</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">lua_rawset</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">);</span>
+        <span class="n">lua_setmetatable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">&#125;</span>
+    <span class="n">lua_pop</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">&#125;</span>
+
+<p><span class="c1">&#x2F;&#x2F; 注册构造函数示例<br></span><span class="n">addClassConstrutor</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">constructor</span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">);</span></p>
+<p><span class="c1">&#x2F;&#x2F; Lua中创建A对象示例<br></span><span class="n">la</span> <span class="o">&#x3D;</span> <span class="n">A</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span></p>
+<p></code></pre></div></div></p>
+<h3 id="注册继承关系">注册继承关系</h3>
+
+<p>C++中定义如下两个类A和B，B继承自A。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Class</span> <span class="n">A</span>
+<span class="p">&#123;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">A</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span><span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">A</span><span class="p">();</span>
+    
+<pre><code>&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TypeY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;funcA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Param1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Param2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...);&lt;/span&gt;
+</code></pre>
+<p><span class="p">};</span></p>
+<p><span class="n">Class</span> <span class="n">B</span> <span class="o">:</span> <span class="k">public</span> <span class="n">A</span><br><span class="p">{</span><br><span class="k">public</span><span class="o">:</span><br>    <span class="n">B</span><span class="p">(</span><span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">A</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><br>    <span class="o">~</span><span class="n">B</span><span class="p">();</span></p>
+<pre><code>&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TypeW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;funcB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Param&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Param2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...);&lt;/span&gt;
+</code></pre>
+<p><span class="p">};</span></p>
+<p></code></pre></div></div></p>
+<p>通过数据交互层提供的接口，不仅可以注册类的成员变量和成员函数，还可以将继承关系继承到Lua中。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">registerClass</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;A&#34;</span><span class="p">);</span> <span class="c1">// L 为lua_State*类型
+</span><span class="n">registerClassFunction</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;funcA&#34;</span><span class="p">,</span> <span class="n">A</span><span class="o">::</span><span class="n">funcA</span><span class="p">);</span>
+<span class="n">registerClassMemberVariable</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;x&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">A</span><span class="o">::</span><span class="n">x</span><span class="p">);</span>
+
+<p><span class="n">registerClass</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;B&amp;#34;</span><span class="p">);</span><br><span class="n">registerClassFunction</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;funcB&amp;#34;</span><span class="p">,</span> <span class="n">B</span><span class="o">::</span><span class="n">funcB</span><span class="p">);</span><br><span class="n">registerClassMemberVariable</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;z&amp;#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">B</span><span class="o">::</span><span class="n">z</span><span class="p">);</span><br><span class="n">inherientClass</span><span class="o">&lt;</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">L</span><span class="p">);</span></p>
+<p><span class="n">A</span> <span class="n">ca</span><span class="p">;</span><br><span class="n">registerVariable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;la&amp;#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ca</span><span class="p">);</span><br></code></pre></div></div></p>
+<p>于是在Lua脚本中，通过实例lb不仅可以访问类B的成员变量和函数，可以访问其父类的。</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lb</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<p><span class="nb">print</span><span class="p">(</span><span class="n">lb</span><span class="p">.</span><span class="n">b</span><span class="p">);</span><br><span class="n">lb</span><span class="p">:</span><span class="n">funcB</span><span class="p">(</span><span class="o">…</span><span class="p">);</span></p>
+<p><span class="nb">print</span><span class="p">(</span><span class="n">lb</span><span class="p">.</span><span class="n">a</span><span class="p">);</span><br><span class="n">lb</span><span class="p">:</span><span class="n">funcA</span><span class="p">(</span><span class="o">…</span><span class="p">);</span><br></code></pre></div></div></p>
+<p>这种继承关系，是如何注册到Lua中去的？</p>
+
+<p>看看inherientClass函数的实现：本质上就是将一个类表的__parent指向了父类表。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span> <span class="n">P</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">inherientClass</span><span class="p">(</span><span class="n">lua_State</span><span class="o">*</span> <span class="n">L</span><span class="p">)</span>
+<span class="p">&#123;</span>
+    <span class="n">push_meta</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">ClassName</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">name</span><span class="p">());</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">lua_istable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="p">&#123;</span>
+        <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;__parent&#34;</span><span class="p">);</span>     <span class="c1">// 通过__parent元方法，奖励两个类表之间的“继承”关系
+</span>        <span class="n">push_meta</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">ClassName</span><span class="o">&lt;</span><span class="n">P</span><span class="o">&gt;::</span><span class="n">name</span><span class="p">());</span>
+        <span class="n">lua_rawset</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">);</span>
+    <span class="p">&#125;</span>
+    <span class="n">lua_pop</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">&#125;</span>
+</code></pre></div></div>
+
+<p>我们再来看一下完整的meta_get和meta_set函数实现，当在当前类表中查找不到键值对时，就会调用invoke_parent函数，递归地从继承关系链中，向上搜寻父类表或者祖先类表中是否存在键值对。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">invoke_parent</span><span class="p">(</span><span class="n">lua_State</span><span class="o">*</span> <span class="n">L</span><span class="p">)</span>
+<span class="p">&#123;</span>
+    <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;__parent&#34;</span><span class="p">);</span>  <span class="c1">// 取出继承关系中的父类表
+</span>    <span class="n">lua_rawget</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+    
+<pre><code>&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lua_istable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 如果存在父类表
+</code></pre>
+<p></span>    <span class="p">{</span><br>        <span class="n">lua_pushvalue</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">&#x2F;&#x2F;将栈底上面的元素，即要找的key复制入栈<br></span>        <span class="n">lua_rawget</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>   <span class="c1">&#x2F;&#x2F; 尝试从父类表中找到key对应的value是否存在<br></span><br>        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">lua_isnil</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><br>        <span class="p">{</span><br>            <span class="n">lua_remove</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span> <span class="c1">&#x2F;&#x2F;如果找到，将父类表移除<br></span>        <span class="p">}</span><br>        <span class="k">else</span><br>        <span class="p">{</span><br>            <span class="n">lua_remove</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">&#x2F;&#x2F;将栈顶的nil移除<br></span>            <span class="n">invoke_parent</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>  <span class="c1">&#x2F;&#x2F;递归调用在父类的父类中查找<br></span>            <span class="n">lua_remove</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span> <span class="c1">&#x2F;&#x2F;将父类表移除<br></span>        <span class="p">}</span><br>    <span class="p">}</span><br><span class="p">}</span><br><span class="kt">int</span> <span class="nf">meta_get</span><span class="p">(</span><span class="n">lua_State</span><span class="o">*</span> <span class="n">L</span><span class="p">)</span><br><span class="p">{</span><br>    <span class="n">lua_getmetatable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">&#x2F;&#x2F;将栈底元素的元表入栈<br></span>    <span class="n">lua_pushvalue</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>    <span class="c1">&#x2F;&#x2F; 复制key并压入栈<br></span>    <span class="n">lua_rawget</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">);</span>      <span class="c1">&#x2F;&#x2F; 获取元表[key]的值<br></span><br>    <span class="k">if&lt;&#x2F;spa</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-495_Lua%20%E5%AD%A6%E4%B9%A0%20chapter16%20/">Lua 学习 chapter16</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-491_Lua%20%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E4%B8%8E%E7%BC%93%E5%AD%98%20/">Lua 的标准输出与缓存</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

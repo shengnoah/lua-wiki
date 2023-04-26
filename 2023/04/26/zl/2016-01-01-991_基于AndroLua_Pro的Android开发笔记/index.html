@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>基于AndroLua_Pro的Android开发笔记 - Lua教程</title>
+
+  
+    <meta name="description" content="温馨提示:请使用电脑浏览器打开,以确保最佳的阅读体验,谢谢.(￣▽￣)”   骚年, 学海无涯, 编程你怕不怕? 啥,你说怕? 那么你还看个P啊.  [0]英文大小写忽略[1]文章中的 alua 和 AndroLua的含义一样[2]文章中的 AndroLua_Pro 和 AndroLua+ 的含义一样  我接触androlua时长是两年半了(cxk警告), 因为AndroLua_Pro是真的很冷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于AndroLua_Pro的Android开发笔记">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-991_%E5%9F%BA%E4%BA%8EAndroLua_Pro%E7%9A%84Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="温馨提示:请使用电脑浏览器打开,以确保最佳的阅读体验,谢谢.(￣▽￣)”   骚年, 学海无涯, 编程你怕不怕? 啥,你说怕? 那么你还看个P啊.  [0]英文大小写忽略[1]文章中的 alua 和 AndroLua的含义一样[2]文章中的 AndroLua_Pro 和 AndroLua+ 的含义一样  我接触androlua时长是两年半了(cxk警告), 因为AndroLua_Pro是真的很冷">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/17032228-b088015359b431bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="article:published_time" content="2023-04-26T05:16:12.324Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.324Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/17032228-b088015359b431bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于AndroLua_Pro的Android开发笔记</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-1-AndroLua-Pro%E5%BC%80%E5%8F%91%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">&gt;1. AndroLua_Pro开发的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-2-AndroLua-Pro%E7%9A%84%E5%8E%86%E5%8F%B2"><span class="toc-text">&gt;2. AndroLua_Pro的历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-1-%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87"><span class="toc-text">&gt;1. 工具准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85AndroLua-Pro"><span class="toc-text">安装AndroLua_Pro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%BD%91%E9%A1%B5%E6%8E%A8%E8%8D%90"><span class="toc-text">学习网页推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="toc-text">学习软件推荐</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-2-%E4%B8%8A%E6%89%8B"><span class="toc-text">&gt;2. 上手</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>基于AndroLua_Pro的Android开发笔记</span></h1>
+<blockquote>
+<p>温馨提示:<strong>请使用电脑浏览器打开</strong>,以确保最佳的阅读体验,谢谢.(￣▽￣)”</p>
+</blockquote>
+<blockquote>
+<p>骚年, 学海无涯, 编程你怕不怕? 啥,你说怕? 那么你还看个P啊.</p>
+</blockquote>
+<p><sup>[0]<strong>英文大小写忽略</strong></sup><br/><sup>[1]文章中的 <strong>alua</strong> 和 <strong>AndroLua</strong>的含义一样</sup><br/><sup>[2]文章中的 <strong>AndroLua_Pro</strong> 和 <strong>AndroLua+</strong> 的含义一样</sup></p>
+<ul>
+<li><p>我接触androlua时长是两年半了(<strong>cxk警告</strong>), 因为AndroLua_Pro是真的很冷门, 所以基本上没有什么学习资料, 但是它的优势很好, 很适合用于学习, 我谈不上大神, 但是我可以把我的经验与你们分享.(<strong>话说都开这么多坑了</strong>)</p>
+</li>
+<li><p>我理解的AndroLua+逻辑应该是, <strong>Java–(jni)–C–(lua栈)–Lua</strong>, 要是想玩得通, 这些小细节必不可少啊.</p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/87ce6f565d37" target="_blank" rel="noopener noreferrer">JNI文章推荐</a></p>
+</li>
+</ul>
+<h2 id="gt-1-AndroLua-Pro开发的优势"><a href="#gt-1-AndroLua-Pro开发的优势" class="headerlink" title="&gt;1. AndroLua_Pro开发的优势"></a>&gt;1. AndroLua_Pro开发的优势</h2><ul>
+<li><strong>简单</strong>:Lua语法简单, 上手<strong>容易</strong>.</li>
+<li><strong>方便</strong>:可以在手机上敲代码, 可以用业余时间来敲敲(<strong>我的大部分代码是打发时间敲的</strong>).</li>
+<li><strong>其他</strong>:效率高, 还可以热更新.</li>
+</ul>
+<hr/>
+<h2 id="gt-2-AndroLua-Pro的历史"><a href="#gt-2-AndroLua-Pro的历史" class="headerlink" title="&gt;2. AndroLua_Pro的历史"></a>&gt;2. AndroLua_Pro的历史</h2><ul>
+<li><a href="https://baike.baidu.com/item/AndroLua/17344562?fr=aladdin" target="_blank" rel="noopener noreferrer">AndroLua+的百度百科</a></li>
+<li>GitHub上的<a href="https://github.com/nirenr/AndroLua_Pro" target="_blank" rel="noopener noreferrer">AndroLua_Pro</a></li>
+</ul>
+<p>是由国内大佬<strong>nirenr</strong>基于<strong>androlua</strong>优化而来的, 这个是大佬的原话:</p>
+<blockquote>
+<p><strong>AndroLua+</strong>是我基于GitHub开源项目优化增强而来的一个工程，主要是<strong>效率提高100倍</strong>以上，原来Lua调用Java方法速度大约一秒只能200次左右，经过不断优化，现在大约在10000-30000不等，使其可以在实际项目使用而不明显拖慢程序速度。另外一个就是<strong>修复其中关于JNI的局部引用溢出</strong>问题，就如原作者说的，他做这个只是为了练手ndk开发，所以luajava1.1中的各种bug一概没有修复，说到JNI的局部引用溢出，真是一个非常无语的问题，有时间专门写篇博文唠叨下。最后还有是<strong>把Lua从5.1.5升级到现在最新的5.3.3</strong>，貌似目前还没有其他安卓工程使用Lua5.3.3<br/>感谢泥人, 让我开始了掉头发的新生活.</p>
+</blockquote>
+<hr/>
+<h1 id="2-开始"><a href="#2-开始" class="headerlink" title="2. 开始"></a>2. 开始</h1><h2 id="gt-1-工具准备"><a href="#gt-1-工具准备" class="headerlink" title="&gt;1. 工具准备"></a>&gt;1. 工具准备</h2><p>AndroLua_Pro的衍生物<strong>很多</strong>比如</p>
+<blockquote>
+<p>ALua/OneLua/MostLua等</p>
+</blockquote>
+<ul>
+<li><p>这些衍生物不乏有优秀的甚至有可以替代本体的的作品, 操作方便/界面美观, 但是有一些版本较旧, 功能最快更新的往往是AndroLua_Pro, 因为其他的都是依赖于nirenr的源代码的二次加工, 当然你也可以自己动手, 自己封装.</p>
+</li>
+<li><p>你只需要明白, 语法都一样就可以啦.</p>
+</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://upload-images.jianshu.io/upload_images/17032228-b088015359b431bf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="图1"/></p>
+<center>图1 我正在使用的软件</center>
+
+<p><br/></p>
+<h3 id="安装AndroLua-Pro"><a href="#安装AndroLua-Pro" class="headerlink" title="安装AndroLua_Pro"></a>安装AndroLua_Pro</h3><blockquote>
+<ul>
+<li><a href="https://www.coolapk.com/apk/com.androlua" target="_blank" rel="noopener noreferrer">AndroLua+</a></li>
+<li><a href="https://www.coolapk.com/apk/com.One.androlua" target="_blank" rel="noopener noreferrer">OneLua</a></li>
+<li>有一些ide在群内优先更新, 需要自己动手去找了</li>
+</ul>
+</blockquote>
+<h3 id="学习网页推荐"><a href="#学习网页推荐" class="headerlink" title="学习网页推荐"></a>学习网页推荐</h3><p>有一些方法已经为你准备好了, 在不侵犯作者权益的情况下你只需要<strong>复制粘贴</strong>就可以了实现, 当然最好要优化一下, 说不定还可以提高效率.</p>
+<blockquote>
+<ul>
+<li><a href="http://www.androlua.cn/" target="_blank" rel="noopener noreferrer">http://www.androlua.cn</a></li>
+<li><a href="http://androlua.com/" target="_blank" rel="noopener noreferrer">http://androlua.com</a>(需要注册)</li>
+</ul>
+</blockquote>
+<h3 id="学习软件推荐"><a href="#学习软件推荐" class="headerlink" title="学习软件推荐"></a>学习软件推荐</h3><blockquote>
+<ul>
+<li>烧风的<a href="https://www.coolapk.com/apk/com.sf.ALuaGuide" target="_blank" rel="noopener noreferrer">ALUA助手</a>补位.</li>
+</ul>
+</blockquote>
+<hr/>
+<h2 id="gt-2-上手"><a href="#gt-2-上手" class="headerlink" title="&gt;2. 上手"></a>&gt;2. 上手</h2><p>你需要知道, 其实你还是在开发Android 软件, Android有的特性ALua基本也有.</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-990_%E7%BB%99%20Tengine%20%E5%8A%A0%E4%B8%8A%20lua%20%E6%8B%93%E5%B1%95/">给 Tengine 加上 lua 拓展</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-993_idea%E9%85%8D%E7%BD%AElua%E7%8E%AF%E5%A2%83/">idea配置lua环境</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

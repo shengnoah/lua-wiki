@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua - Lua教程</title>
+
+  
+    <meta name="description" content="|      分类 &lt;a href&#x3D;&quot;&#x2F;categories&#x2F;#lua之基础&quot; title&#x3D;&quot;lua之基础&quot;&gt;lua之基础&lt;&#x2F;a&gt;              |          “翻译”自https:&#x2F;&#x2F;github.com&#x2F;SteveKChiu&#x2F;lua-intf   lua-intf 提供了C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-651_lua/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="|      分类 &lt;a href&#x3D;&quot;&#x2F;categories&#x2F;#lua之基础&quot; title&#x3D;&quot;lua之基础&quot;&gt;lua之基础&lt;&#x2F;a&gt;              |          “翻译”自https:&#x2F;&#x2F;github.com&#x2F;SteveKChiu&#x2F;lua-intf   lua-intf 提供了C++">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.xumenger.com/media/image/2019-06-07/01.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.292Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.292Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.xumenger.com/media/image/2019-06-07/01.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lua-%E5%92%8Cc-%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">Lua 和C++ 的错误处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8c-%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%BC%96%E8%AF%91lua"><span class="toc-text">在C++ 环境下编译Lua</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BAlua-%E8%84%9A%E6%9C%AC%E5%AF%BC%E5%87%BAc-%E7%B1%BB%E6%88%96%E5%87%BD%E6%95%B0"><span class="toc-text">为Lua 脚本导出C++ 类或函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lua-%E8%B0%83%E7%94%A8c-%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">Lua 调用C++ 的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AElua-object-%E7%9A%84%E9%AB%98%E7%BA%A7%E5%88%ABapi"><span class="toc-text">访问Lua Object 的高级别API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-%E8%B0%83%E7%94%A8lua-%E8%84%9A%E6%9C%AC"><span class="toc-text">C++ 调用Lua 脚本</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua</span></h1>
+<section class="meta">
+  <span class="time">
+    
+  </span>
+  
+<p>  |<br>  <span class="categories"><br>    分类</p>
+<pre><code>&lt;a href=&quot;/categories/#lua之基础&quot; title=&quot;lua之基础&quot;&gt;lua之基础&lt;/a&gt; 
+</code></pre>
+  </span>
+  
+  
+<p>  | </p>
+</section>
+
+<section class="post">
+  <blockquote>
+  <p>“翻译”自<a target="_blank" rel="noopener" href="https://github.com/SteveKChiu/lua-intf">https://github.com/SteveKChiu/lua-intf</a></p>
+</blockquote>
+
+<p>lua-intf 提供了C++11 与Lua 语言之间的一种绑定机制，它提供了三种不同的API（本文只会讲到LuaBinding 与LuaRef）</p>
+
+<ul>
+  <li>LuaBinding：导出C++ 类、函数给Lua 脚本使用</li>
+  <li>LuaRef：用于访问Lua Object 的高级别API</li>
+  <li>LuaState：为Lua C API 提供的低级别包装器</li>
+</ul>
+
+<p>除了C++11、Lua 之外，lua-intf 没有其他需要依赖的。而且它是一个只有头文件的库，也就是说没有makefile 或者其他安装操作，直接拷贝lua-intf 源码到你的项目中，在代码中#include LuaIntf.h 即可</p>
+
+<h2 id="lua-和c-的错误处理">Lua 和C++ 的错误处理</h2>
+
+<p>使用LuaIntf，最好使用C++ 编译器编译Lua，这样允许Lua 库在出现错误时抛出异常，而且保证栈上的C++ 对象被正确的析构</p>
+
+<p>更多关于错误处理的内容，可以参见<a target="_blank" rel="noopener" href="http://lua-users.org/wiki/ErrorHandlingBetweenLuaAndCplusplus">http://lua-users.org/wiki/ErrorHandlingBetweenLuaAndCplusplus</a></p>
+
+<p>如果你坚持想在C 环境下编译Lua，而且可以忍受longjump 问题，你可以在#include LuaIntf.h 头文件之前先#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+#include &#34;LuaIntf/LuaIntf.h&#34;
+</span></code></pre></div></div>
+
+<h2 id="在c-环境下编译lua">在C++ 环境下编译Lua</h2>
+
+<p>预编译的Lua 库大多数发行版都是在C 环境下编译的，如果需要在C++ 环境下编译Lua 库，你可能需要自己手动操作。在C++ 环境下编译Lua 其实也很简单，首先先把Lua 源码下载下来</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://www.lua.org/ftp/lua-5.3.0.tar.gz <span class="nt">-o</span> lua-5.3.0.tar.gz
+<span class="nb">tar </span>xf lua-5.3.0.tar.gz
+<span class="nb">cd </span>lua-5.3.0
+</code></pre></div></div>
+
+<p>在不同的环境下使用不同的命令进行编译构建</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Linux环境下编译</span>
+make linux <span class="nv">MYCFLAGS</span><span class="o">=</span><span class="s2">&#34;-x c++&#34;</span> <span class="nv">CC</span><span class="o">=</span><span class="s2">&#34;g++&#34;</span>
+
+<p><span class="c"># Mac OSX 环境下编译</span><br>make macosx <span class="nv">MYCFLAGS</span><span class="o">&#x3D;</span><span class="s2">&amp;#34;-x c++&amp;#34;</span> <span class="nv">MYLDFLAGS</span><span class="o">&#x3D;</span><span class="s2">&amp;#34;-lc++&amp;#34;</span></p>
+<p><span class="c">## 在Windows 下用MINGW 或MSYS 编译</span><br>make mingw <span class="nv">MYCFLAGS</span><span class="o">&#x3D;</span><span class="s2">&amp;#34;-x c++&amp;#34;</span> <span class="nv">CC</span><span class="o">&#x3D;</span><span class="s2">&amp;#34;g++&amp;#34;</span><br></code></pre></div></div></p>
+<p>而且你可以选择指定路径进行安装</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make install <span class="nv">INSTALL_TOP</span><span class="o">=</span>&lt;path&gt;
+</code></pre></div></div>
+
+<h2 id="为lua-脚本导出c-类或函数">为Lua 脚本导出C++ 类或函数</h2>
+
+<p>比如下面这个C++ 类</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Web</span>
+<span class="p">&#123;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// base_url is optional
+</span>    <span class="n">Web</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">base_url</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">Web</span><span class="p">();</span>
+
+<pre><code>&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;go_home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;home_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set_home_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resolve_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// doing reload if uri is empty
+</code></pre>
+<p></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">uri</span><span class="p">);</span><br><span class="p">}</span><br></code></pre></div></div></p>
+<p>使用下面的代码可以将Web 类导出</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LuaBinding</span><span class="p">(</span><span class="n">L</span><span class="p">).</span><span class="n">beginClass</span><span class="o">&lt;</span><span class="n">Web</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&#34;Web&#34;</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">addConstructor</span><span class="p">(</span><span class="n">LUA_ARGS</span><span class="p">(</span><span class="n">_opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">))</span>
+    <span class="p">.</span><span class="n">addStaticProperty</span><span class="p">(</span><span class="s">&#34;home_url&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Web</span><span class="o">::</span><span class="n">home_url</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Web</span><span class="o">::</span><span class="n">set_home_url</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">addStaticFunction</span><span class="p">(</span><span class="s">&#34;go_home&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Web</span><span class="o">::</span><span class="n">go_home</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s">&#34;url&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Web</span><span class="o">::</span><span class="n">url</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Web</span><span class="o">:</span><span class="n">set_url</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">addFunction</span><span class="p">(</span><span class="s">&#34;resolve_url&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Web</span><span class="o">::</span><span class="n">resolve_url</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">addFunction</span><span class="p">(</span><span class="s">&#34;load&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Web</span><span class="o">::</span><span class="n">load</span><span class="p">,</span> <span class="n">LUA_ARGS</span><span class="p">(</span><span class="n">_opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">))</span>
+    <span class="p">.</span><span class="n">addStaticFunction</span><span class="p">(</span><span class="s">&#34;lambda&#34;</span><span class="p">,</span> <span class="p">[]</span> <span class="p">&#123;</span>
+        <span class="c1">// you can use C++11 lambda expression here too
+</span>        <span class="k">return</span> <span class="s">&#34;yes&#34;</span><span class="p">;</span>
+    <span class="p">&#125;)</span>
+<span class="p">.</span><span class="n">endClass</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>在Lua 代码中可以这样使用Web 类</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">w</span> <span class="o">=</span> <span class="n">Web</span><span class="p">()</span>                            <span class="c1">-- auto w = Web(&#34;&#34;);</span>
+<span class="n">w</span><span class="p">.</span><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://www.xumenger.com&#34;</span>          <span class="c1">-- w.set_url(&#34;http://www.xumenger.com&#34;);</span>
+<span class="kd">local</span> <span class="n">page</span> <span class="o">=</span> <span class="n">w</span><span class="p">:</span><span class="nb">load</span><span class="p">()</span>                      <span class="c1">-- auto page = w.load(&#34;&#34;);</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">w</span><span class="p">:</span><span class="nb">load</span><span class="p">(</span><span class="s2">&#34;http://www.google.com&#34;</span><span class="p">)</span>     <span class="c1">-- page = w.load(&#34;http://www.google.com&#34;);</span>
+<span class="kd">local</span> <span class="n">url</span> <span class="o">=</span> <span class="n">w</span><span class="p">.</span><span class="n">url</span>                          <span class="c1">-- auto url = w.url();</span>
+</code></pre></div></div>
+
+<h2 id="lua-调用c-的例子">Lua 调用C++ 的例子</h2>
+
+<p>编写C++ 代码simplelog.cpp，如下</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+#include &#34;LuaIntf/LuaIntf.h&#34;
+</span>
+<span class="cp">#include &lt;iostream&gt;
+#include &lt;lua.hpp&gt;
+#include &lt;string&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<p><span class="k">struct</span> <span class="n">lua_State</span><span class="p">;</span></p>
+<p><span class="k">class</span> <span class="nc">SimpleLog</span> <span class="p">&#123;</span><br><span class="k">public</span><span class="o">:</span><br>    <span class="k">static</span> <span class="n">SimpleLog</span> <span class="o">*</span><span class="n">getInstance</span><span class="p">()</span> <span class="p">&#123;</span><br>        <span class="k">static</span> <span class="n">SimpleLog</span> <span class="n">instance</span><span class="p">;</span><br>        <span class="k">return</span> <span class="o">&amp;</span><span class="n">instance</span><span class="p">;</span><br>    <span class="p">&#125;</span></p>
+<pre><code>&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SimpleLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BindLua&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lua_State&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+</code></pre>
+<p><span class="k">private</span><span class="o">:</span><br>    <span class="n">SimpleLog</span><span class="p">();</span><br><span class="p">};</span></p>
+<p><span class="n">SimpleLog</span><span class="o">::</span><span class="n">SimpleLog</span><span class="p">()</span> <span class="p">{}</span><br><span class="n">SimpleLog</span><span class="o">::~</span><span class="n">SimpleLog</span><span class="p">()</span> <span class="p">{}</span></p>
+<p><span class="kt">void</span> <span class="n">SimpleLog</span><span class="o">::</span><span class="n">Log</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span><br>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&amp;#34;C++ Env: SimpleLog::Log() &amp;#34;</span> <span class="o">&lt;&lt;</span> <span class="n">str</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span><br><span class="p">}</span></p>
+<p><span class="k">namespace</span> <span class="p">{</span><br>    <span class="k">using</span> <span class="n">LuaRef</span> <span class="o">&#x3D;</span> <span class="n">LuaIntf</span><span class="o">::</span><span class="n">LuaRef</span><span class="p">;</span></p>
+<pre><code>&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;LuaLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;SimpleLog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&#125;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LuaSimpleLog&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lua_State&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;LuaIntf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LuaBinding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beginModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#34;simple_log&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                 &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#34;log&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LuaLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                 &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&#125;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&#125;;&lt;/span&gt;
+</code></pre>
+<p><span class="p">};</span></p>
+<p><span class="kt">void</span> <span class="n">SimpleLog</span><span class="o">::</span><span class="n">BindLua</span><span class="p">(</span><span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span><span class="p">)</span> <span class="p">{</span><br>    <span class="n">LuaSimpleLog</span><span class="o">::</span><span class="n">Bind</span><span class="p">(</span><span class="n">L</span><span class="p">);</span><br><span class="p">}</span></p>
+<p><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span><br>    <span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span> <span class="o">&#x3D;</span> <span class="n">luaL_newstate</span><span class="p">();</span><br>    <span class="n">luaL_openlibs</span><span class="p">(</span><span class="n">L</span><span class="p">);</span><br>    <span class="n">SimpleLog</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">BindLua</span><span class="p">(</span><span class="n">L</span><span class="p">);</span><br>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&amp;#34;C++ Env: C++ main() start&amp;#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span><br>    <span class="n">luaL_dofile</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&amp;#34;.&#x2F;test.lua&amp;#34;</span><span class="p">);</span><br>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&amp;#34;C++ Env: C++ main() end&amp;#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span><br>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span><br><span class="p">}</span><br></code></pre></div></div></p>
+<p>编写log.lua 代码如下</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">Log</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="kd">local</span> <span class="n">log</span> <span class="o">=</span> <span class="n">simple_log</span><span class="p">.</span><span class="n">log</span>
+
+<p><span class="k">function</span> <span class="nf">Log</span><span class="p">:</span><span class="n">new</span><span class="p">(</span><span class="n">log_name</span><span class="p">)</span><br>    <span class="nb">assert</span><span class="p">(</span><span class="s2">&amp;#34;table&amp;#34;</span> <span class="o">&#x3D;&#x3D;</span> <span class="nb">type</span><span class="p">(</span><span class="n">self</span><span class="p">))</span><br>    <span class="nb">assert</span><span class="p">(</span><span class="ow">not</span> <span class="n">log_name</span> <span class="ow">or</span> <span class="s2">&amp;#34;string&amp;#34;</span> <span class="o">&#x3D;&#x3D;</span> <span class="nb">type</span><span class="p">(</span><span class="n">log_name</span><span class="p">))</span><br>    <span class="kd">local</span> <span class="n">log</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br>    <span class="n">log</span><span class="p">.</span><span class="n">log_name</span> <span class="o">&#x3D;</span> <span class="n">log_name</span> <span class="ow">or</span> <span class="s2">&amp;#34;log&amp;#34;</span><br>    <span class="nb">setmetatable</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">self</span><span class="p">)</span><br>    <span class="n">self</span><span class="p">.</span><span class="n">__index</span> <span class="o">&#x3D;</span> <span class="n">self</span><br>    <span class="k">return</span> <span class="n">log</span><br><span class="k">end</span></p>
+<p><span class="k">function</span> <span class="nf">Log</span><span class="p">:</span><span class="n">set_log_name</span><span class="p">(</span><span class="n">log_name</span><span class="p">)</span><br>   <span class="n">self</span><span class="p">.</span><span class="n">log_name</span> <span class="o">&#x3D;</span> <span class="n">log_name</span><br><span class="k">end</span></p>
+<p><span class="k">function</span> <span class="nf">Log</span><span class="p">:</span><span class="n">info</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="o">…</span><span class="p">)</span><br>    <span class="n">log</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="o">…</span><span class="p">))</span><br><span class="k">end</span></p>
+<p><span class="k">function</span> <span class="nf">Log</span><span class="p">:</span><span class="n">debug</span><span class="p">()</span><br>    <span class="nb">print</span><span class="p">(</span><span class="s2">&amp;#34;Lua Env: log.lua debuf()&amp;#34;</span><span class="p">)</span><br><span class="k">end</span></p>
+<p><span class="k">return</span> <span class="n">Log</span><br></code></pre></div></div></p>
+<p>编写test.lua 内容如下</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="k">function</span> <span class="nf">main</span><span class="p">()</span>
+
+<pre><code>&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#34;Lua Env: test.lua main() begin&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;#34;../TestLuaIntf&amp;#34;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;package.path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;package.path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;#34;;&amp;#34;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;#34;TestLuaIntf&amp;#34;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;#34;/?.lua&amp;#34;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#34;Lua Env: test.lua main() middle&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#34;log&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#34;svn_log&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#34;Lua Env: test.lua main() call info() %d...&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#34;Lua Env: test.lua main() end&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+</code></pre>
+<p><span class="k">end</span></p>
+<p><span class="nb">xpcall</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="o">…</span><span class="p">)</span><br>    <span class="kd">local</span> <span class="n">msg</span> <span class="o">&#x3D;</span> <span class="p">{</span><span class="o">…</span><span class="p">};</span><br>    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="k">do</span><br>        <span class="nb">print</span><span class="p">(</span><span class="s2">&amp;#34;Lua Env: k&#x3D;&amp;#34;</span> <span class="o">..</span> <span class="nb">tostring</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">..</span> <span class="s2">&amp;#34; v &#x3D;&amp;#34;</span> <span class="o">..</span> <span class="nb">tostring</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><br>    <span class="k">end</span><br>    <span class="nb">print</span><span class="p">(</span><span class="s2">&amp;#34;Lua Env: &amp;#34;</span> <span class="o">..</span> <span class="nb">tostring</span><span class="p">()</span> <span class="o">..</span> <span class="s2">&amp;#34; 123&amp;#34;</span><span class="p">)</span><br><span class="k">end</span><span class="p">)</span><br></code></pre></div></div></p>
+<p>编译C++ 程序运行效果如下</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://www.xumenger.com/../media/image/2019-06-07/01.png" alt=""/></p>
+
+<blockquote>
+  <p>这个例子中的流程是通过C++ 调用lua 接口luaL_dofile(L, “./test.lua”) 来执行test.lua，test.lua 中require(“log”)，然后lua 再调用C++ 的函数Log 完成打印！</p>
+</blockquote>
+
+<h2 id="访问lua-object-的高级别api">访问Lua Object 的高级别API</h2>
+
+<p>LuaRef 被设计用来方便地访问Lua 对象，而且大多数情况下你不需要像Lua 原生API那样处理Lua 栈</p>
+
+<p>使用Lua 原生API 实现C++ 访问Lua 的代码要这样实现</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="n">lua_getglobal</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;module&#34;</span><span class="p">);</span>
+<span class="n">lua_getfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;method&#34;</span><span class="p">);</span>
+<span class="n">lua_pushintteger</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;yes&#34;</span><span class="p">);</span>
+<span class="n">lua_pushboolean</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+<span class="n">lua_call</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>但如果使用LuaRef 那么就会非常简单</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LuaRef</span> <span class="n">fun</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;module.method&#34;</span><span class="p">);</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;yes&#34;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>访问Lua 中的表也是非常方便的</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LuaRef</span> <span class="n">table</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;my_table&#34;</span><span class="p">);</span>
+<span class="n">table</span><span class="p">[</span><span class="s">&#34;value&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&#34;value&#34;</span><span class="p">);</span>
+
+<p><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">e</span> <span class="o">:</span> <span class="n">table</span><span class="p">)</span> <span class="p">&#123;</span><br>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">key</span> <span class="o">&#x3D;</span> <span class="n">e</span><span class="p">.</span><span class="n">key</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span><br>    <span class="n">LuaRef</span> <span class="n">value</span> <span class="o">&#x3D;</span> <span class="n">e</span><span class="p">.</span><span class="n">value</span><span class="o">&lt;</span><span class="n">LuaRef</span><span class="o">&gt;</span><span class="p">();</span><br>    <span class="p">…</span><br><span class="p">&#125;</span><br></code></pre></div></div></p>
+<p>你也可以和Lua 原生API 混用</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="n">LuaRef</span> <span class="n">v</span> <span class="o">=</span> <span class="p">...;</span>
+<span class="n">lua_getglobal</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">&#34;my_method&#34;</span><span class="p">);</span>
+<span class="n">Lua</span><span class="o">::</span><span class="n">push</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>                    <span class="c1">// the same as lua_pushinteger
+</span><span class="n">Lua</span><span class="o">::</span><span class="n">push</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>                    <span class="c1">// push v to lua stack
+</span><span class="n">Lua</span><span class="o">::</span><span class="n">push</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>                 <span class="c1">// the same as lua_pushboolean
+</span><span class="n">lua_call</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">LuaRef</span> <span class="n">r</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>                    <span class="c1">// map r to lua stack index -2
+</span></code></pre></div></div>
+
+<h2 id="c-调用lua-脚本">C++ 调用Lua 脚本</h2>
+
+<p>下面实际的实现一个例子展示如何使用C++ 调用Lua 脚本，将代码运行起来更直观！</p>
+
+<p>编写call_lua.cpp 的代码如下</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define LUAINTF_LINK_LUA_COMPILED_IN_CXX 0
+#include &#34;LuaIntf/LuaIntf.h&#34;
+</span>
+<span class="cp">#include &lt;lua.hpp&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<p><span class="k">struct</span> <span class="n">lua_State</span><span class="p">;</span></p>
+<p><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span><br><span class="p">&#123;</span><br>    <span class="k">using</span> <span class="n">LuaRef</span> <span class="o">&#x3D;</span> <span class="n">LuaIntf</span><span class="o">::</span><span class="n">LuaRef</span><span class="p">;</span></p>
+<pre><code>&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lua_State&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;luaL_newstate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;luaL_openlibs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;LuaIntf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LuaContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;doFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#34;./test_ref.lua&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;LuaRef&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;test_module.test_func&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;hello world&amp;#34;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&#125;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LuaIntf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LuaException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&#123;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cerr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#34;Error: &amp;#34;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;what&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&#125;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+</code></pre>
+<p><span class="p">}</span><br></code></pre></div></div></p>
+<p>在编写对应的test_ref.lua 代码如下</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">M</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">local</span> <span class="n">modelName</span> <span class="o">=</span> <span class="s2">&#34;test_module&#34;</span>
+<span class="nb">_G</span><span class="p">[</span><span class="n">modelName</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span>
+
+<p><span class="k">function</span> <span class="nc">M</span><span class="p">.</span><span class="nf">test_func</span><span class="p">(</span><span class="n">int_v</span><span class="p">,</span> <span class="n">bool_v</span><span class="p">,</span> <span class="n">string_v</span><span class="p">)</span><br>    <span class="nb">print</span>&lt;span class&#x3D;”</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-649_%E4%BD%BF%E7%94%A8%E5%85%83%E8%A1%A8%E4%BC%98%E5%8C%96%20Lua%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">使用元表优化 Lua 配置文件</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-64_%5BLeetCode%5DEvaluate%20Reverse%20Polish%20Notation/">Evaluate Reverse Polish Notation</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

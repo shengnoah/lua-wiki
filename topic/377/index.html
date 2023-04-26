@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Nginx+Lua返回JSON类型数据 - Lua教程</title>
+
+  
+    <meta name="description" content="Nginx+Lua返回JSON类型数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx+Lua返回JSON类型数据">
+<meta property="og:url" content="https://lua.ren/topic/377/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Nginx+Lua返回JSON类型数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.120Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Nginx+Lua返回JSON类型数据</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%BE%E7%BD%AEHTTP%E7%9A%84%E5%93%8D%E5%BA%94%E5%A4%B4%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="toc-text">1.设置HTTP的响应头信息：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-json-encode-%E2%80%9CLua%E7%9A%84Table%E5%9E%8B%E5%8F%98%E9%87%8F%E2%80%9D-%EF%BC%9A"><span class="toc-text">2.json.encode(“Lua的Table型变量”)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%94%A8say%E5%87%BD%E6%95%B0%E6%98%BE%E7%A4%BA%EF%BC%8C%E7%BB%8F%E8%BF%87encode%E7%9A%84JSON%E6%95%B0%E6%8D%AE%E3%80%82"><span class="toc-text">3.用say函数显示，经过encode的JSON数据。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%EF%BC%8C%E4%BB%A5%E4%B8%8B%EF%BC%9A"><span class="toc-text">完整代码片段，以下：</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Nginx+Lua返回JSON类型数据</span></h1>
+<p>作者：糖果</p>
+<p>Nginx返回JSON数据，一种是直接在配置文件里设置，一种是通过Lua代码封装完成，讲Nginx中执行Lua返回JSON的关键，一个用API函数ngx.say，同时配合json.encode对JSON格式的字符串进行编码，然后设定响应头信息的类型。</p>
+<h1 id="Nginx-Conf中返回JSON的方式"><a href="#Nginx-Conf中返回JSON的方式" class="headerlink" title="Nginx Conf中返回JSON的方式"></a>Nginx Conf中返回JSON的方式</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location /json/ &#123;</span><br><span class="line"></span><br><span class="line">	    default_type application/json;</span><br><span class="line">	    add_header Content-Type <span class="string">&#x27;text/html; charset=utf-8&#x27;</span>;</span><br><span class="line">	    <span class="keyword">return</span> <span class="number">200</span> <span class="string">&#x27;&#123;&quot;about&quot;:&quot;糖果的Lua教程,&quot;sites&quot;:&quot;lua.ren&quot;&#125;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Nginx-Lua返回JSON的方式"><a href="#Nginx-Lua返回JSON的方式" class="headerlink" title="Nginx Lua返回JSON的方式"></a>Nginx Lua返回JSON的方式</h1><p>三步操作：</p>
+<h2 id="1-设置HTTP的响应头信息："><a href="#1-设置HTTP的响应头信息：" class="headerlink" title="1.设置HTTP的响应头信息："></a>1.设置HTTP的响应头信息：</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngx.header[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/json; charset=utf-8&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-json-encode-“Lua的Table型变量”-："><a href="#2-json-encode-“Lua的Table型变量”-：" class="headerlink" title="2.json.encode(“Lua的Table型变量”)："></a>2.json.encode(“Lua的Table型变量”)：</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">json = <span class="built_in">require</span> <span class="string">&quot;cjson&quot;</span> </span><br><span class="line">res_json_data = json.encode(ret)</span><br></pre></td></tr></table></figure>
+<h2 id="3-用say函数显示，经过encode的JSON数据。"><a href="#3-用say函数显示，经过encode的JSON数据。" class="headerlink" title="3.用say函数显示，经过encode的JSON数据。"></a>3.用say函数显示，经过encode的JSON数据。</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngx.say(res_json_data)</span><br></pre></td></tr></table></figure>
+
+<p>用Lua实现以上3个步骤，就实同了JSON数据返回。</p>
+<h2 id="完整代码片段，以下："><a href="#完整代码片段，以下：" class="headerlink" title="完整代码片段，以下："></a>完整代码片段，以下：</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json = <span class="built_in">require</span> <span class="string">&quot;cjson&quot;</span></span><br><span class="line">ngx.header[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/json; charset=utf-8&#x27;</span></span><br><span class="line">ngx.say(json.encode(ret))</span><br></pre></td></tr></table></figure>
+
+
+<p>下面的内容就是用Lua封装了几个函数，通过封装快实现了JSON数据的返回。</p>
+<p>一般的Python的WEB框架，都可以的指定返回JSON数据，基本的原理，还是通过指定返回JSON格式的字符串，并且设定HTTP返回时header的Content-Type属性为application&#x2F;json，来实现返回JSON数据的目地。</p>
+<p>而在Openresty+Lua的框架模式下，不用同时指返回的header类，直接在路由对应的匿名函数中，指定返回一个table类型的即可， 在web框架部分区分判断，如果用户返回的是table类型的数据，直接就用cjson这种库，把table数据渲染成JSON返回。</p>
+<p>依Blues演示框架为例：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">app.run = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">        fun = Route:run(app.router)</span><br><span class="line">        <span class="keyword">if</span> fun <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">local</span> ret = fun(app.req, app.id)</span><br><span class="line">            <span class="keyword">local</span> rtype = <span class="built_in">type</span>(ret)</span><br><span class="line">            <span class="keyword">if</span> rtype == <span class="string">&quot;table&quot;</span>  <span class="keyword">then</span></span><br><span class="line">                json = <span class="built_in">require</span> <span class="string">&quot;cjson&quot;</span></span><br><span class="line">                ngx.header[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/json; charset=utf-8&#x27;</span></span><br><span class="line">                ngx.say(json.encode(ret))</span><br><span class="line">            <span class="keyword">end</span> </span><br><span class="line">        <span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
+
+<p>显然，这里只是对返回值的类型是“talbe”的做了处理，也可以对返回类型是“string”或是其它类型的数据做处理。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">app.run = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">        fun = Route:run(app.router)</span><br><span class="line">        <span class="keyword">if</span> fun <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">local</span> ret = fun(app.req, app.id)</span><br><span class="line">            <span class="keyword">local</span> rtype = <span class="built_in">type</span>(ret)</span><br><span class="line">            <span class="keyword">if</span> rtype == <span class="string">&quot;table&quot;</span>  <span class="keyword">then</span></span><br><span class="line">                json = <span class="built_in">require</span> <span class="string">&quot;cjson&quot;</span></span><br><span class="line">                ngx.header[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/json; charset=utf-8&#x27;</span></span><br><span class="line">                ngx.say(json.encode(ret))</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">if</span> rtype == <span class="string">&quot;string&quot;</span>  <span class="keyword">then</span></span><br><span class="line">                ngx.header[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;text/plain; charset=UTF-8&#x27;</span></span><br><span class="line">                ngx.say(ret)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        le(<span class="string">&#x27;Application.app.run&#x27;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>没有把这种分类型处理，单独封装成一个方法，简单用这段代码说明问题。</p>
+<p>上面是框架中的代码实现，再来看看如何在测试项目中驱动这个功能。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span> <span class="string">&quot;log&quot;</span></span><br><span class="line"><span class="keyword">local</span> HiLog = <span class="built_in">require</span> <span class="string">&quot;HiLog&quot;</span></span><br><span class="line"><span class="keyword">local</span> utils = <span class="built_in">require</span> <span class="string">&quot;utils.utils&quot;</span></span><br><span class="line"><span class="keyword">local</span> Application = <span class="built_in">require</span> <span class="string">&quot;orc&quot;</span></span><br><span class="line">app = Application.new()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app:get(<span class="string">&quot;/json&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">(request,id)</span></span></span><br><span class="line">    <span class="keyword">return</span> &#123;k=<span class="string">&#x27;key&#x27;</span>, v=<span class="string">&#x27;value&#x27;</span>&#125;    </span><br><span class="line"><span class="keyword">end</span>)</span><br><span class="line"></span><br><span class="line">app:get(<span class="string">&quot;/string&quot;</span>, <span class="function"><span class="keyword">function</span><span class="params">(request,id)</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Waterfall&quot;</span></span><br><span class="line"><span class="keyword">end</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> app.run()</span><br></pre></td></tr></table></figure>
+<p>这样以来，我们就可以快速的用Openresty + Lua构建超级微级的路由系统，管理渲染JSON数据，构建一个简单的JSON数据请求服务。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/shengnoah/Blues">Blues</a><br><a target="_blank" rel="noopener" href="https://github.com/shengnoah/Waterfall">Waterfall</a></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/375/">Moonscript的Map声明差异</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/378/">Blues框架如何取得请求者的Rquest信息</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

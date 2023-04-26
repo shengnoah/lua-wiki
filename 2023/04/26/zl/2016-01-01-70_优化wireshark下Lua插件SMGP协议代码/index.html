@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>优化wireshark下Lua插件SMGP协议代码 - Lua教程</title>
+
+  
+    <meta name="description" content="@(Linux)[学习] [toc] 写在前面由于wireshark对SMGP协议不支持，之前使用wireshark查看SMGP协议字段，一般都是拷贝下来HEX，一个字节一个字节对。眼睛都要花了！昨天检查问题的时候同事和我说wireshark可以支持Lua插件自己编写协议识别代码，然后给了我一个SMGP.Lua文件。我安装了一下，发现是可以识别，但是如果一个包里有多个协议包的时候只识别一个，于是决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优化wireshark下Lua插件SMGP协议代码">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-70_%E4%BC%98%E5%8C%96wireshark%E4%B8%8BLua%E6%8F%92%E4%BB%B6SMGP%E5%8D%8F%E8%AE%AE%E4%BB%A3%E7%A0%81/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="@(Linux)[学习] [toc] 写在前面由于wireshark对SMGP协议不支持，之前使用wireshark查看SMGP协议字段，一般都是拷贝下来HEX，一个字节一个字节对。眼睛都要花了！昨天检查问题的时候同事和我说wireshark可以支持Lua插件自己编写协议识别代码，然后给了我一个SMGP.Lua文件。我安装了一下，发现是可以识别，但是如果一个包里有多个协议包的时候只识别一个，于是决">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://summingyu.github.io/1480672127792.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.298Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.299Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://summingyu.github.io/1480672127792.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">优化wireshark下Lua插件SMGP协议代码</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2016-12-29%E4%BF%AE%E6%94%B9"><span class="toc-text">2016-12-29修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-text">前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lua%E6%96%B9%E9%9D%A2"><span class="toc-text">Lua方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sireshark%E6%96%B9%E9%9D%A2"><span class="toc-text">sireshark方面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E4%BF%AE%E6%94%B9%E5%9C%B0%E6%96%B9"><span class="toc-text">主要修改地方</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="toc-text">找到主函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E6%AD%A5%E5%AE%8C%E5%B7%A5"><span class="toc-text">初步完工</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E4%B8%80%E7%82%B9"><span class="toc-text">最后一点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%90%8E%E4%BB%A3%E7%A0%81"><span class="toc-text">修改后代码</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>优化wireshark下Lua插件SMGP协议代码</span></h1>
+<p>@(Linux)[学习]</p>
+<p>[toc]</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>由于wireshark对SMGP协议不支持，之前使用wireshark查看SMGP协议字段，一般都是拷贝下来HEX，一个字节一个字节对。眼睛都要花了！<br/>昨天检查问题的时候同事和我说wireshark可以支持Lua插件自己编写协议识别代码，然后给了我一个SMGP.Lua文件。我安装了一下，发现是可以识别，但是如果一个包里有多个协议包的时候只识别一个，于是决定优化一下<br/></p>
+<h3 id="2016-12-29修改"><a href="#2016-12-29修改" class="headerlink" title="2016-12-29修改"></a>2016-12-29修改</h3><p>有时候包经过跳转，则端口不是标准的8890了，则可以在后面添加一行代码：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tcp_table:add(<span class="number">8890</span>,p_SMGP)</div><div class="line">tcp_table:add(<span class="number">38080</span>,p_SMGP)</div></pre></td></tr></tbody></table></figure><p></p>
+<p>这样就可以识别8890和38080了。想要识别什么就添加什么。很方便</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="Lua方面"><a href="#Lua方面" class="headerlink" title="Lua方面"></a>Lua方面</h3><p>首先，我对Lua语言之前没有接触过，不过语言大都差不多。而且我的修改比较简单，应该就是加一个控制循环语句和判断。先去看了一下Lua一些基本语法.<br/><code>lua</code>的循环和<code>shell</code>差不多<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> a <span class="keyword">do</span></div><div class="line">	pass</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="sireshark方面"><a href="#sireshark方面" class="headerlink" title="sireshark方面"></a>sireshark方面</h3><p>根据官方给的实例，搞懂基本流程<br/><a href="https://www.wireshark.org/docs/wsdg_html_chunked/lua_module_Pinfo.html#lua_class_Column" target="_blank" rel="external noopener noreferrer">https://www.wireshark.org/docs/wsdg_html_chunked/lua_module_Pinfo.html#lua_class_Column</a></p>
+<p><a href="https://www.wireshark.org/docs/wsdg_html_chunked/PartDevelopment.html" target="_blank" rel="external noopener noreferrer">https://www.wireshark.org/docs/wsdg_html_chunked/PartDevelopment.html</a><br/>要改哪里就去搜索开发文档</p>
+<h2 id="主要修改地方"><a href="#主要修改地方" class="headerlink" title="主要修改地方"></a>主要修改地方</h2><h3 id="找到主函数"><a href="#找到主函数" class="headerlink" title="找到主函数"></a>找到主函数</h3><p>在主函数下添加根据字长是否还有剩余，进行判断，如果还有数据，则接着执行<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">(buf,pkt,root)</span></span></div><div class="line"> 	</div><div class="line"> 	<span class="comment">-- else</span></div><div class="line"> 	<span class="comment">-- 	data_dis:call(buf,pkt,root)</span></div><div class="line"> 	<span class="comment">--将下面那段替换上面的那段</span></div><div class="line"> 	<span class="comment">--从这里开始</span></div><div class="line">  <span class="keyword">local</span> buf_len = buf:len()</div><div class="line">  <span class="keyword">local</span> p_length = SMGP_dissector(buf,pkt,root)	<span class="comment">--p_length表示匹配到的有效协议包字段长度</span></div><div class="line">  <span class="keyword">local</span> shengyu_length = buf_len-p_length	<span class="comment">--表示剩余需要匹配的长度</span></div><div class="line">  <span class="comment">---------如果剩余长度大于8字节，则接着匹配</span></div><div class="line">  <span class="keyword">while</span> shengyu_length &gt; <span class="number">8</span>  <span class="keyword">do</span> </div><div class="line">  	p_length = SMGP_dissector(buf(p_length,shengyu_length),pkt,root)</div><div class="line">  	shengyu_length = shengyu_length-p_length</div><div class="line">  <span class="keyword">end</span></div><div class="line">  <span class="keyword">if</span> shengyu_length == <span class="number">0</span> <span class="keyword">then</span></div><div class="line"> <span class="comment">--</span></div><div class="line">  <span class="keyword">else</span></div><div class="line">   data_dis:call(buf(p_length,shengyu_length),pkt,root)</div><div class="line">   <span class="comment">--到这里结束</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"> <span class="keyword">end</span></div></pre></td></tr></tbody></table></figure><p></p>
+<p>修改上面后还要修改返回值，之前函数是返回布尔型的，让他返回有效长度，修改SMGP_dissector函数<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_dissector</span><span class="params">(buf,pkt,root)</span></span></div><div class="line">  <span class="keyword">local</span> buf_len = buf:len();</div><div class="line"><span class="comment">--if buf_len &lt; 8 then return false end</span></div><div class="line">  <span class="keyword">if</span> buf_len &lt; <span class="number">8</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">end</span>	<span class="comment">--修改返回值为字段长度，0表示有效协议字段长度为0</span></div><div class="line">  <span class="comment">-----省略-----</span></div><div class="line">  <span class="comment">--return true</span></div><div class="line">  <span class="keyword">return</span> v_length  <span class="comment">--修改返回值</span></div><div class="line">  <span class="keyword">end</span></div></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="初步完工"><a href="#初步完工" class="headerlink" title="初步完工"></a>初步完工</h3><p>修改上面之后，基本上可以识别了多个协议包了<br/>但是我发现submit包里面本来是有一个8字节的保留字段的，这个字段主要是用于长短信设置udhi字段的。而这个代码里面没有，所以可以添加。<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> f_RecvTime = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.RecvTime&#34;</span>,<span class="string">&#34;RecvTime&#34;</span>)</div><div class="line"><span class="comment">--添加定义保留字段</span></div><div class="line"> <span class="keyword">local</span> f_Reserve = ProtoField.uint32(<span class="string">&#34;SMGP.Reserve&#34;</span>,<span class="string">&#34;Reserve&#34;</span>,base.HEX,{</div><div class="line"> 	[<span class="number">0x0001</span>]=<span class="string">&#34;TP_pid&#34;</span>,[<span class="number">0x0002</span>]=<span class="string">&#34;TP_udhi&#34;</span><span class="comment">--,</span></div><div class="line"> <span class="comment">--	[0x0003]=&#34;&#34;</span></div><div class="line"> 	})</div><div class="line"> <span class="keyword">local</span> f_ReserveValue = ProtoField.uint32(<span class="string">&#34;SMGP.ReserveValue&#34;</span>,<span class="string">&#34;ReserveValue&#34;</span>,base.HEX)</div></pre></td></tr></tbody></table></figure><p></p>
+<p>先在前面一大段定义后面添加一个定义然后在<code>p_SMGP.fields</code>字段后面添加添加的<code>f_RecvTime</code></p>
+<blockquote>
+<p>如果要完善，<code>f_ReserveValue</code>字段应该是定义函数的这里偷了个懒，以后可能添加</p>
+</blockquote>
+<p>然后在<code>local function SMGP_Submit(buf,pkt,t)</code>函数下面添加<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_Submit</span><span class="params">(buf,pkt,t)</span></span></div><div class="line"><span class="comment">---省略---</span></div><div class="line"><span class="comment">--添加调用保留字段</span></div><div class="line">  t:add(f_Reserve,buf(<span class="number">139</span>+v_msgLen,<span class="number">2</span>))</div><div class="line">  t:add(f_ReserveValue,buf(<span class="number">141</span>+v_msgLen,<span class="number">6</span>))</div><div class="line"> <span class="keyword">end</span></div></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="最后一点"><a href="#最后一点" class="headerlink" title="最后一点"></a>最后一点</h3><p>在高亮部分的info里面显示里面的包的协议类型<br/>这个我找了一上午，主要是要找怎样添加字段，而之前的用<code>set()</code>函数是重置<br/>一般是用<code>append()</code>函数，但是，这个是添加到字段尾部，我想添加到头部google了很久，英文的又看不懂。。。最后还是在官方api里找到了，用<code>preend()</code>函数<br/><del>我也可以说我是看英文官方文档的人了</del><br/>再各个协议包字段函数里面添加对应的显示字段<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pkt.cols.info:prepend(<span class="string">&#34;SMGP_Submit&#34;</span> .. <span class="string">&#34; &#34;</span>)</div></pre></td></tr></tbody></table></figure><p></p>
+<p>顺便添加了一下<code>Active_Test</code>和<code>Active_TestResp</code>的显示<br/>到这里，基本上已经改好了，可以适用于大多数的SMGP协议包了。之后有可能进行修改吧。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>既然这么好，那么，哪里可以用上呢？<br/>先升级wireshark，我也忘了哪个版本支持Lua了，看帮助吧，里面有。<br/>然后在安装目录里面的<code>init.lua</code>文件最后添加一行<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">dofile</span>(DATA_DIR..<span class="string">&#34;SMGP.lua&#34;</span>)</div></pre></td></tr></tbody></table></figure><p></p>
+<p>然后<br/>将后面的代码复制，粘贴到一个新文件<code>SMGP.lua</code>,放到<code>init.lua</code>同级目录就可以用了<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://summingyu.github.io/./1480672127792.png" alt="展示成果"/></p>
+<h2 id="修改后代码"><a href="#修改后代码" class="headerlink" title="修改后代码"></a>修改后代码</h2><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- SMGP.lua</span></div><div class="line"><span class="comment">-- SMGP3.0 protocol</span></div><div class="line"><span class="comment">-- author: summingyu</span></div><div class="line"><span class="comment">--基于h_Davy代码</span></div><div class="line"><span class="comment">----https://www.wireshark.org/docs/wsdg_html_chunked/lua_module_Pinfo.html#lua_class_Column</span></div><div class="line"><span class="comment">--https://www.wireshark.org/docs/wsdg_html_chunked/PartDevelopment.html</span></div><div class="line"><span class="keyword">do</span></div><div class="line"> <span class="keyword">local</span> p_SMGP = Proto(<span class="string">&#34;SMGP&#34;</span>,<span class="string">&#34;SMGP&#34;</span>,<span class="string">&#34;SMGP Protocol&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_Length = ProtoField.uint32(<span class="string">&#34;SMGP.length&#34;</span>,<span class="string">&#34;Packet Length&#34;</span>,base.DEC)</div><div class="line"> <span class="keyword">local</span> f_CommandId = ProtoField.uint32(<span class="string">&#34;SMGP.RequestId&#34;</span>,<span class="string">&#34;Request ID&#34;</span>,base.HEX,{</div><div class="line">  [<span class="number">1</span>]=<span class="string">&#34;Login&#34;</span>,      [<span class="number">0x80000001</span>]=<span class="string">&#34;LoginResp&#34;</span>,</div><div class="line">  [<span class="number">2</span>]=<span class="string">&#34;Submit&#34;</span>,     [<span class="number">0x80000002</span>]=<span class="string">&#34;SubmitResp&#34;</span>,</div><div class="line">  [<span class="number">3</span>]=<span class="string">&#34;Deliver&#34;</span>,    [<span class="number">0x80000003</span>]=<span class="string">&#34;DeliverResp&#34;</span>,</div><div class="line">  [<span class="number">4</span>]=<span class="string">&#34;ActiveTest&#34;</span>, [<span class="number">0x80000004</span>]=<span class="string">&#34;ActiveTestResp&#34;</span>,</div><div class="line">  [<span class="number">5</span>]=<span class="string">&#34;Forward&#34;</span>,    [<span class="number">0x80000005</span>]=<span class="string">&#34;ForwardResp&#34;</span>,</div><div class="line">  [<span class="number">6</span>]=<span class="string">&#34;Exit&#34;</span>,       [<span class="number">0x80000006</span>]=<span class="string">&#34;ExitResp&#34;</span>,</div><div class="line">  [<span class="number">7</span>]=<span class="string">&#34;Query&#34;</span>,      [<span class="number">0x80000007</span>]=<span class="string">&#34;QueryResp&#34;</span>})</div><div class="line"> <span class="keyword">local</span> f_SequenceId = ProtoField.uint32(<span class="string">&#34;SMGP.sequenceId&#34;</span>,<span class="string">&#34;Sequence ID&#34;</span>,base.DEC);</div><div class="line"> <span class="keyword">local</span> f_ClientID = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.ClientID&#34;</span>,<span class="string">&#34;ClientID&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_Authenticator = ProtoField.bytes(<span class="string">&#34;SMGP.Authenticator&#34;</span>,<span class="string">&#34;Authenticator&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_LoginMode = ProtoField.uint8(<span class="string">&#34;SMGP.LoginMode&#34;</span>,<span class="string">&#34;Login Mode&#34;</span>,base.DEC)</div><div class="line"> <span class="keyword">local</span> f_TimeStamp = ProtoField.uint32(<span class="string">&#34;SMGP.TimeStamp&#34;</span>,<span class="string">&#34;TimeStamp&#34;</span>,base.DEC)</div><div class="line"> <span class="keyword">local</span> f_Version = ProtoField.uint8(<span class="string">&#34;SMGP.Version&#34;</span>,<span class="string">&#34;Version&#34;</span>,base.HEX)</div><div class="line"> <span class="keyword">local</span> f_Status = ProtoField.uint32(<span class="string">&#34;SMGP.Status&#34;</span>,<span class="string">&#34;Status&#34;</span>,base.DEC,{[<span class="number">0</span>]=<span class="string">&#34;OK&#34;</span>})</div><div class="line"> <span class="keyword">local</span> f_MsgType = ProtoField.uint32(<span class="string">&#34;SMGP.MsgType&#34;</span>,<span class="string">&#34;MsgType&#34;</span>,base.DEC,{[<span class="number">0</span>]=<span class="string">&#34;MO&#34;</span>,[<span class="number">6</span>]=<span class="string">&#34;MT&#34;</span>,[<span class="number">7</span>]=<span class="string">&#34;P2P&#34;</span>})</div><div class="line"> <span class="keyword">local</span> f_NeedReport = ProtoField.uint32(<span class="string">&#34;SMGP.NeedReport&#34;</span>,<span class="string">&#34;NeedReport&#34;</span>,base.DEC,{[<span class="number">0</span>]=<span class="string">&#34;N&#34;</span>,[<span class="number">1</span>]=<span class="string">&#34;Y&#34;</span>})</div><div class="line"> <span class="keyword">local</span> f_Priority = ProtoField.uint32(<span class="string">&#34;SMGP.Priority&#34;</span>,<span class="string">&#34;Priority&#34;</span>,base.DEC)</div><div class="line"> <span class="keyword">local</span> f_ServiceID = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.ServiceID&#34;</span>,<span class="string">&#34;ServiceID&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_FeeType = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.FeeType&#34;</span>,<span class="string">&#34;FeeType&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_FeeCode = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.FeeCode&#34;</span>,<span class="string">&#34;FeeCode&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_FixedFee = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.FixedFee&#34;</span>,<span class="string">&#34;FixedFee&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_MsgFormat = ProtoField.uint32(<span class="string">&#34;SMGP.MsgFormat&#34;</span>,<span class="string">&#34;MsgFormat&#34;</span>,base.DEC,{</div><div class="line">  [<span class="number">0</span>]=<span class="string">&#34;ASCII&#34;</span>,[<span class="number">3</span>]=<span class="string">&#34;Card&#34;</span>,[<span class="number">4</span>]=<span class="string">&#34;Binary&#34;</span>,[<span class="number">8</span>]=<span class="string">&#34;UCS2&#34;</span>,[<span class="number">15</span>]=<span class="string">&#34;GB18030&#34;</span>,[<span class="number">246</span>]=<span class="string">&#34;SIM&#34;</span>})</div><div class="line"> <span class="keyword">local</span> f_ValidTime = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.ValidTime&#34;</span>,<span class="string">&#34;ValidTime&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_AtTime = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.AtTime&#34;</span>,<span class="string">&#34;AtTime&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_SrcTermID = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.SrcTermID&#34;</span>,<span class="string">&#34;SrcTermID&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_ChargeTermID = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.ChargeTermID&#34;</span>,<span class="string">&#34;ChargeTermID&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_DestTermIDCount = ProtoField.uint32(<span class="string">&#34;SMGP.DestTermIDCount&#34;</span>,<span class="string">&#34;DestTermIDCount&#34;</span>,base.DEC)</div><div class="line"> <span class="keyword">local</span> f_DestTermID = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.DestTermID&#34;</span>,<span class="string">&#34;DestTermID&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_MsgLength = ProtoField.uint8(<span class="string">&#34;SMGP.MsgLength&#34;</span>,<span class="string">&#34;MsgLength&#34;</span>,base.DEC)</div><div class="line"> <span class="keyword">local</span> f_MsgContent = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.MsgContent&#34;</span>,<span class="string">&#34;MsgContent&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_MsgID = ProtoField.bytes(<span class="string">&#34;SMGP.MsgID&#34;</span>,<span class="string">&#34;MsgID&#34;</span>)</div><div class="line"> <span class="keyword">local</span> f_IsReport = ProtoField.uint8(<span class="string">&#34;SMGP.IsReport&#34;</span>,<span class="string">&#34;IsReport&#34;</span>,base.DEC)</div><div class="line"> <span class="keyword">local</span> f_RecvTime = ProtoField.<span class="built_in">string</span>(<span class="string">&#34;SMGP.RecvTime&#34;</span>,<span class="string">&#34;RecvTime&#34;</span>)</div><div class="line"> <span class="comment">--添加定义保留字段</span></div><div class="line"> <span class="keyword">local</span> f_Reserve = ProtoField.uint32(<span class="string">&#34;SMGP.Reserve&#34;</span>,<span class="string">&#34;Reserve&#34;</span>,base.HEX,{</div><div class="line">  [<span class="number">0x0001</span>]=<span class="string">&#34;TP_pid&#34;</span>,[<span class="number">0x0002</span>]=<span class="string">&#34;TP_udhi&#34;</span><span class="comment">--,</span></div><div class="line"> <span class="comment">-- [0x0003]=&#34;&#34;</span></div><div class="line">  })</div><div class="line"> <span class="keyword">local</span> f_ReserveValue = ProtoField.uint32(<span class="string">&#34;SMGP.ReserveValue&#34;</span>,<span class="string">&#34;ReserveValue&#34;</span>,base.HEX)</div><div class="line"> <span class="comment">--</span></div><div class="line"></div><div class="line"> p_SMGP.fields = {f_Length,f_CommandId,f_SequenceId,f_ClientID,f_Authenticator,</div><div class="line"> f_LoginMode,f_TimeStamp,f_Version,f_Status,f_MsgType,f_NeedReport,f_Priority,</div><div class="line"> f_ServiceID,f_FeeType,f_FeeCode,f_FixedFee,f_MsgFormat,f_ValidTime,f_AtTime,</div><div class="line"> f_SrcTermID,f_ChargeTermID,f_DestTermIDCount,f_DestTermID,f_MsgLength,f_MsgContent,</div><div class="line"> f_MsgID,f_IsReport,f_RecvTime,f_Reserve,f_ReserveValue}</div><div class="line"></div><div class="line"> <span class="keyword">local</span> data_dis = Dissector.get(<span class="string">&#34;data&#34;</span>)</div><div class="line"> <span class="comment">--</span></div><div class="line"> <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_Login</span><span class="params">(buf,pkt,t)</span></span></div><div class="line">  t:add(f_ClientID,buf(<span class="number">12</span>,<span class="number">8</span>))</div><div class="line">  t:add(f_Authenticator,buf(<span class="number">20</span>,<span class="number">16</span>))</div><div class="line">  t:add(f_LoginMode,buf(<span class="number">36</span>,<span class="number">1</span>))</div><div class="line">  t:add(f_TimeStamp,buf(<span class="number">37</span>,<span class="number">4</span>))</div><div class="line">  t:add(f_Version,buf(<span class="number">41</span>,<span class="number">1</span>))</div><div class="line">  pkt.cols.info:prepend(<span class="string">&#34;SMGP_Login;&#34;</span> .. <span class="string">&#34; &#34;</span>) <span class="comment">--添加在info栏显示包类型</span></div><div class="line"> <span class="keyword">end</span></div><div class="line"> <span class="comment">--</span></div><div class="line"> <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_LoginResp</span><span class="params">(buf,pkt,t)</span></span></div><div class="line">  t:add(f_Status,buf(<span class="number">12</span>,<span class="number">4</span>))</div><div class="line">  t:add(f_Authenticator,buf(<span class="number">16</span>,<span class="number">16</span>))</div><div class="line">  t:add(f_Version,buf(<span class="number">32</span>,<span class="number">1</span>))</div><div class="line">  pkt.cols.info:prepend(<span class="string">&#34;SMGP_LoginResp;&#34;</span> .. <span class="string">&#34; &#34;</span>)</div><div class="line"> <span class="keyword">end</span></div><div class="line"> <span class="comment">--</span></div><div class="line"> <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_Submit</span><span class="params">(buf,pkt,t)</span></span></div><div class="line">  t:add(f_MsgType,buf(<span class="number">12</span>,<span class="number">1</span>))</div><div class="line">  t:add(f_NeedReport,buf(<span class="number">13</span>,<span class="number">1</span>))</div><div class="line">  t:add(f_Priority,buf(<span class="number">14</span>,<span class="number">1</span>))</div><div class="line">  t:add(f_ServiceID,buf(<span class="number">15</span>,<span class="number">10</span>))</div><div class="line">  pkt.cols.info:prepend(<span class="string">&#34;SMGP_Submit&#34;</span> .. <span class="string">&#34; &#34;</span>)</div><div class="line">  t:add(f_FeeType,buf(<span class="number">25</span>,<span class="number">2</span>))</div><div class="line">  t:add(f_FeeCode,buf(<span class="number">27</span>,<span class="number">6</span>))</div><div class="line">  t:add(f_FixedFee,buf(<span class="number">33</span>,<span class="number">6</span>))</div><div class="line">  t:add(f_MsgFormat,buf(<span class="number">39</span>,<span class="number">1</span>))</div><div class="line">  t:add(f_ValidTime,buf(<span class="number">40</span>,<span class="number">17</span>))</div><div class="line">  t:add(f_AtTime,buf(<span class="number">57</span>,<span class="number">17</span>))</div><div class="line">  t:add(f_SrcTermID,buf(<span class="number">74</span>,<span class="number">21</span>))</div><div class="line">  t:add(f_ChargeTermID,buf(<span class="number">95</span>,<span class="number">21</span>))</div><div class="line">  t:add(f_DestTermIDCount,buf(<span class="number">116</span>,<span class="number">1</span>))</div><div class="line">  t:add(f_DestTermID,buf(<span class="number">117</span>,<span class="number">21</span>))</div><div class="line">  <span class="keyword">local</span> v_msgLen = buf(<span class="number">138</span>,<span class="number">1</span>)</div><div class="line">  t:add(f_MsgLength,v_msgLen)</div><div class="line">  v_msgLen = v_msgLen:uint()</div><div class="line">  t:add(f_MsgContent,buf(<span class="number">139</span>,v_msgLen))</div><div class="line">  <span class="comment">--添加调用保留字段</span></div><div class="line">  t:add(f_Reserve,buf(<span class="number">139</span>+v_msgLen,<span class="number">2</span>))</div><div class="line">  t:add(f_ReserveValue,buf(<span class="number">141</span>+v_msgLen,<span class="number">6</span>))</div><div class="line"> <span class="keyword">end</span></div><div class="line"> <span class="comment">--</span></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_SubmitResp</span><span class="params">(buf,pkt,t)</span></span></div><div class="line">  t:add(f_MsgID,buf(<span class="number">12</span>,<span class="number">10</span>))</div><div class="line">  t:add(f_Status,buf(<span class="number">22</span>,<span class="number">4</span>))</div><div class="line">  pkt.cols.info:prepend(<span class="string">&#34;SMGP_SubmitResp;&#34;</span> .. <span class="string">&#34; &#34;</span>)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"> <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_DelvResp</span><span class="params">(buf,pkt,t)</span></span></div><div class="line">  t:add(f_MsgID,buf(<span class="number">12</span>,<span class="number">10</span>))</div><div class="line">  t:add(f_Status,buf(<span class="number">22</span>,<span class="number">4</span>))</div><div class="line">  pkt.cols.info:prepend(<span class="string">&#34;SMGP_DelvResp;&#34;</span> .. <span class="string">&#34; &#34;</span>)</div><div class="line"> <span class="keyword">end</span></div><div class="line"> <span class="comment">--</span></div><div class="line"> <span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">SMGP_Deliver</span><span class="params">(buf,pkt,t)</span></span></div><div class="line">  t:add(f_MsgID,buf(<span class="number">12</span>,<span class="number">10</span>))</div><di
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-709_Lua%E8%A1%A8%E8%BE%BE%E5%BC%8F%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">Lua表达式 · 花生肉泥</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-693_Lua%20%E6%B1%89%E5%AD%97%E6%8B%BC%E9%9F%B3%E9%A6%96%E5%AD%97%E6%AF%8D%E6%8F%90%E5%8F%96%20/">Lua 汉字拼音首字母提取</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

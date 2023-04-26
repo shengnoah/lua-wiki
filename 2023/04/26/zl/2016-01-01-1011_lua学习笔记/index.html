@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua学习笔记 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;p&gt;lua是一门轻量级的脚本语言…好像比较适合写游戏？在 &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;github.com&#x2F;Mogara&#x2F;QSanguosha&quot;&gt;太阳神三国杀&lt;&#x2F;a&gt; 中见过很多lua脚本。 由于&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;splash.readthed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua学习笔记">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1011_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;p&gt;lua是一门轻量级的脚本语言…好像比较适合写游戏？在 &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;github.com&#x2F;Mogara&#x2F;QSanguosha&quot;&gt;太阳神三国杀&lt;&#x2F;a&gt; 中见过很多lua脚本。 由于&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;splash.readthed">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.227Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.227Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua学习笔记</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%93-1-Variables-and-flow-control"><span class="toc-text">– 1. Variables and flow control.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%93-2-Functions"><span class="toc-text">– 2. Functions.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%93-3-Tables"><span class="toc-text">– 3. Tables.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%93-3-1-Metatables-and-metamethods"><span class="toc-text">– 3.1 Metatables and metamethods.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%93-3-2-Class-like-tables-and-inheritance"><span class="toc-text">– 3.2 Class-like tables and inheritance.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%93-4-Modules"><span class="toc-text">– 4. Modules.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%93-5-References"><span class="toc-text">– 5. References.</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.227Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua学习笔记</span></h1>
+<nav id="TableOfContents"></nav>
+                
+<pre><code>            &lt;p&gt;lua是一门轻量级的脚本语言…好像比较适合写游戏？在 &lt;a href=&quot;https://github.com/Mogara/QSanguosha&quot;&gt;太阳神三国杀&lt;/a&gt; 中见过很多lua脚本。 由于&lt;a href=&quot;https://splash.readthedocs.io/en/stable/scripting-tutorial.html&quot;&gt;splash&lt;/a&gt; 的渲染脚本需要用lua来写，因此来学习一波。&lt;/p&gt;
+</code></pre>
+<p>直接上语法…看到了python和pascal的影子orz</p>
+<pre><code>-- Two dashes start a one-line comment.
+
+<p>–[[<br>     Adding two [&#39;s and ]&#39;s makes it a<br>     multi-line comment.<br>–]]</p>
+<hr>
+<h2 id="–-1-Variables-and-flow-control"><a href="#–-1-Variables-and-flow-control" class="headerlink" title="– 1. Variables and flow control."></a>– 1. Variables and flow control.</h2><p>num &#x3D; 42  – All numbers are doubles.<br>– Don&#39;t freak out, 64-bit doubles have 52 bits for<br>– storing exact int values; machine precision is<br>– not a problem for ints that need &lt; 52 bits.</p>
+<p>s &#x3D; &#39;walternate&#39;  – Immutable strings like Python.<br>t &#x3D; &amp;#34;double-quotes are also fine&amp;#34;<br>u &#x3D; [[ Double brackets<br>       start and end<br>       multi-line strings.]]<br>t &#x3D; nil  – Undefines t; Lua has garbage collection.</p>
+<p>– Blocks are denoted with keywords like do&#x2F;end:<br>while num &lt; 50 do<br>  num &#x3D; num + 1  – No ++ or +&#x3D; type operators.<br>end</p>
+<p>– If clauses:<br>if num &gt; 40 then<br>  print(&#39;over 40&#39;)<br>elseif s ~&#x3D; &#39;walternate&#39; then  – ~&#x3D; is not equals.<br>  – Equality check is &#x3D;&#x3D; like Python; ok for strs.<br>  io.write(&#39;not over 40n&#39;)  – Defaults to stdout.<br>else<br>  – Variables are global by default.<br>  thisIsGlobal &#x3D; 5  – Camel case is common.</p>
+<p>  – How to make a variable local:<br>  local line &#x3D; io.read()  – Reads next stdin line.</p>
+<p>  – String concatenation uses the .. operator:<br>  print(&#39;Winter is coming, &#39; .. line)<br>end</p>
+<p>– Undefined variables return nil.<br>– This is not an error:<br>foo &#x3D; anUnknownVariable  – Now foo &#x3D; nil.</p>
+<p>aBoolValue &#x3D; false</p>
+<p>– Only nil and false are falsy; 0 and &#39;&#39; are true!<br>if not aBoolValue then print(&#39;twas false&#39;) end</p>
+<p>– &#39;or&#39; and &#39;and&#39; are short-circuited.<br>– This is similar to the a?b:c operator in C&#x2F;js:<br>ans &#x3D; aBoolValue and &#39;yes&#39; or &#39;no&#39;  –&gt; &#39;no&#39;</p>
+<p>karlSum &#x3D; 0<br>for i &#x3D; 1, 100 do  – The range includes both ends.<br>  karlSum &#x3D; karlSum + i<br>end</p>
+<p>– Use &amp;#34;100, 1, -1&amp;#34; as the range to count down:<br>fredSum &#x3D; 0<br>for j &#x3D; 100, 1, -1 do fredSum &#x3D; fredSum + j end</p>
+<p>– In general, the range is begin, end[, step].</p>
+<p>– Another loop construct:<br>repeat<br>  print(&#39;the way of the future&#39;)<br>  num &#x3D; num - 1<br>until num &#x3D;&#x3D; 0</p>
+<hr>
+<h2 id="–-2-Functions"><a href="#–-2-Functions" class="headerlink" title="– 2. Functions."></a>– 2. Functions.</h2><p>function fib(n)<br>  if n &lt; 2 then return 1 end<br>  return fib(n - 2) + fib(n - 1)<br>end</p>
+<p>– Closures and anonymous functions are ok:<br>function adder(x)<br>  – The returned function is created when adder is<br>  – called, and remembers the value of x:<br>  return function (y) return x + y end<br>end<br>a1 &#x3D; adder(9)<br>a2 &#x3D; adder(36)<br>print(a1(16))  –&gt; 25<br>print(a2(64))  –&gt; 100</p>
+<p>– Returns, func calls, and assignments all work<br>– with lists that may be mismatched in length.<br>– Unmatched receivers are nil;<br>– unmatched senders are discarded.</p>
+<p>x, y, z &#x3D; 1, 2, 3, 4<br>– Now x &#x3D; 1, y &#x3D; 2, z &#x3D; 3, and 4 is thrown away.</p>
+<p>function bar(a, b, c)<br>  print(a, b, c)<br>  return 4, 8, 15, 16, 23, 42<br>end</p>
+<p>x, y &#x3D; bar(&#39;zaphod&#39;)  –&gt; prints &amp;#34;zaphod  nil nil&amp;#34;<br>– Now x &#x3D; 4, y &#x3D; 8, values 15..42 are discarded.</p>
+<p>– Functions are first-class, may be local&#x2F;global.<br>– These are the same:<br>function f(x) return x * x end<br>f &#x3D; function (x) return x * x end</p>
+<p>– And so are these:<br>local function g(x) return math.sin(x) end<br>local g; g  &#x3D; function (x) return math.sin(x) end<br>– the &#39;local g&#39; decl makes g-self-references ok.</p>
+<p>– Trig funcs work in radians, by the way.</p>
+<p>– Calls with one string param don&#39;t need parens:<br>print &#39;hello&#39;  – Works fine.</p>
+<hr>
+<h2 id="–-3-Tables"><a href="#–-3-Tables" class="headerlink" title="– 3. Tables."></a>– 3. Tables.</h2><p>– Tables &#x3D; Lua&#39;s only compound data structure;<br>–          they are associative arrays.<br>– Similar to php arrays or js objects, they are<br>– hash-lookup dicts that can also be used as lists.</p>
+<p>– Using tables as dictionaries &#x2F; maps:</p>
+<p>– Dict literals have string keys by default:<br>t &#x3D; &#123;key1 &#x3D; &#39;value1&#39;, key2 &#x3D; false&#125;</p>
+<p>– String keys can use js-like dot notation:<br>print(t.key1)  – Prints &#39;value1&#39;.<br>t.newKey &#x3D; &#123;&#125;  – Adds a new key&#x2F;value pair.<br>t.key2 &#x3D; nil   – Removes key2 from the table.</p>
+<p>– Literal notation for any (non-nil) value as key:<br>u &#x3D; &#123;[&#39;@!#&#39;] &#x3D; &#39;qbert&#39;, [&#123;&#125;] &#x3D; 1729, [6.28] &#x3D; &#39;tau&#39;&#125;<br>print(u[6.28])  – prints &amp;#34;tau&amp;#34;</p>
+<p>– Key matching is basically by value for numbers<br>– and strings, but by identity for tables.<br>a &#x3D; u[&#39;@!#&#39;]  – Now a &#x3D; &#39;qbert&#39;.<br>b &#x3D; u[&#123;&#125;]     – We might expect 1729, but it&#39;s nil:<br>– b &#x3D; nil since the lookup fails. It fails<br>– because the key we used is not the same object<br>– as the one used to store the original value. So<br>– strings &amp; numbers are more portable keys.</p>
+<p>– A one-table-param function call needs no parens:<br>function h(x) print(x.key1) end<br>h&#123;key1 &#x3D; &#39;Sonmi<del>451&#39;&#125;  – Prints &#39;Sonmi</del>451&#39;.</p>
+<p>for key, val in pairs(u) do  – Table iteration.<br>  print(key, val)<br>end</p>
+<p>– _G is a special table of all globals.<br>print(_G[&#39;_G&#39;] &#x3D;&#x3D; _G)  – Prints &#39;true&#39;.</p>
+<p>– Using tables as lists &#x2F; arrays:</p>
+<p>– List literals implicitly set up int keys:<br>v &#x3D; &#123;&#39;value1&#39;, &#39;value2&#39;, 1.21, &#39;gigawatts&#39;&#125;<br>for i &#x3D; 1, #v do  – #v is the size of v for lists.<br>  print(v[i])  – Indices start at 1 !! SO CRAZY!<br>end<br>– A &#39;list&#39; is not a real type. v is just a table<br>– with consecutive integer keys, treated as a list.</p>
+<hr>
+<h2 id="–-3-1-Metatables-and-metamethods"><a href="#–-3-1-Metatables-and-metamethods" class="headerlink" title="– 3.1 Metatables and metamethods."></a>– 3.1 Metatables and metamethods.</h2><p>– A table can have a metatable that gives the table<br>– operator-overloadish behavior. Later we&#39;ll see<br>– how metatables support js-prototypey behavior.</p>
+<p>f1 &#x3D; &#123;a &#x3D; 1, b &#x3D; 2&#125;  – Represents the fraction a&#x2F;b.<br>f2 &#x3D; &#123;a &#x3D; 2, b &#x3D; 3&#125;</p>
+<p>– This would fail:<br>– s &#x3D; f1 + f2</p>
+<p>metafraction &#x3D; &#123;&#125;<br>function metafraction.__add(f1, f2)<br>  sum &#x3D; &#123;&#125;<br>  sum.b &#x3D; f1.b * f2.b<br>  sum.a &#x3D; f1.a * f2.b + f2.a * f1.b<br>  return sum<br>end</p>
+<p>setmetatable(f1, metafraction)<br>setmetatable(f2, metafraction)</p>
+<p>s &#x3D; f1 + f2  – call __add(f1, f2) on f1&#39;s metatable</p>
+<p>– f1, f2 have no key for their metatable, unlike<br>– prototypes in js, so you must retrieve it as in<br>– getmetatable(f1). The metatable is a normal table<br>– with keys that Lua knows about, like __add.</p>
+<p>– But the next line fails since s has no metatable:<br>– t &#x3D; s + s<br>– Class-like patterns given below would fix this.</p>
+<p>– An __index on a metatable overloads dot lookups:<br>defaultFavs &#x3D; &#123;animal &#x3D; &#39;gru&#39;, food &#x3D; &#39;donuts&#39;&#125;<br>myFavs &#x3D; &#123;food &#x3D; &#39;pizza&#39;&#125;<br>setmetatable(myFavs, &#123;__index &#x3D; defaultFavs&#125;)<br>eatenBy &#x3D; myFavs.animal  – works! thanks, metatable</p>
+<p>– Direct table lookups that fail will retry using<br>– the metatable&#39;s __index value, and this recurses.</p>
+<p>– An __index value can also be a function(tbl, key)<br>– for more customized lookups.</p>
+<p>– Values of __index,add, .. are called metamethods.<br>– Full list. Here a is a table with the metamethod.</p>
+<p>– __add(a, b)                     for a + b<br>– __sub(a, b)                     for a - b<br>– __mul(a, b)                     for a * b<br>– __div(a, b)                     for a &#x2F; b<br>– __mod(a, b)                     for a % b<br>– __pow(a, b)                     for a ^ b<br>– __unm(a)                        for -a<br>– __concat(a, b)                  for a .. b<br>– __len(a)                        for #a<br>– __eq(a, b)                      for a &#x3D;&#x3D; b<br>– __lt(a, b)                      for a &lt; b<br>– __le(a, b)                      for a &lt;&#x3D; b<br>– __index(a, b)  &lt;fn or a table&gt;  for a.b<br>– __newindex(a, b, c)             for a.b &#x3D; c<br>– __call(a, …)                  for a(…)</p>
+<hr>
+<h2 id="–-3-2-Class-like-tables-and-inheritance"><a href="#–-3-2-Class-like-tables-and-inheritance" class="headerlink" title="– 3.2 Class-like tables and inheritance."></a>– 3.2 Class-like tables and inheritance.</h2><p>– Classes aren&#39;t built in; there are different ways<br>– to make them using tables and metatables.</p>
+<p>– Explanation for this example is below it.</p>
+<p>Dog &#x3D; &#123;&#125;                                   – 1.</p>
+<p>function Dog:new()                         – 2.<br>  newObj &#x3D; &#123;sound &#x3D; &#39;woof&#39;&#125;                – 3.<br>  self.__index &#x3D; self                      – 4.<br>  return setmetatable(newObj, self)        – 5.<br>end</p>
+<p>function Dog:makeSound()                   – 6.<br>  print(&#39;I say &#39; .. self.sound)<br>end</p>
+<p>mrDog &#x3D; Dog:new()                          – 7.<br>mrDog:makeSound()  – &#39;I say woof&#39;         – 8.</p>
+<p>– 1. Dog acts like a class; it&#39;s really a table.<br>– 2. function tablename:fn(…) is the same as<br>–    function tablename.fn(self, …)<br>–    The : just adds a first arg called self.<br>–    Read 7 &amp; 8 below for how self gets its value.<br>– 3. newObj will be an instance of class Dog.<br>– 4. self &#x3D; the class being instantiated. Often<br>–    self &#x3D; Dog, but inheritance can change it.<br>–    newObj gets self&#39;s functions when we set both<br>–    newObj&#39;s metatable and self&#39;s __index to self.<br>– 5. Reminder: setmetatable returns its first arg.<br>– 6. The : works as in 2, but this time we expect<br>–    self to be an instance instead of a class.<br>– 7. Same as Dog.new(Dog), so self &#x3D; Dog in new().<br>– 8. Same as mrDog.makeSound(mrDog); self &#x3D; mrDog.</p>
+<hr>
+<p>– Inheritance example:</p>
+<p>LoudDog &#x3D; Dog:new()                           – 1.</p>
+<p>function LoudDog:makeSound()<br>  s &#x3D; self.sound .. &#39; &#39;                       – 2.<br>  print(s .. s .. s)<br>end</p>
+<p>seymour &#x3D; LoudDog:new()                       – 3.<br>seymour:makeSound()  – &#39;woof woof woof&#39;      – 4.</p>
+<p>– 1. LoudDog gets Dog&#39;s methods and variables.<br>– 2. self has a &#39;sound&#39; key from new(), see 3.<br>– 3. Same as LoudDog.new(LoudDog), and converted to<br>–    Dog.new(LoudDog) as LoudDog has no &#39;new&#39; key,<br>–    but does have __index &#x3D; Dog on its metatable.<br>–    Result: seymour&#39;s metatable is LoudDog, and<br>–    LoudDog.__index &#x3D; LoudDog. So seymour.key will<br>–    &#x3D; seymour.key, LoudDog.key, Dog.key, whichever<br>–    table is the first with the given key.<br>– 4. The &#39;makeSound&#39; key is found in LoudDog; this<br>–    is the same as LoudDog.makeSound(seymour).</p>
+<p>– If needed, a subclass&#39;s new() is like the base&#39;s:<br>function LoudDog:new()<br>  newObj &#x3D; &#123;&#125;<br>  – set up newObj<br>  self.__index &#x3D; self<br>  return setmetatable(newObj, self)<br>end</p>
+<hr>
+<h2 id="–-4-Modules"><a href="#–-4-Modules" class="headerlink" title="– 4. Modules."></a>– 4. Modules.</h2><p>–[[ I&#39;m commenting out this section so the rest of<br>–   this script remains runnable.<br>– Suppose the file mod.lua looks like this:<br>local M &#x3D; &#123;&#125;</p>
+<p>local function sayMyName()<br>  print(&#39;Hrunkner&#39;)<br>end</p>
+<p>function M.sayHello()<br>  print(&#39;Why hello there&#39;)<br>  sayMyName()<br>end</p>
+<p>return M</p>
+<p>– Another file can use mod.lua&#39;s functionality:<br>local mod &#x3D; require(&#39;mod&#39;)  – Run the file mod.lua.</p>
+<p>– require is the standard way to include modules.<br>– require acts like:     (if not cached; see below)<br>local mod &#x3D; (function ()<br>  &lt;contents of mod.lua&gt;<br>end)()<br>– It&#39;s like mod.lua is a function body, so that<br>– locals inside mod.lua are invisible outside it.</p>
+<p>– This works because mod here &#x3D; M in mod.lua:<br>mod.sayHello()  – Says hello to Hrunkner.</p>
+<p>– This is wrong; sayMyName only exists in mod.lua:<br>mod.sayMyName()  – error</p>
+<p>– require&#39;s return values are cached so a file is<br>– run at most once, even when require&#39;d many times.</p>
+<p>– Suppose mod2.lua contains &amp;#34;print(&#39;Hi!&#39;)&amp;#34;.<br>local a &#x3D; require(&#39;mod2&#39;)  – Prints Hi!<br>local b &#x3D; require(&#39;mod2&#39;)  – Doesn&#39;t print; a&#x3D;b.</p>
+<p>– dofile is like require without caching:<br>dofile(&#39;mod2.lua&#39;)  –&gt; Hi!<br>dofile(&#39;mod2.lua&#39;)  –&gt; Hi! (runs it again)</p>
+<p>– loadfile loads a lua file but doesn&#39;t run it yet.<br>f &#x3D; loadfile(&#39;mod2.lua&#39;)  – Call f() to run it.</p>
+<p>– loadstring is loadfile for strings.<br>g &#x3D; loadstring(&#39;print(343)&#39;)  – Returns a function.<br>g()  – Prints out 343; nothing printed before now.</p>
+<p>–]]</p>
+<hr>
+<h2 id="–-5-References"><a href="#–-5-References" class="headerlink" title="– 5. References."></a>– 5. References.</h2><p>–[[</p>
+<p>I was excited to learn Lua so I could make games<br>with the Löve 2D game engine. That&#39;s the why.</p>
+<p>I started with BlackBulletIV&#39;s Lua for programmers.<br>Next I read the official Programming in Lua book.<br>That&#39;s the how.</p>
+<p>It might be helpful to check out the Lua short<br>reference on lua-users.org.</p>
+<p>The main topics not covered are standard libraries:</p>
+<ul>
+<li>string library</li>
+<li>table library</li>
+<li>math library</li>
+<li>io library</li>
+<li>os library</li>
+</ul>
+<p>By the way, this entire file is valid Lua; save it<br>as learn.lua and run it with &amp;#34;lua learn.lua&amp;#34; !</p>
+<p>This was first written for tylerneylon.com. It&#39;s<br>also available as a github gist. Tutorials for other<br>languages, in the same style as this one, are here:</p>
+<p><a target="_blank" rel="noopener" href="http://learnxinyminutes.com/">http://learnxinyminutes.com/</a></p>
+<p>Have fun with Lua!</p>
+<p>–]]<br></code></pre></p>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        
+        
+<pre><code>        &lt;p class=&quot;tip&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;真诚赞赏，手留余香&lt;/span&gt;&lt;/p&gt;
+    
+
+&lt;/div&gt;
+&lt;div class=&quot;zs-modal-body&quot;&gt;
+    &lt;div class=&quot;zs-modal-btns&quot;&gt;
+        &lt;button class=&quot;btn btn-blink&quot; data-num=&quot;2&quot;&gt;2元&lt;/button&gt;
+        &lt;button class=&quot;btn btn-blink&quot; data-num=&quot;5&quot;&gt;5元&lt;/button&gt;
+        &lt;button class=&quot;btn btn-blink&quot; data-num=&quot;10&quot;&gt;10元&lt;/button&gt;
+        &lt;button class=&quot;btn btn-blink&quot; data-num=&quot;50&quot;&gt;50元&lt;/button&gt;
+        &lt;button class=&quot;btn btn-blink&quot; data-num=&quot;100&quot;&gt;100元&lt;/button&gt;
+        &lt;button class=&quot;btn btn-blink&quot; data-num=&quot;1&quot;&gt;任意金额&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;zs-modal-pay&quot;&gt;
+        &lt;button class=&quot;btn btn-bred&quot; id=&quot;pay-text&quot;&gt;2元&lt;/button&gt;
+        &lt;p&gt;使用&lt;span id=&quot;pay-type&quot;&gt;微信&lt;/span&gt;扫描二维码完成支付&lt;/p&gt;
+        &lt;img src=&quot;https://111qqz.github.io//img/reward/wechat-2.png&quot; id=&quot;pay-image&quot;/&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;zs-modal-footer&quot;&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;zs-type&quot; value=&quot;wechat&quot; class=&quot;zs-type&quot; checked=&quot;checked&quot;/&gt;&lt;span&gt;&lt;span class=&quot;zs-wechat&quot;&gt;&lt;img src=&quot;https://111qqz.github.io//img/reward/wechat-btn.png&quot;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;zs-type&quot; value=&quot;alipay&quot; class=&quot;zs-type&quot; class=&quot;zs-alipay&quot;/&gt;&lt;img src=&quot;https://111qqz.github.io//img/reward/alipay-btn.png&quot;/&gt;&lt;/label&gt;
+&lt;/div&gt;
+</code></pre>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+<pre><code>            &lt;hr/&gt;
+            
+
+            
+</code></pre>
+<div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"/>
+<script src="https://ihtcboy.com/script/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: decodeURI(window.location.pathname),  
+    owner: '111qqz',
+    repo: '111qqz.github.io',
+    oauth: {
+      client_id: '8839ce5e58d5197e2490',
+      client_secret: '2d475a8a7e27a8b509847a6c60f692b8cbaa274e',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1013_%E4%B8%8B%E8%BD%BDLuaPerfect/">下载LuaPerfect</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1014_LuAndFang/">LuAndFang</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

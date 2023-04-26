@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>How TLA+ Evaluation Next Action - Lua教程</title>
+
+  
+    <meta name="description" content="TLC是如何计算状态的  当TLC计算一个invariant，直接计算值，返回TRUE&#x2F;FALSE 当TLC计算Init和Next，返回一个状态集合（这个集合被加入到sq中）:     Init: 所有可能的初始状态；   Next：所有可能的后继状态；   TLC如何计算Next     状态：是对变量的赋值；   TLC计算一个状态s的后继状态：            对所有unprimed变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How TLA+ Evaluation Next Action">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-493_How%20TLA+%20Evaluation%20Next%20Action/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="TLC是如何计算状态的  当TLC计算一个invariant，直接计算值，返回TRUE&#x2F;FALSE 当TLC计算Init和Next，返回一个状态集合（这个集合被加入到sq中）:     Init: 所有可能的初始状态；   Next：所有可能的后继状态；   TLC如何计算Next     状态：是对变量的赋值；   TLC计算一个状态s的后继状态：            对所有unprimed变">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.277Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.277Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">How TLA+ Evaluation Next Action</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tlc%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E7%8A%B6%E6%80%81%E7%9A%84"><span class="toc-text">TLC是如何计算状态的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tlc%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97next"><span class="toc-text">TLC如何计算Next</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-text">第一个不同点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%85%B7%E4%BD%93%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">一个具体的例子</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>How TLA+ Evaluation Next Action</span></h1>
+<h2 id="tlc是如何计算状态的">TLC是如何计算状态的</h2>
+
+<p>当TLC计算一个invariant，直接计算值，返回TRUE/FALSE
+当TLC计算Init和Next，返回一个状态集合（这个集合被加入到sq中）:</p>
+
+<ol>
+  <li>Init: 所有可能的初始状态；</li>
+  <li>Next：所有可能的后继状态；</li>
+</ol>
+
+<h2 id="tlc如何计算next">TLC如何计算Next</h2>
+
+<ul>
+  <li>状态：是对变量的赋值；</li>
+  <li>TLC计算一个状态s的后继状态：
+    <ol>
+      <li>对所有unprimed变量进行赋值；</li>
+      <li>对所有的primed变量赋值为null；</li>
+      <li>开始计算next Action；</li>
+    </ol>
+  </li>
+  <li>TLC在计算Next Action和普通的表达式是不同的</li>
+</ul>
+
+<h3 id="第一个不同点">第一个不同点</h3>
+
+<ul>
+  <li>TLC对‘或’表达式并不是从左到右计算：
+    <ul>
+      <li>当计算 A1 / … / An，首先拆分成n个子表达式；</li>
+      <li>当计算E x in S : p，对于S中的每个元素，拆分成若干个子表达式；</li>
+      <li>P =&gt; Q，等价于(非P) / Q</li>
+    </ul>
+  </li>
+  <li>
+    <p>举个例子</p>
+
+<pre><code>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  (A =&amp;gt; B) / ( C / (E i in S : D(i) / E)) 
+</code></pre>
+<p></code></pre></div>    </div></p>
+<pre><code>&lt;p&gt;拆分成3个子表达式：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;非A；&lt;/li&gt;
+  &lt;li&gt;B；&lt;/li&gt;
+  &lt;li&gt;C / (E i in S : D(i) / E)；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;计算第3个表达式的过程是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;计算C&lt;/li&gt;
+  &lt;li&gt;如果C为TRUE，把后边的E i in S : D(i) / E 根据S中的元素i拆分成多个表达式D(i) / E;&lt;/li&gt;
+  &lt;li&gt;计算D(i) / E时，应用同样的规则，先计算D(i)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果D(i)为TRUE，计算E&lt;/p&gt;
+
+    &lt;p&gt;# 第二个不同点&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
+  </li>
+  <li>如何计算primed变量
+    <ul>
+      <li>计算x’ = e时，首先把x’赋值为null，然后计算e的值给x’，返回TRUE；</li>
+      <li>计算x’ in S，等价于 E v in S : x’ = v;</li>
+      <li>UNCHANGED«e1, … , en»，等价于 (UNCHANGED e1) / … / (UNCHANGED en)</li>
+    </ul>
+  </li>
+  <li>当primed变量没有被赋值时会报错；</li>
+  <li>当一个‘与’返回FALSE，这个子表达式计算就停止了，没有找到任何状态；</li>
+  <li>当一个表达式计算完毕，就找到一些状态，这些状态就是primed变量的赋值；</li>
+</ul>
+
+<h2 id="一个具体的例子">一个具体的例子</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ / x&#39; in 1..Len(y)
+    / y&#39; = Append(Tail(y), x&#39;)
+/ / x&#39; = x + 1
+    / y&#39; = Append(y, x&#39;)
+</code></pre></div></div>
+<ul>
+  <li>假设Init初始化之后的状态是： x = 1, y = «2, 3»
+    <ul>
+      <li>由于最外层是两个‘或’，TLC把表达式拆分成两个子表达式；</li>
+      <li>计算第一个子表达式：x’ in 1..Len(y) / y’ = Append(Tail(y), x’) 这个表达式一个‘与’因此从左往右依次计算，由于Len(y)为2，因此，这个表达式被拆成两个:
+        <ul>
+          <li>第一个：
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  / x&#39; = 1
+  / y&#39; = Append(Tail(y), x&#39;)
+</code></pre></div>            </div>
+            <p>得到x = 1, y = «3, 1»</p>
+          </li>
+          <li>第二个：
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  / x&#39; = 2
+  / y&#39; = Append(Tail(y), x&#39;)
+</code></pre></div>            </div>
+            <p>得到x = 2, y = «3, 2»</p>
+          </li>
+        </ul>
+      </li>
+      <li>计算第二个子表达式：这是一个‘与’表达式，从左往右依次计算两个
+        <ul>
+          <li>计算第一个x = 2</li>
+          <li>计算第二个y = «2, 3, 2»</li>
+        </ul>
+      </li>
+      <li>整个Next的后继状态一共有3个。</li>
+    </ul>
+  </li>
+  <li>假设Init初始化之后的状态是： x = 1, y = « »
+    <ul>
+      <li>由于最外层是两个‘或’，TLC把表达式拆分成两个子表达式；</li>
+      <li>
+        <p>计算第一个子表达式：<code class="highlighter-rouge">x&#39; in 1..Len(y) / y&#39; = Append(Tail(y), x&#39;)</code>
+  由于Len(y)为0，第一个‘与’的子表达式：</p>
+
+<pre><code>    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  / x&amp;#39; in 1..0
+</code></pre>
+<p>  &#x2F; y&#39; &#x3D; Append(Tail(y), x&#39;)<br></code></pre></div>        </div><br>      </li><br>    </ul></p>
+<pre><code>&lt;p&gt;拆分后为：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  / i in &#123;&#125; : x&amp;#39; = i
+</code></pre>
+<p>  &#x2F; y&#39; &#x3D; Append(Tail(y), x&#39;)<br></code></pre></div>    </div></p>
+<pre><code>&lt;p&gt;这个表达式是一个‘与’，从左往右依次计算，第一个表达式返回FALSE，计算终止&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;计算第二个子表达式：
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  / x&amp;#39; = 2
+</code></pre>
+<p>  &#x2F; y&#39; &#x3D; Append(Tail(y), x&#39;)<br></code></pre></div>        </div><br>        <p>得到 x &#x3D; 2, y &#x3D; «2, 2»</p><br>      </li><br>      <li>整个Next的后继状态一共有1个。</li><br>    </ul><br>  </li></p>
+</ul>
+
+<p>​</p>
+
+<p>​</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-491_Lua%20%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E4%B8%8E%E7%BC%93%E5%AD%98%20/">Lua 的标准输出与缓存</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-494_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">Lua 排序算法</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

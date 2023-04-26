@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua编程9之模块 - Lua教程</title>
+
+  
+    <meta name="description" content="思考并回答以下问题：1.如何创建一个模块？2.私有函数如何声明？3.return tab1必须和模块同一名称吗？4.如何引用一个模块？别名如何使用？5.原生lua文件加载路径如何查看？6.xLua加载方式是怎样的？建议的加载Lua脚本方式是什么？7.什么是自定义Loader？如何自定义Loader？  用Lua写代码不可能把所有代码都写一个文件里，不同文件之间如何引用呢？Lua中也有模块的机制，类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua编程9之模块">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-948_Lua%E7%BC%96%E7%A8%8B9%E4%B9%8B%E6%A8%A1%E5%9D%97/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="思考并回答以下问题：1.如何创建一个模块？2.私有函数如何声明？3.return tab1必须和模块同一名称吗？4.如何引用一个模块？别名如何使用？5.原生lua文件加载路径如何查看？6.xLua加载方式是怎样的？建议的加载Lua脚本方式是什么？7.什么是自定义Loader？如何自定义Loader？  用Lua写代码不可能把所有代码都写一个文件里，不同文件之间如何引用呢？Lua中也有模块的机制，类">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.320Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.320Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua编程9之模块</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#require-%E5%87%BD%E6%95%B0"><span class="toc-text">require 函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xLua%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="toc-text">xLua中的模块加载</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua编程9之模块</span></h1>
+<p>思考并回答以下问题：<br/>1.如何创建一个模块？<br/>2.私有函数如何声明？<br/>3.return tab1必须和模块同一名称吗？<br/>4.如何引用一个模块？别名如何使用？<br/>5.原生lua文件加载路径如何查看？<br/>6.xLua加载方式是怎样的？建议的加载Lua脚本方式是什么？<br/>7.什么是自定义Loader？如何自定义Loader？</p>
+
+<p>用Lua写代码不可能把所有代码都写一个文件里，不同文件之间如何引用呢？Lua中也有模块的机制，类似C#中封装的命名空间。</p>
+<p>模块类似于一个封装库，从 Lua 5.1 开始，Lua 加入了标准的模块管理机制，可以把一些公用的代码放在一个文件里，以 API 接口的形式在其他地方调用，有利于代码的重用和降低代码耦合度。</p>
+<p>Lua 的模块是由变量、函数等已知元素组成的 table，因此<span style="color:red">创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table 就行</span>。以下为创建自定义模块 module.lua，文件代码格式如下：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="comment">-- 定义一个名为 module 的模块</span></span><br/><span class="line">module = {}</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 定义一个常量</span></span><br/><span class="line">module.constant = <span class="string">&#34;这是一个常量&#34;</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 定义一个函数</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">()</span></span></span><br/><span class="line">    <span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&#34;这是一个公有函数！n&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">func2</span><span class="params">()</span></span></span><br/><span class="line">    <span class="built_in">print</span>(<span class="string">&#34;这是一个私有函数！&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">module.func3</span><span class="params">()</span></span></span><br/><span class="line">    func2()</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">return</span> module</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>由上可知，模块的结构就是一个 table 的结构，因此可以像操作调用 table 里的元素那样来操作调用模块里的常量或函数。</p>
+<p>上面的 func2 声明为程序块的局部变量，即表示一个私有函数，因此是不能从外部访问模块里的这个私有函数，必须通过模块里的公有函数来调用.</p>
+<h2 id="require-函数"><a href="#require-函数" class="headerlink" title="require 函数"></a><span style="color:#EF7060;">require 函数</span></h2><p>Lua提供了一个名为require的函数用来加载模块。要加载一个模块，只需要简单地调用就可以了。例如：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#34;&lt;模块名&gt;&#34;</span>)</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>或者<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span> <span class="string">&#34;&lt;模块名&gt;&#34;</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>执行 require 后会返回一个由模块常量或函数组成的 table，并且还会定义一个包含该 table 的全局变量。<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- test_module.lua 文件</span></span><br/><span class="line"><span class="comment">-- module 模块为上文提到到 module.lua</span></span><br/><span class="line"><span class="built_in">require</span>(<span class="string">&#34;module&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(module.constant)</span><br/><span class="line"></span><br/><span class="line">module.func3()</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>以上代码执行结果为：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">这是一个常量</span><br/><span class="line">这是一个私有函数！</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>或者给加载的模块定义一个别名变量，方便调用：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- test_module2.lua 文件</span></span><br/><span class="line"><span class="comment">-- module 模块为上文提到到 module.lua</span></span><br/><span class="line"><span class="comment">-- 别名变量 m</span></span><br/><span class="line"><span class="keyword">local</span> m = <span class="built_in">require</span>(<span class="string">&#34;module&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(m.constant)</span><br/><span class="line"></span><br/><span class="line">m.func3()</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>以上代码执行结果为：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">这是一个常量</span><br/><span class="line">这是一个私有函数！</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p><strong> <span style="color:red">标准Lua中的加载机制</span> </strong></p>
+<p>对于自定义的模块，模块文件不是放在哪个文件目录都行，函数 require 有它自己的文件路径加载策略，它会尝试从 Lua 文件或 C 程序库中加载模块。</p>
+<p>require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA_PATH 的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化。</p>
+<p>在lua中可以使用<span style="color:red">print (package.path)</span>来查看当前的搜索路径。</p>
+<p>我的打印出来是这样的：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line">C:Program FilesUnityHubEditor<span class="number">2018.3</span><span class="number">.6</span>f1Editorlua?.lua;</span><br/><span class="line">C:Program FilesUnityHubEditor<span class="number">2018.3</span><span class="number">.6</span>f1Editorlua?init.lua;</span><br/><span class="line">C:Program FilesUnityHubEditor<span class="number">2018.3</span><span class="number">.6</span>f1Editor?.lua;</span><br/><span class="line">C:Program FilesUnityHubEditor<span class="number">2018.3</span><span class="number">.6</span>f1Editor?init.lua;</span><br/><span class="line">C:Program FilesUnityHubEditor<span class="number">2018.3</span><span class="number">.6</span>f1Editor..sharelua<span class="number">5.3</span>?.lua;</span><br/><span class="line">C:Program FilesUnityHubEditor<span class="number">2018.3</span><span class="number">.6</span>f1Editor..sharelua<span class="number">5.3</span>?init.lua;</span><br/><span class="line">.?.lua;</span><br/><span class="line">.?init.lua</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>那么调用 require(“module”) 时就会尝试从搜索路径中从前到后的顺序去搜索lua文件。</p>
+<p>如果找过目标文件，则会调用 package.loadfile 来加载模块。否则，就会去找 C 程序库。</p>
+<p>C 程序库搜索的文件路径是从全局变量 package.cpath 获取，而这个变量则是通过环境变量 LUA_CPATH 来初始。</p>
+<p>搜索的策略跟上面的一样，只不过现在换成搜索的是 so 或 dll 类型的文件。如果找得到，那么 require 就会通过 package.loadlib 来加载它。</p>
+<h2 id="xLua中的模块加载"><a href="#xLua中的模块加载" class="headerlink" title="xLua中的模块加载"></a><span style="color:#EF7060;">xLua中的模块加载</span></h2><p>xLua中require实际上是调一个个的loader去加载，有一个成功就不再往下尝试，全失败则报文件找不到。</p>
+<p>在xLua中，模块加载在Unity有些因地制宜的loader。目前xLua除了原生的loader外，还添加了从Resource和StreamingAssets（从StreamingAssets加载已被标记弃用，不建议使用）加载的loader，需要注意的是因为Resource只支持有限的后缀，放Resources下的lua文件得加上txt后缀，比如文件名需要命名成<span style="color:red">module.lua.txt</span>。</p>
+<p>可以从xLua的LuaEnv.cs的第108行看到：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">AddSearcher(StaticLuaCallbacks.LoadFromResource, <span class="number">4</span>);</span><br/><span class="line">AddSearcher(StaticLuaCallbacks.LoadFromStreamingAssetsPath, <span class="number">-1</span>);</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>建议的加载Lua脚本方式是：整个程序就一个DoString(“require ‘main’”)，然后在main.lua中require加载其它脚本。</p>
+<p>要是我的Lua文件是下载回来的，或者某个自定义的文件格式里头解压出来，或者需要解密等等，怎么办？<br/>xLua的自定义Loader可以满足这些需求。</p>
+<p><strong> <span style="color:red">自定义Loader</span> </strong></p>
+<p>在xLua加自定义loader是很简单的，只涉及到一个接口：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">public delegate <span class="built_in">byte</span>[] CustomLoader(ref <span class="built_in">string</span> filepath);</span><br/><span class="line">public void LuaEnv.AddLoader(CustomLoader loader)</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>通过AddLoader可以注册个回调，该回调参数是字符串，lua代码里头调用require时，参数将会透传给回调，回调中就可以根据这个参数去加载指定文件，如果需要支持调试，需要把filepath修改为真实路径传出。</p>
+<p>该回调返回值是一个byte数组，如果为空表示该loader找不到，否则则为lua文件的内容。 有了这个就简单了，所有你自己的流程都可以处理。比如：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/></pre></td><td class="code"><pre><span class="line">luaenv.AddLoader((ref <span class="built_in">string</span> filename) =&gt; {</span><br/><span class="line">     <span class="keyword">if</span> (filename == <span class="string">&#34;InMemory&#34;</span>)</span><br/><span class="line">     {</span><br/><span class="line">         <span class="built_in">string</span> script = <span class="string">&#34;return {ccc = 9999}&#34;</span>;</span><br/><span class="line">         <span class="keyword">return</span> System.Text.Encoding.UTF8.GetBytes(script);</span><br/><span class="line">     }</span><br/><span class="line">     <span class="keyword">return</span> null;</span><br/><span class="line"> });</span><br/><span class="line">luaenv.DoString(<span class="string">&#34;print(&#39;InMemory.ccc=&#39;, require(&#39;InMemory&#39;).ccc)&#34;</span>);</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>完整示例见XLuaTutorialLoadLuaScriptLoader</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-946_skynet%20lua%E6%9C%8D%E5%8A%A1/">skynet lua服务</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-94_%E6%9C%80%E8%BF%91%E5%85%B3%E4%BA%8ELua%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AF%87%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89/">最近关于Lua的学习篇总结（一）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua快速入门 - Lua教程</title>
+
+  
+    <meta name="description" content="概览：协同程序提供了一种协作式的多线程。每个协同程序都等于是一个线程。一对yield-resume可以将执行权在不同线程间切换。然而与常规多线程不同，协程是非抢先式的。    参照书籍：《Lua程序设计（第二版）》 Lua版本：Lua 5.3.5  协同程序 Lua将所有关于协同程序的函数放在了一个名叫”coroutine“的table中。  create函数用于创建一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua快速入门">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1003_lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="概览：协同程序提供了一种协作式的多线程。每个协同程序都等于是一个线程。一对yield-resume可以将执行权在不同线程间切换。然而与常规多线程不同，协程是非抢先式的。    参照书籍：《Lua程序设计（第二版）》 Lua版本：Lua 5.3.5  协同程序 Lua将所有关于协同程序的函数放在了一个名叫”coroutine“的table中。  create函数用于创建一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.226Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.226Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua快速入门</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E5%90%8C%E7%A8%8B%E5%BA%8F"><span class="toc-text">协同程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E5%AE%9E%E4%BE%8B-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85"><span class="toc-text">协程实例-生产者消费者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8filter"><span class="toc-text">过滤器filter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E5%8D%8F%E5%90%8C%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-text">用协同程序实现迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E6%8A%A2%E5%8D%A0%E5%BC%8F%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B-non-preemptive"><span class="toc-text">非抢占式的多线程(non-preemptive)</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua快速入门</span></h1>
+<div class="markdown-body">
+            <p><strong>概览</strong>：协同程序提供了一种协作式的多线程。每个协同程序都等于是一个线程。一对yield-resume可以将执行权在不同线程间切换。然而与常规多线程不同，协程是非抢先式的。</p>
+
+
+<blockquote>
+<p>参照书籍：<strong>《Lua程序设计（第二版）》</strong></p>
+<p>Lua版本：<strong>Lua 5.3.5</strong></p>
+</blockquote>
+<h2 id="协同程序"><a href="#协同程序" class="headerlink" title="协同程序"></a>协同程序</h2><ul>
+<li><p>Lua将所有关于协同程序的函数放在了一个名叫”<strong>coroutine</strong>“的table中。</p>
+</li>
+<li><p>create函数用于创建一个协同程序，只有一个参数，为一个函数。最终返回一个thread类型的值。</p>
+<pre><code class="lua">  &gt; co = coroutine.create(function() print&#34;hi&#34; end)
+  &gt; print(co)
+  thread: 000000000078eba8</code></pre>
+</li>
+<li><p>一个协同程序有四种状态：<strong>挂起(suspended)、运行(running)、死亡(dead)和正常(normal)</strong>.创建一个协同程序后它将储于挂起状态，可以使用status函数来检查协同程序的状态。</p>
+<pre><code class="lua">  &gt; print(coroutine.status(co))
+  suspended</code></pre>
+</li>
+<li><p>使用resume函数来启动执行协同程序，并将其状态从<strong>挂起 –&gt; 运行</strong></p>
+<pre><code class="lua">  &gt; coroutine.resume(co)
+  hi
+  true
+  &gt; print(coroutine.status(co))
+  dead
+  &gt; coroutine.resume(co)
+  false   cannot resume dead coroutine
+  &gt;</code></pre>
+</li>
+<li><p>使用yield函数来让一个运行中的协同程序挂起。</p>
+<pre><code class="lua">  co = coroutine.create(function()
+   for i=1,10 do
+   print(&#34;co&#34;,i)
+   coroutine.yield()
+   end
+  end)
+
+<p>  &gt; coroutine.resume(co)<br>  co      1<br>  true<br>  &gt; coroutine.resume(co)<br>  co      2<br>  true<br>  &gt; coroutine.resume(co)<br>  co      3<br>  true<br>  &gt; print(coroutine.status(co))<br>  suspended<br>  &gt;</code></pre></p>
+<blockquote>
+<p><strong>从协程的角度来看，所有在它挂起时发生的活动都发生在yield调用中。当恢复协同程序的执行时，对于yield的调用才最终返回。然后协同程序继续它的执行，直到下个yield调用或执行的结束。</strong></p>
+</blockquote>
+</li>
+<li><p><strong>正常状态</strong>：当协程A唤醒了另一个协程B时，协程A就处于一个特殊状态，既不是挂起状态(A无法继续执行)也不是运行状态(B在运行)。</p>
+</li>
+<li><p>Lua协同程序的机制：通过一对resume-yield来交换数据。在第一次调用resume时，并没有对应的yield在等待它，因此传<strong>递给resume的额外参数都将视为协同程序主函数的参数。</strong></p>
+<pre><code class="lua">  &gt; co = coroutine.create(function(a,b,c)
+  &gt;&gt; print(&#34;co&#34;,a,b,c)
+  &gt;&gt; end)
+  &gt; coroutine.resume(co,1,2,3)
+  co      1       2       3
+  true
+  &gt;</code></pre>
+<p>  数据由yield传给resume。true表明调用成功，true之后的部分，即是yield的参数.</p>
+<pre><code class="lua">  co = coroutine.create(function (a,b)
+    coroutine.yield(a+b,a-b)
+  end)
+
+<p>  &gt; print(coroutine.resume(co,20,10))<br>  true    30      10</code></pre></p>
+<p>  相应地，resume的参数，会被传递给yield。 </p>
+<pre><code class="lua">  co  = coroutine.create (function ()
+    print(&#34;co&#34;,  coroutine.yield())
+  end)
+  coroutine.resume(co)
+  coroutine.resume(co, 4, 5)   --&gt; co  4 5</code></pre>
+<p>  最后一个，协同代码结束时的返回值，也会传给resume：</p>
+<pre><code class="lua">  co  = coroutine.create(function ()
+    return 6, 7
+  end)
+  print(coroutine.resume(co))   --&gt;  true 6 7</code></pre>
+</li>
+<li><p>Lua的协同称为<strong>不对称协同</strong>（asymmetric coroutines），指“挂起一个正在执行的协同函数”与“使一个被挂起的协同再次执行的函数”是不同的，有些语言提供对称协同（symmetric coroutines），即使用同一个函数负责“执行与挂起间的状态切换”.</p>
+<blockquote>
+<p>与对称的协同和不对称协同的区别不同的是，协同与产生器的区别更大。产生器相对比较简单，他不能完成真正的协同所能完成的一些任务。我们熟练使用不对称的协同之后，可以利用不对称的协同实现比较优越的对称协同。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="协程实例-生产者消费者"><a href="#协程实例-生产者消费者" class="headerlink" title="协程实例-生产者消费者"></a>协程实例-生产者消费者</h2><p>生产者消费者涉及两个函数，一个负责不断的产生值，另一个负责不断地消费值。</p>
+<pre><code class="lua">-- 两个函数大致的样子
+function producer()
+    while true do
+        local x = io.read() --产生新的值
+        send(x) -- 发送给消费者
+    end
+end
+
+<p>function consumer()<br>    while true do<br>        local x &#x3D; receive() –从生产者接受值<br>        io.write(x,&amp;#34;n&amp;#34;)  – 消费新的值<br>    end<br>end</code></pre></p>
+<p>这里的问题在于如何将send与receive匹配起来，这是一个典型的<strong>“谁具有主循环”(who-has-the-main-loop)</strong>的问题。由于生产者与消费者都处于活动状态，他们各自具有一个主循环，并且都将对方视为一个可调用的服务。</p>
+<p><strong>而协调程序被称为是一种匹配生产者与消费者的理想工具，因为调用者与被调用者之间的resume-yield关系会不断颠倒。当一个协同调用yield时，并不会进入一个新的函数，取而代之的是返回一个未决的resume的调用。相似的，调用resume时也不会开始一个新的函数而是返回yield的调用。这种性质正是我们所需要的，与使得send-receive协同工作的方式是一致的。receive唤醒生产者生产新值，send把产生的值送给消费者消费。</strong></p>
+<pre><code class="lua">function receive()
+    local status,value = coroutine.resume(producer)
+    return value
+end
+
+<p>function send(x)<br>    coroutine.yield(x)<br>end</p>
+<p>– 因此生产者现在一定是一个协同程序<br>producer &#x3D; coroutine.create(<br>    function ()<br>        while true do<br>            local x &#x3D; io.read()  –产生新值<br>            send(x)<br>        end<br>    end<br>)</code></pre></p>
+<p>在这种设计中，程序通过调用消费者来启动。当消费者需要一个新值时，它唤醒生产者。生产者返回一个新值后停止运行，并等待消费者的再次唤醒。这种设计称之为——“消费者驱动”。</p>
+<h3 id="过滤器filter"><a href="#过滤器filter" class="headerlink" title="过滤器filter"></a>过滤器filter</h3><p>扩展上面的设计，实现过滤器</p>
+<p>过滤器是一种位于生产者与消费者之间的处理功能，可用于对数据的一些变换。过滤器既是一个消费者又是一个生产者，它唤醒一个生产者促使其产生新的值，然后又将变换后的值传递给消费者。</p>
+<pre><code class="lua">function receive(prod)
+    local status,value = coroutine.resume(prod)
+    return value
+end
+
+<p>function send(x)<br>    coroutine.yield(x)<br>end</p>
+<p>function producer()<br>    return coroutine.create(function()<br>        while true do<br>            local x &#x3D; io.read()<br>            send(x)<br>         end<br>       end)<br>end</p>
+<p>function filter(prod)<br>    return coroutine.create(function()<br>        for line&#x3D;1,math.huge do<br>                local x &#x3D; receiver(prod)<br>                x &#x3D; string.format(&amp;#34;%5d %s&amp;#34;,line,x)<br>                send(x)<br>        end<br>     end)<br>end</p>
+<p>function consumer(prod)<br>   while true do<br>        local x &#x3D; receive(prod)  –获取新值<br>        io.write(x,&amp;#34;n&amp;#34;)  –消费新值<br>    end<br>end</p>
+<p>– 运行代码<br>p &#x3D; producer()<br>f &#x3D; filter(p)<br>consumer(f)</p>
+<p>–或者 sonsumer(filter(producer()))</p>
+<p>– 不过貌似无法运行</code></pre></p>
+<p>可能很自然的想到<strong>UNIX的管道（pipe）</strong>，<strong>协同是一种非抢占式的多线程</strong>。管道的方式下，每一个任务在独立的进程中运行，而协同方式下，每个任务运行在独立的协同代码中。管道在读（consumer）与写（producer）之间提供了一个缓冲，因此两者相关的的速度没有什么限制，在上下文管道中这是非常重要的，因为在进程间的切换代价是很高的。协同模式下，任务间的切换代价较小，与函数调用相当，因此读写可以很好的协同处理。</p>
+<h2 id="用协同程序实现迭代器"><a href="#用协同程序实现迭代器" class="headerlink" title="用协同程序实现迭代器"></a>用协同程序实现迭代器</h2><p>我们可以将循环的迭代器看作生产者-消费者模式的特殊的例子。迭代函数产生值给循环体消费。所以可以使用协同来实现迭代器。<strong>协同的一个关键特征是它可以不断颠倒调用者与被调用者之间的关系</strong>，这样我们毫无顾虑的使用它实现一个迭代器，而不用保存迭代函数返回的状态。</p>
+<pre><code class="lua">-- 打印一个数组元素的所有的排列
+function permgen(a,n)
+    n = n or #a --默认n为a的大小
+    if n &lt;= 1 then
+        printResult(a)
+    else
+        for i=1,n do
+            a[n],a[i] = a[i],a[n] --将第i个元素放到数组末尾
+            permgen(a,n-1)  -- 生成其余元素的排列
+            a[n],a[i] = a[i],a[n] -- 恢复第i个元素
+        end
+    end
+end
+
+<p>function printResult(a)<br>    for i&#x3D;1,#a do<br>        io.write(a[i],&amp;#34; &amp;#34;)<br>    end<br>    io.write(&amp;#34;n&amp;#34;)<br>end</p>
+<p>– 调用<br>permgen(&#123;1,2,3,4&#125;) –只传一个参数也可以，函数中会对第二个参数进行默认赋值操作</p>
+<p>–[[<br>2 3 4 1<br>3 2 4 1<br>3 4 2 1<br>4 3 2 1<br>2 4 3 1<br>4 2 3 1<br>4 3 1 2<br>3 4 1 2<br>3 1 4 2<br>1 3 4 2<br>4 1 3 2<br>1 4 3 2<br>2 4 1 3<br>4 2 1 3<br>4 1 2 3<br>1 4 2 3<br>2 1 4 3<br>1 2 4 3<br>2 3 1 4<br>3 2 1 4<br>3 1 2 4<br>1 3 2 4<br>2 1 3 4<br>1 2 3 4<br>–]]</code></pre></p>
+<p>转化为迭代器</p>
+<pre><code class="lua">function permgen(a,n)
+    n = n or #a
+    if n&gt;=1 then
+        coroutine.yield(a)
+    else
+        for i=1,n do
+            a[n],a[i] = a[i],a[n] --将第i个元素放到数组末尾
+            permgen(a,n-1)  -- 生成其余元素的排列
+            a[n],a[i] = a[i],a[n] -- 恢复第i个元素
+        end
+    end
+end
+
+<p>–定义一个工厂函数<br>function permutations(a)<br>    local co &#x3D; coroutine.create(function() permgen(a) end)<br>    return function() –迭代器<br>        local code,res &#x3D; coroutine.resume(co)<br>        return res<br>    end<br>end</p>
+<p>– for循环中便利<br>for p in permutations(&#123;&amp;#34;a&amp;#34;,&amp;#34;b&amp;#34;,&amp;#34;c&amp;#34;&#125;) do<br>    printResult(p)<br>end</code></pre></p>
+<p>permutations函数使用了lua中常用的模式：<strong>将一个对协同的resume的调用封装在一个函数内部</strong>，这种方式在非常常见，所以专门为此专门提供了一个函数<code>coroutine.wrap</code>。与create相同的是，wrap创建一个协同程序；不同的是wrap不返回协同本身，而是返回一个函数，当这个函数被调用时将resume协同。wrap中resume协同的时候不会返回错误代码作为第一个返回结果，一旦有错误发生，将抛出错误。</p>
+<pre><code class="lua">-- 使用wrap来重写permutations
+function permutations(a)
+    return coroutine.wrap(function () permgen(a) end)
+end</code></pre>
+<p>一般情况下，coroutine.wrap比coroutine.create使用起来简单直观，前者更确切的提供了我们所需要的：一个可以resume协同的函数，然而缺少灵活性，没有办法知道wrap所创建的协同的状态，也没有办法检查错误的发生。</p>
+<h2 id="非抢占式的多线程-non-preemptive"><a href="#非抢占式的多线程-non-preemptive" class="headerlink" title="非抢占式的多线程(non-preemptive)"></a>非抢占式的多线程(non-preemptive)</h2><p>对于非抢占式的多线程来说，只要有一个线程调用了阻塞(blocking)的操作，整个程序在该操作完成前，都会停下来。但对于大部分程序来说，这是无法接受的。</p>
+<pre><code class="lua">--未完
+
+<p>相关模块一直无法安装以及使用</code></pre></p>
+<pre><code>        &lt;hr/&gt;
+      &lt;/div&gt;
+      &lt;br/&gt;
+      &lt;div&gt;
+        &lt;p&gt;
+        
+          &lt;span&gt;
+            &lt;i class=&quot;iconfont icon-inbox&quot;&gt;&lt;/i&gt;
+            
+              &lt;a class=&quot;hover-with-bg&quot; href=&quot;/categories/Lua/&quot;&gt;Lua&lt;/a&gt;
+               
+            
+          &lt;/span&gt;  
+        
+        
+          &lt;span&gt;
+            &lt;i class=&quot;iconfont icon-tag&quot;&gt;&lt;/i&gt;
+            
+              &lt;a class=&quot;hover-with-bg&quot; href=&quot;/tags/Lua/&quot;&gt;Lua&lt;/a&gt;
+            
+          &lt;/span&gt;
+        
+        &lt;/p&gt;
+        
+          &lt;p class=&quot;note note-warning&quot;&gt;本博客所有文章除特别声明外，均采用 &lt;a href=&quot;https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;CC BY-SA 3.0协议&lt;/a&gt; 。转载请注明出处！&lt;/p&gt;
+        
+      &lt;/div&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1001_Lua%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Lua正则表达式</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1005_Lua%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">Lua语言学习（二）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua数据结构table的键值存取过程源码分析 - Lua教程</title>
+
+  
+    <meta name="description" content="一、相关数据结构定义1、Table结构定义1234567891011typedef struct  {  CommonHeader;  lu_byte flags;     lu_byte lsizenode;  &#x2F;* log2 of size of &#96;node&#39; array *&#x2F;  struct  *metatable;  TValue *array;  &#x2F;* array part *&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua数据结构table的键值存取过程源码分析">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-529_lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84table%E7%9A%84%E9%94%AE%E5%80%BC%E5%AD%98%E5%8F%96%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="一、相关数据结构定义1、Table结构定义1234567891011typedef struct  {  CommonHeader;  lu_byte flags;     lu_byte lsizenode;  &#x2F;* log2 of size of &#96;node&#39; array *&#x2F;  struct  *metatable;  TValue *array;  &#x2F;* array part *&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.281Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.281Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua数据结构table的键值存取过程源码分析</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-text">一、相关数据结构定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Table%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-text">1、Table结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81TValue%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-text">2、TValue结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Node%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-text">3、Node结构定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%94%AE%E5%80%BC%E5%AD%98%E5%8F%96%E8%BF%87%E7%A8%8B"><span class="toc-text">二、键值存取过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%94%AE%E5%80%BC%E7%9A%84%E5%8F%96%E5%80%BC"><span class="toc-text">1、键值的取值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%94%AE%E5%80%BC%E7%9A%84%E5%AD%98%E5%80%BC"><span class="toc-text">2、键值的存值</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua数据结构table的键值存取过程源码分析</span></h1>
+<h2 id="一、相关数据结构定义"><a href="#一、相关数据结构定义" class="headerlink" title="一、相关数据结构定义"></a>一、相关数据结构定义</h2><h3 id="1、Table结构定义"><a href="#1、Table结构定义" class="headerlink" title="1、Table结构定义"></a>1、Table结构定义</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>  {</span></span><br/><span class="line">  CommonHeader;</span><br/><span class="line">  lu_byte flags;   </span><br/><span class="line">  lu_byte lsizenode;  <span class="comment">/* log2 of size of `node&#39; array */</span></span><br/><span class="line">  <span class="class"><span class="keyword">struct</span>  *<span class="title">metatable</span>;</span></span><br/><span class="line">  TValue *<span class="built_in">array</span>;  <span class="comment">/* array part */</span></span><br/><span class="line">  Node *node;     <span class="comment">/* hash part */</span></span><br/><span class="line">  Node *lastfree;  <span class="comment">/* any free position is before this position */</span></span><br/><span class="line">  GCObject *gclist;</span><br/><span class="line">  <span class="keyword">int</span> sizearray;  <span class="comment">/* size of `array&#39; array */</span></span><br/><span class="line">} Table;</span><br/></pre></td></tr></tbody></table></figure>
+<p>可以看出array和node作为存储数据的两种结构，当table以整型作为key时,会用array来存储，其他数据类型key会用node来存储。sizearray作为数组的长度，2的lsizenode次方作为哈希表的长度。</p>
+<h3 id="2、TValue结构定义"><a href="#2、TValue结构定义" class="headerlink" title="2、TValue结构定义"></a>2、TValue结构定义</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** Union of all Lua values</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> {</span><br/><span class="line">  GCObject *gc;</span><br/><span class="line">  <span class="keyword">void</span> *p;</span><br/><span class="line">  lua_Number n;</span><br/><span class="line">  <span class="keyword">int</span> b;</span><br/><span class="line">} Value;</span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">lua_TValue</span> {</span></span><br/><span class="line">  TValuefields;</span><br/><span class="line">} TValue;</span><br/></pre></td></tr></tbody></table></figure>
+<p>TValue是一个结构体，里面是TValuefields，它由一个宏定义完成，包括Value和一个int值。 tt用于表示lua的基本数据类型，Value是一个联合体,可以是lua所支持的数据类型中的任意一种。</p>
+<h3 id="3、Node结构定义"><a href="#3、Node结构定义" class="headerlink" title="3、Node结构定义"></a>3、Node结构定义</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> {</span></span><br/><span class="line">  TValue i_val;</span><br/><span class="line">  TKey i_key;</span><br/><span class="line">} Node;</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> TKey {</span><br/><span class="line">  <span class="class"><span class="keyword">struct</span> {</span></span><br/><span class="line">    TValuefields;</span><br/><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">next</span>;</span>  <span class="comment">/* for chaining */</span></span><br/><span class="line">  } nk;</span><br/><span class="line">  TValue tvk;</span><br/><span class="line">} TKey;</span><br/></pre></td></tr></tbody></table></figure>
+<p>Node是key-value对的结构，主要是TKey结构,是一个union，所以TKey的大小就是nk的大小，从TValue的定义可知TValue和TValuefields同一个结构，所以tvk和nk的TValuefields都表示键值。struct Node *next这个指针指向了下一个冲突(哈希碰撞)的node。</p>
+<h2 id="二、键值存取过程"><a href="#二、键值存取过程" class="headerlink" title="二、键值存取过程"></a>二、键值存取过程</h2><h3 id="1、键值的取值"><a href="#1、键值的取值" class="headerlink" title="1、键值的取值"></a>1、键值的取值</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> TValue *<span class="title">luaH_get</span> <span class="params">(Table *t, <span class="keyword">const</span> TValue *key)</span> </span>{</span><br/><span class="line">  <span class="keyword">switch</span> (ttype(key)) {</span><br/><span class="line">    <span class="keyword">case</span> LUA_TNIL: <span class="keyword">return</span> luaO_nilobject;</span><br/><span class="line">    <span class="keyword">case</span> LUA_TSTRING: <span class="keyword">return</span> luaH_getstr(t, rawtsvalue(key));</span><br/><span class="line">    <span class="keyword">case</span> LUA_TNUMBER: {</span><br/><span class="line">      <span class="keyword">int</span> k;</span><br/><span class="line">      lua_Number n = nvalue(key);</span><br/><span class="line">      lua_number2int(k, n);</span><br/><span class="line">      <span class="keyword">if</span> (luai_numeq(cast_num(k), nvalue(key))) <span class="comment">/* index is int? */</span></span><br/><span class="line">        <span class="keyword">return</span> luaH_getnum(t, k);  <span class="comment">/* use specialized version */</span></span><br/><span class="line">      <span class="comment">/* else go through */</span></span><br/><span class="line">    }</span><br/><span class="line">    <span class="keyword">default</span>: {</span><br/><span class="line">      Node *n = mainposition(t, key);</span><br/><span class="line">      <span class="keyword">do</span> {  <span class="comment">/* check whether `key&#39; is somewhere in the chain */</span></span><br/><span class="line">        <span class="keyword">if</span> (luaO_rawequalObj(key2tval(n), key))</span><br/><span class="line">          <span class="keyword">return</span> gval(n);  <span class="comment">/* that&#39;s it */</span></span><br/><span class="line">        <span class="keyword">else</span> n = gnext(n);</span><br/><span class="line">      } <span class="keyword">while</span> (n);</span><br/><span class="line">      <span class="keyword">return</span> luaO_nilobject;</span><br/><span class="line">    }</span><br/><span class="line">  }</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>首先对key值进行类型判断，如果是空那就返回空，是字符串就调用luaH_getstr（t，k），是数字则根据是否是整形调用luaH_getnum(t, k)，否则计算key的存储主位置，然后遍历Node节点寻找key对应的节点。其实luaH_getstr（t，k）和luaH_getnum(t, k)方法内部也是通过遍历寻找节点。<br/>1.若是字符串LUA_TSTRING类型，则调用luaH_getstr（t，k)查找，方法如下</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** search function for strings</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="function"><span class="keyword">const</span> TValue *<span class="title">luaH_getstr</span> <span class="params">(Table *t, TString *key)</span> </span>{</span><br/><span class="line">  Node *n = hashstr(t, key);</span><br/><span class="line">  <span class="keyword">do</span> {  <span class="comment">/* check whether `key&#39; is somewhere in the chain */</span></span><br/><span class="line">    <span class="keyword">if</span> (ttisstring(gkey(n)) &amp;&amp; rawtsvalue(gkey(n)) == key)</span><br/><span class="line">      <span class="keyword">return</span> gval(n);  <span class="comment">/* that&#39;s it */</span></span><br/><span class="line">    <span class="keyword">else</span> n = gnext(n);</span><br/><span class="line">  } <span class="keyword">while</span> (n);</span><br/><span class="line">  <span class="keyword">return</span> luaO_nilobject;</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>若key为字符串，则根据hashstr（t，key）方法找到该键对应的node位置，遍历链表，返回对应的值。<br/>2.若是LUA_TNUMBER数字类型，则调用luaH_getnum(t, k)查找，方法如下:</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** search function for integers</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="function"><span class="keyword">const</span> TValue *<span class="title">luaH_getnum</span> <span class="params">(Table *t, <span class="keyword">int</span> key)</span> </span>{</span><br/><span class="line">  <span class="comment">/* (1 &lt;= key &amp;&amp; key &lt;= t-&gt;sizearray) */</span></span><br/><span class="line">  <span class="keyword">if</span> (cast(<span class="keyword">unsigned</span> <span class="keyword">int</span>, key<span class="number">-1</span>) &lt; cast(<span class="keyword">unsigned</span> <span class="keyword">int</span>, t-&gt;sizearray))</span><br/><span class="line">    <span class="keyword">return</span> &amp;t-&gt;<span class="built_in">array</span>[key<span class="number">-1</span>];</span><br/><span class="line">  <span class="keyword">else</span> {</span><br/><span class="line">    lua_Number nk = cast_num(key);</span><br/><span class="line">    Node *n = hashnum(t, nk);</span><br/><span class="line">    <span class="keyword">do</span> {  <span class="comment">/* check whether `key&#39; is somewhere in the chain */</span></span><br/><span class="line">      <span class="keyword">if</span> (ttisnumber(gkey(n)) &amp;&amp; luai_numeq(nvalue(gkey(n)), nk))</span><br/><span class="line">        <span class="keyword">return</span> gval(n);  <span class="comment">/* that&#39;s it */</span></span><br/><span class="line">      <span class="keyword">else</span> n = gnext(n);</span><br/><span class="line">    } <span class="keyword">while</span> (n);</span><br/><span class="line">    <span class="keyword">return</span> luaO_nilobject;</span><br/><span class="line">  }</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>若key大于等于1，且小于等于数组长度，则从数组中取出对应的键值。否则通过hashnum(t, nk)函数找到key对应的Node位置，然后遍历寻找对应的值。<br/>3.若是其他类型，即不是空，数字，字符串类型，都是通过hash函数计算出节点存储主位置,然后遍历链表找查找（因为存在hash冲突的键值，冲突的键值在hash表中有Node *next指针链接起来）。<br/>mainposition函数实现如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** returns the `main&#39; position of an element in a table (that is, the index</span></span><br/><span class="line"><span class="comment">** of its hash value)</span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="function"><span class="keyword">static</span> Node *<span class="title">mainposition</span> <span class="params">(<span class="keyword">const</span> Table *t, <span class="keyword">const</span> TValue *key)</span> </span>{</span><br/><span class="line">  <span class="keyword">switch</span> (ttype(key)) {</span><br/><span class="line">    <span class="keyword">case</span> LUA_TNUMBER:</span><br/><span class="line">      <span class="keyword">return</span> hashnum(t, nvalue(key));</span><br/><span class="line">    <span class="keyword">case</span> LUA_TSTRING:</span><br/><span class="line">      <span class="keyword">return</span> hashstr(t, rawtsvalue(key));</span><br/><span class="line">    <span class="keyword">case</span> LUA_TBOOLEAN:</span><br/><span class="line">      <span class="keyword">return</span> hashboolean(t, bvalue(key));</span><br/><span class="line">    <span class="keyword">case</span> LUA_TLIGHTUSERDATA:</span><br/><span class="line">      <span class="keyword">return</span> hashpointer(t, pvalue(key));</span><br/><span class="line">    <span class="keyword">default</span>:</span><br/><span class="line">      <span class="keyword">return</span> hashpointer(t, gcvalue(key));</span><br/><span class="line">  }</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>可以看出，此函数根据key值的类型选择不同的hash函数进行计算节点存储主位置</p>
+<h3 id="2、键值的存值"><a href="#2、键值的存值" class="headerlink" title="2、键值的存值"></a>2、键值的存值</h3><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function">TValue *<span class="title">luaH_set</span> <span class="params">(lua_State *L, Table *t, <span class="keyword">const</span> TValue *key)</span> </span>{</span><br/><span class="line">  <span class="keyword">const</span> TValue *p = luaH_get(t, key);</span><br/><span class="line">  t-&gt;flags = <span class="number">0</span>;</span><br/><span class="line">  <span class="keyword">if</span> (p != luaO_nilobject)</span><br/><span class="line">    <span class="keyword">return</span> cast(TValue *, p);</span><br/><span class="line">  <span class="keyword">else</span> {</span><br/><span class="line">    <span class="keyword">if</span> (ttisnil(key)) luaG_runerror(L, <span class="string">&#34;table index is nil&#34;</span>);</span><br/><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (ttisnumber(key) &amp;&amp; luai_numisnan(nvalue(key)))</span><br/><span class="line">      luaG_runerror(L, <span class="string">&#34;table index is NaN&#34;</span>);</span><br/><span class="line">    <span class="keyword">return</span> newkey(L, t, key);</span><br/><span class="line">  }</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>首先判断key是否在table中，如果在就替换，否则调用newkey(L, t, key)插入新的key-value结构。<br/>函数newkey代码如下:</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br/><span class="line"><span class="comment">** inserts a new key into a hash table; first, check whether key&#39;s main </span></span><br/><span class="line"><span class="comment">** position is free. If not, check whether colliding node is in its main </span></span><br/><span class="line"><span class="comment">** position or not: if it is not, move colliding node to an empty place and </span></span><br/><span class="line"><span class="comment">** put new key in its main position; otherwise (colliding node is in its main </span></span><br/><span class="line"><span class="comment">** position), new key goes to an empty position. </span></span><br/><span class="line"><span class="comment">*/</span></span><br/><span class="line"><span class="function"><span class="keyword">static</span> TValue *<span class="title">newkey</span> <span class="params">(lua_State *L, Table *t, <span class="keyword">const</span> TValue *key)</span> </span>{</span><br/><span class="line">  Node *mp = mainposition(t, key);</span><br/><span class="line">  <span class="keyword">if</span> (!ttisnil(gval(mp)) || mp == dummynode) {</span><br/><span class="line">    Node *othern;</span><br/><span class="line">    Node *n = getfreepos(t);  <span class="comment">/* get a free place */</span></span><br/><span class="line">    <span class="keyword">if</span> (n == <span class="literal">NULL</span>) {  <span class="comment">/* cannot find a free place? */</span></span><br/><span class="line">      rehash(L, t, key);  <span class="comment">/* grow table */</span></span><br/><span class="line">      <span class="keyword">return</span> luaH_set(L, t, key);  <span class="comment">/* re-insert key into grown table */</span></span><br/><span class="line">    }</span><br/><span class="line">    lua_assert(n != dummynode);</span><br/><span class="line">    othern = mainposition(t, key2tval(mp));</span><br/><span class="line">    <span class="keyword">if</span> (othern != mp) {  <span class="comment">/* is colliding node out of its main position? */</span></span><br/><span class="line">      <span class="comment">/* yes; move colliding node into free position */</span></span><br/><span class="line">      <span class="keyword">while</span> (gnext(othern) != mp) othern = gnext(othern);  <span class="comment">/* find previous */</span></span><br/><span class="line">      gnext(othern) = n;  <span class="comment">/* redo the chain with `n&#39; in place of `mp&#39; */</span></span><br/><span class="line">      *n = *mp;  <span class="comment">/* copy colliding node into free pos. (mp-&gt;next also goes) */</span></span><br/><span class="line">      gnext(mp) = <span class="literal">NULL</span>;  <span class="comment">/* now `mp&#39; is free */</span></span><br/><span class="line">      setnilvalue(gval(mp));</span><br/><span class="line">    }</span><br/><span class="line">    <span class="keyword">else</span> {  <span class="comment">/* colliding node is in its own main position */</span></span><br/><span class="line">      <span class="comment">/* new node will go into free position */</span></span><br/><span class="line">      gnext(n) = gnext(mp);  <span class="comment">/* chain new position */</span></span><br/><span class="line">      gnext(mp) = n;</span><br/><span class="line">      mp = n;</span><br/><span class="line">    }</span><br/><span class="line">  }</span><br/><span class="line">  gkey(mp)-&gt;value = key-&gt;value; gkey(mp)-&gt;tt = key-&gt;tt;</span><br/><span class="line">  luaC_barriert(L, t, key);</span><br/><span class="line">  lua_assert(ttisnil(gval(mp)));</span><br/><span class="line">  <span class="keyword">return</span> gval(mp);</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>从注释可以看出插入表的过程是，检查主位置（mainposition）是否为空，如果不为空则检查冲突Node是否在这个主位置。如果不在，移冲突Node到一个空位置，存放新Key在这个主位置，否则新Key存放到一个空位置。<br/>在插入Key过程中，如果hash表空间已经满了，需要调用rehash函数增加表存储空间。<br/>rehash函数实现如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rehash</span> <span class="params">(lua_State *L, Table *t, <span class="keyword">const</span> TValue *ek)</span> </span>{</span><br/><span class="line">  <span class="keyword">int</span> nasize, na;</span><br/><span class="line">  <span class="keyword">int</span> nums[MAXBITS+<span class="number">1</span>];  <span class="comment">/* nums[i] = number of keys between 2^(i-1) and 2^i */</span></span><br/><span class="line">  <span class="keyword">int</span> i;</span><br/><span class="line">  <span class="keyword">int</span> totaluse;</span><br/><span class="line">  <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;=MAXBITS; i++) nums[i] = <span class="number">0</span>;  <span class="comment">/* reset counts */</span></span><br/><span class="line">  nasize = numusearray(t, nums);  <span class="comment">/* count keys in array part */</span></span><br/><span class="line">  totaluse = nasize;  <span class="comment">/* all those keys are integer keys */</span></span><br/><span class="line">  totaluse += numusehash(t, nums, &amp;nasize);  <span class="comment">/* count keys in hash part */</span></span><br/><span class="line">  <span class="comment">/* count extra key */</span></span><br/><span class="line">  nasize += countint(ek, nums);</span><br/><span class="line">  totaluse++;</span><br/><span class="line">  <span class="comment">/* compute new size for array part */</span></span><br/><span class="line">  na = computesizes(nums, &amp;nasize);</span><br/><span class="line">  <span class="comment">/* resize the table to new computed sizes */</span></span><br/><span class="line">  resize(L, t, nasize, totaluse - na);</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>rehash首先统计当前table中到底有value值不是nil的键值对的个数，然后根据这个数值确定table中数组部分的大小（其大小保证数组部分的空间利用率必须50%），最后调用luaH_resize函数来重建table。<br/>具体过程是首先调用函数numusearray计算table中数组部分非nil的数值的个数，然后调用numusehash函数计算table中哈希部分的非nil的键值对的个数。调用countint函数来确定将要插入的（key,value）是否可以放在数组部分，接着调用computesizes来计算新的table数组部分的大小，最后调用luaH_resize函数根据原来table中数据构建新的table。</p>
+<p>原文参考链接 <a href="https://blog.csdn.net/zr339361504/article/details/52432163" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/zr339361504/article/details/52432163</a></p>
+<p>小知识：位运算的求余公式(该方法只对2的N次方数系有效) X &amp; (2^N - 1)</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-534_Evaluation%20metrics%20Recall,%20Precision,%20BLEU%20and%20MET/">Evaluation metrics Recall, Precision, BLEU and METEOR</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-532_lua%20%E5%8E%9F%E7%94%9Fapi%E8%A7%A3%E8%AF%BB/">lua 原生api解读</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

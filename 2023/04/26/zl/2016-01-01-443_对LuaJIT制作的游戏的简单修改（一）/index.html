@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>对LuaJIT制作的游戏的简单修改（一） - Lua教程</title>
+
+  
+    <meta name="description" content="本次修改的游戏是一个使用了LuaJIT制作的梦幻西游类单机游戏，名字叫做《梦战：碧海旭梦》。 这个游戏在我的硬盘里放了有很长一段时间了，当时水平有限，就没有再修改，直到这几天才重新开始研究。 网上关于LuaJIT的分析资料并不多，而有关单机游戏修改的是没有了，所以我基本上是从零开始研究。 经过几天不断的研究，终于对LuaJIT有了一点点了解，也找到了一些修改的方法。 不过说实话研究这个东西没什么用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对LuaJIT制作的游戏的简单修改（一）">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-443_%E5%AF%B9LuaJIT%E5%88%B6%E4%BD%9C%E7%9A%84%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E5%8D%95%E4%BF%AE%E6%94%B9%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="本次修改的游戏是一个使用了LuaJIT制作的梦幻西游类单机游戏，名字叫做《梦战：碧海旭梦》。 这个游戏在我的硬盘里放了有很长一段时间了，当时水平有限，就没有再修改，直到这几天才重新开始研究。 网上关于LuaJIT的分析资料并不多，而有关单机游戏修改的是没有了，所以我基本上是从零开始研究。 经过几天不断的研究，终于对LuaJIT有了一点点了解，也找到了一些修改的方法。 不过说实话研究这个东西没什么用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/006juYZNgy1fse09228naj30hz08udjs.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/006juYZNgy1fse094hagej31960fuqgg.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/006juYZNgy1fse097ev1hj30ru0lrb29.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/006juYZNgy1fse09a890aj31420q3h86.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/006juYZNgy1fse09c9rvcj31730cd403.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/006juYZNgy1fse0a0ssk3j30gj06fjro.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/006juYZNgy1fse0a3m8bgj30hn01g3ya.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/006juYZNgy1fse0a60ec7j30h801g742.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/large/006juYZNgy1fse0a7ugvsj30m9028t8j.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/006juYZNgy1fse0ab7lsuj30pr0mk43r.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/large/006juYZNgy1fse0aulw77g30zy0ljb29.gif">
+<meta property="article:published_time" content="2023-04-26T05:16:12.273Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.273Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wx3.sinaimg.cn/large/006juYZNgy1fse09228naj30hz08udjs.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">对LuaJIT制作的游戏的简单修改（一）</span></div><div class="widget-body fs14"><div class="doc-tree active"></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>对LuaJIT制作的游戏的简单修改（一）</span></h1>
+<p>本次修改的游戏是一个使用了LuaJIT制作的梦幻西游类单机游戏，名字叫做<a href="http://dream.supmers.com/forum.php?mod=viewthread&amp;tid=20" target="_blank" rel="noopener noreferrer">《梦战：碧海旭梦》</a>。 这个游戏在我的硬盘里放了有很长一段时间了，当时水平有限，就没有再修改，直到这几天才重新开始研究。 网上关于LuaJIT的分析资料并不多，而有关单机游戏修改的是没有了，所以我基本上是从零开始研究。 经过几天不断的研究，终于对LuaJIT有了一点点了解，也找到了一些修改的方法。 不过说实话研究这个东西没什么用处，纯粹是我的兴趣，各位姑且看看就好。 因为我也是新手，所以文章中难免有很多错误，如果发现错误请一定要告诉我。</p>
+
+<h1 id="什么是Lua？和LuaJIT有什么关系"><a href="#什么是Lua？和LuaJIT有什么关系" class="headerlink" title="什么是Lua？和LuaJIT有什么关系?"></a>什么是Lua？和LuaJIT有什么关系?</h1><p>Lua是一个脚本语言，通常是用来嵌入应用程序中的，在游戏中的应用范围也很广，尤其是手游。</p>
+<p>而LuaJIT则是Lua的一个高效版本。</p>
+<p> <a href="https://blog.uwa4d.com/archives/usparkle_luajit.html" target="_blank" rel="noopener noreferrer">用好Lua+Unity，让性能飞起来—LuaJIT性能坑详解</a> 这篇文章对LuaJIT的工作原理有了一定的阐述。 若想了解更多，可以去官方网站看看。</p>
+<p> Lua：<a href="http://www.lua.org/" target="_blank" rel="noopener noreferrer">The Programming Language Lua</a></p>
+<p> LuaJIT：<a href="http://luajit.org/" target="_blank" rel="noopener noreferrer">The LuaJIT Project</a>  </p>
+<h1 id="LuaJIT的字节码和虚拟机"><a href="#LuaJIT的字节码和虚拟机" class="headerlink" title="LuaJIT的字节码和虚拟机"></a>LuaJIT的字节码和虚拟机</h1><p>LuaJIT可以把.lua脚本编译成字节码，然后放到虚拟机中运行。这里的字节码和我们平常看到的机器码不同，LuaJIT的字节码有自己对应的一套指令， 然后在程序中有一块地方负责解释这些字节码（在windows上就是个dll）， 这块地方就是LuaJIT虚拟机。 关于LuaJIT的指令网上已经有人总结，<a href="https://blog.csdn.net/zzz3265/article/details/41146569" target="_blank" rel="noopener noreferrer">Lua LuaJit 指令表(整理)</a>。 也可以直接翻阅LuaJIT的源码（官网可以下载），在lj_bc.h中有定义。 官网的wiki中也有文档，<a href="http://wiki.luajit.org/Bytecode-2.0" target="_blank" rel="noopener noreferrer">LuaJIT 2.0 Bytecode Instructions</a>。 如果有人有改过Lua的游戏就知道非常难改，因为到处都是“共用代码”。 而这里的“共用代码”实际上就是虚拟机，我们直接修改机器码就等于破坏了虚拟机，所以我们要从字节码下手。 </p>
+<h1 id="开始修改"><a href="#开始修改" class="headerlink" title="开始修改"></a>开始修改</h1><p>首先我们先研究一下跟游戏目录下的文件，在游戏目录中有个lua51.dll，我们随便拿一个PE工具看一下。 这里我用ExeinfoPe查看</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx3.sinaimg.cn/large/006juYZNgy1fse09228naj30hz08udjs.jpg" alt=""/></p>
+<p>dll文件被加壳了，但是问题不大，只是个压缩壳，不脱也没关系。 </p>
+<p>点击PE查看导出表信息，发现LuaJIT字样，基本上就确定游戏跟LuaJIT有关系了。 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx4.sinaimg.cn/large/006juYZNgy1fse094hagej31960fuqgg.jpg" alt=""/></p>
+<p>第一次进入游戏要过一段剧情，等待游戏正式开始就好。 注意，修改前请先备份存档，游戏有反修改机制，被检测到后直接杀掉存档。（存档文件为save.bhs） 我们尝试修改一下潜力点 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx1.sinaimg.cn/large/006juYZNgy1fse097ev1hj30ru0lrb29.jpg" alt=""/></p>
+<p>LuaJIT中的数据都是double类型的，所以我们用double类型来搜索，并找出是什么修改了这个地址。 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx2.sinaimg.cn/large/006juYZNgy1fse09a890aj31420q3h86.jpg" alt=""/></p>
+<p>其实如果只是为了自己玩游戏的话这里就直接改数值就好了，只要不改太高游戏的反修改检测都不会杀掉你的存档，但是今天主要是研究一下LuaJIT。 这里出现了两条代码，看第一条就行了。记下代码的地址和潜力点的地址，转到x32dbg或者OD中分析，这里我用x32dbg来分析。 </p>
+<p>Ctrl+G输入6B52F6AF来到该代码处，下F2断点，然后发现游戏马上就被断下来了，这很正常，因为这里的代码就是用来解释字节码的虚拟机，在lua51.dll中。 我们切换到断点页面，选中刚才下的断点，按Ctrl+E来编辑设置断点条件 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx3.sinaimg.cn/large/006juYZNgy1fse09c9rvcj31730cd403.jpg" alt=""/></p>
+<p>这里的ecx == 0x0DD35300 意思就是在ecx等于这个数值的时候才断下，而这里的0DD35300就是我们刚才搜到的潜力点的地址。 </p>
+<p>点击保存后开启断点然后重新运行游戏，发现游戏会变得很卡，这也很正常，因为这里是虚拟机，执行的次数很多，调试器在筛选的时候难免会卡。 随便把某个属性加一点使潜能点改变，游戏就会被断下来，切回到调试器中查看。 这时候的esi值就是指向当前解释的字节码的地址，我们右键点击esi寄存器选择“在内存窗口中转到”，并观察左下角内存窗口。 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx2.sinaimg.cn/large/006juYZNgy1fse0a0ssk3j30gj06fjro.jpg" alt=""/></p>
+<p>04B36748就是当前esi的值</p>
+<p>这里就是LuaJIT的字节码，每条指令的长度都是4个字节。 注意这里的04B36748的指令是下一条要执行的指令， 实际上改变潜力点的指令在前面04B36744处，对应的字节码就是3A 07 07 06， 顺便再注意下04B36740处的1F 07 05 07 我们查一下指令表（前面有），看看这些是什么东西。 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx4.sinaimg.cn/large/006juYZNgy1fse0a3m8bgj30hn01g3ya.jpg" alt=""/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx4.sinaimg.cn/large/006juYZNgy1fse0a60ec7j30h801g742.jpg" alt=""/></p>
+<p>看到之后是不是感觉蒙了，一开始我也是蒙的，后来经过不断的研究发现这里的07 05 07 或者 07 07 06其实是索引， 对应的是LuaJIT栈上的一些东西，这里我就不详细讨论了，主要是我也不太懂。 这两行大概意思就是两个变量相减，然后结果赋值给另一个变量（也就是潜力点）。 这些东西需要自己去写一些LuaJIT的简单程序，然后去调试看内存，再看看LuaJIT对应的源码才能搞清楚一点。 我也读不透LuaJIT的源码，这里我就简单讲一下怎么改就好了。 查看指令表发现这样一条指令，可以直接对变量赋值。 </p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx1.sinaimg.cn/large/006juYZNgy1fse0a7ugvsj30m9028t8j.jpg" alt=""/></p>
+<p>那我们只要修改1F 07 05 07就好了，比如我们要把潜力点变成10000，就改成27 07 10 27 （注意小端序，10 27就是10000的16进制） 看一下效果</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx3.sinaimg.cn/large/006juYZNgy1fse0ab7lsuj30pr0mk43r.jpg" alt=""/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://wx2.sinaimg.cn/large/006juYZNgy1fse0aulw77g30zy0ljb29.gif" alt=""/></p>
+<p>修改成功，想要做成修改器也方便，只要搜一下字节码再改就好了，和aobscan是差不多的 </p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>这游戏还有一些反修改还没有处理，可能会出二，也可能不会。 有关LuaJIT的知识还有很多，我这里讲的只占了很少，当作是抛砖引玉了，有兴趣的可以深入研究，有问题也可以在群里找我，当然我不一定能解答就是了。  </p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-444_%E8%B4%A2%E5%8A%A1%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%B0%E5%80%BC%20Financial%20Analysis%20and%20Valuation/">财务分析与估值 Financial Analysis and Valuation</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-449_Lua%E4%BD%9C%E5%9B%BE%E6%95%99%E7%A8%8B%E4%B9%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Lua作图教程之设计模式</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

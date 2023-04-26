@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua教程</title>
+
+  
+    <meta name="description" content="什么是风险我们已经聊了很多做业务风控的手段和技术，可是到现在还没有说清楚“风险控制”中的“风险”是什么。 我一直在想应该从什么角度来写这个问题，最终我决定从金融行业借鉴一些内容。这个行业已经花了几十年研究风险，我们看看这个行业会带给我们什么启示。 橡树资本联合创始人Howard Marks在几篇备忘录中阐述了他对风险的看法，下面就围绕他写过的内容聊一聊。 风险来自不确定性 Investing re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua教程">
+<meta property="og:url" content="https://lua.ren/2023/04/26/risk-management-note/%E4%BB%80%E4%B9%88%E6%98%AF%E9%A3%8E%E9%99%A9/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="什么是风险我们已经聊了很多做业务风控的手段和技术，可是到现在还没有说清楚“风险控制”中的“风险”是什么。 我一直在想应该从什么角度来写这个问题，最终我决定从金融行业借鉴一些内容。这个行业已经花了几十年研究风险，我们看看这个行业会带给我们什么启示。 橡树资本联合创始人Howard Marks在几篇备忘录中阐述了他对风险的看法，下面就围绕他写过的内容聊一聊。 风险来自不确定性 Investing re">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.224Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.224Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E6%9D%A5%E8%87%AA%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7"><span class="toc-text">风险来自不确定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">风险的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E6%8E%A7%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">风险控制是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E6%8E%A7%E5%88%B6%E6%98%AF%E8%B0%81%E7%9A%84%E8%B4%A3%E4%BB%BB%EF%BC%9F"><span class="toc-text">风险控制是谁的责任？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A3%8E%E6%8E%A7%E6%98%AF%E5%BF%85%E8%A6%81%E7%9A%84%E5%90%97"><span class="toc-text">风控是必要的吗</span></a></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.224Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+
+<h1 id="什么是风险"><a href="#什么是风险" class="headerlink" title="什么是风险"></a>什么是风险</h1><p>我们已经聊了很多做业务风控的手段和技术，可是到现在还没有说清楚“风险控制”中的“风险”是什么。</p>
+<p>我一直在想应该从什么角度来写这个问题，最终我决定从金融行业借鉴一些内容。这个行业已经花了几十年研究风险，我们看看这个行业会带给我们什么启示。</p>
+<p>橡树资本联合创始人Howard Marks在几篇备忘录中阐述了他对风险的看法，下面就围绕他写过的内容聊一聊。</p>
+<h3 id="风险来自不确定性"><a href="#风险来自不确定性" class="headerlink" title="风险来自不确定性"></a>风险来自不确定性</h3><blockquote>
+<p>Investing requires us to decide how to position a portfolio for future developments, but the future isn’t knowable.</p>
+<p>投资行业要求我们为未来发展设计一套投资组合，但是未来是不可知的。</p>
+</blockquote>
+<p>简单来说，金融投资行业就是今天花一笔钱在一件事情上，未来获得一个结果。有难度的部分是：站在现在，未来是不可知的。</p>
+<p>其实投资不是金融行业特有的行为，普通公司、每个人的生活都充满了投资，做一次广告活动、报考大学都是投资，都是花一笔钱或者几年时间在一件事上，未来获得一个结果。同样难的是：站在现在，未来是不可知的。</p>
+<blockquote>
+<p>How can investors deal with the limitations on their ability to know the future? The answer lies in the fact that not being able to know the future doesn’t mean we can’t deal with it. It’s one thing to know what’s going to happen and something very different to have a feeling for the range of possible outcomes and the likelihood of each one happening. Saying we can’t do the former doesn’t mean we can’t do the latter.</p>
+</blockquote>
+<p>那么我们站在现在，该用什么眼光看到未来的结果呢？</p>
+<blockquote>
+<p>The future should be viewed not as a fixed outcome that’s destined to happen and capable of being predicted, but as a range of possibilities and, hopefully on the basis of insight into their respective likelihoods, as a probability distribution.</p>
+<p>未来不应被视为一个注定发生、可被预测的结果，而应被视为一个可能性区间，寄希望于对各个可能性的洞悉，未来可以被看做一个概率分布。</p>
+</blockquote>
+<p>拿金融投资来说，花几百万买了一家公司的股票。未来能不能盈利是不能预测的，结果可能是亏损、回本、盈利（当然你可以拆分的更细），每一种结果都有一个可能性区间。当你认真研究基本面后，再加上一些主观直觉，你就得到了一个概率分布。例如：90%的概率会盈利，5%的概率会亏损，还有5%概率不亏不赚。</p>
+<p>考大学和金融投资类似，花几万学费和很长时间在大学的某个专业学习，几年后毕业的时候也会有很多结果。对于刚高考完的学生而言是无法预测的。我们站在2018年回首，即便同样是计算机专业的毕业生、同样的学校、同样的努力，毕业于14年和16年的两批学生面临的互联网就业环境是完全不一样的。</p>
+<p>这和风险有什么关系呢？</p>
+<blockquote>
+<p>This uncertainty as to which of the possibilities will occur is the source of risk in investing.</p>
+<p>哪种可能会真正发生的不确定性，是投资风险的来源。</p>
+</blockquote>
+<p>也就是说金融投资的风险来自于亏本还是盈利的不确定性，读大学的风险来自于最后是进BAT还是去搬砖的不确定性。</p>
+<p>基于”风险来自不确定性”，Howard Marks延伸出了几个很有意义的关键点。</p>
+<blockquote>
+<p>Risk means more things can happen than will happen. —— Elroy Dimson</p>
+<p>风险意味着可能发生的事总是多于确定发生的事</p>
+</blockquote>
+<p>在评估业务风险时，除了那些大概率会发生的事情，还有更多小概率发生的事，有时那些负面的小概率事件才是风险的来源。所以事前评估风险时应该冷静、开放的思考各个方面，包括小概率事件，甚至将业务逻辑之外的东西也考虑进去。</p>
+<p>某家公司曾经通过QQ群发现有人在卖自己网站的用户账号，但是风控系统显示最近撞库并没有异常，通过风控团队和用户团队的配合，发现用户登录量少于风控记录到的登录量。为什么有些用户登录没有进行风控判断呢？排查后发现：当系统判断到用户在请求接口<a target="_blank" rel="noopener" href="https://example.com/login%E6%97%B6%E4%BC%9A%E8%B0%83%E7%94%A8%E9%A3%8E%E6%8E%A7%EF%BC%8C%E9%BB%91%E4%BA%A7%E9%80%9A%E8%BF%87%E8%AF%B7%E6%B1%82">https://example.com/login时会调用风控，黑产通过请求</a> &#x2F;&#x2F;login(两个&#x2F;)绕开了这个判断逻辑，且依然可以访问登录接口(HTTP路径中&#x2F;和&#x2F;&#x2F;指向的地址是一样的)。</p>
+<p>类似的案例表明风险有时来自于我们很难想到的地方，我们总显得比黑产“笨”一些。所以在风险评估时，应该尽可能从多方面想想，必要时应假设我们的策略失败了，并设计兜底方案。</p>
+<blockquote>
+<p>Knowing the probabilities doesn’t mean you know what’s going to happen.</p>
+<p>知道发生的概率不意味着你知道接下来会发生什么</p>
+</blockquote>
+<p>就像扔骰子，我们都知道扔一次每个面的概率是1&#x2F;6，但是我们却无法准确预测某一次扔出的结果。即便我们通过分析，得出风险很低(或者很高)，也不意味着未来真的是这样。</p>
+<blockquote>
+<p>Even though many things can happen, only one will.</p>
+<p>即便一件事有很多可能性，但最终只有一种会发生</p>
+</blockquote>
+<p>在很多时候我们当然可以用均值作为判断，但是我们要谨记的是即便得出的均值是一个很好的结果，单次结果仍然有可能很差，甚至超过我们的承受能力。</p>
+<blockquote>
+<p>I have no interest in being a skydiver who’s successful 95% of the time.</p>
+<p>我没有兴趣成为一个成功率有95%的跳伞运动员</p>
+</blockquote>
+<blockquote>
+<p>No ambiguity is evident when we view the past. Only the things that happened happened. But that definiteness doesn’t mean the process that creates outcomes is clear-cut and dependable. Many things could have happened in each case in the past, and the fact that only one did happen understates the variability that existed.</p>
+<p>回顾过往时，模棱两可的事总是不清晰的。只有那些发生了的事情真正发生了。这不意味事情的发展注定如此，清晰且恒定。过去的每个案例都有可能发生很多事情，只是最终只有一种变成了现实，这让我们低估了历史中存在的多样性。</p>
+</blockquote>
+<p>因为最后只有一个结果会发生，我们有时会进入一个误区：事后去评估事前发生的风险时，大大低估那些最后没发生的可能结果的概率。下面这些想法你也许听说过：</p>
+<ol>
+<li>我就知道这个活动会失败！</li>
+<li>之前分析报告已经写了，成功率80%，我们果然成功了</li>
+</ol>
+<p>这个误区不仅会让我们看不清过去，也很容易导致我们过度自信，从而影响我们未来的决策。</p>
+<h3 id="风险的定义"><a href="#风险的定义" class="headerlink" title="风险的定义"></a>风险的定义</h3><p>我们说清了风险的来源，接着看看Howard Marks给风险的定义是什么：</p>
+<blockquote>
+<p>The possibility of permanent loss. A downward fluctuation – which by definition is temporary – doesn’t present a big problem if the investor is able to hold on and come out the other side.</p>
+<p>风险就是发生永久性损失的概率。一个暂时的向下波动并不是一个大问题，只要投资者可以承受，且之后可以翻盘。</p>
+</blockquote>
+<p>业务方投入资源(包括时间和经费)去做拉新、促销，是为了获取回报，也就是更多用户、更多订单，当然说到底都是为了利润。对应Howard Marks给出的定义，业务方面临的永久性损失是什么？</p>
+<p>一家成熟公司投入了10万元进行了一次为期1个月的促销活动，最后只多带来了1万元收入。那么差值（9万元）是永久性损失吗？</p>
+<blockquote>
+<p>In the short run, it can be very hard to differentiate between a downward fluctuation and a permanent loss. Often this can really be done only in retrospect. Thus it’s clear that a professional investor may have to bear consequences for a temporary downward fluctuation simply because of its resemblance to a permanent loss.</p>
+<p>短期来看是很难区分向下波动和永久性损失。经常我们只能事后复盘的时候区分出来。因为这种相似性，很显然一个专业投资者必须忍受向下波动的后果。</p>
+</blockquote>
+<p>对于例子中的9万差值，简单来看，可以考虑这个促销活动是否有长期效应，例如大大提高了品牌知名度，只是知名度转化为顾客购买有滞后。如果有长期效应，且后续真的持续带来了大量顾客订单，那么这就是一次临时的向下波动；如果没有长期效应，那么这9万元就是永久性损失了。</p>
+<p>上面是一个简化了的分析，实际上站在运营人员、企业老板、投资人的角度。即便活动没有长期效应，不同的人也会因为投入和报酬的方式不同而得出不同的结论。读者可以自己思考一下为什么。</p>
+<h3 id="风险控制是什么"><a href="#风险控制是什么" class="headerlink" title="风险控制是什么"></a>风险控制是什么</h3><blockquote>
+<p>In order to achieve superior results, an investor must be able – with some regularity – to find asymmetries: instances when the upside potential exceeds the downside risk. That’s what successful investing is all about.</p>
+<p>为了能获得过人的回报，投资者必须能常态的找到不对称：向上潜力超过向下的风险。成功的投资不外乎这样。</p>
+</blockquote>
+<p>和投资行业一样，成功的互联网企业想要盈利也应找到“向上潜力超过向下的风险”的情况。那么具体到风控是做什么呢？</p>
+<blockquote>
+<p>Effective risk management requires deep insight and a deft touch. It has to be based on a superior understanding of the probability distributions that will govern future events. Those who would achieve it have to have a good sense for what the crucial moving parts are, what will influence them, what outcomes are possible, and how likely each one is.</p>
+<p>高效的风险控制需要深入的洞见和灵敏的感知。这构建在对“未来是一个概率分布”这个观点出众的理解。成为风控专家的人必须能理解哪些是关键组件，知道什么会影响它们，有哪些可能结果，每个结果的概率是多少。</p>
+</blockquote>
+<p>例如很多公司都有建立用户钱包的冲动，这样可以建立资金池，从而进一步获利。</p>
+<p>风控专家应该在用户钱包业务上线前了解自己公司的各个业务流程，例如用户体系、充值、消费、退款。应该了解这些流程对钱包的影响，例如撞库、盗绑银行卡、信用卡套现、恶意退单等行为和钱包的关系。最后要清楚这些会导致用户账户损失、支付不合规等结果。当然还应结合主观经验和客观分析得出这些结果的概率。</p>
+<p>风控专家也应该在这个业务上线后持续的运营，随着业务的发展进行新的判断。</p>
+<h3 id="风险控制是谁的责任？"><a href="#风险控制是谁的责任？" class="headerlink" title="风险控制是谁的责任？"></a>风险控制是谁的责任？</h3><p>当你找一家企业的员工，无论基层还是老板，无论是金融还是零售，问他们“风险控制在你们的流程中重要吗？”。你通常都会得到Yes的答复。但是在实际项目中，特别是早期，风控都被人抛之脑后。</p>
+<blockquote>
+<p>The task of managing risk shouldn’t be left to designated risk managers.</p>
+<p>风险管理的工作不应被丢弃给专职的风险经理们。</p>
+</blockquote>
+<p>做风控的人可能都有一个感觉：向Passport、支付等部门推广风控是一件相对容易的事，但是向订单、售前等部门推广时就比较难。这主要是各个部门的职责不同导致风险不同，且在事后责任方有区别。</p>
+<p>Passport部门有一个天生的职责就是保护用户密码，没做到这一点的passport系统是不完整的，所以passport部门会重视这个问题。</p>
+<p>订单团队比较有趣，每家公司不同。我之前在和某公司订单部门初次接触时，对方总是支支吾吾，就是不允许我们在用户下单时对可疑用户进行拦截。最后订单部门的老板说出了实话：(这家公司)订单部门最重要的KPI是订单量，无论是季度、全年还是大促时，最看重的是下单量。如果我们在下单时拦截，担心会影响到这个KPI的完成。最后我们在下单后和物流部门中间找到了20分钟，插入了一段近实时审单逻辑，对于恶意订单在这个阶段进行砍单。</p>
+<p>再来看售前部门，国内某现金贷公司的风控部门很难做，不停抱怨低质贷款申请太多，违约率降不下来。朋友抱怨道：售前部门的KPI是成单量、每日电话呼出次数等鼓励售前多拉单的KPI，没有一个是关于违约的。最后违约了由风控部门背锅，售前部门无需背责任，自然售前部门就可以忽视风险，尽量找成单难度低的用户，找了一堆自控力薄弱的大学生（国家禁止前）和生活不稳定人群。</p>
+<p>由此可以看出：</p>
+<ol>
+<li>成为风控专家的人必须能理解哪些是关键组件，知道什么会影响它们，有哪些可能结果，每个结果的概率是多少。并能在各个组件中找到合理的介入点。</li>
+<li>在整个公司推广风险控制，除了通过培训、宣传提高大家风险意识这种途径外，也离不开自顶向下合理的目标体系、责任体系的支持。</li>
+</ol>
+<h2 id="风控是必要的吗"><a href="#风控是必要的吗" class="headerlink" title="风控是必要的吗"></a>风控是必要的吗</h2><blockquote>
+<p>While risk should be dealt with constantly, investors are often tempted to do so only sporadically. Since risk only turns into loss when bad things happen, this can cause investors to apply risk control only when the future seems ominous. At other times they may opt to pile on risk in the expectation that good things lie ahead. But since we can’t predict the future, we never really know when risk control will be needed. Risk control is unnecessary in times when losses don’t occur, but that doesn’t mean it’s wrong to have it. The best analogy is to fire insurance: do you consider it a mistake to have paid the premium in a year in which your house didn’t burn</p>
+<p>虽然对抗风险是一个持续的过程，但投资者通常是三天打鱼两天晒网。因为风险只在坏事发生时才会显现出真正的损失，这会导致投资者只在未来悲观时才想起风控。其他时候投资者会相信前景一片光明并忽视风险。但是因为我们不能预测未来，我们永远不知道何时需要风控。风控在损失未发生时是不必要的，但这不意味着进行风险控制是错的。最好的类比是火灾险：即便你的房子没着火，你会认为每年支付火灾险保费是一个错误吗？</p>
+</blockquote>
+<blockquote>
+<p>Risk control may restrain results during a rebound from crisis conditions or extreme under-valuations, when those who take the most risk generally make the most money. But it will also extend an investment career and increase the likelihood of long-term success. That’s why Oaktree was built on the belief that risk control is “the most important thing.”</p>
+<p>也许风控会制约你在危机或极度低估期回弹时的收益，眼看那些承受最大风险的公司这时赚了很多钱。但是风控会延长投资视野并且增长长期成功的可能性。这就是为什么橡树资本是建立在风控是“最重要的事”这个信念之上。</p>
+</blockquote>
+<p>这两句十分朴实，却意义深刻。读者不妨自行参透，并应用到非经融领域中。</p>
+<p>参考文献：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cirrelt.ca/DocumentsTravail/CIRRELT-2013-17.pdf">《Risk Management: History, Definition and Critique》(Georges Dionne)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.oaktreecapital.com/docs/default-source/memos/2014-09-03-risk-revisited.pdf">《Risk Revisited》(Howard Marks)</a></p>
+<p>致谢：</p>
+<p>感谢上海工程技术大学翻译专业的Cecilia对本章内容的帮助。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/risk-management-note/%E9%A3%8E%E6%8E%A7%E6%95%88%E6%9E%9C%E9%87%8F%E5%8C%96%E8%AF%84%E4%BC%B0/">2023-04-26</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/risk-management-note/%E5%86%8D%E8%B0%88%E5%88%A9%E7%9B%8A/">2023-04-26</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

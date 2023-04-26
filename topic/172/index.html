@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua代码风格指南（代码规范参考） - Lua教程</title>
+
+  
+    <meta name="description" content="Lua代码风格指南（代码规范参考）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua代码风格指南（代码规范参考）">
+<meta property="og:url" content="https://lua.ren/topic/172/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua代码风格指南（代码规范参考）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.105Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua代码风格指南（代码规范参考）</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">写代码也有风格？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">命名法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">驼峰命名法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">下划线命名法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">变量名长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">变量命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">常数命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">类名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">包和模块名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">惯用法（精巧用法）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">原因：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">原因：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">默认参数的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">一行代码实现表的拷贝</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">正确做法是：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">参考资料</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua代码风格指南（代码规范参考）</span></h1>
+<h3>写代码也有风格？</h3> 
+
+<p>当然，写代码就跟写文章一样，每个人或多或少都有自己的风格。不同的语言也就像不同的文体一样，也有自己的独特的风格。Lua是一门脚本语言，写起来轻松惬意，但不代表它没有属于自己的风格指南。</p>
+<p>好的代码风格基于可读性和一致性。代码更多的时间是给人看的，如果思考好了结构和逻辑，写代码的过程其实很快。风格的一致性也很重要，这样可以减少复杂度和理解成本。养成一种良好的代码风格会形成一种良好写代码习惯，这种习惯会使编码事半功倍。</p>
+<p>下文将从命名，作用域，模块，注释和惯用法（精巧用法）等方面来说明Lua的代码风格，文章的最后会附上一些参考资料的链接以供读者拓展阅读。</p>
+<h3>命名</h3> 
+
+<p>最好的代码是自说明代码，这种代码不需要多余的注释，其本身便具备了描述作者意图的信息。一种好的命名风格是自说明代码的基础。</p>
+<h3>命名法</h3> 
+
+<h4>驼峰命名法</h4> 
+
+<p>小驼峰式命名法：第一个单字以小写字母开始；第二个单字的首字母大写，例如：firstName、lastName。<br>大驼峰式命名法：每一个单字的首字母都采用大写字母，例如：FirstName、LastName、CamelCase，也被称为Pascal命名法。</p>
+<h4>下划线命名法</h4> 
+
+<p>小下划线命名法：所有字母均为小写，例如登录按钮：login_btn。<br>大下划线命名法：所有字母均为大写，常见于常量，例如：最小间隔时间MIN_GAP_TIME。<br>采用驼峰法或者下划线法都不太重要，重要的是你采用了自己喜欢的一种命名法，然后一直保持下去。</p>
+<h3>变量名长度</h3> 
+
+<p>通常作用域范围更大的变量名要比作用域范围更小的变量名具有更多的描述信息。例如：i经常用于循环中充当计数变量，而将其作为全局变量使用容易导致诸多问题。</p>
+<h3>变量命名</h3> 
+
+<p>对于变量（包括函数），小驼峰式命名法或小下划线命名法是一个好选择。比如：curSpeed表示当前速度，canDrop表示是否能掉落等等。</p>
+<p>对于布尔值型的变量，通常前缀加上is可以方便理解，比如isRemoved比Removed更加能表示这是一个布尔值变量。</p>
+<p>Lua中有一种特殊的变量名：_，常用来表示可以被忽略的、不会使用到的变量，常使用在循环中。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- `_`表示表的键可以被忽略，只在循环内使用表中的值`v`</span></span><br><span class="line"><span class="keyword">for</span> _,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(t) <span class="keyword">do</span> <span class="built_in">print</span>(v) <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在表的循环中和函数参数列表中，i常表示ipairs下的数组下标，k常表示pairs下的键，v常表示对应的值，t则表示表。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(t) <span class="keyword">do</span> ... <span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(t) <span class="keyword">do</span> ... <span class="keyword">end</span></span><br><span class="line">mt.<span class="built_in">__newindex</span> = <span class="function"><span class="keyword">function</span><span class="params">(t, k, v)</span></span> ... <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3>常数命名</h3> 
+
+<p>Lua里没有严格的常数定义标识符，所以对于常数的命名格外重要。</p>
+<p>常数一般采用大下划线命名法。这样每个字母都大写，十分醒目，且各个单词都用下划线分割，便于阅读。</p>
+<p>比如：MAX_SPEED表示最大速度，IS_SHOW_DEBUG_ERROR_MSG表示是否显示报错消息等等。</p>
+<h3>类名</h3> 
+
+<p>为了不与变量名和常数名混淆，类名通常使用大驼峰式命名法，即首字母大写。比如：TouchManager表示触摸管理器类。</p>
+<h3>包和模块名</h3> 
+
+<p>包名和模块名通常很短，并且全部小写，单词间并没有下划线区分。比如：文件读取库名为lfs，表示Lua File System；XML解析库名为lxp，表示Lua XML Parser等等。</p>
+<h3>文件名</h3> 
+
+<p>通常为了不与类名混淆，对于文件名，经常使用小驼峰式命名法或小下划线命名法。</p>
+<h3>作用域</h3> 
+
+<p>Lua的作用域以关键字end进行标识。</p>
+<p>对于变量，有一条原则：在一切能使用local修饰的情况下，使用local进行修饰。</p>
+<p>因为不用local修饰的变量会自动变成全局变量。全局变量十分危险，很容易被篡改而不知道在哪里被篡改了，这很容易导致顽固的bug出现。并且全局变量的处理速度也比局部变量的速度要慢很多。</p>
+<p>所以，尽可能的用local来修饰变量。</p>
+<p>有时候，用do .. end可以用来明确限定局部变量的作用域。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> v</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="keyword">local</span> x = u2*v3-u3*v2</span><br><span class="line">  <span class="keyword">local</span> y = u3*v1-u1*v3</span><br><span class="line">  <span class="keyword">local</span> z = u1*v2-u2*v1</span><br><span class="line">  v = &#123;x,y,z&#125;</span><br><span class="line"><span class="keyword">end</span> <span class="comment">-- x,y,z的作用域结束，被系统清理</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">local</span> count</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="keyword">local</span> x = <span class="number">0</span></span><br><span class="line">  count = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> x = x + <span class="number">1</span>; <span class="keyword">return</span> x <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span> <span class="comment">-- x的作用域结束，被系统清理</span></span><br></pre></td></tr></table></figure>
+<h3>模块</h3> 
+
+<p>Lua中有一个叫module的公有函数，此函数的作用是将一组变量和函数打包在一个模块名下，便于其他文件require。但是这个函数受到了诸多的指责，原因是其会创建一个公共变量，并且这个公共变量中的所有细节都会暴露出来。这其实十分不符合面向对象的规范。</p>
+<p>以下有一种办法可以避免这个问题，即不采用module函数进行打包。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- hello/mytest.lua</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">local</span> M = &#123;&#125; <span class="comment">-- 私有变量</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span> <span class="built_in">print</span>(<span class="number">123</span>) <span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">M.test1</span><span class="params">()</span></span> test() <span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">M.test2</span><span class="params">()</span></span> M.test1(); M.test1() <span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">return</span> M <span class="comment">-- 关键</span></span><br></pre></td></tr></table></figure>
+<p>以下是导入此模块的方法。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> MT = <span class="built_in">require</span> <span class="string">&quot;hello.mytest&quot;</span></span><br><span class="line">MT.test2()</span><br></pre></td></tr></table></figure>
+<p>Lua内没有类这个变量类型，但是通过Lua的metatable可以轻松实现类的继承，多态等等特性。关于Lua中类的实现原理，请参考我之前写的这篇博客：Lua中实现类的原理。</p>
+<h3>注释</h3> 
+
+<p>通常在–前加上一个空格。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="literal">nil</span>  <span class="comment">-- not found    (建议)</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span>  <span class="comment">--not found     (不建议)</span></span><br></pre></td></tr></table></figure>
+<p>注释通常用在函数接口，或者复杂，精巧的逻辑上。</p>
+<p>对于接口的注释，可以按照javadoc类似的来写。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Deletes a session.</span></span><br><span class="line"><span class="comment">-- @param id Session identification.</span></span><br><span class="line"><span class="comment">-------------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delete</span> <span class="params">(id)</span></span></span><br><span class="line">    <span class="built_in">assert</span> (check_id (id))</span><br><span class="line">    <span class="built_in">remove</span> (filename (id))</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3>惯用法（精巧用法）</h3> 
+
+<p>尽可能使用local修饰变量（重要的事情要说三遍！）</p>
+<h4>原因：</h4> 
+
+<p>使用local的变量会在作用域结束时释放其内存<br>使用local的变量会比全局变量的存取更快<br>全局变量会污染全局的命名空间，可能会导致诡异的bug出现<br>直接判断真假值</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 不推荐</span></span><br><span class="line"><span class="keyword">if</span> obj ~= <span class="literal">nil</span> <span class="keyword">and</span> willBreak == <span class="literal">false</span> <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">-- 推荐</span></span><br><span class="line"><span class="keyword">if</span> obj <span class="keyword">and</span> <span class="keyword">not</span> willBreak <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4>原因：</h4> Lua在逻辑判断时将所有非false和nil的逻辑判断视为真，反之视为假，不需要再与布尔值和nil进行比对。
+
+<p>但是，在需要对false和nil进行区分时，需要写明&#x3D;&#x3D;：obj &#x3D;&#x3D; nil和obj &#x3D;&#x3D; false。</p>
+<h3>默认参数的实现</h3> 
+
+<p>范式：param &#x3D; param or defaultValue</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span><span class="params">(name)</span></span></span><br><span class="line">    name = name <span class="keyword">or</span> <span class="string">&#x27;noName&#x27;</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>原因：or会在第一次为true的时候断路，返回其判断的最后一个值。所以当name为空时，name or ‘noName’返回为’noName’，这会将name的值自动设置为noName。</p>
+<h4>一行代码实现表的拷贝</h4> 
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u = &#123;<span class="built_in">unpack</span>(t)&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是此法在表内条目大于2000时会失效。</p>
+<p>一行代码判断表是否为空</p>
+<p>用#t &#x3D;&#x3D; 0并不能判断表是否为空，因为#预算符会忽略所有不连续的数字下标和非数字下标。</p>
+<h4>正确做法是：</h4> 
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">next</span>(t) == <span class="literal">nil</span> <span class="keyword">then</span> </span><br><span class="line">    <span class="comment">-- 表为空</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>因为表的键可能为false，所以必须与nil比较，而不直接使用~next(t)来判断表是否空。</p>
+<p>更快的插入代码</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 更慢，不推荐</span></span><br><span class="line"><span class="built_in">table</span>.<span class="built_in">insert</span>(t, value) </span><br><span class="line"> </span><br><span class="line"><span class="comment">-- 更快，推荐</span></span><br><span class="line">t[#t+<span class="number">1</span>] = value </span><br></pre></td></tr></table></figure>
+<p>原因：[]和#避免了高层的函数调用开销。</p>
+<h3>参考资料</h3> 
+
+<p>这篇文章是基于Lua Style Guide而来。</p>
+<p>语言的风格大致是通用的，在Python里，有一种叫pythonic的代码风格，详见：让你的python代码更加pythonic。</p>
+<p>对于任何程序员，我都力荐《代码大全》这本书。在里面，你可以找到十分完备的从设计，架构到具体编码，注释，到团队协作等等相关的引导。</p>
+<p>还有几本书：《程序员修炼之道》，《高效程序员的45个习惯》，《重构》。它们可以作为《代码大全》的补集存在。</p>
+<p>关于《高效程序员的45个习惯》这本书，我进行了总结和提炼，阅读之前不妨看看这篇读书笔记。</p>
+<p>编辑：糖果</p>
+<p>作者：<a href="http://wuzhiwei.net/" target="_blank">Tim’s Blog</a></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/171/">快讯</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/173/">项目</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

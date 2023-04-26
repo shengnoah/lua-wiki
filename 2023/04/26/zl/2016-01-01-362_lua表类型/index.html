@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua表类型 - Lua教程</title>
+
+  
+    <meta name="description" content="Lua的表的定义:typedef struct Table &amp;#123;   CommonHeader;   lu_byte flags;   lu_byte lsizenode;  &#x2F;* log2 of size of &#96;node&#39; array *&#x2F;   struct Table *metatable;   TValue *array;  &#x2F;* array part *&#x2F;   Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua表类型">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-362_lua%E8%A1%A8%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua的表的定义:typedef struct Table &amp;#123;   CommonHeader;   lu_byte flags;   lu_byte lsizenode;  &#x2F;* log2 of size of &#96;node&#39; array *&#x2F;   struct Table *metatable;   TValue *array;  &#x2F;* array part *&#x2F;   Node">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://thumbnail0.baidupcs.com/thumbnail/46eff62f24b48c0dd2380abaa949cb84?fid=1259087893-250528-534280502274275&amp;time=1544864400&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-KcBURzIEUOljxyzUWcN5%2FL3uieo%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=17866885042028318&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100&amp;vuk=-&amp;ft=video">
+<meta property="article:published_time" content="2023-04-26T05:16:12.264Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.264Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://thumbnail0.baidupcs.com/thumbnail/46eff62f24b48c0dd2380abaa949cb84?fid=1259087893-250528-534280502274275&amp;time=1544864400&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-KcBURzIEUOljxyzUWcN5%2FL3uieo%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=17866885042028318&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100&amp;vuk=-&amp;ft=video">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua表类型</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Lua%E7%9A%84%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">Lua的表的定义:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Table%E6%9F%A5%E6%89%BE%E6%95%B0%E6%8D%AE"><span class="toc-text">Table查找数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%AF%E7%B2%B9%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84%E6%88%96%E8%80%85hash%E8%A1%A8%E6%80%A7%E8%83%BD%E6%9B%B4%E9%AB%98"><span class="toc-text">纯粹的使用数组或者hash表性能更高</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.264Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua表类型</span></h1>
+<h4 id="Lua的表的定义"><a href="#Lua的表的定义" class="headerlink" title="Lua的表的定义:"></a>Lua的表的定义:</h4><pre><code>typedef struct Table &#123;
+  CommonHeader;
+  lu_byte flags;
+  lu_byte lsizenode;  /* log2 of size of `node&#39; array */
+  struct Table *metatable;
+  TValue *array;  /* array part */
+  Node *node;
+  Node *lastfree;  /* any free position is before this position */
+  GCObject *gclist;
+  int sizearray;  /* size of `array&#39; array */
+&#125; Table;
+</code></pre><p>这里将Table分为了两个部分:数组部分,array指针指向数组部分的首地址,sizearray是数组的尺寸,绝大部分(注意:不是全部)正整数为key的数据都存放在数组部分;node指针指向一个hash桶,对于不能存放在数组部分的数据,都存放在hash中.如下图所示:<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://thumbnail0.baidupcs.com/thumbnail/46eff62f24b48c0dd2380abaa949cb84?fid=1259087893-250528-534280502274275&amp;time=1544864400&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-KcBURzIEUOljxyzUWcN5%2FL3uieo%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=17866885042028318&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100&amp;vuk=-&amp;ft=video" alt=""/></p>
+<p>hash部分需要特别注意的一点是:在物理上,所有hash部分的数据,其实是存放一块连续的内存中的,即node指针指向的数组;但是从逻辑上来看,如果几块数据在同一个hash桶上,那么又是通过next指针串联起来的.<br/>以图中的示例来分析,node数组的第一个和第三个元素,在物理上是第一和第三个元素,但是在逻辑上,它们是通过next指针串联起来的.</p>
+<h4 id="Table查找数据"><a href="#Table查找数据" class="headerlink" title="Table查找数据"></a>Table查找数据</h4><p>有了以上的了解,从Table中查找一个数据的伪代码就很显而易见了:</p>
+<p>如果输入的Key是一个正整数,并且它的值 &gt; 0 &amp;&amp; &lt;= 数组大小<br/>    尝试在数组部分查找<br/>否则尝试在Hash部分进行查找:<br/>    计算出该Key的Hash值(ltable.c中的mainposition函数),根据此Hash值访问node数组得到Hash桶所在位置<br/>    遍历该Hash桶下的所有链表元素,直到找到该Key为止<br/>以上已经明白了Table的大致结构,来看看Table中如果新加入新的数据会怎么处理.这里有一些内容,要留到后面讲解到Lua虚拟机的时候才触及,这里先讲解一下,当新插入数据时,Table内的数组和Hash部分,做了哪些变化.</p>
+<p>这部分中,核心的算法在ltable.c的rehash函数中,这个函数是计算当新添加数据时,数组和hash重新分配之后各自的尺寸是多少,伪代码如下:</p>
+<p>首先分配一个位图nums,将其中的所有位置0,这个位图的意义在于:nums数组中第i个元素存放的是key在2^(i-1), 2^i之间的元素数量<br/>遍历lua Table中的数组部分,计算在数组部分中的元素数量,更新对应的nums数组元素数量.(numusearray函数)<br/>遍历lua Table中的Hash部分,因为其中也可能存放了正整数,也根据这里的正整数数量更新对应的nums数组元素数量.(numusehash函数)<br/>此时nums数组已经有了当前这个Table中所有正整数的分配统计,逐个遍历nums数组,如果当前已经有的根据新的数组大小和Hash大小重新分配table的大小(computesizes函数)<br/>这里要特别讲解的是computesizes函数,在前面的两个函数调用numusearray函数和numusehash函数之后,此时在nums位图中,已经存放了所有有关整数key的信息,即在[2^(i-1), 2^i]范围内,有多少数据.前面曾经提到过,并不是所有的正整数,都会存放在数组部分的,即使它曾经在,也有可能在之后被分配到hash部分,那么判断的依据是什么?到底怎样的数据,在重新分配之后会从数组部分挪到hash部分?<br/>来看computesizes函数的实现:</p>
+<pre><code>static int computesizes (int nums[], int *narray) &#123;
+  int i;
+  int twotoi;  /* 2^i */
+  int a = 0;  /* number of elements smaller than 2^i */
+  int na = 0;  /* number of elements to go to array part */
+  int n = 0;  /* optimal size for array part */
+  for (i = 0, twotoi = 1; twotoi/2 &lt; *narray; i++, twotoi *= 2) &#123;
+    if (nums[i] &gt; 0) &#123;
+      a += nums[i];
+      if (a &gt; twotoi/2) &#123;  /* more than half elements present? */
+        n = twotoi;  /* optimal size (till now) */
+        na = a;  /* all elements smaller than n will go to array part */
+      &#125;
+    &#125;
+    if (a == *narray) break;  /* all elements already counted */
+  &#125;
+  *narray = n;
+  lua_assert(*narray/2 &lt;= na &amp;&amp; na &lt;= *narray);
+  return na;
+&#125;
+</code></pre><p>注意到这样的细节:这个函数在遍历nums位图数组的时候,会将当前数据数量存放在变量a中,如果a &gt; twotoi/2,也就是当前有一半以上的空间被利用上了,那么这部分数据会继续留在数组部分,否则就会在之后挪到hash部分了.</p>
+<h4 id="纯粹的使用数组或者hash表性能更高"><a href="#纯粹的使用数组或者hash表性能更高" class="headerlink" title="纯粹的使用数组或者hash表性能更高"></a>纯粹的使用数组或者hash表性能更高</h4><p>为了证实这里的判断,简单的写一段lua代码做为实验:</p>
+<pre><code>function print_ipairs(t)
+  print(&#34;in print_ipairs&#34;)
+  for k, v in ipairs(t) do
+    print(k)
+  end
+end 
+
+<p>function print_pairs(t)<br>  print(&amp;#34;in print_pairs&amp;#34;)<br>  for k, v in pairs(t) do<br>    print(k)<br>  end<br>end </p>
+<p>a &#x3D; &#123;&#125;<br>a&#x3D;&#123;1,2,3,4,5,6,7,8,9,10&#125;<br>print_ipairs(a)<br>a[2] &#x3D; nil<br>a[3] &#x3D; nil<br>a[4] &#x3D; nil<br>a[6] &#x3D; nil<br>a[&amp;#34;k&amp;#34;] &#x3D; &amp;#34;e&amp;#34;<br>print_ipairs(a)<br>print_pairs(a)<br>输出为:</p>
+<p>in print_ipairs<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>in print_ipairs<br>1<br>in print_pairs<br>1<br>7<br>8<br>10<br>k<br>5<br>9<br></code></pre><p>在这里,首先对表a赋值,有1-10共十个元素,通过调用函数print_ipairs可知,这些元素都是存放在数组部分的,这是因为ipairs取的是Table的数组部分元素.<br/>在这之后,人为的将其中2,3,4,6元素删除,造成原来数组不满一半元素被利用上的现象,然后再插入一个新key “k”,以让这个Table重新分配空间.再此之后,再次调用ipairs遍历a的数组部分,可以看到只有1被打印出来了,也就是说,在重新分配空间之后,除去已经被删除的2,3,4,6之外,只有1还在数组里面,剩下的5,7,8,9,10已经不在数组部分了.紧接着调用pairs遍历这个表,可以看出这些已经不在数组部分的值又被打印出来了,并且它们的顺序已经被打乱,不再按照数字大小顺序来排列了,它们在这次重新分配中被挪动到了hash部分.</p></p>
+<p>这个实验既验证了我们前面的分析,同时也告诉我们,Table的重新分配,实际上代价是很大的,因此不建议在实际程序中,一个Table即有数组部分,也有Hash部分,纯粹一些,性能上会有提升.</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-363_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">lua学习笔记（六）</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-33_lua%E8%A1%A8%E8%AE%BF%E9%97%AE%E8%B7%9F%E8%B8%AA/">lua表访问跟踪</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

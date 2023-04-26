@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>FSM Lua - Lua教程</title>
+
+  
+    <meta name="description" content="Finite State Machine Description   在讲这个设计模式之前, 我先举一个例子, 假如我们现在开发一款游戏, 我们的任务是实现一个角色, 我们需要根据玩家的输入来控制主角的行为。 那当按下B键时，他应该跳跃但这时有bug，在哪？我们没有阻止主角 “在空中跳跃”，当主角跳起来后持续的按下B键，这样会导致他一直飘在空中，那简单的修复就是添加一个 isJumping 布尔变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FSM Lua">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-332_FSM%20Lua/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Finite State Machine Description   在讲这个设计模式之前, 我先举一个例子, 假如我们现在开发一款游戏, 我们的任务是实现一个角色, 我们需要根据玩家的输入来控制主角的行为。 那当按下B键时，他应该跳跃但这时有bug，在哪？我们没有阻止主角 “在空中跳跃”，当主角跳起来后持续的按下B键，这样会导致他一直飘在空中，那简单的修复就是添加一个 isJumping 布尔变">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.262Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.262Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">FSM Lua</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-1"><span class="toc-text">Example 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-2"><span class="toc-text">Example 2</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>FSM Lua</span></h1>
+<p><br/><font color="#002060" size="6" face="Calibri"><strong>Finite State Machine</strong></font><br/></p>
+<font color="#002060" size="5" face="Calibri"><strong>Description</strong></font>
+
+<blockquote>
+<p>在讲这个设计模式之前, 我先举一个例子, 假如我们现在开发一款游戏, 我们的任务是实现一个角色, 我们需要根据玩家的输入来控制主角的行为。</p>
+<p>那当按下B键时，他应该跳跃但这时有bug，在哪？我们没有阻止主角 “在空中跳跃”，当主角跳起来后持续的按下B键，这样会导致他一直飘在空中，那简单的修复就是添加一个 isJumping 布尔变量来跟踪主角跳跃</p>
+<p>接着，我们要实现主角的闪避动作，当主角站在地面上的时候，玩家按下下方键，则躲避，松开此键则站立, 但这时有bug，在哪？<br/>按下, 下方键来闪避，按B键从闪避状态直接跳起来，玩家在空中的时候松开手，玩家还在空中的时候，却显示站立头像，是时候添加另一个布尔标志位来解决问题了 </p>
+<p>接下来，我们在跳起来的过程，进行一次俯冲攻击，这样才酷炫, 但这时又有bug，在哪？我们发现主角在跳跃状态的时候不能再跳，但在俯冲攻击的时候却可以跳跃。又要添加成员变量了。</p>
+<p>很明显，我们这种做法很有问题，每次我们添加一些功能的时候，都会不经意地破坏已有代码的功能。而且我们还有很多行为等动作没有添加，如果我们继续采用类似的做法，那Bug将会可能更多</p>
+<p>你拥有一组状态，并且可以在这组状态之间进行切换，状态机同一时刻只能处于一种状态。每个状态有一组转换，每一个转换和每一个输入并指向另一个状态。 状态机由此而来</p>
+<p>熟知面向对象方法的人来说，每一个条件分支可以用动态分发来解决。状态模式的目的就是将每个状态相关所有的数据和行为封装到相关的类里面。</p>
+</blockquote>
+<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a><font color="#ff4200" size="5" face="Calibri"><strong>Example 1</strong></font></h2><font color="#002060" size="4" face="Calibri"><strong>FSM.lua</strong></font>
+
+<pre><code>local M = &#123;&#125;
+
+function M:new(...)
+    self.__index = self
+    local ret = setmetatable(&#123;&#125;,self)
+    ret:init(...)
+    return ret
+end
+
+function M:init()
+    self.StateTable = &#123;&#125;        -- 状态表
+    self.CurState = nil         -- 当前状态
+    self.LastState = nil        -- 当前状态的上一个状态
+end
+
+--- 增加一个状态
+function M:AddState(state)
+    if not self.StateTable[state.State] then
+        self.StateTable[state.State] = state
+    end
+end
+
+--- 删除一个状态
+function M:DeleteState(state)
+    if self.StateTable[state.State] then
+        self.StateTable[state.State] = nil
+    end
+end
+
+--- 切换状态
+function M:TranslateState(state)
+    if not self.StateTable[state] then 
+        error(&#34;&lt;color=orange&gt;&#34;..string.format(&#34;Error : State %s not exist state table&#34;,state)..&#34;&lt;/color&gt;&#34;)
+        return
+    end
+    if nil == self.CurState then
+        self.StateTable[state]:DoEnter()
+        self.CurState = state
+        return
+    end
+    if self.StateTable[self.CurState]:Can(state) then
+        self.StateTable[self.CurState]:DoLeave()
+        self.StateTable[state]:DoEnter() 
+        self.LastState = self.CurState
+        self.CurState = state
+    else
+        error(&#34;&lt;color=orange&gt;&#34;..string.format(&#34;Error : Can&#39;t Translate %s  to %s &#34;,self.CurState,state)..&#34;&lt;/color&gt;&#34;)
+    end
+end
+
+--- 当前状态
+function M:CurrentState()
+    return self.CurState
+end
+
+--- 当前状态的:上一个状态
+function M:lastState()
+    return self.LastState
+end 
+
+return M
+</code></pre><font color="#002060" size="4" face="Calibri"><strong>FSMState.lua</strong></font>
+
+<pre><code>local M = &#123;&#125;
+
+function M:new(...)
+    self.__index = self
+    local ret = setmetatable(&#123;&#125;,self)
+    ret:init(...)
+    return ret
+end
+
+function M:init(state,transitionTable,onEnterCallBack,onLeaveCallBack)
+    self.State = state                                      -- 状态值
+    self.Transition = transitionTable or &#123;&#125;                 -- 可迁移状态表
+    self.onEnter = onEnterCallBack                          -- 进入时调用
+    self.onLeave = onLeaveCallBack                          -- 离开时操作
+end
+
+--- 进入状态时的操作
+function M:DoEnter()
+    if self.onEnter then
+        self.onEnter(self.State)
+    end
+end
+
+--- 离开该状态时的操作
+function M:DoLeave()
+    if self.onLeave then
+        self.onLeave(self.State)
+    end
+end
+
+--- 是否可切换到指定状态
+function M:Can(state) 
+    return self.Transition[state]
+end
+
+return M
+</code></pre><font color="#002060" size="4" face="Calibri"><strong>How to Use</strong></font>
+
+<pre><code>local Standing_Enter = function()
+    --进入站立状态的行为
+end 
+
+local Standing_Leave = function()
+    --离开站立状态的行为
+end 
+
+local Jumping_Enter = function()
+    --进入跳跃状态的行为
+end 
+
+local Jumping_Leave = function()
+    --离开跳跃状态的行为
+end 
+
+local Ducking_Enter = function()
+    --进入闪避状态的行为
+end 
+
+local Ducking_Leave = function()
+    --离开闪避状态的行为
+end 
+
+function InitFSM()
+    FState = &#123;
+        Standing = 1,
+        Jumping  = 2,
+        Ducking  = 3,
+    &#125;
+
+    local Fsm = require(&#34;.....FSM&#34;)
+    local State = require(&#34;.....FSMState&#34;)
+    FSM = Fsm:new() 
+
+    FSM:AddState(State:new(FState.Standing,&#123;nil, FState.Jumping, FState.Ducking&#125;, Standing_Enter, Standing_Leave))
+    FSM:AddState(State:new(FState.Jumping,&#123;FState.Standing, nil, nil&#125;, Jumping_Enter,Jumping_Leave))
+    FSM:AddState(State:new(FState.Ducking,&#123;FState.Standing, nil, nil&#125;, Ducking_Enter,Ducking_Leave))
+    FSM:TranslateState(FState.Standing) 
+end 
+
+-- 获取当前状态
+function current_GameState()
+    return FSM:CurrentState()
+end 
+
+-- 获取上一个状态
+function last_GameState() 
+    return FSM:lastState()
+end 
+
+-- 改变状态
+function ChangeFState(State)
+    FSM:TranslateState(State)
+end 
+</code></pre><h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a><font color="#ff4200" size="5" face="Calibri"><strong>Example 2</strong></font></h2><font color="#002060" size="4" face="Calibri"><strong>rFSM 状态机</strong></font>
+
+<blockquote>
+<p>以下是rFSM 状态机的使用情况, 这是个人业余时间写的一个小框架(还在搬砖中……), 读者有时间的话可以去下面的 Github连接上浏览代码。</p>
+</blockquote>
+<pre><code>require (&#39;Common.FSM.rfsm&#39;)
+
+<p>local GameState_Manager &#x3D; Class()</p>
+<p>local fsm</p>
+<p>– 加载所有游戏状态对象<br>local gameStateType &#x3D; &#123;&#125;<br>gameStateType.login_state &#x3D; require(&amp;#34;GameState.login_state&amp;#34;).new()<br>gameStateType.user_state &#x3D; require(&amp;#34;GameState.user_state&amp;#34;).new()<br>gameStateType.lobby_state &#x3D; require(&amp;#34;GameState.lobby_state&amp;#34;).new()<br>gameStateType.room_state &#x3D; require(&amp;#34;GameState.room_state&amp;#34;).new()<br>gameStateType.hero_state &#x3D; require(&amp;#34;GameState.hero_state&amp;#34;).new()<br>gameStateType.loading_state &#x3D; require(&amp;#34;GameState.loading_state&amp;#34;).new()<br>gameStateType.play_state &#x3D; require(&amp;#34;GameState.play_state&amp;#34;).new()<br>gameStateType.over_state &#x3D; require(&amp;#34;GameState.over_state&amp;#34;).new()</p>
+<p>– 建立游戏状态之间的关系<br>local game_state_fsm &#x3D; rfsm.state &#123;</p>
+<pre><code>login_state = rfsm.state&#123; 
+    entry = gameStateType.login_state.enter,
+    exit = gameStateType.login_state.leave,
+&#125;,
+
+
+
+rfsm.transition &#123; src=&amp;#39;initial&amp;#39;, tgt=&amp;#39;login_state&amp;#39; &#125;,
+--rfsm.transition &#123; src=&amp;#39;hello&amp;#39;, tgt=&amp;#39;world&amp;#39;, events=&#123; &amp;#39;e_done&amp;#39; &#125; &#125;,
+--rfsm.transition &#123; src=&amp;#39;world&amp;#39;, tgt=&amp;#39;hello&amp;#39;, events=&#123; &amp;#39;e_restart&amp;#39; &#125; &#125;,
+</code></pre>
+<p>}</p>
+<p>– 默认构造函数<br>function GameState_Manager:ctor()</p>
+<p>end </p>
+<p>– 进入登录状态<br>function GameState_Manager:enter_default_state()<br>    fsm &#x3D; rfsm.init(game_state_fsm)<br>    rfsm.run(fsm)<br>end</p>
+<p>return GameState_Manager<br></code></pre><font color="#002060" size="5" face="Calibri"><strong>Reference</strong></font></p>
+<p>pmsl. (2018). luaFSM. Retrieved from: <a href="https://github.com/pmsl/luaFSM" target="_blank" rel="noopener noreferrer">https://github.com/pmsl/luaFSM</a></p>
+<p>kmarkus. (2017). rFSM. Retrieved from: <a href="https://github.com/kmarkus/rFSM" target="_blank" rel="noopener noreferrer">https://github.com/kmarkus/rFSM</a></p>
+<p>preston. (2019). MobileLegend Retrieved from: <a href="https://github.com/Preston-Chen/MobileLegend" target="_blank" rel="noopener noreferrer">https://github.com/Preston-Chen/MobileLegend</a></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-327_%5BLua%5D%20MetaTable%20and%20MetaMethod/">MetaTable and MetaMethod</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-331_Redisson%20lua%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E8%B8%A9%E5%9D%91%E4%B9%8B%E7%A5%9E%E7%A7%98%E7%9A%84%E5%BC%95%E5%8F%B7/">Redisson lua脚本执行踩坑之神秘的引号</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

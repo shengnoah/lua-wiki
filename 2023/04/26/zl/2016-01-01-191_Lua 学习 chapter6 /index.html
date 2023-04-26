@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua 学习 chapter6 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;h3 id&#x3D;&quot;目录&quot;&gt;目录&lt;&#x2F;h3&gt;     函数   多个返回值   可变长函数参数              函数 在lua中，函数是对语句和表达式抽象的主要方式。函数的调用需要一对空括号，里面放着参数。唯一的例外就是当参数只有一个且该参数是字符串或表构造器。 1 2 3 4 5 6 print [[a multi-line">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua 学习 chapter6">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-191_Lua%20%E5%AD%A6%E4%B9%A0%20chapter6%20/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;h3 id&#x3D;&quot;目录&quot;&gt;目录&lt;&#x2F;h3&gt;     函数   多个返回值   可变长函数参数              函数 在lua中，函数是对语句和表达式抽象的主要方式。函数的调用需要一对空括号，里面放着参数。唯一的例外就是当参数只有一个且该参数是字符串或表构造器。 1 2 3 4 5 6 print [[a multi-line">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.249Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.249Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua 学习 chapter6</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">多个返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E9%95%BF%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0"><span class="toc-text">可变长函数参数</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.249Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua 学习 chapter6</span></h1>
+<pre><code>            &lt;h3 id=&quot;目录&quot;&gt;目录&lt;/h3&gt;
+</code></pre>
+<ol>
+  <li>函数</li>
+  <li>多个返回值</li>
+  <li>可变长函数参数</li>
+  <li>
+    
+  </li>
+</ol>
+
+<h2 id="函数">函数</h2>
+<p>在lua中，函数是对语句和表达式抽象的主要方式。函数的调用需要一对空括号，里面放着参数。唯一的例外就是当参数只有一个且该参数是字符串或表构造器。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="nb">print</span> <span class="s">[[a multi-line
+message]]</span>   
+<span class="cm">--[[&gt;print([[a multi-line
+              message]])]]</span>
+
+<p><span class="n">f</span><span class="p">&#123;</span><span class="n">x</span><span class="o">&#x3D;</span><span class="mi">10</span><span class="p">,</span><span class="n">y</span><span class="o">&#x3D;</span><span class="mi">3</span><span class="p">&#125;</span> <span class="c1">–&gt;f(&#123;x&#x3D;10,y&#x3D;3&#125;)</span><br></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>lua函数是存在语法糖的，即使用冒号来调用函数会把第一个参数默认认为是调用对象本身</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">o</span><span class="p">:</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1">--&gt;其中x就是o对象</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>在lua进程中调用Lua语言编写的函数和用c编写的函数方式是一样的，没有任何区别。</p>
+
+<p>在lua中，调用函数使用的参数个数可以和定义函数使用的参数个数不一致，当传入参数的个数大于定义的时候后面没有用到的参数就会被舍弃，当传入的参数个数少的时候，后面的参数就会被默认为nil。</p>
+
+<h2 id="多个返回值">多个返回值</h2>
+<p>在lua函数中，它允许一个函数返回多个返回值。
+函数定义返回多个返回值，但是在调用的时候lua会根据被调用情况调整返回值的个数。</p>
+<ol>
+  <li>当函数被作为一条单独语句调用的时候，其所有的返回值都将被舍弃。</li>
+  <li>当函数被作为表达式调用时，将只保留第一个返回值。</li>
+  <li>当函数调用时一系列表达式中的最后一个表达式时，其所有的返回值才能被获取到。</li>
+  <li>当函数调用是另一个函数调用的最后一个表达式时能返回多个值，否则只能返回一个值。</li>
+  <li>将函数调用用一对圆括号括起来可以强制其只返回一个结果。</li>
+</ol>
+
+<h2 id="可变长函数参数">可变长函数参数</h2>
+<p>lua语言中的函数是可边长函数参数，参数列表中的三个点表示该函数是可变长的。
+当函数访问这个可变长参数的时候可以将其视作一个表达式。它的放回结果就是各个参数，当然要对其访问的时候，也可以通过表构造器来访问。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">v</span> <span class="k">in</span> <span class="nb">ipairs</span> <span class="p">&#123;</span><span class="o">...</span><span class="p">&#125;</span> <span class="k">do</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">v</span>
+    <span class="k">end</span>
+    <span class="kd">local</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="k">return</span> <span class="n">s</span>
+<span class="k">end</span>
+
+
+<p></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>函数也可以由固定参数加可变参数，但是可变参数一定要在固定参数的后面。</p>
+
+<p>在上面的例子中，直接使用表构造器还是存在问题的，如果中间存在nil表就不是连续的了，对于这种情况跟lua提供了函数<strong>table.pack</strong>，
+该函数像{…}保存所有的参数，然后将其放在一个表中范慧慧，但是这个表还有一个保存了参数个数的额外字段 <strong>n</strong> 。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">function</span> <span class="nf">nonils</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">arg</span> <span class="o">=</span> <span class="nb">table.pack</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">arg</span><span class="p">.</span><span class="n">n</span> <span class="k">do</span>
+        <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">then</span> <span class="k">return</span> <span class="kc">false</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="kc">true</span>
+<span class="k">end</span>
+
+<p></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>可以使用上面的方法来判断参数是否存在空。</p>
+
+<p>在lua中还有一个函数select，函数select总是存在一个固定参数selector和数量可变的参数，如果selector是数值n，则select函数返回n(包含n)之后的所有参数。否则selector应该是字符串”#”，select返回额外参数的总数。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nb">print</span><span class="p">(</span><span class="nb">select</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">,</span><span class="s2">"c"</span><span class="p">))</span> <span class="c1">--&gt;a b c</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">select</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">,</span><span class="s2">"c"</span><span class="p">))</span> <span class="c1">--&gt;b c</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">select</span><span class="p">(</span><span class="s2">"#"</span><span class="p">,</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">,</span><span class="s2">"c"</span><span class="p">))</span> <span class="c1">--&gt;3</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>与pack相对应，table.unpack的参数是一个数组，返回值为数组内的所有元素。
+顾名思义，pack将参数列表转换成一张表，而unpack将表转换成一组返回值。
+如果有需要也可以显示的限制返回值的范围：</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">print</span><span class="p">(</span><span class="nb">table.unpack</span><span class="p">(&#123;</span><span class="s2">"M"</span><span class="p">,</span><span class="s2">"T"</span><span class="p">,</span><span class="s2">"Tu"</span><span class="p">,</span><span class="s2">"W"</span><span class="p">&#125;,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="c1">--&gt; T  Tu</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+
+
+                
+                
+<pre><code>            &lt;hr style=&quot;visibility: hidden;&quot;&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-193_unity%20lua%20%EF%BC%8D1%20%E6%9C%80%E5%BC%80%E5%A7%8B%E8%B0%83%E7%94%A8/">unity lua －1 最开始调用</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-194_Lua%E7%BC%96%E7%A8%8B7%E4%B9%8Bmetatable/">Lua编程7之metatable</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

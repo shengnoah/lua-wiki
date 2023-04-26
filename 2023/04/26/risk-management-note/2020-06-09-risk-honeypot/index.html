@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>风控管理之蜜罐 - Lua教程</title>
+
+  
+    <meta name="description" content="目录{: #toc }  TOC{:toc}  蜜罐在风控中经常要面临这个问题：哪部分流量来自黑产？可信度高吗？ 这关系到现有策略效果评估、问题定位、新策略效果评估、模型训练等多个环节。解决这类问题时，蜜罐就起到了一定作用。 什么是蜜罐？通过一些手段，引诱黑灰产通过或攻击普通用户无法触达的资源，从而清晰的将黑灰产和普通用户流量区分的过程。这其中的资源就是蜜罐。 引诱手段引诱手段有很多，大多需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="风控管理之蜜罐">
+<meta property="og:url" content="https://lua.ren/2023/04/26/risk-management-note/2020-06-09-risk-honeypot/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="目录{: #toc }  TOC{:toc}  蜜罐在风控中经常要面临这个问题：哪部分流量来自黑产？可信度高吗？ 这关系到现有策略效果评估、问题定位、新策略效果评估、模型训练等多个环节。解决这类问题时，蜜罐就起到了一定作用。 什么是蜜罐？通过一些手段，引诱黑灰产通过或攻击普通用户无法触达的资源，从而清晰的将黑灰产和普通用户流量区分的过程。这其中的资源就是蜜罐。 引诱手段引诱手段有很多，大多需">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://candylab.net/images/risk-mangament-note/iqiyi-cdk-group.jpg">
+<meta property="og:image" content="https://candylab.net/images/risk-mangament-note/black-forum.jpg">
+<meta property="og:image" content="https://candylab.net/images/risk-mangament-note/proxy-honey-pot.jpg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.137Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.137Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="风控笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://candylab.net/images/risk-mangament-note/iqiyi-cdk-group.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='page'>
+    
+
+<div class="widgets">
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">风控管理之蜜罐</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%9C%9C%E7%BD%90%EF%BC%9F"><span class="toc-text">什么是蜜罐？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%AF%B1%E6%89%8B%E6%AE%B5"><span class="toc-text">引诱手段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%9C%E7%BD%90%E8%B4%A8%E9%87%8F"><span class="toc-text">蜜罐质量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%9C%E7%BD%90%E5%88%86%E6%9E%90"><span class="toc-text">蜜罐分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9C%9C%E7%BD%90%E5%92%8C%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E8%AF%84%E4%BC%B0"><span class="toc-text">蜜罐和安全策略评估</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E8%9C%9C%E7%BD%90"><span class="toc-text">代理蜜罐</span></a></li></ol></div></div></widget>
+
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+  
+
+<header class="header mobile-only"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div></header>
+
+
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/2023/04/26/risk-management-note/2020-06-09-risk-honeypot/">风控管理之蜜罐</a></div></div>
+<article class="md-text content page"><h1 class="article-title"><span>风控管理之蜜罐</span></h1><span id="more"></span>
+
+
+<p><strong>目录</strong><br>{: #toc }</p>
+<ul>
+<li>TOC<br>{:toc}</li>
+</ul>
+<h1 id="蜜罐"><a href="#蜜罐" class="headerlink" title="蜜罐"></a>蜜罐</h1><p>在风控中经常要面临这个问题：哪部分流量来自黑产？可信度高吗？</p>
+<p>这关系到现有策略效果评估、问题定位、新策略效果评估、模型训练等多个环节。解决这类问题时，蜜罐就起到了一定作用。</p>
+<h2 id="什么是蜜罐？"><a href="#什么是蜜罐？" class="headerlink" title="什么是蜜罐？"></a>什么是蜜罐？</h2><p>通过一些手段，引诱黑灰产通过或攻击普通用户无法触达的资源，从而清晰的将黑灰产和普通用户流量区分的过程。这其中的资源就是蜜罐。</p>
+<h2 id="引诱手段"><a href="#引诱手段" class="headerlink" title="引诱手段"></a>引诱手段</h2><p>引诱手段有很多，大多需要前期混入黑产微信、QQ、论坛进行卧底，再定向散布信息。</p>
+<p>QQ群比较好搜，关键字多试一试</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://candylab.net/images/risk-mangament-note/iqiyi-cdk-group.jpg" alt="黑产QQ群"></p>
+<p>论坛这里列一些</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://candylab.net/images/risk-mangament-note/black-forum.jpg" alt="羊毛论坛"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.zuanke8.com/">http://www.zuanke8.com</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.79tao.com/">http://www.79tao.com</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.hym68.com/">http://www.hym68.com/</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.0818tuan.com/">http://www.0818tuan.com/</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.hxwz2.com/">http://www.hxwz2.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.iqshw.com/">https://www.iqshw.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.52pojie.cn/">https://www.52pojie.cn/</a></li>
+</ul>
+<p>需要注意的有几点：</p>
+<ol>
+<li>这些群和论坛里充斥着的不全是黑产，还有很多性质不很恶劣的羊毛党。所以如果你散布的信息仅仅关于便宜的商品，很可能引诱来大量羊毛党（人肉操作为主），而不是更懂技术的黑产（自动化攻击）</li>
+<li>尽量使用社交工具的小号进行卧底，避免暴露自己的真实信息</li>
+<li>保留论坛截图、聊天记录、转账记录，便于后续起诉</li>
+</ol>
+<h2 id="蜜罐质量"><a href="#蜜罐质量" class="headerlink" title="蜜罐质量"></a>蜜罐质量</h2><p>在整个过程中蜜罐的质量直接决定了最后结果，关键点如下：</p>
+<ol>
+<li>能否将黑产和普通用户流量分开。要确保正常用户通过搜索、列表等正常途径访问不到蜜罐，或访问可能性很低。</li>
+<li>能否将不同黑产团伙的流量分开。尽量将不同黑产的流量在时间或者资源上区分开，以便后续对不同团伙的手段进行对比。</li>
+<li>能否产生足够日志。信息越多，对后续分析越有利。</li>
+<li>是否需要登录、VIP身份。这个和蜜罐目的强相关，例如VIP视频防刷、代下单、刷粉丝等业务的蜜罐就至少要求用户是登录状态。在可以实现蜜罐前提后，尽量让黑产暴露出UID。</li>
+</ol>
+<h2 id="蜜罐分析"><a href="#蜜罐分析" class="headerlink" title="蜜罐分析"></a>蜜罐分析</h2><p>具体分析过程不提，这里只提1个重点：着重关注蜜罐最开始的几条请求，因为很可能就是黑产本人发出的</p>
+<h2 id="蜜罐和安全策略评估"><a href="#蜜罐和安全策略评估" class="headerlink" title="蜜罐和安全策略评估"></a>蜜罐和安全策略评估</h2><p>蜜罐很重要的两个功能是现有策略评估和新策略评估。大致关系如下：</p>
+<p>现有策略 -&gt; 蜜罐 -&gt; 分析 -&gt; 策略升级 -&gt; 蜜罐 -&gt; 分析 -&gt; …</p>
+<p>很多时候风控团队对现有策略的评估是有很大弹性的，虽然很容易说的请拦了多少，但是说不清漏拦了多少。这时蜜罐就可能派上用场。直接“请”黑产刷一波，到底漏了多少、为什么漏了一目了然。</p>
+<p>蜜罐分析、策略升级后，还可以请相同黑产再刷一次，看看新策略效果。多轮多个黑产团伙过后，规则可能会得到优化。只是需要注意的是，因为这一过程均是基于恶意流量制定策略，要防止新策略过于严格导致误杀率大幅上升。例如，分析结果表明100%的黑产流量使用了ADSL频繁更换IP，如果新增一条“ADSL IP就禁止下单”的规则就会导致大量误杀，因为普通用户也会使用ADSL。</p>
+<h2 id="代理蜜罐"><a href="#代理蜜罐" class="headerlink" title="代理蜜罐"></a>代理蜜罐</h2><p>上面介绍的主要是引诱黑产直接攻击蜜罐资源，代理蜜罐不同，黑产并不会攻击代理蜜罐，而是会通过代理蜜罐攻击其他网站。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://candylab.net/images/risk-mangament-note/proxy-honey-pot.jpg" alt="代理IP蜜罐"></p>
+<p>黑产往往为了隐藏自己的IP地址、频繁换IP，会使用代理攻击接口。有些经费充足的黑产会购买专用代理，有些低配黑产会选择公用代理。对于后者，我们就可以在公用代理中安插我们的代理服务器，那么我就可以获知黑产到底在攻击哪些网站、哪些接口、来自哪里。但有以下几点需要注意：</p>
+<ol>
+<li>由于受我们控制的代理仅仅是所有代理中的一部分，所以我们获取的数据也是全部数据的一部分</li>
+<li>公用代理蜜罐数据中除了你关心的数据，还会有大量其他公司、爬虫等对自己公司业务安全不大的数据</li>
+<li>HTTP请求的request body要记录，而不仅仅是URL中的参数</li>
+</ol>
+<p>可以从这几个角度进行监控分析</p>
+<ol>
+<li>基础统计指标，如量比较大的接口、域名、攻击者IP等</li>
+<li>同比和环比趋势，特别是环比趋势</li>
+<li>注意数据中出现的新接口，这往往意味着黑产找到了一条新的攻击途径</li>
+<li>同一黑产团伙的攻击手法是否变化了</li>
+<li>是否有多个团伙有同一请求特征</li>
+<li>同一黑产都攻击了哪些业务，业务之间的关系是什么</li>
+<li>攻击我们的黑产是否也在攻击别人，是同类型网站吗</li>
+</ol>
+<p>引用于“风控笔记”：<a target="_blank" rel="noopener" href="https://github.com/WalterInSH/risk-management-note">https://github.com/WalterInSH/risk-management-note</a></p>
+</article>
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua热更新注意事项 - Lua教程</title>
+
+  
+    <meta name="description" content="lua热更新，是当下最成熟、最热门，也是使用最多的热更新方案，单说热更新的话，它是完美的解决方案，但要从性能上说，它其实比C#要差上不少，自然而然地，如何优化性能也就成了开发人员最头痛的问题。 本文讲从一些数据调研出发，结合一些大牛的文章，对lua中性能优化的点进行汇总。  关于热更新 相信有一定经验的游戏从业者都听说过“热更新”，想象一下你在打开农药之后，登录之前总是要检查资源包更新，时不时还要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua热更新注意事项">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-950_Lua%E7%83%AD%E6%9B%B4%E6%96%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="lua热更新，是当下最成熟、最热门，也是使用最多的热更新方案，单说热更新的话，它是完美的解决方案，但要从性能上说，它其实比C#要差上不少，自然而然地，如何优化性能也就成了开发人员最头痛的问题。 本文讲从一些数据调研出发，结合一些大牛的文章，对lua中性能优化的点进行汇总。  关于热更新 相信有一定经验的游戏从业者都听说过“热更新”，想象一下你在打开农药之后，登录之前总是要检查资源包更新，时不时还要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.320Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.320Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua热更新注意事项</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="toc-text">关于热更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0%E7%9A%84%E6%96%B9%E6%A1%88%E9%80%89%E6%8B%A9"><span class="toc-text">热更新的方案选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#luajit%E5%92%8Clua"><span class="toc-text">luajit和lua</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%87%E7%BA%A7lua53%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">关于升级Lua5.3对性能的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5int%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E8%A1%A5%E4%B8%81"><span class="toc-text">引入int类型以及相关位运算的补丁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9luajit%E7%9A%84bit%E5%BA%93"><span class="toc-text">修改luajit的bit库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#luajit%E7%9A%84jit"><span class="toc-text">luajit的jit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#luajit%E7%9A%84ffi"><span class="toc-text">luajit的ffi</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lua%E5%92%8Cc%E7%9A%84%E4%BA%A4%E4%BA%92%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">lua和c#的交互的注意事项</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua热更新注意事项</span></h1>
+<p>lua热更新，是当下最成熟、最热门，也是使用最多的热更新方案，单说热更新的话，它是完美的解决方案，但要从性能上说，它其实比C#要差上不少，自然而然地，如何优化性能也就成了开发人员最头痛的问题。<br/>
+本文讲从一些数据调研出发，结合一些大牛的文章，对lua中性能优化的点进行汇总。</p>
+
+<h3 id="关于热更新">关于热更新</h3>
+<p>相信有一定经验的游戏从业者都听说过“热更新”，想象一下你在打开农药之后，登录之前总是要检查资源包更新，时不时还要下载一些东西，这其实就是热更新了。与之相对的是整端更新，就是重新下载安装包重新安装那一种。手游嘛，一般要求快速迭代，很多游戏都是一周一个小版本，如果每更一次都要让你下一个整端，你自然不乐意，说不定就要退坑了。在每天有几十款游戏上线的当下，玩家们都被惯坏了，他们可禁不起这么折腾，所以这就是热更新的必要性。</p>
+<h4 id="热更新的方案选择">热更新的方案选择</h4>
+<p>现在市面上常见的热更新方案，无非就那么几种，真要分类的话就两大类，lua热更新和c#热更新，c#热更新本人知之甚少，基于ILRuntime的方式只听说在性能上并不占优势，但好处是c#语言在写代码时比lua爽，如果用c#做服务器的话还能做到客户端服务器统一语言，但终归是新兴起的方案，资料上和完善程度上都不如lua。<br/>
+lua家族里有ulua、tolua、xlua以及各种各样奇怪的lua，但基本上万变不离其宗，通过lua和c#互相调用的方式实现lua和c#的通信，在底层上要么是基于native lua，要么是基于luajit。</p>
+<h4 id="luajit和lua">luajit和lua</h4>
+<p>luajit是lua的高性能版本，其内部实现比较复杂，就不在此讨论了，总之luajit和native lua，几乎无甚区别，只是luajit的性能要高得多。除此之外，luajit目前最新版本是基于lua5.1，目测也很难再更新了，所以如果想要使用lua的新特性，比如原生的位运算，比如原生的int类型，在luajit里基本是做不到了。</p>
+
+<p>常见的热更新方案，ulua、tolua就是基于luajit，xlua默认是基于lua5.3，不过据说可配置或者可以自定义。这里面的取舍，一是看项目类型，二是看方案的必要性。<br/>
+下面是一组测试数据，主要是针对简单的乘法或者移位运算，从中可以看出原生lua和luajit的差别。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">serial</th>
+      <th style="text-align: left">language</th>
+      <th style="text-align: left">operate</th>
+      <th style="text-align: left">count</th>
+      <th style="text-align: left">time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">C# fixed</td>
+      <td style="text-align: left">mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">230ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">C# double</td>
+      <td style="text-align: left">mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">34ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">3</td>
+      <td style="text-align: left">C#</td>
+      <td style="text-align: left">rshift</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">28ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">4</td>
+      <td style="text-align: left">luajit</td>
+      <td style="text-align: left">fixed mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">2600ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">5</td>
+      <td style="text-align: left">luajit</td>
+      <td style="text-align: left">double mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">37ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">6</td>
+      <td style="text-align: left">luajit</td>
+      <td style="text-align: left">bit.rshift</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">167ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">7</td>
+      <td style="text-align: left">luajit jit mode</td>
+      <td style="text-align: left">double mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">10ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">8</td>
+      <td style="text-align: left">lua native</td>
+      <td style="text-align: left">mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">100ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">9</td>
+      <td style="text-align: left">xLua</td>
+      <td style="text-align: left">fixed mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">5038ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">10</td>
+      <td style="text-align: left">xLua</td>
+      <td style="text-align: left">native rshift</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">90ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">11</td>
+      <td style="text-align: left">luajit</td>
+      <td style="text-align: left">int64 mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">1500ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">12</td>
+      <td style="text-align: left">luajit</td>
+      <td style="text-align: left">ffi-int mul</td>
+      <td style="text-align: left">10000000</td>
+      <td style="text-align: left">1000ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="关于升级lua53对性能的影响">关于升级Lua5.3对性能的影响</h3>
+<p>目前luajit官方支持的lua版本是Lua5.1，如果要升级5.3则需要自己修改luajit的源码编译，代价较高。如果直接使用原生lua的话反而会降低性能，因为luajit性能要比原生lua高。<br/>
+luajit是lua代码的解释器，效率比原生lua要高很多，从表中的对比也可窥见一二(5, 8)。<br/>
+而luajit在运行时实际上又分为两种模式，即jit模式和interpreter模式。jit模式一般情况下会比interpreter模式快5-10倍。表中对于这种差别也有所体现(5,7)。但要成功jit，需要很多条件，但即使不用jit模式，只在interpreter模式下运行，效率也比原生lua要高很多。<br/>
+(9)是在xLua中定点数的乘法运算测试，耗时比在tolua中多了一倍。猜测其原因为xLua默认情况下是基于原生的lua5.3，虽然它的位运算效率和其乘除法运算效率相近，但是因为没有jit的高性能，所以总体下来反而变慢了。</p>
+
+<h3 id="引入int类型以及相关位运算的补丁">引入int类型以及相关位运算的补丁</h3>
+<p>在tolua中，其实有一个int64的补丁，但是运算效率并不高。如(11)所示。原因仍需调研。  <br/>
+通过ffi调C的int类型做乘法，效率依然不高。如(12)。原因可能是lua和c之间的频繁调用，耗时较多。<br/>
+找到一个lnum的补丁，看见作者的介绍里，它提供了int32、int64、double、float等数据类型，且运算效率和原生的number类型相近。但是在windows平台编译后，只有double类型可用，尚不知其原因，需要逐步排查。</p>
+
+<h3 id="修改luajit的bit库">修改luajit的bit库</h3>
+<p>目前使用的bit库是基于luajit自带的bit库的，但效率并不高，其运算速度比简单的乘除法要慢得多，目前来看，它是客户端定点数库的主要性能瓶颈，但是在服务器端则不同，因为把lua代码解释成java后，在位运算上时会直接调用java原生的位运算方式，但是因为它把lua中的数据类型抽象成了类，所以在计算时会产生额外的GC，导致性能下降。所以修改luajit的bit库这种方法，并不能提高服务器端的运算效率。</p>
+
+<h4 id="总结">总结</h4>
+<p>在不能修改luajit重新编译Lua5.3的情况下，使用Lua5.3以提升位运算以及整数运算效率并不现实，无论能否成功进入jit模式，其带来的效率提升都不及luajit。<br/>
+如果能修改luajit使其支持Lua5.3，无疑是最好的方法，但是代价较高。<br/>
+修改luajit中的bit库，这种方式暂时不考虑，因为其作用仅体现在客户端，原因上面已经说过了。所以后续主要尝试方向还是前两种，即在lua中添加int32/64类型，这样服务器端可以直接将其解释成java本身的数据类型。</p>
+
+<h3 id="luajit的jit">luajit的jit</h3>
+<p>luajit分为jit模式和interpreter模式，jit模式更快，快到令人发指（与c++接近，甚至更快），但是因为其对平台的高度依赖，导致它在安卓平台上不一定能发挥出PC上的威力，因为，luajit无法保证所有代码都可以jit化，只有在编译时才能知道，而一旦jit失败，其运算速度会骤降百倍。<br/>
+jit模式的开启方式:</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="n">jit</span> <span class="k">then</span>
+  <span class="n">jit</span><span class="p">.</span><span class="n">on</span><span class="p">();</span> <span class="c1">--关闭 jit.off()</span>
+  <span class="n">jit</span><span class="p">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>至于jit模式究竟能带来多少性能提升，或者其稳定性到底如何，需要在真机上进行大量的测试。<br/>
+需要注意的是jit模式在ios平台下并不可用。</p>
+
+<h3 id="luajit的ffi">luajit的ffi</h3>
+<p>ffi是luajit独有的一个神器，用于进行高效的luajit与c的交互。借助ffi也可以提高luajit和c#交互的性能，原理是利用ffi调用自己定义的c函数，再从c函数调用c#。
+必须要注意的是，ffi只有在jit开启下才能发挥其性能，如果是在ios下，ffi反而会拖慢性能。所以使用的时候必须要做好快关。<br/>
+首先，我们在c中定义一个方法，用于将c#的函数注册到c中，以便在c中可以直接调用c#的函数，这样只要luajit可以ffi调用c，也就自然可以调用c#的函数了</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="kt">void</span> <span class="nf">gse_ffi_register_csharp</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">func</span><span class="p">)</span>
+<span class="p">&#123;</span>
+  <span class="n">s_reg_funcs</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">;</span>
+<span class="p">&#125;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>这里，id是一个你自由分配给c#函数的id，lua通过这个id来决定调用哪个函数。</p>
+
+<p>然后在c#中将c#函数注册到c中</p>
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="p">[</span><span class="nf">DllImport</span><span class="p">(</span><span class="n">LUADLL</span><span class="p">,</span> <span class="n">CallingConvention</span> <span class="p">=</span> <span class="n">CallingConvention</span><span class="p">.</span><span class="n">Cdecl</span><span class="p">,</span> <span class="n">ExactSpelling</span> <span class="p">=</span> <span class="k">true</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">static</span> <span class="k">extern</span> <span class="k">void</span> <span class="nf">gse_ffi_register_csharp</span><span class="p">(</span><span class="kt">int</span> <span class="n">funcid</span><span class="p">,</span> <span class="n">IntPtr</span> <span class="n">func</span><span class="p">);</span>
+
+<p><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">gse_ffi_register_v_i1f3</span><span class="p">(</span><span class="kt">int</span> <span class="n">funcid</span><span class="p">,</span> <span class="n">f_v_i1f3</span> <span class="n">func</span><span class="p">)</span><br><span class="p">&#123;</span><br>  <span class="nf">gse_ffi_register_csharp</span><span class="p">(</span><span class="n">funcid</span><span class="p">,</span> <span class="n">Marshal</span><span class="p">.</span><span class="nf">GetFunctionPointerForDelegate</span><span class="p">(</span><span class="n">func</span><span class="p">));</span><br><span class="p">&#125;</span></p>
+<p><span class="nf">gse_ffi_register_v_i1f3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">GObjSetPositionAddTerrainHeight</span><span class="p">);</span><span class="c1">&#x2F;&#x2F;将GObjSetPositionAddTerrainHeight注册为id1的函数</span><br></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>然后lua中使用的时候，这么调用</p>
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="n">local</span> <span class="n">ffi</span> <span class="p">=</span> <span class="nf">require</span><span class="p">(</span><span class="s">&#34;ffi&#34;</span><span class="p">)</span>
+<span class="n">ffi</span><span class="p">.</span><span class="n">cdef</span><span class="p">[[</span>
+<span class="kt">int</span> <span class="nf">gse_ffi_i_f3</span><span class="p">(</span><span class="kt">int</span> <span class="n">funcid</span><span class="p">,</span> <span class="kt">float</span> <span class="n">f1</span><span class="p">,</span> <span class="kt">float</span> <span class="n">f2</span><span class="p">,</span> <span class="kt">float</span> <span class="n">f3</span><span class="p">);</span>
+<span class="p">]]</span>
+
+<p><span class="n">local</span> <span class="n">funcid</span> <span class="p">&#x3D;</span> <span class="m">1</span><br><span class="n">ffi</span><span class="p">.</span><span class="n">C</span><span class="p">.</span><span class="nf">gse_ffi_i_f3</span><span class="p">(</span><span class="n">funcid</span><span class="p">,</span> <span class="n">objID</span><span class="p">,</span> <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span><span class="p">,</span> <span class="n">posz</span><span class="p">)</span><br></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>就可以从lua中利用ffi调用c#的函数了。</p>
+
+<h3 id="lua和c的交互的注意事项">lua和c#的交互的注意事项</h3>
+<p>减少Lua中C# object的引用<br/>
+避免在Lua和C#之间传递Unity独有的值类型（Vector3、Quaternion）  <br/>
+减少传递bool string object，用int float double替代<br/>
+频繁调用的函数，参数的数量尽量少<br/>
+优先使用static函数导出<br/>
+在lua中只使用自己管理的ID，而不直接引用C#的object</p>
+
+<p>以上结论主要来源于UWA-Blog https://blog.uwa4d.com/archives/USparkle_Lua.html</p>
+
+
+
+<pre><code>            &lt;hr style=&quot;visibility: hidden;&quot;/&gt;
+            
+            &lt;hr style=&quot;visibility: hidden;&quot;/&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-952_Lua/">Lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-92_php%E4%BD%BF%E7%94%A8redis%E8%B0%83%E7%94%A8lua/">php使用redis调用lua</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

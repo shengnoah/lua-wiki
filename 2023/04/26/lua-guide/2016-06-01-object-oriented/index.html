@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua面向对象 - Lua教程</title>
+
+  
+    <meta name="description" content="Lua 面向对象面向对象概述面向对象编程技术是目前最常用的编程技术之一。目前大量的编程语言都支持面向对象的特性：       C++     Java     Objective-C     Smalltalk     C#     Ruby   面向对象的特征     类（class）：类是可以创建对象，并为状态（成员变量）提供初值及行为实现的可扩展模板。     对象（objects）：对象是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua面向对象">
+<meta property="og:url" content="https://lua.ren/2023/04/26/lua-guide/2016-06-01-object-oriented/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua 面向对象面向对象概述面向对象编程技术是目前最常用的编程技术之一。目前大量的编程语言都支持面向对象的特性：       C++     Java     Objective-C     Smalltalk     C#     Ruby   面向对象的特征     类（class）：类是可以创建对象，并为状态（成员变量）提供初值及行为实现的可扩展模板。     对象（objects）：对象是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.092Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.092Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua面向对象</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A6%82%E8%BF%B0"><span class="toc-text">面向对象概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-text">面向对象的特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">一个真实世界的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%B1%BB"><span class="toc-text">创建一个简单的类</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/lua-guide/">lua_guide</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua面向对象</span></h1>
+<h1 id="Lua-面向对象"><a href="#Lua-面向对象" class="headerlink" title="Lua 面向对象"></a>Lua 面向对象</h1><h2 id="面向对象概述"><a href="#面向对象概述" class="headerlink" title="面向对象概述"></a>面向对象概述</h2><p>面向对象编程技术是目前最常用的编程技术之一。目前大量的编程语言都支持面向对象的特性： </p>
+<ul>
+    <li>C++</li>
+    <li>Java</li>
+    <li>Objective-C</li>
+    <li>Smalltalk</li>
+    <li>C#</li>
+    <li>Ruby</li>
+</ul>
+
+<h2 id="面向对象的特征"><a href="#面向对象的特征" class="headerlink" title="面向对象的特征"></a>面向对象的特征</h2><ul>
+    <li>类（class）：类是可以创建对象，并为状态（成员变量）提供初值及行为实现的可扩展模板。</li>
+    <li>对象（objects）：对象是类的实例，每个对象都有独立的内存区域。</li>
+    <li>继承（inheritance）：继承用于描述一个类的变量和函数被另一个类继承的行为。</li>
+    <li>封装（encapsulation）：封装是指将数据和函数组织在一个类中。外部可以通过类的方法访问内中的数据。封装也被称之为数据抽象。</li>
+</ul>
+## Lua 中的面向对象  
+
+<p>在 Lua 中，我们可以使用表和函数实现面向对象。将函数和相关的数据放置于同一个表中就形成了一个对象。继承可以用元表实现，它提供了在父类中查找存在的方法和变量的机制。<br>Lua 中的表拥有对象的特征，比如状态和独立于其值的标识。两个有相同值的对象（表）是两个不同的对象，但是一个对象在不同的时间可以拥有不同的值。与对象一样，表拥有独立于其创建者和创建位置的生命周期。  </p>
+<h2 id="一个真实世界的例子"><a href="#一个真实世界的例子" class="headerlink" title="一个真实世界的例子"></a>一个真实世界的例子</h2><p>面向对象已经是一个广泛使用的概念，但是你需要正确清楚地理解它。<br>让我们看一个数学方面的例子。我们经常需要处理各种形状，比如圆、矩形、正方形。<br>这些形状有一个共同的特征——面积。所以，所有其它的形状都可以从有一个公共特征——面积的基类扩展而来。每个对象都可以有它自己的特征和函数，比如矩阵有属性长、宽和面积，printArea 和 calculateArea 方法。  </p>
+<h3 id="创建一个简单的类"><a href="#创建一个简单的类" class="headerlink" title="创建一个简单的类"></a>创建一个简单的类</h3><p>下面例子实现了矩阵类的三个属性：面积、长和宽。它还同时实现了输出面积的函数 printArea。  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-- 元类</span><br><span class="line">Rectangle = &#123;area = 0, length = 0, breadth = 0&#125;</span><br><span class="line"></span><br><span class="line">-- 继承类的方法 new</span><br><span class="line">function Rectangle:new (o,length,breadth)</span><br><span class="line">  o = o or &#123;&#125;</span><br><span class="line">  setmetatable(o, self)</span><br><span class="line">  self.__index = self</span><br><span class="line">  self.length = length or 0</span><br><span class="line">  self.breadth = breadth or 0</span><br><span class="line">  self.area = length*breadth;</span><br><span class="line">  return o</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">-- 继承类的方法 printArea</span><br><span class="line">function Rectangle:printArea ()</span><br><span class="line">  print(&quot;The area of Rectangle is &quot;,self.area)</span><br><span class="line">end</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">### 创建对象  </span><br><span class="line"></span><br><span class="line">创建对象即是为类的实例分配内存空间的过程。每个对象都有自己独立的内存区域，同时还会共享类的数据。  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>r &#x3D; Rectangle:new(nil,10,20)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 访问属性</span><br><span class="line"></span><br><span class="line">我们可以使用点操作符访问类中属性。  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>print(r.length)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 访问成员方法  </span><br><span class="line"></span><br><span class="line">使用冒号操作符可以访问对象的成员方法，如下所示：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>r:printArea()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">初始化阶段，调用函数为对象分配内存同时设置初值。这与其它与面向对象的语言中的构造器很相似。其实，构造器本身也就和上面的初始化代码一样，并没有什么特别之处。  </span><br><span class="line"></span><br><span class="line">## 完整的例子  </span><br><span class="line"></span><br><span class="line">让我们一起看一个 Lua 实现面向对象的完整例子。  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>– 元类<br>Shape &#x3D; {area &#x3D; 0}</p>
+<p>– 基类方法 new<br>function Shape:new (o,side)<br>  o &#x3D; o or {}<br>  setmetatable(o, self)<br>  self.__index &#x3D; self<br>  side &#x3D; side or 0<br>  self.area &#x3D; side*side;<br>  return o<br>end</p>
+<p>– 基类方法 printArea<br>function Shape:printArea ()<br>  print(“The area is “,self.area)<br>end</p>
+<p>– 创建对象<br>myshape &#x3D; Shape:new(nil,10)</p>
+<p>myshape:printArea()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的程序，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The area is 	100</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Lua 中的继承  </span><br><span class="line"></span><br><span class="line">继承就是从基对象扩展的过程，正如从图形扩展至矩形、正方形等等。在现实世界中，常用来共享或扩展某些共同的属性和方法。  </span><br><span class="line">让我们看一个简单的类扩展的例子。我们有如下的类：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> – 元类<br>Shape &#x3D; {area &#x3D; 0}<br>– 基类方法 new<br>function Shape:new (o,side)<br>  o &#x3D; o or {}<br>  setmetatable(o, self)<br>  self.__index &#x3D; self<br>  side &#x3D; side or 0<br>  self.area &#x3D; side*side;<br>  return o<br>end<br>– 基类方法 printArea<br>function Shape:printArea ()<br>  print(“The area is “,self.area)<br>end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">我们从上面的类中扩展出正方形类，如下所示：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Square &#x3D; Shape:new()<br>– 继承类方法 new<br>function Square:new (o,side)<br>  o &#x3D; o or Shape:new(o,side)<br>  setmetatable(o, self)<br>  self.__index &#x3D; self<br>  return o<br>end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 重写基类的函数  </span><br><span class="line"></span><br><span class="line">继承类可以重写基类的方法，从而根据自己的实际情况实现功能。示例代码如下所示：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>– 继承方法 printArea<br>function Square:printArea ()<br>  print(“The area of square is “,self.area)<br>end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 继承的完整示例  </span><br><span class="line"></span><br><span class="line">在元表的帮助下，我们可以使用新的 new 方法实现类的扩展（继承）。子类中保存了所有基类的成员变量和方法。  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> – Meta class<br>Shape &#x3D; {area &#x3D; 0}<br>– Base class method new<br>function Shape:new (o,side)<br>  o &#x3D; o or {}<br>  setmetatable(o, self)<br>  self.__index &#x3D; self<br>  side &#x3D; side or 0<br>  self.area &#x3D; side*side;<br>  return o<br>end<br>– Base class method printArea<br>function Shape:printArea ()<br>  print(“The area is “,self.area)<br>end</p>
+<p>– Creating an object<br>myshape &#x3D; Shape:new(nil,10)<br>myshape:printArea()</p>
+<p>Square &#x3D; Shape:new()<br>– Derived class method new<br>function Square:new (o,side)<br>  o &#x3D; o or Shape:new(o,side)<br>  setmetatable(o, self)<br>  self.__index &#x3D; self<br>  return o<br>end</p>
+<p>– Derived class method printArea<br>function Square:printArea ()<br>  print(“The area of square is “,self.area)<br>end</p>
+<p>– Creating an object<br>mysquare &#x3D; Square:new(nil,10)<br>mysquare:printArea()</p>
+<p>Rectangle &#x3D; Shape:new()<br>– Derived class method new<br>function Rectangle:new (o,length,breadth)<br>  o &#x3D; o or Shape:new(o)<br>  setmetatable(o, self)<br>  self.__index &#x3D; self<br>  self.area &#x3D; length * breadth<br>  return o<br>end</p>
+<p>– Derived class method printArea<br>function Rectangle:printArea ()<br>  print(“The area of Rectangle is “,self.area)<br>end</p>
+<p>– Creating an object<br>myrectangle &#x3D; Rectangle:new(nil,10,20)<br>myrectangle:printArea()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的程序，我们可以得到如下的输出结果：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The area is 	100<br>The area of square is 	100<br>The area of Rectangle is 	200</p>
+<pre><code>
+上面的例子中，我们继承基类 Shape 创建了两个子类 Rectange 与 Square。在子类中可以重写基类提供的方法。在这个例子中，子类重写了 printArea 方法。
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/lua-guide/2016-06-01-nested-if-statement/">Lua中的嵌套 if 语句</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/lua-guide/2016-06-01-operating-system-facilities/">Lua操作系统工具库</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

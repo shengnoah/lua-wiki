@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>tolua原理 - Lua教程</title>
+
+  
+    <meta name="description" content="tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？创建一个 userdata ，存放 C&#x2F;C++ 对象指针，然后给 userdata 添加元表，用index 和newindex 元方法映射 C&#x2F;C++ 中的对象方法。  c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中（_R[mt] &#x3D; name），并且设置这些类型的继承关系(通过_R.to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tolua原理">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-592_tolua%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？创建一个 userdata ，存放 C&#x2F;C++ 对象指针，然后给 userdata 添加元表，用index 和newindex 元方法映射 C&#x2F;C++ 中的对象方法。  c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中（_R[mt] &#x3D; name），并且设置这些类型的继承关系(通过_R.to">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.287Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.287Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">tolua原理</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#tolua-%E5%A6%82%E4%BD%95%E5%B0%86c-%E5%AF%B9%E8%B1%A1%E5%AF%BC%E5%85%A5%E5%88%B0lua%E9%87%8C%EF%BC%9Flua%E5%A6%82%E4%BD%95%E8%83%BD%E5%A4%9F%E8%AE%BF%E9%97%AEc-%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98%EF%BC%9F"><span class="toc-text">tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tolua-%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-text">tolua++如何处理类型的继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tolua-%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">tolua++如何管理对象的生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#tolua-open%E6%98%AF%E5%85%A5%E5%8F%A3%E7%82%B9%EF%BC%8C%E5%AE%83%E5%88%9B%E5%BB%BA%E5%BE%88%E5%A4%9A%E7%94%A8%E4%BA%8E%E7%AE%A1%E7%90%86%E7%9A%84%E5%86%85%E9%83%A8%E5%8F%98%E9%87%8F%EF%BC%8C%E4%BB%A5%E4%B8%8B%E7%94%A8-G%E6%8C%87%E4%BB%A3%E5%85%A8%E5%B1%80%E8%A1%A8%EF%BC%8C-R%E6%8C%87%E5%AE%9Aregistry-table%EF%BC%9A"><span class="toc-text">tolua_open是入口点，它创建很多用于管理的内部变量，以下用_G指代全局表，_R指定registry table：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%B3%A8%E5%86%8C%E3%80%82"><span class="toc-text">类的注册。</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>tolua原理</span></h1>
+<h4 id="tolua-如何将c-对象导入到lua里？lua如何能够访问c-对象成员？"><a href="#tolua-如何将c-对象导入到lua里？lua如何能够访问c-对象成员？" class="headerlink" title="tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？"></a>tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？</h4><p>创建一个 userdata ，存放 C/C++ 对象指针，然后给 userdata 添加元表，用<strong>index</strong> 和<strong>newindex</strong> 元方法映射 C/C++ 中的对象方法。</p>
+<ol>
+<li>c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中（_R[mt] = name），并且设置这些类型的继承关系(通过_R.tolua_super).</li>
+<li>创建一个类表(newtable)，并且设置_R中的原型表为元表（通过tolua_usertype），这个类表是放在全局表中的.</li>
+<li>在注册类型的时候metatable里新建了.get和.set表。</li>
+</ol>
+<p>​      成员变量：在.set和.get表里存储以变量名为键一读取设置c函数为值的键值对。</p>
+<p>​      变量的读取赋值会在在metatable的<strong>index和</strong>newindex里，以变量名为键，从.get和.set表里取得读取设置函数并调用。</p>
+<p>​      成员函数：只需要以函数名为键，函数为值存储在metatable里。</p>
+<ol start="3">
+<li>因为c++类型已经在注册表里，所以可以直接访问。</li>
+</ol>
+<p>​     lua里调用c++创建一个对象之后，c++需要返回这个对象：</p>
+<p>​     新建userdata,将c++指针放入userdata;以对象地址为key，userdata为值放入tolua_ubox表里；设置此类型对象的元表为userdata的元表。</p>
+<p>   经过上面4个步骤，就可以在lua里面调用类表。</p>
+<p>传入c++对象的tolua++函数是tolua_pushusertype。一般情况下，第一次使用这个函数将一个c++对象push到lua堆栈上时，才会新建userdata。tolua++会以c++对象地址为键，userdata为值，将键值对存储在tolua_ubox表里。下次推入同样的c++对象时，从这个表里取出userdata推入堆栈即可。</p>
+<h4 id="tolua-如何处理类型的继承"><a href="#tolua-如何处理类型的继承" class="headerlink" title="tolua++如何处理类型的继承"></a>tolua++如何处理类型的继承</h4><p>父类的metatable,是子类metatable的metatable。这样调用父类方法时，就会去父类的metatable里查找了。</p>
+<p>tolua++还维护了一个tolua_super表，这个表以c++类型的metatable为键，以一个表格为值。这个值表格以类型名称为键，以true为值，记录了metatable对应c++类型的父类有哪些。这个表格可以用来帮助判断对象是否是某一个类型。</p>
+<h4 id="tolua-如何管理对象的生命周期"><a href="#tolua-如何管理对象的生命周期" class="headerlink" title="tolua++如何管理对象的生命周期"></a>tolua++如何管理对象的生命周期</h4><p>一般情况下，当lua里对c++对象的引用变量可以被垃圾回收时，tolua++只是简单的释放userdata占用的4字节指针地址内存。但是也可以通过绑定或者代码指定的方式，让tolua++真正释放对象所占内存。</p>
+<p>绑定的方式，是指在将c++类型构造函数使用tolua++导出到lua里时，tolua++会自动生成new_local方法。如果在lua代码里，用这个方法新建对象时，tolua++会调用tolua_register_gc方法，指明回收对象时回收对象内存。</p>
+<p>在c++代码里，使用tolua_pushusertype_and_takeownership；在lua代码里，使用tolua.takeownership，都可以达到同样的目的。</p>
+<p>对于这些指定由tolua++回收内存的对象，如果其类型的析构函数也通过tolua++导出了，则在回收内存时，会通过delete运算符，调用对象的析构函数。否则只会使用free方法回收。</p>
+<p>tolua_register_gc方法，做的事情，是以对象指针为键，以对象metatable为值，将键值对存储在tolua_gc表里。在对象类型的metatable表的__gc方法里，tolua++会检查tolua_gc表是否包含以这个地址为键的表项。包含的话才会进行上述的内存回收工作。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>有的时候，在lua里取得一个c++对象后，我们想赋给它一些只在lua环境下有意义的属性。或者，我们想在lua里扩展一个c++类。tolua++也提供了实现这种需求的机制。</p>
+<p>tolua++在LUA_REGISTRY里维护了一张tolua_peers表。这张表以表示c++对象的userdata为键，以一张表格t为值。t里面就记录了这个对象在lua里扩展的属性。</p>
+<h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>C++在进行函数调用的时候是this指针+函数地址, Lua提供用户自定义的userdata.</p>
+<p> 一般lua中持有c++对象是使用userdata来实现的(userdata 类型用来将任意 C 数据保存在 Lua 变量中. 这个类型相当于一块原生的内存, 除了赋值和相同性判断, Lua 没有为之预定义任何操作.通过使用 metatable （元表）, 可以为 userdata 自定义一组操作. metatable 中还可以定义一个函数gc让 userdata 作垃圾收集时调用它。</p>
+<p>​     因此，metatable可以用来模拟C++里面的函数，通过替换它来实现函数，类成员的查找。Userdata可以很方便的获取到转换成C++里面this指针。通过this指针+类的函数地址即可调用C++里面的类成员函数。</p>
+<h5 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h5><p>tolua_open()创建很多用于管理的内部变量， 如记录所有基类；</p>
+<p>tolua_usertype() 创建两个表分别问type和 const type类型， const type 继承自 type;</p>
+<p>tolua_cclass()注册类设置元表建立父子类关系；</p>
+<p>tolua_beginmodule（）注册一个模块</p>
+<p>tolua_function()函数绑定到lua表中</p>
+<p>tolua_beginmodule（）结束模块注册。</p>
+<h5 id="tolua-open是入口点，它创建很多用于管理的内部变量，以下用-G指代全局表，-R指定registry-table："><a href="#tolua-open是入口点，它创建很多用于管理的内部变量，以下用-G指代全局表，-R指定registry-table：" class="headerlink" title="tolua_open是入口点，它创建很多用于管理的内部变量，以下用_G指代全局表，_R指定registry table："></a>tolua_open是入口点，它创建很多用于管理的内部变量，以下用_G指代全局表，_R指定registry table：</h5><p>1、_R.TOLUA_VALUE_ROOT={}， 这个表是cocos2dx自己加的，它把所有传入lua的cppobj/userdata都塞到这个表里，而且这还不是一个弱表，也就意味着cocos2dx创建的cpp obj，永远都不会被gc！只有在c++层面被delete时，才会去这个表里删除自己。因此，每一个cocos2dx cpp obj，是不可能依赖lua gc来释放的，必须纯手动管理（retain/release）。当然，根据cocos2dx自身的设计，每个obj在new出来refcount为1，并且会添加autorelease pool里去，因此只要它不在场景树上，下一帧就会被自动删除掉。通常情况下，lua代码是不会干涉其生命期的。但是有些时候我们会把某些节点从场景树上摘下，过一段时间又挂上去，这时就必须先调一下它的retain，如果之后忘记调release，那么它就永远不会销毁了。</p>
+<p>2、_R.tolua_peers={}，这是个弱表，用来缓存所有cppobj的ptr-&gt;peer table，所谓peer table，就是给每个cpp obj userdata关联的一个lua table，用来提供lua层面的额外的kv存储。tolua++把每个userdata的peer table设成该userdata的env，目的当然是为了方便找到它。因为在lua实现里，userdata的env是没有内定用途的，于是tolua++就拿来存peer table了。</p>
+<p>3、_R.tolua_ubox={}，也是个弱表，用来缓存所有cppobj的ptr-&gt;userdata映射，userdata里面存放的值其实就是ptr。这个表的用途是记录所有已经push到lua里的cppobj，每个cppobj第一次进入lua时，会去做创建userdata、关联metatable、设置peertable(env)等等一大堆操作，然后把ptr-&gt;userdata的映射关系记到这个表里，下次再被返回进lua时，就从这表里去查找，查到的话就直接拿已创建好的userdata用了。但是有一种特殊情况，就是第二次push时的类型是上一次的子类，也就是一个“特化类型”，那么需要改设metatable，以使子类的新函数能被访问到。</p>
+<p>4、_R.tolua_super={}，用来记录每个类型的所有基类，key是子类的mt，value则是个map，其中每个kv都是一个pair&lt;基类名,1&gt;。通过这个表可以快速知道两个类之间有无继承关系。</p>
+<p>5、_R.tolua_gc={}</p>
+<p>6、_R.tolua_gc_event = closure{ func:class_gc_event, upvalue:上述两个表格 }， 这是挂在每个类对应的metatable上的__gc方法。</p>
+<p>7、_G.tolua={}，里面存放tolua自己的一些工具函数</p>
+<h5 id="类的注册。"><a href="#类的注册。" class="headerlink" title="类的注册。"></a>类的注册。</h5><p>1、对每个用户类，首先要用tolua_usertype声明这是个用户类型：</p>
+<p>​     tolua_usertype(tolua_S, “<a href="http://www.java123.net/web/" target="_blank" rel="noopener noreferrer">Web</a>Socket”)</p>
+<p>它里面的做事情很简单，就是分别为type和const type“两个类”建表（这个表也就是其实例userdata的元表），然后设置type继承const type，从数据的角度来看也就是：</p>
+<p>//先用tolua_newmetatable分别创建创建两个元表，其内又调用tolua_classevents挂上各种属性</p>
+<p>_R[“WebSocket”]={</p>
+<p>  __index = cfunc:class_index_event,</p>
+<p>  __newindex = cfunc:class_newindex_event,</p>
+<p>  __gc=_R.tolua_gc_event //上面之&lt;一.6&gt;</p>
+<p>  //其它各种add/sub/lt/eq等方法……</p>
+<p>}</p>
+<p>_R[“const WebSocket”]= ……同上</p>
+<p>//mapsuper(L,type,ctype) 设置两者的继承关系</p>
+<p>_R.tolua_super[_R[“WebSocket”]] ={ “const WebSocket” = 1,} //上面之&lt;一.4&gt;</p>
+<p>//这个过程会递归执行，即把基类的所有基类都添到子类里</p>
+<p>for k,v in pairs(_R.tolua_super[_R[“const WebSocket”]]) do</p>
+<p>_R.tolua_super[_R[“WebSocket”]][k] = v</p>
+<p>end</p>
+<p> //在这一步里，mapsuper只是设置type-&gt;const type，但是在后续步骤里会添加大量type-&gt;base type，因此递归下来，每个type的_R.tolua_super[type]表还是有很多内容的。</p>
+<p>2、然后用tolua_cclass来注册类。</p>
+<p>​    tolua_cclass主要做两件事，一是把基类和父类（以及各const变种）之间的关系建立起来，二是注册类的析构函数（构造函数由普通的create静态函数替代了）。</p>
+<p>关于继承关系，总共四对：</p>
+<p>mapinheritance(L,name,base);</p>
+<p>mapinheritance(L,cname,name);</p>
+<p>mapsuper(L,cname,cbase);</p>
+<p>mapsuper(L,name,base);</p>
+<p>其中c指const。除了上面提到的mapsuper，又来了个mapinheritance， 再次对比说明下：</p>
+<p>mapsuper是：在_R.tolua_super记录每个类(k)有哪些父类(v)，所有父类以v[类名]=1的形式记录着。</p>
+<p>mapinheritance是：把父类元表表设成子类元表表的元表，同时给基类表上挂一个用以记录该类objptr-&gt;userdata映射的弱表，大致是：</p>
+<p>setmetatable( _R.type, _R.base_type )，</p>
+<p>_R.type.tolua_ubox = _R.base_type.tolua_ubox or weak({})</p>
+<p>其中第二句与前述之&lt;一.3&gt;有点相似，只是那是放在_R上的一个总表，而这里是为每个类单独建表，但子类与基类是共用的，也就是每次调用tolua_cclass注册一个类，就有“3个类”的表中的tolua_ubox字段指向了同一个表，这3个类从上到下是：base type -&gt; type -&gt; const type，至于const base type，那是在之前注册基类时处理的了。</p>
+<p>不过这里还有个另外的问题！注意和第2条里的对比：</p>
+<p>mapinheritance(L,cname,name) //tolua_cclass里</p>
+<p>mapsuper(L,type,ctype) //tolua_usertype里</p>
+<p>到底type和const type谁是“基类”呢？这主要看不同场合里“基类”这个概念是用于解决什么问题了：</p>
+<p>对mapsuper而言：在c++里一个声明为const的参数，实际是对函数本身的约束而不是对实参的约束：它只是强调函数内部不会去修改这个参数，至于传进来的实参本身是不是const的根本不重要，因为反正函数已经承诺不会去修改它了。所以要把一个类型为type的obj传给某个带有const type参数的函数，是没有问题的，但反过来，一个const type对象要传给接受type参数的函数是不行的，因为不知道它到底会不会修改（没有承诺不修改就意味着会修改）。再加上tolua++在生成胶水代码时，对每个参数都要做类型匹配检测（也就是在生成代码中大量的lua_isusertype调用），一个usertype变量是否合格，就是检查它所在位置的参数类型，是否是它可以“扮演”的角色，这些角色一是它的所有父类，二就是它以及所有父类的const变种了，而这些可以扮演的类型，恰好就是mapsuper所建立的_R.tolua_super体系中记录的内容了。</p>
+<p>对mapinheritance而言：它将基类表设成子类表的元表，这是为了在子类表里可以找到基类的函数（在class_index_event函数里，有一个while循环，通过这里建立的链条不断向上级查找）。就这个目的而言，type和const type谁做基类是一样的。但是，type还有真正的基类base，按照base-&gt;type-&gt;const type的继承顺序是恰好满足的：</p>
+<p>classA -&gt; const classA</p>
+<p>​          -&gt; classB -&gt; const classB</p>
+<p>​                         -&gt; classC -&gt; const classC</p>
+<p>​                                       -&gt; classD -&gt; const classD</p>
+<p>也就是说const类型在当前层次的链上是一个叶，下一层次不是从它继承，而是与它并级。</p>
+<p>而如果按照base-&gt;const type-&gt;type-&gt;const subtype-&gt;sub type，那么问题就麻烦了，因为在注册函数时，所有函数都是挂在不带const的类表上的，如CCNode的函数都在_R[“CCNode”]里，这也符合脚本里创建类实例时的习惯：直接以“纯粹的”（不带const的）类名来操作，比如CCNode:create，而不会写作const_CCNode:create()。那么在后者的继承链上，每一个const type实际成了断点，没有得到这个type自身的函数！</p>
+<p>3.tolua_beginmodule（） tolua_endmodule()  tolua_function()</p>
+<p>tolua_beginmodule(m_pState, “CTest”);是只注册一个模块，比如，我们管CTest叫做”CTest”，保持和C++的名称一样。这样在Lua的对象库中就会多了一个CTest的对象描述，等同于string,number等等基本类型，同tolua_beginmodule()和tolua_endmodule()对象必须成对出现，如果出现不成对的，你注册的C++类型将会失败。 </p>
+<p>tolua_function(m_pState, “SetData”, tolua_SetData_CTest);指的是将Lua里面CTest对象的”SetData”绑定到你的tolua_SetData_CTest()函数中去。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-601_Java%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8%E9%99%90%E6%B5%81%20Redis%20+%20Lua%20%E5%AE%9E%E8%B7%B5/">Java并发：分布式应用限流 Redis + Lua 实践</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-594_399.%20Evaluate%20Division/">399. Evaluate Division</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

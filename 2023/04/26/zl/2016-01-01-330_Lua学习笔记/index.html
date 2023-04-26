@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua学习笔记 - Lua教程</title>
+
+  
+    <meta name="description" content="基础函数assertassert(v[,message])如果其参数v的值为假（nil或false），它就调用error；否则，返回所有的参数。在错误情况时，message指那个错误对象；如果不提供这个参数，参数默认为”assertionfailed!” getmetatablegetmetatable(object)如果object不包含元表，返回nil。否则，如果在该对象的元表中有__meta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua学习笔记">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-330_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="基础函数assertassert(v[,message])如果其参数v的值为假（nil或false），它就调用error；否则，返回所有的参数。在错误情况时，message指那个错误对象；如果不提供这个参数，参数默认为”assertionfailed!” getmetatablegetmetatable(object)如果object不包含元表，返回nil。否则，如果在该对象的元表中有__meta">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.262Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.262Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua学习笔记</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0"><span class="toc-text">基础函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#assert"><span class="toc-text">assert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getmetatable"><span class="toc-text">getmetatable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ipairs"><span class="toc-text">ipairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#load"><span class="toc-text">load</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#loadfile"><span class="toc-text">loadfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#next"><span class="toc-text">next</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pairs"><span class="toc-text">pairs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pcall"><span class="toc-text">pcall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#print"><span class="toc-text">print</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rawequal"><span class="toc-text">rawequal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rawget"><span class="toc-text">rawget</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rawlen"><span class="toc-text">rawlen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rawset"><span class="toc-text">rawset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select"><span class="toc-text">select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setmetatable"><span class="toc-text">setmetatable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tonumber"><span class="toc-text">tonumber</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tostring"><span class="toc-text">tostring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type"><span class="toc-text">type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VERSION"><span class="toc-text">_VERSION</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E8%A1%A8"><span class="toc-text">元表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E6%96%B9%E6%B3%95"><span class="toc-text">元方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E8%A1%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">元表的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%85%83%E8%A1%A8%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-text">对元表的处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua学习笔记</span></h1>
+<h2 id="基础函数"><a href="#基础函数" class="headerlink" title="基础函数"></a>基础函数</h2><h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h3><p>assert(v[,message])<br/>如果其参数v的值为假（nil或false），它就调用error；否则，返回所有的参数。在错误情况时，message指那个错误对象；如果不提供这个参数，参数默认为”assertionfailed!”</p>
+<h3 id="getmetatable"><a href="#getmetatable" class="headerlink" title="getmetatable"></a>getmetatable</h3><p>getmetatable(object)<br/>如果object不包含元表，返回nil。否则，如果在该对象的元表中有<strong>__metatable</strong>域时返回其关联值，没有时返回该对象的元表</p>
+<h3 id="ipairs"><a href="#ipairs" class="headerlink" title="ipairs"></a>ipairs</h3><p>ipairs(t)<br/>返回三个值（迭代函数、表t以及0），如此，以下代码<br/>    for i,v in ipairs(t) do body end</p>
+<h3 id="load"><a href="#load" class="headerlink" title="load"></a>load</h3><p>加载一个代码块。<br/>如果chunk是一个字符串，代码块指这个字符串。如果chunk是一个函数，load不断地调用它获取代码块的片断。每次对chunk的调用都必须返回一个字符串紧紧连接在上次调用的返回串之后。当返回空串、nil、或是不返回值时，都表示代码块结束。<br/>如果没有语法错误，则以函数形式返回编译好的代码块；否则，返回nil加上错误消息。<br/>如果结果函数有上值，env被设为第一个上值。若不提供此参数，将全局环境替代它。所有其它上值初始化为nil。（当你加载主代码块时候，结果函数一定有且仅有一个上值_ENV。然而，如果你加载一个用函数（参见string.dump，结果函数可以有任意数量的上值）创建出来的二进制代码块时，所有的上值都是新创建出来的。也就是说它们不会和别的任何函数共享。<br/>chunkname在错误消息和调试消息中，用于代码块的名字。如果不提供此参数，它默认为字符串chunk。chunk不是字符串时，则为”=(load)”。<br/>字符串mode用于控制代码块是文本还是二进制（即预编译代码块）。它可以是字符串”b”（只能是二进制代码块），”t”（只能是文本代码块），或”bt”（可以是二进制也可以是文本）。默认值为”bt”。<br/><strong>Lua不会对二进制代码块做健壮性检查。恶意构造一个二进制块有可能把解释器弄崩溃。</strong></p>
+<h3 id="loadfile"><a href="#loadfile" class="headerlink" title="loadfile"></a>loadfile</h3><p>loadfile([filename[,mode[,env]]])<br/>和load类似，不过是从文件filename或标准输入（如果文件名未提供）中获取代码块。</p>
+<h3 id="next"><a href="#next" class="headerlink" title="next"></a>next</h3><p>next(table[,index])<br/>运行程序来遍历表中的所有域。第一个参数是要遍历的表，第二个参数是表中的某个键。next返回该键的下一个键及其关联的值。如果用nil作为第二个参数调用next将返回初始键及其关联值。当以最后一个键去调用，或是以nil调用一张空表时，next返回nil。如果不提供第二个参数，将认为它就是nil。特别指出，你可以用next(t)来判断一张表是否是空的。<br/>索引在遍历过程中的次序无定义，即使是数字索引也是这样。（如果想按数字次序遍历表，可以使用数字形式的for。）<br/>当在遍历过程中你给表中并不存在的域赋值，next的行为是未定义的。然而你可以去修改那些已存在的域。特别指出，你可以清除一些已存在的域。</p>
+<h3 id="pairs"><a href="#pairs" class="headerlink" title="pairs"></a>pairs</h3><p>pairs(t)<br/>如果t有元方法<strong>__pairs</strong>，以t为参数调用它，并返回其返回的前三个值。<br/>否则，返回三个值：next函数，表t，以及nil<br/>    for k,v in pairs(t) do body end<br/>能迭代表t中的所有键值对。</p>
+<h3 id="pcall"><a href="#pcall" class="headerlink" title="pcall"></a>pcall</h3><p>pcall(f[,arg1,···])<br/>传入参数，以保护模式调用函数f。这意味着f中的任何错误不会抛出；取而代之的是，pcall会将错误捕获到，并返回一个状态码。第一个返回值是状态码（一个布尔量），当没有错误时，其为真。此时，pcall同样会在状态码后返回所有调用的结果。在有错误时，pcall返回false加错误消息。</p>
+<h3 id="print"><a href="#print" class="headerlink" title="print"></a>print</h3><p>print(···)<br/>接收任意数量的参数，并将它们的值打印到stdout。它用tostring函数将每个参数都转换为字符串。print不用于做格式化输出。仅作为看一下某个值的快捷方式。多用于调试。完整的对输出的控制，请使用string.format以及io.write。</p>
+<h3 id="rawequal"><a href="#rawequal" class="headerlink" title="rawequal"></a>rawequal</h3><p>rawequal(v1,v2)<br/>在不触发任何元方法的情况下检查v1是否和v2相等。返回一个布尔量。</p>
+<h3 id="rawget"><a href="#rawget" class="headerlink" title="rawget"></a>rawget</h3><p>rawget(table,index)<br/>在不触发任何元方法的情况下获取table[index]的值。table必须是一张表；index可以是任何值。</p>
+<h3 id="rawlen"><a href="#rawlen" class="headerlink" title="rawlen"></a>rawlen</h3><p>rawlen(v)<br/>在不触发任何元方法的情况下返回对象v的长度。v可以是表或字符串。它返回一个整数。</p>
+<h3 id="rawset"><a href="#rawset" class="headerlink" title="rawset"></a>rawset</h3><p>rawset(table,index,value)<br/>在不触发任何元方法的情况下将table[index]设为value。table必须是一张表，index可以是nil与NaN之外的任何值。value可以是任何Lua值。<br/>这个函数返回table。</p>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select(index,···)<br/>如果index是个数字，那么返回参数中第index个之后的部分；负的数字会从后向前索引（-1指最后一个参数）。否则，index必须是字符串”#”，此时select返回参数的个数。</p>
+<h3 id="setmetatable"><a href="#setmetatable" class="headerlink" title="setmetatable"></a>setmetatable</h3><p>setmetatable(table,metatable)<br/>给指定表设置元表。（你不能在Lua中改变其它类型值的元表，那些只能在C里做。）如果metatable是nil，将指定表的元表移除。如果原来那张元表有”__metatable”域，抛出一个错误。<br/>这个函数返回table。</p>
+<h3 id="tonumber"><a href="#tonumber" class="headerlink" title="tonumber"></a>tonumber</h3><p>tonumber(e[,base])<br/>如果调用的时候没有base，tonumber尝试把参数转换为一个数字。如果参数已经是一个数字，或是一个可以转换为数字的字符串，tonumber就返回这个数字；否则返回nil。<br/>字符串的转换结果可能是整数也可能是浮点数，这取决于Lua的转换文法（参见§3.1）。（字符串可以有前置和后置的空格，可以带符号。）<br/>当传入base调用它时，e必须是一个以该进制表示的整数字符串。进制可以是2到36（包含2和36）之间的任何整数。大于10进制时，字母’A’（大小写均可）表示10，’B’表示11，依次到’Z’表示35。如果字符串e不是该进制下的合法数字，函数返回nil。</p>
+<h3 id="tostring"><a href="#tostring" class="headerlink" title="tostring"></a>tostring</h3><p>tostring(v)<br/>可以接收任何类型，它将其转换为人可阅读的字符串形式。浮点数总被转换为浮点数的表现形式（小数点形式或是指数形式）。（如果想完全控制数字如何被转换，可以使用string.format。）<br/>如果v有”__tostring”域的元表，tostring会以v为参数调用它。并用它的结果作为返回值。</p>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p>type(v)<br/>将参数的类型编码为一个字符串返回。函数可能的返回值有”nil”（一个字符串，而不是nil值），”number”，”string”，”boolean”，”table”，”function”，”thread”，”userdata”。</p>
+<h3 id="VERSION"><a href="#VERSION" class="headerlink" title="_VERSION"></a>_VERSION</h3><p>_VERSION<br/>一个包含有当前解释器版本号的全局变量（并非函数）。当前这个变量的值为”Lua5.3”。<br/>xpcall(f,msgh[,arg1,···])<br/>这个函数和pcall类似。不过它可以额外设置一个消息处理器msgh</p>
+<h2 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h2><p>Lua中的每个值都可以有一个元表。这个元表就是一个普通的Lua表，它用于定义原始值在特定操作下的行为。如果你想改变一个值在特定操作下的行为，你可以在它的元表中设置对应域。例如，当你对非数字值做加操作时，Lua会检查该值的元表中的<strong>__add</strong>域下的函数。如果能找到，Lua则调用这个函数来完成加这个操作。<br/>Lua中的每个值都有一套预定义的操作集合，如数字相加等。但无法将两个table相加，此时可通过元表修改一个值的行为，使其在面对一个非预定义的操作时执行一个指定操作。<code></code><br/>访问机制：<br/>一般的元方法都只针对Lua的核心，也就是一个虚拟机。它会检测一个操作中的值是否有元表，这些元表是否定义了关于次操作的元方法。例如两个table相加，先检查两者之一是否有元表，之后检查是否有一个叫<strong>__add</strong>的字段，若找到，则调用对应的值。<strong>__add</strong>等即时字段，其对应的值（往往是一个函数或是table）就是“元方法”</p>
+<h2 id="元方法"><a href="#元方法" class="headerlink" title="元方法"></a>元方法</h2><p>元表中的键对应着不同的事件名，键关联的那些值被称为元方法。在上面那个例子中引用的事件为”add”，完成加操作的那个函数就是元方法。</p>
+<h2 id="元表的作用"><a href="#元表的作用" class="headerlink" title="元表的作用"></a>元表的作用</h2><p>[1].修改表的操作符功能或为操作符添加新功能<br/>[2].使用元表中的<strong>__index</strong>方法，我们可以实现在表中查找键不存在时转而在元表中查找键值的功能</p>
+<h2 id="对元表的处理"><a href="#对元表的处理" class="headerlink" title="对元表的处理"></a>对元表的处理</h2><p>Lua提供了两个十分重要的用来处理元表的方法，如下：<br/>setmetatable(table,metatable):此方法用于为一个表设置元表，setmetatable函数会返回第一个参数<br/>getmetatable(table)：此方法用于获取表的元表对象</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/></pre></td><td class="code"><pre><span class="line">将其中的一个表设为另一个表的元表</span><br/><span class="line"><span class="built_in">table</span>={}</span><br/><span class="line">metatable={}</span><br/><span class="line"><span class="built_in">setmetatable</span>(<span class="built_in">table</span>,metatable)</span><br/><span class="line">简写如下</span><br/><span class="line"><span class="built_in">table</span>=<span class="built_in">setmetatable</span>(<span class="built_in">table</span>,metatable)</span><br/><span class="line">**<span class="built_in">__index</span>**元方法,如下，完成了在原表中查找键不存在时转而去元表中查找该键的功能</span><br/><span class="line">ytable=<span class="built_in">setmetatable</span>({key1=<span class="string">&#34;value&#34;</span>},{</span><br/><span class="line">	<span class="built_in">__index</span>=<span class="function"><span class="keyword">function</span><span class="params">(ytable,key)</span></span></span><br/><span class="line">		ifkey==<span class="string">&#34;key2&#34;</span><span class="keyword">then</span></span><br/><span class="line">			<span class="keyword">return</span><span class="string">&#34;metaTableValue&#34;</span></span><br/><span class="line">		<span class="keyword">else</span></span><br/><span class="line">			returnytable[key]</span><br/><span class="line">		<span class="keyword">end</span></span><br/><span class="line">	<span class="keyword">end</span></span><br/><span class="line">})</span><br/><span class="line"><span class="built_in">print</span>(ytable.key1,ytable.key2)==&gt;&gt;valuemetaTableValue</span><br/><span class="line">实例<span class="number">1</span>运行过程分析：</span><br/><span class="line"><span class="number">1.</span>表ytable为{key=<span class="string">&#34;value&#34;</span>}</span><br/><span class="line"><span class="number">2.</span>为ytable设置了一个元表，该元表的键**<span class="built_in">__index</span>**存储了一个函数，我们称这个函数为元方法。</span><br/><span class="line"><span class="number">3.</span>这个元方法的工作也十分简单，它仅查找索引“key2”,如果找到该索引值，则返回<span class="string">&#34;metaTableValue&#34;</span>,否则返回ytable中索引对应的值</span><br/><span class="line"></span><br/><span class="line">简化上述表：</span><br/><span class="line">ytable=<span class="built_in">setmetatable</span>({key1=<span class="string">&#34;value&#34;</span>},{</span><br/><span class="line">	<span class="built_in">__index</span>={</span><br/><span class="line">		key2=<span class="string">&#34;metaTableValue&#34;</span></span><br/><span class="line">	}</span><br/><span class="line">})</span><br/><span class="line"><span class="built_in">print</span>(ytable.key1,ytable.key2)</span><br/></pre></td></tr></tbody></table></figure>
+<p>##参考书籍<br/>[1].<a href="https://cloudwu.github.io/lua53doc/manual.html" target="_blank" rel="noopener noreferrer">Lua5.3参考手册</a></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-326_Lua%20Tabel(%E6%95%B0%E6%8D%AE%E9%9B%86/">Lua Tabel(数据集</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-32_%E5%AE%89%E5%8D%93cocos2d%E6%B8%B8%E6%88%8FLua%E7%83%AD%E6%9B%B4%E6%96%B0%E7%9A%84%E4%B8%80%E6%AC%A1%E7%A0%B4%E8%A7%A3/">安卓cocos2d游戏Lua热更新的一次破解</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>python dictionary lua table - Lua教程</title>
+
+  
+    <meta name="description" content="python dictionary 与 lua table   公司前端的技术栈是 C++ &amp; lua &amp; python, C++、lua做业务开发，python做工具。lua特别好用的东西就是load, 将某些数据（一般是excel）转成lua的table存储，用的时候直接load进来。但是，有些数据，并不是excel转过来的，通过多个excel来组成。 例如：描述: 一个卡牌游">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python dictionary lua table">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-753_python%20dictionary%20lua%20table/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="python dictionary 与 lua table   公司前端的技术栈是 C++ &amp; lua &amp; python, C++、lua做业务开发，python做工具。lua特别好用的东西就是load, 将某些数据（一般是excel）转成lua的table存储，用的时候直接load进来。但是，有些数据，并不是excel转过来的，通过多个excel来组成。 例如：描述: 一个卡牌游">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.303Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.303Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">python dictionary lua table</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E6%A6%82%E6%80%9D%E8%B7%AF"><span class="toc-text">大概思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82"><span class="toc-text">一些细节</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>python dictionary lua table</span></h1>
+<p>python dictionary 与 lua table</p>
+
+<p><br/></p>
+<p>公司前端的技术栈是 C++ &amp; lua &amp; python, C++、lua做业务开发，python做工具。<br/>lua特别好用的东西就是load, 将某些数据（一般是excel）转成lua的table存储，用的时候直接load进来。<br/>但是，有些数据，并不是excel转过来的，通过多个excel来组成。</p>
+<p>例如：<br/>描述: 一个卡牌游戏，肯定有一张卡牌表，在表中我可以知道每张卡牌属于哪个职业。</p>
+<p>Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?<br/>我需要遍历这个卡牌表，然后把相应职业的卡牌筛选出来。<br/>但是，这个方法随着卡牌库的增加，所花费的时间也不断增加，早晚会出事呀。<br/>当然，可以通过各种人为规定，算法设计来加快速度。<br/>可是，都没有根本去解决问题。<br/>回过头来，可以发现，当我们有了这张卡牌表，我就可以知道某职业都有哪些牌。<br/>这就是像卡牌表一样，不需要在游戏中动态去生成，直接可以本地存储静态的一个职业对应卡牌的表。<br/>这样，即使生成这张表再慢，也不会消耗游戏运行中的时间和性能。</p>
+<p><br/></p>
+<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>现在目标很明确了，我要把n个表，根据需求组合拼装成1个表。<br/>麻烦的是，表的生成这些东西，我们都已经做成脚本，交给策划生成了。<br/>这个东西，肯定也需要交给策划进行。<br/>不可能让策划打完表以后，程序再去执行一遍lua脚本。<br/>（PS：这种东西一定要规避掉，一定要学会自动化，工具化。不要把我们的时间浪费在这些可以自动化、工具化的东西上。）</p>
+<p>所以，目前状况是：<br/>语言：python<br/>输入：n张lua表<br/>输出：1张lua表<br/>逻辑：一系列插入、查找、遍历等</p>
+<p>中间的逻辑就不用多说了，python的dict 和 lua的table用法也挺像的。<br/>主要处理两个问题：</p>
+<ol>
+<li>将lua table 转换成 python dict</li>
+<li>将python dict 转换成 lua table</li>
+</ol>
+<h2 id="大概思路"><a href="#大概思路" class="headerlink" title="大概思路"></a>大概思路</h2><p>在动手前，肯定要看有没有好的现成的轮子。重复造轮子还是不要了吧，不一定造的比人家好呢。<br/>经过一番查找，发现了 slpp[ <a href="https://github.com/SirAnthony/slpp" target="_blank" rel="noopener noreferrer">https://github.com/SirAnthony/slpp</a> ]<br/>它可以实现lua table 和 python dict之间的转换。<br/>但是，它是python2.x版本。<br/>然后，在推送请求上看到，有人已经做了python3.x版本。 slpp-23[ <a href="https://github.com/IlyaSkriblovsky/slpp-23" target="_blank" rel="noopener noreferrer">https://github.com/IlyaSkriblovsky/slpp-23</a> ]</p>
+<h2 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h2><p>大概的方向差不多了，剩下的就是符合我所需要的格式。<br/>因为，我的文件格式是这样的:</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> xx_xx = {</span><br/><span class="line">	[<span class="number">1</span>] = {</span><br/><span class="line">		...</span><br/><span class="line">	},</span><br/><span class="line">	[<span class="number">2</span>] = {</span><br/><span class="line">		...</span><br/><span class="line">	},</span><br/><span class="line">	...</span><br/><span class="line">}</span><br/><span class="line"><span class="keyword">return</span> xx_xx</span><br/></pre></td></tr></tbody></table></figure>
+<p>对于输入要求，还简单一些：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/></pre></td><td class="code"><pre><span class="line"><span class="string">&#34;&#34;&#34;</span></span><br/><span class="line"><span class="string">    描述:</span></span><br/><span class="line"><span class="string">        将lua的table转成python的dict</span></span><br/><span class="line"><span class="string">    </span></span><br/><span class="line"><span class="string">    参数:</span></span><br/><span class="line"><span class="string">        table_file_name - string</span></span><br/><span class="line"><span class="string">            文件名（需要加后缀）</span></span><br/><span class="line"><span class="string"></span></span><br/><span class="line"><span class="string">    返回:</span></span><br/><span class="line"><span class="string">        dict格式的table</span></span><br/><span class="line"><span class="string">&#34;&#34;&#34;</span></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="params">(table_file_name)</span>:</span></span><br/><span class="line">    content = <span class="string">&#34;&#34;</span></span><br/><span class="line">    <span class="keyword">with</span> open(table_file_name, <span class="string">&#39;r&#39;</span>, encoding=<span class="string">&#39;utf-8&#39;</span>) <span class="keyword">as</span> f:</span><br/><span class="line">        content = f.read()</span><br/><span class="line"></span><br/><span class="line">    content = content[content.find(<span class="string">&#39;{&#39;</span>) : content.rfind(<span class="string">&#39;}&#39;</span>)+<span class="number">1</span>]</span><br/><span class="line">    content = lua.decode(content)</span><br/><span class="line"></span><br/><span class="line">    <span class="keyword">return</span> content</span><br/></pre></td></tr></tbody></table></figure>
+<p>但是输出，就不能用 lua.encode 了，因为它输出东西是这样子的：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/><span class="line">57</span><br/><span class="line">58</span><br/><span class="line">59</span><br/><span class="line">60</span><br/><span class="line">61</span><br/><span class="line">62</span><br/><span class="line">63</span><br/><span class="line">64</span><br/><span class="line">65</span><br/><span class="line">66</span><br/><span class="line">67</span><br/><span class="line">68</span><br/><span class="line">69</span><br/><span class="line">70</span><br/><span class="line">71</span><br/><span class="line">72</span><br/><span class="line">73</span><br/></pre></td><td class="code"><pre><span class="line">{</span><br/><span class="line">{</span><br/><span class="line">	{</span><br/><span class="line">			z = <span class="number">335</span>,</span><br/><span class="line">			x = <span class="number">1322</span>,</span><br/><span class="line">			cityId = <span class="number">2</span>,</span><br/><span class="line">			id = <span class="number">4</span></span><br/><span class="line">		},</span><br/><span class="line">	{</span><br/><span class="line">			z = <span class="number">140</span>,</span><br/><span class="line">			x = <span class="number">3396</span>,</span><br/><span class="line">			cityId = <span class="number">4</span>,</span><br/><span class="line">			id = <span class="number">3</span></span><br/><span class="line">		}</span><br/><span class="line">	},</span><br/><span class="line">{</span><br/><span class="line">	{</span><br/><span class="line">			z = <span class="number">267.9</span>,</span><br/><span class="line">			x = <span class="number">2639.4</span>,</span><br/><span class="line">			cityId = <span class="number">3</span>,</span><br/><span class="line">			id = <span class="number">3</span></span><br/><span class="line">		},</span><br/><span class="line">	{</span><br/><span class="line">			z = <span class="number">-1.2</span>,</span><br/><span class="line">			x = <span class="number">2006</span>,</span><br/><span class="line">			cityId = <span class="number">1</span>,</span><br/><span class="line">			id = <span class="number">8</span></span><br/><span class="line">		}</span><br/><span class="line">	},</span><br/><span class="line">{</span><br/><span class="line">	{</span><br/><span class="line">			cityId = <span class="number">5</span>,</span><br/><span class="line">			id = <span class="number">6</span></span><br/><span class="line">		},</span><br/><span class="line">	{</span><br/><span class="line">			cityId = <span class="number">2</span>,</span><br/><span class="line">			id = <span class="number">5</span></span><br/><span class="line">		}</span><br/><span class="line">	},</span><br/><span class="line">{</span><br/><span class="line">	{</span><br/><span class="line">			z = <span class="number">122</span>,</span><br/><span class="line">			x = <span class="number">968</span>,</span><br/><span class="line">			cityId = <span class="number">5</span>,</span><br/><span class="line">			id = <span class="number">6</span></span><br/><span class="line">		},</span><br/><span class="line">	{</span><br/><span class="line">			cityId = <span class="number">1</span>,</span><br/><span class="line">			id = <span class="number">5</span></span><br/><span class="line">		}</span><br/><span class="line">	},</span><br/><span class="line">{</span><br/><span class="line">	{</span><br/><span class="line">			cityId = <span class="number">4</span>,</span><br/><span class="line">			id = <span class="number">5</span></span><br/><span class="line">		}</span><br/><span class="line">	},</span><br/><span class="line">{</span><br/><span class="line">		info = 	{</span><br/><span class="line">			<span class="number">123</span> = <span class="number">123</span>,</span><br/><span class="line">			age = <span class="number">98</span>,</span><br/><span class="line">			sex = <span class="string">&#34;man&#34;</span>,</span><br/><span class="line">			hobby = <span class="string">&#34;basketball&#34;</span>,</span><br/><span class="line">			other = 		{</span><br/><span class="line">				addr = <span class="string">&#34;China&#34;</span>,</span><br/><span class="line">				id_card = <span class="string">&#34;1234567890abc&#34;</span></span><br/><span class="line">			},</span><br/><span class="line">			name = <span class="string">&#34;ltree98&#34;</span></span><br/><span class="line">		},</span><br/><span class="line">		<span class="number">2</span> = <span class="string">&#34;hello ltree98&#34;</span>,</span><br/><span class="line">		id = <span class="string">&#34;12345&#34;</span></span><br/><span class="line">	}</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p>没错，它的格式就是这样的，包括对齐。<br/>只能说能用。<br/>我想了一下，发现我需要的输出格式其实很简单，递归的输出就行。<br/>我也懒得改它的源码了，直接手撸了一个。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outPutTab</span><span class="params">(depth, outputHandler)</span>:</span></span><br/><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, depth):</span><br/><span class="line">        outputHandler.write(<span class="string">&#39;t&#39;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 将字典递归转化输出</span></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">RecursiveSerachDict</span><span class="params">(depth, dic, outputHandler)</span>:</span></span><br/><span class="line">    <span class="keyword">for</span> key, val <span class="keyword">in</span> dic.items():</span><br/><span class="line">        <span class="comment"># output key</span></span><br/><span class="line">        outPutTab(depth, outputHandler)</span><br/><span class="line"></span><br/><span class="line">        <span class="keyword">if</span> isinstance(key, Number):   </span><br/><span class="line">            outputHandler.write(<span class="string">&#39;[%s] = &#39;</span> % str(key))</span><br/><span class="line">        <span class="keyword">elif</span> isinstance(key, str):</span><br/><span class="line">            outputHandler.write(<span class="string">&#39;%s = &#39;</span> % key)</span><br/><span class="line"></span><br/><span class="line">        <span class="comment"># output val</span></span><br/><span class="line">        <span class="keyword">if</span> isinstance(val, dict):</span><br/><span class="line">            outputHandler.write(<span class="string">&#39;{n&#39;</span>)</span><br/><span class="line">            RecursiveSerachDict(depth+<span class="number">1</span>, val, outputHandler)</span><br/><span class="line">            outPutTab(depth, outputHandler)</span><br/><span class="line">            outputHandler.write(<span class="string">&#39;},&#39;</span>)</span><br/><span class="line">        <span class="keyword">elif</span> isinstance(val, Number):</span><br/><span class="line">            outputHandler.write(<span class="string">&#39;%s,&#39;</span> % str(val))</span><br/><span class="line">        <span class="keyword">elif</span> isinstance(val, str):</span><br/><span class="line">            outputHandler.write(<span class="string">&#39;&#39;%s&#39;,&#39;</span> % val)</span><br/><span class="line"></span><br/><span class="line">        outputHandler.write(<span class="string">&#39;n&#39;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 将字典写入lua</span></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_dict_lua</span><span class="params">(dict_tmp, table_name, file_path)</span>:</span></span><br/><span class="line">    <span class="keyword">if</span>(type(dict_tmp) != dict):</span><br/><span class="line">        print(<span class="string">&#34;ERROR: only parse dict type!&#34;</span>)</span><br/><span class="line">        <span class="keyword">return</span></span><br/><span class="line"></span><br/><span class="line">    table_file_path = os.path.join(file_path, <span class="string">&#39;%s.lua&#39;</span> % table_name)</span><br/><span class="line">    outputHandler = codecs.open(table_file_path, <span class="string">&#39;w&#39;</span>, encoding=<span class="string">&#39;utf-8&#39;</span>)</span><br/><span class="line"></span><br/><span class="line">    outputHandler.write(<span class="string">&#39;nlocal %s = {n&#39;</span> % table_name)</span><br/><span class="line"></span><br/><span class="line">    RecursiveSerachDict(<span class="number">1</span>, dict_tmp, outputHandler)</span><br/><span class="line"></span><br/><span class="line">    outputHandler.write(<span class="string">&#39;}n&#39;</span>)</span><br/><span class="line">    outputHandler.write(<span class="string">&#39;nreturn %snn&#39;</span> % table_name)</span><br/><span class="line">    outputHandler.close()</span><br/></pre></td></tr></tbody></table></figure>
+<p>我的输出：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/><span class="line">57</span><br/><span class="line">58</span><br/><span class="line">59</span><br/><span class="line">60</span><br/><span class="line">61</span><br/><span class="line">62</span><br/><span class="line">63</span><br/><span class="line">64</span><br/><span class="line">65</span><br/><span class="line">66</span><br/><span class="line">67</span><br/><span class="line">68</span><br/><span class="line">69</span><br/><span class="line">70</span><br/><span class="line">71</span><br/><span class="line">72</span><br/><span class="line">73</span><br/><span class="line">74</span><br/><span class="line">75</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> dict_portal_group = {</span><br/><span class="line">	[<span class="number">1</span>] = {</span><br/><span class="line">		[<span class="number">1</span>] = {</span><br/><span class="line">			z = <span class="number">335</span>,</span><br/><span class="line">			x = <span class="number">1322</span>,</span><br/><span class="line">			cityId = <span class="number">2</span>,</span><br/><span class="line">			id = <span class="number">4</span>,</span><br/><span class="line">		},</span><br/><span class="line">		[<span class="number">2</span>] = {</span><br/><span class="line">			z = <span class="number">140</span>,</span><br/><span class="line">			x = <span class="number">3396</span>,</span><br/><span class="line">			cityId = <span class="number">4</span>,</span><br/><span class="line">			id = <span class="number">3</span>,</span><br/><span class="line">		},</span><br/><span class="line">	},</span><br/><span class="line">	[<span class="number">2</span>] = {</span><br/><span class="line">		[<span class="number">1</span>] = {</span><br/><span class="line">			z = <span class="number">267.9</span>,</span><br/><span class="line">			x = <span class="number">2639.4</span>,</span><br/><span class="line">			cityId = <span class="number">3</span>,</span><br/><span class="line">			id = <span class="number">3</span>,</span><br/><span class="line">		},</span><br/><span class="line">		[<span class="number">2</span>] = {</span><br/><span class="line">			z = <span class="number">-1.2</span>,</span><br/><span class="line">			x = <span class="number">2006</span>,</span><br/><span class="line">			cityId = <span class="number">1</span>,</span><br/><span class="line">			id = <span class="number">8</span>,</span><br/><span class="line">		},</span><br/><span class="line">	},</span><br/><span class="line">	[<span class="number">3</span>] = {</span><br/><span class="line">		[<span class="number">1</span>] = {</span><br/><span class="line">			cityId = <span class="number">5</span>,</span><br/><span class="line">			id = <span class="number">6</span>,</span><br/><span class="line">		},</span><br/><span class="line">		[<span class="number">2</span>] = {</span><br/><span class="line">			cityId = <span class="number">2</span>,</span><br/><span class="line">			id = <span class="number">5</span>,</span><br/><span class="line">		},</span><br/><span class="line">	},</span><br/><span class="line">	[<span class="number">4</span>] = {</span><br/><span class="line">		[<span class="number">1</span>] = {</span><br/><span class="line">			z = <span class="number">122</span>,</span><br/><span class="line">			x = <span class="number">968</span>,</span><br/><span class="line">			cityId = <span class="number">5</span>,</span><br/><span class="line">			id = <span class="number">6</span>,</span><br/><span class="line">		},</span><br/><span class="line">		[<span class="number">2</span>] = {</span><br/><span class="line">			cityId = <span class="number">1</span>,</span><br/><span class="line">			id = <span class="number">5</span>,</span><br/><span class="line">		},</span><br/><span class="line">	},</span><br/><span class="line">	[<span class="number">5</span>] = {</span><br/><span class="line">		[<span class="number">1</span>] = {</span><br/><span class="line">			cityId = <span class="number">4</span>,</span><br/><span class="line">			id = <span class="number">5</span>,</span><br/><span class="line">		},</span><br/><span class="line">	},</span><br/><span class="line">	[<span class="number">6</span>] = {</span><br/><span class="line">		info = {</span><br/><span class="line">			[<span class="number">123</span>] = <span class="number">123</span>,</span><br/><span class="line">			age = <span class="number">98</span>,</span><br/><span class="line">			sex = <span class="string">&#39;man&#39;</span>,</span><br/><span class="line">			hobby = <span class="string">&#39;basketball&#39;</span>,</span><br/><span class="line">			other = {</span><br/><span class="line">				addr = <span class="string">&#39;China&#39;</span>,</span><br/><span class="line">				id_card = <span class="string">&#39;1234567890abc&#39;</span>,</span><br/><span class="line">			},</span><br/><span class="line">			name = <span class="string">&#39;ltree98&#39;</span>,</span><br/><span class="line">		},</span><br/><span class="line">		[<span class="number">2</span>] = <span class="string">&#39;hello ltree98&#39;</span>,</span><br/><span class="line">		id = <span class="string">&#39;12345&#39;</span>,</span><br/><span class="line">	},</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">return</span> dict_portal_group</span><br/></pre></td></tr></tbody></table></figure>
+<p>嗯，大概就是这样了。</p>
+<p><br/></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，就要遵循一个思路，<strong>静态的数据结构尽量不要再游戏过程中动态生成</strong>。<br/>然后，前端要负责的东西太多了，<strong>尽量要把这些东西工具化、脚本化</strong>。<br/>最后，<strong>代码不止能用，还要能看</strong>。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-754_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E5%85%83%E8%A1%A8%E4%B8%8E%E5%85%83%E6%96%B9%E6%B3%95/">Lua入门教程：元表与元方法</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-757_Mac%E4%B8%8A%E6%90%AD%E5%BB%BAlua%E7%8E%AF%E5%A2%83%E5%B9%B6%E8%BF%9E%E6%8E%A5mysql/">Mac上搭建lua环境并连接mysql</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

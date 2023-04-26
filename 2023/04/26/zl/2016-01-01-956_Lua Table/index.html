@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua Table - Lua教程</title>
+
+  
+    <meta name="description" content="前言  table 是lua中是lua中唯一的复合结构， 大多数高级语言中具有的：Array&#x2F;Map&#x2F;Class&#x2F;Struct 数据组织结构均可通过table去实现。table核心的实现主要有：     Array part： 存储数组部分数据结构   Hash part： 存储Map相关数据   metatable： 实现核心func以及运算符重载逻辑，class的数据模式也是利用这个机制实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua Table">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-956_Lua%20Table/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="前言  table 是lua中是lua中唯一的复合结构， 大多数高级语言中具有的：Array&#x2F;Map&#x2F;Class&#x2F;Struct 数据组织结构均可通过table去实现。table核心的实现主要有：     Array part： 存储数组部分数据结构   Hash part： 存储Map相关数据   metatable： 实现核心func以及运算符重载逻辑，class的数据模式也是利用这个机制实现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/png/RSn12u9040NW-_wAEHRK7_0G5WWTX8IaguphCyNLO7UMwDytUuhGmnmUyxwN1s4lSNRcLZNtegxFbxAWuua2HBXrgFnBO0LTHhloG9xrMZsxDsRLIT15VZGz1z5lbjArUKBIHtp45lgfSHd3i78zkw3mlxA5x00xqOoqlmtIweBtX4z67TYH1j9aSYnTdDqN">
+<meta property="og:image" content="https://wiki.jikexueyuan.com/project/java-collection/images/hashmap1.jpg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.321Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.321Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/png/RSn12u9040NW-_wAEHRK7_0G5WWTX8IaguphCyNLO7UMwDytUuhGmnmUyxwN1s4lSNRcLZNtegxFbxAWuua2HBXrgFnBO0LTHhloG9xrMZsxDsRLIT15VZGz1z5lbjArUKBIHtp45lgfSHd3i78zkw3mlxA5x00xqOoqlmtIweBtX4z67TYH1j9aSYnTdDqN">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua Table</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89"><span class="toc-text">数据结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#table-%E5%AD%98%E6%95%B0%E6%8D%AE"><span class="toc-text">Table 存数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#table-rehash"><span class="toc-text">Table rehash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#table-resize"><span class="toc-text">Table resize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#table-%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">Table 使用注意事项</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.321Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua Table</span></h1>
+<h2 id="前言">前言</h2>
+
+<p><b>table</b> 是lua中是lua中唯一的复合结构， 大多数高级语言中具有的：Array/Map/Class/Struct 数据组织结构均可通过table去实现。table核心的实现主要有：</p>
+
+<ul>
+  <li>Array part： 存储数组部分数据结构</li>
+  <li>Hash part： 存储Map相关数据</li>
+  <li>metatable： 实现核心func以及运算符重载逻辑，class的数据模式也是利用这个机制实现</li>
+</ul>
+
+<h3 id="数据结构定义">数据结构定义</h3>
+
+<p>table也是可gc object，所以”继承”了CommonHeader,类似大多数的map/dictionary实现，lua hash部分每个kv都封装在一个Node（也就是entry）中，其中的key决定pos。</p>
+
+<ul>
+  <li>flags 8bit标记了Lua是否实现了对应的元方法，Lua一共可以实现24个元方法，其中前6个lua认为是tag method，需要标记出来，避免每次都查表</li>
+  <li>lsizenode hash部分已分配内存size的平方根（证明都是szie^2分配）</li>
+  <li>sizearray array部分已经分配的size</li>
+  <li>array 存储array数据的部分</li>
+  <li>node 存储hash数据</li>
+  <li>lastfree 指向一个free，可存储node的数据节点</li>
+  <li>metatable 元表</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+** Tables
+*/
+typedef struct Table &#123;
+  CommonHeader;
+  lu_byte flags;  /* 1&lt;&lt;p means tagmethod(p) is not present */
+  lu_byte lsizenode;  /* log2 of size of &#39;node&#39; array */
+  unsigned int sizearray;  /* size of &#39;array&#39; array */
+  TValue *array;  /* array part */
+  Node *node;
+  Node *lastfree;  /* any free position is before this position */
+  struct Table *metatable;
+  GCObject *gclist;
+&#125; Table;
+
+<p>typedef union TKey &#123;<br>  struct &#123;<br>    TValuefields;<br>    int next;  &#x2F;* for chaining (offset for next node) *&#x2F;<br>  &#125; nk;<br>  TValue tvk;<br>&#125; TKey;</p>
+<p>typedef struct Node &#123;<br>  TValue i_val;<br>  TKey i_key;<br>&#125; Node;<br></code></pre></div></div></p>
+<h3 id="table-存数据">Table 存数据</h3>
+
+<p>类似<code class="language-plaintext highlighter-rouge">tbl[k]=v</code>操作，都是在执行一条set table的指令：OP_SETTABLE，具体指令定义暂不分析，下图是指令执行流程：</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://www.plantuml.com/plantuml/png/RSn12u9040NW-_wAEHRK7_0G5WWTX8IaguphCyNLO7UMwDytUuhGmnmUyxwN1s4lSNRcLZNtegxFbxAWuua2HBXrgFnBO0LTHhloG9xrMZsxDsRLIT15VZGz1z5lbjArUKBIHtp45lgfSHd3i78zkw3mlxA5x00xqOoqlmtIweBtX4z67TYH1j9aSYnTdDqN" alt=""/></p>
+
+<p>luaH_newkey 向table中插入一个不存在的key。类似大多数map实现，此处也有个mainpostion概念，对于任意key，hash空间长度:sizehash, 那么mainposition就是使得<code class="language-plaintext highlighter-rouge">tbl-&gt;node[pos] = hash(val)%sizehash</code>的position。hash算法必然有冲突的情况，遇到冲突则就需要把entry 链到首位，流程如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+** 向table中插入一个新key；1. 检查key的main position是否被占据。 2. 如果已经被占，检查目前占领
+** 该mian position的node是否是它自己的main position，如果不是则它该node移动到其他free节点，
+** 新key即可占领改main position。 3.如果main position未被占，则直接赋值即可
+*/
+TValue *luaH_newkey (lua_State *L, Table *t, const TValue *key) &#123;
+  Node *mp;
+  TValue aux;
+  if (ttisnil(key)) luaG_runerror(L, &#34;table index is nil&#34;);
+  else if (ttisfloat(key)) &#123; //如果是可以转换为integer的number则转化一下，对流程无影响
+    lua_Integer k;
+    if (luaV_tointeger(key, &amp;k, 0)) &#123;  /* does index fit in an integer? */
+      setivalue(&amp;aux, k);
+      key = &amp;aux;  /* insert it as an integer */
+    &#125;
+    else if (luai_numisnan(fltvalue(key)))
+      luaG_runerror(L, &#34;table index is NaN&#34;);
+  &#125;
+  mp = mainposition(t, key); //计算main position
+  if (!ttisnil(gval(mp)) || isdummy(t)) &#123;  /* main position 被占领了 */
+    Node *othern;
+    Node *f = getfreepos(t);  /* get a free place */
+    if (f == NULL) &#123;  /* cannot find a free place? */
+      rehash(L, t, key);  /* rehash 保证一定要能找到一个free pos*/
+      return luaH_set(L, t, key); 
+    &#125;
+    lua_assert(!isdummy(t));
+    othern = mainposition(t, gkey(mp)); //计算pos上node对应的main position
+    if (othern != mp) &#123;  /* 当前占领mainPos的节点并不是这个节点的main position/
+      /* yes; move colliding node into free position */
+      while (othern + gnext(othern) != mp)  /* 说明other一定是f这个mainpPos的pre节点，通过next偏移找到它*/
+        othern += gnext(othern);
+      gnext(othern) = cast_int(f - othern);  /* rechain to point to &#39;f&#39; */
+      *f = *mp;  /* copy colliding node into free pos. (mp-&gt;next also goes) */
+      if (gnext(mp) != 0) &#123;
+        gnext(f) += cast_int(mp - f);  /* correct &#39;next&#39;  现在f是mp的深拷贝了，但是mp可能chain 某个pre，所以这里还需要处理一下偏移问题*/
+        gnext(mp) = 0;  /* now &#39;mp&#39; is free */
+      &#125;
+      setnilvalue(gval(mp));
+    &#125;
+    else &#123;  /*mp就是 main position，冲突的情况  */
+      /* new node will go into free position */
+      if (gnext(mp) != 0)
+        gnext(f) = cast_int((mp + gnext(mp)) - f);  /* chain new position 让f成为mainPos的第二个节点 */
+      else lua_assert(gnext(f) == 0);
+      gnext(mp) = cast_int(f - mp); //把f chain到mp上
+      mp = f;
+    &#125;
+  &#125;
+  setnodekey(L, &amp;mp-&gt;i_key, key);
+  luaC_barrierback(L, t, key);
+  lua_assert(ttisnil(gval(mp)));
+  return gval(mp);
+&#125;
+</code></pre></div></div>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://wiki.jikexueyuan.com/project/java-collection/images/hashmap1.jpg" alt=""/></p>
+
+<h3 id="table-rehash">Table rehash</h3>
+<p>当luaH_newkey过程中无法找到free pos时，就会触发 rehash。</p>
+<ol>
+  <li>计算各个bit段的key count</li>
+  <li>计算出array部分需要扩展的size</li>
+  <li>resize 扩展array和hash部分size</li>
+</ol>
+
+<p>注：先统计nums，再计算array size，主要为了避免array size低效率扩展，参考：computesizes实现即可</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+** nums[i] = number of keys &#39;k&#39; where 2^(i - 1) &lt; k &lt;= 2^i
+*/
+static void rehash (lua_State *L, Table *t, const TValue *ek) &#123;
+  unsigned int asize;  /* optimal size for array part */
+  unsigned int na;  /* number of keys in the array part */
+  unsigned int nums[MAXABITS + 1];
+  int i;
+  int totaluse;
+  for (i = 0; i &lt;= MAXABITS; i++) nums[i] = 0;  /* reset counts */
+  na = numusearray(t, nums);  /* count keys in array part */
+  totaluse = na;  /* all those keys are integer keys */
+  totaluse += numusehash(t, nums, &amp;na);  /* count keys in hash part */
+  /* count extra key */
+  na += countint(ek, nums);
+  totaluse++;
+  /* compute new size for array part */
+  asize = computesizes(nums, &amp;na);
+  /* resize the table to new computed sizes */
+  luaH_resize(L, t, asize, totaluse - na);
+&#125;
+</code></pre></div></div>
+
+<h3 id="table-resize">Table resize</h3>
+<p>resize 时rehash的中间过程，真正处理array&amp;hash的部分内存扩展。</p>
+<ul>
+  <li>array 部分比较简单，直接realloc就行，然后把新alloc出来的obj setnilval即可</li>
+  <li>hash部分相对费一点，主要分四步： 1.保存old hash指针 2.alloc新的hash空间 3.把old hash空间调整到new hash 空间 4.释放old hash空间内存</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void luaH_resize (lua_State *L, Table *t, unsigned int nasize,
+                                          unsigned int nhsize) &#123;
+  unsigned int i;
+  int j;
+  AuxsetnodeT asn;
+  unsigned int oldasize = t-&gt;sizearray;
+  int oldhsize = allocsizenode(t);
+  Node *nold = t-&gt;node;  /* save old hash ... */
+  if (nasize &gt; oldasize)  /* array part must grow? */
+    setarrayvector(L, t, nasize);
+  /* create new hash part with appropriate size */
+  asn.t = t; asn.nhsize = nhsize;
+  if (luaD_rawrunprotected(L, auxsetnode, &amp;asn) != LUA_OK) &#123;  /* mem. error? */
+    setarrayvector(L, t, oldasize);  /* array back to its original size */
+    luaD_throw(L, LUA_ERRMEM);  /* rethrow memory error */
+  &#125;
+  if (nasize &lt; oldasize) &#123;  /* array part must shrink? */
+    t-&gt;sizearray = nasize;
+    /* re-insert elements from vanishing slice */
+    for (i=nasize; i&lt;oldasize; i++) &#123;
+      if (!ttisnil(&amp;t-&gt;array[i]))
+        luaH_setint(L, t, i + 1, &amp;t-&gt;array[i]);
+    &#125;
+    /* shrink array */
+    luaM_reallocvector(L, t-&gt;array, oldasize, nasize, TValue);
+  &#125;
+  /* re-insert elements from hash part */
+  for (j = oldhsize - 1; j &gt;= 0; j--) &#123;
+    Node *old = nold + j;
+    if (!ttisnil(gval(old))) &#123;
+      /* doesn&#39;t need barrier/invalidate cache, as entry was
+         already present in the table */
+      setobjt2t(L, luaH_set(L, t, gkey(old)), gval(old));
+    &#125;
+  &#125;
+  if (oldhsize &gt; 0)  /* not the dummy node? */
+    luaM_freearray(L, nold, cast(size_t, oldhsize)); /* free old hash */
+&#125;
+</code></pre></div></div>
+
+<h3 id="table-使用注意事项">Table 使用注意事项</h3>
+
+<ul>
+  <li>#table 取array长度指令</li>
+</ul>
+
+<p>“#” 操作符仅仅算table的array部分，并且是不是逐项遍历，用二分法找nil obj，然后算出一个pos，实现如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+** Try to find a boundary in table &#39;t&#39;. A &#39;boundary&#39; is an integer index
+** such that t[i] is non-nil and t[i+1] is nil (and 0 if t[1] is nil).
+*/
+lua_Unsigned luaH_getn (Table *t) &#123;
+  unsigned int j = t-&gt;sizearray;
+  if (j &gt; 0 &amp;&amp; ttisnil(&amp;t-&gt;array[j - 1])) &#123;
+    /* there is a boundary in the array part: (binary) search for it */
+    unsigned int i = 0;
+    while (j - i &gt; 1) &#123;
+      unsigned int m = (i+j)/2;
+      if (ttisnil(&amp;t-&gt;array[m - 1])) j = m;
+      else i = m;
+    &#125;
+    return i;
+  &#125;
+  /* else must find a boundary in hash part */
+  else if (isdummy(t))  /* hash part is empty? */
+    return j;  /* that is easy... */
+  else return unbound_search(t, j);
+&#125;
+</code></pre></div></div>
+
+<p>那么在计算array size时，如果确定array中间无空洞则可以使用“#”，否则还是手搬一个逐项遍历， 如下面测试就可能出现意外结果了：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local arr = &#123;1,nil,3,nil, 5,6, nil, nil&#125;
+print(#arr)
+--output: 1
+</code></pre></div></div>
+
+<ul>
+  <li>metable 中__newindex, 如果fastset找到已存在的key, 则不会执行到__newindex,具体实现：</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define settableProtected(L,t,k,v) &#123; const TValue *slot; 
+  if (!luaV_fastset(L,t,k,slot,luaH_get,v)) 
+    Protect(luaV_finishset(L,t,k,v,slot)); &#125;
+</code></pre></div></div>
+
+<p>测试代码：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local arr = &#123;&#125;
+arr[1] = 5
+local mt = &#123;&#125;
+mt.__newindex = function(tbl, k, v)
+    print(&#34;hello&#34;, k, v)
+end
+setmetatable(arr, mt)
+arr[1] = 4
+arr[2] = 6
+
+<p>–output:<br>–hello   2       6<br></code></pre></div></div></p>
+<ul>
+  <li>ipairs 迭代器实现简单说就是遍历array部分，如果对应的val不是nil，则继续，否则就终止，所以中间不能有“空洞”</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>static int ipairsaux (lua_State *L) &#123;
+  lua_Integer i = luaL_checkinteger(L, 2) + 1;
+  lua_pushinteger(L, i);
+  return (lua_geti(L, 1, i) == LUA_TNIL) ? 1 : 2;
+&#125;
+</code></pre></div></div>
+<p>测试用例：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local arr = &#123;1,nil,3,nil, 5,6, nil, nil&#125;
+for i,v in ipairs(arr) do
+    print(v)
+end
+
+<p>–output:<br>–1<br></code></pre></div></div></p>
+<pre><code>            &lt;hr style=&quot;visibility: hidden;&quot;/&gt;
+
+            
+
+
+            
+            
+            
+            &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/gitalk/dist/gitalk.css&quot;/&gt;
+            &lt;script src=&quot;https://unpkg.com/gitalk@latest/dist/gitalk.min.js&quot;&gt;&lt;/script&gt;
+            &lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;
+            
+            
+            &lt;script src=&quot;/js/md5.min.js&quot;&gt;&lt;/script&gt;
+            &lt;script type=&quot;text/javascript&quot;&gt;
+                var gitalk = new Gitalk(&#123;
+                clientID: &#39;d468c9684ec424e3e5cc&#39;,
+                clientSecret: &#39;b52faba288acb42039032014d5fd6f781ef3054a&#39;,
+                repo: &#39;lixiang-share.github.io&#39;,
+                owner: &#39;lixiang-share&#39;,
+                admin: [&#39;lixiang-share&#39;],
+                distractionFreeMode: true,
+                id: md5(location.pathname),
+                &#125;);
+                gitalk.render(&#39;gitalk-container&#39;);
+            &lt;/script&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-958_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">Lua 排序算法</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-959_Lua%E4%B8%ADipairs%E5%92%8Cpairs%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E4%BD%BF%E7%94%A8/">Lua中ipairs和pairs的区别与使用</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua语法邮箱sina - Lua教程</title>
+
+  
+    <meta name="description" content="Lua是一个以性能著称的轻量级的脚本语言。可以跨平台运行解析，而不需要编译的过程。Lua是一个区分大小写的编程语言。   Lua语法学习  变量  1、标识符 Lua中使用标识符定义一个变量，标识符由字母，数字，下划线组成。最好不要使用下划线加大写字母的标识符，因为Lua的保留字也是这样。一般约定，以下划线开头连接一串大写字母的名字（如_VERSION)被保留用于Lua内部全局变量。  2、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua语法邮箱sina">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-577_Lua%E8%AF%AD%E6%B3%95%E9%82%AE%E7%AE%B1sina/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua是一个以性能著称的轻量级的脚本语言。可以跨平台运行解析，而不需要编译的过程。Lua是一个区分大小写的编程语言。   Lua语法学习  变量  1、标识符 Lua中使用标识符定义一个变量，标识符由字母，数字，下划线组成。最好不要使用下划线加大写字母的标识符，因为Lua的保留字也是这样。一般约定，以下划线开头连接一串大写字母的名字（如_VERSION)被保留用于Lua内部全局变量。  2、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.285Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.285Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua语法邮箱sina</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#if%E8%AF%AD%E5%8F%A5"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-text">迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#table%E8%A1%A8"><span class="toc-text">table（表）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua%E5%85%83%E8%A1%A8"><span class="toc-text">Lua元表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9B%9E%E6%BA%AF%E6%9F%A5%E8%AF%A2"><span class="toc-text">Lua面向对象:(回溯查询)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97"><span class="toc-text">模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#require%E5%87%BD%E6%95%B0"><span class="toc-text">require函数</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua语法邮箱sina</span></h1>
+<blockquote>
+  <p>Lua是一个以性能著称的轻量级的脚本语言。可以跨平台运行解析，而不需要编译的过程。Lua是一个区分大小写的编程语言。</p>
+</blockquote>
+
+<p><a target="_blank" rel="noopener" href="http://www.runoob.com/lua/lua-tutorial.html">Lua语法学习</a></p>
+
+<h4 id="变量">变量</h4>
+
+<p>1、标识符<br/>
+Lua中使用标识符定义一个变量，标识符由字母，数字，下划线组成。最好不要使用下划线加大写字母的标识符，因为Lua的保留字也是这样。一般约定，以下划线开头连接一串大写字母的名字（如_VERSION)被保留用于Lua内部全局变量。</p>
+
+<p>2、定义变量<br/>
+Lua定义变量是没有类型的，根据存储什么数据来决定是什么类型。如num=10。</p>
+
+<p>3、变量类型<br/>
+   (1) nil表示空数据，等同于null。<br/>
+   (2) boolean布尔类型，Lua把false和nil看作是“假”。数字0与空字符串“ ”为真。<br/>
+   (3) string字符串，用“”或‘’来表示，用2个方括号[[]]来表示“一块”字符串。<br/>
+   (4) number小数类型，表示双精度类型的实浮点数。<br/>
+   (5) table，其实是一个“关联数组”，数组的索引可以是数字或字符串。Lua中的数组索引是从1
+   开始的。</p>
+
+<p>4、Lua变量<br/>
+有三种类型：全局变量、局部变量、表中的域。</p>
+
+<p>变量默认是全局的。全局变量不需要声明，给一个变量赋值后即创建了这个全局变量，如果想删除一个全局变量，只需要将变量赋值给nil。删除table表里的变量也是一样的。</p>
+
+<p>局部变量的作用域从声明位置开始到所在语句块结束。</p>
+
+<h4 id="运算符">运算符</h4>
+<p>1、算术运算符。+、—、*、/、%、^(没有++，–)。<br/>
+2、关系运算符。&lt;、&gt;、&lt;=、&gt;=、==、~=(表！=)。<br/>
+3、逻辑运算符。and、or、not分别表示与、或、非。<br/>
+4、连接运算符。、、表连接两个字符串。<br/>
+5、一元运算符。#，返回字符串或表的长度。</p>
+
+<h4 id="if语句">if语句</h4>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="mi">1</span><span class="err">、</span><span class="k">if</span> <span class="err">条件</span> <span class="k">then</span>
+     <span class="k">end</span>
+    
+<p>  <span class="mi">2</span><span class="err">、</span><span class="k">if</span> <span class="err">条件</span> <span class="k">then</span><br>     <span class="k">else</span><br>     <span class="k">end</span></p>
+<p>  <span class="mi">3</span><span class="err">、</span><span class="k">if</span> <span class="err">条件</span> <span class="k">then</span><br>     <span class="k">elseif</span> <span class="err">条件</span> <span class="k">then</span><br>     <span class="k">else</span><br>     <span class="k">end</span><br></code></pre></div>    </div><br>  </li></p>
+</ul>
+
+<h4 id="循环语句">循环语句</h4>
+<p>1、while循环</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">while</span> <span class="err">条件</span> <span class="k">do</span>
+  <span class="k">end</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>2、repeat循环</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">repeat</span>
+  <span class="o">...</span>
+  <span class="k">until</span> <span class="err">条件</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>3、for循环</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">-- 以step递增循环</span>
+  <span class="k">for</span> <span class="n">index</span> <span class="o">=</span> <span class="n">start</span><span class="p">,</span><span class="k">end</span><span class="err">，</span><span class="n">step</span> <span class="k">do</span>
+  <span class="o">...</span>
+  <span class="k">end</span>
+
+<p>  <span class="c1">– 以step递减循环</span><br>  <span class="k">for</span> <span class="n">index</span> <span class="o">&#x3D;</span> <span class="k">end</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="o">-</span><span class="n">step</span> <span class="k">do</span><br>  <span class="o">…</span><br>  <span class="k">end</span><br></code></pre></div>    </div><br>    <p><em>注：break可以终止循环，没有continue语法。</em></p><br>    <h4 id="函数">函数</h4><br>    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">function</span> <span class="err">方法名（参数1，参数2）</span><br>  <span class="err">...</span><br>  <span class="nf">end</span><br></code></pre></div>    </div><br>    <p>可变参数，Lua函数可以接受可变数目的参数，在函数参数列表中使用三点(…)表示函数有可变的参数。Lua将函数的参数放在一个叫arg的表中。</p><br>  </li></p>
+</ul>
+
+<h4 id="迭代器">迭代器</h4>
+<p>在Lua中迭代器是一种支持指针类型的结构，它可以遍历集合中每一个元素。</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">do</span>
+  <span class="o">...</span>
+  <span class="k">end</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>pairs和ipairs区别</p>
+
+<p>同：都能遍历集合（表、数组）</p>
+
+<p>异：</p>
+<ul>
+  <li>ipairs只遍历值，按照索引升序遍历，索引中断停止遍历，不能返回nil，只能返回数字0，如果遇到nil则退出，它只能遍历到集合中出现的第一个不是整数的key。</li>
+  <li>pairs能遍历集合中的所有元素。还可以返回nil。</li>
+</ul>
+
+<h4 id="table表">table（表）</h4>
+
+<p>    table是Lua的一种数据结构用来创建不同的数据类型。如数组、字典等。通过table来解决模块(module)、包(package)和对象(Object)。</p>
+
+<p>1、table的创建</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">myTable</span><span class="o">=</span><span class="p">&#123;&#125;</span>
+  <span class="n">myTable</span><span class="o">=</span><span class="p">&#123;</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="s2">&#34;abc&#34;</span><span class="p">&#125;</span>    
+  <span class="n">myTable</span><span class="o">=</span><span class="p">&#123;</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;wang&#34;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span><span class="n">isMan</span><span class="o">=</span><span class="kc">false</span><span class="p">&#125;</span>
+</code></pre></div>    </div>
+    <p>2、table的赋值</p>
+  </li>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">myTable</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="mi">34</span>			<span class="o">//</span><span class="err">当键是一个数字时的赋值方式</span>
+  <span class="n">myTable</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">]</span><span class="o">=</span><span class="s2">&#34;wang&#34;</span>	<span class="o">//</span><span class="err">当键是一个字符串时的赋值方式</span>
+  <span class="n">myTable</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;wang&#34;</span>		<span class="o">//</span><span class="err">当键是一个字符串时的赋值方式</span>
+</code></pre></div>    </div>
+    <p>3、table的遍历<br/>
+(1).如果是只有数字键，并且是连续的。</p>
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">table</span><span class="p">.</span><span class="n">getn</span><span class="p">(</span><span class="n">myTable</span><span class="p">)</span> <span class="k">do</span>
+  <span class="o">...</span>
+  <span class="k">end</span>
+</code></pre></div>    </div>
+    <p>(2).所有的表都可以通过下面的方式遍历</p>
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">value</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">myTable</span><span class="p">)</span> <span class="k">do</span>
+  <span class="o">...</span>
+  <span class="k">end</span>
+</code></pre></div>    </div>
+    <p>4、table元素的内存指向</p>
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">mytable1</span><span class="o">=</span><span class="p">&#123;&#125;</span>
+  <span class="n">mytable1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="s2">&#34;lua&#34;</span>
+  <span class="n">mytable1</span><span class="p">[</span><span class="s2">&#34;test&#34;</span><span class="p">]</span><span class="o">=</span><span class="s2">&#34;修改前&#34;</span>
+        
+<p>  <span class="c1">–mytable2和mytable1指向同一个table</span><br>  <span class="n">mytable2</span><span class="o">&#x3D;</span><span class="n">mytable1</span></p>
+<p>  <span class="nb">print</span><span class="p">(</span><span class="n">mytable2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>	<span class="c1">–打印结果为：lua</span><br>  <span class="nb">print</span><span class="p">(</span><span class="n">mytable2</span><span class="p">[</span><span class="s2">&amp;#34;test&amp;#34;</span><span class="p">])</span>		<span class="c1">–打印结果为：修改前</span></p>
+<p>  <span class="n">mytable2</span><span class="p">[</span><span class="s2">&amp;#34;test&amp;#34;</span><span class="p">]</span><span class="o">&#x3D;</span><span class="s2">&amp;#34;修改后&amp;#34;</span><br>  <span class="nb">print</span><span class="p">(</span><span class="n">mytable1</span><span class="p">[</span><span class="s2">&amp;#34;test&amp;#34;</span><span class="p">])</span>		<span class="c1">–打印结果为：修改后</span></p>
+<p>  <span class="c1">–释放变量</span><br>  <span class="n">mytable2</span><span class="o">&#x3D;</span><span class="kc">nil</span><br>  <span class="c1">–mytable1仍能访问</span><br>  <span class="nb">print</span><span class="p">(</span><span class="n">mytable1</span><span class="p">[</span><span class="s2">&amp;#34;test&amp;#34;</span><span class="p">])</span>		<span class="c1">–打印结果为：修改后</span><br></code></pre></div>    </div><br>    <p>当把表A赋值给另一个表B，两个表指向的是同一个表，当对表B中某一索引重新赋值，表A访问该索引的值为修改的值。如果将表B置为nil，表A仍然能访问元素。</p><br>  </li></p>
+</ul>
+
+<h4 id="lua元表">Lua元表</h4>
+<p>Lua提供了元表来改变table的行为，每个行为关联了对应的元方法。</p>
+
+<p>处理元表的函数:</p>
+
+<ul>
+  <li>setmetatable(table,metatable):对指定的table设置元表。</li>
+  <li>getmetatable(table):返回对象的元表。</li>
+</ul>
+
+<p>__index元方法：</p>
+
+<p>当通过键来访问table时，如果该键没有值，lua就会寻找该table的metatable中的__index键。如果__index包含一个表格，Lua就会在表格中查找相应的键；如果__index包含一个函数，Lua就会调用那个函数，table和键会作为参数传递给函数。__index元方法查看表中元素是否存在，如果不存在，返回nil；如果存在则由__index返回结果。</p>
+
+<p>Lua查找一个表元素的步骤：<br/>
+（1）在表中查找，如果找到，返回该元素，找不到则继续。<br/>
+（2）判断该表是否有元表，如果没有元表，返回nil，有元表则继续。<br/>
+（3）判断元表有没有__index方法，如果__index方法为nil，则返回nil；如果__index方法是一个表，则重复1、2、3；如果__index方法是一个函数，则返回该函数的返回值。</p>
+
+<p>__newindex元方法：</p>
+
+<p>__newindex元方法用来对表更新，__index则用来对表访问。<br/>
+当给表的一个缺少的所有赋值，解释器就会查找__newindex元方法；如果存在则调用这个函数而不赋值。</p>
+
+<h4 id="lua面向对象回溯查询">Lua面向对象:(回溯查询)</h4>
+
+<p>对象由属性和方法组成，Lua中的类可以用table来描述对象的属性，function表示方法，来进行模拟。至于继承可以通过metatable进行模拟。</p>
+
+<p>一个简单的类继承：</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">A</span><span class="o">=</span><span class="p">&#123;&#125;</span>
+  <span class="c1">--模拟构造体</span>
+  <span class="k">function</span> <span class="nf">A</span><span class="p">:</span><span class="n">new</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>		<span class="c1">--这里相当于function A.new(A,o),self==A。这样写是方便后面继承。new可视为构造函数。</span>
+    <span class="n">o</span><span class="o">=</span><span class="n">o</span> <span class="ow">or</span> <span class="p">&#123;&#125;</span>				<span class="c1">--定义或获取外部一个o表，这个才是模拟的所谓“对象”的实体。</span>
+    <span class="nb">setmetatable</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">self</span><span class="p">)</span>	<span class="c1">--让A成为o表的元表。这样o表里没有就找A表读取。</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">__index</span><span class="o">=</span><span class="n">self</span>		<span class="c1">--将__index指向自己，以便新对象在访问A的函数和字段时，可被直接重定向。</span>
+    <span class="k">return</span> <span class="n">o</span>
+  <span class="k">end</span>
+    
+<p>  <span class="k">function</span> <span class="nf">A</span><span class="p">:</span><span class="n">funName</span><span class="p">()</span><br>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span><br>  <span class="k">end</span><br>  <span class="c1">–从这个类派生出一个子类B，使其打印出类名。则先需要创建一个空的类，从基类继承所有的操作。</span><br>  <span class="n">B</span><span class="o">&#x3D;</span><span class="n">A</span><span class="p">:</span><span class="n">new</span><span class="p">()</span>		<span class="c1">–创建出一个A的对象，直到现在，B还只是A的一个实例</span><br>  <span class="n">S</span><span class="o">&#x3D;</span><span class="n">B</span><span class="p">:</span><span class="n">new</span><span class="p">()</span>		<span class="c1">–B从A中继承了new，不过这次new在执行时，它的self参数为B，因此，S的元表为B，B中的字段__index的值也是B。S继承自B，而B又继承自A。</span><br>  <span class="c1">–B重写funName()函数</span><br>  <span class="k">function</span> <span class="nf">B</span><span class="p">:</span><span class="n">funName</span><span class="p">()</span><br>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><br>  <span class="k">end</span><br>  <span class="c1">–现在调用</span><br>  <span class="n">S</span><span class="p">:</span><span class="n">funName</span><span class="p">()</span><br></code></pre></div>    </div><br>  </li></p>
+</ul>
+
+<p>实现封装：(使用Lua中的闭包函数)</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">--需要一个闭包函数作为类的创建工厂</span>
+  <span class="k">function</span> <span class="nf">newAccout</span><span class="p">(</span><span class="n">initialBalance</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">self</span><span class="o">=</span><span class="p">&#123;</span><span class="n">balance</span><span class="o">=</span><span class="n">initialBalance</span><span class="p">&#125;</span>
+    <span class="kd">local</span> <span class="n">withdraw</span><span class="o">=</span><span class="k">function</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+  <span class="n">self</span><span class="p">.</span><span class="n">balance</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">balance</span><span class="o">-</span><span class="n">v</span>
+    <span class="k">end</span>
+    <span class="kd">local</span> <span class="n">deposit</span><span class="o">=</span><span class="k">function</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+  <span class="n">self</span><span class="p">.</span><span class="n">balance</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">balance</span><span class="o">+</span><span class="n">v</span>
+    <span class="k">end</span>
+    <span class="kd">local</span> <span class="n">getBalance</span><span class="o">=</span><span class="k">function</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">balance</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="p">&#123;</span><span class="n">withdraw</span><span class="o">=</span><span class="n">withdraw</span><span class="p">,</span><span class="n">deposit</span><span class="o">=</span><span class="n">deposit</span><span class="p">,</span><span class="n">getBalance</span><span class="o">=</span><span class="n">getBalance</span><span class="p">&#125;</span>
+  <span class="k">end</span>
+    
+<p>  <span class="n">accl</span><span class="o">&#x3D;</span><span class="n">newAccout</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><br>  <span class="n">accl</span><span class="p">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span><br>  <span class="nb">print</span><span class="p">(</span><span class="n">accl</span><span class="p">.</span><span class="n">getBalance</span><span class="p">())</span><br></code></pre></div>    </div><br>  </li></p>
+</ul>
+
+<h4 id="模块">模块</h4>
+
+<p>    模块类似于一个封装库，可以把一些公用的代码放在一个文件里，以API接口的形式在其他地方调用，有利于代码的重用和降低代码耦合度。Lua的模块是由变量、函数等已知元素组成的table。</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">--文件名为module.lua</span>
+    
+<p>  <span class="n">module</span><span class="o">&#x3D;</span><span class="p">&#123;&#125;</span>		<span class="c1">–定义一个名为module的模块</span></p>
+<p>  <span class="n">module</span><span class="p">.</span><span class="n">constant</span><span class="o">&#x3D;</span><span class="s2">&amp;#34;这是一个常量&amp;#34;</span>	<span class="c1">–定义一个常量</span></p>
+<p>  <span class="k">function</span> <span class="nc">module</span><span class="p">.</span><span class="nf">func1</span><span class="p">()</span><br>      <span class="nb">io.write</span><span class="p">(</span><span class="s2">&amp;#34;公有函数&amp;#34;</span><span class="p">)</span><br>  <span class="k">end</span></p>
+<p>  <span class="kd">local</span> <span class="k">function</span> <span class="nf">func2</span><span class="p">()</span><br>      <span class="nb">print</span><span class="p">(</span><span class="s2">&amp;#34;私有函数&amp;#34;</span><span class="p">)</span><br>  <span class="k">end</span></p>
+<p>  <span class="k">function</span> <span class="nc">module</span><span class="p">.</span><span class="nf">func3</span><span class="p">()</span><br>      <span class="n">fun2</span><span class="p">()</span><br>  <span class="k">end</span></p>
+<p>  <span class="k">return</span> <span class="n">module</span><br></code></pre></div>    </div><br>  </li></p>
+</ul>
+
+<p>    func2声明为程序块的局部变量，即表示一个私有函数，不能从外部访问模块里的这个私有函数，必须通过模块里的公有函数来调用。</p>
+
+<h4 id="require函数">require函数</h4>
+
+<p>Lua提供了require的函数用来加载模块。要加载一个模块，只需要调用即可。</p>
+
+<p>require(“&lt;模块名&gt;&#34;) 或 require &#34;&lt;模块名&gt;&#34;</p>
+
+<p>执行require后会返回一个由模块常量或函数组成的table，并且还会定义一个包含该table的全局变量。</p>
+
+<p>require返回的值将被缓存，即使多次调用require，被调用文件也只运行一次。</p>
+<ul>
+  <li>代码如下：
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">--mod.lua包含print(&#34;mod2&#34;)</span>
+    
+<p>  <span class="kd">local</span> <span class="n">a</span><span class="o">&#x3D;</span><span class="nb">require</span><span class="p">(</span><span class="s2">&amp;#34;mod2&amp;#34;</span><span class="p">)</span>		<span class="c1">–输出&amp;#34;mod2&amp;#34;</span></p>
+<p>  <span class="kd">local</span> <span class="n">b</span><span class="o">&#x3D;</span><span class="nb">require</span><span class="p">(</span><span class="s2">&amp;#34;mod2&amp;#34;</span><span class="p">)</span>		<span class="c1">–不输出，实际为b&#x3D;a</span></p>
+<p>  <span class="n">Dofile</span><span class="err">是不缓存的版本的</span><span class="nb">require</span><span class="err">。</span></p>
+<p>  <span class="n">Dofile</span><span class="p">(</span><span class="s2">&amp;#34;mod2&amp;#34;</span><span class="p">)</span>		<span class="c1">–输出&amp;#34;mod2&amp;#34;</span><br>  <span class="n">Dofile</span><span class="p">(</span><span class="s2">&amp;#34;mod2&amp;#34;</span><span class="p">)</span>		<span class="c1">–输出&amp;#34;mod2&amp;#34;</span></p>
+<p>  <span class="nb">loadfile</span><span class="err">读取文件但不执行</span></p>
+<p>  <span class="n">f</span><span class="o">&#x3D;</span><span class="nb">loadfile</span><span class="p">(</span><span class="s2">&amp;#34;mod2.lua&amp;#34;</span><span class="p">)</span></p>
+<p>  <span class="n">f</span><span class="p">()</span>		<span class="c1">–输出“mod2”</span></p>
+<p>  <span class="n">loadstring</span><span class="err">读取代码字符串</span></p>
+<p>  <span class="n">f</span><span class="o">&#x3D;</span><span class="n">loadstring</span><span class="p">(</span><span class="s2">&amp;#34;print(&#39;Lua is cool&#39;)&amp;#34;</span><span class="p">)</span></p>
+<p>  <span class="n">f</span><span class="p">()</span>		<span class="err">输出“</span><span class="n">Lua</span> <span class="n">is</span> <span class="n">cool</span><span class="err">”</span><br></code></pre></div>    </div><br>  </li></p>
+</ul>
+
+<p><em>参考文章:</em></p>
+
+<ul>
+  <li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/stephen-liu74/archive/2012/03/28/2421656.html">Lua面向对象</a></li>
+  <li><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/QVBBRvq">Lua面向对象实现</a></li>
+</ul>
+
+<hr/>
+<p><em>注：以上内容来源于网上搜集整理</em></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-578_lua%E5%AD%A6%E4%B9%A0/">lua学习</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-579_Lua%20%E5%AD%A6%E4%B9%A0%20chapter25%20/">Lua 学习 chapter25</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

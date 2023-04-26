@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua模块注册 - Lua教程</title>
+
+  
+    <meta name="description" content="Lua自带的模块并不多,好处就是Lua足够的小,毕竟它的设计目标是定位成一个嵌入式的轻量级语言的. 相关的函数index2adrstatic TValue *index2adr (lua_State *L, int idx) &amp;#123;   if (idx &gt; 0) &amp;#123;     TValue *o &#x3D; L-&gt;base + (idx - 1);     api_check(L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua模块注册">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-307_lua%E6%A8%A1%E5%9D%97%E6%B3%A8%E5%86%8C/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua自带的模块并不多,好处就是Lua足够的小,毕竟它的设计目标是定位成一个嵌入式的轻量级语言的. 相关的函数index2adrstatic TValue *index2adr (lua_State *L, int idx) &amp;#123;   if (idx &gt; 0) &amp;#123;     TValue *o &#x3D; L-&gt;base + (idx - 1);     api_check(L">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.260Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.260Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua模块注册</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%9A%84%E5%87%BD%E6%95%B0index2adr"><span class="toc-text">相关的函数index2adr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua%E6%A8%A1%E5%9D%97%E6%B3%A8%E5%86%8C"><span class="toc-text">lua模块注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E5%A4%96%E9%83%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">注册外部模块</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua模块注册</span></h1>
+<p>Lua自带的模块并不多,好处就是Lua足够的小,毕竟它的设计目标是定位成一个嵌入式的轻量级语言的.</p>
+<h4 id="相关的函数index2adr"><a href="#相关的函数index2adr" class="headerlink" title="相关的函数index2adr"></a>相关的函数index2adr</h4><pre><code>static TValue *index2adr (lua_State *L, int idx) &#123;
+  if (idx &gt; 0) &#123;
+    TValue *o = L-&gt;base + (idx - 1);
+    api_check(L, idx &lt;= L-&gt;ci-&gt;top - L-&gt;base);
+    if (o &gt;= L-&gt;top) return cast(TValue *, luaO_nilobject);
+    else return o;
+  &#125;
+  else if (idx &gt; LUA_REGISTRYINDEX) &#123;
+    api_check(L, idx != 0 &amp;&amp; -idx &lt;= L-&gt;top - L-&gt;base);
+    return L-&gt;top + idx;
+  &#125;
+  else switch (idx) &#123;  /* pseudo-indices */
+    case LUA_REGISTRYINDEX: return registry(L);
+    case LUA_ENVIRONINDEX: &#123;
+      Closure *func = curr_func(L);
+      sethvalue(L, &amp;L-&gt;env, func-&gt;c.env);
+      return &amp;L-&gt;env;
+    &#125;
+    case LUA_GLOBALSINDEX: return gt(L);
+    default: &#123;
+      Closure *func = curr_func(L);
+      idx = LUA_GLOBALSINDEX - idx;
+      return (idx &lt;= func-&gt;c.nupvalues)
+                ? &amp;func-&gt;c.upvalue[idx-1]
+                : cast(TValue *, luaO_nilobject);
+    &#125;
+  &#125;
+&#125;
+</code></pre><p>一个Lua函数栈由两个指针base和top来指定,base指向函数栈底,top则指向栈顶.<br/>回到index2addr函数中,几种情况:</p>
+<ol>
+<li>如果索引为正,则从函数栈底为起始位置向上查找数据</li>
+<li>如果索引为负,则从函数栈顶为起始位置向下查找数据</li>
+<li>紧跟着是几种特殊的索引值,都定义了非常大的数据,由于Lua栈限定了函数的栈尺寸,所以不会有那么大的索引,大可放心使用.</li>
+</ol>
+<p>索引值为LUA_REGISTRYINDEX时,则返回的是全局数据global_state的l_registry表;如果索引值为LUA_GLOBALSINDEX,则返回该Lua_State的l_gt表.</p>
+<h4 id="lua模块注册"><a href="#lua模块注册" class="headerlink" title="lua模块注册"></a>lua模块注册</h4><p>Lua内部所有模块的注册都在linit.c的函数luaL_openlibs中提供.可以看到的是,它依次访问一个数组,数组中定义了每个模块的模块名及相应的模块注册函数,依次调用函数就完成了模块的注册.</p>
+<pre><code>static const luaL_Reg lualibs[] = &#123;
+  &#123;&#34;&#34;, luaopen_base&#125;,
+  &#123;LUA_LOADLIBNAME, luaopen_package&#125;,
+  &#123;LUA_TABLIBNAME, luaopen_table&#125;,
+  &#123;LUA_IOLIBNAME, luaopen_io&#125;,
+  &#123;LUA_OSLIBNAME, luaopen_os&#125;,
+  &#123;LUA_STRLIBNAME, luaopen_string&#125;,
+  &#123;LUA_MATHLIBNAME, luaopen_math&#125;,
+  &#123;LUA_DBLIBNAME, luaopen_debug&#125;,
+  &#123;NULL, NULL&#125;
+&#125;;
+
+<p>LUALIB_API void luaL_openlibs (lua_State *L) &#123;<br>  const luaL_Reg *lib &#x3D; lualibs;<br>  for (; lib-&gt;func; lib++) &#123;<br>    lua_pushcfunction(L, lib-&gt;func);<br>    lua_pushstring(L, lib-&gt;name);<br>    lua_call(L, 1, 0);<br>  &#125;<br>&#125;<br></code></pre><p>我没有详细的查看每个模块的注册函数,不过还是以最简单的例子来讲解,就是最常用的print函数.</p></p>
+<p>由于这个函数没有前缀,因此的它所在的模块是””,也就是一个空字符串,因此它是在base模块中注册的,调用的注册函数是luaopen_base.</p>
+<p>紧跟着继续看luaopen_base内部调用的第一个函数base_open:</p>
+<pre><code>static void base_open (lua_State *L) &#123;
+  /* set global _G */
+  lua_pushvalue(L, LUA_GLOBALSINDEX);
+  lua_setglobal(L, &#34;_G&#34;);
+  /* open lib into global table */
+  luaL_register(L, &#34;_G&#34;, base_funcs);
+
+<p>  &#x2F;&#x2F; ….<br>&#125;<br></code></pre><p>首先来看最前面的两句:</p></p>
+<pre><code>  /* set global _G */
+  lua_pushvalue(L, LUA_GLOBALSINDEX);
+  lua_setglobal(L, &#34;_G&#34;);
+</code></pre><p>这两句首先将LUA_GLOBALSINDEX对应的值压入栈中,其次调用”lua_setglobal(L, “_G”);”,这句代码的意思是在Lua_state的l_gt表中,当查找”_G”时,查找到的是索引值为LUA_GLOBALSINDEX的表.如果觉得有点绕,可以简单这个理解,在Lua中的G表,也就是全局表,满足这个等式”_G = _G[“_G”]“,也就是这个叫”_G”的表,内部有一个key为”_G”的表是指向自己的.怀疑这个结论的,可以在Lua命令行中执行print(_G)和print(_G[“_G”])看看输出结果是不是一致的.</p>
+<p>Lua中要这么处理的理由是:为了让G表和处理其它表使用同样的机制.查找一个变量时,最终会一直查到G表中,这是很自然的事情;所以为了也能按照这个机制顺利的查找到自己,于是在G表中有一个同名成员指向自己.</p>
+<p>好了,前面两句的作用已经分析完毕.其结果有两个:</p>
+<ol>
+<li>_G = _G[“_G”]</li>
+<li>_G表的值压入函数栈中方便了下面的调用.</li>
+</ol>
+<p>继续看下面的语句:<br/><strong>luaL_register(L, “_G”, base_funcs);</strong><br/><strong>它最终会将base_funcs中的函数注册到G表中,但是里面还有些细节需要看看的.</strong></p>
+<pre><code>LUALIB_API void luaI_openlib (lua_State *L, const char *libname,
+                              const luaL_Reg *l, int nup) &#123;
+  if (libname) &#123;
+    int size = libsize(l);
+    /* check whether lib already exists */
+    luaL_findtable(L, LUA_REGISTRYINDEX, &#34;_LOADED&#34;, 1);
+    lua_getfield(L, -1, libname);  /* get _LOADED[libname] */
+    if (!lua_istable(L, -1)) &#123;  /* not found? */
+      lua_pop(L, 1);  /* remove previous result */
+      /* try global variable (and create one if it does not exist) */
+      if (luaL_findtable(L, LUA_GLOBALSINDEX, libname, size) != NULL)
+        luaL_error(L, &#34;name conflict for module &#34; LUA_QS, libname);
+      lua_pushvalue(L, -1);
+      lua_setfield(L, -3, libname);  /* _LOADED[libname] = new table */
+    &#125;
+    lua_remove(L, -2);  /* remove _LOADED table */
+    lua_insert(L, -(nup+1));  /* move library table to below upvalues */
+  &#125;
+
+<p>&#x2F;&#x2F; …<br>&#125;<br></code></pre><p>注册这些函数之前,首先会到l_registry表的成员_LOADED表中查找该库,如果不存在则再在G表中查找这个库,不存在则创建一个表.因此,不管是lua中内部的库或者是外部使用require引用的库,都会走这个流程并最终在G表和l_registry[“_LOADED”]中存放该库的表.最后,再遍历传进来的函数指针数组,完成库函数的注册.</p></p>
+<p>比如,注册os.print时,首先将print函数绑定在一个函数指针上,再去l_registry[“_LOADED”]和G表中查询该名为”os”的库是否存在,不存在则创建一个表,即:<br/>G[“os”] = {}</p>
+<p>紧跟着注册print函数,即: G[“os”][“print”] = 待注册的函数指针.这样,在调用lua代码os.print(1)时,首先根据”os”到G表中查找对应的表,再在这个表中查找”print”成员得到函数指针,最后完成函数的调用.</p>
+<h4 id="注册外部模块"><a href="#注册外部模块" class="headerlink" title="注册外部模块"></a>注册外部模块</h4><p><strong>luaL_newlibtable</strong> 它仅仅是创建了一个table,然后把数组里的函数放进去而已 </p>
+<p><strong>luaL_setfuncs</strong>它把数组l中的所有函数注册入<strong>栈顶</strong>的table，并给所有函数绑上<strong>nup</strong>个<strong>upvalue</strong> </p>
+<p>define luaL_newlibtable(L, l)</p>
+<pre><code>lua_createtble(L, 0, sizeof(l)/sizeof((l)[0]) - 1)
+</code></pre><p>define luaL_newlib(L, l)</p>
+<pre><code>(luaL_newlibtable(L,l), luaL_setfuncs(L,l,0)
+</code></pre><pre><code>LUALIB_API void luaL_setfuncs(lua_State *L, const luaL_Reg *l, int nup)&#123;
+    luaL_checkversion(L);
+    luaL_checkstack(L, nup, &#34;too_many_upvalue&#34;);
+    for(; l-&gt;name != NULL; i++)&#123;/* fill the table with given functions*/
+        int i;
+        for(i = 0; i &lt; nup; i++)/copy upvalues to the top/
+            lua_pushvalue(L, -nup);
+        lua_pushclosure(L, l-&gt;func, nup);/closure with those upvalues/
+        lua_setfield(L, -(nup + 2), l-&gt;name);
+    &#125;
+    lua_pop(L, nup);/remove upvalues/
+&#125;
+
+<p></code></pre></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-303_lua%E7%83%AD%E6%9B%B4%E6%96%B0/">lua热更新</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-309_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">Lua string hash 算法</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

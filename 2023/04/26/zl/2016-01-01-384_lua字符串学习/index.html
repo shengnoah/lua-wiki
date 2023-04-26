@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua字符串学习 - Lua教程</title>
+
+  
+    <meta name="description" content="基础字符串函数   函数 含义     string.lower(s) 字符串转换成小写   string.upper(s) 字符串转换成大写   string.len(s) 字符串长度   string.rep(s,2) 将字符串 s 重复 2 次   string.sub(s, j, j) 截取字符串    模式匹配string.find 函数string.find 函数用于在给定的目标字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua字符串学习">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-384_lua%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="基础字符串函数   函数 含义     string.lower(s) 字符串转换成小写   string.upper(s) 字符串转换成大写   string.len(s) 字符串长度   string.rep(s,2) 将字符串 s 重复 2 次   string.sub(s, j, j) 截取字符串    模式匹配string.find 函数string.find 函数用于在给定的目标字符串">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.267Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.267Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua字符串学习</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-text">基础字符串函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="toc-text">模式匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#string-find-%E5%87%BD%E6%95%B0"><span class="toc-text">string.find 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#string-match-%E5%87%BD%E6%95%B0"><span class="toc-text">string.match 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#string-gsub-%E5%87%BD%E6%95%B0"><span class="toc-text">string.gsub 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#string-gmatch-%E5%87%BD%E6%95%B0"><span class="toc-text">string.gmatch 函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F"><span class="toc-text">模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%95%E8%8E%B7"><span class="toc-text">捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2"><span class="toc-text">替换</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua字符串学习</span></h1>
+<h3 id="基础字符串函数"><a href="#基础字符串函数" class="headerlink" title="基础字符串函数"></a>基础字符串函数</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">string.lower(s)</td>
+<td style="text-align:left">字符串转换成小写</td>
+</tr>
+<tr>
+<td style="text-align:left">string.upper(s)</td>
+<td style="text-align:left">字符串转换成大写</td>
+</tr>
+<tr>
+<td style="text-align:left">string.len(s)</td>
+<td style="text-align:left">字符串长度</td>
+</tr>
+<tr>
+<td style="text-align:left">string.rep(s,2)</td>
+<td style="text-align:left">将字符串 s 重复 2 次</td>
+</tr>
+<tr>
+<td style="text-align:left">string.sub(s, j, j)</td>
+<td style="text-align:left">截取字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3><h4 id="string-find-函数"><a href="#string-find-函数" class="headerlink" title="string.find 函数"></a>string.find 函数</h4><p>string.find 函数用于在给定的目标字符串当中搜索一个模式。例如：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">s = <span class="string">&#34;hello world&#34;</span></span><br/><span class="line">i, j = <span class="built_in">string</span>.<span class="built_in">find</span>(s, <span class="string">&#34;hello&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(i, j) </span><br/></pre></td></tr></tbody></table></figure>
+<p>find 函数会返回匹配到的起始所以和结尾索引。如果没匹配到任何就返回 nil。</p>
+<h4 id="string-match-函数"><a href="#string-match-函数" class="headerlink" title="string.match 函数"></a>string.match 函数</h4><p>string.match 返回的是目标字符串中与模式相匹配的那部分子串。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(<span class="string">&#34;hello world&#34;</span>, <span class="string">&#34;hello&#34;</span>)) <span class="comment">---&gt; hello</span></span><br/></pre></td></tr></tbody></table></figure>
+<h4 id="string-gsub-函数"><a href="#string-gsub-函数" class="headerlink" title="string.gsub 函数"></a>string.gsub 函数</h4><p>string.gsub 函数有三个参数，目标字符串、模式、和替换字符串。它基本的用法是将目标字符串中所有出现模式的地方替换为替换字符串。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&#34;lua is good&#34;</span>, <span class="string">&#34;good&#34;</span>, <span class="string">&#34;nice&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(s) <span class="comment">---&gt; lua is nice</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>另外还有第四个参数，可以限制替换的次数。</p>
+<h4 id="string-gmatch-函数"><a href="#string-gmatch-函数" class="headerlink" title="string.gmatch 函数"></a>string.gmatch 函数</h4><p>string.gmatch 函数会返回一个函数。通过这个函数可以遍历到一个字符串当中所有出现指定模式的地方。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line">words = {}</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(s, <span class="string">&#34;%a+&#34;</span>) <span class="keyword">do</span></span><br/><span class="line">	words[#words + <span class="number">1</span>] = w</span><br/><span class="line"><span class="keyword">end</span></span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h3><p>具体看下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">.</td>
+<td style="text-align:left">所有字符</td>
+</tr>
+<tr>
+<td style="text-align:left">%a</td>
+<td style="text-align:left">字母</td>
+</tr>
+<tr>
+<td style="text-align:left">%c</td>
+<td style="text-align:left">控制字符</td>
+</tr>
+<tr>
+<td style="text-align:left">%d</td>
+<td style="text-align:left">数字</td>
+</tr>
+<tr>
+<td style="text-align:left">%l</td>
+<td style="text-align:left">小写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">%p</td>
+<td style="text-align:left">标点符号</td>
+</tr>
+<tr>
+<td style="text-align:left">%s</td>
+<td style="text-align:left">空白字符</td>
+</tr>
+<tr>
+<td style="text-align:left">%u</td>
+<td style="text-align:left">大写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">%w</td>
+<td style="text-align:left">字母和数字</td>
+</tr>
+<tr>
+<td style="text-align:left">%x</td>
+<td style="text-align:left">十六进制数字</td>
+</tr>
+<tr>
+<td style="text-align:left">%z</td>
+<td style="text-align:left">内部表示为0的字符</td>
+</tr>
+</tbody>
+</table>
+<p>这些分类的大写形式表示他们的补集，例如，”%A”表示所有非字母字符。</p>
+<p>在模式当中有如下元字符，需要进行转义。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">( ) . % + - * ? [ ] ^ $</span><br/></pre></td></tr></tbody></table></figure>
+<p>Lua 提供的修饰符：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字符</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">+</td>
+<td style="text-align:left">重复一次或多次</td>
+</tr>
+<tr>
+<td style="text-align:left">*</td>
+<td style="text-align:left">重复零次或多次（尽可能多匹配）</td>
+</tr>
+<tr>
+<td style="text-align:left">-</td>
+<td style="text-align:left">重复零次或多次（尽可能少匹配)</td>
+</tr>
+<tr>
+<td style="text-align:left">?</td>
+<td style="text-align:left">出现零次或一次</td>
+</tr>
+</tbody>
+</table>
+<h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><p>捕获功能可以根据一个模式从目标字符串中抽取匹配该模式的内容，在指定捕获时，应该将模式中需要捕获的部分写到一对圆括号当中。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">pair = <span class="string">&#34;name=rcx&#34;</span></span><br/><span class="line">key, value = <span class="built_in">string</span>.<span class="built_in">match</span>(pair, <span class="string">&#34;(%a+)%s*=%s*(%a+)&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(key, value) <span class="comment">---&gt; name rcx</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>还可以对模式使用捕获。有一个例子，如果我们想再一个字符串当中找到由单引号或者双引号括起来的字符串。那么我们可以使用如下的模式：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="string">&#34;[&#34;</span><span class="string">&#39;](.-)[&#34;&#39;</span>]<span class="string">&#34;</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>但是当字符串当中是 “it’s all right” 这样的字符串就会出现问题。当然我们可以使用捕获第一个引号，然后用它来指定第二个引号：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line">s = <span class="string">[[then he said: &#34;it&#39;s all right&#34;]]</span></span><br/><span class="line">q, v = <span class="built_in">string</span>.<span class="built_in">match</span>(s, <span class="string">&#34;([&#34;&#39;])(.-)%1&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(q)</span><br/><span class="line"><span class="built_in">print</span>(v)</span><br/></pre></td></tr></tbody></table></figure>
+<p>对于捕获到的值，还可以使用 gsub 函数的字符串替换。和模式一样，用于替换的字符串中可以包含 %d 这样的项。当进行替换的时候，这些项就对应于捕获到的内容。%0 表示整个匹配，并且替换字符串中的 % 必须进行转义到 %% 。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&#34;hello&#34;</span>, <span class="string">&#34;%a&#34;</span>, <span class="string">&#34;%0-%0&#34;</span>))</span><br/><span class="line">=&gt; h-he-el-ll-lo-o	<span class="number">5</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>string.gsub 会返回两个值，第二个返回值表示被替换的次数</p>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>string.gsub 函数的第三个参数不仅是一个字符串，也可以是一个函数或者 table。当传入的是函数的时候，string.gsub 会再每次找到匹配时候调用该函数，传入函数的值就是捕获到的内容，返回值作为替换的字符串。当传入的参数是 table 的时候，string.gsub 会每次捕获到内容作为 key 在 table 当中进行查找，并且将 value 作为要替换的字符串，如果 table 当中找不到值则不进行替换。</p>
+<p>【参考资料】</p>
+<ol>
+<li><a href="http://book.douban.com/subject/3076942/" target="_blank" rel="noopener noreferrer">Lua程序设计</a></li>
+</ol>
+<p>—EOF—</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-394_Lua%20%E6%B1%89%E5%AD%97%E6%8B%BC%E9%9F%B3%E9%A6%96%E5%AD%97%E6%AF%8D%E6%8F%90%E5%8F%96%20/">Lua 汉字拼音首字母提取</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-383_PIL.33Lua%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%8A%B6%E6%80%81%E6%9C%BA/">PIL.33Lua的线程和状态机</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>一个简单的Lua (Memory) Profiler - Lua教程</title>
+
+  
+    <meta name="description" content="Lua没有内置的Profiler，但是提供了一些相关的接口，可以用来实现一个简单的Lua Profiler。   一个Profiler至少需要统计以下信息, 用函数名+调用位置(保留一层堆栈信息)作为key:    执行次数   总时间   单次最大时间   尚未gc的内存数量   分配内存的最大值   二、基础 出发点是LuaProfiler，结构比较合理，但是有一些小问题：    统计数据应该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的Lua (Memory) Profiler">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-409_%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Lua%20(Memory)%20Profiler/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua没有内置的Profiler，但是提供了一些相关的接口，可以用来实现一个简单的Lua Profiler。   一个Profiler至少需要统计以下信息, 用函数名+调用位置(保留一层堆栈信息)作为key:    执行次数   总时间   单次最大时间   尚未gc的内存数量   分配内存的最大值   二、基础 出发点是LuaProfiler，结构比较合理，但是有一些小问题：    统计数据应该">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.270Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.270Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">一个简单的Lua (Memory) Profiler</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#41-%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="toc-text">4.1 内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#42-%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E4%B8%B4%E6%97%B6%E5%86%85%E5%AD%98"><span class="toc-text">4.2 不必要的临时内存</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>一个简单的Lua (Memory) Profiler</span></h1>
+<p><code class="highlighter-rouge">Lua</code>没有内置的<code class="highlighter-rouge">Profiler</code>，但是提供了一些相关的接口，可以用来实现一个简单的<a target="_blank" rel="noopener" href="https://github.com/qq410029478/luaprofiler">Lua Profiler</a>。</p>
+
+
+<p>一个<code class="highlighter-rouge">Profiler</code>至少需要统计以下信息, 用函数名+调用位置(保留一层堆栈信息)作为<code class="highlighter-rouge">key</code>:</p>
+<ul>
+  <li>执行次数</li>
+  <li>总时间</li>
+  <li>单次最大时间</li>
+  <li>尚未gc的内存数量</li>
+  <li>分配内存的最大值</li>
+</ul>
+
+<h1 id="二基础">二、基础</h1>
+<p>出发点是<a target="_blank" rel="noopener" href="https://github.com/LuaDist/luaprofiler">LuaProfiler</a>，结构比较合理，但是有一些小问题：</p>
+<ul>
+  <li>统计数据应该驻留在内存中，不能写<code class="highlighter-rouge">log</code>，太卡。</li>
+  <li><code class="highlighter-rouge">time()</code>的精度太低，换成<code class="highlighter-rouge">PerformanceCounter</code>(windows)。</li>
+  <li><code class="highlighter-rouge">lua5.3</code>和<code class="highlighter-rouge">5.1</code>的<code class="highlighter-rouge">lua_Hook</code>处理<code class="highlighter-rouge">tail call</code>的接口不一样，需要转换一下。</li>
+  <li><code class="highlighter-rouge">coroutine</code>相关的处理。</li>
+</ul>
+
+<h1 id="三memory">三、Memory</h1>
+<p>通过以下方式可以获取每个函数分配内存的数据：</p>
+<ol>
+  <li>启动<code class="highlighter-rouge">Profiler</code>时执行一次<code class="highlighter-rouge">full gc</code></li>
+  <li>重载<a target="_blank" rel="noopener" href="http://www.lua.org/manual/5.3/manual.html#lua_Alloc"><code class="highlighter-rouge">lua_Alloc</code></a>，按下列三种情况统计数据：
+    <ol>
+      <li>分配新的内存：建立内存指针与当前函数数据的对应关系，如果新内存大小为<code class="highlighter-rouge">size</code>, 当前函数的内存数量<code class="highlighter-rouge">+=size</code>，同时检查更新内存最大值。</li>
+      <li>释放内存：获得对应的函数数据，如果释放的内存大小为<code class="highlighter-rouge">size</code>, 当前函数的内存数量<code class="highlighter-rouge">-=size</code></li>
+      <li><code class="highlighter-rouge">realloc</code>: 按照释放旧内存，分配新内存处理，但是这样可能会出现一些问题。如果旧内存是在函数A中分配，新内存在另一个函数B中分配，旧内存对应的数据会被计入B的统计数据中。不过这个问题应该影响不大。</li>
+    </ol>
+  </li>
+  <li>停止<code class="highlighter-rouge">Profiler</code>时执行一次<code class="highlighter-rouge">full gc</code></li>
+</ol>
+
+<h1 id="四应用">四、应用</h1>
+<p>这个<code class="highlighter-rouge">Profiler</code>统计的数据虽然简单，但是已经足以用来进行一些精细的优化，其中值得一提的有：</p>
+<h2 id="41-内存泄漏">4.1 内存泄漏</h2>
+<p>以下面这段代码为例：</p>
+
+<figure class="highlight"><pre><code class="language-lua" data-lang="lua"><span class="kd">local</span> <span class="k">function</span> <span class="nf">alloc</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">&#123;&#125;</span>
+<span class="k">end</span>
+
+<p><span class="c1">–分配</span><br><span class="kd">local</span> <span class="n">Cache</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br><span class="k">for</span> <span class="n">i</span> <span class="o">&#x3D;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span> <span class="k">do</span><br>    <span class="n">Cache</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="n">alloc</span><span class="p">()</span><br><span class="k">end</span><br><span class="c1">– 释放</span><br><span class="k">for</span> <span class="n">i</span> <span class="o">&#x3D;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span> <span class="k">do</span><br>    <span class="n">Cache</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="kc">nil</span><br><span class="k">end</span></code></pre></figure></p>
+<p>下面是函数<code class="highlighter-rouge">alloc</code>在内存方面的数据，可以看到<code class="highlighter-rouge">alloc</code>分配的内存都释放掉了：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>尚未gc的内存数量(Byte)</th>
+      <th>分配内存的最大值(Byte)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>5600</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>把释放内存的代码注释掉，函数<code class="highlighter-rouge">alloc</code>在内存方面的数据变成：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>尚未gc的内存数量(Byte)</th>
+      <th>分配内存的最大值(Byte)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5600</td>
+      <td>5600</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>如果代码中存在(持续地)内存泄漏，表现在<code class="highlighter-rouge">profile</code>数据中，是相关函数的<code class="highlighter-rouge">尚未gc的内存数量(Byte)</code>项不但不为0，还可能持续的变大。</p>
+
+<h2 id="42-不必要的临时内存">4.2 不必要的临时内存</h2>
+<p>用<code class="highlighter-rouge">..</code>拼接字符串是最典型的例子，下面的函数<code class="highlighter-rouge">ConcatStrings</code>将<code class="highlighter-rouge">SubStrList</code>中的字符串拼接成一个字符串：</p>
+
+<figure class="highlight"><pre><code class="language-lua" data-lang="lua"><span class="kd">local</span> <span class="n">SubStrList</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span> <span class="k">do</span>
+    <span class="nb">table.insert</span><span class="p">(</span><span class="n">SubStrList</span><span class="p">,</span> <span class="nb">tostring</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="k">end</span>
+
+<p><span class="kd">local</span> <span class="k">function</span> <span class="nf">ConcatStrings</span><span class="p">(</span><span class="n">SubStrList</span><span class="p">)</span><br>    <span class="kd">local</span> <span class="n">Result</span> <span class="o">&#x3D;</span> <span class="s2">&amp;#34;&amp;#34;</span><br>    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">SubStr</span> <span class="k">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">SubStrList</span><span class="p">)</span> <span class="k">do</span><br>        <span class="n">Result</span> <span class="o">&#x3D;</span> <span class="n">Result</span> <span class="o">..</span> <span class="n">SubStr</span><br>    <span class="k">end</span><br>    <span class="k">return</span> <span class="n">Result</span><br><span class="k">end</span></code></pre></figure></p>
+<p>调用一次<code class="highlighter-rouge">ConcatStrings</code>的<code class="highlighter-rouge">profile</code>数据如下，从中可以看出产生了大量临时的内存，虽然可以<code class="highlighter-rouge">gc</code>掉：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>尚未gc的内存数量(Byte)</th>
+      <th>分配内存的最大值(Byte)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ConcatStrings</td>
+      <td>38919</td>
+      <td>1641422</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>拼接字符串的正确姿势应该是：</p>
+
+<figure class="highlight"><pre><code class="language-lua" data-lang="lua"><span class="kd">local</span> <span class="k">function</span> <span class="nf">ConcatStrings</span><span class="p">(</span><span class="n">SubStrList</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">table.concat</span><span class="p">(</span><span class="n">SubStrList</span><span class="p">)</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>调用这个版本<code class="highlighter-rouge">ConcatStrings</code>的数据如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数名</th>
+      <th>尚未gc的内存数量(Byte)</th>
+      <th>分配内存的最大值(Byte)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ConcatStrings</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>table.concat</td>
+      <td>39582</td>
+      <td>137942</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>比较两个版本的数据可以看出，最终拼接好的字符串占用的内存是相似的，但是拼接过程中产生的临时内存差别非常大。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-426_cocos2dx%20lua%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6%E8%AF%A6%E8%A7%A3/">cocos2dx lua注册事件详解</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-40_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">Programming in Lua(Thrid Edition)笔记</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

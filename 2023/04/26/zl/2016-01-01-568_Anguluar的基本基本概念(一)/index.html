@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Anguluar的基本基本概念(一) - Lua教程</title>
+
+  
+    <meta name="description" content="带着问题学习，效果可能更好一些，本文基于 Angular 1.5.8 版本. 1.AnguluarJS是什么？ AngularJS是一款由Google公司开发维护的前端MVC框架. 作用：克服了HTML在构建应用上的诸多不足，降低开发成本，提升开发效率。 2.AnguluarJS与jQuery有什么区别？ jQuery准确地来说只是一个类库（类库指的是一系列函数的集合），以DOM元素做为驱动（核心">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anguluar的基本基本概念(一)">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-568_Anguluar%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5(%E4%B8%80)/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="带着问题学习，效果可能更好一些，本文基于 Angular 1.5.8 版本. 1.AnguluarJS是什么？ AngularJS是一款由Google公司开发维护的前端MVC框架. 作用：克服了HTML在构建应用上的诸多不足，降低开发成本，提升开发效率。 2.AnguluarJS与jQuery有什么区别？ jQuery准确地来说只是一个类库（类库指的是一系列函数的集合），以DOM元素做为驱动（核心">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.284Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.284Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Anguluar的基本基本概念(一)</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-AnguluarJS%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.AnguluarJS是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-AnguluarJS%E4%B8%8EjQuery%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">2.AnguluarJS与jQuery有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%8F%90%E4%B8%80%E5%98%B4%E7%9A%84MVC%EF%BC%8CMVVM"><span class="toc-text">3.不得不提一嘴的MVC，MVVM?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Angular%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-text">4.Angular的基本使用？</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.284Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Anguluar的基本基本概念(一)</span></h1>
+<p>带着问题学习，效果可能更好一些，本文基于 <strong>Angular 1.5.8</strong> 版本.</p>
+<h3 id="1-AnguluarJS是什么？"><a href="#1-AnguluarJS是什么？" class="headerlink" title="1.AnguluarJS是什么？"></a>1.AnguluarJS是什么？</h3><ul>
+<li>AngularJS是一款由Google公司开发维护的前端MVC框架.</li>
+<li>作用：克服了HTML在构建应用上的诸多不足，降低开发成本，提升开发效率。
+<h3 id="2-AnguluarJS与jQuery有什么区别？"><a href="#2-AnguluarJS与jQuery有什么区别？" class="headerlink" title="2.AnguluarJS与jQuery有什么区别？"></a>2.AnguluarJS与jQuery有什么区别？</h3></li>
+<li>jQuery准确地来说只是一个类库（类库指的是一系列函数的集合），以DOM元素做为驱动（核心）.</li>
+<li>AngularJS则一个框架（诸多类库的集合），以数据和逻辑做为驱动（核心），框架对开发的流程和模式做了约束，开发者遵照约束进行开发，更注重的实际的业务逻辑.</li>
+</ul>
+<h3 id="3-不得不提一嘴的MVC，MVVM"><a href="#3-不得不提一嘴的MVC，MVVM" class="headerlink" title="3.不得不提一嘴的MVC，MVVM?"></a>3.不得不提一嘴的MVC，MVVM?</h3><ul>
+<li>3.1 MVC是一种软件架构设计的思想，将软件按照模型、视图、控制器来划分。模型负责封装业务逻辑和数据；视图负责输入和输出，控制显示界面交互；控制器负责协调模型和视图。<ul>
+<li>Model(模型)：模型是应用程序的主体部分，通常用于处理应用程序的业务数据，或者业务逻辑部分. </li>
+<li>View(视图)：视图是应用程序中处理用户界面显示的部分，通常视图是依据模型数据创建的.</li>
+<li>controller(控制器)：应用程序中处理用户交互的部分，通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据。</li>
+</ul>
+</li>
+<li>3.2 MVC的优点：<ul>
+<li>实现了功能模块和显示模块的分离</li>
+<li>可维护性</li>
+<li>可扩展性</li>
+<li>可移植性和组件的可复用性 </li>
+</ul>
+</li>
+<li>3.3 MVVM是什么梗？<ul>
+<li>MV:可以通过模型到视图传递数据</li>
+<li>VM:视图也可以传递数据到模型</li>
+<li>MVVM属于数据的双向绑定<blockquote>
+<p>AngularJS构建应用（App）时是以模块化（Module）的方式组织的，将整个应用划分成若干模块，每个模块都有各自的职责，最终组合成一个整体，采用模块化的组织方式，可以最大程度的实现代码的复用.<br/>OK，讲了一大堆虚头巴脑的理论，都看不下去了，那就废话不多说，直接上代码。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-Angular的基本使用？"><a href="#4-Angular的基本使用？" class="headerlink" title="4.Angular的基本使用？"></a>4.Angular的基本使用？</h4><p>简单粗暴的代码长这样(删减版)：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&#34;en&#34;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&#34;UTF-8&#34;&gt;</div><div class="line">    &lt;title&gt;Title&lt;/title&gt;</div><div class="line">    &lt;script src=&#34;angular.js&#34;&gt;&lt;/script&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">    var app =  angular.module(&#39;app&#39;,[]);</div><div class="line">        app.controller(&#39;preController&#39;,[&#39;$scope&#39;,function ($scope) {</div><div class="line">            $scope.box = [&#39;apple&#39;,&#39;banana&#39;,&#39;orange&#39;];</div><div class="line">            $scope.msg = &#34;xmg&#34;;</div><div class="line">            $scope.show = function () {</div><div class="line">                alert(&#39;hello world&#39;);</div><div class="line">            }</div><div class="line">        }]);</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line"></div><div class="line">&lt;body ng-app=&#34;app&#34; ng-controller=&#34;preController&#34;&gt;</div><div class="line"></div><div class="line">&lt;p ng-show=&#34;true&#34;&gt;&lt;/p&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li ng-repeat=&#34;goods in box&#34;&gt;&lt;/li&gt;</div><div class="line"></div><div class="line">&lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></tbody></table></figure><p></p>
+<p>如果上面简介的代码看得云里雾里，那就可以看看下面这份完整版的，然而文末并没有彩蛋..<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&#34;en&#34;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&#34;UTF-8&#34;&gt;</div><div class="line">    &lt;title&gt;创建模块(MVC思想)&lt;/title&gt;</div><div class="line">    &lt;!--0.导入angular--&gt;</div><div class="line">    &lt;script src=&#34;angular.js&#34;&gt;&lt;/script&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        // MVC: Model(数据/模型)  View(视图)  Controller(控制器)</div><div class="line">        // 1.创建模块，angularJS提供了一个全局对象angular，在此全局对象下存在着若干的方法</div><div class="line">        // 其中angular.module()方法用来定义一个模块。</div><div class="line">        // 第一个参数：模块的名称</div><div class="line">        // 第二个参数：依赖模块的名称</div><div class="line">        var app = angular.module(&#39;app&#39;, []);</div><div class="line"></div><div class="line">        // 2.创建控制器</div><div class="line">        // 控制器(Controller)作为连接模型(Model)和视图(View)的桥梁存在，</div><div class="line">        // 所以当我们定义好了控制器之后也就定义好了模型和视图</div><div class="line">        // 参数一：控制器的名称</div><div class="line">        // 参数二：依赖的服务 app.controller(&#39;名称&#39;, [&#39;$scope&#39;, function($scope){}]);</div><div class="line">        app.controller(&#39;perController&#39;, [&#39;$scope&#39;, function ($scope) {</div><div class="line">            $scope.msg = &#39;zxc&#39;;</div><div class="line">            $scope.show = function () {</div><div class="line">                alert(&#39;Hello world&#39;);</div><div class="line">            };</div><div class="line">            $scope.box = [&#39;apple&#39;, &#39;banana&#39;, &#39;orange&#39;];</div><div class="line">        }]);</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;!--指令：ng-app  定义应用程序的根元素。--&gt;</div><div class="line">&lt;!--3.绑定模块--&gt;</div><div class="line">&lt;body ng-app=&#34;app&#34; ng-controller=&#34;pergController&#34;&gt;</div><div class="line">&lt;!--4.绑定控制器--&gt;</div><div class="line">&lt;!-- 指令：给原生的html添加了一些新的属性。可以达到指定的功能 --&gt;</div><div class="line"></div><div class="line">&lt;!-- 指令：ng-show	显示或隐藏 HTML 元素 --&gt;</div><div class="line">&lt;p ng-show=&#34;true&#34;&gt;&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;ul&gt;</div><div class="line">    &lt;!--指令：ng-repeat	遍历元素，定义集合中&#34;每项&#34;数据的模板--&gt;</div><div class="line">    &lt;li ng-repeat=&#34;goods in box&#34;&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></tbody></table></figure><p></p>
+<p>呃，并不打算放一张运行结果图，自己撸完看结果呗，现在，简单梳理一下这个过程，这整个流程就好比一个人要开一家餐厅：</p>
+<ul>
+<li>第一步，导入Angular框架</li>
+<li>第二步，创建模块，让当前页面支持angular，这就相当于餐厅选址，要在哪里开餐厅.</li>
+<li>第三步，创建一个控制器，这就好比请了一个服务员，并且这个服务员还自带了一个厨房，包括厨师(这个服务员有木有很6).</li>
+<li>第四步，绑定模块，指定模块生效的区域，也就是要开多大的餐厅.</li>
+<li>第五步，绑定控制器，制定运营制度。<br/>最后，祝贺你，你的餐厅开张了，你已然是一位餐厅老板了，是不是发现开个餐厅太容易了，简直分分钟搞定，如果以后这行做不下去了，咱还可以创建个餐厅玩玩对吧。</li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-566_tolua%E4%B9%8Bwrap%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">tolua之wrap文件的原理与使用</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-56_cocos2dx%20lua%20%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E6%88%98/">cocos2dx lua 热更新原理与实战</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

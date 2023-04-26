@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>我与Coding的开发日常 - Lua教程</title>
+
+  
+    <meta name="description" content="我与Coding的开发日常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我与Coding的开发日常">
+<meta property="og:url" content="https://lua.ren/topic/271/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="我与Coding的开发日常">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952055/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952058/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952057/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952075/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952059/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952074/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952061/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952062/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952063/imagePreview">
+<meta property="og:image" content="https://coding.net/api/project/257653/files/952065/imagePreview">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.112Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://coding.net/api/project/257653/files/952055/imagePreview">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">我与Coding的开发日常</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%8A%E6%88%91%E4%B8%8ECoding%E7%9A%84%E5%BC%80%E5%8F%91%E6%97%A5%E5%B8%B8%E3%80%8B"><span class="toc-text">《我与Coding的开发日常》</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E6%BB%B4%E8%AE%B0%E5%BD%95%EF%BC%88%E5%8D%9A%E5%AE%A2%E5%B0%B1%E6%98%AF%E8%BF%99%E4%B9%88%E6%9D%A5%E7%9A%84%EF%BC%89"><span class="toc-text">点滴记录（博客就是这么来的）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E9%A1%B9%E7%9B%AE%EF%BC%88%E8%B5%9A%E7%82%B9%E5%A4%96%E5%BF%AB%EF%BC%89"><span class="toc-text">私有项目（赚点外快）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%B0%8F%E4%BC%99%E4%BC%B4%E7%9A%84%E9%9B%86%E6%95%A3%E5%9C%B0%EF%BC%89"><span class="toc-text">开源项目（小伙伴的集散地）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pages%E6%9C%8D%E5%8A%A1%EF%BC%88Coding%E4%B8%8A%E5%A5%94%E8%B7%91%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%89"><span class="toc-text">Pages服务（Coding上奔跑的博客）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%8F%8D%E9%A6%88%EF%BC%88%E7%A5%9E%E5%9B%9E%E5%A4%8D%EF%BC%89"><span class="toc-text">响应反馈（神回复）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Markdown%E5%86%99%E4%BD%9C%E5%B9%B3%E5%8F%B0"><span class="toc-text">Markdown写作平台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E9%87%8C%E7%9A%84%E4%BA%92%E5%8A%A8%EF%BC%88Happy-Coding%EF%BC%89"><span class="toc-text">冒泡里的互动（Happy Coding）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8A%B1%E6%A0%B7%E7%BC%96%E7%A0%81"><span class="toc-text">花样编码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E4%BA%92%E5%8A%A8"><span class="toc-text">各种互动</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AB%E5%93%A5%E6%89%93%E8%B5%8F%E4%BA%86"><span class="toc-text">八哥打赏了</span></a></li></ol></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>我与Coding的开发日常</span></h1>
+<h2 id="《我与Coding的开发日常》"><a href="#《我与Coding的开发日常》" class="headerlink" title="《我与Coding的开发日常》"></a>《我与Coding的开发日常》</h2><p>经历在那个时期，Paas云、虚拟机、Docker、VPS，本地服务，然后连上SSH，打开编辑器，让电流信号穿过各种这些设备。那时有一个梦想，如果有一天，只需要一个简单终端，就可以进入丰富的服务器资源世界，忘记各种平台参数配置，用键盘打开一扇通向乌托邦世界的门，那是你想要到的地方。</p>
+<p>有时就是这么的神奇，突如其来的想法，就是想看看coding.net这个域名被用来做什么， 结果就结识了coding。那时国内还有其它同类的代码托管平台，比如Gitcafe,特有的绿界面，管理之前代码，如果用现在流行的话，Coding的界面风格，在当时就像一股清新的洪流，只要一个浏览器，你想要做的事，几乎都可以在WEB IDE下完成，这无限的接近了，当初理想的服务器开发环境状态，新建一个环境，只需要在控制台上，点几下按钮就完成了。</p>
+<p>那时，用coding提供的环境，做各种实验，简直如鱼得水，还留下了几篇以Coding为背景的博文。</p>
+<h3 id="点滴记录（博客就是这么来的）"><a href="#点滴记录（博客就是这么来的）" class="headerlink" title="点滴记录（博客就是这么来的）"></a>点滴记录（博客就是这么来的）</h3><ol>
+<li><p>经常性的使用WEB IDE对vim进行测试，很灵活。<br><a target="_blank" rel="noopener" href="http://www.epubit.com.cn/article/149">VIM的IDE实验记</a></p>
+</li>
+<li><p>在coding上部署C,Lua开发环境很轻松。<br><a target="_blank" rel="noopener" href="http://www.epubit.com.cn/article/141">Lua中脚本中加载.so库</a></p>
+</li>
+<li><p>Lapis是一个Lua web框架，飞快速度就能的WEB IDE中搭建WEB服务。<br><a target="_blank" rel="noopener" href="http://www.epubit.com.cn/article/145">WEB IDE环境运行Lua网页应用</a></p>
+</li>
+<li><p>用GoTTY可以扩展WEB IDE里人terminal。<br><a target="_blank" rel="noopener" href="http://www.epubit.com.cn/article/201">GoTTY简介：共享字符终端，变网页应用</a></p>
+</li>
+<li><p>在WEB IDE中测试Python三大框架，全部通过。<br><a target="_blank" rel="noopener" href="http://www.epubit.com.cn/article/143">如何创建部署WSGI类型的（Django, Tornado, Flask）Python应用</a></p>
+</li>
+<li><p>Coding其实是可以很好的支持SVN的。<br><a href="http://lua.ren/topic/245/%E5%9C%A8coding-net%E4%B8%8A%E4%BD%BF%E7%94%A8svn%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81">在Coding.net上使用SVN部署代码</a></p>
+</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952055/imagePreview" alt="svn"></p>
+<h3 id="私有项目（赚点外快）"><a href="#私有项目（赚点外快）" class="headerlink" title="私有项目（赚点外快）"></a>私有项目（赚点外快）</h3><p>WEB IDE不断的升级，配置起来就越发方便，而当听到Gitcafe和Coding合并的消息时，又开启一个新的时期，之前在Gitcafe里的代码，同时也是可以做到在coding里部署运行的，这样一来，直接把Gitcafe的代码轻松导入，统一管理。与某个团体的合作也是在Coding上完成的，在项目中加入冒泡功能后，我们又在项目中自由讨论，涉及到客户信息，就不具体说了，总之用赚了外快。</p>
+<h3 id="开源项目（小伙伴的集散地）"><a href="#开源项目（小伙伴的集散地）" class="headerlink" title="开源项目（小伙伴的集散地）"></a>开源项目（小伙伴的集散地）</h3><p>随着Coding愈发强大，我们也把开源社区里小伙伴从Github上拉来，拉入Coding,一个特有的原因就是，在coding下，我们可以管理文件发任务，分享共享开发环境。</p>
+<p>2016年初，在Openresty社区环境下，开源社区小伙伴有Lua开发一个web框架，一个社区软件。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952058/imagePreview" alt="member"></p>
+<p><a target="_blank" rel="noopener" href="https://coding.net/u/shengyang/p/OpenResty-China">Openresty China</a><br>后来这个项目上线了，就是现在的<a target="_blank" rel="noopener" href="https://www.orchina.org/">orchina.org</a></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952057/imagePreview" alt="openresy-china"></p>
+<p><a target="_blank" rel="noopener" href="https://coding.net/u/shengyang/p/ORC-LOR">LOR框架</a><br>我们方便在coding的WEB-IDE下共享我们的开发环境，节省时间，高效。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952075/imagePreview" alt="share"></p>
+<h3 id="Pages服务（Coding上奔跑的博客）"><a href="#Pages服务（Coding上奔跑的博客）" class="headerlink" title="Pages服务（Coding上奔跑的博客）"></a>Pages服务（Coding上奔跑的博客）</h3><p>coding不只是平时开发独立项目和测试用的，Coding同时还可以做成发布平台，在Coding上，应用Coding Pages服务创建自己的博客，也成为一种博客创建的可行方案，当时把Coding Pages服务搭建的过程也记录了下来：</p>
+<p>[使用Pages服务创建静态博客(上)]<a href="http://lua.ren/topic/215/%E4%BD%BF%E7%94%A8pages%E6%9C%8D%E5%8A%A1%E5%88%9B%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E4%B8%8A">http://lua.ren/topic/215/%E4%BD%BF%E7%94%A8pages%E6%9C%8D%E5%8A%A1%E5%88%9B%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E4%B8%8A</a>)<br><a href="http://lua.ren/topic/217/%E4%BD%BF%E7%94%A8pages%E6%9C%8D%E5%8A%A1%E5%88%9B%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E4%B8%8B-%E9%83%A8%E7%BD%B2jekyll%E9%9D%99%E6%80%81%E7%AB%99">使用Pages服务创建静态博客(下)</a></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952059/imagePreview" alt="moonscript.cn"></p>
+<p>现在应用Pages服务上线的一个站点，叫 <a href="www.moonscript.cn">MoonScript</a> ，上面记载了一些Lua和Moonscript相关的内容。</p>
+<h3 id="响应反馈（神回复）"><a href="#响应反馈（神回复）" class="headerlink" title="响应反馈（神回复）"></a>响应反馈（神回复）</h3><p>最开始反馈问题，运营美女们会第一时间反应，快到我都没反应过来她们已经有反应了的程度。提bug，是直接的方式是用冒泡的，复杂的问题就直接建立一个项目，上传数据，后来冒泡支持打赏功能了，突然一天来了一个消息， @八哥 的打赏了。</p>
+<p>有一次给@八哥反馈问题：<br>我在公司发消息，他会回。<br>我在回家的路上发消息，他会回。<br>我到家了发消息，他会回。<br>我上床用手机coding发消息，他还会回。<br>…….<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952074/imagePreview" alt="phone"></p>
+<h3 id="Markdown写作平台"><a href="#Markdown写作平台" class="headerlink" title="Markdown写作平台"></a>Markdown写作平台</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952061/imagePreview" alt="markdown"></p>
+<p>这篇文章的诞生就是在coding平台上，我项目的“文件”里创建了这篇Markdown,同时共享了这篇文章，之后会同步到用Coding的Pages服务搭建的网站<a target="_blank" rel="noopener" href="http://www.moonscript.cn/">moonscirpt.cn</a>上，也发布了这篇文章。</p>
+<h3 id="冒泡里的互动（Happy-Coding）"><a href="#冒泡里的互动（Happy-Coding）" class="headerlink" title="冒泡里的互动（Happy Coding）"></a>冒泡里的互动（Happy Coding）</h3><h5 id="花样编码"><a href="#花样编码" class="headerlink" title="花样编码"></a>花样编码</h5><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952062/imagePreview" alt="Happy Coding"></p>
+<h5 id="各种互动"><a href="#各种互动" class="headerlink" title="各种互动"></a>各种互动</h5><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952063/imagePreview" alt="maopao"></p>
+<h5 id="八哥打赏了"><a href="#八哥打赏了" class="headerlink" title="八哥打赏了"></a>八哥打赏了</h5><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://coding.net/api/project/257653/files/952065/imagePreview" alt="money"></p>
+<p>其实，还有很多和coding有关的故事，就这样不知道不觉中，coding已经两岁吧，这过程中亲眼经历了coding一天天的功能的丰满， 冒泡里的红火人气，刷coding已经是每天的例行内容，已经把很多其他平台的项目都搬家到了coding，coding已经变成了一个工作开始的起点，一个愈发强大的平台，祝福coding，谢谢coding，一直以来为大家带来的这一切！</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/268/">Threading的Timer是否可以被wait和communicate阻塞</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/270/">ElasticSearch的LUA客户端</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

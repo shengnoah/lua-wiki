@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>LuaFramework笔记One - Lua教程</title>
+
+  
+    <meta name="description" content="Contents                                    &lt;&#x2F;div&gt;          &lt;h2 id&#x3D;&quot;AppConst-DebugMode&quot;&gt;&lt;a href&#x3D;&quot;#AppConst-DebugMode&quot; class&#x3D;&quot;headerlink&quot; title">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LuaFramework笔记One">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-613_LuaFramework%E7%AC%94%E8%AE%B0One/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Contents                                    &lt;&#x2F;div&gt;          &lt;h2 id&#x3D;&quot;AppConst-DebugMode&quot;&gt;&lt;a href&#x3D;&quot;#AppConst-DebugMode&quot; class&#x3D;&quot;headerlink&quot; title">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.289Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.289Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">LuaFramework笔记One</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AppConst-UpdateMode"><span class="toc-text">AppConst.UpdateMode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AppConst-LuaBundleMode"><span class="toc-text">AppConst.LuaBundleMode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AppConst-AppName"><span class="toc-text">AppConst.AppName</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AppConst-DebugMode-%E5%92%8C-AppConst-LuaBundleMode-%E7%9A%84%E5%90%88%E4%BD%9C"><span class="toc-text">AppConst.DebugMode 和 AppConst.LuaBundleMode 的合作</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>LuaFramework笔记One</span></h1>
+<div id="toc" class="toc-article">
+            <strong class="toc-title">Contents</strong>
+        
+            
+        
+<pre><code>    &lt;/div&gt;
+    
+    &lt;h2 id=&quot;AppConst-DebugMode&quot;&gt;&lt;a href=&quot;#AppConst-DebugMode&quot; class=&quot;headerlink&quot; title=&quot;AppConst.DebugMode&quot;&gt;&lt;/a&gt;AppConst.DebugMode&lt;/h2&gt;&lt;ol&gt;
+</code></pre>
+<li>当AppConst.DebugMode=true时<br/>1.1 获取的本地持久化资源目录为<br/><code>return Application.dataPath + &#34;/&#34; + AppConst.AssetDir + &#34;/&#34;;</code><br/>在LuaFramework框架中这个路径为Assets/StreamingAssets目录，也就是说读取的ab资源是Assets/StreamingAssets下面的ab资源；<br/>1.2 不会进行StreamingAssets下面资源的解压释放，但是会执行更新逻辑<br/>1.3 lua引擎所初始化的搜索路劲为Assets/{AppName}/Lua和Assets/{AppName}/ToLua/Lua</li>
+<li>当AppConst.DebugMode=false时<br/>2.1 获取的本地持久化资源目录为当前系统的持久化目录<br/>2.2 会根据是否解压释放过，进行Asset/StreamingAssets下面的ab资源的释放<br/>2.3 lua引擎所初始化的搜索路劲为本地持久化目录下面的Lua文件夹</li>
+</ol>
+<h2 id="AppConst-UpdateMode"><a href="#AppConst-UpdateMode" class="headerlink" title="AppConst.UpdateMode"></a>AppConst.UpdateMode</h2><p>当AppConst.UpdateMode=false时，框架不会进行资源的更新下载</p>
+<h2 id="AppConst-LuaBundleMode"><a href="#AppConst-LuaBundleMode" class="headerlink" title="AppConst.LuaBundleMode"></a>AppConst.LuaBundleMode</h2><p>当AppConst.LuaBundleMode为true时：</p>
+<ol>
+<li>会将.lua文件打包进ab：<br/>打包lua文件流程：先创建Assets/Lua文件夹，然后遍历Assets/{AppName}/Lua/和Assets/{AppName}/ToLua/Lua这两个文件夹；<br/>1.1 当AppConst.LuaByteMode为true时，先将文件夹下面的所有.lua文件遍历出来，然后执行EncodeLuaFile(files[j], dest)函数：将非.lua文件直接copy到Assets/Lua下面的相应文件夹下面，将.lua文件进行luajit加密，然后copy到Assets/Lua下面的相应文件夹下面。<br/>1.2 当AppConst.LuaByteMode为false时,直接将文件加上.bytes后缀，copy到Assets/Lua下面的相应文件夹下面。<br/>1.3 所有Assets/Lua目录下面的所有文件夹路径，然后获取到ab包的名字（规则是lua/lua_{文件夹文字}.{AppConst.ExtName}）;然后将Assets/Lua/下面的每一个文件夹作为一个ab包，加入要打包的map中。<br/>1.4 最后将Assets/Lua下面的所有.bytes文件加入要打包的map中，名字为lua/lua.{AppConst.ExtName}<br/>1.5 最终，将Assets/{AppName}/Lua/和Assets/{AppName}/ToLua/Lua这两个文件夹下面的所有非.lua文件直接copy到Assets/StreamingAssets/lua/目录下面</li>
+<li>LuaLoader对象中的 beZip = AppConst.LuaBundleMode，这样，LuaManager中InitLuaBundle()函数会将打包的加入lua引擎的搜索目录</li>
+</ol>
+<p>当AppConst.LuaBundleMode为false时：</p>
+<ol>
+<li>直接copyAssets/{AppName}/Lua/和Assets/{AppName}/ToLua/Lua这两个文件夹下面的文件到Assets/StreamingAssets/lua/下面</li>
+</ol>
+<h2 id="AppConst-AppName"><a href="#AppConst-AppName" class="headerlink" title="AppConst.AppName"></a>AppConst.AppName</h2><p>决定Lua的打包和搜索目录</p>
+<h2 id="AppConst-DebugMode-和-AppConst-LuaBundleMode-的合作"><a href="#AppConst-DebugMode-和-AppConst-LuaBundleMode-的合作" class="headerlink" title="AppConst.DebugMode 和 AppConst.LuaBundleMode 的合作"></a>AppConst.DebugMode 和 AppConst.LuaBundleMode 的合作</h2><ol>
+<li>AppConst.DebugMode为true和AppConst.LuaBundleMode为true：<br/>打包时：lua文件会被打包进入ab。<br/>运行时：ab包中的lua文件会被加入lua引擎搜索目录。程序不会进行解压资源。读取的lua文件是ab包中的lua文件，如果ab包不存在就会报错</li>
+<li>AppConst.DebugMode为true和AppConst.LuaBundleMode为false：<br/>打包时：lua文件不会被打包进入ab。<br/>运行时：ab包中的lua文件不会被加入lua引擎搜索目录。程序不会进行解压资源。读取的lua文件是Assets/{AppName}/Lua/和Assets/{AppName}/ToLua/Lua这两个文件夹下面的文件</li>
+<li>AppConst.DebugMode为false时，会进行资源解压，其他照旧。</li>
+<li>总结 ：<br/>开发时，AppConst.DebugMode为true和AppConst.LuaBundleMode为false；</li>
+</ol>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-611_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85/">Lua入门教程：模块与包</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-614_2.3%20lua%20%E8%A1%A8%E8%BE%BE%E5%BC%8F/">2.3 lua 表达式</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

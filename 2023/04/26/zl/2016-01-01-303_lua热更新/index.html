@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua热更新 - Lua教程</title>
+
+  
+    <meta name="description" content="单纯热更新Lua热更新最简单粗暴的热更新就是将package.loaded[modelname]的值置为nil，强制重新加载： function reload_module(module_name)     package.loaded[modulename] &#x3D; nil     require(modulename) end 这样做虽然能完成热更，但问题是已经引用了该模块的地方不会得到更新， 因">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua热更新">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-303_lua%E7%83%AD%E6%9B%B4%E6%96%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="单纯热更新Lua热更新最简单粗暴的热更新就是将package.loaded[modelname]的值置为nil，强制重新加载： function reload_module(module_name)     package.loaded[modulename] &#x3D; nil     require(modulename) end 这样做虽然能完成热更，但问题是已经引用了该模块的地方不会得到更新， 因">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.260Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.260Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua热更新</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="toc-text">单纯热更新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0%E7%9A%84%E5%8E%9F%E5%88%99"><span class="toc-text">热更新的原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%8C%E4%BB%A3%E7%A0%81%E9%80%82%E7%94%A8%E4%BA%8E5-2%E4%BB%A5%E4%B8%8A"><span class="toc-text">热更新的实现，代码适用于5.2以上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-text">更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%9D%91"><span class="toc-text">关于坑</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua热更新</span></h1>
+<h4 id="单纯热更新"><a href="#单纯热更新" class="headerlink" title="单纯热更新"></a>单纯热更新</h4><p>Lua热更新<br/>最简单粗暴的热更新就是将package.loaded[modelname]的值置为nil，强制重新加载：</p>
+<pre><code>function reload_module(module_name)
+    package.loaded[modulename] = nil
+    require(modulename)
+end
+</code></pre><p>这样做虽然能完成热更，但问题是已经引用了该模块的地方不会得到更新， 因此我们需要将引用该模块的地方的值也做对应的更新。</p>
+<pre><code>function reload_module(module_name)
+    local old_module = _G[module_name]
+    package.loaded[module_name] = nil
+    require (module_name)
+
+<pre><code>local new_module = _G[module_name]
+for k, v in pairs(new_module) do
+  old_module[k] = v
+end
+
+package.loaded[module_name] = old_module
+</code></pre>
+<p>end<br></code></pre><h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><blockquote></p>
+<p>在生产环境上，总有可能出现不可预知的Bug，而通常修改好Bug仅仅又修改几句，停机维护的成本又太高，对于游戏来说，通常每个服就是单独的进程，也做不到像分布式环境下，关掉一部分机器，先升级一部分，再升级另一部分的无缝升级。这时候如果有热更就可以迅速的把Bug修复方案通过热更新进行修复，不会对用户任何的影响。例如：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>业务逻辑有Bug</li>
+<li>配置的数据有误</li>
+<li>需求发生变更</li>
+</ol>
+</blockquote>
+<h3 id="热更新的原则"><a href="#热更新的原则" class="headerlink" title="热更新的原则"></a>热更新的原则</h3><p>1、热更新不破坏原有数据</p>
+<blockquote>
+<p>热更新更新的基本内容就是更新服务的逻辑，通常只是逻辑发生变化，但原有的值并不能被改变，例如：</p>
+</blockquote>
+<pre><code>local a = 1
+function get_a()
+    return a
+end
+</code></pre><p>此时，我们调用get_a()返回是的1，我们将热更成</p>
+<pre><code>local a = 2
+function get_a()
+    print(&#34;get_a function&#34;)
+    return a
+end
+</code></pre><p>此时我们改变了a的初始值，但我们并不知道之前服务a的值是不是被重新赋过值，假设热更前a的值仍然为1，那么我们热更后调用get_a()返回的应该是1，而不应受新的初始值影响，而且同能打印出了”get_a function”，这时候则认为热更正常。</p>
+<p>2、不为热更新写更多的代码</p>
+<blockquote>
+<p>热更新可以通过很多种方法实现，比如说模块为了支持数据不变的特性，需要在模块里额外写一些代码来记录旧值，热更新之后再把旧值copy过来，或者用一些特殊的语法来支撑。这种方法将会对项目增加很多的负担，而且一旦发生意料之外的Bug，热更系统几乎处于半瘫痪状态。应该来说，代码原本该怎么实现就怎么实现，对于99%的lua代码都是支持的，不需要修改来迎合热更新。通常热更新不改变原有变量值的类型。</p>
+</blockquote>
+<h3 id="热更新的实现，代码适用于5-2以上"><a href="#热更新的实现，代码适用于5-2以上" class="headerlink" title="热更新的实现，代码适用于5.2以上"></a>热更新的实现，代码适用于5.2以上</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>利用_ENV环境，在加载的时候把数据加载到_ENV下，然后再通过对比的方式修改_G底下的值，从而实现热更新，函数</p>
+</blockquote>
+<pre><code>function hotfix(chunk, check_name)
+</code></pre><p>定义env的table，并为env设置_G访问权限，然后调用load实现把数据重新加载进来</p>
+<pre><code>local env = &#123;&#125;
+setmetatable(env, &#123; __index = _G &#125;)
+local _ENV = env
+local f, err = load(chunk, check_name,  &#39;t&#39;, env)
+assert(f,err)
+local ok, err = pcall(f)
+assert(ok,err)
+</code></pre><p>此时env我们可以得到新函数有变更的部分，我们替换的为可见变量，也就是可直接访问的变量</p>
+<pre><code>for name,value in pairs(env) do
+    local g_value = _G[name]
+    if type(g_value) ~= type(value) then
+        _G[name] = value
+    elseif type(value) == &#39;function&#39; then
+        update_func(value, g_value, name, &#39;G&#39;..&#39;  &#39;)
+        _G[name] = value
+    elseif type(value) == &#39;table&#39; then
+        update_table(value, g_value, name, &#39;G&#39;..&#39;  &#39;)
+    end
+end
+</code></pre><blockquote>
+<p>通过env当前的值和_G当前的值进行对比</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>如果类型不同我们直接覆盖原值，此时value不为nil，不会出现原则被覆盖成nil的情况</li>
+<li>如果当前值为函数，我们进行函数的upvalue值比对</li>
+</ol>
+</blockquote>
+<pre><code>function update_func(env_f, g_f, name, deep)
+    --取得原值所有的upvalue，保存起来
+    local old_upvalue_map = &#123;&#125;
+    for i = 1, math.huge do
+        local name, value = debug.getupvalue(g_f, i)
+        if not name then break end
+        old_upvalue_map[name] = value
+    end
+    --遍历所有新的upvalue，根据名字和原值对比，如果原值不存在则进行跳过，如果为其它值则进行遍历env类似的步骤
+    for i = 1, math.huge do
+        local name, value = debug.getupvalue(env_f, i)
+        if not name then break end
+        local old_value = old_upvalue_map[name]
+        if old_value then
+            if type(old_value) ~= type(value) then
+                debug.setupvalue(env_f, i, old_value)
+            elseif type(old_value) == &#39;function&#39; then
+                update_func(value, old_value, name, deep..&#39;  &#39;..name..&#39;  &#39;)
+            elseif type(old_value) == &#39;table&#39; then
+                update_table(value, old_value, name, deep..&#39;  &#39;..name..&#39;  &#39;)
+                debug.setupvalue(env_f, i, old_value)
+            else
+                debug.setupvalue(env_f, i, old_value)
+            end
+        end
+    end
+end
+</code></pre><blockquote>
+<ol>
+<li>如果当前值为table，我们遍历table值进行对比</li>
+</ol>
+</blockquote>
+<pre><code>local protection = &#123;
+    setmetatable = true,
+    pairs = true,
+    ipairs = true,
+    next = true,
+    require = true,
+    _ENV = true,
+&#125;
+--防止重复的table替换，造成死循环
+local visited_sig = &#123;&#125;
+function update_table(env_t, g_t, name, deep)
+    --对某些关键函数不进行比对
+    if protection[env_t] or protection[g_t] then return end
+    --如果原值与当前值内存一致，值一样不进行对比
+    if env_t == g_t then return end
+    local signature = tostring(g_t)..tostring(env_t)
+    if visited_sig[signature] then return end
+    visited_sig[signature] = true
+    --遍历对比值，如进行遍历env类似的步骤
+    for name, value in pairs(env_t) do
+        local old_value = g_t[name]
+        if type(value) == type(old_value) then
+            if type(value) == &#39;function&#39; then
+                update_func(value, old_value, name, deep..&#39;  &#39;..name..&#39;  &#39;)
+                g_t[name] = value
+            elseif type(value) == &#39;table&#39; then
+                update_table(value, old_value, name, deep..&#39;  &#39;..name..&#39;  &#39;)
+            end
+        else
+            g_t[name] = value
+        end
+    end
+    --遍历table的元表，进行对比
+    local old_meta = debug.getmetatable(g_t)
+    local new_meta = debug.getmetatable(env_t)
+    if type(old_meta) == &#39;table&#39; and type(new_meta) == &#39;table&#39; then
+        update_table(new_meta, old_meta, name..&#39;s Meta&#39;, deep..&#39;  &#39;..name..&#39;s Meta&#39;..&#39;  &#39; )
+    end
+end
+</code></pre><h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>1、可以调用hotfix_file对整个文件进行热更</p>
+<pre><code>function hotfix_file(name)
+    local file_str
+    local fp = io.open(name)
+    if fp then
+        io.input(name)
+        file_str = io.read(&#39;*all&#39;)
+        io.close(fp)
+    end
+
+<pre><code>if not file_str then
+    return -1
+end
+return hotfix(file_str, name)
+</code></pre>
+<p>end<br></code></pre><p>2、可以通过hotfix进行代码的更新</p></p>
+<pre><code>function hotfix(chunk, check_name)
+</code></pre><h4 id="关于坑"><a href="#关于坑" class="headerlink" title="关于坑"></a>关于坑</h4><blockquote>
+<p>这里有一个注意事项，lua的module模块，如：</p>
+</blockquote>
+<pre><code>module(&#34;AA&#34;, package.seeall)
+</code></pre><p>当我们加载lua模块的时候，这时候这个模块信息并不像初始化全局代码一样，就算提前设置了package.loaded[“AA”] = nil, 也不会出现在env中同时也不会调用_G的__newindex函数，也就是说env[“AA”]为空，故这种写法无法进行热更新，所以通常模块的写法改成如下</p>
+<pre><code>--定义模块AA
+AA = &#123;&#125;
+--相当于package.seeall
+setmetatable(AA, &#123;__index = _G&#125;)
+--环境隔离
+local _ENV = AA
+</code></pre>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-304_lua%20c%20api%20/">lua c api</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-307_lua%E6%A8%A1%E5%9D%97%E6%B3%A8%E5%86%8C/">lua模块注册</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

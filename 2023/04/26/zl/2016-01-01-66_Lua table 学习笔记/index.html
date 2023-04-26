@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua table 学习笔记 - Lua教程</title>
+
+  
+    <meta name="description" content="Lua table定义 table类型实现了“关联数组”。“关联数组” 是一种具有特殊索引方式的数组，索引可为字符串string或(整)数number类型.  local corp &#x3D; &amp;#123;     web &#x3D; &amp;#34;www.google.com&amp;#34;,   --索引为字符串，key &#x3D; &amp;#34;web&amp;#34;, value &#x3D; &amp;#34;www.google.com&amp;#34;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua table 学习笔记">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-66_Lua%20table%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua table定义 table类型实现了“关联数组”。“关联数组” 是一种具有特殊索引方式的数组，索引可为字符串string或(整)数number类型.  local corp &#x3D; &amp;#123;     web &#x3D; &amp;#34;www.google.com&amp;#34;,   --索引为字符串，key &#x3D; &amp;#34;web&amp;#34;, value &#x3D; &amp;#34;www.google.com&amp;#34;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.294Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.294Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua table 学习笔记</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#lua-table%E5%AE%9A%E4%B9%89"><span class="toc-text">Lua table定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lua-table%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-text">Lua table的遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lua-table%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="toc-text">Lua table删除元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lua-table%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="toc-text">Lua table库介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tableconcat-table--sep--i--j---"><span class="toc-text">table.concat (table [, sep [, i [, j ] ] ])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tableinsert-table-pos--value"><span class="toc-text">table.insert (table, [pos ,] value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tablemaxn-table"><span class="toc-text">table.maxn (table)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tableremove-table--pos"><span class="toc-text">table.remove (table [, pos])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tablesort-table--comp"><span class="toc-text">table.sort (table [, comp])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#table%E4%B8%80%E4%BA%9B%E6%9C%89%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-text">table一些有用的函数</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua table 学习笔记</span></h1>
+<h2 id="lua-table定义">Lua table定义</h2>
+<p>table类型实现了“关联数组”。“关联数组” 是一种具有特殊索引方式的数组，索引可为字符串string或(整)数number类型.</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">local</span> <span class="n">corp</span> <span class="o">=</span> <span class="p">&#123;</span>
+    <span class="n">web</span> <span class="o">=</span> <span class="s">&#34;www.google.com&#34;</span><span class="p">,</span>   <span class="o">--</span><span class="err">索引为字符串，</span><span class="n">key</span> <span class="o">=</span> <span class="s">&#34;web&#34;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&#34;www.google.com&#34;</span>
+    <span class="n">telephone</span> <span class="o">=</span> <span class="s">&#34;12345678&#34;</span><span class="p">,</span>   <span class="o">--</span><span class="err">索引为字符串</span>
+    <span class="n">staff</span> <span class="o">=</span> <span class="p">&#123;</span><span class="s">&#34;Jack&#34;</span><span class="p">,</span> <span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="s">&#34;Gary&#34;</span><span class="p">&#125;,</span> <span class="o">--</span><span class="err">索引为字符串，值也是一个表</span>
+    <span class="mi">100876</span><span class="p">,</span>              <span class="o">--</span><span class="err">相当于</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100876</span><span class="err">，此时索引为数字</span><span class="p">,</span><span class="n">key</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">100876</span>
+    <span class="mi">100191</span><span class="p">,</span>              <span class="o">--</span><span class="err">相当于</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100191</span><span class="err">，此时索引为数字</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">360</span><span class="p">,</span>          <span class="o">--</span><span class="err">直接把数字索引给出</span>
+    <span class="p">[</span><span class="s">&#34;city&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Beijing&#34;</span> <span class="o">--</span><span class="err">索引为字符串</span>
+<span class="p">&#125;</span>
+
+<p><span class="n">print</span><span class="p">(</span><span class="n">corp</span><span class="p">.</span><span class="n">web</span><span class="p">)</span>               <span class="o">–&gt;</span><span class="n">output</span><span class="o">:</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><br><span class="n">print</span><span class="p">(</span><span class="n">corp</span><span class="p">[</span><span class="s">&amp;#34;telephone&amp;#34;</span><span class="p">])</span>      <span class="o">–&gt;</span><span class="n">output</span><span class="o">:</span><span class="mi">12345678</span><br><span class="n">print</span><span class="p">(</span><span class="n">corp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>                <span class="o">–&gt;</span><span class="n">output</span><span class="o">:</span><span class="mi">100191</span><br><span class="n">print</span><span class="p">(</span><span class="n">corp</span><span class="p">[</span><span class="s">&amp;#34;city&amp;#34;</span><span class="p">])</span>           <span class="o">–&gt;</span><span class="n">output</span><span class="o">:</span><span class="s">&amp;#34;Beijing&amp;#34;</span><br><span class="n">print</span><span class="p">(</span><span class="n">corp</span><span class="p">.</span><span class="n">staff</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>          <span class="o">–&gt;</span><span class="n">output</span><span class="o">:</span><span class="n">Jack</span><br><span class="n">print</span><span class="p">(</span><span class="n">corp</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>               <span class="o">–&gt;</span><span class="n">output</span><span class="o">:</span><span class="mi">360</span><br></code></pre></p>
+</div>
+<p>在定义表的时候，我们可以把所有的数据内容一起写在”{“和”}”之间，这样子是非常方便，而且很好看。比如：</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">T1</span><span class="o">=</span> <span class="p">&#123;</span> 
+    <span class="mi">10</span><span class="p">,</span> <span class="o">--</span> <span class="err">相当于</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span> 
+    <span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> 
+    <span class="n">John</span><span class="o">=</span> <span class="o">--</span> <span class="err">如果你原意，你还可以写成：</span><span class="p">[</span><span class="s">&#34;John&#34;</span><span class="p">]</span> <span class="o">=</span> 
+    <span class="p">&#123;</span> 
+        <span class="n">Age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="o">--</span> <span class="err">如果你原意，你还可以写成：</span><span class="p">[</span><span class="s">&#34;Age&#34;</span><span class="p">]</span> <span class="o">=</span><span class="mi">27</span> 
+        <span class="n">Gender</span><span class="o">=</span><span class="n">Male</span> <span class="o">--</span> <span class="err">如果你原意，你还可以写成：</span><span class="p">[</span><span class="s">&#34;Gender&#34;</span><span class="p">]</span> <span class="o">=</span><span class="n">Male</span> 
+    <span class="p">&#125;,</span> 
+    <span class="mi">20</span> <span class="o">--</span> <span class="err">相当于</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span> 
+<span class="p">&#125;</span>
+</code></pre>
+</div>
+
+<p>在构造TTable时，可以用<code class="highlighter-rouge">;</code>代替<code class="highlighter-rouge">,</code>分割数据项。</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="p">&#123;</span><span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">45</span><span class="p">;</span> <span class="s">&#34;one&#34;</span><span class="p">,</span> <span class="s">&#34;two&#34;</span><span class="p">,</span> <span class="s">&#34;three&#34;</span><span class="p">&#125;</span>
+</code></pre>
+</div>
+
+<h2 id="lua-table的遍历">Lua table的遍历</h2>
+<p>不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始. 对table的遍历，用关键字<code class="highlighter-rouge">pairs</code>.</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">tbl</span> <span class="o">=</span> <span class="p">&#123;</span><span class="s">&#34;apple&#34;</span><span class="p">,</span> <span class="s">&#34;pear&#34;</span><span class="p">,</span> <span class="s">&#34;orange&#34;</span><span class="p">,</span> <span class="s">&#34;grape&#34;</span><span class="p">&#125;</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="n">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">tbl</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+<span class="n">end</span>
+
+<p><span class="o">–&gt;</span><span class="n">output</span><span class="o">:</span><br><span class="mi">1</span>	<span class="n">apple</span><br><span class="mi">2</span>	<span class="n">pear</span><br><span class="mi">3</span>	<span class="n">orange</span><br><span class="mi">4</span>	<span class="n">grape</span><br></code></pre></p>
+</div>
+
+<h2 id="lua-table删除元素">Lua table删除元素</h2>
+<p>给table 表里的变量赋一个<code class="highlighter-rouge">nil</code>值，等同于把它们删掉.示例如下：</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">tab1</span> <span class="o">=</span> <span class="p">&#123;</span> <span class="n">key1</span> <span class="o">=</span> <span class="s">&#34;val1&#34;</span><span class="p">,</span> <span class="n">key2</span> <span class="o">=</span> <span class="s">&#34;val2&#34;</span><span class="p">,</span> <span class="s">&#34;val3&#34;</span> <span class="p">&#125;</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="n">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">tab1</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">k</span> <span class="p">..</span> <span class="s">&#34; - &#34;</span> <span class="p">..</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">end</span>
+
+<p><span class="o">–&gt;</span> <span class="n">output</span><span class="o">:</span><br><span class="mi">1</span> <span class="o">-</span> <span class="n">val3</span><br><span class="n">key2</span> <span class="o">-</span> <span class="n">val2</span><br><span class="n">key1</span> <span class="o">-</span> <span class="n">val1</span></p>
+<p><span class="n">tab1</span><span class="p">.</span><span class="n">key1</span> <span class="o">&#x3D;</span> <span class="n">nil</span><br><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="n">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">tab1</span><span class="p">)</span> <span class="k">do</span><br>    <span class="n">print</span><span class="p">(</span><span class="n">k</span> <span class="p">..</span> <span class="s">&amp;#34; - &amp;#34;</span> <span class="p">..</span> <span class="n">v</span><span class="p">)</span><br><span class="n">end</span></p>
+<p><span class="o">–&gt;</span> <span class="n">output</span><span class="o">:</span><br><span class="mi">1</span> <span class="o">-</span> <span class="n">val3</span><br><span class="n">key2</span> <span class="o">-</span> <span class="n">val2</span></p>
+<p><span class="n">tab1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="n">nil</span><br><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="n">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">tab1</span><span class="p">)</span> <span class="k">do</span><br>    <span class="n">print</span><span class="p">(</span><span class="n">k</span> <span class="p">..</span> <span class="s">&amp;#34; - &amp;#34;</span> <span class="p">..</span> <span class="n">v</span><span class="p">)</span><br><span class="n">end</span></p>
+<p><span class="o">–&gt;</span> <span class="n">output</span><span class="o">:</span><br><span class="n">key2</span> <span class="o">-</span> <span class="n">val2</span><br></code></pre></p>
+</div>
+
+<h2 id="lua-table库介绍">Lua table库介绍</h2>
+
+<h3 id="tableconcat-table--sep--i--j---">table.concat (table [, sep [, i [, j ] ] ])</h3>
+<p>对于元素是string或者number类型的表table，返回table[i]..sep..table[i+1] ··· sep..table[j]连接成的字符串。填充字符串sep默认为空白字符串。起始索引位置i默认为1，结束索引位置j默认是table的长度。如果i大于j，返回一个空字符串。</p>
+
+<blockquote>
+  <p>示例代码</p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">&#123;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&#34;hello&#34;</span> <span class="p">&#125;</span>
+<span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s">&#34;|&#34;</span><span class="p">))</span>
+<span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s">&#34; &#34;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s">&#34; &#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<p><span class="o">–&gt;</span><span class="n">output</span><br><span class="mi">135</span><span class="n">hello</span><br><span class="mi">1</span><span class="o">|</span><span class="mi">3</span><span class="o">|</span><span class="mi">5</span><span class="o">|</span><span class="n">hello</span></p>
+<p><span class="mi">3</span> <span class="mi">5</span> <span class="n">hello</span><br></code></pre></p>
+</div>
+
+<h3 id="tableinsert-table-pos--value">table.insert (table, [pos ,] value)</h3>
+<p>在表table的pos索引位置插入value，其它元素向后移动到空的地方。pos的默认值是表的长度加一，即默认是插在表的最后。</p>
+
+<blockquote>
+  <p>示例代码</p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">&#123;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">&#125;</span>             <span class="o">--</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">table</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>   <span class="o">--</span><span class="err">在表索引为</span><span class="mi">1</span><span class="err">处插入</span><span class="mi">3</span>
+<span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">table</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>    <span class="o">--</span><span class="err">在表的最后插入</span><span class="mi">10</span>
+<span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+
+<p><span class="o">–&gt;</span><span class="n">output</span><br><span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">8</span><br><span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">8</span>    <span class="mi">10</span><br></code></pre></p>
+</div>
+
+<h3 id="tablemaxn-table">table.maxn (table)</h3>
+<p>返回表table的最大索引编号；如果此表没有正的索引编号，返回0。</p>
+
+<blockquote>
+  <p>示例代码</p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">maxn</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>  
+<span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">maxn</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<p><span class="o">–&gt;</span><span class="n">output</span><br><span class="mi">0</span><br><span class="mi">5</span><br></code></pre></p>
+</div>
+
+<h3 id="tableremove-table--pos">table.remove (table [, pos])</h3>
+<p>在表table中删除索引为pos（pos只能是number型）的元素，并返回这个被删除的元素，它后面所有元素的索引值都会减一。pos的默认值是表的长度，即默认是删除表的最后一个元素。</p>
+
+<blockquote>
+  <p>示例代码</p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">&#123;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">&#125;</span>
+<span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">--</span><span class="err">删除速索引为</span><span class="mi">1</span><span class="err">的元素</span>
+<span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+
+<p><span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>   <span class="o">–</span><span class="err">删除最后一个元素</span><br><span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span></p>
+<p><span class="o">–&gt;</span><span class="n">output</span><br><span class="mi">1</span><br><span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="n">nil</span><br><span class="mi">4</span><br><span class="mi">2</span>    <span class="mi">3</span>    <span class="n">nil</span>    <span class="n">nil</span><br></code></pre></p>
+</div>
+
+<h3 id="tablesort-table--comp">table.sort (table [, comp])</h3>
+<p>按照给定的比较函数comp给表table排序，也就是从table[1]到table[n]，这里n表示table的长度。 比较函数有两个参数，如果希望第一个参数排在第二个的前面，就应该返回true，否则返回false。 如果比较函数comp没有给出，默认从小到大排序。</p>
+
+<blockquote>
+  <p>示例代码</p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">function</span> <span class="n">compare</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">--</span><span class="err">从大到小排序</span>
+   <span class="k">return</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span>    <span class="o">--</span><span class="err">如果第一个参数大于第二个就返回</span><span class="nb">true</span><span class="err">，否则返回</span><span class="nb">false</span>
+<span class="n">end</span>
+
+<p><span class="n">a</span> <span class="o">&#x3D;</span> <span class="p">&#123;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">25</span><span class="p">&#125;</span><br><span class="n">table</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>         <span class="o">–</span><span class="err">默认从小到大排序</span><br><span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span><br><span class="n">table</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">compare</span><span class="p">)</span> <span class="o">–</span><span class="err">使用比较函数进行排序</span><br><span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span></p>
+<p><span class="o">–&gt;</span><span class="n">output</span><br><span class="mi">1</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>    <span class="mi">25</span><br><span class="mi">25</span>    <span class="mi">7</span>    <span class="mi">4</span>    <span class="mi">3</span>    <span class="mi">1</span><br></code></pre></p>
+</div>
+
+<h3 id="table一些有用的函数">table一些有用的函数</h3>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">local</span> <span class="n">function</span> <span class="n">table_is_empty</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">next</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">==</span> <span class="n">nil</span>
+<span class="n">end</span>
+
+<p><span class="n">local</span> <span class="n">function</span> <span class="n">table_is_array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><br>  <span class="k">if</span> <span class="n">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">~&#x3D;</span> <span class="s">&amp;#34;table&amp;#34;</span> <span class="n">then</span> <span class="k">return</span> <span class="nb">false</span> <span class="n">end</span><br>  <span class="n">local</span> <span class="n">i</span> <span class="o">&#x3D;</span> <span class="mi">0</span><br>  <span class="k">for</span> <span class="n">_</span> <span class="n">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">do</span><br>    <span class="n">i</span> <span class="o">&#x3D;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><br>    <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&#x3D;&#x3D;</span> <span class="n">nil</span> <span class="n">then</span> <span class="k">return</span> <span class="nb">false</span> <span class="n">end</span><br>  <span class="n">end</span><br>  <span class="k">return</span> <span class="nb">true</span><br><span class="n">end</span></p>
+<p><span class="n">local</span> <span class="n">function</span> <span class="n">table_is_map</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><br>  <span class="k">if</span> <span class="n">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">~&#x3D;</span> <span class="s">&amp;#34;table&amp;#34;</span> <span class="n">then</span> <span class="k">return</span> <span class="nb">false</span> <span class="n">end</span><br>  <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">_</span> <span class="n">in</span> <span class="n">pairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">do</span><br>    <span class="k">if</span> <span class="n">type</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&#x3D;&#x3D;</span> <span class="s">&amp;#34;number&amp;#34;</span> <span class="n">then</span>  <span class="k">return</span> <span class="nb">false</span> <span class="n">end</span><br>  <span class="n">end</span><br>  <span class="k">return</span> <span class="nb">true</span><br><span class="n">end</span><br></code></pre></p>
+</div>
+
+
+
+<pre><code>            &lt;hr/&gt;
+
+            
+            
+            
+            &lt;div class=&quot;ds-share&quot; style=&quot;text-align: right&quot; data-thread-key=&quot;/2015/11/23/lua_table&quot; data-title=&quot;Lua table 学习笔记&quot; data-url=&quot;http://hooting.github.io/2015/11/23/lua_table/&quot; data-images=&quot;http://hooting.github.io/img/post-bg-2015.jpg&quot; data-content=&quot;Lua table定义
+</code></pre>
+<p>table类型实现了“关联数组”。“关联数组” 是一种具有特殊索引方式的数组，索引可为字符串string或(整)数number类型… | Hooting Blog “&gt;</p>
+<pre><code>            &lt;hr/&gt;
+            &lt;/div&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-665_Ubuntu18.04%20Tengine+Lua+GraphicsMagick%E5%9B%BE%E7%89%87%E7%BC%A9%E6%94%BE/">Ubuntu18.04 Tengine+Lua+GraphicsMagick图片缩放</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-670_Lua%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6/">Lua语言进阶</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

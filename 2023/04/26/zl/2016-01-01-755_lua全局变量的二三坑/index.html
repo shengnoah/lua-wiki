@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua全局变量的二三坑 - Lua教程</title>
+
+  
+    <meta name="description" content="lua全局变量的二三坑 | CloudKey Ocean         &lt;meta name&#x3D;&quot;keywords&quot; content&#x3D;&quot;ngx-lua,&quot;&#x2F;&gt;                          &lt;link rel&#x3D;&quot;icon&quot; href&#x3D;&quot;&#x2F;favicon.ico&quot;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua全局变量的二三坑">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-755_lua%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E4%BA%8C%E4%B8%89%E5%9D%91/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="lua全局变量的二三坑 | CloudKey Ocean         &lt;meta name&#x3D;&quot;keywords&quot; content&#x3D;&quot;ngx-lua,&quot;&#x2F;&gt;                          &lt;link rel&#x3D;&quot;icon&quot; href&#x3D;&quot;&#x2F;favicon.ico&quot;&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lua.ren/images/proxy-global-variable.png">
+<meta property="og:image" content="https://lua.ren/images/ui-global-invalid-use.png">
+<meta property="og:image" content="https://lua.ren/images/fix-global-to-local.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.303Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.303Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lua.ren/images/proxy-global-variable.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua全局变量的二三坑</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%B8%A9%E5%9D%91-amp-amp-%E8%BF%BD%E6%9F%A5%E8%BF%87%E7%A8%8B-proxy-%EF%BC%9A"><span class="toc-text">第一次踩坑&amp;&amp;追查过程(proxy)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lua%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%AE%98%E6%96%B9%E8%AF%B4%E6%98%8E"><span class="toc-text">lua全局变量官方说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E8%B8%A9%E5%9D%91-ui-module"><span class="toc-text">第二次踩坑(ui module)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua全局变量的二三坑</span></h1>
+<head>
+  <meta charset="utf-8"/>
+  
+  <title>lua全局变量的二三坑 | CloudKey Ocean</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+  
+<pre><code>&lt;meta name=&quot;keywords&quot; content=&quot;ngx-lua,&quot;/&gt;
+</code></pre>
+  <meta name="description" content="背景  最近正在开发关于WebService相关系统，其中有两个模块使用的是（nginx+lua）框架，业务逻辑用lua语言实现。而从这两个新模块上线到正常运行，一共发生了两次请求错乱的线上问题：  123query A:  http:://uriA + argsA在经过proxy（or webui）这一层处理之后，请求传到下一层module变成了queryB，导致请求错乱，影响线上服务。quer"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="lua全局变量的二三坑"/>
+<meta property="og:url" content="http://cloudkey.github.io/2015/12/01/lua-global-variable-trap/index.html"/>
+<meta property="og:site_name" content="CloudKey Ocean"/>
+<meta property="og:description" content="背景  最近正在开发关于WebService相关系统，其中有两个模块使用的是（nginx+lua）框架，业务逻辑用lua语言实现。而从这两个新模块上线到正常运行，一共发生了两次请求错乱的线上问题：  123query A:  http:://uriA + argsA在经过proxy（or webui）这一层处理之后，请求传到下一层module变成了queryB，导致请求错乱，影响线上服务。quer"/>
+<meta property="og:image" content="http://cloudkey.github.iohttps://cloudkey.github.io//images/proxy-global-variable.png"/>
+<meta property="og:image" content="http://cloudkey.github.iohttps://cloudkey.github.io//images/ui-global-invalid-use.png"/>
+<meta property="og:image" content="http://cloudkey.github.iohttps://cloudkey.github.io//images/fix-global-to-local.png"/>
+<meta property="og:updated_time" content="2017-01-21T12:16:27.000Z"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="lua全局变量的二三坑"/>
+<meta name="twitter:description" content="背景  最近正在开发关于WebService相关系统，其中有两个模块使用的是（nginx+lua）框架，业务逻辑用lua语言实现。而从这两个新模块上线到正常运行，一共发生了两次请求错乱的线上问题：  123query A:  http:://uriA + argsA在经过proxy（or webui）这一层处理之后，请求传到下一层module变成了queryB，导致请求错乱，影响线上服务。quer"/>
+<meta name="twitter:image" content="http://cloudkey.github.io/images/proxy-global-variable.png"/>
+
+  
+
+  
+<pre><code>&lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quot;/&gt;
+</code></pre>
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet"/>
+
+
+  
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/personal-style.css&quot;/&gt;
+</code></pre>
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56303271-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+<pre><code>&lt;script async=&quot;&quot; src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+</head>
+
+<body>
+
+
+  
+<pre><code>&lt;span id=&quot;toolbox-mobile&quot; class=&quot;toolbox-mobile&quot;&gt;盒子&lt;/span&gt;
+</code></pre>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+<pre><code>    &lt;li class=&quot;item-toolbox&quot;&gt;
+      &lt;a class=&quot;ROUND_RECT&quot; href=&quot;/archives/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_self&quot;&gt;
+        博客
+      &lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li class=&quot;item-toolbox&quot;&gt;
+      &lt;a class=&quot;ROUND_RECT&quot; href=&quot;/category/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_self&quot;&gt;
+        分类
+      &lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li class=&quot;item-toolbox&quot;&gt;
+      &lt;a class=&quot;ROUND_RECT&quot; href=&quot;/tag/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_self&quot;&gt;
+        标签
+      &lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li class=&quot;item-toolbox&quot;&gt;
+      &lt;a class=&quot;ROUND_RECT&quot; href=&quot;/link/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_self&quot;&gt;
+        友链
+      &lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li class=&quot;item-toolbox&quot;&gt;
+      &lt;a class=&quot;ROUND_RECT&quot; href=&quot;/about/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_self&quot;&gt;
+        关于
+      &lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li class=&quot;item-toolbox&quot;&gt;
+      &lt;a class=&quot;ROUND_RECT&quot; href=&quot;/atom.xml&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;
+        RSS
+      &lt;/a&gt;
+    &lt;/li&gt;
+  
+    &lt;li class=&quot;item-toolbox&quot;&gt;
+      &lt;a class=&quot;ROUND_RECT&quot; href=&quot;/search/&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_self&quot;&gt;
+        搜索
+      &lt;/a&gt;
+    &lt;/li&gt;
+  
+&lt;/ul&gt;
+</code></pre>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-lua-global-variable-trap" class="article article-type-post" itemprop="blogPost">
+  
+
+  <div class="article-content">
+    
+<pre><code>  &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;  最近正在开发关于WebService相关系统，其中有两个模块使用的是（nginx+lua）框架，业务逻辑用lua语言实现。而从这两个新模块上线到正常运行，一共发生了两次请求错乱的线上问题：&lt;br/&gt;  &lt;/p&gt;&lt;figure class=&quot;highlight lua&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;query A:  http:://uriA + argsA&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;在经过proxy（&lt;span class=&quot;keyword&quot;&gt;or&lt;/span&gt; webui）这一层处理之后，请求传到下一层&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;变成了queryB，导致请求错乱，影响线上服务。&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;query B:  http:://uriB + argsB&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;/p&gt;
+</code></pre>
+<h2 id="第一次踩坑-amp-amp-追查过程-proxy-："><a href="#第一次踩坑-amp-amp-追查过程-proxy-：" class="headerlink" title="第一次踩坑&amp;&amp;追查过程(proxy)："></a>第一次踩坑&amp;&amp;追查过程(proxy)：</h2><ol>
+<li><p>首先确定入口请求的URL A，经过proxy处理之后，NOTICE日志打印的URL，发现前后的URL不一致，怀疑是经过某个module之后，URL被篡改。同时这种现象一般发生在<strong>前后时间比较靠近的请求之间<em> </em></strong>。</p>
+</li>
+<li><p>线上一台proxy机器打开一台nginx debug日志（注意：日志很大，所以时间不能太长），发现了一个比较诡异的现象：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">1</span> lua upstream: B64A2168</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">2</span> lua upstream: B71D5FF8</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">1</span> lua upstream: B64A2168</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">2</span> lua upstream: B71D5FF8</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">1</span> lua upstream: B64A2168</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">1</span> lua upstream: B64A2168 &lt;===</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">2</span> lua upstream: B71D5FF8</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">2</span> lua upstream: B71D5FF8</div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">1</span> lua upstream: B71D5FF8 &lt;=== </div><div class="line"><span class="number">10</span>:<span class="number">22</span>:<span class="number">42</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">2</span> lua upstream: B71D5FF8</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">5</span> lua upstream: B64B0A20</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">6</span> lua upstream: B64B0FA8</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">5</span> lua upstream: B64B0A20</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">6</span> lua upstream: B64B0FA8</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">5</span> lua upstream: B64B0A20</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">5</span> lua upstream: B64B0A20</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">6</span> lua upstream: B64B0FA8</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">6</span> lua upstream: B64B0FA8</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">5</span> lua upstream: B64B0A20</div><div class="line"><span class="number">10</span>:<span class="number">29</span>:<span class="number">23</span> [<span class="built_in">debug</span>] <span class="number">3505</span>#<span class="number">0</span>: *<span class="number">6</span> lua upstream: B64B0FA8</div></pre></td></tr></tbody></table></figure>
+<p>两个箭头指向的都是req1，但是前后的upstream pointer确发生了改变，第二个箭头表明req1使用了upstream pointer “B71D5FF8”，但是这个pointer这时候req2正在使用，这时候我们觉得很可能是upstream pointer的改变，导致了URL被篡改（也就是reqA -&gt; reqB），但是是什么原因导致upstream pointer改变一时还没有什么头绪。</p>
+</li>
+<li><p>这时候想到了openresty google group和github openresty issue，想看看有没有遇到类似异常情况的。<br/>发现有一个帖子<a href="https://github.com/openresty/lua-nginx-module/issues/150" target="_blank" rel="external noopener noreferrer">It seems the socket upstream pointer changed while processing concurrent requests.</a>有点类似我们的情况，仔细看了一下帖子，楼主和春哥的结论是lua global variable不当使用，造成意外的跨请求socket共享，导致异常出现。</p>
+</li>
+<li><p>使用<a href="https://github.com/openresty/nginx-devel-utils/blob/master/lua-releng" target="_blank" rel="external noopener noreferrer">lua-releng</a>脚本check我们的proxy代码发现：<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/proxy-global-variable.png" alt="proxy-global-variable.png"/></p>
+</li>
+<li><p>飘红的地方使用了非预期的全局变量，改成local之后，小流量上线验证，不再出现请求错乱的情况。</p>
+</li>
+</ol>
+<h2 id="lua全局变量官方说明"><a href="#lua全局变量官方说明" class="headerlink" title="lua全局变量官方说明"></a>lua全局变量官方说明</h2><p>关于lua变量的作用域，官方文档说明：  <a href="https://github.com/openresty/lua-nginx-module#lua-variable-scope" target="_blank" rel="external noopener noreferrer">lua-variable-scope</a><br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Generally, use of Lua global variables is a really really bad idea <span class="keyword">in</span> the context of ngx_lua because</div><div class="line"><span class="number">1.</span> misuse of Lua globals has very bad side effects <span class="keyword">for</span> concurrent requests when these variables are actually supposed to be <span class="keyword">local</span> only,</div><div class="line"><span class="number">2.</span> Lua global variables <span class="built_in">require</span> Lua <span class="built_in">table</span> look-up <span class="keyword">in</span> the global environment (which is just a Lua <span class="built_in">table</span>), which is kinda expensive, <span class="keyword">and</span></div><div class="line"><span class="number">3.</span> some Lua global variable references are just typos, which are hard to <span class="built_in">debug</span>.</div><div class="line">It<span class="string">&#39;s highly recommended to always declare them via &#34;local&#34; in the scope that is reasonable.</span></div></pre></td></tr></tbody></table></figure><p></p>
+<p>官方说明：在并发场景下，一些应该使用局部变量的地方如果滥用lua的全局变量可能会导致一些异常的情况出现； 同时全局变量的访问开销代价很大；如果出错很难调试。</p>
+<h2 id="第二次踩坑-ui-module"><a href="#第二次踩坑-ui-module" class="headerlink" title="第二次踩坑(ui module)"></a>第二次踩坑(ui module)</h2><p>经过第一次的经验，我们已经将proxy 和 ui 代码进行了全量的check，修复所有非预期的全局变量的使用。<br/>但是，ui上线切新的流量之后，一些服务又出现请求错乱的问题，查看日志发现同一个logid的请求，URL前后又出现不一致情况，并且重试的情况下，有概率的出现。</p>
+<p><strong>当时，第一感觉是全局变量问题，但是我们线上的代码已经用lua-releng脚本check过了，并未有非local变量的情况。</strong></p>
+<p>追查过程：</p>
+<ul>
+<li>因为这次上线是首次使用action/InnerRedirect.lua模块，所以我们的检查重点放在这个module中。</li>
+<li><p>有一个涉及全局变量的地方引起了我们的注意：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ui-global-invalid-use.png" alt="ui-global-invalid-use.png"/></p>
+<p>飘红的箭头是一个全局的配置，而Conf_Services是一个全局变量，但是这里是赋值给local变量service，而service变量在下面的地方进行了修改：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service.url = path</div><div class="line">service.args = args</div></pre></td></tr></tbody></table></figure>
+<p>相当于我们把一个全局变量赋值给一个已经申明为local的变量，然后直接对这个local table变量进行修改。<br/>这个地方有点怀疑这个<strong>local table变量service，在用全局变量赋值的时候使用的是浅拷贝</strong>，为了验证我们的怀疑，写了下面一个非常简单的lua test script:</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">table_global = { </div><div class="line">    [<span class="string">&#34;key1&#34;</span>] = <span class="string">&#34;key1&#34;</span>,</div><div class="line">    [<span class="string">&#34;key2&#34;</span>] = <span class="string">&#34;key2&#34;</span>,</div><div class="line">    [<span class="string">&#34;key3&#34;</span>] = <span class="string">&#34;key3&#34;</span>,</div><div class="line">}   </div><div class="line"><span class="built_in">print</span>(<span class="string">&#34;global table address: &#34;</span>)</div><div class="line"><span class="built_in">print</span>(table_global)</div><div class="line"></div><div class="line"><span class="keyword">local</span> tmp_table = table_global</div><div class="line"><span class="built_in">print</span>(<span class="string">&#34;local table address: &#34;</span>)</div><div class="line"><span class="built_in">print</span>(tmp_table)</div><div class="line"></div><div class="line">tmp_table[<span class="string">&#34;key3&#34;</span>] = <span class="string">&#34;key333&#34;</span></div><div class="line"><span class="built_in">print</span>(<span class="string">&#34;After modidy local table field: &#34;</span>)</div><div class="line"><span class="built_in">print</span>(table_global[<span class="string">&#34;key3&#34;</span>])</div><div class="line"></div><div class="line">TEST RESULT:</div><div class="line">    global <span class="built_in">table</span> address: </div><div class="line">    <span class="built_in">table</span>: <span class="number">0x539de0</span></div><div class="line">    <span class="keyword">local</span> <span class="built_in">table</span> address: </div><div class="line">    <span class="built_in">table</span>: <span class="number">0x539de0</span></div><div class="line">    After modidy <span class="keyword">local</span> <span class="built_in">table</span> field: </div><div class="line">    key333</div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>更改此处service使用全局配置的方式：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/fix-global-to-local.png" alt="fix-global-to-local.png"/></p>
+<p>上线一台机器出现缩略图错乱的线上机器，不再出现URL被篡改情况。</p>
+<p>而刚才说的只有在第一次请求失败之后，重试才会出现错乱，是因为：在第二次重试的时候，代码逻辑中的<code>compare_str</code>条件才为<code>true</code>，service变量被赋值，因为在重试的时候会出现引入全局变量。</p>
+</li>
+<li><p>lua 中的table使用的是<strong>引用方式<em> </em></strong>，这个大家都清楚，但是<code>table的拷贝是浅拷贝</code>，如果我们在代码不得己需要使用全局的配置，赋值给一个local table，同时在后续的逻辑中更改了这个local table，就有可能会出现引入全局变量的情况。</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>lua中的全局变量使用需谨慎，可以使用 <a href="https://github.com/openresty/nginx-devel-utils/blob/master/lua-releng" target="_blank" rel="external noopener noreferrer">lua-releng-tool</a> 脚本check非预期的global variable，尽量使用local 申明变量。</p>
+</li>
+<li><p>对于一些全局的Conf，不得不使用全局变量的时候，在table 赋值引用的时候，需要进行特殊处理（例如上面的坑二处理方式）。或者使用clone的方式，进行深拷贝赋值（<a href="http://stackoverflow.com/questions/640642/how-do-you-copy-a-lua-table-by-value" target="_blank" rel="external noopener noreferrer">lua-clone</a>）。</p>
+</li>
+<li><p>后续对新上传SVN的代码都需要使用lua-releng脚本进行check；<br/>同时，在引用全局配置的时候都需要使用特殊方式处理，防止异常case。</p>
+</li>
+</ol>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2015/11/15/lua-coding-style/">
+        
+<pre><code>&lt;/a&gt;
+</code></pre>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr/>
+    
+  </div>
+</div>
+
+
+
+  
+<pre><code>  &lt;div class=&quot;fexo-comments comments-post&quot;&gt;
+</code></pre>
+  <section class="disqus-comments">
+    
+  </section>
+
+  <script>
+    var disqus_shortname = 'cloudkey';
+    
+    var disqus_url = 'http://cloudkey.github.io/2015/12/01/lua-global-variable-trap/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//cloudkey.disqus.com/count.js" async=""></script>
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+
+
+</body>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-759_lua%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%85%83%E8%A1%A8%E5%92%8C%E5%85%83%E6%96%B9%E6%B3%95/">lua学习之元表和元方法</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-758_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">Programming in Lua(Thrid Edition)笔记</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

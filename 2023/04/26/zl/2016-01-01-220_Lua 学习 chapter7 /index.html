@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua 学习 chapter7 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;h3 id&#x3D;&quot;目录&quot;&gt;目录&lt;&#x2F;h3&gt;     简单I&#x2F;O模型   完整I&#x2F;O模型   其它文档操作   其它系统调用     简单I&#x2F;O模型 对于文档操作，I&#x2F;O提供了两种不同的模型。简单模型虚拟了一个当前输入流和一个当前的输出流，其I&#x2F;O是通过这些流实现的。 I&#x2F;O库把当前的输入流初始化为进程的标准输入(C中的stdin),将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua 学习 chapter7">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-220_Lua%20%E5%AD%A6%E4%B9%A0%20chapter7%20/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;h3 id&#x3D;&quot;目录&quot;&gt;目录&lt;&#x2F;h3&gt;     简单I&#x2F;O模型   完整I&#x2F;O模型   其它文档操作   其它系统调用     简单I&#x2F;O模型 对于文档操作，I&#x2F;O提供了两种不同的模型。简单模型虚拟了一个当前输入流和一个当前的输出流，其I&#x2F;O是通过这些流实现的。 I&#x2F;O库把当前的输入流初始化为进程的标准输入(C中的stdin),将">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.252Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.252Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua 学习 chapter7</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95io%E6%A8%A1%E5%9E%8B"><span class="toc-text">简单I&#x2F;O模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4io%E6%A8%A1%E5%9E%8B"><span class="toc-text">完整I&#x2F;O模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C"><span class="toc-text">其他文档操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">其它系统调用</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua 学习 chapter7</span></h1>
+<pre><code>            &lt;h3 id=&quot;目录&quot;&gt;目录&lt;/h3&gt;
+</code></pre>
+<ol>
+  <li>简单I/O模型</li>
+  <li>完整I/O模型</li>
+  <li>其它文档操作</li>
+  <li>其它系统调用</li>
+</ol>
+
+
+
+<h2 id="简单io模型">简单I/O模型</h2>
+<p>对于文档操作，I/O提供了两种不同的模型。简单模型虚拟了一个当前输入流和一个当前的输出流，其I/O是通过这些流实现的。
+I/O库把当前的输入流初始化为进程的标准输入(C中的stdin),将当前的输出流初始化进程的标准输出(C中的stdout)。因此当执行io.read()这样的语句的时候就可以从标准的输入中读取一行。</p>
+
+<p>函数的io.input和函数io.output用来改变当前的输入输出流。
+io.input(fileName)会以只读的方式打开指定的文档，并将文档设置为当前的输入流。之后所有的输入都将来自于这个文档，除非重新调用io.input函数来改变。对于输出与之类似。</p>
+
+<p><strong>函数write()</strong>:
+由于调用该函数可以传入多个参数，所以应该避免使用io.write(a..b..b),而是使用write(a,b,c)。
+作为原则应该只在用后<strong>即弃</strong>的代码或者调试代码的时候调用print输出，当需要完全控制输出是，应该使用io.write()输出，和print不同，
+函数io.write最终的输出不会添加诸如制表符或者换行符这样的额外内容。
+此外函数io.write允许对输出进行重定向，而函数print只能使用标准输出。函数print会为其参数调用tostring函数。</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nb">io.write</span><span class="p">(</span><span class="s2">"sin(3)="</span><span class="p">,</span><span class="nb">math.sin</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="s2">"</span><span class="se">n</span><span class="s2">"</span><span class="p">)</span> <span class="c1">-- &gt;sin(3) = 0.1411200080</span>
+<span class="nb">io.write</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"sin(3)=%.4fn"</span><span class="p">,</span><span class="nb">math.sin</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span> <span class="c1">-- &gt;sin(3) = 0.1411</span>
+
+<p><span class="nb">io.read</span><span class="p">(</span><span class="s2">“a”</span><span class="p">)</span> <span class="c1">–&gt;从当前位置开始的读取当前输入文档的全部内容</span><br></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>函数io.read可以从当前的输入流中读取字符串，其参数决定了其要读取的数据：</p>
+
+<ol>
+  <li>“a”  读取整个文档</li>
+  <li>“l”  读取下一行 （丢弃换行符）  默认参数</li>
+  <li>“L”  读取下一行（保留换行符）</li>
+  <li>“n”  读取一个数值(number 类型)</li>
+  <li>num  以字符串读取num个字符</li>
+</ol>
+
+<p>获取一个文档的所有行数可以使用 io.lines() 函数</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">local</span> <span class="n">lines</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="nb">io.lines</span><span class="p">()</span> <span class="k">do</span>
+    <span class="n">lines</span><span class="p">[</span><span class="o">#</span><span class="n">lines</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
+<span class="k">end</span>
+
+<p><span class="nb">table.sort</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></p>
+<p><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="k">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="k">do</span><br>    <span class="nb">io.write</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">“</span><span class="se">n</span><span class="s2">“</span><span class="p">)</span><br><span class="k">end</span><br></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>io.write(n) 从当前的输入流中最多读取n个字符，如果没有字符返回nil,io.write(0)是一个特烈，它常用于测试是否达到了文档末尾。如果仍然有数据可供读取，他就会返回一个空字符串，否则返回nil。</p>
+
+<h2 id="完整io模型">完整I/O模型</h2>
+<p>可以使用io.open来打开一个文档。该函数拥有两个参数，一个是文档名，一个是打开的模式。</p>
+<ol>
+  <li>“r”  只读</li>
+  <li>“w”  只写(可以用来删除文档中原来的内容)</li>
+  <li>“a”  追加</li>
+  <li>“b”  打开二进制文档</li>
+</ol>
+
+<p>io.open函数打开发生错的时候会返回两个值，一个是nil另一个是系统相关错误的错误码</p>
+
+<p>检测错误的一种典型方法是使用函数assert:
+local f = assert(io.open(fileName,mode))  发生错的时候错误信息会作为函数assert的第二个餐宿被传入。 然后assert会将错误信息展示出来。</p>
+
+<p>文档打开之后可以使用从流中读取和写入。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">assert</span><span class="p">(</span><span class="nb">io.open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s2">"r"</span><span class="p">))</span>
+<span class="kd">local</span> <span class="n">t</span> <span class="o">=</span> <span class="n">f</span><span class="p">:</span><span class="n">read</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="n">f</span><span class="p">:</span><span class="n">close</span><span class="p">()</span>
+<span class="c1">-- io.stdin, io.stdout, io.stderr</span>
+<span class="nb">io.stderr</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Io库提供了三个预定义的C语言流的句柄，可以直接调用。</p>
+
+<p>可以通过io.input 和 io.output 来改变的当前的输入输出流</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">local</span> <span class="n">temp</span> <span class="o">=</span> <span class="nb">io.input</span><span class="p">()</span>
+<span class="nb">io.input</span><span class="p">(</span><span class="s2">"newInput"</span><span class="p">)</span>
+<span class="c1">--对新的输入流进行操作</span>
+<span class="nb">io.input</span><span class="p">():</span><span class="n">close</span>
+<span class="nb">io.input</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>  <span class="c1">--恢复之前的输入流</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><strong>注意：</strong> io.read(args) 实际上是io.input():read(args)，同样的io.write(args)和io.output():write(args)的简写。
+io.lines() 函数可以带参数，filename,读取文档中的内容，不带参数就是从当前输入流中读，现在次函数还可以接收像read函数一样的参数。</p>
+
+<h2 id="其他文档操作">其他文档操作</h2>
+<p>io.tmpfile返回一个操作临时文档的句柄，该句柄是以读写模式打开的，当进程运行完成后，该句柄就会被回收。
+函数flush将所有的缓冲数据写入到文档中。与函数write一样，我们也可以把它当作io.flush()使用，以刷新当前的输出流，或者f:flush()，用来刷新当前流。</p>
+
+<p>函数setvbuf用于设置流的缓冲模式。</p>
+<ol>
+  <li>“no” 不缓冲</li>
+  <li>“full” 缓冲区满或者显示刷新文档时才写入数据</li>
+  <li>“line” 遇到换行符或从特定文档中读到了数据</li>
+</ol>
+
+<p>对于后面两个模式，可以跟第二个参数来设置缓冲区大小。
+一般情况下:io.stderr 是不缓冲的，io.stdout是按行缓冲的。</p>
+
+<p>函数seek用来获取和设置文档当前位置。常使用f:seek(whence,offset)的形式来调用。whence有一下三种模式：</p>
+<ol>
+  <li>“set”  文档开头</li>
+  <li>“cur”  文档当前位置</li>
+  <li>“end”  文档结尾</li>
+</ol>
+
+<p>偏移是以字节为单位的。
+whence默认值为”cur”,offset的默认值是0。file:seek() 返回当前位置且不改变当前位置。file:seek(“set”)会将位置重置到文档开头并返回0，file:seek(“end”)会将文档当前位置重置到文档结尾，并返回文档的大小。</p>
+
+<p>os.rename改变文档名字 os.remove删除文档。</p>
+
+<h2 id="其它系统调用">其它系统调用</h2>
+<p>os.exit用于终止进程的执行。
+os.getev用于获取环境变量。</p>
+
+<p>os.execute用来运行系统命令，等价于c中的system。还用io.popen也是运行一条系统命令,但是该函数可以重定向命令的输入输出流。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
+    <span class="nb">os.execute</span><span class="p">(</span><span class="s2">"mkdir "</span><span class="o">...</span><span class="n">dirname</span><span class="p">)</span>
+<span class="k">end</span>
+
+<p><span class="kd">local</span> <span class="n">f</span> <span class="o">&#x3D;</span> <span class="nb">io.popen</span><span class="p">(</span><span class="s2">“dir &#x2F;B”</span><span class="p">,</span><span class="s2">“r”</span><span class="p">)</span> <span class="c1">– 只读</span><br><span class="kd">local</span> <span class="n">dir</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br><span class="k">for</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">f</span><span class="p">:</span><span class="n">lines</span><span class="p">()</span> <span class="k">do</span><br>    <span class="n">dir</span><span class="p">[</span><span class="o">#</span><span class="n">dir</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&#x3D;</span> <span class="n">entry</span><br><span class="k">end</span><br></pre></td></tr></tbody></table></code></pre></div></div></p>
+<pre><code>            &lt;hr style=&quot;visibility: hidden;&quot;&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-222_Lua%20%E5%9C%A8%20Android%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%B8%8B,%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8/">Lua 在 Android 中应用下,具体使用</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-221_python%E5%92%8Clua%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%AF%94%E8%BE%83/">python和lua数据类型的比较</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

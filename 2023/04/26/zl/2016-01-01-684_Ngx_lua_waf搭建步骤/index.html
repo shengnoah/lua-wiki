@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Ngx_lua_waf搭建步骤 - Lua教程</title>
+
+  
+    <meta name="description" content="Ngx_lua_waf是一个web防火墙，主要通过lua实现，安装简单，性能优异，由国人loveshell开发。  ngx_lua_waf是我刚入职趣游时候开发的一个基于ngx_lua的web应用防火墙。 代码很简单，开发初衷主要是使用简单，高性能和轻量级。 现在开源出来，遵从MIT许可协议。其中包含我们的过滤规则。如果大家有什么建议和想法，欢迎和我一起完善。  主页上介绍的安装流程不是很详细，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ngx_lua_waf搭建步骤">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-684_Ngx_lua_waf%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Ngx_lua_waf是一个web防火墙，主要通过lua实现，安装简单，性能优异，由国人loveshell开发。  ngx_lua_waf是我刚入职趣游时候开发的一个基于ngx_lua的web应用防火墙。 代码很简单，开发初衷主要是使用简单，高性能和轻量级。 现在开源出来，遵从MIT许可协议。其中包含我们的过滤规则。如果大家有什么建议和想法，欢迎和我一起完善。  主页上介绍的安装流程不是很详细，我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hustlibraco.github.io//images/waf-example.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.296Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.296Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hustlibraco.github.io//images/waf-example.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Ngx_lua_waf搭建步骤</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85openresty%E5%B9%B3%E5%8F%B0"><span class="toc-text">安装openresty平台</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Ngx-lua-waf"><span class="toc-text">部署Ngx_lua_waf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%84%E5%88%99"><span class="toc-text">规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C"><span class="toc-text">效果</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.296Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Ngx_lua_waf搭建步骤</span></h1>
+<p>Ngx_lua_waf是一个web防火墙，主要通过lua实现，安装简单，性能优异，由国人loveshell开发。<br/></p>
+<blockquote>
+<p><a href="https://github.com/loveshell/ngx_lua_waf" target="_blank" rel="external noopener noreferrer">ngx_lua_waf</a>是我刚入职趣游时候开发的一个基于ngx_lua的web应用防火墙。</p>
+<p>代码很简单，开发初衷主要是使用简单，高性能和轻量级。</p>
+<p>现在开源出来，遵从MIT许可协议。其中包含我们的过滤规则。如果大家有什么建议和想法，欢迎和我一起完善。</p>
+</blockquote>
+<p>主页上介绍的安装流程不是很详细，我这里详细记录了一下。</p>
+<h2 id="安装openresty平台"><a href="#安装openresty平台" class="headerlink" title="安装openresty平台"></a>安装openresty平台</h2><p>OpenResty 是一个基于 NGINX 和 LuaJIT 的 Web 平台,相当于集成了lua的Nginx，比自己编译安装Nginx+Lua要方便很多。步骤如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"></span><br/><span class="line">su</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 预装环境</span></span><br/><span class="line">yum install readline-devel pcre-devel openssl-devel gcc</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 下载安装包</span></span><br/><span class="line">wget https://openresty.org/download/openresty-1.9.7.4.tar.gz</span><br/><span class="line">tar zxvf openresty-1.9.7.4.tar.gz</span><br/><span class="line"><span class="built_in">cd</span> openresty-1.9.7.4.tar.gz</span><br/><span class="line">./configure</span><br/><span class="line">make &amp;&amp; make install</span><br/></pre></td></tr></tbody></table></figure>
+<p>安装如果出现问题，可以参考 <a href="http://openresty.org/cn/installation.html" target="_blank" rel="external noopener noreferrer">http://openresty.org/cn/installation.html</a></p>
+<p>默认安装位置在/usr/local/openresty/nginx，修改conf/nginx.conf指定运行nginx worker的用户：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">user nginx;</span><br/><span class="line">worker_processes  1;</span><br/><span class="line"></span><br/><span class="line"><span class="comment">#error_log  logs/error.log;</span></span><br/><span class="line"><span class="comment">#error_log  logs/error.log  notice;</span></span><br/><span class="line"><span class="comment">#error_log  logs/error.log  info;</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">#pid        logs/nginx.pid;</span></span><br/></pre></td></tr></tbody></table></figure>
+<p>如果没有nginx用户，在root权限下运行useradd nginx即可添加。</p>
+<p>如果是用systemctl管理服务，创建/lib/systemd/system/nginx.service文件，填写如下内容：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">[Unit]</span><br/><span class="line">Description=nginx</span><br/><span class="line">After=network.target</span><br/><span class="line"></span><br/><span class="line">[Service]</span><br/><span class="line">Type=forking</span><br/><span class="line">ExecStart=/usr/<span class="built_in">local</span>/openresty/nginx/sbin/nginx</span><br/><span class="line">ExecReload=/usr/<span class="built_in">local</span>/openresty/nginx/sbin/nginx <span class="_">-s</span> reload</span><br/><span class="line">ExecStop=/usr/<span class="built_in">local</span>/openresty/nginx/sbin/nginx <span class="_">-s</span> stop</span><br/><span class="line">PrivateTmp=<span class="literal">true</span></span><br/><span class="line"></span><br/><span class="line">[Install]</span><br/><span class="line">WantedBy=multi-user.target</span><br/></pre></td></tr></tbody></table></figure>
+<p>即可使用systemctl命令管理nginx服务：</p>
+<ul>
+<li><p><strong>启动</strong> systemctl start nginx</p>
+</li>
+<li><p><strong>关闭</strong> systemctl stop nginx</p>
+</li>
+<li><p><strong>重启</strong> systemctl restart nginx</p>
+</li>
+<li><p><strong>开启自启动</strong> systemctl enable nginx</p>
+</li>
+</ul>
+<h2 id="部署Ngx-lua-waf"><a href="#部署Ngx-lua-waf" class="headerlink" title="部署Ngx_lua_waf"></a>部署Ngx_lua_waf</h2><p>下载安装包到nginx配置目录，重命名为waf：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/openresty/nginx/conf</span><br/><span class="line">git <span class="built_in">clone</span> https://github.com/loveshell/ngx_lua_waf.git waf</span><br/></pre></td></tr></tbody></table></figure>
+<p>然后修改Nginx.conf，在http下面增加以下waf配置：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">http {</span><br/><span class="line">    include       mime.types;</span><br/><span class="line">    default_<span class="built_in">type</span>  application/octet-stream;</span><br/><span class="line"></span><br/><span class="line">    <span class="comment"># Lua包的路径</span></span><br/><span class="line">    lua_package_path <span class="string">&#34;/usr/local/openresty/nginx/conf/waf/?.lua&#34;</span>;</span><br/><span class="line"></span><br/><span class="line">    <span class="comment"># Lua运行时最大内存</span></span><br/><span class="line">    lua_shared_dict <span class="built_in">limit</span> 10m;</span><br/><span class="line"></span><br/><span class="line">    <span class="comment"># Waf启动脚本</span></span><br/><span class="line">    init_by_lua_file /usr/<span class="built_in">local</span>/openresty/nginx/conf/waf/init.lua;</span><br/><span class="line"></span><br/><span class="line">    <span class="comment"># Waf过滤逻辑脚本</span></span><br/><span class="line">    access_by_lua_file /usr/<span class="built_in">local</span>/openresty/nginx/conf/waf/waf.lua;</span><br/><span class="line"></span><br/><span class="line">    ···</span><br/></pre></td></tr></tbody></table></figure>
+<p>然后配置waf下的config.lua文件，主要是waf规则目录(RulePath)和日志目录(logdir):</p>
+<figure class="highlight lua"><table><tbody><tr><td class="code"><pre><span class="line">RulePath = <span class="string">&#34;/usr/local/openresty/nginx/conf/waf/wafconf&#34;</span></span><br/><span class="line"><span class="comment">--规则存放目录</span></span><br/><span class="line">attacklog = <span class="string">&#34;off&#34;</span></span><br/><span class="line"><span class="comment">--是否开启攻击信息记录，需要配置logdir</span></span><br/><span class="line">logdir = <span class="string">&#34;/usr/local/openresty/nginx/logs/hack/&#34;</span></span><br/><span class="line"><span class="comment">--log存储目录，该目录需要用户自己新建，且需要nginx用户的可写权限</span></span><br/><span class="line">UrlDeny=<span class="string">&#34;on&#34;</span></span><br/><span class="line"><span class="comment">--是否拦截url访问</span></span><br/><span class="line">Redirect=<span class="string">&#34;on&#34;</span></span><br/><span class="line"><span class="comment">--是否拦截后重定向</span></span><br/><span class="line">CookieMatch = <span class="string">&#34;on&#34;</span></span><br/><span class="line"><span class="comment">--是否拦截cookie攻击</span></span><br/><span class="line">postMatch = <span class="string">&#34;on&#34;</span> </span><br/><span class="line"><span class="comment">--是否拦截post攻击</span></span><br/><span class="line">whiteModule = <span class="string">&#34;on&#34;</span> </span><br/><span class="line"><span class="comment">--是否开启URL白名单</span></span><br/><span class="line">black_fileExt={<span class="string">&#34;php&#34;</span>,<span class="string">&#34;jsp&#34;</span>}</span><br/><span class="line"><span class="comment">--填写不允许上传文件后缀类型</span></span><br/><span class="line">ipWhitelist={<span class="string">&#34;127.0.0.1&#34;</span>}</span><br/><span class="line"><span class="comment">--ip白名单，多个ip用逗号分隔</span></span><br/><span class="line">ipBlocklist={<span class="string">&#34;1.0.0.1&#34;</span>}</span><br/><span class="line"><span class="comment">--ip黑名单，多个ip用逗号分隔</span></span><br/><span class="line">CCDeny=<span class="string">&#34;on&#34;</span></span><br/><span class="line"><span class="comment">--是否开启拦截cc攻击(需要nginx.conf的http段增加lua_shared_dict limit 10m;)</span></span><br/><span class="line">CCrate = <span class="string">&#34;100/60&#34;</span></span><br/><span class="line"><span class="comment">--设置cc攻击频率，单位为秒.</span></span><br/><span class="line"><span class="comment">--默认1分钟同一个IP只能请求同一个地址100次</span></span><br/><span class="line">html=<span class="string">[[Please go away~~]]</span></span><br/><span class="line"><span class="comment">--警告内容,可在中括号内自定义</span></span><br/><span class="line">备注:不要乱动双引号，区分大小写</span><br/></pre></td></tr></tbody></table></figure>
+<p>logdir目录尤其注意，需要用户自行创建，并且设置nginx用户可写，否则不会生成拦截日志也不会报错。</p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><p>规则文件在wafconf下面，分为:</p>
+<ul>
+<li><p><code>args</code></p>
+</li>
+<li><p><code>cookie</code> </p>
+</li>
+<li><p><code>post</code></p>
+</li>
+<li><p><code>url</code></p>
+</li>
+<li><p><code>user-agent</code></p>
+</li>
+<li><p><code>whiteurl</code></p>
+</li>
+</ul>
+<p>文件一行一条规则，基于正则表达式编写，你可以根据你的需要进行修改。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>在部署配置完成之后，执行命令systemctl restart nginx重启nginx服务，即可看到WAF效果：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://hustlibraco.github.io//images/waf-example.png" alt="waf-example"/></p>
+<p>拦截页面内容配置在config.lua的html字段中，你可以自定义更美观的样式。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-681_Lua%E7%9A%84%E5%85%83%E8%A1%A8/">Lua的元表</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-682_%E9%80%9A%E8%BF%87lua%E6%A0%88%E4%BA%86%E8%A7%A3lua%E4%B8%8Ec%E7%9A%84%E4%BA%A4%E4%BA%92/">通过lua栈了解lua与c的交互</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

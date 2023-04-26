@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua程序设计（0） - Lua教程</title>
+
+  
+    <meta name="description" content="Lua程序设计的第一篇，主要内容是基本语法以及运算符。  交互模式：在交互模式下，Lua语言解释器如果发现我们输入的某一行不完整，会等待知道程序块或表达式被输入完整后再进行解释执行。  我们可以使用-i参数让Lua语言解释器在执行完制定的程序段之后进入交互模式。 % lua -i prog 在执行完文件prog中的程序段之后进入交互模式。  另一种运行程序段的方式：dofile 我们可以同时打开两">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua程序设计（0）">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-522_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%880%EF%BC%89/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Lua程序设计的第一篇，主要内容是基本语法以及运算符。  交互模式：在交互模式下，Lua语言解释器如果发现我们输入的某一行不完整，会等待知道程序块或表达式被输入完整后再进行解释执行。  我们可以使用-i参数让Lua语言解释器在执行完制定的程序段之后进入交互模式。 % lua -i prog 在执行完文件prog中的程序段之后进入交互模式。  另一种运行程序段的方式：dofile 我们可以同时打开两">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.280Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.280Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua程序设计（0）</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F%EF%BC%9A"><span class="toc-text">交互模式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%8D%E6%B3%95%E8%A7%84%E8%8C%83%EF%BC%9A"><span class="toc-text">词法规范：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="toc-text">全局变量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC%EF%BC%9A"><span class="toc-text">类型和值：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nil%EF%BC%9A"><span class="toc-text">nil：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#boolean%EF%BC%9A"><span class="toc-text">boolean：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%80%BC"><span class="toc-text">数值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E5%B8%B8%E9%87%8F%EF%BC%9A"><span class="toc-text">数值常量：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%EF%BC%9A"><span class="toc-text">算术运算：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%EF%BC%9A"><span class="toc-text">关系运算：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%BA%93%EF%BC%9A"><span class="toc-text">数学库：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%8F%91%E7%94%9F%E5%99%A8%EF%BC%9A"><span class="toc-text">随机数发生器：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%96%E6%95%B4%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-text">取整函数：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA%E8%8C%83%E5%9B%B4%EF%BC%9A"><span class="toc-text">表示范围：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9A"><span class="toc-text">运算符优先级：</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua程序设计（0）</span></h1>
+<p>Lua程序设计的第一篇，主要内容是基本语法以及运算符。</p>
+
+<h3 id="交互模式："><a href="#交互模式：" class="headerlink" title="交互模式："></a>交互模式：</h3><p>在交互模式下，Lua语言解释器如果发现我们输入的某一行不完整，会等待知道程序块或表达式被输入完整后再进行解释执行。</p>
+<ul>
+<li><p>我们可以使用-i参数让Lua语言解释器在执行完制定的程序段之后进入交互模式。</p>
+<p><code>% lua -i prog</code></p>
+<p>在执行完文件prog中的程序段之后进入交互模式。</p>
+</li>
+<li><p>另一种运行程序段的方式：dofile</p>
+<p>我们可以同时打开两个窗口，一个窗口中使用文件编辑器编辑的代码，另一个窗口中使用交互模式运行lua语言解释器，当修改完代码并保存时，只要在Lua语言交互模式的提示符下执行dofile就可以加载新代码，然后就可以观察新代码的函数调用与执行结果了。</p>
+</li>
+</ul>
+<h3 id="词法规范："><a href="#词法规范：" class="headerlink" title="词法规范："></a>词法规范：</h3><ul>
+<li>标识符是由<strong>任意字母，数字和下划线</strong>组成的字符串</li>
+<li>下划线+大写字母的标识符通常用作特殊用途</li>
+<li>可以将下划线+小写字母用作“哑变量”</li>
+<li><strong>Lua 语言对大小写敏感</strong></li>
+<li>单行注释：两个连续的连字符（- -）；多行注释：两个连续的连字符加两对连续左方括号表示长注释或多行注释的开始，直到两个连续的右括号为止，需要重新启用代码时，在第一行行首添加一个连字符即可。</li>
+<li>可以用分号对语句进行分隔，但一般不使用</li>
+</ul>
+<h3 id="全局变量："><a href="#全局变量：" class="headerlink" title="全局变量："></a>全局变量：</h3><ul>
+<li><strong>全局变量无需声明便可使用，若使用未经初始化的全局变量，其结果为nil</strong></li>
+<li><strong>当把nil赋值给全局变量时，Lua会回收该全局变量</strong></li>
+<li><strong>Lua不区分未初始化变量和被赋值为nil的变量，当赋值语句执行后，Lua语言会最终回收该变量占用的内存</strong></li>
+</ul>
+<h3 id="类型和值："><a href="#类型和值：" class="headerlink" title="类型和值："></a>类型和值：</h3><ul>
+<li><p>Lua语言是一种动态类型语言，在这种语言中， <strong>没有类型定义，每个值都有其自身的类型信息。</strong></p>
+</li>
+<li><p>Lua中有八种基本类型：</p>
+<ul>
+<li>nil</li>
+<li>boolean</li>
+<li>number</li>
+<li>string</li>
+<li>userdata</li>
+<li>function</li>
+<li>thread</li>
+<li>table</li>
+</ul>
+</li>
+<li><p>使用函数type可获取一个值的对应类型名称，以字符串形式表示。</p>
+</li>
+<li>变量没有预定义的类型，任何变量都可以包含任何类型的值。</li>
+</ul>
+<h4 id="nil："><a href="#nil：" class="headerlink" title="nil："></a>nil：</h4><p>只有一个nil值的类型，用于与其他所有值进行区分，来表示无效值。</p>
+<h4 id="boolean："><a href="#boolean：" class="headerlink" title="boolean："></a>boolean：</h4><p>拥有true与false两个值。</p>
+<ul>
+<li><p><strong>条件测试将除false与nil外的所有值视为真。</strong></p>
+</li>
+<li><p>逻辑运算符：and、or和not</p>
+<ul>
+<li>and：如果它的第一个操作数为false，则返回第一个操作数，否则返回第二个操作数</li>
+<li>or：如果第一个操作数不为false，则返回第一个操作数，否则返回第二个操作数</li>
+<li>not：永远返回Boolean类型的值</li>
+</ul>
+</li>
+<li><p>两种便捷写法：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line">x=x <span class="keyword">or</span> v </span><br/><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> x <span class="keyword">then</span> x = v <span class="keyword">end</span> <span class="comment">-- 当x未被初始化时，将其默认值设置为v</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">--</span></span><br/><span class="line"></span><br/><span class="line">((a <span class="keyword">and</span> b)<span class="keyword">or</span> c) <span class="comment">-- 当b不为false时，等价于三目运算符：a?b:c</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h3 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h3><p>从Lua5.3版本开始，Lua为数值类型提供了两种选择：</p>
+<ul>
+<li>integer：64位整型</li>
+<li>float：双精度浮点类型</li>
+</ul>
+<h4 id="数值常量："><a href="#数值常量：" class="headerlink" title="数值常量："></a>数值常量：</h4><ul>
+<li>可以使用科学计数法来表示数值常量</li>
+<li>具有十进制小数或者指数的值的数值会被当作浮点型，其余的为整型</li>
+<li>整型与浮点型的值的类型都为number，相同算术值的不同整型值与浮点型值是相等的</li>
+<li>可使用math.type函数具体区分整型值与浮点型值</li>
+<li>可用0x开头表示十六进制常量，也支持十六进制的浮点数，由小数部分和以p或P开头的指数部分组成，其转换规则大抵如下：<ul>
+<li>十六进制：0xa.bp2，将其拆解为二进制为1010.1011*10^2，即为101010.11，十进制下为42.75</li>
+</ul>
+</li>
+<li>可以使用%a参数与string.format函数对上述格式进行格式化输出：<ul>
+<li>string.format(“%a”,419)        –&gt; 0x1.a3p+8</li>
+</ul>
+</li>
+</ul>
+<h4 id="算术运算："><a href="#算术运算：" class="headerlink" title="算术运算："></a>算术运算：</h4><ul>
+<li><p>支持加、减、乘、除、floor（//）、取模（%）、指数运算（^）</p>
+</li>
+<li><p>除法运算操作的永远是浮点数且产生浮点数的结果</p>
+</li>
+<li>floor除法：对得到的商向负无穷取整，以确保结果是一个整数</li>
+<li>幂运算的操作数也永远是浮点类型</li>
+</ul>
+<h4 id="关系运算："><a href="#关系运算：" class="headerlink" title="关系运算："></a>关系运算：</h4><ul>
+<li>支持小于、大于、小于等于、大于等于、等于（==）、不等于（～=）</li>
+</ul>
+<h4 id="数学库："><a href="#数学库：" class="headerlink" title="数学库："></a>数学库：</h4><h5 id="随机数发生器："><a href="#随机数发生器：" class="headerlink" title="随机数发生器："></a>随机数发生器：</h5><p>math.random用于生成伪随机数，当不带参数调用时，该函数返回一个在[0，1）范围内均匀分布的伪随机实数；当使用整型n作为参数时，返回一个在[1，n]范围内的伪随机整数，使用两个整型值l和u时，返回[l，u]范围内的伪随机整数。</p>
+<p>可以用函数randomseed来设置伪随机数发生器的种子，以使加强其随机性。</p>
+<h5 id="取整函数："><a href="#取整函数：" class="headerlink" title="取整函数："></a>取整函数：</h5><ul>
+<li>floor函数：向负无穷取整</li>
+<li>ceil函数：向正无穷取整</li>
+<li>modf函数：向零取整，返回取整后的值以及小数部分作为第二个结果。</li>
+</ul>
+<h4 id="表示范围："><a href="#表示范围：" class="headerlink" title="表示范围："></a>表示范围：</h4><p>标准Lua使用64个比特位来存储整型值，其最大值为2^63 - 1；精简Lua使用32个比特位存储整型值。</p>
+<p>当对整形操作时出现比mininteger更小或者maxinteger更大的数值时，结果就会回环。在计算机领域，回环的意思就是丢弃最高进位。</p>
+<p>对于浮点数而言，标准Lua使用双精度。</p>
+<h4 id="运算符优先级："><a href="#运算符优先级：" class="headerlink" title="运算符优先级："></a>运算符优先级：</h4><p>详见：<a href="https://www.runoob.com/lua/lua-miscellaneous-operator.html" target="_blank" rel="noopener noreferrer">https://www.runoob.com/lua/lua-miscellaneous-operator.html</a></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-520_Lua%E5%8C%B9%E9%85%8D%E7%AC%A6%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">Lua匹配符 · 花生肉泥</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-523_lua%E6%94%AF%E6%8C%81init64/">lua支持init64</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

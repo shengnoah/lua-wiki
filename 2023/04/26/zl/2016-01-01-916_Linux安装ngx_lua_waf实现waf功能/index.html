@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Linux安装ngx_lua_waf实现waf功能 - Lua教程</title>
+
+  
+    <meta name="description" content="一、ngx_lua_waf用途 1、防止SQL注入，本地包含，本地溢出，fuzzing测试，XSS，SSRF等web攻击;2、防止SVN&#x2F;备份之类文件泄漏;3、防止apachebench之类的压力测试工具的攻击;4、屏蔽常见的扫描黑客工具，扫描器;5、屏蔽常见的网络请求;6、屏蔽照片附件类目录php执行权限;7、防止webshell上传。 二、安装1、首先安装所需要的依赖环境yum -y inst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安装ngx_lua_waf实现waf功能">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-916_Linux%E5%AE%89%E8%A3%85ngx_lua_waf%E5%AE%9E%E7%8E%B0waf%E5%8A%9F%E8%83%BD/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="一、ngx_lua_waf用途 1、防止SQL注入，本地包含，本地溢出，fuzzing测试，XSS，SSRF等web攻击;2、防止SVN&#x2F;备份之类文件泄漏;3、防止apachebench之类的压力测试工具的攻击;4、屏蔽常见的扫描黑客工具，扫描器;5、屏蔽常见的网络请求;6、屏蔽照片附件类目录php执行权限;7、防止webshell上传。 二、安装1、首先安装所需要的依赖环境yum -y inst">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://app.yinxiang.com/FileSharing.action?hash=1/13ad558d231e9bde3653bb3f97920f15-23899">
+<meta property="article:published_time" content="2023-04-26T05:16:12.317Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.317Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://app.yinxiang.com/FileSharing.action?hash=1/13ad558d231e9bde3653bb3f97920f15-23899">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Linux安装ngx_lua_waf实现waf功能</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E9%A6%96%E5%85%88%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E4%BE%9D%E8%B5%96%E7%8E%AF%E5%A2%83"><span class="toc-text">1、首先安装所需要的依赖环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81LuaJIT"><span class="toc-text">2、LuaJIT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81ngx-devel-kit"><span class="toc-text">3、ngx_devel_kit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81lua-nginx-model"><span class="toc-text">4、lua-nginx-model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%AE%89%E8%A3%85nginx"><span class="toc-text">5、安装nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85waf%E6%A8%A1%E5%9D%97"><span class="toc-text">6、下载并安装waf模块</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.317Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Linux安装ngx_lua_waf实现waf功能</span></h1>
+<h1 id="一、ngx-lua-waf用途"><a href="#一、ngx-lua-waf用途" class="headerlink" title="一、ngx_lua_waf用途"></a>一、ngx_lua_waf用途</h1><p> 1、防止SQL注入，本地包含，本地溢出，fuzzing测试，XSS，SSRF等web攻击;<br/>2、防止SVN/备份之类文件泄漏;<br/>3、防止apachebench之类的压力测试工具的攻击;<br/>4、屏蔽常见的扫描黑客工具，扫描器;<br/>5、屏蔽常见的网络请求;<br/>6、屏蔽照片附件类目录php执行权限;<br/>7、防止webshell上传。</p>
+<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h2 id="1、首先安装所需要的依赖环境"><a href="#1、首先安装所需要的依赖环境" class="headerlink" title="1、首先安装所需要的依赖环境"></a>1、首先安装所需要的依赖环境</h2><p><code>yum -y install gcc gcc-c++ wget git geoip-devel gd-devel pcre-deve libcurl-devel libxml2 libxml2-devel libgd-devel openssl-devel lua-devel</code></p>
+<h2 id="2、LuaJIT"><a href="#2、LuaJIT" class="headerlink" title="2、LuaJIT"></a>2、LuaJIT</h2><p> 下载并安装LuaJIT2.0.5，首先来到/usr/local/src（压缩包存放目录）目录下。<br/> <code>cd /usr/local/src</code><br/> <code>wget http://luajit.org/download/LuaJIT-2.0.5.tar.gz</code><br/><code>tar -zxvf LuaJIT-2.0.5.tar.gz</code><br/><code>cd LuaJIT-2.0.5</code><br/><code>make install PREFIX=/usr/local/src/luajit</code><br/>然后创建一条软连接：<br/><code>ln -s /usr/local/src/luajit/lib/libluajit-5.1.so.2 /lib64/libluajit-5.1.so.2</code></p>
+<h2 id="3、ngx-devel-kit"><a href="#3、ngx-devel-kit" class="headerlink" title="3、ngx_devel_kit"></a>3、ngx_devel_kit</h2><p>下载并安装ngx_devel_kit<br/><code>cd /usr/local/src</code><br/><code>wget https://github.com/simpl/ngx_devel_kit/archive/v0.3.0.tar.gz</code><br/><code>tar -zxvf v0.3.0.tar.gz</code></p>
+<h2 id="4、lua-nginx-model"><a href="#4、lua-nginx-model" class="headerlink" title="4、lua-nginx-model"></a>4、lua-nginx-model</h2><p>下载并安装lua-nginx-model（nginx的lua模块）<br/><code>wget https://github.com/openresty/lua-nginx-module/archive/v0.10.14rc3.tar.gz</code><br/><code>tar -zxvf v0.10.14rc3.tar.gz</code></p>
+<h2 id="5、安装nginx"><a href="#5、安装nginx" class="headerlink" title="5、安装nginx"></a>5、安装nginx</h2><p>下载并安装nginx，这里我选择的是1.15.2版本的。<br/><code>wget http://nginx.org/download/nginx-1.15.2.tar.gz</code><br/>然后开始编译安装。<br/><code>./configure 
+--user=www 
+--group=www 
+--prefix=/data/server/nginx 
+--error-log-path=/data/server/nginx/error.log 
+--http-log-path=/data/server/nginx/access.log 
+--with-http_ssl_module 
+--with-http_v2_module 
+--with-http_realip_module 
+--with-http_addition_module 
+--with-http_image_filter_module 
+--with-http_geoip_module 
+--with-http_sub_module 
+--with-http_dav_module 
+--with-http_flv_module 
+--with-http_mp4_module 
+--with-http_gunzip_module 
+--with-http_gzip_static_module 
+--with-http_random_index_module 
+--with-http_secure_link_module 
+--with-http_degradation_module 
+--with-http_slice_module 
+--with-http_stub_status_module 
+--with-pcre 
+--with-pcre-jit 
+--with-stream 
+--with-stream_ssl_module 
+--with-debug 
+--add-module=/usr/local/src/ngx_devel_kit-0.3.0 
+--add-module=/usr/local/src/lua-nginx-module-0.10.14rc3 
+--with-ld-opt=&#34;-Wl,-rpath,$LUAJIT_LIB&#34; ;</code><br/>检查没问题的话开始安装：<br/><code>make &amp;&amp; make install</code></p>
+<h2 id="6、下载并安装waf模块"><a href="#6、下载并安装waf模块" class="headerlink" title="6、下载并安装waf模块"></a>6、下载并安装waf模块</h2><p><code>wget https://github.com/hack-umbrella/ngx_lua_waf/archive/master.zip</code><br/>解压并改名为waf，移动到nginx的配置目录下<br/><code>unzip master.zip</code><br/><code>mv /usr/local/src/ngx_lua_waf-0.7.2/ waf</code><br/><code>cp -rf /usr/local/src/waf/ /data/server/nginx/conf/</code><br/>修改waf模块的规则配置路径<br/><code>vim /data/server/nginx/conf/waf/config.lua</code><br/>修改配置文件为如下：<br/>   RulePath = “/data/server/nginx/conf/waf/wafconf/“<br/>    –规则存放目录<br/>    attacklog = “off”<br/>    –是否开启攻击信息记录，需要配置logdir<br/>    logdir = “/data/server/nginx/logs/hack/“<br/>    –log存储目录，该目录需要用户自己新建，切需要nginx用户的可写权限<br/>    UrlDeny=”on”<br/>    –是否拦截url访问<br/>    Redirect=”on”<br/>    –是否拦截后重定向<br/>    CookieMatch = “on”<br/>    –是否拦截cookie攻击<br/>    postMatch = “on”<br/>    –是否拦截post攻击<br/>    whiteModule = “on”<br/>    –是否开启URL白名单<br/>    black_fileExt={“php”,”jsp”}<br/>    –填写不允许上传文件后缀类型<br/>    ipWhitelist={“127.0.0.1”}<br/>    –ip白名单，多个ip用逗号分隔<br/>    ipBlocklist={“1.0.0.1”}<br/>    –ip黑名单，多个ip用逗号分隔<br/>    CCDeny=”on”<br/>    –是否开启拦截cc攻击(需要nginx.conf的http段增加lua_shared_dict limit 10m;)<br/>    CCrate = “30/60”<br/>    –设置cc攻击频率，单位为秒.<br/>    –默认1分钟同一个IP只能请求同一个地址30次<br/>    html=[[Please go away~~]]<br/>    –警告内容,可在中括号内自定义<br/>    备注:不要乱动双引号，区分大小写._</p>
+<p>修改nginx的配置文件使其加载waf功能模块。<br/><code>vim /data/server/nginx/conf/nginx.conf</code><br/>http里面添加如下（注意文件内的格式）<br/>    <code>lua_package_path &#34;/data/server/nginx/conf/waf/?.lua&#34;;</code><br/>    <code>lua_shared_dict limit 10m;</code><br/>    <code>init_by_lua_file  /data/server/nginx/conf/waf/init.lua;</code><br/>    <code>access_by_lua_file /data/server/nginx/conf/waf/waf.lua;</code><br/>创建nginx的启动脚本<br/><code>vim /lib/systemd/system/nginx.service</code><br/>内容如下：<br/>== [Unit]<br/>Description=The NGINX HTTP and reverse proxy server<br/>After=syslog.target network.target remote-fs.target nss-lookup.target</p>
+<p>[Service]<br/>Type=forking<br/>PIDFile=/data/server/nginx/logs/nginx.pid<br/>ExecStartPre=/data/server/nginx/sbin/nginx -t<br/>ExecStart=/data/server/nginx/sbin/nginx<br/>ExecReload=/data/server/nginx/sbin/nginx -s reload<br/>ExecStop=/usr/bin/kill -s QUIT $MAINPID<br/>PrivateTmp=true</p>
+<p>[Install]<br/>WantedBy=multi-user.target==</p>
+<p>启动nginx并设置为开机自启<br/><code>systemctl start nginx.service</code><br/><code>systemctl enable nginx.service</code><br/>创建nginx的软连接:<br/><code>ln -s /data/server/nginx/sbin/* /usr/local/sbin/</code></p>
+<h1 id="三、测试"><a href="#三、测试" class="headerlink" title="三、测试"></a>三、测试</h1><p>浏览器访问：<br/>http://安装waf的IP/test.txt?id=../../etc/passwd<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://app.yinxiang.com/FileSharing.action?hash=1/13ad558d231e9bde3653bb3f97920f15-23899" alt=""/><br/>如上图所示，WAF成功起了作用。还可以根据自己的需求给WAF添加过滤规则，使其更安全可靠，到这一个简单的WAF就搭建完成了。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-919_%E6%B5%85%E6%9E%90android%E6%89%8B%E6%B8%B8lua%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86%EF%BC%88%E5%89%8D%E4%BC%A0%EF%BC%89/">浅析android手游lua脚本的加密与解密（前传）</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-915_xLua%E7%83%AD%E6%9B%B4%E6%96%B04%E4%B9%8BHotfix%EF%BC%88%E4%B8%8A%E7%AF%87%EF%BC%89/">xLua热更新4之Hotfix（上篇）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

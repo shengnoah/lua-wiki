@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>LUA遍历所有Table变量元素与cjson.null的意义 - Lua教程</title>
+
+  
+    <meta name="description" content="LUA遍历所有Table变量元素与cjson.null的意义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LUA遍历所有Table变量元素与cjson.null的意义">
+<meta property="og:url" content="https://lua.ren/topic/359/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="LUA遍历所有Table变量元素与cjson.null的意义">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.118Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">LUA遍历所有Table变量元素与cjson.null的意义</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8D%E5%8E%86Table%E5%8F%98%E9%87%8F%E7%9A%84%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E3%80%82"><span class="toc-text">遍历Table变量的所有元素。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cjson-null%E4%B8%8Enil%E3%80%81NULL%E6%98%AF%E5%90%A6%E7%AD%89%E4%BB%B7%E3%80%82"><span class="toc-text">cjson.null与nil、NULL是否等价。</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>LUA遍历所有Table变量元素与cjson.null的意义</span></h1>
+<p>作者：糖果</p>
+<p>Lapis使用JSON解析的代层库就是CJSON。</p>
+<h2 id="遍历Table变量的所有元素。"><a href="#遍历Table变量的所有元素。" class="headerlink" title="遍历Table变量的所有元素。"></a>遍历Table变量的所有元素。</h2><p>util.moon</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">json_encodable = (obj, seen=&#123;&#125;) -&gt;</span><br><span class="line">  switch type obj</span><br><span class="line">    when &quot;table&quot;</span><br><span class="line">      unless seen[obj]</span><br><span class="line">        seen[obj] = true</span><br><span class="line">        &#123; k, json_encodable(v) for k,v in pairs(obj) when type(k) == &quot;string&quot; or type(k) == &quot;number&quot; &#125;</span><br><span class="line">    when &quot;function&quot;, &quot;userdata&quot;, &quot;thread&quot;</span><br><span class="line">      nil</span><br><span class="line">    else</span><br><span class="line">      obj</span><br><span class="line"></span><br><span class="line">to_json = (obj) -&gt; json.encode json_encodable obj</span><br><span class="line">from_json = (obj) -&gt; json.decode obj</span><br></pre></td></tr></table></figure>
+
+
+<p>json_encodable递归调用检查形参，seen&#x3D;{} 在形参列表里的应用。<br>检查出所有字符中含有的JSON数据，放入Table返回。</p>
+<p>util.lua</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">json_encodable = <span class="function"><span class="keyword">function</span><span class="params">(obj, seen)</span></span></span><br><span class="line">  <span class="keyword">if</span> seen == <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">    seen = &#123; &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">local</span> _exp_0 = <span class="built_in">type</span>(obj)</span><br><span class="line">  <span class="keyword">if</span> <span class="string">&quot;table&quot;</span> == _exp_0 <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> (seen[obj]) <span class="keyword">then</span></span><br><span class="line">      seen[obj] = <span class="literal">true</span></span><br><span class="line">      <span class="keyword">local</span> _tbl_0 = &#123; &#125;</span><br><span class="line">      <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(obj) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(k) == <span class="string">&quot;string&quot;</span> <span class="keyword">or</span> <span class="built_in">type</span>(k) == <span class="string">&quot;number&quot;</span> <span class="keyword">then</span></span><br><span class="line">          _tbl_0[k] = json_encodable(v)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">return</span> _tbl_0</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">elseif</span> <span class="string">&quot;function&quot;</span> == _exp_0 <span class="keyword">or</span> <span class="string">&quot;userdata&quot;</span> == _exp_0 <span class="keyword">or</span> <span class="string">&quot;thread&quot;</span> == _exp_0 <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> obj</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">to_json = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span></span></span><br><span class="line">  <span class="keyword">return</span> json.encode(json_encodable(obj))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">from_json = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span></span></span><br><span class="line">  <span class="keyword">return</span> json.decode(obj)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Lua版因为没有像MoonScript支持When语句，被翻译成了很多的if elseif end语句。</p>
+<p>Lapis调用的JSON基础就是lua-cjson这个库，这个库同样有一个类似的递归调用就是<br>：serialise_value。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">is_array</span><span class="params">(table)</span></span></span><br><span class="line">    <span class="keyword">local</span> <span class="built_in">max</span> = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">local</span> count = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(<span class="built_in">table</span>) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(k) == <span class="string">&quot;number&quot;</span> <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> k &gt; <span class="built_in">max</span> <span class="keyword">then</span> <span class="built_in">max</span> = k <span class="keyword">end</span> </span><br><span class="line">            count = count + <span class="number">1</span> </span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">end</span> </span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">max</span> &gt; count * <span class="number">2</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span> </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> serialise_value</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">serialise_table</span><span class="params">(value, indent, depth)</span></span></span><br><span class="line">    <span class="keyword">local</span> spacing, spacing2, indent2</span><br><span class="line">    <span class="keyword">if</span> indent <span class="keyword">then</span></span><br><span class="line">        spacing = <span class="string">&quot;\n&quot;</span> .. indent</span><br><span class="line">        spacing2 = spacing .. <span class="string">&quot;  &quot;</span></span><br><span class="line">        indent2 = indent .. <span class="string">&quot;  &quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        spacing, spacing2, indent2 = <span class="string">&quot; &quot;</span>, <span class="string">&quot; &quot;</span>, <span class="literal">false</span></span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">    depth = depth + <span class="number">1</span> </span><br><span class="line">    <span class="keyword">if</span> depth &gt; <span class="number">50</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Cannot serialise any further: too many nested tables&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> <span class="built_in">max</span> = is_array(value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> comma = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">local</span> fragment = &#123; <span class="string">&quot;&#123;&quot;</span> .. spacing2 &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">max</span> &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="comment">-- Serialise array</span></span><br><span class="line">        <span class="keyword">for</span> i = <span class="number">1</span>, <span class="built_in">max</span> <span class="keyword">do</span></span><br><span class="line">            <span class="keyword">if</span> comma <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">table</span>.<span class="built_in">insert</span>(fragment, <span class="string">&quot;,&quot;</span> .. spacing2)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="built_in">table</span>.<span class="built_in">insert</span>(fragment, serialise_value(value[i], indent2, depth))</span><br><span class="line">            comma = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">elseif</span> <span class="built_in">max</span> &lt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="comment">-- Serialise table</span></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(value) <span class="keyword">do</span></span><br><span class="line">            <span class="keyword">if</span> comma <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">table</span>.<span class="built_in">insert</span>(fragment, <span class="string">&quot;,&quot;</span> .. spacing2)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="built_in">table</span>.<span class="built_in">insert</span>(fragment,</span><br><span class="line">                (<span class="string">&quot;[%s] = %s&quot;</span>):<span class="built_in">format</span>(serialise_value(k, indent2, depth),</span><br><span class="line">                                     serialise_value(v, indent2, depth)))</span><br><span class="line">            comma = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">table</span>.<span class="built_in">insert</span>(fragment, spacing .. <span class="string">&quot;&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">table</span>.<span class="built_in">concat</span>(fragment)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">serialise_value</span><span class="params">(value, indent, depth)</span></span></span><br><span class="line">    <span class="keyword">if</span> indent == <span class="literal">nil</span> <span class="keyword">then</span> indent = <span class="string">&quot;&quot;</span> <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> depth == <span class="literal">nil</span> <span class="keyword">then</span> depth = <span class="number">0</span> <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> value == json.null <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;json.null&quot;</span></span><br><span class="line">    <span class="keyword">elseif</span> <span class="built_in">type</span>(value) == <span class="string">&quot;string&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="string">&quot;%q&quot;</span>):<span class="built_in">format</span>(value)</span><br><span class="line">    <span class="keyword">elseif</span> <span class="built_in">type</span>(value) == <span class="string">&quot;nil&quot;</span> <span class="keyword">or</span> <span class="built_in">type</span>(value) == <span class="string">&quot;number&quot;</span> <span class="keyword">or</span></span><br><span class="line">           <span class="built_in">type</span>(value) == <span class="string">&quot;boolean&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">tostring</span>(value)</span><br><span class="line">    <span class="keyword">elseif</span> <span class="built_in">type</span>(value) == <span class="string">&quot;table&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> serialise_table(value, indent, depth)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;\&quot;&lt;&quot;</span> .. <span class="built_in">type</span>(value) .. <span class="string">&quot;&gt;\&quot;&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>调用序列化，如果table变量里的value还是table就递归的调用serialise_value函数自己。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">meta_info = &#123; </span><br><span class="line">    key = &quot;test key:&quot;,</span><br><span class="line">    values = &#123; </span><br><span class="line">        k = &quot;key&quot;,</span><br><span class="line">        v = &quot;value&quot;</span><br><span class="line">    &#125;,  </span><br><span class="line">    testcase = &quot;null&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print(serialise_value(meta_info))</span><br></pre></td></tr></table></figure>
+
+<p>以上函数是直接从CJSON中提取出来的，可以遍历任意的table，相关于pprint这种功能。</p>
+<p>打印结果如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="string">&quot;testcase&quot;</span>] = json.null,</span><br><span class="line">  [<span class="string">&quot;key&quot;</span>] = <span class="string">&quot;test key:&quot;</span>,</span><br><span class="line">  [<span class="string">&quot;values&quot;</span>] = &#123;</span><br><span class="line">    [<span class="string">&quot;k&quot;</span>] = <span class="string">&quot;key&quot;</span>,</span><br><span class="line">    [<span class="string">&quot;v&quot;</span>] = <span class="string">&quot;value&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="cjson-null与nil、NULL是否等价。"><a href="#cjson-null与nil、NULL是否等价。" class="headerlink" title="cjson.null与nil、NULL是否等价。"></a>cjson.null与nil、NULL是否等价。</h2><p>下面是@hambut老师的测试代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> cjson = <span class="built_in">require</span> <span class="string">&quot;cjson&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> s = <span class="string">[[&#123;&quot;key&quot;:null,&quot;key1&quot;:&quot;value&quot;&#125;]]</span></span><br><span class="line"><span class="keyword">local</span> sd = cjson.decode(s)</span><br><span class="line">sd.key2 = <span class="string">&quot;value2&quot;</span></span><br><span class="line"></span><br><span class="line">ngx.say(cjson.encode(sd))</span><br></pre></td></tr></table></figure>
+
+
+<p>打印结果如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;key1&quot;</span>:<span class="string">&quot;value&quot;</span>,<span class="string">&quot;key&quot;</span>:null,<span class="string">&quot;key2&quot;</span>:<span class="string">&quot;value2&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>再做一个实验， 我们直接写一个so库，同句函数cjson_new，只返回一个table结构数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> <span class="title function_">cjson_new</span><span class="params">(lua_State* L)</span>; </span><br><span class="line"></span><br><span class="line"><span class="type">static</span> luaL_Reg libtangguo[] = &#123; </span><br><span class="line">    &#123;<span class="string">&quot;cjson_new&quot;</span>, cjson_new&#125;,</span><br><span class="line">    &#123;<span class="literal">NULL</span>, <span class="literal">NULL</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">cjson_new</span><span class="params">(lua_State* L)</span> &#123;</span><br><span class="line">    lua_newtable(L);</span><br><span class="line">    <span class="comment">/* Set cjson.null */</span></span><br><span class="line">    lua_pushlightuserdata(L, <span class="literal">NULL</span>);</span><br><span class="line">    lua_setfield(L, <span class="number">-2</span>, <span class="string">&quot;null&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>cjson.null 就是.so库返回的一个table变量，中的一个key名为 “null”, value是userdata(nil)<br>的userdata类型的table元素，lightuserdata不归GC管理，就是一个的指针，一般就用于和<br>其它的lightsuerdata比较， 而这个其它的lightuserdata变量，一般也都是C产生的，是产生<br>lightuserdata之间比，不是C的lightuserdata和lua的lightuserdata比法。</p>
+<p>lightuserdata和userdata也不一样， lightuserdata是指针，userdata是buffer。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> cjson_new = <span class="built_in">package</span>.<span class="built_in">loadlib</span>(<span class="string">&quot;libtangguo.so&quot;</span>, <span class="string">&quot;cjson_new&quot;</span>)</span><br><span class="line"><span class="keyword">local</span> cjson = cjson_new()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(cjson) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(k, v, <span class="built_in">type</span>(v))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(cjson.null)</span><br><span class="line">tmp = cjson.null</span><br><span class="line"><span class="built_in">print</span>(tmp, <span class="built_in">type</span>(tmp))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> cjson.null == <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;OK&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> cjson.null == <span class="string">&quot;null&quot;</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;OK&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> cjson.null == tmp <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;OK&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>cjson.null不是nil, 更不是”null”。数据在内存空间的存储形式是不一样的，但表示的现实意义是一样的，表示“啥也没有”。</p>
+<p>为了进一步说明是这样的，我们直接看一下pushlightusredata的C源码：</p>
+<p>lapi.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">** Union of all Lua values</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span> <span class="title">Value</span> &#123;</span></span><br><span class="line">  GCObject *gc;    <span class="comment">/* collectable objects */</span></span><br><span class="line">  <span class="type">void</span> *p;         <span class="comment">/* light userdata */</span></span><br><span class="line">  <span class="type">int</span> b;           <span class="comment">/* booleans */</span></span><br><span class="line">  lua_CFunction f; <span class="comment">/* light C functions */</span></span><br><span class="line">  lua_Integer i;   <span class="comment">/* integer numbers */</span></span><br><span class="line">  lua_Number n;    <span class="comment">/* float numbers */</span></span><br><span class="line">&#125; Value;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LUA_API <span class="type">void</span> <span class="title function_">lua_pushlightuserdata</span> <span class="params">(lua_State *L, <span class="type">void</span> *p)</span> &#123;</span><br><span class="line">  lua_lock(L);</span><br><span class="line">  setpvalue(L-&gt;top, p);</span><br><span class="line">  api_incr_top(L);</span><br><span class="line">  lua_unlock(L);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>cjson.so</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lua_newtable(L);</span><br><span class="line">lua_pushlightuserdata(L, <span class="literal">NULL</span>);</span><br><span class="line">lua_setfield(L, <span class="number">-2</span>, <span class="string">&quot;null&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这样在实际调用时，  setpvalue(L-&gt;top, p);<br>相当于 void *p &#x3D; NULL，<br>最后是被封装到table变量里返回的。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/36/">Django Guide</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/361/">MoonScript与ElasticSearch客户端</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

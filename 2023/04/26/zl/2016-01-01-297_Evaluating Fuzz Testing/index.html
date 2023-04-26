@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Evaluating Fuzz Testing - Lua教程</title>
+
+  
+    <meta name="description" content="1 介绍信息量太大回头再写。。 # 一天后更新 不想写了差不多就下面这些内容吧。。 2 背景2.1 fuzzing流程 fuzzing的核心算法 initSeedCorpus：初始化新的输入 isDone：决定fuzzing是否停止 choose：从队列中选择至少一个种子输入进行变异 mutate：从至少一个种子输入和观察到的现象中产生新的候选种子 eval：评价程序的种子产生观察现象 isInt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Evaluating Fuzz Testing">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-297_Evaluating%20Fuzz%20Testing/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="1 介绍信息量太大回头再写。。 # 一天后更新 不想写了差不多就下面这些内容吧。。 2 背景2.1 fuzzing流程 fuzzing的核心算法 initSeedCorpus：初始化新的输入 isDone：决定fuzzing是否停止 choose：从队列中选择至少一个种子输入进行变异 mutate：从至少一个种子输入和观察到的现象中产生新的候选种子 eval：评价程序的种子产生观察现象 isInt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1bbf352fab.png">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c98ae5ab0.png">
+<meta property="og:image" content="https://i.loli.net/2018/10/26/5bd2aa5f67bbb.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.259Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.259Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2018/10/25/5bd1bbf352fab.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Evaluating Fuzz Testing</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="toc-text">1 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%83%8C%E6%99%AF"><span class="toc-text">2 背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-fuzzing%E6%B5%81%E7%A8%8B"><span class="toc-text">2.1 fuzzing流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%BF%91%E5%B9%B4%E6%9D%A5fuzzing%E7%9A%84%E8%BF%9B%E5%B1%95"><span class="toc-text">2.2 近年来fuzzing的进展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BB%BC%E8%BF%B0%E5%92%8C%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-text">3 综述和实验设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%BB%9F%E8%AE%A1%E4%B8%8A%E7%9A%84%E9%B2%81%E6%A3%92%E6%80%A7%E6%AF%94%E8%BE%83"><span class="toc-text">4 统计上的鲁棒性比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%A7%8D%E5%AD%90%E9%80%89%E6%8B%A9"><span class="toc-text">5 种子选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E8%B6%85%E6%97%B6"><span class="toc-text">6 超时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%A1%A8%E7%8E%B0-%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F"><span class="toc-text">7 表现&#x2F;性能度量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-Ground-Truth-Bugs-Found"><span class="toc-text">7.1 Ground Truth: Bugs Found</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-AFL%E8%A6%86%E7%9B%96%E7%8E%87%E7%AE%80%E5%86%B5"><span class="toc-text">7.2 AFL覆盖率简况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-Stack-hashes"><span class="toc-text">7.3 Stack hashes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E4%BB%A3%E7%A0%81%E8%A6%86%E7%9B%96"><span class="toc-text">7.4 代码覆盖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E7%9B%AE%E6%A0%87%E7%A8%8B%E5%BA%8F"><span class="toc-text">8 目标程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E7%9C%9F%E5%AE%9E%E7%A8%8B%E5%BA%8F"><span class="toc-text">8.1 真实程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E4%BA%BA%E5%B7%A5%E7%A8%8B%E5%BA%8F"><span class="toc-text">8.2 人工程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-%E9%9D%A2%E5%90%91%E4%B8%80%E4%B8%AAFuzzing-Benchmark-Suite"><span class="toc-text">8.3 面向一个Fuzzing Benchmark Suite</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E7%BB%93%E8%AE%BA%E5%92%8C%E6%9C%AA%E6%9D%A5%E5%B7%A5%E4%BD%9C"><span class="toc-text">9 结论和未来工作</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Evaluating Fuzz Testing</span></h1>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><p>信息量太大回头再写。。</p>
+<p># 一天后更新</p>
+<p>不想写了差不多就下面这些内容吧。。</p>
+<h2 id="2-背景"><a href="#2-背景" class="headerlink" title="2 背景"></a>2 背景</h2><h3 id="2-1-fuzzing流程"><a href="#2-1-fuzzing流程" class="headerlink" title="2.1 fuzzing流程"></a>2.1 fuzzing流程</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2018/10/25/5bd1bbf352fab.png" alt="fuzzing algorithm.png"/></p>
+<p>fuzzing的核心算法</p>
+<p><strong>initSeedCorpus</strong>：初始化新的输入</p>
+<p><strong>isDone</strong>：决定fuzzing是否停止</p>
+<p><strong>choose</strong>：从队列中选择至少一个种子输入进行变异</p>
+<p><strong>mutate</strong>：从至少一个种子输入和观察到的现象中产生新的候选种子</p>
+<p><strong>eval</strong>：评价程序的种子产生观察现象</p>
+<p><strong>isInteresting</strong>：根据观察到的现象决定种子是否保留</p>
+<p>fuzzer的最终目标是生成输入使程序crash。其他类型的观察现象也是需要的，比如用例运行的时间，可以用来指示算法复杂度漏洞的存在。</p>
+<h3 id="2-2-近年来fuzzing的进展"><a href="#2-2-近年来fuzzing的进展" class="headerlink" title="2.2 近年来fuzzing的进展"></a>2.2 近年来fuzzing的进展</h3><p>本文研究对象是2012至2018这7年顶会上32篇相关论文。其中25篇是2016年以来的成果。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2018/10/25/5bd1c98ae5ab0.png" alt="summary.png"/></p>
+<p>这里总结了32篇论文评价时的相关信息。</p>
+<p>这里通过文章的主题将这些文章分类：</p>
+<p><strong>initSeedCorpus</strong>: </p>
+<ul>
+<li>Skyfire和Orthrus改进初始化种子选择</li>
+<li>QuickFuzz通过输入结构的语法生成种子输入</li>
+<li>DIFUZE进行前期的静态分析来识别输入的结构（？）</li>
+</ul>
+<p><strong>mutate</strong>:</p>
+<ul>
+<li>SYMFUZZ使用符号执行决定变异的种子输入的位数</li>
+<li>有些fuzzer使用预定义的变异策略（如位翻转或随机代替）</li>
+<li>MutaGen通过代码切片使用测试程序的代码段来转换或操作输入</li>
+<li>SDF使用种子自身的性质指导变异</li>
+<li>Chizpurfle的变异器使用java语言构建器的知识辅助安卓系统服务的过程中fuzz</li>
+</ul>
+<p><strong>eval</strong>:</p>
+<ul>
+<li>Driller和MAYHEM发现某些guard条件通过暴力猜很难满足，因此使用符号执行在eval阶段绕过他们</li>
+<li>S2F也在eval阶段使用符号执行</li>
+<li>其他工作目标加快eval阶段的速度通过修改操作系统或低层级的原语来观测执行影响</li>
+<li>T-Fuzz移除对于输入的检查（这些检查阻止程序达到新代码）</li>
+<li>MEDS进行更细粒度的运行时分析来检测error</li>
+</ul>
+<p><strong>isInteresting</strong>:</p>
+<p>有意思的行为如：长运行时间，有差异的行为等</p>
+<ul>
+<li>Steelix和Angora进行插桩获取更细粒度的信息</li>
+<li>Dowser和VUzzer使用静态分析在不同程序点赋值不同的rewards来达到CFG中更深的点</li>
+</ul>
+<p><strong>choose</strong>:</p>
+<ul>
+<li>部分工作基于输入是否到达某些区域来选择下一个候选输入</li>
+<li>另一部分提出算法选择候选种子</li>
+</ul>
+<h2 id="3-综述和实验设置"><a href="#3-综述和实验设置" class="headerlink" title="3 综述和实验设置"></a>3 综述和实验设置</h2><p>评价模糊测试算法的步骤</p>
+<ol>
+<li>选择一个baseline算法</li>
+<li>选择一个有表达能力的目标程序（benchmark）</li>
+<li>选择比较的度量，最理想的是找到的bug数</li>
+<li>算法的参数选择，比如种子文件如何选择</li>
+<li>在A和B上多次运行，进行性能上的差异显著性检验</li>
+</ol>
+<p><strong>实验设置</strong>：</p>
+<p><em>fuzzers.</em> AFL 2.43b作为baseline B，AFLFast作为advanced算法。同时使用AFL的<code>-n</code>选项（关闭了覆盖率跟踪），称为<code>AFLNaive</code>。</p>
+<p><em>benchmark.</em> <em>nm</em>, <em>objdump</em>, <em>cxxfilt</em>, <em>gif2png</em>, <em>FFmpeg</em>。这些程序都在最近的成果评价时用来评价工具性能。</p>
+<p><em>Performance measure.</em> unique crashes，uniqueness由AFL能覆盖的路径数决定。</p>
+<p><em>platform and configuration.</em> 每次测试跑24小时，每种测试至少跑30次。同时也尝试了多样的种子输入文件：空文件，随机选择正确类型，人工写得文件。</p>
+<h2 id="4-统计上的鲁棒性比较"><a href="#4-统计上的鲁棒性比较" class="headerlink" title="4 统计上的鲁棒性比较"></a>4 统计上的鲁棒性比较</h2><p>大部分已有研究（18/32）没有提及测试的次数。这些论文可能认为随机性是均匀的，即如果测试跑了足够长时间，不同的随机会收敛，所有fuzzer会发现相同数量的crash。对于gif2png进行30次24小时的实验，AFLFast找到51个crash（中位数），AFL找到39个crash（中位数），使用<code>Mann Whitney U-test</code>进行显著性检验发现<code>p-value</code>&gt;0.05。</p>
+<p><strong>讨论：最好的检验方法</strong></p>
+<p>两个可行的方法：</p>
+<ol>
+<li>permutation test</li>
+<li>bootstrap-based tests</li>
+</ol>
+<p>这两个方法与<code>Mann Whitney</code>相比是否合适不得而知，所以本文采取Arcuri和Briand的方法。从实验结果可知方法A比B好，但是<em>好多少</em>不知道，所以通过比较中位数的绝对差异来隐含地回答这个问题。</p>
+<h2 id="5-种子选择"><a href="#5-种子选择" class="headerlink" title="5 种子选择"></a>5 种子选择</h2><p>大多数工作（27/32）改进fuzzing loop。30/32使用非空的种子集合。</p>
+<p>一个普遍的观点就是种子输入应该well-formed（valid）而且small。</p>
+<p>可能初始语料库的细节并不重要，也就是说，不论种子如何初始，都能从算法的改进上体现出来。</p>
+<p>本文使用不同种子输入测试<em>FFmpeg</em>，包括已有video files和randomly-generated videos。</p>
+<p>总结来说，fuzzers在同个程序上针对不同输入的性能表现各不同。本文建议应该更谨慎地考虑，应该使用各类输入评价fuzzer的算法。论文应该写明种子输入如何收集，且最好给出实验用到的种子输入。而且empty seed应该考虑到，因为这是最简单的输入，可以被任意系统使用。</p>
+<h2 id="6-超时"><a href="#6-超时" class="headerlink" title="6 超时"></a>6 超时</h2><p>比较常用的是24小时（10/32），和5或6小时（7/32）。6/32超过一天。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2018/10/26/5bd2aa5f67bbb.png" alt="QQ截图20181026134651.png"/></p>
+<p>而且不同超时设置会影响实验的结果，如上图。<code>timeout=6h</code>时，AFL没找到crash但是AFLFast找到4个，差异是显著的；然而若<code>timeout=24h</code>，AFL找到14个crash而AFLFast只找到8个，这个差异也是显著的。</p>
+<p>较短的<code>timeout</code>更符合实际场景。</p>
+<p><em>讨论：</em>也可以计算AUC作为报告找bug能力的度量。但是如果一个fuzzer A一开始就发现5个crash，另一个fuzzer B在最后才发现了10个crash，直觉来说B的找bug能力大于A，但是AUC较小，所以AUC度量不适用于基于时间绘图。</p>
+<h2 id="7-表现-性能度量"><a href="#7-表现-性能度量" class="headerlink" title="7 表现/性能度量"></a>7 表现/性能度量</h2><h3 id="7-1-Ground-Truth-Bugs-Found"><a href="#7-1-Ground-Truth-Bugs-Found" class="headerlink" title="7.1 Ground Truth: Bugs Found"></a>7.1 Ground Truth: Bugs Found</h3><p>能找到bug是检验fuzzers性能的第一标准！</p>
+<h3 id="7-2-AFL覆盖率简况"><a href="#7-2-AFL覆盖率简况" class="headerlink" title="7.2 AFL覆盖率简况"></a>7.2 AFL覆盖率简况</h3><h3 id="7-3-Stack-hashes"><a href="#7-3-Stack-hashes" class="headerlink" title="7.3 Stack hashes"></a>7.3 Stack hashes</h3><h3 id="7-4-代码覆盖"><a href="#7-4-代码覆盖" class="headerlink" title="7.4 代码覆盖"></a>7.4 代码覆盖</h3><p>一句话，代码覆盖率作为第二度量是讲得通的，但是最主要的评价指标还是找到的bug数（distinct bugs）。</p>
+<h2 id="8-目标程序"><a href="#8-目标程序" class="headerlink" title="8 目标程序"></a>8 目标程序</h2><p>这里涉及benchmark选择的问题。</p>
+<p>主要分为两类：</p>
+<ol>
+<li>真实程序和人工程序（或bug）</li>
+<li>手动选择的程序，人工注入bug</li>
+</ol>
+<h3 id="8-1-真实程序"><a href="#8-1-真实程序" class="headerlink" title="8.1 真实程序"></a>8.1 真实程序</h3><p>使用真实程序作为benchmark的问题：</p>
+<ol>
+<li>只使用了很少的目标程序，没有明确说明代表性。很难泛化到其他程序，7个真实项目太少了</li>
+<li>在这些文章中很少有论文用到相同的目标程序（版本也相同）</li>
+</ol>
+<p>Google Fuzzer Suite比较好地解决了这个问题：</p>
+<ol>
+<li>使用了25个程序，包括已有bug</li>
+<li>设计用作一类回归测试</li>
+</ol>
+<h3 id="8-2-人工程序"><a href="#8-2-人工程序" class="headerlink" title="8.2 人工程序"></a>8.2 人工程序</h3><p>有时不关心特定的程序集合，而是程序中反模式的有代表性的集合。</p>
+<p>有两个著名的suite：CGC和LAVA-M</p>
+<h3 id="8-3-面向一个Fuzzing-Benchmark-Suite"><a href="#8-3-面向一个Fuzzing-Benchmark-Suite" class="headerlink" title="8.3 面向一个Fuzzing Benchmark Suite"></a>8.3 面向一个Fuzzing Benchmark Suite</h3><ol>
+<li>suite包含的程序应该能够说明bug在什么是否发现的？是合成引入的还是就版本已有bug？</li>
+<li>suite应该足够大，能够很好表达目标程序群体的特征</li>
+<li>需要构建测试方法防止overfitting（为了找更多bug而强行硬编码规则之类的？）</li>
+</ol>
+<h2 id="9-结论和未来工作"><a href="#9-结论和未来工作" class="headerlink" title="9 结论和未来工作"></a>9 结论和未来工作</h2><p>已有工作：</p>
+<ul>
+<li>没有多次执行，没有进行性能提升的显著性检验</li>
+<li>很有工作没有通过统计distinct bugs评价fuzzer的性能，而是和AFL一样使用unique crashes</li>
+<li>很多工作只有很短的timeout，缺少合理的理由</li>
+<li>许多工作没有认真考虑种子输入的影响</li>
+<li>这些工作选择了不同的目标程序，很难比较不同工具或算法间的性能</li>
+</ul>
+<p>本文建议，模糊测试效果评价应该包含以下元素：</p>
+<ul>
+<li>多次试验，进行统计测试</li>
+<li>大量包含已知bug的目标程序</li>
+<li>从已知bug的方面度量性能，而不是基于AFL的启发式度量</li>
+<li>全面考虑各类种子输入，包括空输入</li>
+<li><code>timeout</code>≥24h</li>
+</ul>
+<p>未来工作的三条线：</p>
+<ol>
+<li>benchmark</li>
+<li>在实际fuzzign结果的基础上考虑crash去重方法</li>
+<li>探索改进新的基于observation的fuzzing算法</li>
+</ol>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-294_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Lua学习笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-299_How%20%20computer%20program%20are%20interpreted%20and%20evaluate/">How  computer program are interpreted and evaluated</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

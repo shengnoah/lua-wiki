@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua教程</title>
+
+  
+    <meta name="description" content="FFIFFI 库，是 LuaJIT 中最重要的一个扩展库。它允许从纯 Lua 代码调用外部C函数，使用 C 数据结构。有了它，就不用再像 Lua 标准 math 库一样，编写 Lua 扩展库。把开发者从开发 Lua 扩展 C 库（语言&#x2F;功能绑定库）的繁重工作中释放出来。 FFI 库最大限度的省去了使用 C 手工编写繁重的 Lua&#x2F;C 绑定的需要。不需要学习一门独立&#x2F;额">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua教程">
+<meta property="og:url" content="https://lua.ren/FFI.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="FFIFFI 库，是 LuaJIT 中最重要的一个扩展库。它允许从纯 Lua 代码调用外部C函数，使用 C 数据结构。有了它，就不用再像 Lua 标准 math 库一样，编写 Lua 扩展库。把开发者从开发 Lua 扩展 C 库（语言&#x2F;功能绑定库）的繁重工作中释放出来。 FFI 库最大限度的省去了使用 C 手工编写繁重的 Lua&#x2F;C 绑定的需要。不需要学习一门独立&#x2F;额">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lua.ren/images/ffi.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.127Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.127Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="openresty">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lua.ren/images/ffi.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets"></div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+
+<h1 id="FFI"><a href="#FFI" class="headerlink" title="FFI"></a>FFI</h1><p>FFI 库，是 LuaJIT 中最重要的一个扩展库。它允许从纯 Lua 代码调用外部C函数，使用 C 数据结构。有了它，就不用再像 Lua 标准 math 库一样，编写 Lua 扩展库。把开发者从开发 Lua 扩展 C 库（语言&#x2F;功能绑定库）的繁重工作中释放出来。</p>
+<p>FFI 库最大限度的省去了使用 C 手工编写繁重的 Lua&#x2F;C 绑定的需要。不需要学习一门独立&#x2F;额外的绑定语言——它解析普通 C 声明。这样可以从 C 头文件或参考手册中，直接剪切，粘贴。它的任务就是绑定很大的库，但不需要捣鼓脆弱的绑定生成器。</p>
+<p>FFI 紧紧的整合进了 LuaJIT（几乎不可能作为一个独立的模块）。JIT 编译器为 Lua 代码直接访问 C 数据结构而产生的代码，等同于一个 C 编译器应该生产的代码。在 JIT 编译过的代码中，调用 C 函数，可以被内连处理，不同于基于 Lua&#x2F;C API 函数调用。</p>
+<h4 id="调用-C-函数"><a href="#调用-C-函数" class="headerlink" title="调用 C 函数"></a>调用 C 函数</h4><p>真的很用容易去调用一个外部C库函数，示例代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> ffi = <span class="built_in">require</span>(<span class="string">&quot;ffi&quot;</span>)</span><br><span class="line">ffi.cdef<span class="string">[[</span></span><br><span class="line"><span class="string">int printf(const char *fmt, ...);</span></span><br><span class="line"><span class="string">]]</span></span><br><span class="line">ffi.C.printf(<span class="string">&quot;Hello %s!&quot;</span>, <span class="string">&quot;world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>以上操作步骤，如下：</p>
+<ol>
+<li>加载 FFI 库。</li>
+<li>为函数增加一个函数声明。这个包含在 <code>中括号</code> 对之间的部分，是标准C语法。</li>
+<li>调用命名的 C 函数——非常简单。</li>
+</ol>
+<p>事实上，背后的实现远非如此简单：③ 使用标准C库的命名空间 ffi.C。通过符号名 (“printf”) 索引这个命名空间，自动绑定标准 C 库。索引结果是一个特殊类型的对象，当被调用时，执行 printf 函数。传递给这个函数的参数，从 Lua 对象自动转换为相应的 C 类型。</p>
+<p>再来一个源自官方的示例代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> ffi = <span class="built_in">require</span>(<span class="string">&quot;ffi&quot;</span>)</span><br><span class="line">ffi.cdef<span class="string">[[</span></span><br><span class="line"><span class="string">unsigned long compressBound(unsigned long sourceLen);</span></span><br><span class="line"><span class="string">int compress2(uint8_t *dest, unsigned long *destLen,</span></span><br><span class="line"><span class="string">        const uint8_t *source, unsigned long sourceLen, int level);</span></span><br><span class="line"><span class="string">int uncompress(uint8_t *dest, unsigned long *destLen,</span></span><br><span class="line"><span class="string">         const uint8_t *source, unsigned long sourceLen);</span></span><br><span class="line"><span class="string">]]</span></span><br><span class="line"><span class="keyword">local</span> zlib = ffi.<span class="built_in">load</span>(ffi.<span class="built_in">os</span> == <span class="string">&quot;Windows&quot;</span> <span class="keyword">and</span> <span class="string">&quot;zlib1&quot;</span> <span class="keyword">or</span> <span class="string">&quot;z&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">compress</span><span class="params">(txt)</span></span></span><br><span class="line">  <span class="keyword">local</span> n = zlib.compressBound(#txt)</span><br><span class="line">  <span class="keyword">local</span> buf = ffi.new(<span class="string">&quot;uint8_t[?]&quot;</span>, n)</span><br><span class="line">  <span class="keyword">local</span> buflen = ffi.new(<span class="string">&quot;unsigned long[1]&quot;</span>, n)</span><br><span class="line">  <span class="keyword">local</span> res = zlib.compress2(buf, buflen, txt, #txt, <span class="number">9</span>)</span><br><span class="line">  <span class="built_in">assert</span>(res == <span class="number">0</span>)</span><br><span class="line">  <span class="keyword">return</span> ffi.<span class="built_in">string</span>(buf, buflen[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">uncompress</span><span class="params">(comp, n)</span></span></span><br><span class="line">  <span class="keyword">local</span> buf = ffi.new(<span class="string">&quot;uint8_t[?]&quot;</span>, n)</span><br><span class="line">  <span class="keyword">local</span> buflen = ffi.new(<span class="string">&quot;unsigned long[1]&quot;</span>, n)</span><br><span class="line">  <span class="keyword">local</span> res = zlib.uncompress(buf, buflen, comp, #comp)</span><br><span class="line">  <span class="built_in">assert</span>(res == <span class="number">0</span>)</span><br><span class="line">  <span class="keyword">return</span> ffi.<span class="built_in">string</span>(buf, buflen[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Simple test code.</span></span><br><span class="line"><span class="keyword">local</span> txt = <span class="built_in">string</span>.<span class="built_in">rep</span>(<span class="string">&quot;abcd&quot;</span>, <span class="number">1000</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Uncompressed size: &quot;</span>, #txt)</span><br><span class="line"><span class="keyword">local</span> c = compress(txt)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Compressed size: &quot;</span>, #c)</span><br><span class="line"><span class="keyword">local</span> txt2 = uncompress(c, #txt)</span><br><span class="line"><span class="built_in">assert</span>(txt2 == txt)</span><br></pre></td></tr></table></figure>
+
+<p>解释一下这段代码。  我们首先使用 <code>ffi.cdef</code> 声明了一些被 zlib 库提供的 C 函数。然后加载 zlib 共享库，在 Windows 系统上，则需要我们手动从网上下载 zlib1.dll 文件，而在 POSIX 系统上 libz 库一般都会被预安装。因为 <code>ffi.load</code> 函数会自动填补前缀和后缀，所以我们简单地使用 z 这个字母就<br>可以加载了。我们检查 <code>ffi.os</code>，以确保我们传递给 <code>ffi.load</code> 函数正确的名字。</p>
+<p>一开始，压缩缓冲区的最大值被传递给 <code>compressBound</code>函数，下一行代码分配了一个要压缩字符串长度的字节缓冲区。<code>[?]</code>意味着他是一个变长数组。它的实际长度由<code>ffi.new</code>函数的第二个参数指定。</p>
+<p>我们仔细审视一下<code>compress2</code>函数的声明就会发现，目标长度是用指针传递的！这是因为我们要传递进去缓冲区的最大值，并且得到缓冲区实际被使用的大小。</p>
+<p>在C语言中，我们可以传递变量地址。但因为在Lua中并没有地址相关的操作符，所以我们使用只有一个元素的数组来代替。我们先用最大缓冲区大小初始化这唯一一个元素，接下来就是很直观地调用<code>zlib.compress2</code>函数了。使用<code>ffi.string</code>函数得到一个存储着压缩数据的Lua字符串，这个函数需要一个指向数据起始区的指针和实际长度。实际长度将会在<code>buflen</code>这个数组中返回。因为压缩数据并不包括原始字符串的长度，所以我们要显式地传递进去。</p>
+<h4 id="使用-C-数据结构"><a href="#使用-C-数据结构" class="headerlink" title="使用 C 数据结构"></a>使用 C 数据结构</h4><p>cdata 类型用来将任意 C 数据保存在 Lua 变量中。这个类型相当于一块原生的内存，除了赋值和相同性<br>判断，Lua 没有为之预定义任何操作。 然而，通过使用 metatable （元表） ，程序员可以为 cdata<br>自定义一组操作。 cdata 不能在 Lua 中创建出来，也不能在 Lua 中修改。这样的操作只能通过 C API。这一点保证了宿主程序完全掌管其中的数据。</p>
+<p>我们将C语言类型与 metamethod （元方法）关联起来，这个操作只用做一次。<code>ffi.metatype</code>会返回一个该类型的构造函数。原始C类型也可以被用来创建数组，元方法会被自动地应用到每个元素。</p>
+<p>尤其需要指出的是，metatable 与 C 类型的关联是永久的，而且不允许被修改，__index 元方法也是。</p>
+<blockquote>
+<p>下面是一个使用 C 数据结构的实例</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> ffi = <span class="built_in">require</span>(<span class="string">&quot;ffi&quot;</span>)</span><br><span class="line">ffi.cdef<span class="string">[[</span></span><br><span class="line"><span class="string">typedef struct &#123; double x, y; &#125; point_t;</span></span><br><span class="line"><span class="string">]]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> point</span><br><span class="line"><span class="keyword">local</span> mt = &#123;</span><br><span class="line">  <span class="built_in">__add</span> = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span></span> <span class="keyword">return</span> point(a.x+b.x, a.y+b.y) <span class="keyword">end</span>,</span><br><span class="line">  <span class="built_in">__len</span> = <span class="function"><span class="keyword">function</span><span class="params">(a)</span></span> <span class="keyword">return</span> <span class="built_in">math</span>.<span class="built_in">sqrt</span>(a.x*a.x + a.y*a.y) <span class="keyword">end</span>,</span><br><span class="line">  <span class="built_in">__index</span> = &#123;</span><br><span class="line">    area = <span class="function"><span class="keyword">function</span><span class="params">(a)</span></span> <span class="keyword">return</span> a.x*a.x + a.y*a.y <span class="keyword">end</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">point = ffi.metatype(<span class="string">&quot;point_t&quot;</span>, mt)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> a = point(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(a.x, a.y)  <span class="comment">--&gt; 3  4</span></span><br><span class="line"><span class="built_in">print</span>(#a)        <span class="comment">--&gt; 5</span></span><br><span class="line"><span class="built_in">print</span>(a:area())  <span class="comment">--&gt; 25</span></span><br><span class="line"><span class="keyword">local</span> b = a + point(<span class="number">0.5</span>, <span class="number">8</span>)</span><br><span class="line"><span class="built_in">print</span>(#b)        <span class="comment">--&gt; 12.5</span></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>附表：Lua 与 C 语言语法对应关系</p>
+</blockquote>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/../images/ffi.png" alt="Lua 与 C 语言语法对应关系"></p>
+<h4 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h4><p>todo：介绍 FFI 就必须从必要的 C 基础，包括内存管理的细节，说起，同时也须介绍包括 Valgrind 在内的内存问题调试工具的细节（by agentzh），后面重点补充。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/pra_flame_when.html">2023-04-26</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/array_size.html">2023-04-26</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

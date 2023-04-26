@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Pose Estimation Evaluation (Metric) - Lua教程</title>
+
+  
+    <meta name="description" content="对于人体骨骼关键点算法来说，如何有效的衡量一个算法的好坏非常重要，他不像分类问题那样可以很容易采用一些常用指标，例如precise、error、F-score等进行计算。因为在衡量的过程中，我们无法有效的将预测结果与真实值一一对应，无法知道他们之前的对应关系，更加无法知道当前的某个预测结果是否出现了误检或者漏检的情况。因此，构建一个合适的人体关键点的度量指标很重要。 本文目前涉及 oks、AP、m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pose Estimation Evaluation (Metric)">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-888_Pose%20Estimation%20Evaluation%20(Metric)/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="对于人体骨骼关键点算法来说，如何有效的衡量一个算法的好坏非常重要，他不像分类问题那样可以很容易采用一些常用指标，例如precise、error、F-score等进行计算。因为在衡量的过程中，我们无法有效的将预测结果与真实值一一对应，无法知道他们之前的对应关系，更加无法知道当前的某个预测结果是否出现了误检或者漏检的情况。因此，构建一个合适的人体关键点的度量指标很重要。 本文目前涉及 oks、AP、m">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=OKS_%7Bp%7D+%3D+%5Cfrac%7B%5Csum_i+exp%5C%7B-d_%7Bpi%7D%5E2+%2F+2S_p%5E2+%5Csigma_i%5E2%5C%7D%5Cdelta%28v_%7Bpi%7D%3D1%29%7D%7B%5Csum_i+%5Cdelta%28v_%7Bpi%7D%3D1%29%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=p">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=i">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=d_%7Bpi%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=S_p">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Csqrt%7B%28x_2-x_1%29%28y_2-y_1%29%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Csigma_i">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Csigma">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=v_%7Bpi%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cdelta">
+<meta property="article:published_time" content="2023-04-26T05:16:12.315Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.315Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhihu.com/equation?tex=OKS_%7Bp%7D+%3D+%5Cfrac%7B%5Csum_i+exp%5C%7B-d_%7Bpi%7D%5E2+%2F+2S_p%5E2+%5Csigma_i%5E2%5C%7D%5Cdelta%28v_%7Bpi%7D%3D1%29%7D%7B%5Csum_i+%5Cdelta%28v_%7Bpi%7D%3D1%29%7D">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Pose Estimation Evaluation (Metric)</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81oks"><span class="toc-text">一、oks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OKS"><span class="toc-text">OKS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OKS%E7%9F%A9%E9%98%B5"><span class="toc-text">OKS矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AP%EF%BC%88Average-Precision%EF%BC%89"><span class="toc-text">AP（Average Precision）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mAP%EF%BC%88mean-Average-Precision%EF%BC%89"><span class="toc-text">mAP（mean Average Precision）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81PCK-PCKh%EF%BC%8CPDJ"><span class="toc-text">二、PCK,PCKh，PDJ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-PCK-Percentage-of-Correct-Keypoints"><span class="toc-text">1.PCK (Percentage of Correct Keypoints)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-PCKh"><span class="toc-text">1.1 PCKh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-PDJ-Percentage-of-Detected-Joints"><span class="toc-text">2.PDJ - Percentage of Detected Joints</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.315Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Pose Estimation Evaluation (Metric)</span></h1>
+<p>对于人体骨骼关键点算法来说，如何有效的衡量一个算法的好坏非常重要，他不像分类问题那样可以很容易采用一些常用指标，例如precise、error、F-score等进行计算。因为在衡量的过程中，我们无法有效的将预测结果与真实值一一对应，无法知道他们之前的对应关系，更加无法知道当前的某个预测结果是否出现了误检或者漏检的情况。因此，构建一个合适的人体关键点的度量指标很重要。</p>
+<p>本文目前涉及 <strong>oks、AP、mAP、PCK、PCKh、PDJ</strong>，后续碰到新的会继续补充</p>
+<hr/>
+<h4 id="一、oks"><a href="#一、oks" class="headerlink" title="一、oks"></a>一、oks</h4><p>目前最为常用的就是<strong>OKS（Object Keypoint Similarity）</strong>指标，这个指标启发于目标检测中的IoU指标，目的就是为了计算真值和预测人体关键点的相似度。</p>
+<h4 id="OKS"><a href="#OKS" class="headerlink" title="OKS"></a>OKS</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=OKS_%7Bp%7D+%3D+%5Cfrac%7B%5Csum_i+exp%5C%7B-d_%7Bpi%7D%5E2+%2F+2S_p%5E2+%5Csigma_i%5E2%5C%7D%5Cdelta%28v_%7Bpi%7D%3D1%29%7D%7B%5Csum_i+%5Cdelta%28v_%7Bpi%7D%3D1%29%7D" alt="[公式]"/></p>
+<p>其中：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=p" alt="[公式]"/> 表示groudtruth中，人的id</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=i" alt="[公式]"/> 表示key point的id</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=d_%7Bpi%7D" alt="[公式]"/> 表示groudtruth中每个人和预测的每个人的关键点的欧氏距离</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=S_p" alt="[公式]"/> 表示当前人的尺度因子，这个值等于此人在groundtruth中所占面积的平方根，即 <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=%5Csqrt%7B%28x_2-x_1%29%28y_2-y_1%29%7D" alt="[公式]"/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=%5Csigma_i" alt="[公式]"/> 表示第 i 个骨骼点的归一化因子，这个因此是通过对数据集中所有groundtruth计算的标准差而得到的，反映出当前骨骼点标注时候的标准差， <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=%5Csigma" alt="[公式]"/> 越大表示这个点越难标注。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=v_%7Bpi%7D" alt="[公式]"/>代表第p个人的第 i 个关键点是否可见</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.zhihu.com/equation?tex=%5Cdelta" alt="[公式]"/> 用于将可见点选出来进行计算的函数</p>
+<h4 id="OKS矩阵"><a href="#OKS矩阵" class="headerlink" title="OKS矩阵"></a>OKS矩阵</h4><p>上面介绍的OKS是计算两个人之间的骨骼点相似度的，那一张图片中有很多的人时，该怎么计算呢？这时候就是构造一个OKS矩阵了。</p>
+<p>假设一张图中，一共有M个人（groudtruth中），现在算法预测出了N个人，那么我们就构造一个M×N的矩阵，矩阵中的位置（i,j）代表groudtruth中的第i个人和算法预测出的第j个人的OKS相似度，找到矩阵中每一行的最大值，作为对应于第i个人的OKS相似度值。</p>
+<h4 id="AP（Average-Precision）"><a href="#AP（Average-Precision）" class="headerlink" title="AP（Average Precision）"></a>AP（Average Precision）</h4><p>根据前面的OKS矩阵，已经知道了某一张图像的所有人（groundtruth中出现的）的OKS分数，现在测试集中有很多图像，每张图像又有一些人，此时该如何衡量整个算法的好坏的。这个时候就用到了AP的概念，AP就是给定一个t，如果当前的OKS大于t，那就说明当前这个人的骨骼点成功检测出来了，并且检测对了，如果小于t，则说明检测失败或者误检漏检等，因此对于所有的OKS，统计其中大于t的个数，并计算其占所有OKS的比值。即假设OKS一共有100个，其中大于阈值t的共有30个，那么AP值就是30/100=0.3.</p>
+<h4 id="mAP（mean-Average-Precision）"><a href="#mAP（mean-Average-Precision）" class="headerlink" title="mAP（mean Average Precision）"></a>mAP（mean Average Precision）</h4><p>顾名思义，AP的均值，具体计算方法就是给定不同的阈值t，计算不同阈值情况下对应的AP，然后求个均值就ok了。（<strong>与分类的 mAP 指标不同</strong>）</p>
+<hr/>
+<h3 id="二、PCK-PCKh，PDJ"><a href="#二、PCK-PCKh，PDJ" class="headerlink" title="二、PCK,PCKh，PDJ"></a>二、PCK,PCKh，PDJ</h3><p><code>MPII 中是以头部长度(head length) 作为归一化参考，即 PCKh.</code></p>
+<p><code>FLIC 中是以躯干直径(torso size) 作为归一化参考.</code></p>
+<h4 id="1-PCK-Percentage-of-Correct-Keypoints"><a href="#1-PCK-Percentage-of-Correct-Keypoints" class="headerlink" title="1.PCK (Percentage of Correct Keypoints)"></a><strong>1.PCK (Percentage of Correct Keypoints)</strong></h4><p>关键点正确估计的比例<br/>计算检测的关键点与其对应的groundtruth间的归一化距离小于设定阈值的比例(the percentage of detections that fall within a normalized distance of the ground truth).</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/><span class="line">57</span><br/><span class="line">58</span><br/><span class="line">59</span><br/><span class="line">60</span><br/><span class="line">61</span><br/></pre></td><td class="code"><pre><span class="line">function eval_pck(pred, joints, symmetry_joint_id, joint_name, name)</span><br/><span class="line">% PCK 的实现</span><br/><span class="line">% torso height: || left_shoulder - right hip ||</span><br/><span class="line">% symmetry_joint_id: 具有对称关系的关键点 ID</span><br/><span class="line">% joint_name: 具有对称关系的关键点名字</span><br/><span class="line"></span><br/><span class="line">range = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.1</span>;</span><br/><span class="line">show_joint_ids = (symmetry_joint_id &gt;= <span class="number">1</span>:numel(symmetry_joint_id));</span><br/><span class="line"></span><br/><span class="line">% compute distance to ground truth joints</span><br/><span class="line">dist = get_dist_pck(pred, joints(<span class="number">1</span>:<span class="number">2</span>,:,:));</span><br/><span class="line"></span><br/><span class="line">% 计算 PCK</span><br/><span class="line">pck_all = compute_pck(dist,range);</span><br/><span class="line">pck = pck_all(end, :);</span><br/><span class="line">pck(<span class="number">1</span>:end<span class="number">-1</span>) = (pck(<span class="number">1</span>:end<span class="number">-1</span>) + pck(symmetry_joint_id))/<span class="number">2</span>;</span><br/><span class="line"></span><br/><span class="line">% 可视化结果</span><br/><span class="line">pck = [pck(show_joint_ids) pck(end)];</span><br/><span class="line">fprintf(<span class="string">&#39;------------ PCK Evaluation: %s -------------n&#39;</span>, name);</span><br/><span class="line">fprintf(<span class="string">&#39;Parts &#39;</span>); fprintf(<span class="string">&#39;&amp; %s &#39;</span>, joint_name{:}); fprintf(<span class="string">&#39;&amp; Meann&#39;</span>);</span><br/><span class="line">fprintf(<span class="string">&#39;PCK   &#39;</span>); fprintf(<span class="string">&#39;&amp; %.1f  &#39;</span>, pck); fprintf(<span class="string">&#39;n&#39;</span>);</span><br/><span class="line"></span><br/><span class="line">% -------------------------------------------------------------------------</span><br/><span class="line">function dist = get_dist_pck(pred, gt)</span><br/><span class="line"><span class="keyword">assert</span>(size(pred,<span class="number">1</span>) == size(gt,<span class="number">1</span>) &amp;&amp; size(pred,<span class="number">2</span>) == size(gt,<span class="number">2</span>) &amp;&amp; size(pred,<span class="number">3</span>) == size(gt,<span class="number">3</span>));</span><br/><span class="line"></span><br/><span class="line">dist = nan(<span class="number">1</span>,size(pred, <span class="number">2</span>), size(pred,<span class="number">3</span>));</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">for</span> imgidx = <span class="number">1</span>:size(pred,<span class="number">3</span>)</span><br/><span class="line">  % torso diameter 躯干直径</span><br/><span class="line">  <span class="keyword">if</span> size(gt, <span class="number">2</span>) == <span class="number">14</span></span><br/><span class="line">    refDist = norm(gt(:,<span class="number">10</span>,imgidx) - gt(:,<span class="number">3</span>,imgidx));</span><br/><span class="line">  elseif size(gt, <span class="number">2</span>) == <span class="number">10</span> % <span class="number">10</span> joints FLIC</span><br/><span class="line">    refDist = norm(gt(:,<span class="number">7</span>,imgidx) - gt(:,<span class="number">6</span>,imgidx));</span><br/><span class="line">  elseif size(gt, <span class="number">2</span>) == <span class="number">11</span> % <span class="number">11</span> joints FLIC</span><br/><span class="line">    refDist = norm(gt(:,<span class="number">4</span>,imgidx) - gt(:,<span class="number">11</span>,imgidx));</span><br/><span class="line">  <span class="keyword">else</span></span><br/><span class="line">    error(<span class="string">&#39;Number of joints should be 14 or 10 or 11&#39;</span>);</span><br/><span class="line">  end</span><br/><span class="line"></span><br/><span class="line">  % 预测的关键点与 gt 关键点的距离</span><br/><span class="line">  dist(<span class="number">1</span>,:,imgidx) = sqrt(sum((pred(:,:,imgidx) - gt(:,:,imgidx)).^<span class="number">2</span>,<span class="number">1</span>))./refDist;</span><br/><span class="line"></span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">% -------------------------------------------------------------------------</span><br/><span class="line">function pck = compute_pck(dist,range)</span><br/><span class="line">pck = zeros(numel(range),size(dist,<span class="number">2</span>)+<span class="number">1</span>);</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">for</span> jidx = <span class="number">1</span>:size(dist,<span class="number">2</span>)</span><br/><span class="line">  % 计算每个设定阈值的 PCK</span><br/><span class="line">  <span class="keyword">for</span> k = <span class="number">1</span>:numel(range)</span><br/><span class="line">    pck(k,jidx) = <span class="number">100</span>*mean(squeeze(dist(<span class="number">1</span>,jidx,:)) &lt;= range(k));</span><br/><span class="line">  end</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">% 计算平均 PCK</span><br/><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:numel(range)</span><br/><span class="line">  pck(k,end) = <span class="number">100</span>*mean(reshape(squeeze(dist(<span class="number">1</span>,:,:)),size(dist,<span class="number">2</span>)*size(dist,<span class="number">3</span>),<span class="number">1</span>) &lt;= range(k));</span><br/><span class="line">end</span><br/></pre></td></tr></tbody></table></figure>
+
+<h4 id="1-1-PCKh"><a href="#1-1-PCKh" class="headerlink" title="1.1 PCKh"></a>1.1 PCKh</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/></pre></td><td class="code"><pre><span class="line">% 计算 head 的长度</span><br/><span class="line">headSize = getHeadSizeAll(annolist_test_flat(single_person_test_flat == <span class="number">1</span>));</span><br/><span class="line"></span><br/><span class="line">% 计算预测的关键点与 gt 关键点间的归一化距离</span><br/><span class="line">dist = getDistPCKh(pred,gt,headSize);</span><br/><span class="line"></span><br/><span class="line">% 计算 PCKh</span><br/><span class="line">pck = computePCK(dist,range);</span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line">function headSizeAll = getHeadSizeAll(annolist)</span><br/><span class="line">headSizeAll = nan(length(annolist),<span class="number">1</span>);</span><br/><span class="line"><span class="keyword">for</span> imgidx = <span class="number">1</span>:length(annolist)</span><br/><span class="line">    rect = annolist(imgidx).annorect;</span><br/><span class="line">    headSizeAll(imgidx) =  util_get_head_size(rect);</span><br/><span class="line">end</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">function headSize = util_get_head_size(rect)</span><br/><span class="line">SC_BIAS = <span class="number">0.6</span>; % <span class="number">0.8</span>*<span class="number">0.75</span></span><br/><span class="line">headSize = SC_BIAS*norm([rect.x2 rect.y2] - [rect.x1 rect.y1]); </span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">function dist = getDistPCKh(pred,gt,refDist)</span><br/><span class="line"><span class="keyword">assert</span>(size(pred,<span class="number">1</span>) == size(gt,<span class="number">1</span>) &amp;&amp; size(pred,<span class="number">2</span>) == size(gt,<span class="number">2</span>) &amp;&amp; size(pred,<span class="number">3</span>) == size(gt,<span class="number">3</span>));</span><br/><span class="line"><span class="keyword">assert</span>(size(refDist,<span class="number">1</span>) == size(gt,<span class="number">3</span>));</span><br/><span class="line"></span><br/><span class="line">dist = nan(<span class="number">1</span>,size(pred,<span class="number">2</span>),size(pred,<span class="number">3</span>));</span><br/><span class="line"><span class="keyword">for</span> imgidx = <span class="number">1</span>:size(pred,<span class="number">3</span>)</span><br/><span class="line">    % pred joints 与 gt joints 的归一化距离</span><br/><span class="line">    dist(<span class="number">1</span>,:,imgidx) = sqrt(sum((pred(:,:,imgidx) - gt(:,:,imgidx)).^<span class="number">2</span>,<span class="number">1</span>))./refDist(imgidx);</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">function pck = computePCK(dist,range)</span><br/><span class="line">pck = zeros(numel(range),size(dist,<span class="number">2</span>)+<span class="number">2</span>);</span><br/><span class="line"><span class="keyword">for</span> jidx = <span class="number">1</span>:size(dist,<span class="number">2</span>)</span><br/><span class="line">    % 计算各阈值的 PCK</span><br/><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:numel(range)</span><br/><span class="line">        d = squeeze(dist(<span class="number">1</span>,jidx,:));</span><br/><span class="line">        % dist <span class="keyword">is</span> NaN <span class="keyword">if</span> gt <span class="keyword">is</span> missing; ignore dist <span class="keyword">in</span> this case</span><br/><span class="line">        pck(k,jidx) = <span class="number">100</span>*mean(d(~isnan(d))&lt;=range(k));</span><br/><span class="line">    end</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">% 计算上半身关键点的平均 PCK</span><br/><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:numel(range)</span><br/><span class="line">    d = reshape(squeeze(dist(<span class="number">1</span>,<span class="number">7</span>:<span class="number">12</span>,:)),<span class="number">6</span>*size(dist,<span class="number">3</span>),<span class="number">1</span>);</span><br/><span class="line">    pck(k,end<span class="number">-1</span>) = <span class="number">100</span>*mean(d(~isnan(d))&lt;=range(k));</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">% 计算全身关键点的 PCK</span><br/><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:numel(range)</span><br/><span class="line">    d = reshape(squeeze(dist(<span class="number">1</span>,:,:)),size(dist,<span class="number">2</span>)*size(dist,<span class="number">3</span>),<span class="number">1</span>);</span><br/><span class="line">    pck(k,end) = <span class="number">100</span>*mean(d(~isnan(d))&lt;=range(k));</span><br/><span class="line">end</span><br/><span class="line">end</span><br/></pre></td></tr></tbody></table></figure>
+
+<h4 id="2-PDJ-Percentage-of-Detected-Joints"><a href="#2-PDJ-Percentage-of-Detected-Joints" class="headerlink" title="2.PDJ - Percentage of Detected Joints"></a>2.PDJ - Percentage of Detected Joints</h4><p>检测到的关键点比例.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/><span class="line">57</span><br/><span class="line">58</span><br/><span class="line">59</span><br/><span class="line">60</span><br/><span class="line">61</span><br/><span class="line">62</span><br/><span class="line">63</span><br/><span class="line">64</span><br/><span class="line">65</span><br/><span class="line">66</span><br/><span class="line">67</span><br/></pre></td><td class="code"><pre><span class="line">function [accs, range] = eval_pdj(pred, joints, reference_joints_pair, symmetry_joint_id, joint_name, eval_name)</span><br/><span class="line">% 设定选定的参考点：reference_joints_pair = [<span class="number">3</span>, <span class="number">10</span>];     % 右肩点到左臀点</span><br/><span class="line">% symmetry_joint_id: 具有对称关系的关键点 ID</span><br/><span class="line"><span class="keyword">assert</span>(numel(reference_joints_pair) == <span class="number">2</span>);</span><br/><span class="line">show_joint_ids = find(symmetry_joint_id &gt;= <span class="number">1</span>:numel(symmetry_joint_id)); </span><br/><span class="line">range = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">0.5</span>;</span><br/><span class="line"></span><br/><span class="line">num = size(pred, <span class="number">3</span>);</span><br/><span class="line"><span class="keyword">assert</span>(num &gt;= <span class="number">1</span>);</span><br/><span class="line">% the number of joints</span><br/><span class="line">joint_n = size(joints, <span class="number">2</span>);</span><br/><span class="line"></span><br/><span class="line">scale = zeros(<span class="number">1</span>, num);</span><br/><span class="line"><span class="keyword">for</span> ii = <span class="number">1</span>:num</span><br/><span class="line">  scale(ii) = norm( joints(:,reference_joints_pair(<span class="number">1</span>), ii) - joints(:,reference_joints_pair(<span class="number">2</span>), ii) );</span><br/><span class="line">  %scale(ii) = <span class="number">100</span>;</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">dists = zeros(num, joint_n);</span><br/><span class="line"><span class="keyword">for</span> ii = <span class="number">1</span>:num</span><br/><span class="line">  dists(ii,:) = sqrt(sum( (pred(:, :, ii) - joints(:,:,ii)).^<span class="number">2</span>, <span class="number">1</span> ));</span><br/><span class="line">  dists(ii,:) = dists(ii,:) / scale(ii);</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">accs = zeros(numel(range), joint_n);</span><br/><span class="line"><span class="keyword">for</span> ii = <span class="number">1</span>:numel(range)</span><br/><span class="line">  accs(ii,:) = mean(dists &lt;= range(ii),<span class="number">1</span>);</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">accs = (accs + accs(:,symmetry_joint_id)) / <span class="number">2</span>;</span><br/><span class="line">accs = accs(:, show_joint_ids);</span><br/><span class="line">% <span class="keyword">print</span></span><br/><span class="line">fprintf(<span class="string">&#39;-------------- PDJ Evaluation ---------------n&#39;</span>)</span><br/><span class="line">fprintf(<span class="string">&#39;Joints    &#39;</span>); fprintf(<span class="string">&#39;&amp; %s &#39;</span>, joint_name{:}); fprintf(<span class="string">&#39;n&#39;</span>);</span><br/><span class="line">sample_pdj_thresholds = [<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>];</span><br/><span class="line"><span class="keyword">for</span> ii = <span class="number">1</span>:length(sample_pdj_thresholds)</span><br/><span class="line">  t = sample_pdj_thresholds(ii);</span><br/><span class="line">  idx = (range == t);</span><br/><span class="line">  fprintf(<span class="string">&#39;PDJ@%.2f  &#39;</span>, t); fprintf(<span class="string">&#39;&amp; %.1f &#39;</span>, accs(idx,:)*<span class="number">100</span>); fprintf(<span class="string">&#39;n&#39;</span>);</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line">% plot</span><br/><span class="line">line_width = <span class="number">2</span>;</span><br/><span class="line">p_color = {<span class="string">&#39;g&#39;</span>,<span class="string">&#39;y&#39;</span>,<span class="string">&#39;b&#39;</span>,<span class="string">&#39;r&#39;</span>,<span class="string">&#39;c&#39;</span>,<span class="string">&#39;k&#39;</span>,<span class="string">&#39;m&#39;</span>};</span><br/><span class="line"></span><br/><span class="line">% visualize</span><br/><span class="line">figure; hold on; grid on;</span><br/><span class="line"><span class="keyword">for</span> ii = <span class="number">1</span>:numel(show_joint_ids)</span><br/><span class="line">  plot(range, accs(:, ii), p_color{mod(ii, numel(p_color))+<span class="number">1</span>}, <span class="string">&#39;linewidth&#39;</span>, line_width);</span><br/><span class="line">end</span><br/><span class="line">leg_str = cell(numel(show_joint_ids), <span class="number">1</span>);</span><br/><span class="line"><span class="keyword">for</span> ii = <span class="number">1</span>:numel(show_joint_ids)</span><br/><span class="line">  leg_str{ii} = sprintf(<span class="string">&#39;%s&#39;</span>, joint_name{ii});</span><br/><span class="line">end</span><br/><span class="line">h_leg = legend(leg_str, <span class="string">&#39;FontSize&#39;</span>, <span class="number">12</span>);</span><br/><span class="line">set(h_leg, <span class="string">&#39;location&#39;</span>, <span class="string">&#39;southeast&#39;</span>, <span class="string">&#39;linewidth&#39;</span>, <span class="number">1</span>);</span><br/><span class="line"></span><br/><span class="line">axis([range(<span class="number">1</span>),range(end), <span class="number">0</span>, <span class="number">1</span>]);</span><br/><span class="line">set(gca,<span class="string">&#39;ytick&#39;</span>, <span class="number">0</span>:<span class="number">0.1</span>:<span class="number">1</span>);</span><br/><span class="line">set(gca, <span class="string">&#39;linewidth&#39;</span>, <span class="number">1</span>);</span><br/><span class="line"></span><br/><span class="line">% --- titles</span><br/><span class="line">xlabel(<span class="string">&#39;Normalized  Threshold&#39;</span>) % x-axis label</span><br/><span class="line">ylabel(<span class="string">&#39;Detection Rate&#39;</span>) % y-axis label</span><br/><span class="line"></span><br/><span class="line">title([eval_name <span class="string">&#39; PDJ&#39;</span>]);</span><br/><span class="line">hold off;</span><br/></pre></td></tr></tbody></table></figure>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-896_nginx+lua+ngx_lua_waf%E5%AE%9E%E7%8E%B0waf%E5%8A%9F%E8%83%BD/">nginx+lua+ngx_lua_waf实现waf功能</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-891_Lua%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E6%96%B9%E6%B3%95%E5%92%8C%E5%8E%9F%E7%90%86/">Lua实现继承方法和原理</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

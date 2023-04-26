@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>lua学习之元表和元方法 - Lua教程</title>
+
+  
+    <meta name="description" content="学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。 文字简述 metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。  metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lua学习之元表和元方法">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-759_lua%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%85%83%E8%A1%A8%E5%92%8C%E5%85%83%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。 文字简述 metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。  metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.303Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.303Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">lua学习之元表和元方法</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E7%AE%80%E8%BF%B0"><span class="toc-text">文字简述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%AE%B2%E8%A7%A3"><span class="toc-text">代码讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#api-%E4%BB%8B%E7%BB%8D"><span class="toc-text">api 介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">元方法介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E5%85%83%E6%96%B9%E6%B3%95"><span class="toc-text">简单的元方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#index"><span class="toc-text">__index</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#newindex"><span class="toc-text">__newindex</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#metatable"><span class="toc-text">__metatable</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#call"><span class="toc-text">__call</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rawget"><span class="toc-text">rawget</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rawset"><span class="toc-text">rawset</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%A0%81"><span class="toc-text">系统代码</span></a></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>lua学习之元表和元方法</span></h1>
+<p>学习lua也有大概一年了，对lua的一些基本的语法很熟练了，也做了一些简单的业务，但是对于lua的高级特性还是不是很熟，最近有时间得以系统的学习学习。本文主要讲述的是lua高级特性之一的元表和元方法。</p>
+<h3 id="文字简述"><a href="#文字简述" class="headerlink" title="文字简述"></a>文字简述</h3><ul>
+<li><p>metatable(元表) 本质上来讲元表也是一个表，不过这个表是用来定义对lua的值进行自定义运算行为的地方。</p>
+</li>
+<li><p>metamethod(元方法) 本质上来讲就是一个lua函数，不过这个函数是用来绑定lua中特定的值，这些特定的值可以称为事件。这个函数我们可以进行我们一些自定义的操作。</p>
+<blockquote>
+<p>元表之中的事件其实是一些定义的值，这些值后面会讲到；<br/>实际上我们只能对lua中table类型的值进行修改元表和元方法的操作，其它的一些例如number, string等都已经有自己内置的元表和元方法，且不可改变。</p>
+</blockquote>
+</li>
+<li><p>通过元表和元方法，我们可以实现lua的面向对象编程。</p>
+</li>
+</ul>
+
+
+<h3 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h3><h4 id="api-介绍"><a href="#api-介绍" class="headerlink" title="api 介绍"></a>api 介绍</h4><p>简单的介绍一下会用到的api。</p>
+<blockquote>
+<p><code>setmetatable(table, metatable)</code> 设置table的元表为metatable并且返回这个table。不能为除table类型之外的值设置元表，如果metatable为nil，则将指定的元表移除 。如果存在<code>__metatable</code>，则会抛出一个错误。<br/><code>getmetatable(obj)</code> 返回一个类型的元表，如果没有元表返回nil。如果存在<code>__metatable</code>，则返回这个域的值。<br/><code>rawget(table, index)</code> 在不触发任何元方法的情况下获取table中的值。也就是跳过元表和元方法。<br/><code>rawset(table, index, value)</code> 在不触发任何元方法的情况下设置table[index]的值为value，index不能是nil和NaN</p>
+</blockquote>
+<h4 id="元方法介绍"><a href="#元方法介绍" class="headerlink" title="元方法介绍"></a>元方法介绍</h4><p>我们都知道对于两个number型的值，我们可以进行加，减，乘，除等的元算，但是对于table我们是不能直接进行这些预定义的运算的。但是通过通过元表和元方法我们是可以实现的；首先介绍下有哪些特定的值被用于绑定元方法，也称为事件，如下：</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">__index</span> </span><br/><span class="line"><span class="built_in">__newindex</span> <span class="comment">-- 用于赋值操作</span></span><br/><span class="line"><span class="built_in">__metatable</span> <span class="comment">-- 限定元表操作</span></span><br/><span class="line"><span class="built_in">__call</span> <span class="comment">-- 用于把一个函数当成函数调用的操作</span></span><br/><span class="line"><span class="built_in">__add</span> <span class="comment">-- &#39;+&#39; 加</span></span><br/><span class="line"><span class="built_in">__sub</span> <span class="comment">-- &#39;-&#39; 减</span></span><br/><span class="line"><span class="built_in">__mul</span> <span class="comment">-- &#39;*&#39; 乘</span></span><br/><span class="line"><span class="built_in">__div</span> <span class="comment">-- &#39;/&#39; 除</span></span><br/><span class="line"><span class="built_in">__mod</span> <span class="comment">-- &#39;%&#39; 取余</span></span><br/><span class="line"><span class="built_in">__pow</span> <span class="comment">-- &#39;^&#39; 次方</span></span><br/><span class="line"><span class="built_in">__unm</span> <span class="comment">-- &#39;-&#39; 取反</span></span><br/><span class="line"><span class="built_in">__concat</span> <span class="comment">-- &#39;..&#39; 连接</span></span><br/><span class="line"><span class="built_in">__tostring</span> <span class="comment">-- 字符串序列话</span></span><br/><span class="line"><span class="built_in">__len</span> <span class="comment">-- &#39;#&#39; 取长</span></span><br/><span class="line"><span class="built_in">__eq</span> <span class="comment">-- &#39;==’ 相等</span></span><br/><span class="line"><span class="built_in">__lt</span> <span class="comment">-- &#39;&lt;&#39; 小于</span></span><br/><span class="line"><span class="built_in">__le</span> <span class="comment">-- &#39;&lt;=&#39; 小于等于</span></span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>对于不同的lua版本可能这些事件还有区别，具体详细的可以看lua对应版本的介绍，这里只列出了一些常用的。<br/>对于一些特定的事件进行一些简单的介绍</p>
+<blockquote>
+<ul>
+<li>__index 当我们在取一个table中的不存在这个index的值的时候，如果有元表的话，会触发这个操作，会到元表中进行查询，并且返回这个值，元表中月不存在的时候返回nil。</li>
+<li>__newindex 当我们对一个table中的一个不存在的index赋值的时候，如果有元表的话，会触发这个操作，如果元表中有定义这个行为，就按照这个进行。</li>
+<li>__metatable 使用这个元方法的时候是保护元表，进值对元表中的成员进行获取或者修改</li>
+<li>__call 使用这个的时候我们可以吧table当成函数来进行调用。</li>
+</ul>
+</blockquote>
+</blockquote>
+<h4 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h4><h5 id="简单的元方法"><a href="#简单的元方法" class="headerlink" title="简单的元方法"></a>简单的元方法</h5><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t1 = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}</span><br/><span class="line"><span class="keyword">local</span> t2 = {<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>}</span><br/><span class="line"><span class="keyword">local</span> t = {</span><br/><span class="line">    <span class="built_in">__add</span> = <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span></span></span><br/><span class="line">        <span class="keyword">local</span> tmp = {}</span><br/><span class="line">        <span class="keyword">for</span> i = <span class="number">1</span>, #a <span class="keyword">do</span></span><br/><span class="line">            tmp[i] = a[i] + b[i]</span><br/><span class="line">        <span class="keyword">end</span></span><br/><span class="line">        <span class="keyword">for</span> i = #tmp + <span class="number">1</span>, #b <span class="keyword">do</span></span><br/><span class="line">            tmp[i] = b[i]</span><br/><span class="line">        <span class="keyword">end</span></span><br/><span class="line">        <span class="keyword">return</span> tmp</span><br/><span class="line">    <span class="keyword">end</span>,</span><br/><span class="line">    <span class="built_in">__tostring</span> = <span class="function"><span class="keyword">function</span><span class="params">(a)</span></span></span><br/><span class="line">        <span class="keyword">local</span> str = <span class="string">&#34;&#34;</span></span><br/><span class="line">        <span class="keyword">local</span> split = <span class="string">&#34;&#34;</span></span><br/><span class="line">        <span class="keyword">for</span> i = <span class="number">1</span>, #a <span class="keyword">do</span></span><br/><span class="line">            str = str .. split .. a[i]</span><br/><span class="line">            split = <span class="string">&#34;|&#34;</span></span><br/><span class="line">        <span class="keyword">end</span></span><br/><span class="line">        <span class="keyword">return</span> str</span><br/><span class="line">    <span class="keyword">end</span></span><br/><span class="line">}</span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, t)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;t1 : &#34;</span>, t1)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;t2 : &#34;</span>, t2)</span><br/><span class="line"><span class="keyword">local</span> tmp = t1 + t2</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;tmp : &#34;</span>, tmp)</span><br/><span class="line"><span class="built_in">setmetatable</span>(t2, t)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34; - t2 : &#34;</span>, t2)</span><br/><span class="line"><span class="built_in">setmetatable</span>(tmp, t)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34; - tmp : &#34;</span>, tmp)</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>运行结果如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line">t1 :    1|2|3</span><br/><span class="line">t2 :    table: 0x16984f0</span><br/><span class="line">tmp :   table: 0x16981c0</span><br/><span class="line"> - t2 :         5|6|7|9</span><br/><span class="line"> - tmp :        6|8|10|9</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>当对两个table进行加(+)的操作的时候，会查找元表中对应的元方法，然后按照元方法的行为去做。其它的一些算术运算都和这个例子大同小异，就不多做介绍了。</p>
+</blockquote>
+<h5 id="index"><a href="#index" class="headerlink" title="__index"></a>__index</h5><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t1 = {}</span><br/><span class="line"><span class="keyword">local</span> t2 = {}</span><br/><span class="line">t2.a = <span class="number">10</span></span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, {<span class="built_in">__index</span> = t2})</span><br/><span class="line"><span class="built_in">print</span>(t1.a)</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>运行结果如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">10</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>当访问t1中的a的时候，t1中并没有这个值，但是t1有元表，则会到元表中查询a，并返回；<br/>__index 也可以是一个函数，用于自定义的一些行为。</p>
+</blockquote>
+<h5 id="newindex"><a href="#newindex" class="headerlink" title="__newindex"></a>__newindex</h5><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t1 = {}</span><br/><span class="line">t1.c = <span class="number">30</span></span><br/><span class="line"><span class="keyword">local</span> t2 = {}</span><br/><span class="line">t2.a = <span class="number">10</span></span><br/><span class="line">t2.b = <span class="number">20</span></span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, {<span class="built_in">__newindex</span> = t2})</span><br/><span class="line"><span class="built_in">print</span>(t1.a)</span><br/><span class="line"><span class="built_in">print</span>(t2.a)</span><br/><span class="line">t1.a = <span class="string">&#34;a10&#34;</span></span><br/><span class="line"><span class="built_in">print</span>(t1.a)</span><br/><span class="line"><span class="built_in">print</span>(t2.a)</span><br/><span class="line"><span class="built_in">print</span>(t1.c)</span><br/><span class="line">t1.c = <span class="string">&#34;c10&#34;</span></span><br/><span class="line"><span class="built_in">print</span>(t1.c)</span><br/><span class="line"><span class="built_in">print</span>(t2.c)</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>运行结果如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line">nil</span><br/><span class="line">10</span><br/><span class="line">nil</span><br/><span class="line">a10</span><br/><span class="line">30</span><br/><span class="line">c10</span><br/><span class="line">nil</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>在对t1中的变量进行赋值的时候，如果存在则直接进行赋值，如果不存在则触发__newindex，设置元表中对应的值</p>
+</blockquote>
+<h5 id="metatable"><a href="#metatable" class="headerlink" title="__metatable"></a>__metatable</h5><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t1 = {}</span><br/><span class="line"><span class="keyword">local</span> t = {}</span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, t)</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">getmetatable</span>(t1))</span><br/><span class="line">t.<span class="built_in">__metatable</span> = <span class="string">&#34;lock&#34;</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34; metatable : &#34;</span>, <span class="built_in">getmetatable</span>(t1))</span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, t)</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>运行结果如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">table: 0xe7f4f0</span><br/><span class="line"> metatable :    lock</span><br/><span class="line">lua: test.lua:11: cannot change a protected metatable</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>在设置完__metatable域的时候，就不能再对元表进行操作了，会报错。</p>
+</blockquote>
+<h5 id="call"><a href="#call" class="headerlink" title="__call"></a>__call</h5><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t1 = {}</span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, {</span><br/><span class="line">    <span class="built_in">__call</span> = <span class="function"><span class="keyword">function</span><span class="params">(t, a, b, c, ...)</span></span></span><br/><span class="line">        <span class="keyword">local</span> num = a + b + c</span><br/><span class="line">        <span class="built_in">print</span>(<span class="string">&#34;__call str : &#34;</span>, num)</span><br/><span class="line">    <span class="keyword">end</span></span><br/><span class="line">})</span><br/><span class="line">t1(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>运行结果如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">__call str :    6</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>t1作为table，但是可以直接当成函数来进行调用，会查找__call元方法</p>
+</blockquote>
+<h5 id="rawget"><a href="#rawget" class="headerlink" title="rawget"></a>rawget</h5><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t1 = {}</span><br/><span class="line"><span class="keyword">local</span> t2 = {}</span><br/><span class="line">t2.a = <span class="number">20</span></span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, {<span class="built_in">__index</span> = t2})</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;t1 a : &#34;</span>, t1.a)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;rawget t1 a : &#34;</span>, <span class="built_in">rawget</span>(t1,a))</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>运行结果如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">t1 a :  20</span><br/><span class="line">rawget t1 a :   nil</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>设置完元表后可以取到t1中的a，从元表t2中，但是用rawget的时候会会忽略元表的存在</p>
+</blockquote>
+<h5 id="rawset"><a href="#rawset" class="headerlink" title="rawset"></a>rawset</h5><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t1 = {}</span><br/><span class="line"><span class="keyword">local</span> t2 = {}</span><br/><span class="line">t2.a = <span class="number">20</span></span><br/><span class="line"><span class="built_in">setmetatable</span>(t1, {<span class="built_in">__newindex</span> = t2})</span><br/><span class="line">t1.b = <span class="string">&#34;bbb&#34;</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;t1 b : &#34;</span>, t1.b)</span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;t2 b : &#34;</span>, t2.b)</span><br/><span class="line"><span class="built_in">rawset</span>(t1, b, <span class="string">&#34;ccc&#34;</span>)</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>运行结果如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">t1 b :  nil</span><br/><span class="line">t2 b :  bbb</span><br/><span class="line">lua: table index is nil</span><br/></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>正常的设置完元表并且设置__newindex域之后，对t1中的不存在的b赋值的时候会触发__newindex操作，但是如果用rawset的话就会报错，rawset(t1, b, “ccc”)，会对t1中的b进行赋值，并不会触发__newindex，而t1中也没有b这个值，所以报错了。</p>
+</blockquote>
+<h5 id="系统代码"><a href="#系统代码" class="headerlink" title="系统代码"></a>系统代码</h5><p>以一个之前写的例子结束这篇介绍</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/><span class="line">57</span><br/><span class="line">58</span><br/><span class="line">59</span><br/><span class="line">60</span><br/><span class="line">61</span><br/><span class="line">62</span><br/><span class="line">63</span><br/><span class="line">64</span><br/><span class="line">65</span><br/><span class="line">66</span><br/><span class="line">67</span><br/><span class="line">68</span><br/><span class="line">69</span><br/><span class="line">70</span><br/><span class="line">71</span><br/><span class="line">72</span><br/><span class="line">73</span><br/><span class="line">74</span><br/><span class="line">75</span><br/><span class="line">76</span><br/><span class="line">77</span><br/><span class="line">78</span><br/><span class="line">79</span><br/><span class="line">80</span><br/><span class="line">81</span><br/><span class="line">82</span><br/><span class="line">83</span><br/><span class="line">84</span><br/><span class="line">85</span><br/><span class="line">86</span><br/><span class="line">87</span><br/><span class="line">88</span><br/><span class="line">89</span><br/><span class="line">90</span><br/><span class="line">91</span><br/><span class="line">92</span><br/><span class="line">93</span><br/><span class="line">94</span><br/><span class="line">95</span><br/><span class="line">96</span><br/><span class="line">97</span><br/><span class="line">98</span><br/><span class="line">99</span><br/><span class="line">100</span><br/><span class="line">101</span><br/><span class="line">102</span><br/><span class="line">103</span><br/><span class="line">104</span><br/><span class="line">105</span><br/><span class="line">106</span><br/><span class="line">107</span><br/><span class="line">108</span><br/><span class="line">109</span><br/><span class="line">110</span><br/><span class="line">111</span><br/><span class="line">112</span><br/><span class="line">113</span><br/><span class="line">114</span><br/><span class="line">115</span><br/><span class="line">116</span><br/><span class="line">117</span><br/><span class="line">118</span><br/><span class="line">119</span><br/><span class="line">120</span><br/><span class="line">121</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br/><span class="line"><span class="comment">    lua 5.1.5</span></span><br/><span class="line"><span class="comment">    socket 2.0.2</span></span><br/><span class="line"><span class="comment">]]</span><span class="comment">--</span></span><br/><span class="line"><span class="keyword">local</span> socket = <span class="built_in">require</span>(<span class="string">&#34;socket&#34;</span>)</span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">sub</span> = <span class="built_in">string</span>.<span class="built_in">sub</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">byte</span> = <span class="built_in">string</span>.<span class="built_in">byte</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">concat</span> = <span class="built_in">table</span>.<span class="built_in">concat</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">tonumber</span> = <span class="built_in">tonumber</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">tostring</span> = <span class="built_in">tostring</span></span><br/><span class="line"><span class="keyword">local</span> _M = {</span><br/><span class="line">    <span class="built_in">_VERSION</span> = <span class="string">&#34;0.1&#34;</span>,</span><br/><span class="line">}</span><br/><span class="line"><span class="keyword">local</span> mt = { <span class="built_in">__index</span> = _M }</span><br/><span class="line"><span class="function"><span class="keyword">function</span> _M.new<span class="params">(self)</span></span></span><br/><span class="line">    <span class="keyword">local</span> sock, err = socket.tcp()</span><br/><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> sock <span class="keyword">then</span></span><br/><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br/><span class="line">    <span class="keyword">end</span></span><br/><span class="line">    <span class="keyword">return</span> <span class="built_in">setmetatable</span>({_sock = sock, _subscribed = <span class="literal">false</span> }, mt)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> _M.connect<span class="params">(self, ...)</span></span></span><br/><span class="line">    <span class="keyword">local</span> args = {...}</span><br/><span class="line">    <span class="keyword">local</span> sock = <span class="built_in">rawget</span>(self, <span class="string">&#34;_sock&#34;</span>)</span><br/><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> sock <span class="keyword">then</span></span><br/><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="string">&#34;not initialized&#34;</span></span><br/><span class="line">    <span class="keyword">end</span></span><br/><span class="line">    self._subscribed = <span class="literal">false</span></span><br/><span class="line">    <span class="keyword">return</span> sock:connect(...)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> _M.close<span class="params">(self)</span></span></span><br/><span class="line">    <span class="keyword">local</span> sock = <span class="built_in">rawget</span>(self, <span class="string">&#34;_sock&#34;</span>)</span><br/><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> sock <span class="keyword">then</span></span><br/><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="string">&#34;not initialized&#34;</span></span><br/><span class="line">    <span class="keyword">end</span></span><br/><span class="line">    <span class="keyword">return</span> sock:<span class="built_in">close</span>()</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> _gen_req<span class="params">(args)</span></span></span><br/><span class="line">    <span class="keyword">local</span> nargs = #args</span><br/><span class="line">    <span class="keyword">local</span> req = <span class="string">&#34;&#34;</span></span><br/><span class="line">    req = req .. <span class="string">&#34;*&#34;</span> .. nargs .. <span class="string">&#34;rn&#34;</span></span><br/><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, nargs <span class="keyword">do</span></span><br/><span class="line">        <span class="keyword">local</span> <span class="built_in">arg</span> = args[i]</span><br/><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(<span class="built_in">arg</span>) ~= <span class="string">&#34;string&#34;</span> <span class="keyword">then</span> <span class="built_in">arg</span> = <span class="built_in">tostring</span>(<span class="built_in">arg</span>) <span class="keyword">end</span></span><br/><span class="line">        req = req .. <span class="string">&#34;$&#34;</span></span><br/><span class="line">        req = req .. #<span class="built_in">arg</span></span><br/><span class="line">        req = req .. <span class="string">&#34;rn&#34;</span></span><br/><span class="line">        req = req .. <span class="built_in">arg</span></span><br/><span class="line">        req = req .. <span class="string">&#34;rn&#34;</span></span><br/><span class="line">    <span class="keyword">end</span></span><br/><span class="line"><span class="comment">-- print(&#34;req : &#34;, req)</span></span><br/><span class="line">    <span class="keyword">return</span> req</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> _read_reply<span class="params">(self, sock)</span></span></span><br/><span class="line">    <span class="keyword">local</span> line, err = sock:receive()</span><br/><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> line <span class="keyword">then</span></span><br/><span class="line">        <span class="keyword">if</span> err == <span class="string">&#34;timeout&#34;</span> <span class="keyword">then</span></span><br/><span class="line">            sock:<span class="built_in">close</span>()</span><br/><span class="line">        <span class="keyword">end</span></span><br/><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br/><span class="line">    <span class="keyword">end</span></span><br/><span class="line">    <span class="keyword">local</span> prefix = <span class="built_in">byte</span>(line)</span><br/><span class="line">    <span class="keyword">if</span> prefix == <span class="number">42</span> <span class="keyword">then</span> <span class="comment">-- char &#34;*&#34;</span></span><br/><span class="line">        <span class="keyword">local</span> n = <span class="built_in">tonumber</span>(<span class="built_in">sub</span>(line, <span class="number">2</span>))</span><br/><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="literal">nil</span> <span class="keyword">end</span></span><br/><span class="line">        <span class="keyword">local</span> vals = {}</span><br/><span class="line">        <span class="keyword">local</span> ind = <span class="number">1</span></span><br/><span class="line">        <span class="keyword">for</span> i = <span class="number">1</span>, n <span class="keyword">do</span></span><br/><span class="line">            <span class="keyword">local</span> res, err = _read_reply(self, sock)</span><br/><span class="line">            <span class="keyword">if</span> res <span class="keyword">then</span></span><br/><span class="line">
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-756_%E6%83%85%E8%BF%81QQ%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%96%B0%E5%8A%9F%E8%83%BD%E5%8F%AF%E4%BD%BF%E7%94%A8lua%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8F%92%E4%BB%B6%E5%95%A6%20%C2%B7%20%E6%83%85%E8%BF%81%E7%BE%8E%E5%A5%BD%E6%97%B6%E5%85%89%E8%BF%BD%E5%BF%86/">情迁QQ机器人新功能可使用lua脚本编写机器人插件啦 · 情迁美好时光追忆</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-755_lua%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E4%BA%8C%E4%B8%89%E5%9D%91/">lua全局变量的二三坑</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

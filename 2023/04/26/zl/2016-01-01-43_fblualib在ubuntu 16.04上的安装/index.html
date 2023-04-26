@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>fblualib在ubuntu 16.04上的安装 - Lua教程</title>
+
+  
+    <meta name="description" content="最近需要复现一下CRNN的结果，因为自己实现的版本点数不够高，所以需要跑一下人家的代码。一共有两个依赖，一个是TORCH，这个好装，另一个是fblualib，这个项目已经停止维护了，真的是跳了无数个坑，这里做一个记录。最后也只能跑inference不能train BTW. 但是对于其他跳坑的人可能也是有帮助的.  概览 torch cudnn.torch googletest folly mstc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fblualib在ubuntu 16.04上的安装">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-43_fblualib%E5%9C%A8ubuntu%2016.04%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="最近需要复现一下CRNN的结果，因为自己实现的版本点数不够高，所以需要跑一下人家的代码。一共有两个依赖，一个是TORCH，这个好装，另一个是fblualib，这个项目已经停止维护了，真的是跳了无数个坑，这里做一个记录。最后也只能跑inference不能train BTW. 但是对于其他跳坑的人可能也是有帮助的.  概览 torch cudnn.torch googletest folly mstc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.272Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.273Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">fblualib在ubuntu 16.04上的安装</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%A7%88"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#torch"><span class="toc-text">torch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cudnn-torch"><span class="toc-text">cudnn.torch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#googletest"><span class="toc-text">googletest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#folly"><span class="toc-text">folly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mstch"><span class="toc-text">mstch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zstd"><span class="toc-text">zstd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#googletest-1"><span class="toc-text">googletest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wangle"><span class="toc-text">wangle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fbthrift"><span class="toc-text">fbthrift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thpp"><span class="toc-text">thpp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fblualib"><span class="toc-text">fblualib</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRNN"><span class="toc-text">CRNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-text">各种报错的解决办法</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.272Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>fblualib在ubuntu 16.04上的安装</span></h1>
+<p>最近需要复现一下<a href="https://github.com/bgshih/crnn" target="_blank" rel="noopener noreferrer">CRNN</a>的结果，因为自己实现的版本点数不够高，所以需要跑一下人家的代码。一共有两个依赖，一个是TORCH，这个好装，另一个是fblualib，这个项目已经停止维护了，真的是跳了无数个坑，这里做一个记录。最后也只能跑inference不能train BTW. 但是对于其他跳坑的人可能也是有帮助的.<br/><br/><br/></p>
+<ul>
+<li><a href="#概览">概览</a></li>
+<li><a href="#torch">torch</a></li>
+<li><a href="#cudnntorch">cudnn.torch</a></li>
+<li><a href="#googletest">googletest</a></li>
+<li><a href="#folly">folly</a></li>
+<li><a href="#mstch">mstch</a></li>
+<li><a href="#zstd">zstd</a></li>
+<li><a href="#googletest-1">googletest</a></li>
+<li><a href="#wangle">wangle</a></li>
+<li><a href="#fbthrift">fbthrift</a></li>
+<li><a href="#thpp">thpp</a></li>
+<li><a href="#fblualib">fblualib</a></li>
+<li><a href="#crnn">CRNN</a></li>
+<li><a href="#各种报错的解决办法">各种报错的解决办法</a></li>
+</ul>
+
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>首先是需要安装的包<br/><a href="https://github.com/facebookarchive/fblualib/blob/master/install_all.sh" target="_blank" rel="noopener noreferrer">fblualib</a>,<a href="https://github.com/facebook/folly/" target="_blank" rel="noopener noreferrer">folly</a>,<a href="https://github.com/no1msd/mstch" target="_blank" rel="noopener noreferrer">mstch</a>,<a href="https://github.com/facebook/zstd" target="_blank" rel="noopener noreferrer">zstd</a>,<a href="https://github.com/facebook/wangle" target="_blank" rel="noopener noreferrer">wangle</a>,<a href="https://github.com/facebook/thpp" target="_blank" rel="noopener noreferrer">thpp</a>,<a href="https://github.com/facebook/fbthrift/" target="_blank" rel="noopener noreferrer">fbthrift</a><br/>其次：<br/>system：ubuntu 16.04，相比来说14.04应该更好装<br/>python:2.7，之前试了python3，但是在import frontend的时候遇到了一些问题，没有解决好，就放弃了，其实是有希望的。<br/></p>
+<h3 id="torch"><a href="#torch" class="headerlink" title="torch"></a>torch</h3><p>commit 0219027e6c4644a0ba5c5bf137c989a0a8c9e01b</p>
+<h3 id="cudnn-torch"><a href="#cudnn-torch" class="headerlink" title="cudnn.torch"></a>cudnn.torch</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">git clone https://github.com/soumith/cudnn.torch</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="googletest"><a href="#googletest" class="headerlink" title="googletest"></a>googletest</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line">wget https://github.com/google/googletest/archive/release-1.8.0.tar.gz &amp;&amp; </span><br/><span class="line">tar zxf release-1.8.0.tar.gz &amp;&amp; </span><br/><span class="line">rm -f release-1.8.0.tar.gz &amp;&amp; </span><br/><span class="line">cd googletest-release-1.8.0 &amp;&amp; </span><br/><span class="line">cmake configure . &amp;&amp; </span><br/><span class="line">make &amp;&amp; </span><br/><span class="line">make install</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="folly"><a href="#folly" class="headerlink" title="folly"></a>folly</h3><p>commit ID:<code>5817bad</code><br/>依赖：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/></pre></td><td class="code"><pre><span class="line">sudo apt-get install </span><br/><span class="line">    g++ </span><br/><span class="line">    cmake </span><br/><span class="line">    libboost-all-dev </span><br/><span class="line">    libevent-dev </span><br/><span class="line">    libdouble-conversion-dev </span><br/><span class="line">    libgoogle-glog-dev </span><br/><span class="line">    libgflags-dev </span><br/><span class="line">    libiberty-dev </span><br/><span class="line">    liblz4-dev </span><br/><span class="line">    liblzma-dev </span><br/><span class="line">    libsnappy-dev </span><br/><span class="line">    make </span><br/><span class="line">    zlib1g-dev </span><br/><span class="line">    binutils-dev </span><br/><span class="line">    libjemalloc-dev </span><br/><span class="line">    libssl-dev </span><br/><span class="line">    pkg-config</span><br/><span class="line">    libunwind8-dev </span><br/><span class="line">    libelf-dev </span><br/><span class="line">    libdwarf-dev</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line">git clone https://github.com/facebook/folly/</span><br/><span class="line">cd folly/folly</span><br/><span class="line">autoreconf -ivf</span><br/><span class="line">./configure &amp;&amp;</span><br/><span class="line">make &amp;&amp;</span><br/><span class="line">sudo make install &amp;&amp;</span><br/><span class="line">sudo ldconfig &amp;&amp;</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="mstch"><a href="#mstch" class="headerlink" title="mstch"></a>mstch</h3><p>commit ID:<code>0fde1cf</code><br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line">git clone https://github.com/no1msd/mstch</span><br/><span class="line">cd mstch</span><br/><span class="line">mkdir build</span><br/><span class="line">cd build</span><br/><span class="line">cmake ..</span><br/><span class="line">make -j 4</span><br/><span class="line">sudo make install</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="zstd"><a href="#zstd" class="headerlink" title="zstd"></a>zstd</h3><p>commit ID:<code>87125c2</code> dev branch<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">git clone https://github.com/facebook/zstd</span><br/><span class="line">cd zstd</span><br/><span class="line">sudo make install</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="googletest-1"><a href="#googletest-1" class="headerlink" title="googletest"></a>googletest</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line">git clone https://github.com/google/googletest</span><br/><span class="line">cmake make install</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="wangle"><a href="#wangle" class="headerlink" title="wangle"></a>wangle</h3><p>commit ID:`31fbaba<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line">git clone https://github.com/facebook/wangle</span><br/><span class="line">cmake .</span><br/><span class="line">make</span><br/><span class="line">ctest</span><br/><span class="line">sudo make install</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="fbthrift"><a href="#fbthrift" class="headerlink" title="fbthrift"></a>fbthrift</h3><p>commit ID:<code>94a399a</code><br/>更改的部分<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line">diff --git a/CMakeLists.txt b/CMakeLists.txt</span><br/><span class="line">index 51271e3..7a15eae 100644</span><br/><span class="line">--- a/CMakeLists.txt</span><br/><span class="line">+++ b/CMakeLists.txt</span><br/><span class="line">@@ -8,6 +8,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)</span><br/><span class="line"> set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)</span><br/><span class="line"> set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)</span><br/><span class="line"></span><br/><span class="line">+set(CMAKE_CXX_FLAGS &#34;-fPIC&#34;)</span><br/><span class="line">+set(CMAKE_C_FLAGS &#34;-fPIC&#34;)</span><br/><span class="line">+</span><br/><span class="line"> set(TEMPLATES_INSTALL_DIR include/thrift/templates CACHE STRING</span><br/><span class="line">     &#34;The subdirectory where compiler template files should be installed&#34;)</span><br/><span class="line"> set(BIN_INSTALL_DIR bin CACHE STRING</span><br/><span class="line">主要为了解决python包 thrift-compiler无法生成的问题</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">cd build</span><br/><span class="line">cmake ..</span><br/><span class="line">make -j 32</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="thpp"><a href="#thpp" class="headerlink" title="thpp"></a>thpp</h3><p>commit ID:<code>0a4c745</code><br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line">git clone https://github.com/facebook/thpp</span><br/><span class="line">cd thpp/thpp</span><br/><span class="line">./build.sh</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>更改的部分<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/></pre></td><td class="code"><pre><span class="line">diff --git a/thpp/CMakeLists.txt b/thpp/CMakeLists.txt</span><br/><span class="line">index 4ae3683..603702b 100644</span><br/><span class="line">--- a/thpp/CMakeLists.txt</span><br/><span class="line">+++ b/thpp/CMakeLists.txt</span><br/><span class="line">@@ -42,7 +42,7 @@ ELSE()</span><br/><span class="line">   ADD_DEFINITIONS(-DNO_THRIFT)</span><br/><span class="line"> ENDIF()</span><br/><span class="line"></span><br/><span class="line">-SET(CMAKE_CXX_FLAGS &#34;${CMAKE_CXX_FLAGS} -std=gnu++11&#34;)</span><br/><span class="line">+SET(CMAKE_CXX_FLAGS &#34;${CMAKE_CXX_FLAGS} -std=gnu++14&#34;)</span><br/><span class="line"></span><br/><span class="line"> SET(src</span><br/><span class="line">   Storage.cpp</span><br/><span class="line">------------------------------------------------------</span><br/><span class="line">   diff --git a/thpp/build.sh b/thpp/build.sh</span><br/><span class="line">   index 79af5d9..7c807e7 100755</span><br/><span class="line">   --- a/thpp/build.sh</span><br/><span class="line">   +++ b/thpp/build.sh</span><br/><span class="line">   @@ -52,4 +52,4 @@ make</span><br/><span class="line">    ctest</span><br/><span class="line"></span><br/><span class="line">    # Install</span><br/><span class="line">   -make install</span><br/><span class="line">   +sudo make install</span><br/><span class="line">------------------------------------------------------</span><br/><span class="line">diff --git a/thpp/detail/TensorGeneric.h b/thpp/detail/TensorGeneric.h</span><br/><span class="line">index a8837f6..6b67c72 100644</span><br/><span class="line">--- a/thpp/detail/TensorGeneric.h</span><br/><span class="line">+++ b/thpp/detail/TensorGeneric.h</span><br/><span class="line">@@ -188,17 +188,17 @@ template &lt;&gt; struct TensorOps&lt;Tensor&lt;real&gt;&gt; {</span><br/><span class="line">   }</span><br/><span class="line">   static void _max(THTensor* values, THLongTensor* indices,</span><br/><span class="line">                    THTensor* t, int dim) {</span><br/><span class="line">-    return THTensor_(max)(values, indices, t, dim);</span><br/><span class="line">+    return THTensor_(max)(values, indices, t, dim, 1);</span><br/><span class="line">   }</span><br/><span class="line">   static void _min(THTensor* values, THLongTensor* indices,</span><br/><span class="line">                    THTensor* t, int dim) {</span><br/><span class="line">-    return THTensor_(min)(values, indices, t, dim);</span><br/><span class="line">+    return THTensor_(min)(values, indices, t, dim, 1);</span><br/><span class="line">   }</span><br/><span class="line">   static void _sum(THTensor* r, THTensor* t, int dim) {</span><br/><span class="line">-    return THTensor_(sum)(r, t, dim);</span><br/><span class="line">+    return THTensor_(sum)(r, t, dim, 1);</span><br/><span class="line">   }</span><br/><span class="line">   static void _prod(THTensor* r, THTensor* t, int dim) {</span><br/><span class="line">-    return THTensor_(prod)(r, t, dim);</span><br/><span class="line">+    return THTensor_(prod)(r, t, dim, 1);</span><br/><span class="line">   }</span><br/><span class="line">   static void _cumsum(THTensor* r, THTensor* t, int dim) {</span><br/><span class="line">     return THTensor_(cumsum)(r, t, dim);</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="fblualib"><a href="#fblualib" class="headerlink" title="fblualib"></a>fblualib</h3><p>commit ID:<code>4812779</code><br/>更改的部分，这个改的太多了<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/></pre></td><td class="code"><pre><span class="line">modified:   fblualib/build.sh</span><br/><span class="line">modified:   fblualib/ffivector/CMakeLists.txt</span><br/><span class="line">modified:   fblualib/ffivector/FFIVector.cpp</span><br/><span class="line">modified:   fblualib/mattorch/CMakeLists.txt</span><br/><span class="line">modified:   fblualib/python/CMakeLists.txt</span><br/><span class="line">modified:   fblualib/thrift/ChunkedCompression.h</span><br/><span class="line">modified:   fblualib/thrift/Encoding.h</span><br/><span class="line">modified:   fblualib/thrift/LuaObject.h</span><br/><span class="line">modified:   fblualib/thrift/LuaSerialization.cpp</span><br/><span class="line">modified:   fblualib/torch/CMakeLists.txt</span><br/><span class="line">modified:   fblualib/util/Reactor.cpp</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="CRNN"><a href="#CRNN" class="headerlink" title="CRNN"></a>CRNN</h3><p>ptr的问题</p>
+<h3 id="各种报错的解决办法"><a href="#各种报错的解决办法" class="headerlink" title="各种报错的解决办法"></a>各种报错的解决办法</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line">Could not find a package configuration file provided by &#34;Torch&#34; with any of</span><br/><span class="line">  the following names:</span><br/><span class="line"></span><br/><span class="line">    TorchConfig.cmake</span><br/><span class="line">    torch-config.cmake</span><br/><span class="line"></span><br/><span class="line">export CMAKE_PREFIX_PATH=/path/to/torch</span><br/></pre></td></tr></tbody></table></figure>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-438_lua/">lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-439_Lua%E4%B8%AD%E6%A8%A1%E5%9D%97%5Bmodlue%5D/">Lua中模块[modlue]</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

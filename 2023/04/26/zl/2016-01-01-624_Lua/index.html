@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua - Lua教程</title>
+
+  
+    <meta name="description" content="由于lua的编译速度相当快，而且这种迭代编译的过程仅仅在程序加载的时候进行一次，故而可以带来性能的提高；一些在系统初始化可以决定的参数（比如从配置文件中读出来的数据直接编译为常量置入程序中。 1234567891011121314151617local select &#x3D; selectlocal setmetatable &#x3D; setmetatablelocal getfenv &#x3D; getfenvlo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-624_Lua/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="由于lua的编译速度相当快，而且这种迭代编译的过程仅仅在程序加载的时候进行一次，故而可以带来性能的提高；一些在系统初始化可以决定的参数（比如从配置文件中读出来的数据直接编译为常量置入程序中。 1234567891011121314151617local select &#x3D; selectlocal setmetatable &#x3D; setmetatablelocal getfenv &#x3D; getfenvlo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.290Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.290Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%92%E5%88%86"><span class="toc-text">源文件划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lua%E6%A0%B8%E5%BF%83"><span class="toc-text">Lua核心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BF%BB%E8%AF%91%E5%8F%8A%E9%A2%84%E7%BC%96%E8%AF%91%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-text">代码翻译及预编译字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%B5%8C%E5%BA%93"><span class="toc-text">内嵌库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%BA%90%E4%BB%A3%E7%A0%81%E7%9A%84%E6%AC%A1%E5%BA%8F"><span class="toc-text">阅读源代码的次序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-text">加载机制</span></a></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua</span></h1>
+<p>由于lua的编译速度相当快，而且这种迭代编译的过程仅仅在程序加载的时候进行一次，故而可以带来性能的提高；一些在系统初始化可以决定的参数（比如从配置文件中读出来的数据直接编译为常量置入程序中。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="built_in">select</span> = <span class="built_in">select</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">setmetatable</span> = <span class="built_in">setmetatable</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">getfenv</span> = <span class="built_in">getfenv</span></span><br/><span class="line"><span class="keyword">local</span> setfenc = <span class="built_in">setfenv</span></span><br/><span class="line"><span class="keyword">local</span> loadstring = loadstring</span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">type</span> = <span class="built_in">type</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">tostring</span> = <span class="built_in">tostring</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">next</span> = <span class="built_in">next</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">unpack</span> = <span class="built_in">unpack</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">assert</span> = <span class="built_in">assert</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">string</span> = <span class="built_in">string</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">table</span> = <span class="built_in">table</span></span><br/><span class="line"><span class="keyword">local</span> <span class="built_in">io</span> = <span class="built_in">io</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="params">(...)</span></span></span><br/><span class="line">    <span class="keyword">return</span> <span class="built_in">select</span>(<span class="string">&#34;#&#34;</span>, ...), <span class="built_in">select</span>(<span class="number">1</span>, ...) </span><br/><span class="line"><span class="keyword">end</span></span><br/></pre></td></tr></tbody></table></figure>
+<h1 id="Lua的upvalue和闭包"><a href="#Lua的upvalue和闭包" class="headerlink" title="Lua的upvalue和闭包"></a>Lua的upvalue和闭包</h1><p>Lua函数可以被当成参数传递，也可以被当成结果返回，在函数体中仍然可以定义内嵌函数，Lua闭包是Lua函数生成的数据对象。每个闭包可以有一个upvalue值，或者多个闭包共享一个upvalue值。</p>
+<h1 id="什么是JIT"><a href="#什么是JIT" class="headerlink" title="什么是JIT"></a>什么是JIT</h1><p>JIT=Just In Time即时编译，是动态编译的一种形式，是一种优化虚拟机运行的技术。<br/>程序运行通常有两种方式，一种是静态编译，一种是动态编译，即使编译混合了这二者。Java和.Net/mono中都使用了这种技术。<br/>然而IOS中禁止使用（不是针对JIT，而是所有的动态编译都不支持）</p>
+<h1 id="为什么要使用JIT"><a href="#为什么要使用JIT" class="headerlink" title="为什么要使用JIT"></a>为什么要使用JIT</h1><p>解释执行：</p>
+<ul>
+<li>效率低</li>
+<li>代码暴露</li>
+</ul>
+<p>静态编译：</p>
+<ul>
+<li>不够灵活，无法热更新</li>
+<li>平台兼容性差。</li>
+</ul>
+<p>JIT：</p>
+<ul>
+<li>效率：高于解释执行，低于静态编译。</li>
+<li>安全性：一般都会先转换成字节码。</li>
+<li>热更新：无论源码还是字节码本质都是资源文件。</li>
+<li>兼容性：虚拟机会处理平台差异，对用户透明。</li>
+</ul>
+<h1 id="JIT是如何实现的"><a href="#JIT是如何实现的" class="headerlink" title="JIT是如何实现的"></a>JIT是如何实现的</h1><p>这里讲的实际上是JIT的一个变种：自适应动态编译(adaptive dynamic compilation)。它分为两种：Method JIT和Trace JIT。<br/>简单来讲：</p>
+<ol>
+<li>跟踪热点函数或trace，编译成机器码执行，并缓存起来供以后使用。</li>
+<li>非热点函数解释执行。</li>
+</ol>
+<p>为什么只编译热点函数？<br/>对只执行一次的代码而言，解释执行其实总是比JIT编译要快。对这些代码做JIT编译在执行，可以说是得补偿式。而对于只执行少量次数的代码，JIT编译带来的执行速度的提升也未必必能抵消掉最初编译带来的开销。只有对频繁执行的代码，JIT编译才能保证有正面的收益。</p>
+<h1 id="Lua元素-Metatable"><a href="#Lua元素-Metatable" class="headerlink" title="Lua元素(Metatable)"></a>Lua元素(Metatable)</h1><p>1.定义算术操作符和关系操作符的行为</p>
+<pre><code>+ __add
+* __mul
+- __sub
+/ __div
+- __unm(for negation) 自减
+% __mod
+^ __pow
+</code></pre><p>关系操作符</p>
+<pre><code>== __eq
+&lt;  __lt
+&lt;= __le
+</code></pre><p>当我们访问某个不存在的字段的时候，就会调用<code>__index</code>元方法。</p>
+<h3 id="源文件划分"><a href="#源文件划分" class="headerlink" title="源文件划分"></a>源文件划分</h3><p>1.虚拟机运转核心功能<br/>|源文件名        |功能                            |前缀|<br/>|———————:|———————————————:|—-:|<br/>|lapi.c         |C语言接口                        |luaC|<br/>|lctype.c         |C标准库中ctype相关实现            ||<br/>|ldebug.c         |Debug 接口                        ||<br/>|ldo.c             |函数调用以及栈管理                |luaD|<br/>|lfunc.c         |函数原型及闭包管理                ||<br/>|lgc.c             |垃圾回收                        ||<br/>|lmem.c         |内存管理接口                    ||<br/>|lobject.c         |对象操作的一些函数                ||<br/>|lopcodes.c     |虚拟机的字节码定义                ||<br/>|lstate.c         |全局状态机                        ||<br/>|lstring.c         |字符串池                        ||<br/>|ltable.c         |表类型的相关操作                |luaH|<br/>|ltm.c             |元方法                            ||<br/>|lvm.c             |虚拟机                            ||<br/>|lzio.c         |输入流接口                        |luaZ|</p>
+<p>2.源代码解析以及预编译字节码<br/>|源文件名        |功能                            |前缀|<br/>|———————:|———————————————:|—-:|<br/>|lcode.c     |代码生成器||<br/>|ldump.c     |序列化预编译的Lua字节码||<br/>|llex.c         |词法分析器||<br/>|lparser.c     |解析器||<br/>|lundump.c     |还原预编译的字节码||</p>
+<p>3.内嵌库<br/>|源文件名        |功能                            |前缀|<br/>|———————:|———————————————:|—-:|<br/>|lauxlib.c     |库编写用到的辅助函数库||<br/>|lbaselib.c     |基础库||<br/>|lbitlib.c     |位操作库||<br/>|ldblib.c     |Debug库||<br/>|lini.c     |    内嵌库的初始化||<br/>|liolib.c     |IO库||<br/>|lstrlib.c     |字符串库||<br/>|ltablib.c     |表处理库||</p>
+<p>4.可执行的解析器，字节码编译器<br/>|源文件名        |功能                            |前缀|<br/>|———————:|———————————————:|—-:|<br/>|lua.c         |解释器||<br/>|luac.c         |字节码编译器||</p>
+<h3 id="Lua核心"><a href="#Lua核心" class="headerlink" title="Lua核心"></a>Lua核心</h3><pre><code>Lua核心部分仅包括Lua虚拟机的运转。Lua虚拟机的行为是由一组组opcode控制的。这些opcode定义在lopcodes.h及lopcodes.c中。而虚拟机对opcode的解析和运作在lvm.c中，其API以luaV为前缀。
+Lua虚拟机的外在数据形式是一个lua_State结构体，取名State大概意为Lua虚拟机的当前状态。全局State引用了整个虚拟机的所有数据。这个全局State的相关代码放在lstate.c中，API使用luaE为前缀。
+函数的运行流程：函数调用及返回则放在ldo.c中，相关API以luaD为前缀。
+Lua中最复杂和重要的三种数据类型function、table、string的实现分属在lfunc.c、ltable.c、lstring.c中。这三组内部API分别以luaF、luaH、luaS为前缀命名。不同的数据类型最终呗统一定义为LuaObject，相关操作在lobject.c中，API以luaO为前缀。
+Lua从第五版后增加了元表，元表的处理在ltm.c中，API以luaT为前缀。
+另外，核心系统还用到两个基础设施：内存管理lmem.c，API以luaM为前缀；带缓存的流处理lzio.c，API以luaZ为前缀。
+最后是核心系统里最为复杂的部分，垃圾回收部分，在lgc.c中实现，API以luaC为前缀。
+Lua设计的初衷之一就为了最好的和宿主系统相结合。它是一门嵌入式语言，所以必须提供和宿主系统交互API。这些API以C函数的形式提供，大多数实现在lapi.c中。API直接以lua为前缀，可供C编写的程序库直接调用。
+</code></pre><h3 id="代码翻译及预编译字节码"><a href="#代码翻译及预编译字节码" class="headerlink" title="代码翻译及预编译字节码"></a>代码翻译及预编译字节码</h3><pre><code>光有核心代码和一个虚拟机还无法让Lua程序运行起来。因为必须从外部输入将Lua运行起来。Lua的脚本需要经过解析得到内部的数据结构（常量和opcode的集合）。这个是用parser:lparser.c （luaY:语法解析)及词法分析llex.c(luaX)
+解析完脚本代码，还需要最终生成code码，在lcode.c中实现。luaK
+为了满足某些需求，加快代码翻译的流程。还可以采用预编译的过程。把运行时编译的结果，生成为字节码。这个过程以及逆过程由ldump.c和lundump.c实现。luaU
+</code></pre><h3 id="内嵌库"><a href="#内嵌库" class="headerlink" title="内嵌库"></a>内嵌库</h3><pre><code>作为嵌入式语言，其实完全可以不提供任何库及函数。全部由宿主系统注入到State中即可。也的确有许多系统是这么用的。但Lua的官方版本还是提供了少量必要的库。尤其是一些基础函数paris、error、setmetatable、type等等，完成了语言的一些基本特性，几乎很难不使用。
+而coroutine、string、table、math等等库，也很常用。Lua提供了一套简洁的方案，允许你自由加载你需要的部分，以控制最终执行文件的体积和内存的占用量。主动加载这些内建库进入lua_State，是由在lualib.h中的API实现的。
+</code></pre><figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> TValue *<span class="title">index2addr</span> <span class="params">(lua_State *L, <span class="keyword">int</span> idx)</span> </span>{</span><br/><span class="line">    CallInfo *ci = L-&gt;ci;</span><br/><span class="line">    <span class="keyword">if</span> (idx &gt; <span class="number">0</span>) {</span><br/><span class="line">        TValue *o = ci-&gt;func + idx;</span><br/><span class="line">        api_check(L, idx &lt;= ci-&gt;top - (ci-&gt;func + <span class="number">1</span>), <span class="string">&#34;unacceptable index&#34;</span>);</span><br/><span class="line">        <span class="keyword">if</span> (o &gt;= L-&gt;top) <span class="keyword">return</span> NONVALIDVALUE;</span><br/><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> o;</span><br/><span class="line">    }</span><br/><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (!ispseudo(idx)) { <span class="comment">/* nagative index */</span></span><br/><span class="line">        api_check(L, idx != <span class="number">0</span> &amp;&amp; -idx &lt;= L-&gt;top - (ci-&gt;func + <span class="number">1</span>), <span class="string">&#34;invalid index&#34;</span>);</span><br/><span class="line">        <span class="keyword">return</span> L-&gt;top + idx;</span><br/><span class="line">    }</span><br/><span class="line">    ...</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<figure class="highlight c#"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/><span class="line">57</span><br/><span class="line">58</span><br/><span class="line">59</span><br/><span class="line">60</span><br/><span class="line">61</span><br/><span class="line">62</span><br/><span class="line">63</span><br/><span class="line">64</span><br/><span class="line">65</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LuaMgr</span></span><br/><span class="line">{</span><br/><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Module <span class="title">GetModule</span>(<span class="params"><span class="keyword">string</span> name</span>)</span></span><br/><span class="line"><span class="function"></span>	{</span><br/><span class="line">        Module m = m_modules.PG_TryGetValue(name);</span><br/><span class="line">        <span class="keyword">if</span> (m == <span class="literal">null</span>)</span><br/><span class="line">        {</span><br/><span class="line">            ...</span><br/><span class="line">        }</span><br/><span class="line">        <span class="comment">// repeat</span></span><br/><span class="line">        <span class="keyword">if</span> (m.m_state != Module.State.None)</span><br/><span class="line">        {</span><br/><span class="line">            <span class="keyword">if</span> (m.m_state == Module.State.Failed) <span class="keyword">return</span> <span class="literal">null</span>;</span><br/><span class="line">            <span class="keyword">return</span> m;</span><br/><span class="line">        }</span><br/><span class="line"></span><br/><span class="line">        <span class="keyword">var</span> L = m_L;<span class="comment">//lua_State</span></span><br/><span class="line">        <span class="keyword">string</span>[] names = name.Split(m_dotSep); <span class="comment">// mulit file</span></span><br/><span class="line">        LuaDLL.lua_pushvalue(L, LuaIndexes.LUA_GLOBALSINDEX); <span class="comment">// 0</span></span><br/><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; names.Length; ++ i)</span><br/><span class="line">        {</span><br/><span class="line">            LuaDLL.lua_pushstring(L, names[i]);</span><br/><span class="line">            LuaDLL.lua_rawget(L, <span class="number">-2</span>); <span class="comment">//</span></span><br/><span class="line"></span><br/><span class="line">            <span class="keyword">var</span> t = LuaDLL.lua_type(L, <span class="number">-1</span>); <span class="comment">// 1</span></span><br/><span class="line">            <span class="keyword">switch</span> (t)</span><br/><span class="line">            {</span><br/><span class="line">                <span class="keyword">case</span> LuaTypes.LUA_TNIL:</span><br/><span class="line">                    LuaDLL.lua_pop(L, <span class="number">1</span>);</span><br/><span class="line"></span><br/><span class="line">                    luaDLL.lua_newtable(L);</span><br/><span class="line">                    luaDLL.lua_pushstring(L, names[i]);</span><br/><span class="line">                    luaDLL.lua_pushvalue(L, <span class="number">-2</span>);</span><br/><span class="line">                    LuaDLL.lua_rawset(L, <span class="number">-4</span>); <span class="comment">// _G.name = module</span></span><br/><span class="line"></span><br/><span class="line">                    LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, m_ref_globalMeta);</span><br/><span class="line">                    LuaDLL.lua_setmetatable(L, <span class="number">-2</span>);</span><br/><span class="line">                    LuaDLL.lua_pushvalue(L, <span class="number">-1</span>);</span><br/><span class="line">                    LuaDLL.lua_setfield(L, <span class="number">-2</span>, <span class="string">&#34;_M&#34;</span>); <span class="comment">// module._M = module</span></span><br/><span class="line">                    <span class="keyword">break</span>;</span><br/><span class="line">                <span class="keyword">case</span> LuaTypes.LUA_TTABLE:</span><br/><span class="line">                    <span class="keyword">break</span>;</span><br/><span class="line">                <span class="keyword">default</span>:</span><br/><span class="line">                    m.m_state = Module.State.Failed;</span><br/><span class="line">                    LuaDLL.lua_pop(L, <span class="number">2</span>);</span><br/><span class="line">                    <span class="keyword">return</span> <span class="literal">null</span>;</span><br/><span class="line">            }</span><br/><span class="line"></span><br/><span class="line">            LuaDLL.lua_remove(L, <span class="number">-2</span>);</span><br/><span class="line">        }</span><br/><span class="line"></span><br/><span class="line">        m.m_index = ++m_moduleIndex;</span><br/><span class="line">        m.m_ref_module = LuaDLL.luaL_ref(L, luaIndexes.LUA_REGISTRYINDEX);</span><br/><span class="line">        ReloadModule(m);</span><br/><span class="line">        <span class="keyword">return</span> m;</span><br/><span class="line">    }</span><br/><span class="line">}</span><br/><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">LoadModule</span>(<span class="params"></span>)</span></span><br/><span class="line"><span class="function"></span>{</span><br/><span class="line">    <span class="keyword">var</span> L = LuaMgr.m_L;</span><br/><span class="line">    <span class="keyword">string</span> name = LuaDLL.lua_tosting(L, <span class="number">1</span>);</span><br/><span class="line">    <span class="keyword">var</span> m = LuaMgr.GetModule(name);</span><br/><span class="line">    LuaDLL.lua_pushboolean(L, m != <span class="literal">null</span>);</span><br/><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="阅读源代码的次序"><a href="#阅读源代码的次序" class="headerlink" title="阅读源代码的次序"></a>阅读源代码的次序</h3><p>首先、阅读外围的库是如何实现功能扩展的，这样可以熟悉Lua公开API，不必陷入功能细节。<br/>然后、阅读API的具体实现。Lua对外暴露的API可以说是一个对内部模块的一层封装，这个层次尚未触及核心，但可以对核心代码有个初步的了解。<br/>之后、可以开始了解Lua VM的实现。<br/>接下来就是分别理解函数调用、返回，string,table,metatable等如何实现。<br/>debug模块是一个额外的设施，但可以帮助你理解Lua内部细节。<br/>最后是parser等编译相关的部分。<br/>垃圾回收是最难的部分，可能会花掉最多的时间去理解细节。</p>
+<h1 id="Lua模块与包"><a href="#Lua模块与包" class="headerlink" title="Lua模块与包"></a>Lua模块与包</h1><p>模块类似于一个封装库，从Lua5.1开始，Lua加入了标准的模块管理机制，可以把一些公用的代码放在一个文件里，以API接口的形式在其他地方调用，有利于代码的重用和降低代码耦合度。<br/>Lua的模块是由变量、函数等已知元素组成的table，因此创建一个模块很简单，就是创建一个table，然后把需要导出的常量、函数放入其中，最后返回这个table就行。以下为创建自定义模块module.lua，文件代码格式如下：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 文件名module.lua</span></span><br/><span class="line"><span class="comment">-- 定义一个名为module的模块</span></span><br/><span class="line">module = {}</span><br/><span class="line"><span class="comment">-- 定义一个常量</span></span><br/><span class="line">module.constant = <span class="string">&#34;这是一个常量&#34;</span></span><br/><span class="line"><span class="comment">-- 定义一个函数</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">module.func1</span><span class="params">()</span></span></span><br/><span class="line">    <span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&#34;这是一个公有函数！n&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">func2</span><span class="params">()</span></span></span><br/><span class="line">    <span class="built_in">print</span>(<span class="string">&#34;这是一个私有函数！&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">module.func3</span><span class="params">()</span></span></span><br/><span class="line">    func2()</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="keyword">return</span> module</span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>由上可知，模块的结构就是一个table的结构，因此可以像操作table里的元素那样来操作调用模块里的常量或函数。<br/>上面的func声明为程序块的局部变量，即表示一个私有函数，因此是不能从外部访问模块里的这个私有函数，必须通过模块的公有函数来调用。</p>
+<h1 id="require-函数"><a href="#require-函数" class="headerlink" title="require 函数"></a>require 函数</h1><p>Lua提供了一个名为require的函数用来加载模块。要加载一个模块，只需要简单地调用就可以了。例如：</p>
+<pre><code>require(&#34;&lt;模块名&gt;&#34;)
+</code></pre><p>或者</p>
+<pre><code>require &#34;&lt;模块名&gt;&#34;
+</code></pre><p>执行require后会返回一个由模块常量或函数组成的table，并且还会定义一个包含该table的全局变量。</p>
+<h2 id="加载机制"><a href="#加载机制" class="headerlink" title="加载机制"></a>加载机制</h2><p>对于自定义的模块，模块文件不是放在哪个目录都行，函数require有它自己的文件路劲加载策略，它会尝试从Lua文件或C程序库中加载模块。<br/>require用于搜索Lua文件的路径是存放在全局变量package.path中，当Lua启动后，会以环境变量LUA_PATH的值来初始这个环境变量。如果没有找到该环境变量，则使用一个编译时定义的默认路径来初始化。<br/>当前目录也会加载</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-626_Lua%E4%B8%ADtable%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9B%9B%E7%A7%8D%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F%EF%BD%9Cqiuzhong's%20blog/">Lua中table常用的四种遍历方式｜qiuzhong's blog</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-627_%E6%B5%85%E8%B0%88Lua%E5%8D%8F%E7%A8%8B%20%5B%20%E5%A5%94%E8%B7%91%E7%9A%84%E8%9C%97%E7%89%9B%20%5D/">浅谈Lua协程 [ 奔跑的蜗牛 ]</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>golua虚拟机的使用_linux 应用_黑光技术 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;&#x2F;div&gt;             &lt;div class&#x3D;&quot;article_content&quot;&gt;                                     &lt;p&gt;&lt;&#x2F;p&gt;&lt;h1&gt;前言&lt;&#x2F;h1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golua虚拟机的使用_linux 应用_黑光技术">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-164_golua%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E4%BD%BF%E7%94%A8_linux%20%E5%BA%94%E7%94%A8_%E9%BB%91%E5%85%89%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;&#x2F;div&gt;             &lt;div class&#x3D;&quot;article_content&quot;&gt;                                     &lt;p&gt;&lt;&#x2F;p&gt;&lt;h1&gt;前言&lt;&#x2F;h1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.246Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.246Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">golua虚拟机的使用_linux 应用_黑光技术</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">lua虚拟机的创建使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">go中调用lua函数</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>golua虚拟机的使用_linux 应用_黑光技术</span></h1>
+<div class="title">
+                    
+                    
+<pre><code>            &lt;/div&gt;
+            &lt;div class=&quot;article_content&quot;&gt;
+                                    &lt;p&gt;&lt;/p&gt;&lt;h1&gt;前言&lt;/h1&gt;
+</code></pre>
+<p>​      之前一直想把openflow这样的分布式流程系统做起来，但是时间和应用场景的问题所以都是做了一个半拉子工程，而且之前想的也有点简单了，认为只要有同学愿意，在开发上应该没问题，但是最终还是出现了项目管理和开发能力的问题，最终搁浅了。但是我想做一个分布式流程调度系统的想法一直没有断，其实在公司内和另外一个同学做过一个flow系统，也在线上使用了，直到现在还在使用。前一段时间就想把这个系统再优化梳理一下，目标是做一个小巧的开源可用版本。经过一段时间的梳理目前已经初步完成了，后台+前端代码的重新梳理也已经完成了。<br><a target="_blank" rel="noopener" href="http://helight.info//zb_users/upload/2019/01/微信图片_20190104150018.jpg"></a></p>
+<h1>lua虚拟机的使用</h1>
+
+<p>​      而今天主要想写的是其中使用到的一个技术点：lua。内部版本我们使用的是golang开发，但是在执行中为了保证流程之间不会互相影响，我们使用lua虚拟机技术；让每个流程在执行的时候在一个独立的lua虚拟机中执行。内部版本使用golua这个组件，但是这个组件有个问题，它其实是一个cgo的版本，就是它其实上是调用本地lua库来执行，所在在编译部署和执行上都有一定的效率问题。</p>
+<p>​   所以在新开发的版本上我想使用其它的方式，在研究了一段时间后决定使用<a target="_blank" rel="noopener" href="https://github.com/yuin/gopher-lua">gopher-lua</a>这个组件，这个是使用golang重写的支持Lua5.1的虚拟机，在执行上可以直接golang无缝结合，有非常好的go的api接口，在使用上也流畅很多，在实现思路上也采用golang的一些思路，和golang结合更好。也通过这次学习了一把lua，才发现这个技术确实很牛，据统计lua的c实现代码才1w行左右，但是执行非常高效，而且lua的预留关键字也非常少。可以说是一个非常简洁又高效的语言。</p>
+<h1>gopher-lua的一些特点</h1>
+
+<p>​   在我这个flow项目非常合适，所以用gopher-lua替换了golua，因为gopher-lua的api和类型支持比golua要好很多，所以在替换后精简了不少代码。下面就介绍一下项目中使用到的一些关键点。</p>
+<h2>lua虚拟机的创建使用</h2>
+
+<p>​   在使用上api非常简单，主要有以下几步：</p>
+<ol>
+<li>引入gopher-lua</li>
+<li>创建虚拟机</li>
+<li>使用虚拟机执行lua语句或lua脚本文件</li>
+<li>关闭虚拟机</li>
+</ol>
+
+<pre><code class="language-go line-numbers">package main
+
+import lua &#34;github.com/yuin/gopher-lua&#34; // 1.引入gopher-lua
+
+func main() &#123;
+    L := lua.NewState() // 2.创建一个lua解释器实例
+    defer L.Close()    // 4.关闭虚拟机
+    if err := L.DoString(`print(&#34;hello&#34;)`); err != nil &#123; // 3.用创建的虚拟机来执行lua语句   
+     // if err := L.DoFile(&#34;hello.lua&#34;); err != nil &#123; // 3.用创建的虚拟机来执行lua脚本文件
+        panic(err)
+    &#125;
+&#125;
+</code></pre>
+
+<p>​   api在使用上还是非常简单的。其它关于基本数据类型的这里就不多介绍了，在其github站点上有非常详细的介绍。</p>
+<p>​   下面将主要介绍2个在flow项目中用到的非常有用的功能点。</p>
+<h2>go中调用lua函数</h2>
+
+<p>​   用golang写的服务，如果我们要使用lua脚本中定义的函数怎么办呢？在gopher-lua提供了响应的方法，在其站点也有非常好的例子来说明：</p>
+<ol>
+<li>首先用DoFile方法来加载lua脚本，在脚本中定义需要lua函数</li>
+<li>其次使用CallByParam函数进行调用</li>
+</ol>
+
+<pre><code class="language-go line-numbers">L := lua.NewState()
+defer L.Close()
+if err := L.DoFile(&#34;double.lua&#34;); err != nil &#123;
+    panic(err)
+&#125;
+if err := L.CallByParam(lua.P&#123;
+    Fn: L.GetGlobal(&#34;double&#34;),    // 获取double这个函数的引用
+    NRet: 1,                    // 指定返回值数量
+    Protect: true,                // 如果出现异常，是panic还是返回err
+    &#125;, lua.LNumber(10)); err != nil &#123; // 传递输入参数：10
+    panic(err)
+&#125;
+ret := L.Get(-1) // 获取返回结果值
+L.Pop(1)  // 从堆栈中扔掉返回结果
+</code></pre>
+
+<p>​   GopherLua的函数调用是通过堆栈来进行的，调用前把需要传递给函数的参数压到栈里，函数执行完成之后再将结果放入堆栈中，调用方通过在堆栈顶部拿函数执行结果。</p>
+<h1>lua脚本中调用go函数</h1>
+
+<p>​   go调用lua函数在flow项目中用的相对较少，用的较多的是下面一种：lua脚本中调用go函数；因为很多复杂操作其实用lua来做还是有点复杂和不安全，尤其有些公共操作或者复杂的db操作。所以好的做法是在go中把函数封装好，再在外部写lua脚本，执行的时候可以调用go函数，这样既可以满足lua脚本的灵活性，也极大的扩展了lua的能力和减低了编写复杂度。</p>
+<p>​   先看看其基本使用方法，也是通过官网的例子来说明。</p>
+<pre><code class="language-go line-numbers">func Double(L *lua.LState) int &#123;
+    lv := L.ToInt(1)             // 获取七个参数
+    L.Push(lua.LNumber(lv * 2))  // 把计算结果压栈
+    return 1                     // 返回计算返回参数的个数
+&#125;
+
+func main() &#123;
+    L := lua.NewState()
+    defer L.Close()
+    L.SetGlobal(&#34;double&#34;, L.NewFunction(Double)) // 注册函数
+&#125;
+</code></pre>
+
+<p>​   首先再gopher-lua中有一个类型<a target="_blank" rel="noopener" href="https://godoc.org/github.com/yuin/gopher-lua#LGFunction">lua.LGFunction </a>，这个类型就是一个函数类型，它固定了函数的入参和出参，入参就是lua.LState的一个引用，返回值就是一个int。如下面的定义，如果需要跟多的参数就需要使用堆栈或者对lua.LState扩展成员的方式。在执行完成之后也是通过堆栈或者对lua.LState扩展成员的方式把返回值传递出去。</p>
+<p>​   函数的注册有多种方式，上面是一种方式，另外我从网上还看到一种方式，就是使用lua的table的方式。</p>
+<pre><code class="line-numbers">    myfuns := L.NewTable()
+    L.SetGlobal(&#34;myfuns&#34;, myfuns)
+    // 注册函数
+    L.SetField(myfuns, &#34;gofun1&#34;, L.NewFunction(gofun1))
+    ....
+    // 调用方式
+    err := L.DoString(`
+        test = myfuns:gofun1(&#34;test&#34;)
+    `)
+</code></pre>
+
+<p>​   这里面不方便的一点就是参数的传递和获取不是很直观，很多时候需要二次分装调用函数。这一点有点不方便。其它还好。</p>
+<p>​   GopherLua可以创建一个非常干净的Lua解释器实例，不加载任何系统模块。然后由程序员自己提供的模块注册进去，给内嵌脚本提供一个安全的沙箱运行环境。</p>
+<h1>参考文档</h1>
+
+<ol>
+<li>https://github.com/yuin/gopher-lua</li>
+<li>https://zhuanlan.zhihu.com/p/33471484</li>
+<li>https://segmentfault.com/a/1190000011527968</li>
+<li>http://www.runoob.com/lua/lua-tutorial.html</li>
+</ol><p></p>									</div>
+                 
+<pre><code>            &lt;div class=&quot;rights&quot;&gt;
+                &lt;h5&gt;版权声明&lt;/h5&gt;
+</code></pre>
+<p>本文仅代表作者观点，不代表本站立场。<br/>本文系作者授权发表，未经许可，不得转载。</p>				</div>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-159_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">Programming in Lua(Thrid Edition)笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-165_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E5%8D%8F%E7%A8%8B/">Lua入门教程：协程</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

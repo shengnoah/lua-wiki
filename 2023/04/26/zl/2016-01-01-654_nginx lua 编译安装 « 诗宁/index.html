@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>nginx lua 编译安装 « 诗宁 - Lua教程</title>
+
+  
+    <meta name="description" content="编译安装脚本   主配置文件   systemd启动配置   启动脚本   编译安装脚本     nginx-lua-build.sh   #!&#x2F;bin&#x2F;bash #Date:2018-09-03 #Written by magic5650. #Readme:install nginx + lua.  #step 0mkdir &#x2F;usr&#x2F;local&#x2F;nginxm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx lua 编译安装 « 诗宁">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-654_nginx%20lua%20%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%20%C2%AB%20%E8%AF%97%E5%AE%81/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="编译安装脚本   主配置文件   systemd启动配置   启动脚本   编译安装脚本     nginx-lua-build.sh   #!&#x2F;bin&#x2F;bash #Date:2018-09-03 #Written by magic5650. #Readme:install nginx + lua.  #step 0mkdir &#x2F;usr&#x2F;local&#x2F;nginxm">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.293Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.293Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">nginx lua 编译安装 « 诗宁</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC"><span class="toc-text">编译安装脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">主配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#systemd%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">systemd启动配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="toc-text">启动脚本</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>nginx lua 编译安装 « 诗宁</span></h1>
+<ul id="markdown-toc">
+  <li><a href="#编译安装脚本" id="markdown-toc-编译安装脚本">编译安装脚本</a></li>
+  <li><a href="#主配置文件" id="markdown-toc-主配置文件">主配置文件</a></li>
+  <li><a href="#systemd启动配置" id="markdown-toc-systemd启动配置">systemd启动配置</a></li>
+  <li><a href="#启动脚本" id="markdown-toc-启动脚本">启动脚本</a></li>
+</ul>
+
+<h2 id="编译安装脚本">编译安装脚本</h2>
+
+<blockquote>
+  <p>nginx-lua-build.sh</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#Date:2018-09-03</span>
+<span class="c">#Written by magic5650.</span>
+<span class="c">#Readme:install nginx + lua.</span>
+
+<p><span class="c">#step 0</span><br>mkdir &#x2F;usr&#x2F;local&#x2F;nginx<br>mkdir nginx_lua_build</p>
+<p><span class="c">#step 1</span><br>wget <span class="nt">-q</span> <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.13.6.tar.gz">http://nginx.org/download/nginx-1.13.6.tar.gz</a><br><span class="nb">tar </span>xf nginx-1.13.6.tar.gz</p>
+<p><span class="c">#step 2</span><br>wget <span class="nt">-q</span> <a target="_blank" rel="noopener" href="https://www.openssl.org/source/openssl-1.1.0i.tar.gz">https://www.openssl.org/source/openssl-1.1.0i.tar.gz</a><br><span class="nb">tar </span>xf openssl-1.1.0i.tar.gz</p>
+<p>wget <span class="nt">-q</span> <a target="_blank" rel="noopener" href="https://sourceforge.mirrorservice.org/p/pc/pcre/pcre/8.38/pcre-8.38.tar.gz">https://sourceforge.mirrorservice.org/p/pc/pcre/pcre/8.38/pcre-8.38.tar.gz</a><br><span class="nb">tar </span>xf pcre-8.38.tar.gz</p>
+<p>wget <span class="nt">-q</span> <a target="_blank" rel="noopener" href="https://nchc.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.gz">https://nchc.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.gz</a><br><span class="nb">tar </span>xf zlib-1.2.11.tar.gz</p>
+<p><span class="c">#step 3</span><br>wget <span class="nt">-q</span> <a target="_blank" rel="noopener" href="http://luajit.org/download/LuaJIT-2.1.0-beta3.zip">http://luajit.org/download/LuaJIT-2.1.0-beta3.zip</a><br>unzip LuaJIT-2.1.0-beta3.zip <span class="o">&gt;&gt;</span> &#x2F;dev&#x2F;null<br><span class="nb">cd </span>LuaJIT-2.1.0-beta3<br><span class="c">#modify Makefile</span><br>sed <span class="nt">-i</span> <span class="s1">&#39;&#x2F;^export PREFIX&#x3D;&#x2F;s&#x2F;&#x2F;usr&#x2F;local&#x2F;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;&#39;</span> Makefile<br>make<br>make install <span class="nv">PREFIX</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0<br>ln <span class="nt">-sf</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;bin&#x2F;luajit-2.1.0-beta3 &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;bin&#x2F;luajit<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;bin&#x2F;luajit <span class="nt">-e</span> <span class="s2">&amp;#34;print(package.cpath)&amp;#34;</span> | sed <span class="nt">-n</span> <span class="s1">&#39;s&#x2F;;&#x2F;;n&#x2F;gp&#39;</span><br><span class="nb">cd</span> -</p>
+<p><span class="c">#step 4</span><br>wget <span class="nt">-q</span> <a target="_blank" rel="noopener" href="https://github.com/simplresty/ngx_devel_kit/archive/v0.3.1rc1.tar.gz">https://github.com/simplresty/ngx_devel_kit/archive/v0.3.1rc1.tar.gz</a><br><span class="nb">tar </span>xf v0.3.1rc1.tar.gz</p>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/openresty/lua-nginx-module.git">https://github.com/openresty/lua-nginx-module.git</a><br>mv lua-nginx-module lua-nginx-module-0.10.14</p>
+<p>wget <span class="nt">-q</span> <a target="_blank" rel="noopener" href="https://github.com/openresty/stream-lua-nginx-module/archive/v0.0.5.tar.gz">https://github.com/openresty/stream-lua-nginx-module/archive/v0.0.5.tar.gz</a><br><span class="nb">tar </span>xf v0.0.5.tar.gz</p>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/wdaike/ngx_upstream_jdomain.git">https://github.com/wdaike/ngx_upstream_jdomain.git</a></p>
+<p><span class="c">#step 5</span><br><span class="nb">cd </span>nginx-1.13.6<br><span class="nb">export </span><span class="nv">LUAJIT_LIB</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;lib<br><span class="nb">export </span><span class="nv">LUAJIT_INC</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;include&#x2F;luajit-2.1</p>
+<p>.&#x2F;configure <span class="se"></span><br><span class="nt">–prefix</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;nginx <span class="se"></span><br><span class="nt">–with-file-aio</span> <span class="se"></span><br><span class="nt">–with-http_v2_module</span> <span class="se"></span><br><span class="nt">–with-http_dav_module</span> <span class="se"></span><br><span class="nt">–with-http_realip_module</span> <span class="se"></span><br><span class="nt">–with-http_flv_module</span> <span class="se"></span><br><span class="nt">–with-http_mp4_module</span> <span class="se"></span><br><span class="nt">–with-http_sub_module</span> <span class="se"></span><br><span class="nt">–with-http_stub_status_module</span> <span class="se"></span><br><span class="nt">–with-http_gzip_static_module</span> <span class="se"></span><br><span class="nt">–with-http_ssl_module</span> <span class="se"></span><br><span class="nt">–with-openssl</span><span class="o">&#x3D;</span>..&#x2F;openssl-1.1.0i <span class="se"></span><br><span class="nt">–with-zlib</span><span class="o">&#x3D;</span>..&#x2F;zlib-1.2.11 <span class="se"></span><br><span class="nt">–with-pcre</span><span class="o">&#x3D;</span>..&#x2F;pcre-8.38 <span class="se"></span><br><span class="nt">–with-pcre-jit</span> <span class="se"></span><br><span class="nt">–with-stream</span> <span class="se"></span><br><span class="nt">–with-stream_ssl_module</span> <span class="se"></span><br><span class="nt">–with-ld-opt</span><span class="o">&#x3D;</span><span class="nt">-Wl</span>,-rpath,&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;lib <span class="se"></span><br><span class="nt">–add-module</span><span class="o">&#x3D;</span>..&#x2F;ngx_devel_kit-0.3.1rc1 <span class="se"></span><br><span class="nt">–add-module</span><span class="o">&#x3D;</span>..&#x2F;lua-nginx-module-0.10.14 <span class="se"></span><br><span class="nt">–add-module</span><span class="o">&#x3D;</span>..&#x2F;stream-lua-nginx-module-0.0.5 <span class="se"></span><br><span class="nt">–add-module</span><span class="o">&#x3D;</span>..&#x2F;ngx_upstream_jdomain</p>
+<p>make <span class="nt">-j2</span><br>make install</p>
+<p><span class="c">#step 6</span><br><span class="nb">cd</span> -<br>git clone <a target="_blank" rel="noopener" href="https://github.com/openresty/lua-cjson.git">https://github.com/openresty/lua-cjson.git</a><br><span class="nb">cd </span>lua-cjson<br>make<br>make install <span class="nv">LUA_CMODULE_DIR</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;lib&#x2F;lua&#x2F;5.1 <span class="nv">LUA_INCLUDE_DIR</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;include&#x2F;luajit-2.1<br><span class="nb">ls</span> <span class="nt">-l</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;luajit-2.1.0&#x2F;lib&#x2F;lua&#x2F;5.1&#x2F;cjson.so<br><span class="nb">cd</span> -</p>
+<p><span class="c">#step 7</span><br>git clone <a target="_blank" rel="noopener" href="https://github.com/openresty/lua-resty-core">https://github.com/openresty/lua-resty-core</a><br>git clone <a target="_blank" rel="noopener" href="https://github.com/openresty/lua-resty-lrucache">https://github.com/openresty/lua-resty-lrucache</a><br>git clone <a target="_blank" rel="noopener" href="https://github.com/openresty/lua-resty-limit-traffic">https://github.com/openresty/lua-resty-limit-traffic</a></p>
+<p>mkdir &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;lualib&#x2F;<br><span class="nb">cd </span>lua-resty-core&#x2F;lib<br>cp <span class="nt">-r</span> <span class="nb">.</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;lualib&#x2F;<br>tree <span class="nt">-L</span> 2 &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;lualib<br><span class="nb">cd</span> -<br><span class="nb">cd </span>lua-resty-lrucache&#x2F;lib<br>cp <span class="nt">-r</span> <span class="nb">.</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;lualib&#x2F;<br>tree <span class="nt">-L</span> 2 &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;lualib<br><span class="nb">cd</span> -<br><span class="nb">cd </span>lua-resty-limit-traffic&#x2F;lib<br>cp <span class="nt">-r</span> <span class="nb">.</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;lualib&#x2F;<br>tree <span class="nt">-L</span> 2 &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;lualib<br><span class="nb">cd</span> -</p>
+<p><span class="c">#at last</span><br><span class="nb">cd</span> &#x2F;usr&#x2F;local&#x2F;nginx<br>tree <span class="nt">-L</span> 2<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx <span class="nt">-V</span><br></code></pre></div></div></p>
+<p>查看</p>
+<blockquote>
+  <p>/usr/local/nginx/sbin/nginx -V</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nginx version: nginx/1.13.6
+built by gcc 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 
+built with OpenSSL 1.1.0i  14 Aug 2018
+TLS SNI support enabled
+configure arguments: --prefix=/usr/local/nginx --with-file-aio --with-http_v2_module --with-http_dav_module --with-http_realip_module --with-http_flv_module --with-http_mp4_module --with-http_sub_module --with-http_stub_status_module --with-http_gzip_static_module --with-http_ssl_module --with-openssl=../openssl-1.1.0i --with-zlib=../zlib-1.2.11 --with-pcre=../pcre-8.38 --with-pcre-jit --with-stream --with-stream_ssl_module --with-ld-opt=-Wl,-rpath,/usr/local/nginx/luajit-2.1.0/lib --add-module=../ngx_devel_kit-0.3.1rc1 --add-module=../lua-nginx-module-0.10.14 --add-module=../stream-lua-nginx-module-0.0.5 --add-module=../ngx_upstream_jdomain
+</code></pre></div></div>
+
+<h2 id="主配置文件">主配置文件</h2>
+<blockquote>
+  <p>nginx.conf</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user www-data;
+worker_processes 4;
+worker_rlimit_nofile 262140;
+error_log  logs/error.log warn;
+pid  run/nginx.pid; #需跟nginx.service里面定义一致
+
+<p>events<br>&#123;<br>    use epoll;<br>    worker_connections  65535;<br>&#125;</p>
+<p>http<br>&#123;<br>    include mime.types;<br>    default_type application&#x2F;octet-stream;<br>    # Update charset_types due to updated mime.types<br>    charset_types text&#x2F;xml text&#x2F;plain text&#x2F;vnd.wap.wml application&#x2F;x-javascript application&#x2F;rss+xml text&#x2F;css application&#x2F;javascript application&#x2F;json;</p>
+<pre><code>sendfile on;
+aio on;
+directio 512;
+output_buffers 1 128k;
+log_not_found off;
+keepalive_timeout  60;
+server_tokens off;
+
+# Compression
+gzip on;
+
+# Setup gzip http version 1.0 
+gzip_http_version 1.0;
+
+# Disable gzip compression for IE6, because IE6 supports gzip not friendly.
+gzip_disable     &amp;#34;MSIE [1-6].(?!.*SV1)&amp;#34;;
+
+# Compression level (1-9).
+# 5 is a perfect compromise between size and cpu usage, offering about
+# 75% reduction for most ascii files (almost identical to level 9).
+gzip_comp_level 5;
+
+# Don’t compress anything that’s already small and unlikely to shrink much
+# if at all (the default is 20 bytes, which is bad as that usually leads to
+# larger files after gzipping).
+gzip_min_length  1k;
+gzip_buffers     4 8k;
+
+# Compress data even for clients that are connecting to us via proxies
+# identified by the “Via” header (required for CloudFront).
+gzip_proxied any;
+
+# Tell proxies to cache both the gzipped and regular version of a resource
+# whenever the client’s Accept-Encoding capabilities header varies;
+# Avoids the issue where a non-gzip capable client (which is extremely rare
+# today) would display gibberish if their proxy gave them the gzipped version.
+gzip_vary on;
+
+# Compress all output labeled with one of the following MIME-types.
+gzip_types application/atom+xml application/javascript application/json application/rss+xml application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/svg+xml image/x-icon text/css text/plain text/x-component;
+# text/html is always compressed by HttpGzipModule
+
+log_format main &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; $status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#34;$http_user_agent&amp;#34; &amp;#34;$request_time&amp;#34; &amp;#34;$upstream_response_time&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;;
+
+access_log logs/$&#123;server_name&#125;.access.log main;
+
+fastcgi_intercept_errors on;
+error_page   500 502 503 504  /50x.html;
+
+server_names_hash_max_size 4096;
+
+geo $allow &#123;
+    default	0;
+    
+    127.0.0.1 1;
+    10.0.0.0/8 1;
+    192.168.0.0/16 1;
+    172.16.0.0/12 1;
+&#125;
+
+server 
+&#123;
+    listen 80 default_server;
+    server_name  _;
+    access_log off;
+    
+    # use for health check
+    location / 
+    &#123;
+        if ($allow = 1) &#123;
+            return 200;
+        &#125;
+        if ($allow = 0) &#123;
+            return 403;
+        &#125;
+    &#125;
+    # use for monitor
+    location /nginx_status
+    &#123;
+        stub_status on;
+        access_log off;
+        allow 127.0.0.1;
+        deny all;
+    &#125;
+&#125;
+
+server 
+&#123;
+    listen 8080 default_server;
+    server_name  _;
+    access_log off;
+    
+    # use for health check
+    location / 
+    &#123;
+        if ($allow = 1) &#123;
+            return 200;
+        &#125;
+        if ($allow = 0) &#123;
+            return 403;
+        &#125;
+    &#125;
+    # use for monitor
+    location /nginx_status
+    &#123;
+        stub_status on;
+        access_log off;
+        allow 127.0.0.1;
+        deny all;
+    &#125;
+&#125;
+
+# set search paths for pure Lua external libraries (&amp;#39;;;&amp;#39; is the default path):
+lua_package_path &amp;#34;/usr/local/nginx/lualib/?.lua;;&amp;#34;;
+# set search paths for Lua external libraries written in C (can also use &amp;#39;;;&amp;#39;);
+lua_package_cpath &amp;#39;/usr/local/nginx/luajit-2.1.0/lib/lua/5.1/?.so;;&amp;#39;;
+
+lua_shared_dict limit_req_store 100m;
+lua_shared_dict cc_req_store 100m;
+
+include /data/services/nginx_vhost/*.conf;
+</code></pre>
+<p>}<br></code></pre></div></div></p>
+<h2 id="systemd启动配置">systemd启动配置</h2>
+<blockquote>
+  <p>nginx.service</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+Description=The NGINX HTTP and reverse proxy server
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+<p>[Service]<br>Type&#x3D;forking<br>PIDFile&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;nginx.pid<br>ExecStartPre&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -t<br>ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx<br>ExecStartPost&#x3D;&#x2F;bin&#x2F;sleep 0.1<br>ExecReload&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s reload<br>#ExecReload&#x3D;&#x2F;bin&#x2F;kill -s HUP $MAINPID<br>ExecStop&#x3D;&#x2F;bin&#x2F;kill -s QUIT $MAINPID<br>ExecStopPost&#x3D;<br>Restart&#x3D;on-failure<br>#RestartSec&#x3D;1<br>PrivateTmp&#x3D;true</p>
+<p>[Install]<br>WantedBy&#x3D;multi-user.target<br></code></pre></div></div></p>
+<h2 id="启动脚本">启动脚本</h2>
+<p>低版本的linux使用，需要安装 start-stop-daemon</p>
+<blockquote>
+  <p>nginx.sh</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
+
+<p><span class="c">### BEGIN INIT INFO</span><br><span class="c"># Provides:          nginx</span><br><span class="c"># Required-Start:    $local_fs $remote_fs $network $syslog</span><br><span class="c"># Required-Stop:     $local_fs $remote_fs $network $syslog</span><br><span class="c"># Default-Start:     2 3 4 5</span><br><span class="c"># Default-Stop:      0 1 6</span><br><span class="c"># Short-Description: starts the nginx web server</span><br><span class="c"># Description:       starts nginx using start-stop-daemon</span><br><span class="c">### END INIT INFO</span></p>
+<p><span class="nv">PATH</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;sbin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin<br><span class="nv">DAEMON</span><span class="o">&#x3D;</span>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx<br><span class="nv">LOCK_FILE</span><span class="o">&#x3D;</span><span class="s2">&amp;#34;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;auto_restart_when_stop&amp;#34;</span><br><span class="nv">NAME</span><span class="o">&#x3D;</span>nginx<br><span class="nv">DESC</span><span class="o">&#x3D;</span>nginx</p>
+<p><span class="nb">test</span> <span class="nt">-x</span> <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>255</p>
+<p><span class="nb">set</span> <span class="nt">-e</span></p>
+<p><span class="nb">.</span> &#x2F;lib&#x2F;lsb&#x2F;init-functions</p>
+<p>test_nginx_config<span class="o">()</span> <span class="o">&#123;</span><br>  <span class="k">if</span> <span class="nv">$DAEMON</span> <span class="nt">-t</span> <span class="nv">$DAEMON_OPTS</span><br>  <span class="k">then<br>    return </span>0<br>  <span class="k">else<br>    return</span> <span class="nv">$?</span><br>  <span class="k">fi</span><br><span class="o">&#125;</span></p>
+<p><span class="k">case</span> <span class="s2">&amp;#34;</span><span class="nv">$1</span><span class="s2">&amp;#34;</span> <span class="k">in<br>  </span>start<span class="p">)</span><br>        <span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">&amp;#34;Starting </span><span class="nv">$DESC</span><span class="s2">: &amp;#34;</span><br>        test_nginx_config<br>        start-stop-daemon <span class="nt">–start</span> <span class="nt">–quiet</span> <span class="nt">–pidfile</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;<span class="nv">$NAME</span>.pid <span class="se"></span><br>                <span class="nt">–exec</span> <span class="nv">$DAEMON</span> <span class="nt">–</span> <span class="nv">$DAEMON_OPTS</span> <span class="o">||</span> <span class="nb">true<br>        echo</span> <span class="s2">&amp;#34;</span><span class="nv">$NAME</span><span class="s2">.&amp;#34;</span><br>        touch <span class="nv">$LOCK_FILE</span><br>        <span class="p">;;</span><br>  stop<span class="p">)</span><br>        <span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">&amp;#34;Stopping </span><span class="nv">$DESC</span><span class="s2">: &amp;#34;</span><br>        start-stop-daemon <span class="nt">–stop</span> <span class="nt">–quiet</span> <span class="nt">–pidfile</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;<span class="nv">$NAME</span>.pid <span class="se"></span><br>                <span class="nt">–exec</span> <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">true<br>        echo</span> <span class="s2">&amp;#34;</span><span class="nv">$NAME</span><span class="s2">.&amp;#34;</span><br>        rm <span class="nt">-f</span> <span class="nv">$LOCK_FILE</span><br>        <span class="p">;;</span><br>  restart|force-reload<span class="p">)</span><br>        <span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">&amp;#34;Restarting </span><span class="nv">$DESC</span><span class="s2">: &amp;#34;</span><br>        start-stop-daemon <span class="nt">–stop</span> <span class="nt">–quiet</span> <span class="nt">–pidfile</span> <span class="se"></span><br>                &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;<span class="nv">$NAME</span>.pid <span class="nt">–exec</span> <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">true<br>        </span>sleep 1<br>        test_nginx_config<br>        start-stop-daemon <span class="nt">–start</span> <span class="nt">–quiet</span> <span class="nt">–pidfile</span> <span class="se"></span><br>                &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;<span class="nv">$NAME</span>.pid <span class="nt">–exec</span> <span class="nv">$DAEMON</span> <span class="nt">–</span> <span class="nv">$DAEMON_OPTS</span> <span class="o">||</span> <span class="nb">true<br>        </span>touch <span class="nv">$LOCK_FILE</span><br>        <span class="nb">echo</span> <span class="s2">&amp;#34;</span><span class="nv">$NAME</span><span class="s2">.&amp;#34;</span><br>        <span class="p">;;</span><br>  reload<span class="p">)</span><br>        <span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">&amp;#34;Reloading </span><span class="nv">$DESC</span><span class="s2"> configuration: &amp;#34;</span><br>        test_nginx_config<br>        start-stop-daemon <span class="nt">–stop</span> <span class="nt">–signal</span> HUP <span class="nt">–quiet</span> <span class="nt">–pidfile</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;<span class="nv">$NAME</span>.pid <span class="se"></span><br>            <span class="nt">–exec</span> <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">true<br>        echo</span> <span class="s2">&amp;#34;</span><span class="nv">$NAME</span><span class="s2">.&amp;#34;</span><br>        <span class="p">;;</span><br>  configtest<span class="p">)</span><br>        <span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">&amp;#34;Testing </span><span class="nv">$DESC</span><span class="s2"> configuration: &amp;#34;</span><br>        <span class="k">if </span>test_nginx_config<br>        <span class="k">then<br>          </span><span class="nb">echo</span> <span class="s2">&amp;#34;</span><span class="nv">$NAME</span><span class="s2">.&amp;#34;</span><br>        <span class="k">else<br>          </span><span class="nb">exit</span> <span class="nv">$?</span><br>        <span class="k">fi</span><br>        <span class="p">;;</span><br>  status<span class="p">)</span><br>        status_of_proc <span class="nt">-p</span> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;run&#x2F;<span class="nv">$NAME</span>.pid <span class="s2">&amp;#34;</span><span class="nv">$DAEMON</span><span class="s2">&amp;#34;</span> nginx <span class="o">&amp;&amp;</span> <span class="nb">exit </span>0 <span class="o">||</span> <span class="nb">exit</span> <span class="nv">$?</span><br>        <span class="p">;;</span><br>  <span class="k">*</span><span class="p">)</span><br>        <span class="nb">echo</span> <span class="s2">&amp;#34;Usage: </span><span class="nv">$NAME</span><span class="s2"> &#123;start|stop|restart|reload|force-reload|status|configtest&#125;&amp;#34;</span> <span class="o">&gt;</span>&amp;2<br>        <span class="nb">exit </span>1<br>        <span class="p">;;</span><br><span class="k">esac</span></p>
+<p><span class="nb">exit </span>0</p>
+<p></code></pre></div></div></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-655_Lua%20%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E4%B8%8E%E7%BC%93%E5%AD%98%20/">Lua 的标准输出与缓存</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-656_150.%20Evaluate%20Reverse%20Polish%20Notation/">150. Evaluate Reverse Polish Notation</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

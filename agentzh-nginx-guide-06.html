@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Agentzh的Nginx教程 - Lua教程</title>
+
+  
+    <meta name="description" content="Nginx 变量漫谈（六）Nginx 内建变量用在“子请求”的上下文中时，其行为也会变得有些微妙。 前面在 （三） 中我们已经知道，许多内建变量都不是简单的“存放值的容器”，它们一般会通过注册“存取处理程序”来表现得与众不同，而它们即使有存放值的容器，也只是用于缓存“存取处理程序”的计算结果。我们之前讨论过的 $args 变量正是通过它的“取处理程序”来返回当前请求的 URL 参数串。因为当前请求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agentzh的Nginx教程">
+<meta property="og:url" content="https://lua.ren/agentzh-nginx-guide-06.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Nginx 变量漫谈（六）Nginx 内建变量用在“子请求”的上下文中时，其行为也会变得有些微妙。 前面在 （三） 中我们已经知道，许多内建变量都不是简单的“存放值的容器”，它们一般会通过注册“存取处理程序”来表现得与众不同，而它们即使有存放值的容器，也只是用于缓存“存取处理程序”的计算结果。我们之前讨论过的 $args 变量正是通过它的“取处理程序”来返回当前请求的 URL 参数串。因为当前请求">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.084Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.084Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="openresty">
+<meta property="article:tag" content="OOM">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets"></div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Agentzh的Nginx教程</span></h1>
+<h2 id="Nginx-变量漫谈（六）"><a href="#Nginx-变量漫谈（六）" class="headerlink" title="Nginx 变量漫谈（六）"></a>Nginx 变量漫谈（六）</h2><p>Nginx 内建变量用在“子请求”的上下文中时，其行为也会变得有些微妙。</p>
+<p>前面在 （三） 中我们已经知道，许多内建变量都不是简单的“存放值的容器”，它们一般会通过注册“存取处理程序”来表现得与众不同，而它们即使有存放值的容器，也只是用于缓存“存取处理程序”的计算结果。我们之前讨论过的 $args 变量正是通过它的“取处理程序”来返回当前请求的 URL 参数串。因为当前请求也可以是“子请求”，所以在“子请求”中读取 $args，其“取处理程序”会很自然地返回当前“子请求”的参数串。我们来看这样的一个例子：</p>
+<pre><code>location /main &#123;
+    echo &quot;main args: $args&quot;;
+    echo_location /sub &quot;a=1&amp;b=2&quot;;
+&#125;
+
+location /sub &#123;
+    echo &quot;sub args: $args&quot;;
+&#125;
+</code></pre>
+<p>这里在 &#x2F;main 接口中，先用 echo 指令输出当前请求的 $args 变量的值，接着再用 echo_location 指令发起子请求 &#x2F;sub. 这里值得注意的是，我们在 echo_location 语句中除了通过第一个参数指定“子请求”的 URI 之外，还提供了第二个参数，用以指定该“子请求”的 URL 参数串（即 a&#x3D;1&amp;b&#x3D;2）。最后我们定义了 &#x2F;sub 接口，在里面输出了一下 $args 的值。请求 &#x2F;main 接口的结果如下：</p>
+<pre><code>$ curl &#39;http://localhost:8080/main?c=3&#39;
+main args: c=3
+sub args: a=1&amp;b=2
+</code></pre>
+<p>显然，当 $args 用在“主请求” &#x2F;main 中时，输出的就是“主请求”的 URL 参数串，c&#x3D;3；而当用在“子请求” &#x2F;sub 中时，输出的则是“子请求”的参数串，a&#x3D;1&amp;b&#x3D;2。这种行为正符合我们的直觉。</p>
+<p>与 $args 类似，内建变量 $uri 用在“子请求”中时，其“取处理程序”也会正确返回当前“子请求”解析过的 URI:</p>
+<pre><code>location /main &#123;
+    echo &quot;main uri: $uri&quot;;
+    echo_location /sub;
+&#125;
+
+location /sub &#123;
+    echo &quot;sub uri: $uri&quot;;
+&#125;
+</code></pre>
+<p>请求 &#x2F;main 的结果是</p>
+<pre><code>$ curl &#39;http://localhost:8080/main&#39;
+main uri: /main
+sub uri: /sub
+</code></pre>
+<p>这依然是我们所期望的。</p>
+<p>但不幸的是，并非所有的内建变量都作用于当前请求。少数内建变量只作用于“主请求”，比如由标准模块 ngx_http_core 提供的内建变量 $request_method.</p>
+<p>变量 $request_method 在读取时，总是会得到“主请求”的请求方法，比如 GET、POST 之类。我们来测试一下：</p>
+<pre><code>location /main &#123;
+    echo &quot;main method: $request_method&quot;;
+    echo_location /sub;
+&#125;
+
+location /sub &#123;
+    echo &quot;sub method: $request_method&quot;;
+&#125;
+</code></pre>
+<p>在这个例子里，&#x2F;main 和 &#x2F;sub 接口都会分别输出 $request_method 的值。同时，我们在 &#x2F;main 接口里利用 echo_location 指令发起一个到 &#x2F;sub 接口的 GET “子请求”。我们现在利用 curl 命令行工具来发起一个到 &#x2F;main 接口的 POST 请求：</p>
+<pre><code>$ curl --data hello &#39;http://localhost:8080/main&#39;
+main method: POST
+sub method: POST
+</code></pre>
+<p>这里我们利用 curl 程序的 –data 选项，指定 hello 作为我们的请求体数据，同时 –data 选项会自动让发送的请求使用 POST 请求方法。测试结果证明了我们先前的预言， $request_method 变量即使在 GET “子请求” &#x2F;sub 中使用，得到的值依然是“主请求” &#x2F;main 的请求方法，POST.</p>
+<p>有的读者可能觉得我们在这里下的结论有些草率，因为上例是先在“主请求”里读取（并输出） $request_method 变量，然后才发“子请求”的，所以这些读者可能认为这并不能排除 $request_method 在进入子请求之前就已经把第一次读到的值给缓存住，从而影响到后续子请求中的输出结果。不过，这样的顾虑是多余的，因为我们前面在 （五） 中也特别提到过，缓存所依赖的变量的值容器，是与当前请求绑定的，而由 ngx_echo 模块发起的“子请求”都禁用了父子请求之间的变量共享，所以在上例中， $request_method 内建变量即使真的使用了值容器作为缓存（事实上它也没有），它也不可能影响到 &#x2F;sub 子请求。</p>
+<p>为了进一步消除这部分读者的疑虑，我们不妨稍微修改一下刚才那个例子，将 &#x2F;main 接口输出 $request_method 变量的时间推迟到“子请求”执行完毕之后：</p>
+<pre><code>location /main &#123;
+    echo_location /sub;
+    echo &quot;main method: $request_method&quot;;
+&#125;
+
+location /sub &#123;
+    echo &quot;sub method: $request_method&quot;;
+&#125;
+</code></pre>
+<p>让我们重新测试一下：</p>
+<pre><code>$ curl --data hello &#39;http://localhost:8080/main&#39;
+sub method: POST
+main method: POST
+</code></pre>
+<p>可以看到，再次以 POST 方法请求 &#x2F;main 接口的结果与原先那个例子完全一致，除了父子请求的输出顺序颠倒了过来（因为我们在本例中交换了 &#x2F;main 接口中那两条输出配置指令的先后次序）。</p>
+<p>由此可见，我们并不能通过标准的 $request_method 变量取得“子请求”的请求方法。为了达到我们最初的目的，我们需要求助于第三方模块 ngx_echo 提供的内建变量 $echo_request_method：</p>
+<pre><code>location /main &#123;
+    echo &quot;main method: $echo_request_method&quot;;
+    echo_location /sub;
+&#125;
+
+location /sub &#123;
+    echo &quot;sub method: $echo_request_method&quot;;
+&#125;
+</code></pre>
+<p>此时的输出终于是我们想要的了：</p>
+<pre><code>$ curl --data hello &#39;http://localhost:8080/main&#39;
+main method: POST
+sub method: GET
+</code></pre>
+<p>我们看到，父子请求分别输出了它们各自不同的请求方法，POST 和 GET.</p>
+<p>类似 $request_method，内建变量 $request_uri 一般也返回的是“主请求”未经解析过的 URL，毕竟“子请求”都是在 Nginx 内部发起的，并不存在所谓的“未解析的”原始形式。</p>
+<p>如果真如前面那部分读者所担心的，内建变量的值缓存在共享变量的父子请求之间起了作用，这无疑是灾难性的。我们前面在 （五） 中已经看到 ngx_auth_request 模块发起的“子请求”是与其“父请求”共享一套变量的。下面是一个这样的可怕例子：</p>
+<pre><code>map $uri $tag &#123;
+    default     0;
+    /main       1;
+    /sub        2;
+&#125;
+
+server &#123;
+    listen 8080;
+
+    location /main &#123;
+        auth_request /sub;
+        echo &quot;main tag: $tag&quot;;
+    &#125;
+
+    location /sub &#123;
+        echo &quot;sub tag: $tag&quot;;
+    &#125;
+&#125;
+</code></pre>
+<p>这里我们使用久违了的 map 指令来把内建变量 $uri 的值映射到用户变量 $tag 上。当 $uri 的值为 &#x2F;main 时，则赋予 $tag 值 1，当 $uri 取值 &#x2F;sub 时，则赋予 $tag 值 2，其他情况都赋 0. 接着，我们在 &#x2F;main 接口中先用 ngx_auth_request 模块的 auth_request 指令发起到 &#x2F;sub 接口的子请求，然后再输出变量 $tag 的值。而在 &#x2F;sub 接口中，我们直接输出变量 $tag. 猜猜看，如果我们访问接口 &#x2F;main，将会得到什么样的输出呢？</p>
+<pre><code>$ curl &#39;http://localhost:8080/main&#39;
+main tag: 2
+</code></pre>
+<p>咦？我们不是分明把 &#x2F;main 这个值映射到 1 上的么？为什么实际输出的是 &#x2F;sub 映射的结果 2 呢？</p>
+<p>其实道理很简单，因为我们的 $tag 变量在“子请求” &#x2F;sub 中首先被读取，于是在那里计算出了值 2（因为 $uri 在那里取值 &#x2F;sub，而根据 map 映射规则，$tag 应当取值 2），从此就被 $tag 的值容器给缓存住了。而 auth_request 发起的“子请求”又是与“父请求”共享一套变量的，于是当 Nginx 的执行流回到“父请求”输出 $tag 变量的值时，Nginx 就直接返回缓存住的结果 2 了。这样的结果确实太意外了。</p>
+<p>从这个例子我们再次看到，父子请求间的变量共享，实在不是一个好主意。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/agentzh-nginx-guide-07.html">Agentzh的Nginx教程</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/agentzh-nginx-guide-01.html">Agentzh的Nginx教程</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

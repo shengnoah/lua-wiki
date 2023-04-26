@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Vanilla （lua web framework）中文文档 [2018.09.19] - Lua教程</title>
+
+  
+    <meta name="description" content="0、前言香草&#x2F;Vanilla是一个基于Openresty实现的高性能Web应用开发框架.  邮件列表  vanilla-en  vanilla-en@googlegroups.com vanilla-devel  vanilla-devel@googlegroups.com vanilla中文邮件列表  vanilla@googlegroups.com  推荐始终使用最新版的Vanilla 当前V">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vanilla （lua web framework）中文文档 [2018.09.19]">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-431_Vanilla%20%EF%BC%88lua%20web%20framework%EF%BC%89%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3%20[2018.09.19]/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="0、前言香草&#x2F;Vanilla是一个基于Openresty实现的高性能Web应用开发框架.  邮件列表  vanilla-en  vanilla-en@googlegroups.com vanilla-devel  vanilla-devel@googlegroups.com vanilla中文邮件列表  vanilla@googlegroups.com  推荐始终使用最新版的Vanilla 当前V">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://m1.sinaimg.cn/maxwidth.300/m1.sinaimg.cn/120d7329960e19cf073f264751e8d959_2043_2241.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.272Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.272Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://m1.sinaimg.cn/maxwidth.300/m1.sinaimg.cn/120d7329960e19cf073f264751e8d959_2043_2241.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Vanilla （lua web framework）中文文档 [2018.09.19]</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-text">0、前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-1%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-text">0.1、安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-2%E3%80%81%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="toc-text">0.2、快速开始</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-text">1、快速上手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E3%80%81Hello-World"><span class="toc-text">1.1、Hello World</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1%E3%80%81Vanilla-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">1.1.1、Vanilla 的安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95"><span class="toc-text">1.2、如何调试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1%E3%80%81Vanilla-%E7%9A%84-%E8%B0%83%E8%AF%95"><span class="toc-text">1.2.1、Vanilla 的 调试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E3%80%81%E5%A6%82%E4%BD%95%E6%96%B0%E5%A2%9E%E4%B8%80%E4%B8%AAController"><span class="toc-text">1.3、如何新增一个Controller</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1%E3%80%81Vanilla-%E7%9A%84-controller"><span class="toc-text">1.3.1、Vanilla 的 controller</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2%E3%80%81%E6%96%B0%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA-Controller"><span class="toc-text">1.3.2、新添加一个 Controller</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Models-Dao"><span class="toc-text">1.4、如何使用Models&#x2F;Dao</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-1%E3%80%81Vanilla-%E7%9A%84-DAO"><span class="toc-text">1.4.1、Vanilla 的 DAO</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Models-Service"><span class="toc-text">1.5、如何使用Models&#x2F;Service</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-1%E3%80%81Vanilla-%E7%9A%84-Service"><span class="toc-text">1.5.1、Vanilla 的 Service</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81APIs"><span class="toc-text">2、APIs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81%E9%85%8D%E7%BD%AE"><span class="toc-text">2.1、配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1%E3%80%81App%E9%85%8D%E7%BD%AE"><span class="toc-text">2.1.1、App配置</span></a></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.272Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Vanilla （lua web framework）中文文档 [2018.09.19]</span></h1>
+<h2 id="0、前言"><a href="#0、前言" class="headerlink" title="0、前言"></a>0、前言</h2><p><em>香草/Vanilla是一个基于Openresty实现的高性能Web应用开发框架.</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://m1.sinaimg.cn/maxwidth.300/m1.sinaimg.cn/120d7329960e19cf073f264751e8d959_2043_2241.png" alt="Vanilla"/></p>
+<p><strong>邮件列表</strong></p>
+<ul>
+<li>vanilla-en  <a href="mailto:vanilla-en@googlegroups.com">vanilla-en@googlegroups.com</a></li>
+<li>vanilla-devel  <a href="mailto:vanilla-devel@googlegroups.com">vanilla-devel@googlegroups.com</a></li>
+<li>vanilla中文邮件列表  <a href="mailto:vanilla@googlegroups.com">vanilla@googlegroups.com</a></li>
+</ul>
+<p><strong>推荐始终使用最新版的Vanilla</strong></p>
+<p><em>当前Vanilla最新版本0.1.0.rc6，支持命令：</em></p>
+<ul>
+<li>vanilla-0.1.0.rc6（<em>你没看错，自0.1.0.rc5起，vanilla的命令行和框架代码都带着版本号，方便多版本共存，也方便框架升级</em>）</li>
+<li>v-console-0.1.0.rc6</li>
+</ul>
+<p><strong>特性</strong></p>
+<ul>
+<li>提供很多优良组件诸如：bootstrap、 router、 controllers、 models、 views。</li>
+<li>强劲的插件体系。</li>
+<li>多 Application 部署。</li>
+<li>多版本框架共存，支持便捷的框架升级。</li>
+<li>一键 nginx 配置、 应用部署。</li>
+<li>便捷的服务批量管理。</li>
+<li>你只需关注自身业务逻辑。</li>
+</ul>
+<h3 id="0-1、安装"><a href="#0-1、安装" class="headerlink" title="0.1、安装"></a>0.1、安装</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">$ ./setup-framework -v <span class="variable">$VANILLA_PROJ_ROOT</span> -o <span class="variable">$OPENRESTY_ROOT</span>        </span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="0-2、快速开始"><a href="#0-2、快速开始" class="headerlink" title="0.2、快速开始"></a>0.2、快速开始</h3><p><strong>部署你的第一个Vanilla Application</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">$ ./setup-vanilal-demoapp  [-a <span class="variable">$VANILLA_APP_ROOT</span> -u <span class="variable">$VANILLA_APP_USER</span> -g <span class="variable">$VANILLA_APP_GROUP</span> -e <span class="variable">$VANILLA_RUNNING_ENV</span>]    <span class="comment">#运行 ./setup-vanilal-demoapp -h 查看更多参数细节</span></span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>启动你的 Vanilla 服务</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line">$ ./<span class="variable">$VANILLA_APP_ROOT</span>/va-appname-service start</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>社区组织</strong></p>
+<p><strong>QQ群&amp;&amp;微信公众号</strong></p>
+<ul>
+<li><em>Openresty/Vanilla 开发 1 群：205773855</em></li>
+<li><em>Openresty/Vanilla 开发 2 群：419191655</em></li>
+<li><em>Openresty 技术交流 1 群：34782325</em></li>
+<li><em>Openresty 技术交流 2 群：481213820</em></li>
+<li><em>Openresty 技术交流 3 群：124613000</em></li>
+<li><em>Vanilla开发微信公众号:Vanilla-OpenResty(Vanilla相关资讯、文档推送)</em></li>
+</ul>
+<h2 id="1、快速上手"><a href="#1、快速上手" class="headerlink" title="1、快速上手"></a>1、快速上手</h2><h3 id="1-1、Hello-World"><a href="#1-1、Hello-World" class="headerlink" title="1.1、Hello World"></a>1.1、Hello World</h3><h4 id="1-1-1、Vanilla-的安装"><a href="#1-1-1、Vanilla-的安装" class="headerlink" title="1.1.1、Vanilla 的安装"></a>1.1.1、Vanilla 的安装</h4><p><strong>安装准备</strong></p>
+<ol>
+<li>安装好 OpenResty</li>
+<li>Vanilla Github 地址：<a href="https://github.com/idevz/vanilla" target="_blank" rel="noopener noreferrer">https://github.com/idevz/vanilla</a></li>
+</ol>
+<p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.git clone 最新 Vanilla 版本（或者下载相应的 Vanilla release 版本）</span></span><br/><span class="line">git <span class="built_in">clone</span> https://github.com/idevz/vanilla.git</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 2. 切换到 Vanilla 文件夹</span></span><br/><span class="line"><span class="built_in">cd</span> vanilla</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 3.编译 vanilla： ./setup-framework -v $VANILLA_PROJ_ROOT -o $OPENRESTY_ROOT 其中 $VANILLA_PROJ_ROOT 为 vanilla 框架安装目录。 -o 为 openresty 安装目录</span></span><br/><span class="line"></span><br/><span class="line">./setup-framework -v /application/vanilla -o /application/openresty</span><br/></pre></td></tr></tbody></table></figure>
+<p><em>经过这 3 步如果没有报错，则安装 vanilla 成功</em></p>
+<p><strong>创建 vanilla 项目</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. 创建 vanilla 的运行用户</span></span><br/><span class="line"></span><br/><span class="line">useradd -s /sbin/nologin -M nginx</span><br/><span class="line"></span><br/><span class="line">id nginx <span class="comment"># 可以查看到创建的用户</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 2、创建 vanilla 项目, -a 为 项目路径，-u 为执行用户 -g 为用户组 （在根目录 /home/webserver 下创建名为 cms 的项目）</span></span><br/><span class="line"></span><br/><span class="line">./setup-vanilla-demoapp -a /home/webserver/cms -u nginx -g nginx</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 3、删掉默认 Nginx 服务</span></span><br/><span class="line"></span><br/><span class="line">pkill -9 nginx</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 4、切换到项目文件夹 编辑项目配置文件，改成你要的</span></span><br/><span class="line"></span><br/><span class="line"><span class="built_in">cd</span> /home/webserver/cms</span><br/><span class="line"><span class="built_in">cd</span> nginx_conf</span><br/><span class="line">vim va-nginx.conf</span><br/><span class="line">vim va-nginx-development.conf</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 5、同步配置文件到运行目录</span></span><br/><span class="line"></span><br/><span class="line">./va-cms-service initconf dev -f <span class="comment">#开发模式</span></span><br/><span class="line">./va-cms-service initconf -f <span class="comment">#生产模式</span></span><br/><span class="line"></span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 6、启动项目（2选1）</span></span><br/><span class="line"></span><br/><span class="line">./va-cms-service start dev  <span class="comment"># 启动开发模式</span></span><br/><span class="line">./va-cms-service start  <span class="comment"># 启动生产模式</span></span><br/></pre></td></tr></tbody></table></figure>
+<p><em>服务启动后，开发环境默认启动在 9110 端口，<a href="http://localhost:9110" target="_blank" rel="noopener noreferrer">http://localhost:9110</a> 即可访问</em></p>
+<p><strong>vanilla 常用命令</strong></p>
+<ol>
+<li><p>启动项目： <code>./va-cms-service start</code> 或者 <code>./va-orcms-service start dev</code></p>
+</li>
+<li><p>重启项目  <code>./va-cms-service restart</code> 或者 <code>./va-orcms-service restart dev</code></p>
+</li>
+<li><p>停止项目： <code>./va-cms-service stop</code> 或者 <code>./va-orcms-service stop dev</code></p>
+</li>
+<li><p>创建配置文件 <code>./va-cms-service initconf dev -f</code></p>
+</li>
+</ol>
+<h3 id="1-2、如何调试"><a href="#1-2、如何调试" class="headerlink" title="1.2、如何调试"></a>1.2、如何调试</h3><h4 id="1-2-1、Vanilla-的-调试"><a href="#1-2-1、Vanilla-的-调试" class="headerlink" title="1.2.1、Vanilla 的 调试"></a>1.2.1、Vanilla 的 调试</h4><p><em>除了查看 nginx 错误日志辅助开发外，为了方便 Vanilla 项目的开发和调试，Vanilla 提供了诸如 <code>print_r</code> 之类的对象输出方法，以及详细友好的页面报错输出，你不需要到服务器日志去查看，就能所见即所得的开发调试代码.</em></p>
+<p><strong>sprint_r，print_r，lprint_r，err_log</strong></p>
+<ul>
+<li><strong>sprint_r</strong></li>
+</ul>
+<p><em>将 LUA 对象等格式化为易读的字符串返回</em></p>
+<ul>
+<li><strong>print_r</strong></li>
+</ul>
+<p><em>类似 <code>ngx.say</code> 的效果，将对象、变量等以易读的格式进行输出，适用于 Vanilla 开发的 Web 服务</em></p>
+<ul>
+<li><strong>lprint_r</strong></li>
+</ul>
+<p><em><code>print_r</code> 的 CLI 版本，适用于 v-console 命令行环境</em></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/></pre></td><td class="code"><pre><span class="line">╰─○ v-console-0.1.0.rc6</span><br/><span class="line">Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio</span><br/><span class="line">v-console&gt;a={}</span><br/><span class="line">v-console&gt;a.v1=<span class="string">&#39;a_v1&#39;</span></span><br/><span class="line">v-console&gt;a.v2=<span class="string">&#39;a_v2&#39;</span></span><br/><span class="line">v-console&gt;lprint_r(a)</span><br/><span class="line">{</span><br/><span class="line">  v2 = <span class="string">&#34;a_v2&#34;</span>,</span><br/><span class="line">  v1 = <span class="string">&#34;a_v1&#34;</span></span><br/><span class="line">}</span><br/><span class="line">v-console&gt;</span><br/></pre></td></tr></tbody></table></figure>
+<ul>
+<li><strong>err_log</strong></li>
+</ul>
+<p><em>err_log 方法是对 <code>ngx.ERR</code> 的封装，将 <code>msg</code> 记录到 nginx 错误日志</em></p>
+<h3 id="1-3、如何新增一个Controller"><a href="#1-3、如何新增一个Controller" class="headerlink" title="1.3、如何新增一个Controller"></a>1.3、如何新增一个Controller</h3><h4 id="1-3-1、Vanilla-的-controller"><a href="#1-3-1、Vanilla-的-controller" class="headerlink" title="1.3.1、Vanilla 的 controller"></a>1.3.1、Vanilla 的 controller</h4><p><em>vanilla 的 controller 是业务处理的关键，vanilla 通过对 URI 的路由，找到本次请求对应的 controller 和 action。</em></p>
+<ul>
+<li><strong>最简单的 Controller</strong></li>
+</ul>
+<p><em>自动生成的 demo 中默认生成了 IndexController 和 index action（<code>function IndexController:index()</code>），默认使用简单路由协议（<code>vanilla.v.routes.simple</code>）对 URI 进行路由</em></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> IndexController = {}</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- curl http://localhost:9110</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">()</span></span></span><br/><span class="line">    <span class="keyword">local</span> view = self:getView()</span><br/><span class="line">    <span class="keyword">local</span> p = {}</span><br/><span class="line">    p[<span class="string">&#39;vanilla&#39;</span>] = <span class="string">&#39;Welcome To Vanilla...&#39;</span> .. user_service:get()</span><br/><span class="line">    p[<span class="string">&#39;zhoujing&#39;</span>] = <span class="string">&#39;Power by Openresty&#39;</span></span><br/><span class="line">    <span class="comment">-- view:assign(p)</span></span><br/><span class="line">    <span class="keyword">do</span> <span class="keyword">return</span> view:render(<span class="string">&#39;index/index.html&#39;</span>, p) <span class="keyword">end</span></span><br/><span class="line">    <span class="keyword">return</span> view:display()</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- curl http://localhost:9110/index/action_b</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">IndexController:action_b</span><span class="params">()</span></span></span><br/><span class="line">    <span class="keyword">return</span> <span class="string">&#39;index-&gt;action_b&#39;</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">return</span> IndexController</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>以上代码解释</strong></p>
+<p><em>关于上面的 controller 实例代码，我们只需关注下面几点</em></p>
+<ul>
+<li>IndexController:index （index Controller 中的 index Action），通过 <code>self:getView()</code> 方法获取视图实例</li>
+<li>可以通过先调用 <code>view:assign(p)</code> 将所需要的参数传入视图，再调用 <code>view:display()</code> 进行模板渲染，或者可以直接调用 <code>view:render(&#39;index/index.html&#39;, p)</code> 方法，指定需要渲染的模板，并同时传入相应的参数</li>
+<li>模板参数都是与 LUA 数组的形式进行传递</li>
+<li>每个 action 的返回值都必须是字符串，所以可以知道 <code>view:display()</code> 和 <code>view:render()</code> 方法都是返回字符串</li>
+<li>IndexController:action_b （index Controller 中的 action_b Action，这里注意，action 的方法名必须小写），使用默认的简单路由协议，访问 URI 为 <code>curl http://localhost:9110/index/action_b</code></li>
+</ul>
+<p><em>注：目前 vanilla 所默认使用的模板引擎是 appo 老师开发的 <a href="https://github.com/bungle/lua-resty-template" target="_blank" rel="noopener noreferrer">resty-template</a>，模板详细的使用文档请移步 appo 老师处参阅。</em></p>
+<h4 id="1-3-2、新添加一个-Controller"><a href="#1-3-2、新添加一个-Controller" class="headerlink" title="1.3.2、新添加一个 Controller"></a>1.3.2、新添加一个 Controller</h4><p><em>给 Vanilla 添加一个新的 Controller 非常简单，只需要在项目的 controllers 目录，实现一个 LUA 包，包导入的函数即为各个 action， 文件名与 controller 同名。例如添加一个名为 idevz 的 controller， 且实现一个名为 dohello 的 action（）。</em></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> IdevzController = {}</span><br/><span class="line"><span class="comment">-- curl http://localhost:9110/idevz/dohello</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">IdevzController:dohello</span><span class="params">()</span></span></span><br/><span class="line">    <span class="keyword">return</span> <span class="string">&#39;do-hello-action.&#39;</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="keyword">return</span> IdevzController</span><br/></pre></td></tr></tbody></table></figure>
+<h3 id="1-4、如何使用Models-Dao"><a href="#1-4、如何使用Models-Dao" class="headerlink" title="1.4、如何使用Models/Dao"></a>1.4、如何使用Models/Dao</h3><h4 id="1-4-1、Vanilla-的-DAO"><a href="#1-4-1、Vanilla-的-DAO" class="headerlink" title="1.4.1、Vanilla 的 DAO"></a>1.4.1、Vanilla 的 DAO</h4><p><em>vanilla 的 DAO 预设为项目对数据源的封装，一切对数据源的操作都可以封装成 DAO，方便维护、管理、缓存等。 Vanilla 的 DAO 在项目的 models/dao 路径下，一般使用 <code>LoadModel</code> 方法进行加载</em></p>
+<p><strong>最简单的 DAO</strong></p>
+<p><em>由自动生成的 demo 中默认生成了 TableDao，可以看出 TableDao 只是一个普通的 LUA 包。</em></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> TableDao = {}</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TableDao:set</span><span class="params">(key, value)</span></span></span><br/><span class="line">    self.__cache[key] = value</span><br/><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TableDao:new</span><span class="params">()</span></span></span><br/><span class="line">    <span class="keyword">local</span> instance = {</span><br/><span class="line">        set = self.set,</span><br/><span class="line">        __cache = {}</span><br/><span class="line">    }</span><br/><span class="line">    <span class="built_in">setmetatable</span>(instance, TableDao)</span><br/><span class="line">    <span class="keyword">return</span> instance</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TableDao:__index</span><span class="params">(key)</span></span></span><br/><span class="line">    <span class="keyword">local</span> out = <span class="built_in">rawget</span>(<span class="built_in">rawget</span>(self, <span class="string">&#39;__cache&#39;</span>), key)</span><br/><span class="line">    <span class="keyword">if</span> out <span class="keyword">then</span> <span class="keyword">return</span> out <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">end</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="keyword">return</span> TableDao</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>以上代码解释</strong></p>
+<p><em>DAO 可以是任何对数据层访问封装的 LUA 包，实现方式非常自由。</em></p>
+<h3 id="1-5、如何使用Models-Service"><a href="#1-5、如何使用Models-Service" class="headerlink" title="1.5、如何使用Models/Service"></a>1.5、如何使用Models/Service</h3><h4 id="1-5-1、Vanilla-的-Service"><a href="#1-5-1、Vanilla-的-Service" class="headerlink" title="1.5.1、Vanilla 的 Service"></a>1.5.1、Vanilla 的 Service</h4><p><em>vanilla 的 Service 预设为项目对某些通用业务逻辑封装为独立的 Service，方便维护、管理、缓存等。 Vanilla 的 Service 在项目的 models/service 路径下，一般使用 <code>LoadModel</code> 方法进行加载</em></p>
+<p><strong>最简单的 Service</strong></p>
+<p><em>由自动生成的 demo 中默认生成了 UserService，可以看出 UserService 也只是一个普通的 LUA 包。不过 Service 一般调用更底层的 DAO ，并对之做必要封装，并将相关的 Service 暴露给 Controller 使用</em></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> table_dao = LoadApplication(<span class="string">&#39;models.dao.table&#39;</span>):new()</span><br/><span class="line"><span class="keyword">local</span> UserService = {}</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">UserService:get</span><span class="params">()</span></span></span><br/><span class="line">    table_dao:set(<span class="string">&#39;zhou&#39;</span>, <span class="string">&#39;UserService res&#39;</span>)</span><br/><span class="line">    <span class="keyword">return</span> table_dao.zhou</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">return</span> UserService</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>以上代码解释</strong></p>
+<p><em>Service 可以是任何对数据层访问封装的 LUA 包</em></p>
+<h2 id="2、APIs"><a href="#2、APIs" class="headerlink" title="2、APIs"></a>2、APIs</h2><h3 id="2-1、配置"><a href="#2-1、配置" class="headerlink" title="2.1、配置"></a>2.1、配置</h3><p><em>香草/Vanilla的配置由以下三个部分组成.</em></p>
+<ul>
+<li><em>App配置</em></li>
+<li><em>Nginx配置</em></li>
+<li><em>WAF配置</em></li>
+</ul>
+<h4 id="2-1-1、App配置"><a href="#2-1-1、App配置" class="headerlink" title="2.1.1、App配置"></a>2.1.1、App配置</h4><p><strong>应用基础配置（config/application.lua）</strong></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/></pre></td><td class="code"><pre><span class="line">Appconf.sysconf = {				<span class="comment">--系统预加载配置文件</span></span><br/><span class="line">    <span class="string">&#39;v_resource&#39;</span>,</span><br/><span class="line">}</span><br/><span class="line">Appconf.name = <span class="string">&#39;app_name&#39;</span>		<span class="comment">--app名称，执行vanilla new命令时给定的应用名</span></span><br/><span class="line"></span><br/><span class="line">Appconf.route=<span class="string">&#39;vanilla.v.routes.simple&#39;</span>		<span class="comment">--路由器，指定URL路由方式，目的解析出需要执行的controller与action</span></span><br/><span class="line">Appconf.bootstrap=<span class="string">&#39;application.bootstrap&#39;</span>		<span class="comment">--初始化bootstrap（用来对应用进行初始化操作）</span></span><br/><span class="line">Appconf.app={}		<span class="comment">--app相关配置</span></span><br/><span class="line">Appconf.app.root=<span class="string">&#39;./&#39;</span>		<span class="comment">--当前vanilla start命令执行路径</span></span><br/><span class="line"></span><br/><span class="line">Appconf.controller={}		<span class="comment">--当前app的controller相关配置</span></span><br/><span class="line">Appconf.controller.<span class="built_in">path</span>=Appconf.app.root .. <span class="string">&#39;application/controllers/&#39;</span>		<span class="comment">--controller文件所在路径（使用默认生成路径即可）</span></span><br/><span class="line"></span><br/><span class="line">Appconf.view={}		<span class="comment">--当前app的视图层相关配置</span></span><br/><span class="line">Appconf.view.<span class="built_in">path</span>=Appconf.app.root .. <span class="string">&#39;application/views/&#39;</span>		<span class="comment">--模板路径</span></span><br/><span class="line">Appconf.view.suffix=<span class="string">&#39;.html&#39;</span>		<span class="comment">--模板后缀</span></span><br/><span class="line">Appconf.view.auto_render=<span class="literal">true</span>		<span class="comment">--是否开启自动渲染</span></span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>应用基础配置的引用</strong></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 如上的配置，可以在代码中通过 Registry[&#39;APP_CONF&#39;] 表来进行获取，比如获取 APP_NAME</span></span><br/><span class="line"><span class="keyword">local</span> app_name = Registry[<span class="string">&#39;APP_CONF&#39;</span>][<span class="string">&#39;name&#39;</span>]</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>错误处理配置（config/errors.lua）</strong></p>
+<p><em>根据errors.lua文件中实例，配置用户级别错误码.</em></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> Errors = {</span><br/><span class="line">    [<span class="number">1000</span>] = { <span class="built_in">status</span> = <span class="number">500</span>, message = <span class="string">&#34;Controller Err.&#34;</span> },</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>Restful 路由协议配置（config/restful.lua）</strong></p>
+<p><em>根据 URI 需要来自定义路由协议的配置</em></p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> restful = {</span><br/><span class="line">    v1={},</span><br/><span class="line">    v={}</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line">restful.v.GET = {</span><br/><span class="line">    {pattern = <span class="string">&#39;/&#39;</span>, controller = <span class="string">&#39;index&#39;</span>, action = <span class="string">&#39;index&#39;</span>},</span><br/><span class="line">    {pattern = <span class="string">&#39;/:category&#39;</span>, controller = <span class="string">&#39;index&#39;</span>, action = <span class="string">&#39;list&#39;</span>}</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line">restful.v.POST = {</span><br/><span class="line">    {pattern = <span class="string">&#39;/post&#39;</span>, controller = <span class="string">&#39;index&#39;</span>, action = <span class="string">&#39;post&#39;</span>},</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line">restful.v1.GET = {</span><br/><span class="line">    {pattern = <span class="string">&#39;/api&#39;</span>, controller = <span class="string">&#39;index&#39;</span>, action = <span class="string">&#39;api_get&#39;</span>},</span><br/><span class="line">}</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">return</span> restful</span><br/></pre></td></tr></tbody></table></figure>
+<p><strong>系统相关配置（sys/*）</strong></p>
+<p><em>比如DB、MC等资源配置，系统相关的分机房配置等（在某些大公司，这部分配置又运维人员统一管理和下发），文件格式目前使用相对更运维友好的 ini 文件，开发中可以方便的在 Registry[‘sys_conf’] 中获取相关数据，如 <code>Registry[&#39;sys_conf&#39;][&#39;cache&#39;][&#39;lrucache&#39;]</code> 获取 lrucache 相关配置</em></p>
+<p><strong>系统缓存相关配置 （sys/cache）</strong></p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/></pre></td><td class="code"><pre><span class="line"><span class="section">[shared_dict]</span></span><br/><span class="line"><span class="attr">dict</span>=idevz</span><br/><span class="line"><span class="attr">exptime</span>=<span class="number">100</span></span><br/><span class="line"></span><br/><span class="line"><span class="section">[memcached]</span></span><br/><span class="line"><span class="attr">instances</span>=<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">11211</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">11211</span></span><br/><span class="line"><span class="attr">exptime</span>=<span class="number">60</span></span><br/><span class="line"><span class="attr">timeout</span>=<span class="number">100</span></span><br/><span class="line"><span class="attr">poolsize</span>=<span class="number">100</span></span><br/><span class="line"><span class="attr">idletimeout</span>=<span class="number">10000</span></span><br/><span class="line"></span><br/><span class="line"><span class="section">[redis]</span></span><br/><span class="line"><span class="attr">instances</span>=<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">6379</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">6379</span></span><br/><span class="line"><span class="attr">exptime</span>=<span class="number">60</span></span><br/><span class="line"><span class="attr">timeout</span>=<span class="number">100</span></span><br/><span class="line"><span class="attr">poolsize</span>=<span class="number">100</span></span><br/><span class="line"><span class="attr">idletimeout</span>=<span class="number">10000</span></span><br/><span class="line"></span><br/><span class="line"><span class="section">[lrucache]</span></span><br/><span class="line"><span class="attr">items</span>=<span class="number">200</span></span><br/><span class="line"><span class="attr">exptime</span>=<span class="number">60</span></span><br/><span class="line"><span class="attr">useffi</span>=<span class="literal">false</span></span><br/></pre></td></tr></tbody></table></figure>
+<ul>
+<li>目前这部分配置一般由 vanilla.v.libs.cache 来使用</li>
+<li>目前支持的配置项如 poolsize（连接池大小）、timeout（数据获取超时等）</li>
+</ul>
+<p><strong>系统缓存相关配置 （sys/v_resource）</strong></p>
+<figure class="highlight ini"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/></pre></td><td class="code"><pre><span class="line"><span class="section">[mc]</span></span><br/><span class="line"><span class="attr">conf</span>=<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7348</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">11211</span></span><br/><span class="line"></span><br/><span class="line"><span class="section">[redis]</span></span><br/><span class="line"><span class="attr">conf</span>=<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">7348</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span cl
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-434_tolua%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90/">tolua实现分析</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-419_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">Lua string hash 算法</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

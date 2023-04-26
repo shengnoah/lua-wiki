@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>matrix transform for luastg - Lua教程</title>
+
+  
+    <meta name="description" content="Another time copy from css (first attempt is ease function)  Theory  From css3 animation, we have matrix, matrix3d method to describe transform of a image affinely.  For 2d image: 0. translate, skew a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="matrix transform for luastg">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1045_matrix%20transform%20for%20luastg/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="Another time copy from css (first attempt is ease function)  Theory  From css3 animation, we have matrix, matrix3d method to describe transform of a image affinely.  For 2d image: 0. translate, skew a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.230Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.230Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">matrix transform for luastg</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#theory"><span class="toc-text">Theory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#realization"><span class="toc-text">Realization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#place-points-at-anticlockwise-direction-and-add-edges"><span class="toc-text">Place points at anticlockwise direction and add edges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solve-the-convex"><span class="toc-text">Solve the convex</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#example"><span class="toc-text">Example</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>matrix transform for luastg</span></h1>
+<p><del>Another time copy from css (first attempt is ease function)</del></p>
+
+<h2 id="theory">Theory</h2>
+
+<p>From css3 animation, we have matrix, matrix3d method to describe transform of a image affinely.</p>
+
+<p>For 2d image:
+0. translate, skew and scale according to (0, 0)</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+begin{bmatrix} x \ y \ 1 end{bmatrix}  
+begin{bmatrix}
+    text{scaleX} & text{skewX} & text{translateX} \
+    text{skewY} & text{scaleY} & text{translateY} \
+    0 & 0 & 1
+ end{bmatrix} %]]></script>
+
+<ol>
+  <li>rotation according to (0, 0)</li>
+</ol>
+
+<script type="math/tex; mode=display">% <![CDATA[
+begin{bmatrix} 
+    cos{theta} & -sin{theta} & 0 \
+    sin{theta} & cos{theta} & 0 \
+    0 & 0 & 1
+ end{bmatrix} %]]></script>
+
+<p>Matrix is kinda linear transformation, so rotation matrix ($R$) + sketching matrix ($S$) = $T(=RS)$</p>
+
+<p>If we have matrix $A$ (invertiable), we can use eigenvalue decomposition to tween, $A=VDV^{-1}$, if separated into 10 steps, $T = VD^{1/10}V^{-1}$</p>
+
+<p>Also for matrix 3d on 2d image:</p>
+
+<p>o. translate, skew and scale according to (0, 0, 0)</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+begin{bmatrix} x \ y \ 1 end{bmatrix}  
+begin{bmatrix}
+    text{scaleX} & text{skewX} & text{translateX} \
+    text{skewY} & text{scaleY} & text{translateY} \
+    text{skewZ} & text{translateZ} & text{scaleZ} \
+    0 & 0 & 1
+ end{bmatrix} %]]></script>
+
+<p>o.rotation according to (x, y, z) <a target="_blank" rel="noopener" href="http://blog.csdn.net/harryhare/article/details/9195053">rotation</a> <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5">wiki</a></p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+mathcal{M}(hat{mathbf{v}},theta) = begin{bmatrix}
+   cos theta + (1 - cos theta) x^2
+ & (1 - cos theta) x y - (sin theta) z 
+ & (1 - cos theta) x z + (sin theta) y & 0 
+\
+   (1 - cos theta) y x + (sin theta) z 
+ & cos theta + (1 - cos theta) y^2
+ & (1 - cos theta) y z - (sin theta) x & 0
+\
+   (1 - cos theta) z x - (sin theta) y
+ & (1 - cos theta) z y + (sin theta) x
+ & cos theta + (1 - cos theta) z^2 & 0
+ \
+ 0 & 0 & 0 & 1
+end{bmatrix} %]]></script>
+
+<p>Similarily, we can have eigenvalue decomposiiton to make tweening animation. One point is remained that for 3d object projected to xy-plane, we should make parameter equation for each surface.</p>
+
+<p>Finally we can use projection of surface to create beautiful bullets.</p>
+
+<h2 id="realization">Realization</h2>
+
+<p>Use pyqt as gui, matplotlib.pylab, mpl_toolkits.mplot3d as drawer.
+To simplify this problem, we only draw edges of convex polyhedron on xy-plane.</p>
+
+<h3 id="place-points-at-anticlockwise-direction-and-add-edges">Place points at anticlockwise direction and add edges</h3>
+
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/loveclumsybaby/p/3420795.html">anticlockwise sort</a></p>
+
+<p>Calculate the mass center, $vec{OA}, vec{OB}$ as vector from mass center to point A, B. If $vec{OA} times vec{OB} &lt; 0$, then B is anticlockwise to A. Quick sort the whole point set. Add edges AB in the edges set</p>
+
+<h3 id="solve-the-convex">Solve the convex</h3>
+
+<p>Accordint to anticlockwise points set and edges set, judge one edge AB and one point C. If the $CBA &lt; 90^{circ}$ then it’s concave, error.</p>
+
+<h2 id="example">Example</h2>
+
+<p>Remain to be done</p>
+
+
+<pre><code>            &lt;hr/&gt;
+
+            
+            
+            
+            &lt;div class=&quot;ds-share&quot; style=&quot;text-align: right&quot; data-thread-key=&quot;/2016/05/13/LuaSTG_Matrix_Transform&quot; data-title=&quot;Matrix Transform for LuaSTG&quot; data-url=&quot;http://airtnp.github.io/2016/05/13/LuaSTG_Matrix_Transform/&quot; data-images=&quot;http://airtnp.github.io/img/post-matrix.jpg&quot; data-content=&quot;Another time copy from css (first attempt is ease function)
+</code></pre>
+<p>Theory</p>
+<p>From css… | Airtnp 的博客 | Airtnp Blog “&gt;</p>
+<pre><code>            &lt;hr/&gt;
+            &lt;/div&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1044_lua/">lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1046_luaframework%20puremvc/">luaframework puremvc</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

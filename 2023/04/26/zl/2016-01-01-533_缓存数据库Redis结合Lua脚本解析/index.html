@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>缓存数据库Redis结合Lua脚本解析 - Lua教程</title>
+
+  
+    <meta name="description" content="redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="缓存数据库Redis结合Lua脚本解析">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-533_%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93Redis%E7%BB%93%E5%90%88Lua%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置l">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lilomin.github.io//images/lua/redis_lua_1.png">
+<meta property="og:image" content="https://lilomin.github.io//images/lua/redis_lua_2.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.281Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.281Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lilomin.github.io//images/lua/redis_lua_1.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">缓存数据库Redis结合Lua脚本解析</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-text">解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%BA%94%E7%94%A8"><span class="toc-text">项目应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD"><span class="toc-text">实现功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#demo%E4%BB%A3%E7%A0%81"><span class="toc-text">demo代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>缓存数据库Redis结合Lua脚本解析</span></h1>
+<p>redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，内置lua解释器，通过 redis Eval 命令来执行lua脚本，达到执行自定义逻辑的redis命令的目的。</p>
+
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>Eval 命令的基本语法如下：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis 127.0.0.1:6379&gt; EVAL script numkeys key [key ...] arg [arg ...]</div></pre></td></tr></tbody></table></figure><p></p>
+<p>如果我们想在lua脚本中调用redis的命令该如何操作？可以在脚本中使用redis.call()或redis.pcall()直接调用，两者用法类似，只是在遇到错误时，返回错误的提示方式不同。例如：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eval &#34;return redis.call(&#39;set&#39;,KEYS[1],&#39;bar&#39;)&#34; 1 foo</div></pre></td></tr></tbody></table></figure><p></p>
+<p>实例：<br/></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">10.109:9&gt;eval &#34;return {KEYS[1],ARGV[1]}&#34; 1 key1 ff</div><div class="line"> 1)  &#34;key1&#34;</div><div class="line"> 2)  &#34;ff&#34;</div></pre></td></tr></tbody></table></figure><p></p>
+<p>由于redis是单线程执行命令的，因此我们需要保证我们lua脚本足够精简，才不至于会阻塞redis线程，因此脚本内容尽量不用循环，避免阻塞redis线程，导致后续网络请求也被阻塞。</p>
+<h3 id="项目应用"><a href="#项目应用" class="headerlink" title="项目应用"></a>项目应用</h3><h4 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h4><p>redis实现消息队列先进先出，并限制队列最大长度，超出长度则顶出队列最后一个元素</p>
+<h4 id="demo代码"><a href="#demo代码" class="headerlink" title="demo代码"></a>demo代码</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest.WebEnvironment;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.core.script.DefaultRedisScript;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.core.script.RedisScript;</div><div class="line"><span class="keyword">import</span> org.springframework.scripting.support.ResourceScriptSource;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Collections;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</div><div class="line"></div><div class="line"></div><div class="line"> * Created by lilm on 17-11-10.</div><div class="line"> */</div><div class="line">(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@SpringBootTest</span>(webEnvironment = WebEnvironment.RANDOM_PORT)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span>  </span>{</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(getClass());</div><div class="line">	</div><div class="line">	<span class="meta">@Autowired</span></div><div class="line">	<span class="keyword">private</span> StringRedisTemplate redisTemplate;</div><div class="line">	</div><div class="line">	</div><div class="line">	 * push redis 队列脚本</div><div class="line">	 * 1. 检查队列长度是否超出配置长度</div><div class="line">	 * 2. 若超出, 弹出队列最后一个元素, 并将当前元素插入第一位</div><div class="line">	 * 3. 没超出则将当前元素插入第一位</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> DefaultRedisScript&lt;Long&gt; queueScript = <span class="keyword">null</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// 创建一个锁对象</span></div><div class="line">	<span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> Long l = <span class="number">0L</span>;</div><div class="line">	</div><div class="line">	<span class="comment">// 最大缓存消息数</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Long MAX_CACHED_NUM = <span class="number">300L</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String QUEUE_KEY = <span class="string">&#34;demo-queue&#34;</span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">()</span> </span>{</div><div class="line">		<span class="keyword">try</span> {</div><div class="line">			lock.lock();</div><div class="line">			Long num = redisTemplate.execute(</div><div class="line">					getQueueScript(), Collections.singletonList(QUEUE_KEY),</div><div class="line">					MAX_CACHED_NUM.toString(), String.valueOf(l)</div><div class="line">			);</div><div class="line">			logger.info(<span class="string">&#34;push data:{} to queue return:{}&#34;</span>, l, num);</div><div class="line">		} <span class="keyword">catch</span> (Exception e) {</div><div class="line">			logger.error(<span class="string">&#34;redis error:&#34;</span>, e);</div><div class="line">		} <span class="keyword">finally</span> {</div><div class="line">			l++;</div><div class="line">			lock.unlock();</div><div class="line">		}</div><div class="line">	}</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> RedisScript&lt;Long&gt; <span class="title">getQueueScript</span><span class="params">()</span> </span>{</div><div class="line">		<span class="keyword">if</span> (queueScript == <span class="keyword">null</span>) {</div><div class="line">			queueScript = <span class="keyword">new</span> DefaultRedisScript&lt;Long&gt;();</div><div class="line">			queueScript.setResultType(Long.class);</div><div class="line">			<span class="comment">// ClassPathResource指定路径不需要前缀 classpath:</span></div><div class="line">			queueScript.setScriptSource(<span class="keyword">new</span> ResourceScriptSource(<span class="keyword">new</span> ClassPathResource(<span class="string">&#34;lua/queue_script.lua&#34;</span>)));</div><div class="line">		}</div><div class="line">		<span class="keyword">return</span> queueScript;</div><div class="line">	}</div><div class="line">	</div><div class="line">	</div><div class="line">	 * 线程池持有三十个线程，每个线程持续写入100次，推入数据为0~2999</div><div class="line">	 * 由于push方法是线程安全的，最终redis中demo-queue的结果应该是：</div><div class="line">	 * 1. list中总共300条数据</div><div class="line">	 * 2. 第一条为 2999 第300条为 2700，中间数据依次加1</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueue</span><span class="params">()</span> </span>{</div><div class="line">		ExecutorService service = Executors.newFixedThreadPool(<span class="number">50</span>);</div><div class="line">		<span class="keyword">try</span> {</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; i ++) {</div><div class="line">				Thread t = <span class="keyword">new</span> Thread(() -&gt; {</div><div class="line">					<span class="keyword">int</span> x = <span class="number">0</span>;</div><div class="line">					<span class="keyword">while</span> (<span class="keyword">true</span>) {</div><div class="line">						<span class="keyword">if</span> (x == <span class="number">100</span>) {</div><div class="line">							<span class="keyword">break</span>;</div><div class="line">						}</div><div class="line">						push();</div><div class="line">						x++;</div><div class="line">					}</div><div class="line">				});</div><div class="line">				<span class="keyword">try</span> {</div><div class="line">					service.execute(t);</div><div class="line">				} <span class="keyword">finally</span> {</div><div class="line">					logger.info(<span class="string">&#34;子线程{}已开启&#34;</span>, i + <span class="number">1</span>);</div><div class="line">				}</div><div class="line">			}</div><div class="line">			</div><div class="line">			logger.info(<span class="string">&#34;已启动所有的子线程&#34;</span>);</div><div class="line">			service.shutdown();</div><div class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) {</div><div class="line">				<span class="keyword">if</span> (service.isTerminated()) {</div><div class="line">					logger.info(<span class="string">&#34;所有的子线程都结束了！&#34;</span>);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		} <span class="keyword">catch</span> (Exception e) {</div><div class="line">			e.printStackTrace();</div><div class="line">		}</div><div class="line">		</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p>lua脚本内容：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- push redis 队列脚本</span></div><div class="line"><span class="comment">-- 1. 检查队列长度是否超出配置长度</span></div><div class="line"><span class="comment">-- 2. 若超出, 弹出队列最后一个元素, 并将当前元素插入第一位</span></div><div class="line"><span class="comment">-- 3. 没超出则将当前元素插入第一位</span></div><div class="line"><span class="keyword">local</span> num = redis.call(<span class="string">&#39;LLEN&#39;</span>, KEYS[<span class="number">1</span>])</div><div class="line"><span class="keyword">if</span> num &gt;= <span class="built_in">tonumber</span>(ARGV[<span class="number">1</span>]) <span class="keyword">then</span></div><div class="line">    redis.call(<span class="string">&#39;RPOP&#39;</span>, KEYS[<span class="number">1</span>])</div><div class="line">    num = num - <span class="number">1</span></div><div class="line"><span class="keyword">end</span></div><div class="line">redis.call(<span class="string">&#39;LPUSH&#39;</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">2</span>])</div><div class="line"><span class="keyword">return</span> num + <span class="number">1</span></div></pre></td></tr></tbody></table></figure><p></p>
+<p>redis处理结果：<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://lilomin.github.io//images/lua/redis_lua_1.png" alt=""/><br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://lilomin.github.io//images/lua/redis_lua_2.png" alt=""/></p>
+<p>demo代码使用springboot+junit+spring-data-redis实现，附 <a href="https://github.com/lilomin/Easy/blob/master/easy-account/src/test/java/lilm/p/easy/account/RedisDemoTest.java" target="_blank" rel="external noopener noreferrer">源码地址</a></p>
+<p>使用redis加lua脚本的好处是使程序逻辑更加简单，只需调用脚本执行即可，lua脚本执行可以减少网络延迟以及多余的传输流量，redis在执行lua脚本之后会将脚本sha1值缓存，下次调用时可以只携带脚本sha1值执行，进一步的减小网络开销。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>使用redis+lua脚本时一定要精简我们的脚本，太过复杂的逻辑将会降低redis执行效率，阻塞线程，甚至影响到系统性能；同时复杂的脚本一旦出现bug，因为是在lua解释器中执行将很难去排查问题。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-532_lua%20%E5%8E%9F%E7%94%9Fapi%E8%A7%A3%E8%AF%BB/">lua 原生api解读</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-536_NGX_LUA/">NGX_LUA</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

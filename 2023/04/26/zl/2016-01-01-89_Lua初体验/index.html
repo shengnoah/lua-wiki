@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua初体验 - Lua教程</title>
+
+  
+    <meta name="description" content="背景  项目中后期需要支持热更新，因此只能把之前基于UGUI的C#外围逻辑全部修改为Lua，修改过程中的方案是做一个兼容处理，新逻辑用Lua，并在项目推进过程中逐步把外围都改为Lua编码。  项目中的接入实践  工程目录结构  XFramework&#x2F;lua          -- C#端脚本根目录 --------------------------------------------------">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua初体验">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-89_Lua%E5%88%9D%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="背景  项目中后期需要支持热更新，因此只能把之前基于UGUI的C#外围逻辑全部修改为Lua，修改过程中的方案是做一个兼容处理，新逻辑用Lua，并在项目推进过程中逐步把外围都改为Lua编码。  项目中的接入实践  工程目录结构  XFramework&#x2F;lua          -- C#端脚本根目录 --------------------------------------------------">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.316Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.316Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua初体验</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%85%A5%E5%AE%9E%E8%B7%B5"><span class="toc-text">项目中的接入实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">工程目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E5%BA%93"><span class="toc-text">核心代码库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#c%E7%AB%AF"><span class="toc-text">C#端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua%E7%AB%AF"><span class="toc-text">Lua端</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%98%E6%9C%AA%E6%89%A7%E8%A1%8C%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-text">还未执行的工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%85%E6%8E%A2%E8%AE%A8%E7%9A%84%E5%81%9A%E6%B3%95"><span class="toc-text">待探讨的做法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E6%8A%80%E5%B7%A7"><span class="toc-text">经验技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83"><span class="toc-text">项目规范</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.316Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua初体验</span></h1>
+<h2 id="背景">背景</h2>
+
+<p>项目中后期需要支持热更新，因此只能把之前基于UGUI的C#外围逻辑全部修改为Lua，修改过程中的方案是做一个兼容处理，新逻辑用Lua，并在项目推进过程中逐步把外围都改为Lua编码。</p>
+
+<h2 id="项目中的接入实践">项目中的接入实践</h2>
+
+<h3 id="工程目录结构">工程目录结构</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>XFramework/lua          -- C#端脚本根目录
+------------------------------------------------------
+luaScripts              -- Lua端脚本根目录
+├── api                 -- 用于写代码时只能提示Api信息
+├── cfg_sheet           -- 本地配置表对应的代码
+├── common              -- 核心常用代码
+├── libs                -- 第三方库 例如 protobuf,cjson...
+├── proto               -- 协议对应代码
+├── service             -- 数据层服务代码
+├── ui                  -- UI代码
+├── Global.lua          -- 集中管理和C#层交互的地方
+└── LuaDebug.lua        -- 调试器
+</code></pre></div></div>
+
+<h3 id="核心代码库">核心代码库</h3>
+
+<h4 id="c端">C#端</h4>
+<ol>
+  <li><code class="highlighter-rouge">LuaHelper.cs</code> Lua的启动脚本并传递各种游戏状态事件。</li>
+  <li><code class="highlighter-rouge">LuaStrHelper.cs</code> Lua有部分字符串实现暂时没有找到Lua版本的，还包括C#的字符串格式化逻辑的转接，用以兼容现有配置。</li>
+  <li><code class="highlighter-rouge">LuaMsgHelper.cs</code> 既然是兼容方案，那么socket只能直接获取现有的C#端实例来中转。这里有一个待解决的问题，是Lua到C#的传参过程，并没有找到方便的传输<code class="highlighter-rouge">byte[]</code>的方法。临时使用了tolua示例中的<code class="highlighter-rouge">LuaByteBuffer</code>。</li>
+  <li><code class="highlighter-rouge">LuaResHelper.cs</code> 资源的操作中转类，目前只加了<code class="highlighter-rouge">PlayerPrefs</code>，用到再添加。</li>
+  <li><code class="highlighter-rouge">LuaUIHelper.cs</code> UI中转类，打开关闭窗口等，因为之前的C#端用到了大量泛型，并不方便直接提供<code class="highlighter-rouge">UIManager</code>，所以这里短期内是会一直使用的。</li>
+  <li><code class="highlighter-rouge">LuaObsoleteHelper.cs</code> 这是一个终将会废弃的类，把一些暂时没有办法处理的中转逻辑都集中到这个类中，以后逐个修改到Lua端实现，最终完全删除该类。
+    <h4 id="lua端">Lua端</h4>
+  </li>
+  <li><code class="highlighter-rouge">Global.lua</code> Lua端的入口代码，与C#端直接交互（仅此一个）。</li>
+  <li><code class="highlighter-rouge">Common/SandBox.lua</code> 利用子类沙盒模式，给<code class="highlighter-rouge">Service.lua</code>和<code class="highlighter-rouge">UIView.lua</code>提供一系列的基本操作，把代码中大量的全局变量调用集中到这个基类中，降低耦合度，同时方便维护。</li>
+  <li><code class="highlighter-rouge">Common/Service.lua</code>, <code class="highlighter-rouge">Common/ServiceManager.lua</code> 这两个类就是UI框架设计中提到的数据层的两个基础类了。</li>
+  <li><code class="highlighter-rouge">Common/UIView.lua</code> 是所有UI窗口和视图的基类。封装一系列简化操作的窗口API,分为获取组件、设置组件事件、属性绑定与自动解绑、窗口事件，以及一些常用的UI层操作。</li>
+  <li><code class="highlighter-rouge">Common/UIPath.lua</code> 这里是UI的资源路径字典，规范应该保证的是资源和代码同名，这样会减少后续维护的麻烦。</li>
+  <li><code class="highlighter-rouge">Common/XPlayerPrefs.lua</code> 本地的一个数据缓存。</li>
+  <li><code class="highlighter-rouge">Common/XProperty.lua</code>,<code class="highlighter-rouge">Common/XListProperty.lua</code> mvp架构的核心思想，单项数据绑定。</li>
+  <li><code class="highlighter-rouge">Common/ConfigReader.lua</code> 本地配置表的读取类，支持两种读取方式，数组和字典。</li>
+  <li><code class="highlighter-rouge">Common/Collections/XList.lua</code> 一个基本的list实现，内部是一个数组，未采用链表的形式是处于性能考虑。</li>
+</ol>
+
+<h3 id="还未执行的工作">还未执行的工作</h3>
+<ol>
+  <li>生成获取组件的代码</li>
+  <li>自动拦截替换现有的C#端实现</li>
+  <li>代码模板</li>
+</ol>
+
+<h3 id="待探讨的做法">待探讨的做法</h3>
+<ol>
+  <li>class
+目前大众一点的面向对象思路一共有三种。一种是metatable直接来（项目中目前就是如此，缺点是如果继承层级过多会有额外的metatable开销）。二是copy父类方法到子类中。三是执行时copy（参考云风的blog）。</li>
+  <li>配置表
+目前参考了一些市面上的项目方案，直接将配置表导出成对应的代码。需要讨论的有两个点，一是解析配置表好还是直接就是代码好。二是代码中的重复关键词如何消除，目前考虑可以使用数组+metatable实现，还没有动手。</li>
+  <li>协议
+目前协议使用了<code class="highlighter-rouge">tolua</code>自带的<code class="highlighter-rouge">proto-gen-lua</code>，缺陷是不支持<code class="highlighter-rouge">[packed=true]</code>字段，该字段可以减少列表长度n的字段 (n - 1) * 8bit的数据量。</li>
+  <li>全局变量
+全局变量是否有额外的开销，开销是多少目前我还不是很清楚。因此，<code class="highlighter-rouge">UIView</code>等是否使用全局变量还需要进一步了解。</li>
+</ol>
+
+<h3 id="经验技巧">经验技巧</h3>
+<ol>
+  <li>显示子视图时，需要判断该视图是一个全局的还是一个独立的实例
+    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">-- 显示顶部菜单中的货币视图 因为各个界面都有该类，那么其应该是一个单独的实例 所以需要调用 new() 方法</span>
+ <span class="n">self</span><span class="p">:</span><span class="n">showView</span><span class="p">(</span><span class="n">CommonTopView_Coins</span><span class="p">:</span><span class="n">new</span><span class="p">(),</span> <span class="n">self</span><span class="p">.</span><span class="n">mContextCoin</span><span class="p">)</span>
+
+<p> <span class="c1">– 邮件详情界面这里就只有一个全局的实例了 并不需要也不应该去 new()</span><br> <span class="kd">local</span> <span class="n">content</span> <span class="o">&#x3D;</span> <span class="nb">require</span><span class="p">(</span><span class="n">UIPath</span><span class="p">.</span><span class="n">MailWindow_ContentView</span><span class="p">)</span><br> <span class="n">content</span><span class="p">.</span><span class="n">selectedMail</span> <span class="o">&#x3D;</span> <span class="n">self</span><span class="p">.</span><span class="n">selectedMail</span><br> <span class="n">self</span><span class="p">:</span><span class="n">showView</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">mUIContext_mail_content_not_empty_6</span><span class="p">)</span></p>
+<p> <span class="c1">– 列表的显示每个子视图都是独立的实例 这里需要注意的是传参的方式 列表会有一个特殊字段 prefab 需要赋值</span><br> <span class="kd">local</span> <span class="n">list</span> <span class="o">&#x3D;</span> <span class="n">XList</span><span class="p">:</span><span class="n">new</span><span class="p">()</span><br> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">item</span> <span class="k">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">)</span> <span class="k">do</span><br>     <span class="c1">--@RefType [ui.Common.CommonItemView#CommonItemView]</span><br>     <span class="kd">local</span> <span class="n">cell</span> <span class="o">&#x3D;</span> <span class="n">CommonItemViewPrefab</span><span class="p">:</span><span class="n">new</span><span class="p">()</span><br>     <span class="n">cell</span><span class="p">.</span><span class="n">item</span> <span class="o">&#x3D;</span> <span class="n">item</span><br>     <span class="n">cell</span><span class="p">.</span><span class="n">couldClick</span> <span class="o">&#x3D;</span> <span class="kc">true</span><br>     <span class="n">cell</span><span class="p">.</span><span class="n">prefab</span> <span class="o">&#x3D;</span> <span class="n">self</span><span class="p">.</span><span class="n">lstCell</span><br>     <span class="n">list</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span><br> <span class="k">end</span></p>
+<p> <span class="n">self</span><span class="p">.</span><span class="n">lstContainer</span><span class="p">:</span><span class="n">setLuaDatas</span><span class="p">(</span><span class="n">list</span><span class="p">)</span><br> <span class="n">self</span><span class="p">.</span><span class="n">lstContainer</span><span class="p">:</span><span class="n">display</span><span class="p">()</span><br></code></pre></div>    </div><br>  </li><br>  <li>代码提示的功能添加<br>    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">-- 最常用的应该这个引用标签了，这里直接声明了cfg变量的类型是对应配置表，方便写代码</span><br> <span class="c1">--@RefType [cfg_sheet.common_config.t_item_config#t_item_config]</span><br> <span class="n">Item</span><span class="p">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="kc">nil</span></p>
+<p> <span class="c1">-- 这里同时指定了参数类型和返回值类型，方便调用</span><br> <span class="c1">-- 获取指定id的道具信息</span><br> <span class="c1">--@itemId: 道具ID</span><br> <span class="c1">--@return [api.Item#Item]</span><br> <span class="k">function</span> <span class="nf">BagService</span><span class="p">:</span><span class="n">getItem</span><span class="p">(</span><span class="n">itemId</span><span class="p">)</span><br>     <span class="kd">local</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="n">itemId</span><span class="p">]</span><br>     <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">then</span><br>         <span class="nb">print</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">&#34;道具错误 %d =&gt; 找玥祺&amp;海哥&#34;</span><span class="p">,</span> <span class="n">itemId</span><span class="p">))</span><br>     <span class="k">end</span><br>     <span class="k">return</span> <span class="n">ret</span><br> <span class="k">end</span><br></code></pre></div>    </div><br>  </li><br>  <li>Public or Private 函数<br>    <div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">local</span> <span class="n">M</span> <span class="o">=</span> <span class="n">BagService</span><br> <span class="c1">-- 外部会调用的逻辑直接用全局名称,这样写代码会有智能提示</span><br> <span class="c1">-- 出售道具</span><br> <span class="k">function</span> <span class="nf">BagService</span><span class="p">:</span><span class="n">C2SSellItem</span><span class="p">(</span><span class="n">itemId</span><span class="p">,</span> <span class="n">itemNum</span><span class="p">)</span><br>     <span class="kd">local</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">MsgStruct</span><span class="p">:</span><span class="n">C2SSellItem</span><span class="p">()</span><br>     <span class="n">msg</span><span class="p">.</span><span class="n">itemID</span> <span class="o">=</span> <span class="n">itemId</span><br>     <span class="n">msg</span><span class="p">.</span><span class="n">itemNum</span> <span class="o">=</span> <span class="n">itemNum</span><br>     <span class="n">self</span><span class="p">:</span><span class="n">sendMain</span><span class="p">(</span><span class="n">NetMsgId</span><span class="p">.</span><span class="n">C2SSellItem</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span><br> <span class="k">end</span></p>
+<p> <span class="c1">-- 内部函数就用M打头，外部没有提示</span><br> <span class="c1">-- 出售道具</span><br> <span class="k">function</span> <span class="nf">M</span><span class="p">:</span><span class="n">S2CSellItem</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><br>     <span class="n">self</span><span class="p">:</span><span class="n">showErrorCode</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">ret</span><span class="p">)</span><br> <span class="k">end</span><br></code></pre></div>    </div><br>  </li></p>
+</ol>
+
+<h3 id="项目规范">项目规范</h3>
+<ol>
+  <li>所有的变量，添加详细的注释，可以是英文</li>
+  <li>类型名称的每个单词首字母均大写</li>
+  <li>变量名和函数名均小写字母开头</li>
+  <li>常量名全大写或者k字母开头并在注释中声明</li>
+  <li>窗口代码和资源名称要匹配</li>
+  <li>窗口以<code class="highlighter-rouge">Window</code>,视图以<code class="highlighter-rouge">View</code>为后缀方便区分</li>
+  <li>一些公共的数据结构，到<code class="highlighter-rouge">api</code>目录下创建对应的接口提示 like <code class="highlighter-rouge">Item</code></li>
+  <li>一些常用的数据，和方法，要是用标签指定其对应参数和返回值类型，方便大家写代码</li>
+  <li>方法一定要注意<code class="highlighter-rouge">:</code>和<code class="highlighter-rouge">.</code>的区别，尽量少用<code class="highlighter-rouge">.</code>减少全局变量的调用，并且保持一致的<code class="highlighter-rouge">:</code>风格</li>
+</ol>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-8_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Lua学习笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-897_%E3%80%90leetcode%E3%80%91%20399%20Evaluate%20Division/">【leetcode】 399 Evaluate Division</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

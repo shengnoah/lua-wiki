@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Programming in Lua(Thrid Edition)笔记 - Lua教程</title>
+
+  
+    <meta name="description" content="17 Weak Tables and Finalizers第二部分的这后几章都不太好理解，作为第二部分的这最后一章尤其如此，看了至少有三遍才看明白，为了保证之后能看懂，这一章的笔记会加上不少自己的理解。 这章看完PiL第二部分也就学完，前两部分占了全书一半多一点，偏重语法和语言本身的特性，而后半部分偏重应用，打算在学后半部分之前写个小总结，说说这段时间学Lua的一些感想。  在Lua中有对象和引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Programming in Lua(Thrid Edition)笔记">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-628_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="17 Weak Tables and Finalizers第二部分的这后几章都不太好理解，作为第二部分的这最后一章尤其如此，看了至少有三遍才看明白，为了保证之后能看懂，这一章的笔记会加上不少自己的理解。 这章看完PiL第二部分也就学完，前两部分占了全书一半多一点，偏重语法和语言本身的特性，而后半部分偏重应用，打算在学后半部分之前写个小总结，说说这段时间学Lua的一些感想。  在Lua中有对象和引用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.290Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.290Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Programming in Lua(Thrid Edition)笔记</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#17-Weak-Tables-and-Finalizers"><span class="toc-text">17 Weak Tables and Finalizers</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Programming in Lua(Thrid Edition)笔记</span></h1>
+<h3 id="17-Weak-Tables-and-Finalizers"><a href="#17-Weak-Tables-and-Finalizers" class="headerlink" title="17 Weak Tables and Finalizers"></a>17 Weak Tables and Finalizers</h3><p>第二部分的这后几章都不太好理解，作为第二部分的这最后一章尤其如此，看了至少有三遍才看明白，为了保证之后能看懂，这一章的笔记会加上不少自己的理解。</p>
+<p>这章看完PiL第二部分也就学完，前两部分占了全书一半多一点，偏重语法和语言本身的特性，而后半部分偏重应用，打算在学后半部分之前写个小总结，说说这段时间学Lua的一些感想。<br/></p>
+<ul>
+<li><p>在Lua中有对象和引用的概念，一个对象不同于数字和字符串，包括table和线程等，一个对象的名字是对其的引用，创建一个对象并用一个变量承载后，将该变量赋值给另一个变量，这两个变量其实对同一个对象的引用，是相等的，不同对象的引用是不想等的。所以当一个对象没有引用时，它就变成了垃圾，Lua的垃圾自动回收机制会将其回收，释放占用的内存。但是当一个对象存储在table中并且没有了引用时，Lua不会将其视为垃圾，这时就需要用weak table来存储这些对象，所以weak table的设计宗旨是用来优化内存使用。</p>
+</li>
+<li><p>weak table用metatable中的<code>__mode</code>域来设定，值为字符串，<code>&#34;k&#34;</code>表示table的键是弱的，<code>&#34;v&#34;</code>表示table的值是弱的，<code>&#34;kv&#34;</code>表示table的键值都是弱的。如果一个table的键或值是弱的，则当对象类型的键或值没有引用时，该条目就会被Lua当做垃圾回收。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/></pre></td><td class="code"><pre><span class="line">a = {}</span><br/><span class="line">b = {<span class="built_in">__mode</span> = <span class="string">&#34;k&#34;</span>}</span><br/><span class="line"><span class="built_in">setmetatable</span>(a, b) </span><br/><span class="line">key = {} <span class="comment">-- create first key</span></span><br/><span class="line">a[key] = <span class="number">1</span></span><br/><span class="line">key = {} <span class="comment">-- create second key</span></span><br/><span class="line">a[key] = <span class="number">2</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">-- forces a garbaeg collection cycle</span></span><br/><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(a) <span class="keyword">do</span> <span class="built_in">print</span>(v) <span class="keyword">end</span> <span class="comment">--&gt; 2</span></span><br/><span class="line">a = {}</span><br/><span class="line">b = {<span class="built_in">__mode</span> = <span class="string">&#34;v&#34;</span>}</span><br/><span class="line"><span class="built_in">setmetatable</span>(a, b) </span><br/><span class="line">value = {}</span><br/><span class="line">a[<span class="number">1</span>] = value</span><br/><span class="line">value = {}</span><br/><span class="line">a[<span class="number">2</span>] = value</span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">-- forces a garbaeg collection cycle</span></span><br/><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(a) <span class="keyword">do</span> <span class="built_in">print</span>(k) <span class="keyword">end</span> <span class="comment">--&gt; 2</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>memorize function，记忆化函数，该方法是对weak table的一个应用。当一个函数的返回值是一个对象时，为了避免函数对相同的输入每次依然创建一个新的对象，从而浪费时间和空间，可以用一个table将输入与输出存起来，但是如果输入过多导致该table体积过大也会浪费空间，所以当大多数输入和输出在之后的程序都不再使用时，可以用weak table来存储，使得Lua可以自动回收不再使用的条目。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> results = {}</span><br/><span class="line"><span class="built_in">setmetatable</span>(results, {<span class="built_in">__mode</span> = <span class="string">&#34;v&#34;</span>}) <span class="comment">-- make values weak</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">(s)</span></span></span><br/><span class="line">	<span class="keyword">local</span> res = results[s]</span><br/><span class="line">	<span class="keyword">if</span> res == <span class="literal">nil</span> <span class="keyword">then</span> <span class="comment">-- result not available?</span></span><br/><span class="line">		res = <span class="built_in">assert</span>(<span class="built_in">load</span>(s)) <span class="comment">-- compute new result</span></span><br/><span class="line">		result[s] = res <span class="comment">-- save for later reuse</span></span><br/><span class="line">	<span class="keyword">end</span></span><br/><span class="line">	<span class="keyword">return</span> res</span><br/><span class="line"><span class="keyword">end</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p>一个RGB颜色值对象的例子：<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> results = {}</span><br/><span class="line"><span class="built_in">setmetatable</span>(results, {<span class="built_in">__mode</span> = <span class="string">&#34;v&#34;</span>}) <span class="comment">-- make values weak</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createRGB</span><span class="params">(r, g, b)</span></span></span><br/><span class="line">	<span class="keyword">local</span> key = r .. <span class="string">&#34;-&#34;</span> .. g .. <span class="string">&#34;-&#34;</span> .. b</span><br/><span class="line">	<span class="keyword">local</span> color = results[key]</span><br/><span class="line">	<span class="keyword">if</span> color = <span class="literal">nil</span> <span class="keyword">then</span></span><br/><span class="line">		color = {red = r, green = g, blue = b}</span><br/><span class="line">		results[key] = color</span><br/><span class="line">	<span class="keyword">end</span></span><br/><span class="line">	<span class="keyword">return</span> color</span><br/><span class="line"><span class="keyword">end</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<ul>
+<li>有时我们不想把一个table的属性存储在table自身中，例如为了不扰乱table的遍历，这时可以把table的属性存储在一个weak table中，当该table不再使用时，weak table中相应的属性会被自动回收。有两种方法使用weak table来存储属性，以table元素默认值为例：<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> default = {}</span><br/><span class="line"><span class="built_in">setmetatable</span>(defaults, {<span class="built_in">__mode</span> = <span class="string">&#34;k&#34;</span>})</span><br/><span class="line"><span class="keyword">local</span> mt = {<span class="built_in">__index</span> = <span class="function"><span class="keyword">function</span> <span class="params">(t)</span></span> <span class="keyword">return</span> defaluts[t] <span class="keyword">end</span>}</span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setDefault</span><span class="params">(t, d)</span></span></span><br/><span class="line">	defaults[t] = d</span><br/><span class="line">	<span class="built_in">setmetatable</span>(t, mt)</span><br/><span class="line"><span class="keyword">end</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p>该方法会为每个table设定一个metatable，该metatable共享，但是每个table都有自己的默认值，即使多个table的默认值相同。该方法弱化的对象是原table，即若原table无引用则回收。该方法适用于大部分table的默认值都不相同。<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> metas = {}</span><br/><span class="line"><span class="built_in">setmetatable</span>(metas, {<span class="built_in">__mode</span> = <span class="string">&#34;v&#34;</span>})</span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setDefault</span><span class="params">(t, d)</span></span></span><br/><span class="line">	<span class="keyword">local</span> mt = metas[d]</span><br/><span class="line">	<span class="keyword">if</span> mt = <span class="literal">nil</span> <span class="keyword">then</span></span><br/><span class="line">		mt = {<span class="built_in">__index</span> = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span> <span class="keyword">return</span> d <span class="keyword">end</span>}</span><br/><span class="line">		metas[d] = mt <span class="comment">-- memorize</span></span><br/><span class="line">	<span class="keyword">end</span></span><br/><span class="line">	<span class="built_in">setmetatable</span>(t, mt)</span><br/><span class="line"><span class="keyword">end</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>该方法使得有共同默认值的table共享一个metatable。该方法弱化的对象是metatable，即若所有与某一metatable关联的table（有共同的默认值）都不再使用了（该metatable无引用了），则将其回收。该方法适用于许多table的默认值都相同。</p>
+<ul>
+<li>ephemeron table，该类table的键和值互相引用，键是弱的，值是强的。考虑条目<code>(k, v)</code>，当除了<code>v</code>之外没有其他对<code>k</code>的引用时，则该条目被回收。这是Lua对于weak table的一个特殊回收机制，为了防止键值循环引用造成条目无法被回收<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br/><span class="line">	<span class="keyword">local</span> mem = {}</span><br/><span class="line">	<span class="built_in">setmetatable</span>(mem, {<span class="built_in">__mode</span> = <span class="string">&#34;k&#34;</span>})</span><br/><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">print_content</span><span class="params">()</span></span></span><br/><span class="line">		<span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(mem) <span class="keyword">do</span></span><br/><span class="line">			<span class="built_in">print</span>(k, v)</span><br/><span class="line">		<span class="keyword">end</span></span><br/><span class="line">	<span class="keyword">end</span></span><br/><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">factory</span><span class="params">(o)</span></span></span><br/><span class="line">		<span class="keyword">local</span> res = mem[o]</span><br/><span class="line">		<span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">then</span></span><br/><span class="line">			res = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span> <span class="keyword">return</span> o <span class="keyword">end</span></span><br/><span class="line">			mem[o] = res</span><br/><span class="line">		<span class="keyword">else</span></span><br/><span class="line">			<span class="built_in">print</span>(<span class="string">&#34;again&#34;</span>)</span><br/><span class="line">		<span class="keyword">end</span></span><br/><span class="line">		<span class="keyword">return</span> res</span><br/><span class="line">	<span class="keyword">end</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line">a = factory({<span class="number">1</span>})</span><br/><span class="line"><span class="built_in">print</span>(a()) <span class="comment">--&gt; table: 0x866080</span></span><br/><span class="line">a = factory({<span class="number">2</span>})</span><br/><span class="line"><span class="built_in">print</span>(a()) <span class="comment">--&gt; table: 0x864890</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>()</span><br/><span class="line">print_content() <span class="comment">--&gt; table: 0x864890	function: 0x8648e0</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p><code>print_content()</code>只输出了一个条目，说明一个条目被回收了，即使其键值相互引用</p>
+<ul>
+<li><p>finalizer，是一个在对象被回收之前调用的函数，由metatable的<code>__gc</code>域设定，只有当finalizer是一个函数才会被调用。</p>
+</li>
+<li><p>如果想要设定finalizer，必须在用<code>setmetatable()</code>设定metatable时就设定<code>__gc</code>域，可以先设定一个临时值，之后在定义finalizer函数，否则无效</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line">o = {x = <span class="string">&#34;hi&#34;</span>}</span><br/><span class="line">mt = {}</span><br/><span class="line"><span class="built_in">setmetatable</span>(o, mt)</span><br/><span class="line">mt.<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span> <span class="params">(o)</span></span> <span class="built_in">print</span>(o.x) <span class="keyword">end</span></span><br/><span class="line">o = <span class="literal">nil</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">--&gt; （prints nothing)</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p>没有预先定义<code>__gc</code>域，之后再定义无效<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/></pre></td><td class="code"><pre><span class="line">o = {x = <span class="string">&#34;hi&#34;</span>}</span><br/><span class="line">mt = {<span class="built_in">__gc</span> = <span class="literal">true</span>}</span><br/><span class="line"><span class="built_in">setmetatable</span>(o, mt)</span><br/><span class="line">mt.<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span> <span class="params">(o)</span></span> <span class="built_in">print</span>(o.x) <span class="keyword">end</span></span><br/><span class="line">o = <span class="literal">nil</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">--&gt; hi</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<ul>
+<li><p>回收器调用finalizer的顺序与对象被标记结束的顺序相反</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line">mt = {<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span> <span class="params">(o)</span></span> <span class="built_in">print</span>(o[<span class="number">1</span>]) <span class="keyword">end</span>}</span><br/><span class="line">list = <span class="literal">nil</span></span><br/><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">3</span> <span class="keyword">do</span></span><br/><span class="line">	list = <span class="built_in">setmetatable</span>({i, link = list}, mt)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line">list = <span class="literal">nil</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>()</span><br/><span class="line"><span class="comment">--&gt; 3</span></span><br/><span class="line"><span class="comment">--&gt; 2</span></span><br/><span class="line"><span class="comment">--&gt; 1</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>resurrection，如果finalizer的参数就是要回收的对象，则在该finalizer中，对象得到暂时恢复，并被标记在一个队列中，在下一次回收循环时被回收。如果finalizer将该对象存储在一个全局变量中，则对象得到永久恢复，直到程序结束才会被回收。不论是何种恢复，finalizer只会调用一次。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line">A = {x = <span class="string">&#34;this is A&#34;</span>}</span><br/><span class="line">B = {f = A}</span><br/><span class="line"><span class="built_in">setmetatable</span>(B, {<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span> <span class="params">(o)</span></span> <span class="built_in">print</span>(o.f.x) <span class="keyword">end</span>})</span><br/><span class="line">A, B = <span class="literal">nil</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">--&gt; this is A</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>在程序结束前调用的finalizer是叫做atexit函数</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">_G</span>.AA = {<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span></span><br/><span class="line">	<span class="comment">-- your &#39;atexit&#39; code comes here</span></span><br/><span class="line">	<span class="built_in">print</span>(<span class="string">&#34;finishing Lua program&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span>}</span><br/><span class="line"><span class="built_in">setmetatable</span>(<span class="built_in">_G</span>.AA, <span class="built_in">_G</span>.AA)</span><br/></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>设定在完成回收之前执行的函数</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br/><span class="line">	<span class="keyword">local</span> mt = {<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span> <span class="params">(o)</span></span></span><br/><span class="line">		<span class="comment">-- whatever you want to do</span></span><br/><span class="line">		<span class="built_in">print</span>(<span class="string">&#34;new cycle&#34;</span>)</span><br/><span class="line">		<span class="comment">-- create new object for next cycle</span></span><br/><span class="line">		<span class="built_in">setmetatable</span>({}, <span class="built_in">getmetatable</span>(o))</span><br/><span class="line">	<span class="keyword">end</span>}</span><br/><span class="line">	<span class="comment">-- create first object</span></span><br/><span class="line">	<span class="built_in">setmetatable</span>({}, mt)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">--&gt; new cycle</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">--&gt; new cycle</span></span><br/><span class="line"><span class="built_in">collectgarbage</span>() <span class="comment">--&gt; new cycle</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p>程序在结束时，Lua会调用所有待回收对象的finalizer，如果任何finalizer在这时标记对象为待回收，则该标记无效。所以<br/>上面的函数在程序结束前不会进入死循环</p>
+<ul>
+<li>weak table中弱键和弱值的finalizer在恢复对象时有差别：weak table的弱值会在恢复之前回收，而弱键会在恢复之后回收<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment">-- a table with weak keys</span></span><br/><span class="line">wk = <span class="built_in">setmetatable</span>({}, {<span class="built_in">__mode</span> = <span class="string">&#34;k&#34;</span>})</span><br/><span class="line"><span class="comment">-- a table with weak values</span></span><br/><span class="line">wv = <span class="built_in">setmetatable</span>({}, {<span class="built_in">__mode</span> = <span class="string">&#34;v&#34;</span>})</span><br/><span class="line">o = {} <span class="comment">-- an object</span></span><br/><span class="line">wv[<span class="number">1</span>] = o; wk[o] = <span class="number">10</span> <span class="comment">-- add it to both tables</span></span><br/><span class="line"><span class="built_in">setmetatable</span>(o, {<span class="built_in">__gc</span> = <span class="function"><span class="keyword">function</span> <span class="params">(o)</span></span></span><br/><span class="line">	<span class="built_in">print</span>(wk[o], wv[<span class="number">1</span>])</span><br/><span class="line"><span class="keyword">end</span>})</span><br/><span class="line">o = <span class="literal">nil</span>; <span class="built_in">collectgarbage</span>() <span class="comment">--&gt; 10	nil</span></span><br/></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-629_Style%20Transfer%20in%20Text%20Exploration%20and%20Evaluation/">Style Transfer in Text Exploration and Evaluation</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-62_%E4%BD%BF%E7%94%A8tengine%20DSO%20%E6%9D%A5%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97%EF%BC%88Lua/">使用tengine DSO 来动态编译安装第三方模块（Lua</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

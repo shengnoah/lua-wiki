@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua 学习 chapter23 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;h3 id&#x3D;&quot;目录&quot;&gt;目录&lt;&#x2F;h3&gt;     弱引用表   记忆函数   环境和模块   垃圾收集器     弱引用表 弱引用表是用来告知lua语言一个引用不应该阻止对一个对象回收的机制。所谓弱引用是一种不在垃圾收集器考虑范围内的对象引用。如果一个对象都是所有的引用都是弱引用，那么垃圾回收器就可以回收这个对象，并把所有引用都删除">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua 学习 chapter23">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-247_Lua%20%E5%AD%A6%E4%B9%A0%20chapter23%20/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;h3 id&#x3D;&quot;目录&quot;&gt;目录&lt;&#x2F;h3&gt;     弱引用表   记忆函数   环境和模块   垃圾收集器     弱引用表 弱引用表是用来告知lua语言一个引用不应该阻止对一个对象回收的机制。所谓弱引用是一种不在垃圾收集器考虑范围内的对象引用。如果一个对象都是所有的引用都是弱引用，那么垃圾回收器就可以回收这个对象，并把所有引用都删除">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.254Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.254Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua 学习 chapter23</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8%E8%A1%A8"><span class="toc-text">弱引用表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B0%E5%BF%86%E5%87%BD%E6%95%B0"><span class="toc-text">记忆函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%92%8C%E6%A8%A1%E5%9D%97"><span class="toc-text">环境和模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">垃圾收集器</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.254Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua 学习 chapter23</span></h1>
+<pre><code>            &lt;h3 id=&quot;目录&quot;&gt;目录&lt;/h3&gt;
+</code></pre>
+<ol>
+  <li>弱引用表</li>
+  <li>记忆函数</li>
+  <li>环境和模块</li>
+  <li>垃圾收集器</li>
+</ol>
+
+
+
+<h2 id="弱引用表">弱引用表</h2>
+<p>弱引用表是用来告知lua语言一个引用不应该阻止对一个对象回收的机制。所谓弱引用是一种不在垃圾收集器考虑范围内的对象引用。如果一个对象都是所有的引用都是弱引用，那么垃圾回收器就可以回收这个对象，并把所有引用都删除了。
+表是由键值对组成，一般情况下垃圾收集器不会回收一个在可访问表中作为值或者键的对象，键和值都是强引用。
+在一个弱引用表中，键和值都可以是弱引用。</p>
+
+<p>一个表是否为弱引用表是由原表中的__mode字段决定的，这个字段存在时，其值应该为一个字符串:这个字符串的值为”k”,那么表的键为弱引用，如果是”v”，值为弱应用，”kv”，表示这个表的键和值都是弱引用。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="n">a</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="n">mt</span> <span class="o">=</span> <span class="p">&#123;</span><span class="n">__mode</span> <span class="o">=</span> <span class="s2">"k"</span><span class="p">&#125;</span>
+<span class="nb">setmetatable</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mt</span><span class="p">)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">key</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">collectgarbage</span><span class="p">()</span><span class="c1">--第一个key就被回收了</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="记忆函数">记忆函数</h2>
+<p>lua语言中处理全局变量的方式：</p>
+<ul>
+  <li>编译器在编译所有代码之前，在外层创建局部变量_ENV</li>
+  <li>编译器将所有自由名称变换为_ENV.var;</li>
+  <li>函数load(or loadfile)使用全局环境初始化代码段的第一个上值，即lua语言内部维护的一个普通表。</li>
+</ul>
+
+<p>_ENV只是一个普通的变量，将其赋值为nil会使得后续的代码不能直接访问全局变量。
+我们还可以使用_ENV来绕过局部声明的变量，直接访问全局变量。</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="kd">local</span> <span class="nb">print</span><span class="p">,</span> <span class="n">sin</span> <span class="o">=</span> <span class="nb">print</span><span class="p">,</span> <span class="nb">math.sin</span>
+<span class="n">_ENV</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span> <span class="c1">--error 访问不到全局</span>
+
+<p><span class="n">a</span> <span class="o">&#x3D;</span> <span class="mi">13</span><br><span class="kd">local</span> <span class="n">a</span> <span class="o">&#x3D;</span> <span class="mi">12</span><br><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><br><span class="nb">print</span><span class="p">(</span><span class="n">_ENV</span><span class="p">.</span><span class="n">a</span><span class="p">)</span> <span class="c1">–访问全局的a，当然也可以使用_G来访问全局的a</span></p>
+<p><span class="n">_ENV</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br><span class="n">a</span> <span class="o">&#x3D;</span> <span class="mi">1</span><br><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">–print is a nil</span></p>
+<p><span class="n">a</span> <span class="o">&#x3D;</span> <span class="mi">15</span><br><span class="n">_ENV</span> <span class="o">&#x3D;</span> <span class="p">&#123;</span><span class="n">g</span> <span class="o">&#x3D;</span> <span class="nb">_G</span><span class="p">&#125;</span><br><span class="n">a</span> <span class="o">&#x3D;</span> <span class="mi">1</span><br><span class="n">g</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">_ENV</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">.</span><span class="n">a</span><span class="p">&#125;</span> <span class="c1">– 1 , 15</span><br></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>通常_G和_ENV指向的是同一个表。但是，尽管如此，他们是很不一样的实体。_ENV是一个局部变量，所以对“全局变量”的访问实际上访问的都是_ENV。_G则是一个在任何情况下都没有任何特殊状态的全局变量。_ENV永远指向的是当前的环境；而假设在可见且无人改变过其值的前提下，_G通常指向的是全局变量。</p>
+
+<p>_ENV的主要作用就是改变当前的环境。</p>
+
+<h2 id="环境和模块">环境和模块</h2>
+<p>为了防止污染全局环境：</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="kd">local</span> <span class="n">M</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+<span class="n">_ENV</span> <span class="o">=</span> <span class="p">&#123;&#125;</span>
+
+<p><span class="k">function</span> <span class="nf">hello</span><span class="p">()</span><br>    <span class="nb">print</span><span class="p">(</span><span class="s2">“hello”</span><span class="p">)</span><br><span class="k">end</span></p>
+<p><span class="k">function</span> <span class="nf">sayHello</span><span class="p">()</span><br>    <span class="n">hello</span><span class="p">()</span> <span class="c1">–M.hello</span><br><span class="k">end</span></p>
+<p><span class="kd">local</span> <span class="n">M</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br><span class="kd">local</span> <span class="n">sqrt</span> <span class="o">&#x3D;</span> <span class="nb">math.sqrt</span><br><span class="kd">local</span> <span class="k">in</span> <span class="o">&#x3D;</span> <span class="n">io</span><br><span class="n">_ENV</span> <span class="o">&#x3D;</span> <span class="kc">nil</span><br><span class="c1">–这样就不能进行外部访问了</span></p>
+<p></pre></td></tr></tbody></table></code></pre></div></div></p>
+<p>load函数通常被加载代码段的上值_ENV初始化为全局变量。</p>
+
+<p>在lua中，<strong>一个具有弱引用的键和一个强引用的值的表是一个瞬表。</strong></p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="n">o</span> <span class="o">=</span> <span class="p">&#123;</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">"hi"</span><span class="p">&#125;</span>
+<span class="nb">setmetatable</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="p">&#123;</span><span class="n">__gc</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="nb">print</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="k">end</span><span class="p">&#125;)</span>
+<span class="n">o</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="nb">collectgarbage</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>元函数__gc表示析构函数，在垃圾回收这个对象的时候会自动调用函数。</p>
+
+<h2 id="垃圾收集器">垃圾收集器</h2>
+<p>每一个垃圾回收周期由四个阶段组成：标记、清理、清除和析构。</p>
+<ul>
+  <li>标记阶段：把可达对象标记为活跃；</li>
+  <li>清理阶段处：理析构器和弱引用表，这些没有被标记为活跃状态的对象会被标记为活跃（复苏），并放在一个单独的列表中，这个列表将在析构阶段使用。然后，lua遍历弱引用表并从中移除键或者值未被标记的元素。</li>
+  <li>清除阶段：遍历所有对象，对象未被标记为活跃就回收，否则标记为清理标记，然后准备下一个清理周期。</li>
+  <li>析构阶段：调用清理阶段被分离出来的对象的析构器。</li>
+</ul>
+
+
+
+                
+                
+<pre><code>            &lt;hr style=&quot;visibility: hidden;&quot;&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-245_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E7%9B%AE%E5%BD%95%E5%8F%8A%E6%A8%A1%E5%9D%97%E7%BB%93%E6%9E%84/">Lua源码阅读：目录及模块结构</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-248_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%85%AD)/">Lua学习笔记(六)</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

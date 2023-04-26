@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>build system, lazy evaluation, and incremental computation - Lua教程</title>
+
+  
+    <meta name="description" content="NOTE: I wrote this based on the same casual tech talk I gave in USTC and SJTU. The talk is recorded in Chinese, thus I wrote this to share the ideas to more people :)     Why am I speaking about th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="build system, lazy evaluation, and incremental computation">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1181_build%20system,%20lazy%20evaluation,%20and%20incremental%20com/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="NOTE: I wrote this based on the same casual tech talk I gave in USTC and SJTU. The talk is recorded in Chinese, thus I wrote this to share the ideas to more people :)     Why am I speaking about th">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.001.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.002.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.003.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.004.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.005.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.005.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.006.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.007.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.008.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.009.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.010.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.011.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.012.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.013.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.014.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.015.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.017.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.018.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.020.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.019.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.021.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.022.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.023.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.024.jpeg">
+<meta property="og:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.025.jpeg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.241Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.241Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.001.jpeg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">build system, lazy evaluation, and incremental computation</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#build-system"><span class="toc-text">Build System</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lazy-evaluation"><span class="toc-text">Lazy evaluation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#incremental-computation"><span class="toc-text">Incremental Computation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thinking-about-them"><span class="toc-text">Thinking about them…</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.241Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>build system, lazy evaluation, and incremental computation</span></h1>
+<blockquote>
+  <p>NOTE: I wrote this based on the same casual tech talk I gave in USTC and SJTU.
+The talk is recorded in Chinese, thus I wrote this to share the ideas to more people :)</p>
+</blockquote>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.001.jpeg" alt=""/></p>
+
+<p>Why am I speaking about these three things? First, they are often paid poor attention in the regular CS education curriculum; second, they are subtly sharing some commonalities, which might not be intuitive at the first sight.</p>
+
+<h2 id="build-system">Build System</h2>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.002.jpeg" alt=""/></p>
+
+<p>First, what is a build system? It is a tool that transforms and composes the source code and other resources into a single software application. The fundamental reason why we need it is that there are multiple layers of abstraction between source code and instructions run on your computer. Usually, these transformations are performed by other tools called <em>compiler</em> and <em>linker</em> etc. However, building software can be a complex process, which poses significant challenges for the team. For example, in the early days of Window NT kernel development (see book <em>Show Stopper!: The Breakneck Race to Create Windows NT and the Next Generation at Microsoft</em>), windows team needs one (or two) specific person (people) who knows all the tricky steps and specific environment setup in order to produce a complete executable kernel from source code. Since it is a tedious job and compilation become slower and slower when the codebase grows, this specific person might want to construct an automated tool to perform the steps. It would be nice to support dependency tracking, such that things are only built when their dependencies changed.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.003.jpeg" alt=""/></p>
+
+<p>To give you an example, this is a short snippet for Makefile, a declarative language for describing the dependencies and the steps to produce target file(s) from dependencies. One of the most intuitive ways to present this file is to interpret it as a dependency graph. But, what does this mysterious title, “Non-recursive Make Considered Harmful”, mean here? What you need to know is that Makefile scales poorly, especially for big projects.</p>
+
+<p>Concretely, here is part of the (many) <code class="highlighter-rouge">Makefile</code>s used to build GHC, a compiler for Haskell language. <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.004.jpeg" alt=""/></p>
+
+<p>This is a very complex project (e.g. platform sensitive compilation, hybrid source code language, dynamic code generation etc.), and you can see that the resulted Makefile is hardly readable, not to say being maintainable. <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.005.jpeg" alt=""/> This paper tried to use a new build system called Hadrian to rewrite the build system of GHC compiler. The picture on the right is an example of build script in Shake. This is actually Haskell code, and the library uses type system of Haskell to conveniently encode the build system’s semantics correctly &amp; efficiently while permitting you to use any features or libraries already in Haskell.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.005.jpeg" alt=""/></p>
+
+<p>This migration project is called <em>Hadrian</em>, which I contributed to two years ago and now has been part of GHC and will be used as the default build system soon.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.006.jpeg" alt=""/></p>
+
+<p>However, build system can be used to build things beyond software applications. For example, if you are working a ML project involving the data pipeline that transforms raw data into feature vectors (this process is called ETL, <em>Extract-Transform-Load</em>) and then used to train a ML model, either online or offline, you might have the needs such as changing some code/infra in the later stages but doesn’t want to rerun everything in the earlier stages from scratch, which can be a long time.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.007.jpeg" alt=""/></p>
+
+<p>As a mid-talk quiz/question, I want to ask you to think about the neural network as a computation dependency graph, and how we could use knowledge in build system, lazy evolution and incremental computation to make it more efficient.</p>
+
+<h2 id="lazy-evaluation">Lazy evaluation</h2>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.008.jpeg" alt=""/></p>
+
+<p>The transformation from code to computed results is called <em>evaluation</em>, and then there will be rules describing possible transformations. However, constructs that look exactly the same (i.e. with same syntax structure) can be evaluated (interpreted) differently, resulting in different runtime behaviors or even different results. <em>Lazy evaluation</em> is the evaluation strategy that puts off the computation (transformation) of expression as late as possible. Why is it useful? It gives extra power to the syntax language, makes it possible to describe an infinitely long data structure. This extra power enables a more declarative syntax style, which looks like math formula, and thus makes your programs look simpler.</p>
+
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fibs</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="n">fibs</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="n">fibs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">fibs</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Q: Haskell is a functional language, but most functional languages are interpreted – how is
+haskell compiled to machine code?</p>
+</blockquote>
+
+<p>A: Haskell is not like C, which is compiled to machine code while preserving the basic structure of the code. Haskell code will undergo several layers of transformations into STG code (Spinless tagless G-machine), which are graph level operations/reductions. Then, STG is compiled to
+low-level language (C/ASM/LLVM), and linked to a small RTS (runtime system) compiled from C code.
+For more details, see <a target="_blank" rel="noopener" href="https://aosabook.org/en/ghc.html">https://aosabook.org/en/ghc.html</a>.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.009.jpeg" alt=""/></p>
+
+<p>To give you another concrete application of this, here is the data flow block graph for Spark, a Big Data computation framework. Spark lets you define the data transformation you want through expression APIs based on <em>map</em> and <em>reduce</em> operators. Then, Spark constructs a dependency graph based on the final expressions. It only performs the necessary computation if the user explicitly requires it.</p>
+
+<h2 id="incremental-computation">Incremental Computation</h2>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.010.jpeg" alt=""/></p>
+
+<p>When we are solving an algorithm problem, we have access to all the input data, and we compute the output based on all of them in a single batch. However, in the real world production scenarios, it is a common need to build a daemon program, which handles incoming requests, non-stop.</p>
+
+<p>In this case, the input changes incrementally, and we can’t afford recomputing the output each time it changes. (Concretely, services at a scale like Google might receive millions of update requests per day, and each request can effectively change the input to your aggregation algorithm, for example, page-rank).</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.011.jpeg" alt=""/></p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.012.jpeg" alt=""/></p>
+
+<p>Another less explicit example is CSS rendering engine. The essence of browser engine is a pipeline that transforms source resources (e.g. html, css) into pixels on screen. In a simplified version of the rendering process, there are two key data structures called <em>style tree</em> and <em>flow tree</em>. Style tree is the DOM tree with computed styles attached to each node (DOM element). Flow tree is a tree of boxes, and each box has its dimensional properties computed from styles of corresponding element nodes. For example, a single paragraph element, after computation (layout algorithm), will consist of line boxes with exact dimension info. Now, when does incremental computation happen in this case? It is when JavaScript comes into play. JavaScript can modify the page after the page is loaded, e.g. triggered by user actions or other events. Re-renderings become a persistent need in modern web pages. We want to have a browser engine that only re-renders page elements that are impacted by the change, rather than re-rendering the whole web page from scratch.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.013.jpeg" alt=""/></p>
+
+<p>Similarly, another related work is called “<em>data-structure synthesis</em>”. It is a sub-topic in the area of program synthesis, and its goal is to synthesize data structures with state e.g. interface implementation or C++ class. One such work is called <em>Cozy</em>, and it allows user to specify the behavior of intended programs by a logical specification of the query and operator semantics. The value of the tool comes from its ability to synthesize a program that satisfies the specification and also optimize it, in a large sense by automatic incrementalization. Consider the example on the right, a good implementation of this spec would be using an auxiliary data structures for maintaining the maximum value with each update operation, and simply return this value when being called. In the future, this style of work might be used to speed up data-intensive applications automatically in scale.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.014.jpeg" alt=""/></p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.015.jpeg" alt=""/></p>
+
+<p>Another good application of incremental computation is React.js framework. First, as a brief introduction, React.js supports a language extend from JS called JSX, in which you can embed HTML directly in your JavaScript code. Essentially, it composes the web page together through a computational way on the client-side and propagates the updates reactively, IN a bit more detail, React.js provide concepts called “props” and “state”. Props are immutable data passed down from the root component, and state is what each component maintains and updates (by reacting to different events).</p>
+
+<h2 id="thinking-about-them">Thinking about them…</h2>
+
+<p>The questions are:</p>
+
+<ul>
+  <li>How are these three concepts related?</li>
+  <li>How are they relevant to my daily engineering tasks?</li>
+  <li>How will the future of algorithm development look like?</li>
+</ul>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.017.jpeg" alt=""/></p>
+
+<p>First, I’d like to use a graph-based abstraction to unify three concepts. Each node might be a data or operator, while each edge is a “depends-on” relationship. This graph might be statically determined or changeable throughout the dynamic evaluation process.</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.018.jpeg" alt=""/>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.020.jpeg" alt=""/>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.019.jpeg" alt=""/></p>
+
+<p>Now, in a <em>build system</em>, each node might be an I/O operation or command-line program; in the <em>lazy evaluation</em>, we might be able to do computation over the dependencies, and evaluation order will be important in this case. Finally, the <em>incremental computation</em> can be understood as a shortcut that computes changed output directly based on the change in the input, without the need for recompilation using the full input data).</p>
+
+<p>In fact, our daily engineering tasks might include many such small facilities or tricks already:</p>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.021.jpeg" alt=""/>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.022.jpeg" alt=""/>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.023.jpeg" alt=""/>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.024.jpeg" alt=""/>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://izgzhen.github.io/assets/images/computation-talk-released/computation-talk-released.025.jpeg" alt=""/></p>
+
+<p>In the future, I think there are two trends:</p>
+
+<ul>
+  <li><strong>Decouple of performance optimization and algorithmic specification (business requirements understanding)</strong>: Programmers will continue diverging into two groups of people, one building better and better infra tools, and another group will focus on mastering a wide range of tools, composing them and using them to express the business logics.</li>
+  <li><strong>Advancement of practical, backward-compatible program synthesizers for automatic algorithm development</strong>: Previous work in this area focuses on building synthesizers for newly designed, standalone specifications (either in logical expression, I/O examples or predictive, pattern-based systems).</li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-118_Suricata%20+%20Lua%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0%E6%83%85%E6%8A%A5%E5%AF%B9%E6%8E%A5/">Suricata + Lua实现本地情报对接</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1182_lua%20table.sort%E6%96%B9%E6%B3%95/">lua table.sort方法</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>evaluation of association patterns - Lua教程</title>
+
+  
+    <meta name="description" content="This article is the note for reading _Introduction to Data Mining_ . _Chapter 6. Association Analysis: Basic Concepts and Algorithms_ — Evaluation of Association Patterns.  GeneralAs the size and dime">
+<meta property="og:type" content="article">
+<meta property="og:title" content="evaluation of association patterns">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1114_evaluation%20of%20association%20patterns/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="This article is the note for reading _Introduction to Data Mining_ . _Chapter 6. Association Analysis: Basic Concepts and Algorithms_ — Evaluation of Association Patterns.  GeneralAs the size and dime">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.236Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.236Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">evaluation of association patterns</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#General"><span class="toc-text">General</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Objective-Measures-of-Interestingness"><span class="toc-text">Objective Measures of Interestingness</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Limitations-of-the-Support-Confidence-Framework"><span class="toc-text">Limitations of the Support-Confidence Framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interest-Factor"><span class="toc-text">Interest Factor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Correlation-Analysis"><span class="toc-text">Correlation Analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IS-Measure"><span class="toc-text">IS Measure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alternative-Objective-Interestingness-Measures"><span class="toc-text">Alternative Objective Interestingness Measures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Consistency-among-Objective-Measures"><span class="toc-text">Consistency among Objective Measures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Properties-of-Objective-Measures"><span class="toc-text">Properties of Objective Measures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Measures-beyond-Pairs-of-Binary-Variables"><span class="toc-text">Measures beyond Pairs of Binary Variables</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Simpson%E2%80%99s-Paradox"><span class="toc-text">Simpson’s Paradox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Effect-of-Skewed-Support-Distribution"><span class="toc-text">Effect of Skewed Support Distribution</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>evaluation of association patterns</span></h1>
+<p>This article is the note for reading <strong>_Introduction to Data Mining_ </strong>.</p>
+<p>_Chapter 6. Association Analysis: Basic Concepts and Algorithms_</p>
+<p>— Evaluation of Association Patterns.</p>
+
+<h2 id="General"><a href="#General" class="headerlink" title="General"></a><a href="#General" title="General"></a>General</h2><p>As the size and dimensionality of real commercial databases can be very large, we could easily end up with thousands or even millions of patterns, many of which might not be interesting. Therefore it is important to establish a set of well-accepted criteria for evaluating the quality of association patterns.</p>
+<p>There are few criteria as following :</p>
+<ul>
+<li><strong>Objective Interestingness Measure</strong> : Uses statistics derived from data to determine whether a pattern.<em>   <em>*Subjective Argument</em></em> : A pattern is considered subjectively uninteresting unless it reveals unexpected information about the data or provides useful knowledge that can lead to profitable actions. There are few approaches for incorporating subjective knowledge into the pattern discovery task: Visualization, Templete-based Approach, Subjective Interestingness Measure.</li>
+</ul>
+<h2 id="Objective-Measures-of-Interestingness"><a href="#Objective-Measures-of-Interestingness" class="headerlink" title="Objective Measures of Interestingness"></a><a href="#Objective-Measures-of-Interestingness" title="Objective Measures of Interestingness"></a>Objective Measures of Interestingness</h2><p>An objective measure is usually computed based on the frequency counts tabulated in a <strong>contingency table</strong>.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>B</th>
+<th>Not B</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>f<sub>11</sub></td>
+<td>f<sub>10</sub></td>
+<td>f<sub>1+</sub></td>
+</tr>
+<tr>
+<td>Not A</td>
+<td>f<sub>01</sub></td>
+<td>f<sub>00</sub></td>
+<td>f<sub>0+</sub></td>
+</tr>
+<tr>
+<td></td>
+<td>f<sub>+1</sub></td>
+<td>f<sub>+0</sub></td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3 id="Limitations-of-the-Support-Confidence-Framework"><a href="#Limitations-of-the-Support-Confidence-Framework" class="headerlink" title="Limitations of the Support-Confidence Framework"></a><a href="#Limitations-of-the-Support-Confidence-Framework" title="Limitations of the Support-Confidence Framework"></a>Limitations of the Support-Confidence Framework</h3><p>Existing association rule mining formulation relies on the support and confidence measures to eliminate uninteresting patterns.</p>
+<p><strong>The drawback of support</strong> : Many potentially interesting patterns involving low support items might be eliminated by the support threshold.</p>
+<p><strong>The drawback of confidence</strong> : In a pattern of A -&gt; B, a high confidence can be less than the support of B, which means that A will actually decrease the probability of B. Concretely, the pitfall of confidence can be traced to the fact that the measure ignores the support of the itemset in the rule consequent. </p>
+<p>Because of the limitations in the support-confidence framework, various objective measures have been used to evaluate the quality of association patterns.</p>
+<h3 id="Interest-Factor"><a href="#Interest-Factor" class="headerlink" title="Interest Factor"></a><a href="#Interest-Factor" title="Interest Factor"></a>Interest Factor</h3><p> $Lift = frac{c(A to B)}{s(B)} $</p>
+<p>For binary variables, lift is equivalent to another objective measure called <strong>interest factor</strong>, which is defined as follows: </p>
+<p>$I(A, B) = frac{s(A, B)}{s(A) times s(B)} = frac{Nf_{11}}{f_{1+}f_{+1}}$</p>
+<p>$begin{equation}I(A, B)begin{cases}= 1mbox{, if A and B are independent;}&gt; 1mbox{, if A and B are positively correlated;}\&lt; 1mbox{, if A and B are negatively correlated.}end{cases}end{equation}$</p>
+<p><strong>Limitations of Interest Factor</strong> : Interest factor can be approximately near to 1 while the supports of A and B are large. In this situation, confidence is perhaps the better choice.</p>
+<h3 id="Correlation-Analysis"><a href="#Correlation-Analysis" class="headerlink" title="Correlation Analysis"></a><a href="#Correlation-Analysis" title="Correlation Analysis"></a>Correlation Analysis</h3><p>$phi = frac{f_{11}f_{00} - f_{01}f_{10}}{sqrt{f_{1+}f_{+1}f_{0+}f_{+0}}}$</p>
+<p>The value of correlation ranges from -1 (perfect negative correlation) to +1 (perfect positive correlation). If the variables are statistically independent, then $phi = 0$.</p>
+<p><strong>Limitations of Correlation Analysis</strong> : The $phi$-coefficient gives equal importance to both co-presence and co-absence of items in a transaction. Therefore it is more suitable for analysing symmetric binary variables. Another limitation of this measure is that it does not remain invariant when there are proportional changes to the sample size.</p>
+<h3 id="IS-Measure"><a href="#IS-Measure" class="headerlink" title="IS Measure"></a><a href="#IS-Measure" title="IS Measure"></a>IS Measure</h3><p>$IS(A, B) = sqrt{I(A, B) times s(A, B)} = frac{s(A, B)}{sqrt{s(A)s(B)}}$</p>
+<p>Note that IS is large when the interest factor and support of the pattern are large.</p>
+<p><strong>Limitations of IS Measure</strong> : The IS value for a pair of independent itemsets, A and B, is</p>
+<p>​    $IS_{indep}(A, B) = frac{s(A, B)}{sqrt{s(A) times s(B)}} = sqrt{s(A) times s(B)}$</p>
+<p>Since the value depends on s(A) and s(B), IS shares a similar problem as the confidence measure —- that the value of the measure can be quite large, even for uncorrelated and negatively correlated patterns.</p>
+<h3 id="Alternative-Objective-Interestingness-Measures"><a href="#Alternative-Objective-Interestingness-Measures" class="headerlink" title="Alternative Objective Interestingness Measures"></a><a href="#Alternative-Objective-Interestingness-Measures" title="Alternative Objective Interestingness Measures"></a>Alternative Objective Interestingness Measures</h3><p>There are still many other measures proposed for analysing relationships between pairs of binary variables, which can be divided into two categories:</p>
+<p>​    <strong>Symmetric</strong> : $M(A to B) = M(B to A)$</p>
+<p>​    Correlation, Odds ratio, Kappa, Interest, Cosine, Piatetsky-Shapiro, Collective stringth, Jaccard, All-confidence</p>
+<p>​    <strong>Asymmetric</strong> : $M(A to B) neq M(B to A)$</p>
+<p>​    Goodman-Kruskal, Mutual Information, J-Measure, Gini index, Laplace, Conviction, Certainty factor, Added Value</p>
+<h3 id="Consistency-among-Objective-Measures"><a href="#Consistency-among-Objective-Measures" class="headerlink" title="Consistency among Objective Measures"></a><a href="#Consistency-among-Objective-Measures" title="Consistency among Objective Measures"></a>Consistency among Objective Measures</h3><p>If the measures are consistent, then we can choose any one of them as our evaluation metric. Otherwise, it is important to understand that their differences are in order to determine which measure is more suitable for analysing certain types of patterns.</p>
+<h3 id="Properties-of-Objective-Measures"><a href="#Properties-of-Objective-Measures" class="headerlink" title="Properties of Objective Measures"></a><a href="#Properties-of-Objective-Measures" title="Properties of Objective Measures"></a>Properties of Objective Measures</h3><p>A significant number of the measures provide conflicting information about the quality of a pattern. To understand their differences, we need to examine the properties of these measures.</p>
+<ol>
+<li><strong>Inversion Property</strong> : An objective measure M is invariant under the inversion operation if its value remains the same when exchanging the frequency counts f<sub>11</sub> with f<sub>00</sub> and f<sub>10</sub> with f<sub>01</sub>.</li>
+<li><strong>Null Addition Property</strong> : An objective measure M is invariant under the null addition if it is not affected by increasing f<sub>00</sub>, while all other frequencies in the contingency table stay the same.</li>
+<li><strong>Scaling Property</strong> : An objective measure M is invariant under the row/column scaling operation if $M(T) = M(T’)$, where $T$ is a contingency table with frequency counts [f<sub>11</sub>; f<sub>10</sub>; f<sub>01</sub>; f<sub>00</sub>], $T’$ is a contingency table with scaled frequency counts [k<sub>1</sub>k<sub>3</sub>f<sub>11</sub>; k<sub>2</sub>k<sub>3</sub>f<sub>10</sub>； k<sub>1</sub>k<sub>4</sub>f<sub>01</sub>; k<sub>2</sub>k<sub>4</sub>f<sub>00</sub>], and k<sub>1</sub>, k<sub>2</sub>, k<sub>3</sub>, k<sub>4</sub> are positive constants.</li>
+</ol>
+<h3 id="Measures-beyond-Pairs-of-Binary-Variables"><a href="#Measures-beyond-Pairs-of-Binary-Variables" class="headerlink" title="Measures beyond Pairs of Binary Variables"></a><a href="#Measures-beyond-Pairs-of-Binary-Variables" title="Measures beyond Pairs of Binary Variables"></a>Measures beyond Pairs of Binary Variables</h3><p>Many of the measures, such as support and all-confidence, are also applicable to larger-sized itemsets. Other measures, such as interest factor, IS, PS, and Jaccard coefficient, can be extended to more than two variables using the frequency tables tabulated in a multidimensional contingency table.</p>
+<p>Given a k-itemset {i<sub>1</sub>,i<sub>1</sub>,…,i<sub>k</sub>}, the condition for statistical independent can be stated as follows:</p>
+<p>​    $f_{i1i2…ik} = frac{f_{i1+…+} times f_{+i2…+} times … times f_{++…ik}}{N ^ {k-1}}$</p>
+<p>With this definition, we can extend objective measures such as interest factor and PS, which are based on deviations from statistical independence, to more than two variables:</p>
+<p>​    $I = frac{N^{k-1} times f_{i1i2…ik}}{f_{i1+…+} times f_{+i2…+} times … times f_{++…ik}}$</p>
+<h2 id="Simpson’s-Paradox"><a href="#Simpson’s-Paradox" class="headerlink" title="Simpson’s Paradox"></a><a href="#Simpson’s-Paradox" title="Simpson’s Paradox"></a>Simpson’s Paradox</h2><p>It is important to exercise caution when interpreting the association between variables because the observed relationship may be influenced by the presence of other confounding factors, i.e., hidden variables that are not included in the analysis. In some cases, the hidden variables may cause the observed relationship between a pair of variables to disappear or reverse its direction, a phenomenon that is known as Simpson’s paradox.</p>
+<p>Mathematically, suppose</p>
+<p>​    $a/b &lt; c/d mbox{ and } p/q &lt; r/s$</p>
+<p>where $a/b$ and $p/q$ may represent the confidence of the rule $A to B$ in two different strata, while $c/d$ and $r/s$ may represent the confidence of the rule $bar{A} to B$ in the two strata. When the data is pooled together, the confidence values of the rules in the combined data are $(a + p)/(b + q)$ and $(c + r)/(d + s)$, respectively. Simpson’s paradox occurs when</p>
+<p>​    $frac{a + p}{b + q} &gt; frac{c + r}{d + s}$</p>
+<p>thus leading to the wrong conclusion about the relationship between the variables.<br/>The lesson here is that proper stratification is needed to avoid generating spurious patterns resulting from Simpson’s paradox.</p>
+<h2 id="Effect-of-Skewed-Support-Distribution"><a href="#Effect-of-Skewed-Support-Distribution" class="headerlink" title="Effect of Skewed Support Distribution"></a><a href="#Effect-of-Skewed-Support-Distribution" title="Effect of Skewed Support Distribution"></a>Effect of Skewed Support Distribution</h2><p>The performances of many association analysis algorithms are influenced by properties of their input data.</p>
+<p>eg. Grouping the items in the census data set based on their support values</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Group</th>
+<th>G<sub>1</sub></th>
+<th>G<sub>2</sub></th>
+<th>G<sub>3</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Support</td>
+<td>&lt; 1%</td>
+<td>1% - 90%</td>
+<td>&gt; 90%</td>
+</tr>
+<tr>
+<td style="text-align:center">Number of Items</td>
+<td>1735</td>
+<td>358</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Choosing the right support threshold for mining this data set can be quite tricky.</p>
+<ul>
+<li>If threshold too high, we may miss many interesting patterns involving the low support items from G<sub>1</sub>.</li>
+<li>If threshold too low, computational and memory requirement increase considerably and the number of extracted patterns also increases substantially. And, we may extract many spurious patterns that relate a high-frequency item to a low-frequency item. Such patterns, which are called <strong>cross-support patterns</strong>, are likely to be spurious because their correlations tend to be weak, although the confidence might be high.</li>
+</ul>
+<p><strong>Cross-support Pattern</strong> : A cross-support pattern is an itemset X = {i<sub>1</sub>,i<sub>2</sub>,…,i<sub>k</sub>} whose support ratio</p>
+<p>​    $r(X) = frac{min[s(i_1),s(i_2),…,s(i_k)]}{max[s(i_1),s(i_2),…,s(i_k)]}$</p>
+<p>is less than a user-defined threshold h<sub>c</sub>.</p>
+<p>eg.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">p</th>
+<th style="text-align:center">q</th>
+<th style="text-align:center">r</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>​    Given h<sub>c</sub> = 0.5, {p,q}, {p,r}, {p,q,r} are cross-support patterns.</p>
+<p>​    We can see that c(q -&gt; p) is 100% even though {p,q} is a cross-support pattern. The fact that cross-support pattern can produce a high-confidence rule should not come as a surprise because one of its items (p) appears very frequently in the data.</p>
+<p>Cross-support patterns can be detected by examining the lowest confidence rule that can be extracted from a given itemset.</p>
+<ol>
+<li><p>Recall the following anti-monotone property of confidence:</p>
+<p>$conf({i_1i_2} to {i_3i_4…i_k}) le conf({i_1i_2i_3} to {i_4…i_k})$</p>
+</li>
+<li><p>Therefore, the lowest confidence attainable from a frequent itemset {i<sub>1</sub>,i<sub>2</sub>,…,i<sub>k</sub>} is</p>
+<p>​    $frac{s({i_1i_2…i_k})}{max[s(i_1),i(i_2),…,s(i_k)]}$</p>
+<p>This expression is also known as the <strong>h-confidence</strong> or <strong>all-confidence</strong> measure. And because of the anti-monotone property of support, then</p>
+<p>​    $mbox{h-confidence}(X) le frac{min[s(i_1),i(i_2),…,s(i_k)]}{max[s(i_1),i(i_2),…,s(i_k)]}$</p>
+</li>
+</ol>
+<p><strong>Therefore, cross-support patterns can be eliminated by ensuring that the h-confidence values for the patterns exceed h<sub>c</sub>.</strong></p>
+<p>Also, the measure is anti-monotone, i.e.,</p>
+<p>​    $mbox{h-confidence}({i_1i_2…i_k}) ge mbox{h-confidence}({i_1i_2…i_{k+1}})$</p>
+<p>So this can be incorporated directly into the mining algorithm. Furthermore, h-confidence ensures that the items contained in an itemset are strongly associated with each other. For example, suppose the h-confidence of an itemset X is 80%. If one of the items in X is present in a transaction, there is at least an 80% chance that the rest of the items in X also belong to the same transaction. Such strongly associated patterns are called <strong>hyperclique patterns</strong>.</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1112_Lua-table/">Lua-table</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1113_lua%20%E7%BC%96%E7%A8%8B%E4%B9%8B%20hello%20world/">lua 编程之 hello world</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

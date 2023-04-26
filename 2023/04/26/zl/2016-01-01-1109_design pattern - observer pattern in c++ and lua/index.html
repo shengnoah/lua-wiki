@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>design pattern - observer pattern in c++ and lua - Lua教程</title>
+
+  
+    <meta name="description" content="What is Observer Pattern   Example in C++   Example in Lua        Observer Pattern Wiki    The observer pattern is a software design pattern in which an object, called the subject, maintains a list">
+<meta property="og:type" content="article">
+<meta property="og:title" content="design pattern - observer pattern in c++ and lua">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1109_design%20pattern%20-%20observer%20pattern%20in%20c++%20and%20lua/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="What is Observer Pattern   Example in C++   Example in Lua        Observer Pattern Wiki    The observer pattern is a software design pattern in which an object, called the subject, maintains a list">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/01/W3sDesign_Observer_Design_Pattern_UML.jpg">
+<meta property="article:published_time" content="2023-04-26T05:16:12.235Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.235Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/0/01/W3sDesign_Observer_Design_Pattern_UML.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">design pattern - observer pattern in c++ and lua</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-observer-pattern"><span class="toc-text">What is Observer Pattern</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#example-in-c"><span class="toc-text">Example in C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#example-in-lua"><span class="toc-text">Example in Lua</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>design pattern - observer pattern in c++ and lua</span></h1>
+<ul id="markdown-toc">
+  <li><a href="#what-is-observer-pattern" id="markdown-toc-what-is-observer-pattern">What is Observer Pattern</a></li>
+  <li><a href="#example-in-c" id="markdown-toc-example-in-c">Example in C++</a></li>
+  <li><a href="#example-in-lua" id="markdown-toc-example-in-lua">Example in Lua</a></li>
+</ul>
+
+
+<center><br/>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://upload.wikimedia.org/wikipedia/commons/0/01/W3sDesign_Observer_Design_Pattern_UML.jpg" width="800" itemprop="image"/>
+</center>
+<p><br/>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Observer_pattern">Observer Pattern Wiki</a><br/></p>
+<blockquote>
+  <p>The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
+</p>
+</blockquote>
+
+
+<center><b><br/>
+一一一一一一一一一一一一一一一一一一一一一一一一<br/>
+© Hung-Chi&#39;s Blog<br/>
+<a href="https://hungchicheng.github.io/2017/09/29/Design-Patterns-Observer-Pattern-in-lua-and-C++/" id="link" target="_blank" rel="noopener noreferrer">
+    https://hungchicheng.github.io/2017/09/29/Design-Patterns-Observer-Pattern-in-lua-and-C++/
+</a><br/>
+一一一一一一一一一一一一一一一一一一一一一一一一
+</b></center>
+
+
+
+<p><br/></p>
+<center>
+
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>
+
+
+<h2 id="what-is-observer-pattern">What is Observer Pattern</h2>
+
+<h2 id="example-in-c">Example in C++</h2>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;set&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<p><span class="k">class</span> <span class="nc">Observer</span><span class="p">&#123;</span><br><span class="k">public</span><span class="o">:</span><br>    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="o">&#x3D;</span> <span class="mi">0</span><span class="p">;</span><br><span class="p">&#125;;</span></p>
+<p><span class="k">class</span> <span class="nc">Subject</span><span class="p">&#123;</span><br><span class="k">protected</span><span class="o">:</span><br>    <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span> <span class="n">Observer</span><span class="o"><em></span> <span class="o">&gt;</span> <span class="n">m_observerList</span><span class="p">;</span><br><span class="k">public</span><span class="o">:</span><br>    <span class="kt">void</span> <span class="n">attach</span><span class="p">(</span> <span class="n">Observer</span> <span class="o"></em></span><span class="n">o</span> <span class="p">)&#123;</span> <span class="n">m_observerList</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span> <span class="n">o</span> <span class="p">);</span> <span class="p">&#125;;</span><br>    <span class="kt">void</span> <span class="n">detach</span><span class="p">(</span> <span class="n">Observer</span> <span class="o">*</span><span class="n">o</span> <span class="p">)&#123;</span> <span class="n">m_observerList</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span> <span class="n">o</span> <span class="p">);</span> <span class="p">&#125;;</span><br>    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">notify</span> <span class="p">()</span> <span class="o">&#x3D;</span> <span class="mi">0</span><span class="p">;</span><br><span class="p">&#125;;</span></p>
+<p><span class="k">class</span>  <span class="nc">Subject1</span><span class="o">:</span><span class="k">public</span> <span class="n">Subject</span><span class="p">&#123;</span><br><span class="k">private</span><span class="o">:</span><br>    <span class="kt">int</span> <span class="n">m_state</span><span class="p">;</span><br><span class="k">public</span><span class="o">:</span><br>    <span class="kt">void</span> <span class="n">notify</span> <span class="p">()&#123;</span><br>        <span class="k">for</span> <span class="p">(</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="n">o</span> <span class="o">:</span> <span class="n">m_observerList</span> <span class="p">)&#123;</span><br>            <span class="n">o</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">m_state</span><span class="p">);</span><br>        <span class="p">&#125;</span><br>    <span class="p">&#125;;</span><br>    <span class="kt">void</span> <span class="n">setState</span><span class="p">(</span> <span class="kt">int</span> <span class="n">s</span> <span class="p">)&#123;</span><br>        <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="n">s</span><span class="p">;</span><br>        <span class="n">notify</span><span class="p">();</span><br>    <span class="p">&#125;</span><br>    <span class="kt">int</span> <span class="n">getState</span><span class="p">()&#123;</span> <span class="k">return</span> <span class="n">m_state</span><span class="p">;</span> <span class="p">&#125;</span><br><span class="p">&#125;;</span></p>
+<p><span class="k">class</span> <span class="nc">Observer1</span><span class="o">:</span><span class="k">public</span> <span class="n">Observer</span><span class="p">&#123;</span><br>    <span class="n">string</span> <span class="n">m_name</span><span class="p">;</span><br>    <span class="kt">int</span> <span class="n">m_state</span><span class="p">;</span><br><span class="k">public</span><span class="o">:</span><br>    <span class="n">Observer1</span><span class="p">(</span> <span class="n">string</span> <span class="n">name</span> <span class="p">)</span><span class="o">:</span><span class="n">m_name</span><span class="p">(</span> <span class="n">name</span> <span class="p">)&#123;&#125;</span><br>    <span class="kt">void</span> <span class="n">update</span><span class="p">(</span> <span class="kt">int</span> <span class="n">p</span> <span class="p">)&#123;</span> <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="n">p</span><span class="p">;</span> <span class="p">&#125;</span> <span class="c1">&#x2F;&#x2F; override<br></span>    <span class="n">string</span> <span class="n">getName</span><span class="p">()&#123;</span> <span class="k">return</span> <span class="n">m_name</span><span class="p">;</span> <span class="p">&#125;</span><br>    <span class="kt">int</span> <span class="n">getState</span><span class="p">()&#123;</span> <span class="k">return</span> <span class="n">m_state</span><span class="p">;</span> <span class="p">&#125;</span><br><span class="p">&#125;;</span></p>
+<p><span class="k">class</span> <span class="nc">Observer2</span><span class="o">:</span><span class="k">public</span> <span class="n">Observer</span><span class="p">&#123;</span><br>    <span class="n">string</span> <span class="n">m_name</span><span class="p">;</span><br>    <span class="kt">int</span> <span class="n">m_state</span><span class="p">;</span><br><span class="k">public</span><span class="o">:</span><br>    <span class="n">Observer2</span><span class="p">(</span> <span class="n">string</span> <span class="n">name</span> <span class="p">)</span><span class="o">:</span><span class="n">m_name</span><span class="p">(</span> <span class="n">name</span> <span class="p">)&#123;&#125;</span><br>    <span class="kt">void</span> <span class="n">update</span><span class="p">(</span> <span class="kt">int</span> <span class="n">p</span> <span class="p">)&#123;</span> <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="n">p</span><span class="p">;</span> <span class="p">&#125;</span> <span class="c1">&#x2F;&#x2F; override<br></span>    <span class="n">string</span> <span class="n">getName</span><span class="p">()&#123;</span> <span class="k">return</span> <span class="n">m_name</span><span class="p">;</span> <span class="p">&#125;</span><br>    <span class="kt">int</span> <span class="n">getState</span><span class="p">()&#123;</span> <span class="k">return</span> <span class="n">m_state</span><span class="p">;</span> <span class="p">&#125;</span><br><span class="p">&#125;;</span></p>
+<p><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span><br><span class="p">&#123;</span><br>    <span class="n">Subject1</span> <span class="n">product</span><span class="p">;</span><br>    <span class="n">Observer1</span> <span class="n">shop1</span><span class="p">(</span> <span class="s">&amp;#34;shop1–&amp;#34;</span> <span class="p">);</span><br>    <span class="n">Observer2</span> <span class="n">shop2</span><span class="p">(</span> <span class="s">&amp;#34;shop2–&amp;#34;</span> <span class="p">);</span></p>
+<pre><code>&lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shop1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shop2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;detach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shop2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shop2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+</code></pre>
+<p><span class="p">}</span><br></code></pre></div></div></p>
+<p>Output:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">shop1--12
+shop2--12
+shop1--11
+shop2--12
+</span></code></pre></div></div>
+<p><a target="_blank" rel="noopener" href="https://github.com/hungchicheng/DesignPattern/blob/master/C%2B%2B/Observer.cpp">Download - Source Code</a><br/>
+
+<p><br/></p></p>
+<center>
+
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>
+
+
+<h2 id="example-in-lua">Example in Lua</h2>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nf">FuncNew</span><span class="p">(</span> <span class="n">obj</span> <span class="p">)</span> <span class="c1">-- for Inheritance </span>
+    <span class="k">function</span> <span class="nf">obj</span><span class="p">:</span><span class="n">new</span><span class="p">(</span> <span class="n">o</span> <span class="p">)</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="n">o</span> <span class="ow">or</span> <span class="p">&#123;&#125;</span>
+        <span class="nb">setmetatable</span><span class="p">(</span> <span class="n">o</span><span class="p">,</span> <span class="n">self</span> <span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">__index</span> <span class="o">=</span> <span class="n">self</span>
+        <span class="k">return</span> <span class="n">o</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">obj</span>
+<span class="k">end</span>
+
+<p><span class="n">Observer</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br><span class="k">function</span> <span class="nf">Observer</span><span class="p">:</span><span class="n">create</span><span class="p">()</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">update</span><span class="p">(</span> <span class="n">p</span> <span class="p">)</span> <span class="c1">– virtual update</span><br>        <span class="c1">– do nothing</span><br>    <span class="k">end</span><br>    <span class="k">return</span> <span class="n">FuncNew</span><span class="p">(</span> <span class="n">Observer</span> <span class="p">):</span><span class="n">new</span><span class="p">()</span><br><span class="k">end</span></p>
+<p><span class="n">Subject</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br><span class="k">function</span> <span class="nf">Subject</span><span class="p">:</span><span class="n">create</span><span class="p">()</span><br>    <span class="n">self</span><span class="p">.</span><span class="n">m_observerList</span> <span class="o">&#x3D;</span> <span class="p">&#123;&#125;</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">attach</span><span class="p">(</span> <span class="n">observer</span> <span class="p">)</span><br>        <span class="nb">table.insert</span><span class="p">(</span> <span class="n">self</span><span class="p">.</span><span class="n">m_observerList</span><span class="p">,</span> <span class="n">observer</span> <span class="p">)</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">detach</span><span class="p">(</span> <span class="n">observer</span> <span class="p">)</span><br>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span> <span class="n">self</span><span class="p">.</span><span class="n">m_observerList</span> <span class="p">)</span> <span class="k">do</span><br>            <span class="k">if</span> <span class="n">v</span> <span class="o">&#x3D;&#x3D;</span> <span class="n">observer</span> <span class="k">then</span><br>                <span class="nb">table.remove</span><span class="p">(</span> <span class="n">self</span><span class="p">.</span><span class="n">m_observerList</span><span class="p">,</span> <span class="n">k</span> <span class="p">)</span><br>            <span class="k">end</span><br>        <span class="k">end</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">notify</span><span class="p">()</span> <span class="c1">– virtual notify</span><br>        <span class="c1">– do nothing</span><br>    <span class="k">end</span><br>    <span class="k">return</span> <span class="n">FuncNew</span><span class="p">(</span> <span class="n">Subject</span> <span class="p">):</span><span class="n">new</span><span class="p">()</span><br><span class="k">end</span></p>
+<p><span class="n">Subject1</span> <span class="o">&#x3D;</span> <span class="n">Subject</span><span class="p">:</span><span class="n">create</span><span class="p">()</span> <span class="c1">– inheritance Subject</span><br><span class="k">function</span> <span class="nf">Subject1</span><span class="p">:</span><span class="n">create</span><span class="p">()</span><br>    <span class="kd">local</span> <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="kc">nil</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">notify</span><span class="p">()</span> <span class="c1">– override notify</span><br>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span> <span class="n">self</span><span class="p">.</span><span class="n">m_observerList</span> <span class="p">)</span> <span class="k">do</span><br>            <span class="n">v</span><span class="p">:</span><span class="n">update</span><span class="p">(</span> <span class="n">m_state</span> <span class="p">)</span><br>        <span class="k">end</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">setState</span><span class="p">(</span> <span class="n">s</span> <span class="p">)</span><br>        <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="n">s</span><br>        <span class="n">self</span><span class="p">:</span><span class="n">notify</span><span class="p">()</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">getState</span><span class="p">(</span> <span class="n">s</span> <span class="p">)</span><br>        <span class="k">return</span> <span class="n">m_state</span><br>    <span class="k">end</span><br>    <span class="k">return</span> <span class="n">FuncNew</span><span class="p">(</span> <span class="n">Subject1</span> <span class="p">):</span><span class="n">new</span><span class="p">()</span><br><span class="k">end</span></p>
+<p><span class="n">Observer1</span> <span class="o">&#x3D;</span> <span class="n">Observer</span><span class="p">:</span><span class="n">create</span><span class="p">()</span> <span class="c1">– inheritance Subject</span><br><span class="k">function</span> <span class="nf">Observer1</span><span class="p">:</span><span class="n">create</span><span class="p">(</span> <span class="n">n</span> <span class="p">)</span><br>    <span class="kd">local</span> <span class="n">m_name</span> <span class="o">&#x3D;</span> <span class="n">n</span><br>    <span class="kd">local</span> <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="kc">nil</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">update</span><span class="p">(</span> <span class="n">p</span> <span class="p">)</span> <span class="c1">– override update</span><br>        <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="n">p</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">getName</span><span class="p">()</span><br>        <span class="k">return</span> <span class="n">m_name</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">getState</span><span class="p">()</span><br>        <span class="k">return</span> <span class="n">m_state</span><br>    <span class="k">end</span><br>    <span class="k">return</span> <span class="n">FuncNew</span><span class="p">(</span> <span class="n">Observer1</span> <span class="p">):</span><span class="n">new</span><span class="p">()</span><br><span class="k">end</span></p>
+<p><span class="n">Observer2</span> <span class="o">&#x3D;</span> <span class="n">Observer</span><span class="p">:</span><span class="n">create</span><span class="p">()</span> <span class="c1">– inheritance Subject</span><br><span class="k">function</span> <span class="nf">Observer2</span><span class="p">:</span><span class="n">create</span><span class="p">(</span> <span class="n">n</span> <span class="p">)</span><br>    <span class="kd">local</span> <span class="n">m_name</span> <span class="o">&#x3D;</span> <span class="n">n</span><br>    <span class="kd">local</span> <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="kc">nil</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">update</span><span class="p">(</span> <span class="n">p</span> <span class="p">)</span> <span class="c1">– override update</span><br>        <span class="n">m_state</span> <span class="o">&#x3D;</span> <span class="n">p</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">getName</span><span class="p">()</span><br>        <span class="k">return</span> <span class="n">m_name</span><br>    <span class="k">end</span><br>    <span class="k">function</span> <span class="nf">self</span><span class="p">:</span><span class="n">getState</span><span class="p">()</span><br>        <span class="k">return</span> <span class="n">m_state</span><br>    <span class="k">end</span><br>    <span class="k">return</span> <span class="n">FuncNew</span><span class="p">(</span> <span class="n">Observer2</span> <span class="p">):</span><span class="n">new</span><span class="p">()</span><br><span class="k">end</span></p>
+<p><span class="c1">——————————————————</span></p>
+<p><span class="kd">local</span> <span class="n">product</span> <span class="o">&#x3D;</span> <span class="n">Subject1</span><span class="p">:</span><span class="n">create</span><span class="p">()</span><br><span class="kd">local</span> <span class="n">shop1</span> <span class="o">&#x3D;</span> <span class="n">Observer1</span><span class="p">:</span><span class="n">create</span><span class="p">(</span> <span class="s2">&amp;#34;shop1–&amp;#34;</span> <span class="p">)</span><br><span class="kd">local</span> <span class="n">shop2</span> <span class="o">&#x3D;</span> <span class="n">Observer2</span><span class="p">:</span><span class="n">create</span><span class="p">(</span> <span class="s2">&amp;#34;shop2–&amp;#34;</span> <span class="p">)</span><br><span class="n">product</span><span class="p">:</span><span class="n">attach</span><span class="p">(</span> <span class="n">shop1</span> <span class="p">)</span><br><span class="n">product</span><span class="p">:</span><span class="n">attach</span><span class="p">(</span> <span class="n">shop2</span> <span class="p">)</span><br><span class="n">product</span><span class="p">:</span><span class="n">setState</span><span class="p">(</span> <span class="mi">12</span> <span class="p">)</span><br><span class="c1">–print( shop1.m_state )</span><br><span class="nb">print</span><span class="p">(</span> <span class="n">shop1</span><span class="p">:</span><span class="n">getName</span><span class="p">()</span> <span class="o">..</span> <span class="nb">tostring</span><span class="p">(</span> <span class="n">shop1</span><span class="p">:</span><span class="n">getState</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span><br><span class="nb">print</span><span class="p">(</span> <span class="n">shop2</span><span class="p">:</span><span class="n">getName</span><span class="p">()</span> <span class="o">..</span> <span class="nb">tostring</span><span class="p">(</span> <span class="n">shop2</span><span class="p">:</span><span class="n">getState</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span><br><span class="nb">print</span><span class="p">(</span> <span class="s2">&amp;#34;&amp;#34;</span> <span class="p">)</span><br><span class="n">product</span><span class="p">:</span><span class="n">detach</span><span class="p">(</span> <span class="n">shop2</span> <span class="p">)</span><br><span class="n">product</span><span class="p">:</span><span class="n">setState</span><span class="p">(</span> <span class="mi">11</span> <span class="p">)</span><br><span class="nb">print</span><span class="p">(</span> <span class="n">shop1</span><span class="p">:</span><span class="n">getName</span><span class="p">()</span> <span class="o">..</span> <span class="nb">tostring</span><span class="p">(</span> <span class="n">shop1</span><span class="p">:</span><span class="n">getState</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span><br><span class="nb">print</span><span class="p">(</span> <span class="n">shop2</span><span class="p">:</span><span class="n">getName</span><span class="p">()</span> <span class="o">..</span> <span class="nb">tostring</span><span class="p">(</span> <span class="n">shop2</span><span class="p">:</span><span class="n">getState</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span><br></code></pre></div></div></p>
+<p>Output:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">shop1--12
+shop2--12
+
+<p>shop1–11<br>shop2–12<br>[Finished in 0.0s]<br></span></code></pre></div></div></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/hungchicheng/DesignPattern/blob/master/Lua/Observer.lua">Download - Source Code</a><br/></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1108_design%20pattern%20-%20decorator%20pattern%20in%20c++%20and%20lua/">design pattern - decorator pattern in c++ and lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1110_design%20pattern%20-%20strategy%20pattern%20in%20c++%20and%20lua/">design pattern - strategy pattern in c++ and lua</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

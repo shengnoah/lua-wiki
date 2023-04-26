@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua标准库 - Lua教程</title>
+
+  
+    <meta name="description" content="lua标准库之数学库 数学库概念数学库由算术函数的标准集合组成；比如三角函数（sin、cos、tan、asin、acos、etc）幂指函数（exp、log、log10），舍入函数（floor、ceil）、max、min，加上一个变量pi，数学库也定义了一个幂操作符 ^     函数 描述 示例 结果     abs 取绝对值 math.abs(-15) 15   acos 反余弦函数 math.a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua标准库">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-489_Lua%E6%A0%87%E5%87%86%E5%BA%93/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="lua标准库之数学库 数学库概念数学库由算术函数的标准集合组成；比如三角函数（sin、cos、tan、asin、acos、etc）幂指函数（exp、log、log10），舍入函数（floor、ceil）、max、min，加上一个变量pi，数学库也定义了一个幂操作符 ^     函数 描述 示例 结果     abs 取绝对值 math.abs(-15) 15   acos 反余弦函数 math.a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.277Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.277Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua标准库</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%BA%93%E6%A6%82%E5%BF%B5"><span class="toc-text">数学库概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-random"><span class="toc-text">math.random</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-randomseed"><span class="toc-text">math.randomseed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-abs"><span class="toc-text">math.abs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-floor"><span class="toc-text">math.floor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-ceil"><span class="toc-text">math.ceil</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-sqrt"><span class="toc-text">math.sqrt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-fmod"><span class="toc-text">math.fmod</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-modf"><span class="toc-text">math.modf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-max"><span class="toc-text">math.max</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#math-mim"><span class="toc-text">math.mim</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua标准库</span></h1>
+<p>lua标准库之数学库</p>
+<h3 id="数学库概念"><a href="#数学库概念" class="headerlink" title="数学库概念"></a>数学库概念</h3><p>数学库由算术函数的标准集合组成；比如三角函数（sin、cos、tan、asin、acos、etc）<br/>幂指函数（exp、log、log10），舍入函数（floor、ceil）、max、min，加上一个变量pi，数学库也定义了一个幂操作符 ^ </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">abs</td>
+<td style="text-align:center">取绝对值</td>
+<td style="text-align:center">math.abs(-15)</td>
+<td style="text-align:center">15</td>
+</tr>
+<tr>
+<td style="text-align:center">acos</td>
+<td style="text-align:center">反余弦函数</td>
+<td style="text-align:center">math.acos(0.5)</td>
+<td style="text-align:center">1.04719755</td>
+</tr>
+<tr>
+<td style="text-align:center">asin</td>
+<td style="text-align:center">反正弦函数</td>
+<td style="text-align:center">math.asin(0.5)</td>
+<td style="text-align:center">0.52359877</td>
+</tr>
+<tr>
+<td style="text-align:center">atan2</td>
+<td style="text-align:center">x / y的反正切值</td>
+<td style="text-align:center">math.atan2(90.0, 45.0)</td>
+<td style="text-align:center">1.10714871</td>
+</tr>
+<tr>
+<td style="text-align:center">atan</td>
+<td style="text-align:center">反正切函数</td>
+<td style="text-align:center">math.atan(0.5)</td>
+<td style="text-align:center">0.463647609</td>
+</tr>
+<tr>
+<td style="text-align:center">ceil</td>
+<td style="text-align:center">不小于x的最大整数</td>
+<td style="text-align:center">math.ceil(5.8)</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:center">cosh</td>
+<td style="text-align:center">双曲线余弦函数</td>
+<td style="text-align:center">math.cosh(0.5)</td>
+<td style="text-align:center">1.276259652</td>
+</tr>
+<tr>
+<td style="text-align:center">cos</td>
+<td style="text-align:center">余弦函数</td>
+<td style="text-align:center">math.cos(0.5)</td>
+<td style="text-align:center">0.87758256</td>
+</tr>
+<tr>
+<td style="text-align:center">deg</td>
+<td style="text-align:center">弧度转角度</td>
+<td style="text-align:center">math.deg(math.pi)</td>
+<td style="text-align:center">180</td>
+</tr>
+<tr>
+<td style="text-align:center">exp</td>
+<td style="text-align:center">计算以e为底x次方值</td>
+<td style="text-align:center">math.exp(2)</td>
+<td style="text-align:center">2.718281828</td>
+</tr>
+<tr>
+<td style="text-align:center">floor</td>
+<td style="text-align:center">不大于x的最大整数</td>
+<td style="text-align:center">math.floor(5.6)</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">fmod （mod）</td>
+<td style="text-align:center">取模运算</td>
+<td style="text-align:center">math.mod(14, 5)</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">frexp</td>
+<td style="text-align:center">把双精度数val分解为数字部分（尾数）和以2为底的指数n，即val=x*2n</td>
+<td style="text-align:center">math.frexp(10.0)</td>
+<td style="text-align:center">0.625    4</td>
+</tr>
+<tr>
+<td style="text-align:center">ldexp</td>
+<td style="text-align:center">计算value * 2的n次方</td>
+<td style="text-align:center">math.ldexp(10.0, 3)</td>
+<td style="text-align:center">80 = 10 * (2 ^3)</td>
+</tr>
+<tr>
+<td style="text-align:center">log10</td>
+<td style="text-align:center">计算以10为基数的对数</td>
+<td style="text-align:center">math.log10(100)</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">log</td>
+<td style="text-align:center">计算一个数字的自然对数</td>
+<td style="text-align:center">math.log(2.71)</td>
+<td style="text-align:center">0.9969</td>
+</tr>
+<tr>
+<td style="text-align:center">max</td>
+<td style="text-align:center">取得参数中最大值</td>
+<td style="text-align:center">math.max(2.71, 100, -98, 23)</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">min</td>
+<td style="text-align:center">取得参数中最小值</td>
+<td style="text-align:center">math.min(2.71, 100, -98, 23)</td>
+<td style="text-align:center">-98</td>
+</tr>
+<tr>
+<td style="text-align:center">modf</td>
+<td style="text-align:center">把数分为整数和小数</td>
+<td style="text-align:center">math.modf(15.98)</td>
+<td style="text-align:center">15    98</td>
+</tr>
+<tr>
+<td style="text-align:center">pow</td>
+<td style="text-align:center">得到x的y次方</td>
+<td style="text-align:center">math.pow(2, 5)</td>
+<td style="text-align:center">32</td>
+</tr>
+<tr>
+<td style="text-align:center">rad</td>
+<td style="text-align:center">角度转弧度</td>
+<td style="text-align:center">math.rad(180)</td>
+<td style="text-align:center">3.14159265358</td>
+</tr>
+<tr>
+<td style="text-align:center">random</td>
+<td style="text-align:center">获取随机数</td>
+<td style="text-align:center">math.random(1, 100) math.random(100)</td>
+<td style="text-align:center">获取1-100的随机数</td>
+</tr>
+<tr>
+<td style="text-align:center">randomseed</td>
+<td style="text-align:center">设置随机数种子</td>
+<td style="text-align:center">math.randomseed(os.time())</td>
+<td style="text-align:center">在使用math.random函数之前必须使用此函数设置随机数种子</td>
+</tr>
+<tr>
+<td style="text-align:center">sinh</td>
+<td style="text-align:center">双曲线正弦函数</td>
+<td style="text-align:center">math.sinh(0.5)</td>
+<td style="text-align:center">0.5210953</td>
+</tr>
+<tr>
+<td style="text-align:center">sin</td>
+<td style="text-align:center">正弦函数</td>
+<td style="text-align:center">math.sin(math.rad(30))</td>
+<td style="text-align:center">0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">sqrt</td>
+<td style="text-align:center">开平方函数</td>
+<td style="text-align:center">math.sqrt(16)</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">tanh</td>
+<td style="text-align:center">双曲线正切函数</td>
+<td style="text-align:center">math.tanh(0.5)</td>
+<td style="text-align:center">0.46211715</td>
+</tr>
+<tr>
+<td style="text-align:center">tan</td>
+<td style="text-align:center">正切函数</td>
+<td style="text-align:center">math.tan(0.5)</td>
+<td style="text-align:center">0.5463024</td>
+</tr>
+</tbody>
+</table>
+<h3 id="math-random"><a href="#math-random" class="headerlink" title="math.random"></a>math.random</h3><p>产生伪随机数，有三种调用方式<br/>第一：不带参数，产生[0，1)范围内的随机数<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>())     </span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>第二：带一个参数n，将产生1到n内的随机数（包括1和n）<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">80</span>))     <span class="comment">-- 45</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<p>第三：带两个参数m和n，将产生m到n内的随机数（包含m和n）<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">1</span>,<span class="number">80</span>))     <span class="comment">-- 16</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-randomseed"><a href="#math-randomseed" class="headerlink" title="math.randomseed"></a>math.randomseed</h3><p>random的伪随机原理：在程序开始时，他是使用固定的种子初始化随机数发生器，使得每次运行都会拥有相同的关卡<br/>解决方法，使用系统时间作为种子，通常放在脚本最开始的位置math.randomseed(os.time())<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">math</span>.<span class="built_in">randomseed</span>(<span class="built_in">os</span>.<span class="built_in">time</span>())</span><br/><span class="line"><span class="keyword">for</span> i  = <span class="number">1</span>,<span class="number">5</span> <span class="keyword">do</span></span><br/><span class="line">     <span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">random</span>(<span class="number">1</span>,<span class="number">10</span>))</span><br/><span class="line"><span class="keyword">end</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-abs"><a href="#math-abs" class="headerlink" title="math.abs"></a>math.abs</h3><p>math.abs(X) 返回X的绝对值，通常在时间戳的计算上使用率最高<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> n = <span class="built_in">os</span>.<span class="built_in">time</span>()</span><br/><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>,<span class="number">10000000000</span> <span class="keyword">do</span></span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"><span class="keyword">local</span> new = <span class="built_in">os</span>.<span class="built_in">time</span>()</span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">abs</span>(new-n))     <span class="comment">-- 30(单位秒)</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-floor"><a href="#math-floor" class="headerlink" title="math.floor"></a>math.floor</h3><p>math.floor(X) 函数返回不大于参数X的最大整数<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">floor</span>(<span class="number">5.2</span>))     <span class="comment">-- 5</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">floor</span>(<span class="number">-5.2</span>))     <span class="comment">-- -6</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-ceil"><a href="#math-ceil" class="headerlink" title="math.ceil"></a>math.ceil</h3><p>math.ceil(X) 函数返回不小于参数X的最大整数<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">ceil</span>(<span class="number">5.2</span>))     <span class="comment">-- 6</span></span><br/><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">ceil</span>(<span class="number">-5.2</span>))     <span class="comment">-- -5</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-sqrt"><a href="#math-sqrt" class="headerlink" title="math.sqrt"></a>math.sqrt</h3><p>math.sqrt(X) 返回参数X的平方根或1/2方根 如果X为负，产生域错误<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(maht.<span class="built_in">sqrt</span>(<span class="number">16</span>))     <span class="comment">-- 4</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-fmod"><a href="#math-fmod" class="headerlink" title="math.fmod"></a>math.fmod</h3><p>math.fmod(X,Y) 返回参数X/Y的余数<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">fmod</span>(<span class="number">55</span>,<span class="number">50</span>))     <span class="comment">--5</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-modf"><a href="#math-modf" class="headerlink" title="math.modf"></a>math.modf</h3><p>math.modf(X) 将参数X分割为整数和小数，返回两个值<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">modf</span>(<span class="number">5.3</span>))     <span class="comment">--5 0.3</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-max"><a href="#math-max" class="headerlink" title="math.max"></a>math.max</h3><p>math.max(X…)函数返回所有参数最大值<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">max</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))     <span class="comment">-- 5</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="math-mim"><a href="#math-mim" class="headerlink" title="math.mim"></a>math.mim</h3><p>math.min(X…)函数返回所有参数的最小值<br/></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">min</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))     <span class="comment">-- 1</span></span><br/></pre></td></tr></tbody></table></figure><p></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-485_Nginx%20Lua%20Backdoor%20/">Nginx Lua Backdoor</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-484_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">Lua string 哈希碰撞</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

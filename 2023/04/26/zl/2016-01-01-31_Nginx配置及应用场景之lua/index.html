@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Nginx配置及应用场景之lua - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;&#x2F;div&gt;                 &lt;div class&#x3D;&quot;pt-article-main&quot;&gt;                     &lt;div class&#x3D;&quot;panel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx配置及应用场景之lua">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-31_Nginx%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B9%8Blua/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;&#x2F;div&gt;                 &lt;div class&#x3D;&quot;pt-article-main&quot;&gt;                     &lt;div class&#x3D;&quot;panel">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.261Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.261Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Nginx配置及应用场景之lua</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8Cngx_lua%E4%BB%8B%E7%BB%8D"><span class="toc-text">二、ngx_lua介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8Cngx_lua%E5%AE%89%E8%A3%85"><span class="toc-text">二、ngx_lua安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89ngx_lua%E7%94%A8%E6%B3%95"><span class="toc-text">三、ngx_lua用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E5%AE%9E%E9%99%85%E8%BF%90%E7%94%A8%E4%B8%AD%E9%80%9A%E8%BF%87lua%E7%BB%93%E5%90%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%E5%AF%B9session%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-text">四、实际运用中通过lua结合分布式缓存对session的处理</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Nginx配置及应用场景之lua</span></h1>
+<div class="col-md-9 col-sm-12 col-xs-12 mainbar">
+                <div class="pt-article">
+                    <div class="panel panel-default pt-article-extra">
+                        
+<pre><code>                &lt;/div&gt;
+                &lt;div class=&quot;pt-article-main&quot;&gt;
+                    &lt;div class=&quot;panel panel-default&quot;&gt;
+                        &lt;div class=&quot;panel-body&quot;&gt;
+                            &lt;div class=&quot;pt-article-content&quot;&gt;
+                                &lt;h2 id=&quot;一说明&quot;&gt;一、说明&lt;/h2&gt;
+</code></pre>
+<p>这里不对lua语言本身及其编译器运行环境等做介绍，以下所有介绍前提对lua相关有所了解。</p>
+<h2 id="二ngx_lua介绍">二、ngx_lua介绍</h2>
+
+<h3 id="原理">原理</h3>
+
+<p>ngx_lua将Lua嵌入Nginx，可以让Nginx执行Lua脚本，并且高并发、非阻塞的处理各种请求。Lua内建协程，这样就可以很好的将异步回调转换成顺序调用的形式。ngx_lua在Lua中进行的IO操作都会委托给Nginx的事件模型，从而实现非阻塞调用。开发者可以采用串行的方式编写程序，ngx_lua会自动的在进行阻塞的IO操作时中断，保存上下文；然后将IO操作委托给Nginx事件处理机制，在IO操作完成后，ngx_lua会恢复上下文，程序继续执行，这些操作都是对用户程序透明的。</p>
+
+<p>每个NginxWorker进程持有一个Lua解释器或者LuaJIT实例，被这个Worker处理的所有请求共享这个实例。每个请求的Context会被Lua轻量级的协程分割，从而保证各个请求是独立的。</p>
+
+<p>ngx_lua采用“one-coroutine-per-request”的处理模型，对于每个用户请求，ngx_lua会唤醒一个协程用于执行用户代码处理请求，当请求处理完成这个协程会被销毁。每个协程都有一个独立的全局环境（变量空间），继承于全局共享的、只读的“comman data”。所以，被用户代码注入全局空间的任何变量都不会影响其他请求的处理，并且这些变量在请求处理完成后会被释放，这样就保证所有的用户代码都运行在一个“sandbox”（沙箱），这个沙箱与请求具有相同的生命周期。</p>
+
+<p>得益于Lua协程的支持，ngx_lua在处理10000个并发请求时只需要很少的内存。根据测试，ngx_lua处理每个请求只需要2KB的内存，如果使用LuaJIT则会更少。所以ngx_lua非常适合用于实现可扩展的、高并发的服务。</p>
+
+<p><strong>协程</strong></p>
+
+<p>协程类似一种多线程，与多线程的区别有：</p>
+
+<ol>
+  <li>协程并非os线程，所以创建、切换开销比线程相对要小。</li>
+  <li>协程与线程一样有自己的栈、局部变量等，但是协程的栈是在用户进程空间模拟的，所以创建、切换开销很小。</li>
+  <li>多线程程序是多个线程并发执行，也就是说在一瞬间有多个控制流在执行。而协程强调的是一种多个协程间协作的关系，只有当一个协程主动放弃执行权，另一个协程才能获得执行权，所以在某一瞬间，多个协程间只有一个在运行。</li>
+  <li>由于多个协程时只有一个在运行，所以对于临界区的访问不需要加锁，而多线程的情况则必须加锁。</li>
+  <li>多线程程序由于有多个控制流，所以程序的行为不可控，而多个协程的执行是由开发者定义的所以是可控的。</li>
+</ol>
+
+<p>Nginx的每个Worker进程都是在epoll或kqueue这样的事件模型之上，封装成协程，每个请求都有一个协程进行处理。这正好与Lua内建协程的模型是一致的，所以即使ngx_lua需要执行Lua，相对C有一定的开销，但依然能保证高并发能力。</p>
+
+<h2 id="二ngx_lua安装">二、ngx_lua安装</h2>
+
+<p>Nginx中安装ngx_lua需要安装LuaJIT，ngx_devel_kit，ngx_lua等安装文件，我们这里用的OpenResty，内部已经集成ngx_lua，无需再安装任何模块。</p>
+
+<h2 id="三ngx_lua用法">三、ngx_lua用法</h2>
+
+<p><strong>嵌套lua脚本</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /lua &#123;
+set $test &#34;hello, world&#34;;
+content_by_lua &#39;
+    ngx.header.content_type = &#34;text/plain&#34;;
+    ngx.say(ngx.var.test);
+&#39;;
+&#125;
+</code></pre></div></div>
+
+<p>$ curl ‘http://134.32.28.134:8888/lua’，输出 hello, world。</p>
+
+<p><strong>include lua文件</strong></p>
+
+<p>Nginx中include lua的脚本文件方式，如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> location /mytest &#123;    
+      content_by_lua_file conf/alcache.lua;       
+ &#125;
+</code></pre></div></div>
+
+<p>其中在alcache.lua中编写lua脚本即可。</p>
+
+<h2 id="四实际运用中通过lua结合分布式缓存对session的处理">四、实际运用中通过lua结合分布式缓存对session的处理</h2>
+
+<p>这里redis与memcache的支持不是调用Nginx自带redis与memcache模块，都是调用OpenResty内部集成的第三方模块</p>
+
+<p><strong>nginx.conf部分配置</strong></p>
+
+<pre><code>  location /login &#123;  &lt;br/&gt;
+</code></pre>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	content_by_lua_file conf/alcache.lua;       
+&#125;
+</code></pre></div></div>
+
+<p><strong>alcache.lua配置</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local key = tostring(ngx.var.arg_username)
+local val = tostring(ngx.var.arg_password)
+local passLogin = tostring(ngx.var.arg_passLoginFlag)
+local flags = tostring(ngx.var.arg_flags or 0)
+local exptime = tostring(ngx.var.arg_exptime or 0)
+local sessionId  = tostring(ngx.var.cookie_JSESSIONID)
+
+<p>ngx.say(&amp;#34;sessionId:&amp;#34;,sessionId)<br>ngx.say(&amp;#34;key:&amp;#34;,key)<br>ngx.say(&amp;#34;val:&amp;#34;,val)</p>
+<p>if (key &#x3D;&#x3D; nil and val &#x3D;&#x3D; nil)  then return end<br>–if (passLogin &#x3D;&#x3D; nil or sessionId &#x3D;&#x3D; nil)  then return end</p>
+<p>local memcached &#x3D; require(&amp;#34;resty.memcached&amp;#34;)<br>–local redis &#x3D; require(&amp;#34;resty.redis&amp;#34;)<br>local cache,err &#x3D; memcached:new()<br>–local cache,err &#x3D; redis.new()</p>
+<p>if not cache then<br>        ngx.say(&amp;#34;failed to instantiate cache: &amp;#34;,err)<br>        return<br>end</p>
+<p>cache:set_timeout(1000)</p>
+<p>local ok,err &#x3D; cache:connect(&amp;#34;134.32.28.134&amp;#34;,11211)<br>–local ok,err &#x3D; cache:connect(&amp;#34;134.32.28.134&amp;#34;,6379)<br>if not ok then<br>        ngx.say(&amp;#34;failed to connect: &amp;#34;,err)<br>        return<br>end</p>
+<p>local res,flags,err &#x3D; cache:get(key)<br>if err then<br>        ngx.say(&amp;#34;failed to get &amp;#34;,key,&amp;#34; : &amp;#34;,err)<br>        return<br>end<br>if res and tostring(res) ~&#x3D; sessionId then<br>        cache:delete(key)<br>        cache:set(key,sessionId,exptime,flags)<br>else<br>                 cache:set(key,sessionId,exptime,flags)<br>end</p>
+<p>local ok, err &#x3D; cache:close()<br>                if not ok then<br>            ngx.say(&amp;#34;failed to close:&amp;#34;, err)<br>        return<br>end</p>
+<p>local url &#x3D; ngx.var.uri<br>local res &#x3D; ngx.location.capture(&amp;#34;&#x2F;proxy&amp;#34;)<br></code></pre></div></div></p>
+<pre><code>                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;row&quot;&gt;
+                        
+                        &lt;div class=&quot;col-lg-6 col-md-6 col-sm-12 col-xs-12&quot; style=&quot;font-weight: 600&quot;&gt;
+                            &lt;span&gt;上一篇:
+                                &lt;a href=&quot;/blog/2013/10/22/nginx-3.html&quot; title=&quot;Nginx配置及应用场景之高级配置&quot; style=&quot;text-decoration: underline;&quot;&gt;Nginx配置及应用场景之高级配置&lt;/a&gt;
+                            &lt;/span&gt;
+                        &lt;/div&gt;
+                        
+                        
+                        &lt;div class=&quot;col-lg-6 col-md-6 col-sm-12 col-xs-12&quot; style=&quot;font-weight: 600&quot;&gt;
+                            &lt;span class=&quot;pull-right hidden-sm hiden-xs visible-lg visible-md&quot;&gt;下一篇:
+                                &lt;a href=&quot;/blog/2014/01/15/apache-commons-beanutils.html&quot; title=&quot;Apache Commons 系列简介 之 BeanUtils&quot; style=&quot;text-decoration: underline;&quot;&gt;Apache Commons 系列简介 之 BeanUtils&lt;/a&gt;
+                            &lt;/span&gt;
+                            &lt;span class=&quot;hidden-lg hiden-md visible-sm visible-xs&quot;&gt;下一篇:
+                                &lt;a href=&quot;/blog/2014/01/15/apache-commons-beanutils.html&quot; title=&quot;Apache Commons 系列简介 之 BeanUtils&quot; style=&quot;text-decoration: underline;&quot;&gt;Apache Commons 系列简介 之 BeanUtils&lt;/a&gt;
+                            &lt;/span&gt;
+                        &lt;/div&gt;
+                        
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-md-3 hidden-sm hidden-xs sidebar&quot;&gt;
+            &lt;div class=&quot;authorbar&quot;&gt;
+                &lt;div class=&quot;list-group&quot; id=&quot;post-author&quot;&gt;
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    &lt;a href=&quot;/authors/tangshizhong/&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-user&quot;&gt;&lt;/span&gt; 
+                        作者：
+                        汤仕忠
+                    &lt;/a&gt;
+                    
+                    
+                    &lt;a href=&quot;/authors/tangshizhong/&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-file&quot;&gt;&lt;/span&gt;
+                        文章
+                        &lt;span class=&quot;pull-right badge&quot;&gt;19&lt;/span&gt;
+                        &lt;div class=&quot;inset-line&quot;&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                    &lt;a class=&quot;list-group-item&quot;&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-star&quot;&gt;&lt;/span&gt;
+                        浏览量
+                        &lt;span class=&quot;pull-right badge&quot;&gt;
+                            
+                       &lt;/span&gt;
+                        &lt;div class=&quot;inset-line&quot;&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+                &lt;div class=&quot;list-group&quot; id=&quot;my-like&quot;&gt;
+                    &lt;a href=&quot;&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-user&quot;&gt;&lt;/span&gt; 
+                        博文推荐
+                    &lt;/a&gt;
+                    
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                    &lt;a href=&quot;&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;object&gt;
+                            &lt;a href=&quot;/blog/2018/06/20/first-bolg.html&quot;&gt;
+                                &lt;span&gt;Blog介绍&lt;/span&gt;
+                            &lt;/a&gt;
+                        &lt;/object&gt;
+                        &lt;br/&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-user&quot;&gt;
+                            &lt;object&gt;
+                                &lt;a href=&quot;/authors/wfhuang/&quot;&gt;黄文峰&lt;/a&gt;
+                            &lt;/object&gt;
+                        &lt;/span&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-calendar pull-right&quot;&gt;2018.06.20&lt;/span&gt;
+                        &lt;div class=&quot;inset-line&quot;&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                    &lt;a href=&quot;&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;object&gt;
+                            &lt;a href=&quot;/blog/2018/06/08/spark-basic.html&quot;&gt;
+                                &lt;span&gt;Spark基础简易教程(Scala)&lt;/span&gt;
+                            &lt;/a&gt;
+                        &lt;/object&gt;
+                        &lt;br/&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-user&quot;&gt;
+                            &lt;object&gt;
+                                &lt;a href=&quot;/authors/shenbin/&quot;&gt;申斌&lt;/a&gt;
+                            &lt;/object&gt;
+                        &lt;/span&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-calendar pull-right&quot;&gt;2018.06.08&lt;/span&gt;
+                        &lt;div class=&quot;inset-line&quot;&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    
+                        
+                            
+                    &lt;a href=&quot;&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;object&gt;
+                            &lt;a href=&quot;/blog/2018/06/08/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E4%B8%8AElasticsearch%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8-%E4%B8%89.html&quot;&gt;
+                                &lt;span&gt;阿里云服务上Elasticsearch的安装及简单使用（三）&lt;/span&gt;
+                            &lt;/a&gt;
+                        &lt;/object&gt;
+                        &lt;br/&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-user&quot;&gt;
+                            &lt;object&gt;
+                                &lt;a href=&quot;/authors/chenlong/&quot;&gt;陈龙&lt;/a&gt;
+                            &lt;/object&gt;
+                        &lt;/span&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-calendar pull-right&quot;&gt;2018.06.08&lt;/span&gt;
+                        &lt;div class=&quot;inset-line&quot;&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    
+                        
+                            
+                    &lt;a href=&quot;&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;object&gt;
+                            &lt;a href=&quot;/blog/2018/06/06/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E4%B8%8AElasticsearch%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8-%E4%BA%8C.html&quot;&gt;
+                                &lt;span&gt;阿里云服务上Elasticsearch的安装及简单使用（二）&lt;/span&gt;
+                            &lt;/a&gt;
+                        &lt;/object&gt;
+                        &lt;br/&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-user&quot;&gt;
+                            &lt;object&gt;
+                                &lt;a href=&quot;/authors/chenlong/&quot;&gt;陈龙&lt;/a&gt;
+                            &lt;/object&gt;
+                        &lt;/span&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-calendar pull-right&quot;&gt;2018.06.06&lt;/span&gt;
+                        &lt;div class=&quot;inset-line&quot;&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    
+                        
+                            
+                    &lt;a href=&quot;&quot; class=&quot;list-group-item&quot;&gt;
+                        &lt;object&gt;
+                            &lt;a href=&quot;/blog/2018/06/05/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E4%B8%8AElasticsearch%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8-%E4%B8%80.html&quot;&gt;
+                                &lt;span&gt;阿里云服务上Elasticsearch的安装及简单使用（一）&lt;/span&gt;
+                            &lt;/a&gt;
+                        &lt;/object&gt;
+                        &lt;br/&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-user&quot;&gt;
+                            &lt;object&gt;
+                                &lt;a href=&quot;/authors/chenlong/&quot;&gt;陈龙&lt;/a&gt;
+                            &lt;/object&gt;
+                        &lt;/span&gt;
+                        &lt;span class=&quot;glyphicon glyphicon-calendar pull-right&quot;&gt;2018.06.05&lt;/span&gt;
+                        &lt;div class=&quot;inset-line&quot;&gt;&lt;/div&gt;
+                    &lt;/a&gt;
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    
+                &lt;/div&gt;
+            
+        &lt;/div&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-315_Lua%E7%BC%96%E7%A8%8B5%E4%B9%8B%E5%87%BD%E6%95%B0/">Lua编程5之函数</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-320_Lua%20%E5%AD%A6%E4%B9%A0%20chapter9%20/">Lua 学习 chapter9</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

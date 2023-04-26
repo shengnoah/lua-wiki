@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua编程2之数据类型 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;p&gt;思考并回答以下问题：&lt;br&gt;1.nil 的“删除”作用怎么理解？如何删除table里的一个值？&lt;br&gt;2.怎么比较一个变量是否为nil？&lt;br&gt;3.数字零和空字符串为真吗？假有哪些？&lt;br&gt;4.如何表示块字符串？如何避免误解析的发生？&lt;br&gt;5.显式转换函数有哪些？&lt;br&gt;6.如何计算字符串的长度？&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua编程2之数据类型">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-232_Lua%E7%BC%96%E7%A8%8B2%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;p&gt;思考并回答以下问题：&lt;br&gt;1.nil 的“删除”作用怎么理解？如何删除table里的一个值？&lt;br&gt;2.怎么比较一个变量是否为nil？&lt;br&gt;3.数字零和空字符串为真吗？假有哪些？&lt;br&gt;4.如何表示块字符串？如何避免误解析的发生？&lt;br&gt;5.显式转换函数有哪些？&lt;br&gt;6.如何计算字符串的长度？&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.252Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.253Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua编程2之数据类型</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nil%EF%BC%88%E7%A9%BA%EF%BC%89"><span class="toc-text">nil（空）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#boolean%EF%BC%88%E5%B8%83%E5%B0%94%EF%BC%89"><span class="toc-text">boolean（布尔）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#number%EF%BC%88%E6%95%B0%E5%AD%97%EF%BC%89"><span class="toc-text">number（数字）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#string%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%89"><span class="toc-text">string（字符串）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#table%EF%BC%88%E8%A1%A8%EF%BC%89"><span class="toc-text">table（表）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#function%EF%BC%88%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">function（函数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thread%EF%BC%88%E7%BA%BF%E7%A8%8B%EF%BC%89"><span class="toc-text">thread（线程）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#userdata%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="toc-text">userdata（自定义类型）</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua编程2之数据类型</span></h1>
+<pre><code>    &lt;p&gt;思考并回答以下问题：&lt;br&gt;1.nil 的“删除”作用怎么理解？如何删除table里的一个值？&lt;br&gt;2.怎么比较一个变量是否为nil？&lt;br&gt;3.数字零和空字符串为真吗？假有哪些？&lt;br&gt;4.如何表示块字符串？如何避免误解析的发生？&lt;br&gt;5.显式转换函数有哪些？&lt;br&gt;6.如何计算字符串的长度？&lt;br&gt;7.如何构建数组？第一个索引是0吗？table会固定长度吗？&lt;br&gt;8.a = &#123;&#125; a[1000] = 1 和table.maxn()之间有什么关系？&lt;br&gt;9.function和int类型一样怎么理解？C#中的delegate，class和int一样怎么理解？&lt;br&gt;10.lua中如何进行字符串连接？&lt;br&gt;11.Lua将nil作为界定数据结尾的标志会导致什么问题？&lt;/p&gt;
+</code></pre>
+<p>Lua是一种动态类型的语言，变量本身没有类型，只有值拥有类型。Lua语言本身没有提供类型定义的语法，每个值都“携带”了它自身的类型信息。</p>
+<p>在Lua中有8种基础类型，分别是：nil、boolean、number、string、userdata、function、thread和table。</p>
+<table>
+<thead>
+<tr>
+<th align="left"><center>** 数据类型 ** </center></th>
+<th align="left"><center>** 描述 ** </center></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">nil</td>
+<td align="left">这个最简单，只有值nil属于该类型，表示一个无效值（在条件表达式中相当于false）。</td>
+</tr>
+<tr>
+<td align="left">boolean</td>
+<td align="left">包含两个值：false和true。</td>
+</tr>
+<tr>
+<td align="left">number</td>
+<td align="left">表示双精度类型的实浮点数</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">字符串由一对双引号或单引号来表示</td>
+</tr>
+<tr>
+<td align="left">function</td>
+<td align="left">由 C 或 Lua 编写的函数</td>
+</tr>
+<tr>
+<td align="left">userdata</td>
+<td align="left">表示任意存储在变量中的C数据结构</td>
+</tr>
+<tr>
+<td align="left">thread</td>
+<td align="left">表示执行的独立线路，用于执行协同进程</td>
+</tr>
+<tr>
+<td align="left">table</td>
+<td align="left"><span style="color:red">Lua 中的表（table）其实是一个“关联数组”（associative arrays），数组的索引可以是数字或者是字符串。</span>在 Lua 里，table 的创建是通过“构造表达式”来完成，最简单构造表达式是{}，用来创建一个空表。</td>
+</tr>
+</tbody></table>
+<p>我们可以通过type函数获得变量的类型信息，该类型信息将以字符串的形式返回。如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="string">"hello world"</span>)) </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">10.4</span>)) </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">print</span>)) </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">true</span>)) </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">nil</span>)) <span class="comment">--nil</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">type</span>(X))) <span class="comment">--string</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="nil（空）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#nil%EF%BC%88%E7%A9%BA%EF%BC%89" class="headerlink" title="nil（空）"></a><span style="color:#EF7060;">nil（空）</span></h2><p>nil是一种类型，它只有一个值nil，它的主要功能是区别其他任何值。就像之前所说的，<span style="color:red">一个全局变量在第一次赋值前的默认值的默认值就是nil，将nil赋予一个全局变量等同于删除它</span>。Lua将nil用于表示一种“无效值”的情况，类似C#中的null。</p>
+<p>例如打印一个没有赋值的变量，便会输出一个 nil 值：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a)) <span class="comment">-- nil</span></span><br></pre></td></tr></table></figure>
+
+<p>对于全局变量和 table，nil 还有一个“删除”作用，给全局变量或者 table 表里的变量赋一个 nil 值，等同于把它们删掉，如下面代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tab1 = { key1 = <span class="string">"val1"</span>, key2 = <span class="string">"val2"</span>, <span class="string">"val3"</span> }</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(tab1) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(k .. <span class="string">" - "</span> .. v)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">tab1.key1 = <span class="literal">nil</span></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(tab1) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(k .. <span class="string">" - "</span> .. v)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>nil 作比较时应该加上双引号 “”：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>(X) <span class="comment">--nil</span></span><br><span class="line"><span class="built_in">type</span>(X)==<span class="literal">nil</span> <span class="comment">--false</span></span><br><span class="line"><span class="built_in">type</span>(X)==<span class="string">"nil"</span> <span class="comment">--true</span></span><br></pre></td></tr></table></figure>
+
+<p><span style="color:red">type(X)==nil</span> 结果为 false 的原因是因为 <span style="color:red">type(type(X))==string</span>。</p>
+<h2 id="boolean（布尔）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#boolean%EF%BC%88%E5%B8%83%E5%B0%94%EF%BC%89" class="headerlink" title="boolean（布尔）"></a><span style="color:#EF7060;">boolean（布尔）</span></h2><p>boolean 类型只有两个可选值：true（真） 和 false（假），Lua 把 false 和 nil 看作是“假”，其他的都为“真”，如数字零和空字符串也为真，这点需要注意。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">true</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">false</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="literal">nil</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="literal">false</span> <span class="keyword">or</span> <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"至少有一个是 true"</span>)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"false 和 nil 都为 false!"</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">boolean</span><br><span class="line">boolean</span><br><span class="line"><span class="literal">nil</span></span><br><span class="line"><span class="literal">false</span> 和 <span class="literal">nil</span> 都为 <span class="literal">false</span>!</span><br></pre></td></tr></table></figure>
+
+<h2 id="number（数字）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#number%EF%BC%88%E6%95%B0%E5%AD%97%EF%BC%89" class="headerlink" title="number（数字）"></a><span style="color:#EF7060;">number（数字）</span></h2><p><span style="color:red">Lua 默认只有一种 number 类型 – double（双精度）类型（默认类型可以修改 luaconf.h 里的定义），以下几种写法都被看作是 number 类型</span>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">2.2</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">0.2</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">2e+1</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">0.2e-1</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="number">7.8263692594256e-06</span>))</span><br></pre></td></tr></table></figure>
+
+<p><span style="color:red">Lua中没有专门的类型表示整数。</span></p>
+<h2 id="string（字符串）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#string%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%89" class="headerlink" title="string（字符串）"></a><span style="color:#EF7060;">string（字符串）</span></h2><p>字符串由一对双引号或单引号来表示。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string1 = <span class="string">"this is string1"</span></span><br><span class="line">string2 = <span class="string">'this is string2'</span></span><br></pre></td></tr></table></figure>
+
+<p>Lua支持和C语言类似的字符转义序列，见下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left"><center>** 转义符 ** </center></th>
+<th align="left"><center>** 描述 ** </center></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">a</td>
+<td align="left">响铃</td>
+</tr>
+<tr>
+<td align="left">b</td>
+<td align="left">退格</td>
+</tr>
+<tr>
+<td align="left">n</td>
+<td align="left">换行</td>
+</tr>
+<tr>
+<td align="left">r</td>
+<td align="left">回车</td>
+</tr>
+<tr>
+<td align="left">t</td>
+<td align="left">水平Tab</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">反斜杠</td>
+</tr>
+<tr>
+<td align="left">"</td>
+<td align="left">双引号</td>
+</tr>
+<tr>
+<td align="left">'</td>
+<td align="left">单引号</td>
+</tr>
+</tbody></table>
+<p><span style="color:red">也可以用 2 个方括号 “[[]]” 来表示”一块”字符串，这个时候会禁用里面的转义字符</span>。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">html = <span class="string">[[</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line"><span class="string">&lt;head&gt;&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">    &lt;a href="http://www.runoob.com/"&gt;菜鸟教程&lt;/a&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br><span class="line"><span class="string">]]</span></span><br><span class="line"><span class="built_in">print</span>(html)</span><br></pre></td></tr></table></figure>
+
+<p>如果两个方括号中包含这样的内容：<span style="color:red">a = b[c[i]]</span>，这样将会导致Lua的误解析，因此在这种情况下，我们可以将其改为<span style="color:red">[===[ </span>和<span style="color:red"> ]===]</span>的形式，从而避免了误解析的发生。</p>
+<p><span style="color:red">在对一个数字字符串上进行算术操作时，Lua 会尝试将这个数字字符串转成一个数字，这和C#中的加号会进行字符串拼接不同</span>:</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"2"</span> + <span class="number">6</span>) <span class="comment">--8.0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"2"</span> + <span class="string">"6"</span>) <span class="comment">--8.0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"2 + 6"</span>) <span class="comment">-- 2 + 6</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"-2e2"</span> * <span class="string">"6"</span>) <span class="comment">-- -1200.0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"error"</span> + <span class="number">1</span>)</span><br><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">stdin:1: attempt to perform arithmetic on a string value</span></span><br><span class="line"><span class="comment">stack traceback:</span></span><br><span class="line"><span class="comment">    stdin:1: in main chunk</span></span><br><span class="line"><span class="comment">    [C]: in ?</span></span><br><span class="line"><span class="comment"> --]]</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码中”error” + 1执行报错了，** 字符串连接应该使用的是 .. **，如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"a"</span> .. <span class="string">'b'</span>) <span class="comment">--ab</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">157</span> .. <span class="number">428</span>) <span class="comment">--157428</span></span><br></pre></td></tr></table></figure>
+
+<p>尽管Lua提供了这种自动转换的功能，为了避免一些不可预测的行为发生，特别是因为Lua版本升级而导致的行为不一致现象。鉴于此，还是应该尽可能使用显式的转换，如字符串转数字的函数tonumber()，或者是数字转字符串的函数tostring()。对于前者，如果函数参数不能转换为数字，该函数返回nil。如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">line = <span class="string">"150.56"</span></span><br><span class="line">n = <span class="built_in">tonumber</span>(line)</span><br><span class="line"><span class="keyword">if</span> n == <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">error</span>(line .. <span class="string">" is not a valid number"</span>)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">print</span>(n * <span class="number">2</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><span style="color:red">使用 # 来计算字符串的长度，放在字符串前面</span>，如下实例：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span> = <span class="string">"hello world"</span></span><br><span class="line"><span class="built_in">print</span>(#<span class="built_in">len</span>) <span class="comment">--11</span></span><br><span class="line"><span class="built_in">print</span>(#<span class="string">"hello world"</span>) <span class="comment">--11</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="table（表）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#table%EF%BC%88%E8%A1%A8%EF%BC%89" class="headerlink" title="table（表）"></a><span style="color:#EF7060;">table（表）</span></h2><p>在 Lua 里，table 的创建是通过”构造表达式”来完成，最简单构造表达式是{}，用来创建一个空表。也可以在表里添加一些数据，直接初始化表:</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建一个空的 table</span></span><br><span class="line"><span class="keyword">local</span> tbl1 = {}</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 直接初始表</span></span><br><span class="line"><span class="keyword">local</span> tbl2 = {<span class="string">"apple"</span>, <span class="string">"pear"</span>, <span class="string">"orange"</span>, <span class="string">"grape"</span>}</span><br></pre></td></tr></table></figure>
+
+<p>Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以为任意类型(nil除外)。类似C#中的Dictionary的Key-Value结构。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = {}</span><br><span class="line">a[<span class="string">"key"</span>] = <span class="string">"value"</span></span><br><span class="line">key = <span class="number">10</span></span><br><span class="line">a[key] = <span class="number">22</span></span><br><span class="line">a[key] = a[key] + <span class="number">11</span></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(a) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(k .. <span class="string">" : "</span> .. v)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>脚本执行结果为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">key : value</span><br><span class="line"><span class="number">10</span> : <span class="number">33</span></span><br></pre></td></tr></table></figure>
+
+<p>不同于其他语言的数组把 0 作为数组的初始索引，在 Lua 里表的默认初始索引一般以 1 开始。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> tbl = {<span class="string">"apple"</span>, <span class="string">"pear"</span>, <span class="string">"orange"</span>, <span class="string">"grape"</span>}</span><br><span class="line"><span class="keyword">for</span> key, val <span class="keyword">in</span> <span class="built_in">pairs</span>(tbl) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Key"</span>, key)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>脚本执行结果为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Key    <span class="number">1</span></span><br><span class="line">Key    <span class="number">2</span></span><br><span class="line">Key    <span class="number">3</span></span><br><span class="line">Key    <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>table 不会固定长度大小，有新数据添加时 table 长度会自动增长，没初始的 table 都是 nil。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a3 = {}</span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10</span> <span class="keyword">do</span></span><br><span class="line">    a3[i] = i</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">a3[<span class="string">"key"</span>] = <span class="string">"val"</span></span><br><span class="line"><span class="built_in">print</span>(a3[<span class="string">"key"</span>])</span><br><span class="line"><span class="built_in">print</span>(a3[<span class="string">"none"</span>])</span><br></pre></td></tr></table></figure>
+
+<p>脚本执行结果为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val</span><br><span class="line"><span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+
+<p>在Lua中还提供了另外一种方法用于访问table中的值，见如下示例：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.x = <span class="number">10</span>      <span class="comment">--等同于a["x"] = 10</span></span><br><span class="line"><span class="built_in">print</span>(a.x)    <span class="comment">--等同于print(a["x"])</span></span><br><span class="line"><span class="built_in">print</span>(a.y)    <span class="comment">--等同于print(a["y"])</span></span><br></pre></td></tr></table></figure>
+
+<p>由于数组实际上仍为一个table，所以对于数组大小的计算需要留意某些特殊的场景，如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = {}</span><br><span class="line">a[<span class="number">1000</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，数组a中索引值为1–999的元素的值均为nil。<span style="color:red">而Lua则将nil作为界定数据结尾的标志。</span>当一个数组含有“空隙”时，即中间含有nil值，长度操作符#会认为这些nil元素就是结尾标志。当然这肯定不是我们想要的结果。因此对于这些含有“空隙”的数组，我们可以通过函数table.maxn()返回table的最大正数索引值。如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = {}</span><br><span class="line">a[<span class="number">1000</span>] = <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">table</span>.<span class="built_in">maxn</span>(a))    <span class="comment">-- 输出1000</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="function（函数）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#function%EF%BC%88%E5%87%BD%E6%95%B0%EF%BC%89" class="headerlink" title="function（函数）"></a><span style="color:#EF7060;">function（函数）</span></h2><p>在Lua中，函数可以存储在变量中，可以通过参数传递其它函数，还可以作为其它函数的返回值。这种特性使语言具有了极大的灵活性。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">(n)</span></span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> n * factorial1(n - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(factorial1(<span class="number">5</span>))</span><br><span class="line">factorial2 = factorial1</span><br><span class="line"><span class="built_in">print</span>(factorial2(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+
+<p>脚本执行结果为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">120</span></span><br><span class="line"><span class="number">120</span></span><br></pre></td></tr></table></figure>
+
+<p>function 可以以匿名函数（anonymous function）的方式通过参数传递:</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">(tab,fun)</span></span></span><br><span class="line">    <span class="keyword">for</span> k ,v <span class="keyword">in</span> <span class="built_in">pairs</span>(tab) <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">print</span>(fun(k,v));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tab={key1=<span class="string">"val1"</span>,key2=<span class="string">"val2"</span>};</span><br><span class="line">testFun(tab,</span><br><span class="line"><span class="function"><span class="keyword">function</span><span class="params">(key,val)</span></span><span class="comment">--匿名函数</span></span><br><span class="line">    <span class="keyword">return</span> key..<span class="string">"="</span>..val;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>脚本执行结果为：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">key1 = val1</span><br><span class="line">key2 = val2</span><br></pre></td></tr></table></figure>
+
+<h2 id="thread（线程）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#thread%EF%BC%88%E7%BA%BF%E7%A8%8B%EF%BC%89" class="headerlink" title="thread（线程）"></a><span style="color:#EF7060;">thread（线程）</span></h2><p>在 Lua 里，thread代表了单独线程的执行，并且用来实现lua里的协程（coroutine），类似Unity中的协程。它跟线程（thread）差不多，拥有自己独立的栈、局部变量和命令指针，可以跟其他协同进程共享全局变量和其他大部分东西。</p>
+<p>Lua的线程和操作系统的线程并不相关。Lua的协程支持所有的操作系统，即使那些不支持线程的操作系统也支持协程。</p>
+<h2 id="userdata（自定义类型）"><a target="_blank" rel="noopener" href="https://chebincarl.github.io/#userdata%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%EF%BC%89" class="headerlink" title="userdata（自定义类型）"></a><span style="color:#EF7060;">userdata（自定义类型）</span></h2><p>userdata 是一种用户自定义数据，提供了将任意外部数据（通常是 struct 和 指针）存储在lua变量中的能力。一个userdata代表了一块内存数据。</p>
+<p>有两种userdata，一种是full userdata，是lua管理的一个对象，拥有一块内存区域；还有一种叫light userdata，是一个指针。</p>
+<p>在Lua中除了赋值和比较，没有其他针对userdata预先定义的操作，通常使用metatable对full userdata定义操作。userdata的值无法在lua中创建或者修改，只能通过C语言API，这也保证了和宿主进程数据的一致性。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-227_OpenResty%E4%B8%AD%E4%BD%BF%E7%94%A8Lua%E7%9A%84MongoDB%E5%BA%93%EF%BC%8C%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E8%8A%82%E7%9C%81%E8%BF%9E%E6%8E%A5%E8%AE%A4%E8%AF%81%E6%97%B6%E9%97%B4/">OpenResty中使用Lua的MongoDB库，使用连接池节省连接认证时间</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-231_Lua%20Learning%20Notes/">Lua Learning Notes</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

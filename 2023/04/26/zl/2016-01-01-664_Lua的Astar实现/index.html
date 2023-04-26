@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua的Astar实现 - Lua教程</title>
+
+  
+    <meta name="description" content="用Lua实现了一个简单的方块A*寻路。A*寻路的原理是会计算路径，产生一个估值f值，这个估值是由起点到走过的路径g值和当前的位置到终点的估值h组成的。取这个估值的最小值来进行寻路，所以A*寻路的效率是由估值函数的效率决定的。代码分析：  创建一个节点，该节点保存位置和估值信息，并保留父节点，相当于整个路径是由链式节点组成。 1234567891011121314151617181920212223">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua的Astar实现">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-664_Lua%E7%9A%84Astar%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="用Lua实现了一个简单的方块A*寻路。A*寻路的原理是会计算路径，产生一个估值f值，这个估值是由起点到走过的路径g值和当前的位置到终点的估值h组成的。取这个估值的最小值来进行寻路，所以A*寻路的效率是由估值函数的效率决定的。代码分析：  创建一个节点，该节点保存位置和估值信息，并保留父节点，相当于整个路径是由链式节点组成。 1234567891011121314151617181920212223">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tacthgin.github.io/astar_result.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.294Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.294Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tacthgin.github.io/astar_result.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua的Astar实现</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8Lua%E5%AE%9E%E7%8E%B0%E4%BA%86%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E5%9D%97A-%E5%AF%BB%E8%B7%AF%E3%80%82"><span class="toc-text">用Lua实现了一个简单的方块A*寻路。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E5%AF%BB%E8%B7%AF%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-text">A*寻路的优化</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua的Astar实现</span></h1>
+<h2 id="用Lua实现了一个简单的方块A-寻路。"><a href="#用Lua实现了一个简单的方块A-寻路。" class="headerlink" title="用Lua实现了一个简单的方块A*寻路。"></a>用Lua实现了一个简单的方块A*寻路。</h2><p>A*寻路的原理是会计算路径，产生一个估值f值，这个估值是由起点到走过的路径g值和当前的位置到终点的估值h组成的。取这个估值的最小值来进行寻路，所以A*寻路的效率是由估值函数的效率决定的。<br/>代码分析：</p>
+<ul>
+<li><p>创建一个节点，该节点保存位置和估值信息，并保留父节点，相当于整个路径是由链式节点组成。</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> node = {}</div><div class="line">node.<span class="built_in">__index</span> = node</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="params">(pos, h, p)</span></span></div><div class="line">    <span class="keyword">local</span> n = {}</div><div class="line">    n.pos = {x = pos.x, y = pos.y}</div><div class="line">    n.h = h</div><div class="line">    n.parent = p</div><div class="line">    n.g = <span class="number">0</span></div><div class="line">    <span class="keyword">if</span> p ~= <span class="literal">nil</span> <span class="keyword">then</span></div><div class="line">        n.g = p.g + <span class="number">1</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    n.f = n.g + n.h</div><div class="line">    <span class="keyword">return</span> <span class="built_in">setmetatable</span>(n, node)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">node:get_pos</span><span class="params">()</span></span></div><div class="line">    <span class="keyword">return</span> self.pos</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">node:get_g</span><span class="params">()</span></span></div><div class="line">    <span class="keyword">return</span> self.g</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">node:get_f</span><span class="params">()</span></span></div><div class="line">    <span class="keyword">return</span> self.f</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>开始寻路的时候，会把当前节点的四周节点加入开放列表中（寻找路径只会在开放列表中），把障碍物或者已经走过的路径放入关闭列表中（防止重复行走）</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> astar = {}</div><div class="line">astar.<span class="built_in">close</span> = {}</div><div class="line">astar.<span class="built_in">open</span> = {}</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">estimate_hvalue</span><span class="params">(srcPos, dstPos)</span></span></div><div class="line">    <span class="keyword">return</span> <span class="built_in">math</span>.<span class="built_in">abs</span>(srcPos.x - dstPos.x) + <span class="built_in">math</span>.<span class="built_in">abs</span>(srcPos.y - dstPos.y);</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--f值排序</span></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">nodeSort</span><span class="params">(l, r)</span></span></div><div class="line">    <span class="keyword">if</span> l:get_f() == r:get_f() <span class="keyword">then</span></div><div class="line">        <span class="keyword">return</span> l:get_g() &gt; r:get_g()</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> l:get_f() &lt; r:get_f()</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">contain</span><span class="params">(t, pos)</span></span></div><div class="line">    <span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(t) <span class="keyword">do</span></div><div class="line">        <span class="keyword">if</span> v:get_pos().x == pos.x <span class="keyword">and</span> v:get_pos().y == pos.y <span class="keyword">then</span></div><div class="line">            <span class="keyword">return</span> v</div><div class="line">        <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">astar:fitNode</span><span class="params">(pos)</span></span></div><div class="line">    <span class="keyword">if</span> self.map[pos.x] ~= <span class="literal">nil</span> <span class="keyword">and</span> self.map[pos.x][pos.y] == <span class="number">0</span> <span class="keyword">then</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--把周围4个节点不是墙或者没走过的节点加入开放列表中，开放列表中按f值从少到多排序</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">astar:addOtherNode</span><span class="params">(curNode)</span></span></div><div class="line">    <span class="keyword">if</span> curNode == <span class="literal">nil</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="keyword">local</span> d = {</div><div class="line">        {x = <span class="number">0</span>, y = <span class="number">1</span>},</div><div class="line">        {x = <span class="number">0</span>, y = <span class="number">-1</span>},</div><div class="line">        {x = <span class="number">-1</span>, y =  <span class="number">0</span>},</div><div class="line">        {x = <span class="number">1</span>, y = <span class="number">0</span>}</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="built_in">table</span>.<span class="built_in">insert</span>(self.<span class="built_in">close</span>, curNode)</div><div class="line"></div><div class="line">    <span class="keyword">local</span> newPos, h = {x = <span class="number">0</span>, y = <span class="number">0</span>}, <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(d) <span class="keyword">do</span></div><div class="line">        newPos.x = curNode:get_pos().x + v.x</div><div class="line">        newPos.y = curNode:get_pos().y + v.y</div><div class="line">        h = estimate_hvalue(newPos, self.dstPos)</div><div class="line">        <span class="keyword">if</span> contain(self.<span class="built_in">close</span>, newPos) == <span class="literal">nil</span> <span class="keyword">and</span> self:fitNode(newPos) <span class="keyword">then</span></div><div class="line">            <span class="built_in">table</span>.<span class="built_in">insert</span>(self.<span class="built_in">open</span>, node.new(newPos, h, curNode))</div><div class="line">        <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="built_in">table</span>.<span class="built_in">sort</span>(self.<span class="built_in">open</span>, nodeSort)</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">--重复从开放列表中取f值低的节点，直到终点，然后把终点的节点和一连串的父节点组成路径</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">astar:makePath</span><span class="params">()</span></span></div><div class="line">    self.<span class="built_in">close</span> = {}</div><div class="line">    self.<span class="built_in">open</span> = {}</div><div class="line">    <span class="keyword">local</span> <span class="built_in">path</span> = {}</div><div class="line"></div><div class="line">    <span class="keyword">local</span> h = estimate_hvalue(self.srcPos, self.dstPos)</div><div class="line">    <span class="keyword">if</span> h == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="keyword">local</span> n = node.new(self.srcPos, h, <span class="literal">nil</span>)</div><div class="line">    <span class="built_in">table</span>.<span class="built_in">insert</span>(self.<span class="built_in">open</span>, n)</div><div class="line"></div><div class="line">    <span class="keyword">local</span> last = <span class="literal">nil</span></div><div class="line">    <span class="keyword">while</span> #self.<span class="built_in">open</span> ~= <span class="number">0</span> <span class="keyword">and</span> last == <span class="literal">nil</span> <span class="keyword">do</span></div><div class="line">        n = <span class="built_in">table</span>.<span class="built_in">remove</span>(self.<span class="built_in">open</span>, <span class="number">1</span>)</div><div class="line">        self:addOtherNode(n)</div><div class="line">        last = contain(self.<span class="built_in">open</span>, self.dstPos)</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span> last ~= <span class="literal">nil</span> <span class="keyword">do</span></div><div class="line">        <span class="built_in">table</span>.<span class="built_in">insert</span>(<span class="built_in">path</span>, <span class="number">1</span>, last)</div><div class="line">        last = last.parent</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="built_in">path</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>加载地图等资源进行寻路</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> astar = <span class="built_in">require</span> <span class="string">&#34;astar&#34;</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> map = {</div><div class="line">	{<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>},</div><div class="line">	{<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>},</div><div class="line">	{<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>},</div><div class="line">	{<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>},</div><div class="line">	{<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>},</div><div class="line">	{<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>}</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printMap</span><span class="params">()</span></span></div><div class="line">    <span class="keyword">for</span> i=<span class="number">1</span>, #map <span class="keyword">do</span></div><div class="line">        <span class="keyword">local</span> s = <span class="string">&#34;&#34;</span></div><div class="line">        <span class="keyword">for</span> j=<span class="number">1</span>, #map[i] <span class="keyword">do</span></div><div class="line">            s = s..<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&#34;%d &#34;</span>, map[i][j])</div><div class="line">        <span class="keyword">end</span></div><div class="line">        <span class="built_in">print</span>(s)</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">    <span class="keyword">local</span> <span class="built_in">path</span> = astar:getPath({x = <span class="number">1</span>, y = <span class="number">1</span>}, {x = <span class="number">3</span>, y = <span class="number">4</span>}, map)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="built_in">path</span> ~= <span class="literal">nil</span> <span class="keyword">then</span></div><div class="line">        <span class="built_in">print</span>(<span class="string">&#34;before&#34;</span>)</div><div class="line">        printMap()</div><div class="line">        </div><div class="line">        <span class="keyword">local</span> n = <span class="literal">nil</span></div><div class="line">        <span class="keyword">for</span> i=<span class="number">1</span>, #<span class="built_in">path</span> <span class="keyword">do</span></div><div class="line">            n = <span class="built_in">path</span>[i]</div><div class="line">            map[n:get_pos().x][n:get_pos().y] = <span class="number">2</span></div><div class="line">        <span class="keyword">end</span></div><div class="line"></div><div class="line">        <span class="built_in">print</span>(<span class="string">&#34;after&#34;</span>)</div><div class="line">        printMap()</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">main()</div></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://tacthgin.github.io/astar_result.png" alt=""/><br/>0是空地，1是墙壁，2是行走的路径</p>
+<h2 id="A-寻路的优化"><a href="#A-寻路的优化" class="headerlink" title="A*寻路的优化"></a>A*寻路的优化</h2><ul>
+<li>当地图比较大的时候，使用A*寻路的效率就会变低，这时候不用再一次函数计算中得到结果，可以在游戏帧中分几帧来计算。</li>
+<li>像魔兽或者帝国中，一大堆兵团进行寻路时候，可以使用队列中间的一个来进行计算，其他兵种靠偏移量来确定位置。</li>
+</ul>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-663_Lua%20strings/">Lua strings</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-666_lua/">lua</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

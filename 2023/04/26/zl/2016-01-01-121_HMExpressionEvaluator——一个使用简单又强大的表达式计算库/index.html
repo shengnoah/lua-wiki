@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>HMExpressionEvaluator——一个使用简单又强大的表达式计算库 - Lua教程</title>
+
+  
+    <meta name="description" content="demo下载地址 一. 简介 一个数学表达式计算器，能实现和 UIWebView 的 stringByEvaluatingJavaScriptFromString: 一样的计算效果，但效率要高很多，可以在子线程中执行；  基本全面覆盖 NSExpression 的 expressionForFunction:arguments 中的所有function，使用要比 NSExpression 简单很">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HMExpressionEvaluator——一个使用简单又强大的表达式计算库">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-121_HMExpressionEvaluator%E2%80%94%E2%80%94%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E5%8F%88%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%BA%93/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="demo下载地址 一. 简介 一个数学表达式计算器，能实现和 UIWebView 的 stringByEvaluatingJavaScriptFromString: 一样的计算效果，但效率要高很多，可以在子线程中执行；  基本全面覆盖 NSExpression 的 expressionForFunction:arguments 中的所有function，使用要比 NSExpression 简单很">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/931410-8906ec964cf91fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/931410-83b7bd70bcd6a820.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/931410-68665b6115bd610b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/931410-932d39cac3fa373f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/931410-cf719fb086124172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/931410-2a8c3bcc21de0bdf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2023-04-26T05:16:12.242Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.242Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/931410-8906ec964cf91fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">HMExpressionEvaluator——一个使用简单又强大的表达式计算库</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E7%AE%80%E4%BB%8B"><span class="toc-text">一. 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-text">二. 使用方式</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>HMExpressionEvaluator——一个使用简单又强大的表达式计算库</span></h1>
+<p><a href="https://github.com/IOSLittleWhite/HMExpressionEvaluator" target="_blank" rel="external noopener noreferrer"> <strong>demo下载地址</strong></a></p>
+<h2 id="一-简介"><a href="#一-简介" class="headerlink" title="一. 简介"></a>一. 简介</h2><ol>
+<li><p>一个数学表达式计算器，能实现和 <strong>UIWebView</strong> 的 stringByEvaluatingJavaScriptFromString: 一样的计算效果，但效率要高很多，可以在子线程中执行；</p>
+</li>
+<li><p>基本全面覆盖 <strong>NSExpression</strong> 的 expressionForFunction:arguments 中的所有function，使用要比 <strong>NSExpression</strong> 简单很多，只需将注意力放大expression表达式的编辑上，将任意复杂度的表达式，通过eval:方法传入便可轻松得到计算结果；</p>
+</li>
+<li><p>支持复杂加减乘除四则运算，与或非逻辑运算，和大于小于等比较运算；</p>
+</li>
+<li><p>支持三目运算；</p>
+</li>
+<li><p>表达式中能自动识别处理的函数，基本全部覆盖<strong>NSExpression</strong>，有的未实现的，因为可以自己有数学表达式表达，比如 a+b，这个表达式计算最基本功能，无需通过函数调用来实现；</p>
+</li>
+<li><p>以上所述的计算类型在符合数学表达式逻辑的前提下，可以组合在一个表达式中，函数支持嵌套调用；</p>
+</li>
+<li><p>支持字符串相加（字符串拼接）；</p>
+</li>
+<li><p>开发者可以扩展自己的函数，通过构建 <strong>HMExpressionFunction</strong> 对象来声明自定义的函数，详细使用方式可以参考 demo。</p>
+</li>
+</ol>
+<h2 id="二-使用方式"><a href="#二-使用方式" class="headerlink" title="二. 使用方式"></a>二. 使用方式</h2><ol>
+<li><p>引入头文件</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import&#34;HMExpressionEvaluator.h&#34;</div></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<pre><code>**HMExpressionEvaluator.h** 文件中只声明了4个方法：&lt;br&gt;
+- -(id)eval:(NSString *)expression // 用于传入表达式进行计算并返回计算结果&lt;br&gt;
+- -(void)setCustomFunctions:(NSDictionary *)customFunctions // 用于给开发者注册自定义方法&lt;br&gt;
+- -(void)setDateFormatter:(NSDateFormatter *)dateFormatter // 设置支持的日期格式，默认只支持 yyyy-MM-dd HH:mm:ss 格式&lt;br&gt;
+- -(void)withoutFunctionTransfer:(BOOL)withoutFunction; // 不支持函数调用，仅用于计算纯数学表达式，默认为支持函数调用&lt;br&gt;&lt;br&gt;
+</code></pre><p>  开发者仅需通过这4个 <strong>API</strong> 来使用表达式计算全部功能<br/><br/>    </p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">// HMExpressionEvaluator.h</div><div class="line"></div><div class="line">   @interface HMExpressionEvaluator : NSObject</div><div class="line"></div><div class="line">#pragma mark - API</div><div class="line">/**</div><div class="line"> *  表达式计算</div><div class="line"> *</div><div class="line"> *  @param expression 需要计算的表达式</div><div class="line"> *</div><div class="line"> *  @return 计算结果</div><div class="line"> */</div><div class="line">- (id)eval:(NSString *)expression;</div><div class="line"></div><div class="line">/**</div><div class="line"> *	设置开发者自定义的函数集</div><div class="line"> *</div><div class="line"> *  @param customFunctions 每个函数用 HMExpressionCustomFunction 对象来描述，以函数名为 key</div><div class="line"> *                         </div><div class="line"> */</div><div class="line">- (void)setCustomFunctions:(NSDictionary *)customFunctions;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  设置支持的日期格式，默认只支持 yyyy-MM-dd HH:mm:ss 格式</div><div class="line"> *</div><div class="line"> *  @param dateFormat 日期格式</div><div class="line"> */</div><div class="line">- (void)setDateFormat:(NSString *)dateFormat;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  不支持函数调用，仅用于计算纯数学表达式，默认为支持函数调用</div><div class="line"> */</div><div class="line">- (void)withoutFunctionTransfer:(BOOL)withoutFunction;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></tbody></table></figure><p></p>
+<ol>
+<li><p>具体使用方式</p>
+<ol>
+<li><p>支持的数学运算操作符和操作数类型</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, HMExpressionNodeType)</div><div class="line">{</div><div class="line">    /**</div><div class="line">     * 未知  0</div><div class="line">     */</div><div class="line">    Unknown,  </div><div class="line">      </div><div class="line">    /**</div><div class="line">     * + 加</div><div class="line">     */</div><div class="line">    Plus,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * - 减</div><div class="line">     */</div><div class="line">    Subtract,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * * 乘</div><div class="line">     */</div><div class="line">    MultiPly,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * / 除</div><div class="line">     */</div><div class="line">    Divide,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * ( 左括号</div><div class="line">     */</div><div class="line">    LParentheses,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * ) 右括号</div><div class="line">     */</div><div class="line">    RParentheses,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * % 求模,取余</div><div class="line">     */</div><div class="line">    Mod,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * ^ 幂运算</div><div class="line">     */</div><div class="line">    Power,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &lt;&lt; 左移位</div><div class="line">     */</div><div class="line">    LShift,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &gt;&gt; 右移位</div><div class="line">     */</div><div class="line">    RShift,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &amp; 按位与</div><div class="line">     */</div><div class="line">    BitwiseAnd,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * | 按位或</div><div class="line">     */</div><div class="line">    BitwiseOr,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &amp;&amp; 逻辑与</div><div class="line">     */</div><div class="line">    And,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * || 逻辑或</div><div class="line">     */</div><div class="line">    Or,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * ! 逻辑非</div><div class="line">     */</div><div class="line">    Not,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * == 比较等</div><div class="line">     */</div><div class="line">    Equal,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * != 或 &lt;&gt; 比较不等</div><div class="line">     */</div><div class="line">    Unequal,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &gt; 比较大于</div><div class="line">     */</div><div class="line">    GT,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &lt; 比较小于</div><div class="line">     */</div><div class="line">    LT,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &gt;= 比较大于等于</div><div class="line">     */</div><div class="line">    GTOrEqual,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * &lt;= 比较小于等于</div><div class="line">     */</div><div class="line">    LTOrEqual,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 数值</div><div class="line">     */</div><div class="line">    Numeric,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 字符串</div><div class="line">     */</div><div class="line">    String,</div><div class="line">    </div><div class="line">    /**</div><div class="line">     * 日期时间</div><div class="line">     */</div><div class="line">    Datetime</div><div class="line">};</div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>使用示例</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 简单四则运算</div><div class="line">[HMExpressionEvaluator eval:@&#34;22 + 33 * 66 + 3^5&#34;]; // 3^5 3的5次方</div><div class="line"></div><div class="line">// 简单比较运算</div><div class="line">[HMExpressionEvaluator eval:@&#34;5 &lt; 6&#34;];</div><div class="line"></div><div class="line">// 逻辑运算</div><div class="line">[HMExpressionEvaluator eval:@&#34;5 &lt; 3 || 6 &gt; 5)&#34;];</div><div class="line"></div><div class="line">// 位运算</div><div class="line">[HMExpressionEvaluator eval:@&#34;4 &lt;&lt; 5&#34;];</div><div class="line"></div><div class="line">// 字符串相加</div><div class="line">[HMExpressionEvaluator eval:@&#34;&#34;Hello&#34; + &#34; &#34; + &#34;World&#34; &lt;&lt; 5&#34;];</div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>包含函数的运算</p>
+<ol>
+<li><p>支持的函数清单</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">	// 逻辑运算类</div><div class="line">    ternaryOperation(5&lt;7, &#34;真&#34;, &#34;假&#34;) // 三目表达式</div><div class="line"></div><div class="line">    日期类处理方法, 日期字符串格式要求为：yyyy-MM-dd或者yyyy-MM-dd HH:mm:ss</div><div class="line">    dateDiff(差值类型, 较早日期, 较晚日期) // 时间差值</div><div class="line">    getYear(date) // 获取日期中的年份</div><div class="line">    getQuarter(date) // 获取日期中的第几季度</div><div class="line">    getLocalQuarter(date) // 获取日期中的中文第几季度</div><div class="line">    getMonth(date) // 获取日期中的月份</div><div class="line">    getLocalMonth(date) // 获取日期中的中文月份</div><div class="line">    getWeek(date) // 获取日期中的第几周</div><div class="line">    getLocalWeek(date) // 获取日期中的中文第几周</div><div class="line">    getDayOfWeek(date) // 获取日期中的星期几</div><div class="line">    getLocalDayOfWeek(date) // 获取日期中的中文星期几</div><div class="line">    getDay(date) // 获取日子</div><div class="line">    getLocalDay // 获取中文日子</div><div class="line">    now() // 获取现在时间</div><div class="line"></div><div class="line">    // 数值类</div><div class="line">    getLocalMoney(digit) // 将数值转换为大写金额</div><div class="line">    round(digit) // 数值四舍五入</div><div class="line">    ceil(digit) // 数值0舍1入</div><div class="line">    trunc(digit) // 向下取整</div><div class="line">    floor(digit) // 向下取整</div><div class="line">    abs(digit) // 求绝对值</div><div class="line">    sqrt(digit) // 开平方</div><div class="line">    log(digit) // 底数为e对数</div><div class="line">    ln(digit) // 底数为e对数</div><div class="line">    log10(digit) // 底数为10对数</div><div class="line">    log2(digit) // 底数为2对数</div><div class="line">    raiseToPower(x, n) // 计算 x 的 n 次方</div><div class="line">    exp(digit) // 求e的x次方</div><div class="line">    bitwiseXor(a, b) // a 异或 b</div><div class="line">    onesComplement(a) // a 的补码</div><div class="line">    average(digit, digit, ...) // 求平均</div><div class="line">    sum(digit, digit, ...) // 求和</div><div class="line">    count(digit, digit, ...) // 计数</div><div class="line">    min(digit, digit, ...) // 找最小值</div><div class="line">    max(digit, digit, ...) // 找最大值</div><div class="line">    median(digit, digit, ...) // 找中值</div><div class="line">    mode(digit, digit, ...) // 一数组或数据区域中出现频率最多的数值</div><div class="line">    stddev(digit, digit, ...) // 样本标准偏差</div><div class="line">    random(void) // 获取随机数小数</div><div class="line">    randomn(digit) // 获取随机数整数</div><div class="line"></div><div class="line">    // 字符串类</div><div class="line">    contains(&#34;待检字符串&#34;, &#34;被包含字符串&#34;) // 检查包含子字符串</div><div class="line">    unContains(&#34;待检字符串&#34;, &#34;不被包含字符串&#34;) // 检查不包含子字符串</div><div class="line">    lowercase(&#34;字符串&#34;) // 转小写</div><div class="line">    uppercase(&#34;字符串&#34;) // 转大写</div><div class="line">	``` </div><div class="line">2. 调用方式</div><div class="line">	</div><div class="line">	```Objective-C</div><div class="line">	// 三目运算函数</div><div class="line">	[HMExpressionEvaluator eval:@&#34;ternaryOperation(5&lt;7, &#34;真&#34;, &#34;假&#34;)&#34;];</div><div class="line">	</div><div class="line">	// 获取大写金额</div><div class="line">	[HMExpressionEvaluator eval:@&#34;getLocalMoney(10086)&#34;];</div><div class="line">	</div><div class="line">	// 复杂混合运算表达式</div><div class="line">	[HMExpressionEvaluator eval:@&#34;dateDiff(&#34;dd&#34;, &#34;2016-12-17&#34;, now()) * 10 - getYear(now()) + max(11, 22,33,1000) * sqrt(floor(1000.445))&#34;];</div></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>自定义函数的使用，以 demo 为例：<br/> <br/><br/><strong>第一步：自定义方法的OC实现</strong><br/> <br/><br/>demo 中在 ViewController.m 实现了如下四个方法，可以看到返回时，均构建了 HMExpressionCustomFunctionResult 类实例来返回，这是必须的；<br/> <br/> 方法中传入的 param 会根据表达式中调用函数时括号内传入的参数情况解析成字符串，一维数组，或者二维数组，具体规则看如下代码段的注释。</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">#pragma mark - 自定义函数测试</div><div class="line">/*</div><div class="line"> *  不带参函数</div><div class="line"> *  在表达式中写入 test1()</div><div class="line"> *</div><div class="line"> *  @return 创建 HMExpressionFunctionResult 实例，返回函数运行结果</div><div class="line"> */</div><div class="line">- (HMExpressionCustomFunctionResult *)test1</div><div class="line">{</div><div class="line">    return [[HMExpressionCustomFunctionResult alloc] initWithResult:@&#34;测试不带参函数&#34;</div><div class="line">                                                     dataType:HMExpressionCustomFunctionResultDataTypeString] ;</div><div class="line">}</div><div class="line"></div><div class="line">/*</div><div class="line"> *  带一个加单参数的函数</div><div class="line"> *</div><div class="line"> *  @param param 如在表达式中写：test2(123) 则此处 param 为: @&#34;123&#34;</div><div class="line"> *</div><div class="line"> *  @return 创建 HMExpressionFunctionResult 实例，返回函数运行结果</div><div class="line"> */</div><div class="line">- (HMExpressionCustomFunctionResult *)test2:(id)param</div><div class="line">{</div><div class="line">    return [[HMExpressionCustomFunctionResult alloc] initWithResult:[NSString stringWithFormat:@&#34;测试带参函数，传入参数为：%@&#34;, param]</div><div class="line">                                                     dataType:HMExpressionCustomFunctionResultDataTypeString];</div><div class="line">}</div><div class="line"></div><div class="line">/*</div><div class="line"> *  一维多参函数，将所有参数拼接成一个字符串</div><div class="line"> *  如表达式中写：test3(123, 456, 789...) 数量根据自己的需要来定</div><div class="line"> *</div><div class="line"> *  @param param 此处得到 param 为一维数组 @[@&#34;123&#34;, @&#34;456&#34;, @&#34;789&#34;...]</div><div class="line"> *</div><div class="line"> *  @return 创建 HMExpressionFunctionResult 实例，返回函数运行结果</div><div class="line"> */</div><div class="line">- (HMExpressionCustomFunctionResult *)test3:(id)param</div><div class="line">{</div><div class="line">    // 将所有参数拼接成一个字符串</div><div class="line">    </div><div class="line">    NSMutableString *result = [NSMutableString string];</div><div class="line">    for(NSString *str in param)</div><div class="line">    {</div><div class="line">        [result appendString:str];</div><div class="line">    }</div><div class="line">    </div><div class="line">    return [[HMExpressionCustomFunctionResult alloc] initWithResult:result</div><div class="line">                                                     dataType:HMExpressionCustomFunctionResultDataTypeString];</div><div class="line">}</div><div class="line"></div><div class="line">/*</div><div class="line"> *  二维多参函数，函数功能为将所有参数拼接为字符串</div><div class="line"> *  如表达式中写：test3(123, [456, 789], @&#34;333&#34;, [234]...) 数量根据自己的需要来定</div><div class="line"> *</div><div class="line"> *  @param param 此处得到 param 为二维数组 @[@&#34;123&#34;, @[@&#34;456&#34;, @&#34;789&#34;], @&#34;333&#34;, @[@&#34;234&#34;]...]</div><div class="line"> *</div><div class="line"> *  @return 创建 HMExpressionFunctionResult 实例，返回函数运行结果</div><div class="line"> */</div><div class="line">- (HMExpressionCustomFunctionResult *)test4:(id)param</div><div class="line">{</div><div class="line">    NSMutableString *result = [NSMutableString string];</div><div class="line">    </div><div class="line">    for(id obj in param)</div><div class="line">    {</div><div class="line">        if([obj isKindOfClass:[NSArray class]])</div><div class="line">        {</div><div class="line">            for(NSString *str in (NSArray *)obj)</div><div class="line">            {</div><div class="line">                [result appendString:str];</div><div class="line">            }</div><div class="line">        }</div><div class="line">        else</div><div class="line">        {</div><div class="line">            [result appendString:obj];</div><div class="line">        }</div><div class="line">    }</div><div class="line">    </div><div class="line">    return [[HMExpressionCustomFunctionResult alloc] initWithResult:result</div><div class="line">                                                     dataType:HMExpressionCustomFunctionResultDataTypeString];</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p> <strong>第二步：构建 HMExpressionCustomFunction 实例</strong><br/> <br/><br/>如下代码将上述四个 test 方法分别构建一个 HMExpressionCustomFunction 实例来进行描述，并以用于表达式调用的函数名为 key 存入字典，准备注入表达式解析计算器中。</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">- (NSDictionary *)customFunctions</div><div class="line">{</div><div class="line">    if(!_customFunctions)</div><div class="line">    {</div><div class="line">        _customFunctions = [NSMutableDictionary dictionary];</div><div class="line">        // test1 无参函数</div><div class="line">        HMExpressionCustomFunction *function = [[HMExpressionCustomFunction alloc] initWithFunctionName:@&#34;test1&#34;</div><div class="line">                                                                                                         selector:@selector(test1)</div><div class="line">                                                                                                           target:self];</div><div class="line">        [_customFunctions setObject:function forKey:function.functionName];</div><div class="line">        // test2 带一个参数的函数</div><div class="line">        function = [[HMExpressionCustomFunction alloc] initWithFunctionName:@&#34;test2&#34;</div><div class="line">                                                                        selector:@selector(test2:)</div><div class="line">                                                                          target:self];</div><div class="line">        [_customFunctions setObject:function forKey:function.functionName];</div><div class="line">        // test3 带多个一维参数的函数</div><div class="line">        function = [[HMExpressionCustomFunction alloc] initWithFunctionName:@&#34;test3&#34;</div><div class="line">                                                                        selector:@selector(test3:)</div><div class="line">                                                                          target:self];</div><div class="line">        [_customFunctions setObject:function forKey:function.functionName];</div><div class="line">        // test4 带多个二维参数的函数</div><div class="line">        function = [[HMExpressionCustomFunction alloc] initWithFunctionName:@&#34;test4&#34;</div><div class="line">                                                                        selector:@selector(test4:)</div><div class="line">                                                                          target:self];</div><div class="line">        [_customFunctions setObject:function forKey:function.functionName];</div><div class="line">    }</div><div class="line">    return _customFunctions;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+<p> <strong>第三步：将构建好的 HMExpressionCustomFunction 实例注入表达式解析计算器</strong><br/> <br/><br/>代码如下，即在 demo 中点击 “计算” 按钮时执行的代码</p>
+ <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> *  创建表达式计算器对象</div><div class="line"> */</div><div class="line">- (HMExpressionEvaluator *)evaluator</div><div class="line">{</div><div class="line">    if(!_evaluator)</div><div class="line">    {</div><div class="line">        _evaluator = [[HMExpressionEvaluator alloc] init];</div><div class="line">        [_evaluator setCustomFunctions:self.customFunctions]; // 注入自定义函数集</div><div class="line">        </div><div class="line">         // 默认就是这个格式</div><div class="line">         // [_evaluator setDateFormat:@&#34;yyyy-MM-dd HH:mm:ss&#34;];</div><div class="line">        </div><div class="line">         // 默认就是 false，即表达式支持函数调用，当表达式不需要函数调用是，调用该方法置为 true，可以调高运算效率</div><div class="line">         // [_evaluator withoutFunctionTransfer:false];</div><div class="line">    }</div><div class="line">    return _evaluator;</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://upload-images.jianshu.io/upload_images/931410-8906ec964cf91fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1. 开始运行.png"/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://upload-images.jianshu.io/upload_images/931410-83b7bd70bcd6a820.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2. 选择函数.png"/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://upload-images.jianshu.io/upload_images/931410-68665b6115bd610b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3. 选择指定测试用例.png"/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://upload-images.jianshu.io/upload_images/931410-932d39cac3fa373f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4. 选择确定输入到了输入框.png"/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://upload-images.jianshu.io/upload_images/931410-cf719fb086124172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5. 表达式无误完成计算.png"/></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="http://upload-images.jianshu.io/upload_images/931410-2a8c3bcc21de0bdf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6. 表达式有错误计算失败.png"/></p>
+<p><br/><br/>感兴趣请下载demo研究，运行后，点击快速测试，快速一睹 HMExpressionValuator 的风采吧！</p>
+<p><a href="https://github.com/IOSLittleWhite/HMExpressionEvaluator" target="_blank" rel="external noopener noreferrer"> <strong>demo下载地址</strong></a></p>
+<p>意见建议请联系：</p>
+<p><strong>QQ: 247159603</strong></p>
+<p><strong>简书：</strong> <a href="http://www.jianshu.com/u/9f166a0db301" target="_blank" rel="external noopener noreferrer"> <strong>JZ_Stone</strong></a></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-122_FDDB%20datasets%20and%20evaluation%20%C2%B7%20KaLyo's%20Notes/">FDDB datasets and evaluation · KaLyo's Notes</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-123_%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%BC%8F%EF%BC%88lazy%20evaluation%EF%BC%89/">延迟加载模式（lazy evaluation）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

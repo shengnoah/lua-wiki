@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>论文阅读：Ranking vs. Regression in Machine Translation Evaluation - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;script type&#x3D;&quot;text&#x2F;x-mathjax-config&quot;&gt;     MathJax.Hub.Config(&amp;#123;         tex2jax: &amp;#123;         skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&amp;#39">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Ranking vs. Regression in Machine Translation Evaluation">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-961_%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9ARanking%20vs.%20Regression%20in%20Machine%20Translation/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;script type&#x3D;&quot;text&#x2F;x-mathjax-config&quot;&gt;     MathJax.Hub.Config(&amp;#123;         tex2jax: &amp;#123;         skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&amp;#39">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.321Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.321Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">论文阅读：Ranking vs. Regression in Machine Translation Evaluation</span></div><div class="widget-body fs14"><div class="doc-tree active"></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.321Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>论文阅读：Ranking vs. Regression in Machine Translation Evaluation</span></h1>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<pre><code>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+    MathJax.Hub.Config(&#123;
+        tex2jax: &#123;
+        skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;],
+        inlineMath: [[&#39;$&#39;,&#39;$&#39;]]
+        &#125;
+    &#125;);
+&lt;/script&gt;
+</code></pre>
+<p>来源：WMT Metrics Shared Task 2008</p>
+
+<p>链接：<a target="_blank" rel="noopener" href="https://dl.acm.org/citation.cfm?doid=1626394.1626425">Abstract</a> or <a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=88FB762456FCA0B2C349C3DA3AE7B9CF?doi=10.1.1.158.9744&amp;rep=rep1&amp;type=pdf">PDF</a></p>
+
+<p>作者：Kevin Duh</p>
+
+<p>单位：UWashington</p>
+
+<p>阅读基础：本文前部为读者普及了Metrics的相关知识，读之即可。另外模型中用到的RankSVM<sup id="fnref:2"><a href="#fn:2" class="footnote">1</a></sup>可以看一下（不看也行，读这篇论文关注的是思想）。</p>
+
+
+
+<p>WMT历年来的一个重要任务就是为翻译结果设计评价指标，即WMT Metrics Shared Task. 
+metrics是给定译文和参考翻译，评价参考翻译的质量。</p>
+
+<p>与之不同的是，quality estimation（QE）是在不给出参考译文的情况下评估翻译质量。QE只依赖原文和翻译模型，和metrics的数据集是完全不一样的。
+QE对应的比赛是WMT Quality Estimation Shared Task.</p>
+
+<h1 id="metrics的应用细节">metrics的应用细节</h1>
+
+<p>Metrics用于在不同翻译系统之间建立比较，作用包括指导单个系统调参，比较系统之间好坏，比较系统的改进（定目标，算进度）等等。</p>
+
+<p>Metrics分为系统级别和句子级别，前者对每一个系统给出一个评价，后者对每一个句子原文及翻译给出一个评价。</p>
+
+<p>Metrics其实是很主观的，所以评价一个metrics的好坏就是看这个指标判断与人类判断的对应程度。
+Metrics的一些评价指标通过比较metrics的打分和人类打分的相符程度来评价metrics.</p>
+
+<p>可以参考<sup id="fnref:3"><a href="#fn:3" class="footnote">2</a></sup>入门，里面给出了：</p>
+
+<ul>
+  <li>Metrics是什么，为什么要做</li>
+  <li>几个非常基础的metrics的baseline和评价指标</li>
+  <li>没有给出数据集，但建议看看</li>
+</ul>
+
+<h1 id="score-based-metrics-和-ranking-based-metrics">Score-based metrics 和 Ranking-based metrics</h1>
+
+<p>Score-based metrics 为每一句译文给出确切的分数，比如最著名的BLEU就是score-based的。
+Ranking-based metrics 对同一原句的不同译文按质量进行排序。
+两者的主要区别在于，Score-based metrics 给出的标记是绝对的，Ranking-based metrics 给出的标记是相对的。</p>
+
+<h1 id="ranking-based-metrics-的好处">Ranking-based metrics 的好处</h1>
+
+<p>一句话：和人的判断比较相符。</p>
+<ul>
+  <li>因为是相对标注，所以人更容易给出精确的标注，这样IAA也会比较高。</li>
+  <li>metrics的目的就是比较不同翻译系统的优劣，所以如果可以的话直接给出比较结果就行了，没必要先打绝对评分再比较。</li>
+</ul>
+
+<p>虽然 Ranking-based metrics 不能定量刻画系统之间的差异，但是大部分情况下也够用了。</p>
+
+<h1 id="ranking-based-metrics-的可行性">Ranking-based metrics 的可行性</h1>
+
+<p>如何实现一个 Ranking-based metrics 系统？</p>
+
+<p>考虑metrics语料库的格式，将问题形式化：一共$T$个句子，$r_t$是第$t$个句子的参考译文$(1leq tleq T)$，而$o_t^{(n)}$是对第$t$个句子的第$n$个翻译$(1leq nleq N)$。Score-based metrics的标签$y_t = [y_t^{(n)}]_N$是一个$N$维向量，每个维度表示对应译文的得分；而Ranking-based metrics的标签完全一样，但是只比较标签值的大小。</p>
+
+<p><em>（上面描述的形式化过程和原文稍有出入，此处做了简化，但不影响理解全文。）</em></p>
+
+<p>常规的score-based metrics通过$r_t$和$o_t^{(n)}$形成译文的特征向量$x_t^{(n)}$，配合标签$y_t$训练一个回归算法预测打分；而ranking-based metrics也一样通过回归预测得分，然而只取预测结果的排序。</p>
+
+
+
+<h1 id="实验">实验</h1>
+
+<p>score-based metrics使用RegressionSVM，ranking-based metrics使用RankSVM/RankBoost</p>
+
+<p>提取的特征多是一些基于统计的metrics，所以实验内容也没啥可看的了，无非展示效果，调参，选择特征云云。</p>
+
+<h1 id="相关数据集">相关数据集</h1>
+
+<p>参考每年最新的WMT任务。</p>
+
+<h1 id="建议阅读">建议阅读</h1>
+
+<p>使用Ranking-based数据集训练metrics模型的思想最早的工作是<sup id="fnref:1"><a href="#fn:1" class="footnote">3</a></sup>，可以看看。</p>
+
+<p>每年最新的WMT建议参考。</p>
+
+<h1 id="参考">参考</h1>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:2">
+      <p><strong>Joachims 2002 KDD</strong> T. Joachims. 2002. Optimizing search engines using clickthrough data. In KDD <a href="#fnref:2" class="reversefootnote">↩</a></p>
+    </li>
+    <li id="fn:3">
+      <p><strong>Bojar 2016 WMT Metrics</strong> <a target="_blank" rel="noopener" href="http://www.statmt.org/wmt16/slides/wmt16-metrics.pdf">WMT Metrics 2016 总结</a> <a href="#fnref:3" class="reversefootnote">↩</a></p>
+    </li>
+    <li id="fn:1">
+      <p><strong>Ye 2007 WMT Metrics</strong> Y. Ye, M. Zhou, and C.-Y. Lin. 2007. Sentence level machine translation evaluation as a ranking problem. In ACL2007 Wksp on Statistical Machine Translation. <a href="#fnref:1" class="reversefootnote">↩</a></p>
+    </li>
+  </ol>
+</div>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-962_Lua%20%E5%AD%A6%E4%B9%A0%20chapter17%20/">Lua 学习 chapter17</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-963_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20%C2%B7%20DUDOR's%20BLOG/">lua学习笔记 · DUDOR's BLOG</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

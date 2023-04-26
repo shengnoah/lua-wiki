@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua学习笔记(4)面向对象实现 - Lua教程</title>
+
+  
+    <meta name="description" content="百度搜索一下，给出出的解决方案和学习帖子很多，可是我还是有很多的问题！          什么是面向对象？           lua中怎么实现面向对象？           什么样的实现既简单又能完成我的功能？           一定要按照c++的方式实现类的继承吗？      在学习lua面向对象的过程中我比较喜欢下面两种实现方式：  简单粗暴的实现     参考[1]：参考同事的方法，如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua学习笔记(4)面向对象实现">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-72_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(4)%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="百度搜索一下，给出出的解决方案和学习帖子很多，可是我还是有很多的问题！          什么是面向对象？           lua中怎么实现面向对象？           什么样的实现既简单又能完成我的功能？           一定要按照c++的方式实现类的继承吗？      在学习lua面向对象的过程中我比较喜欢下面两种实现方式：  简单粗暴的实现     参考[1]：参考同事的方法，如果">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.300Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.300Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua学习笔记(4)面向对象实现</span></div><div class="widget-body fs14"><div class="doc-tree active"></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua学习笔记(4)面向对象实现</span></h1>
+<p>百度搜索一下，给出出的解决方案和学习帖子很多，可是我还是有很多的问题！</p>
+
+<ul>
+  <li>
+    <p>什么是面向对象？</p>
+  </li>
+  <li>
+    <p>lua中怎么实现面向对象？</p>
+  </li>
+  <li>
+    <p>什么样的实现既简单又能完成我的功能？</p>
+  </li>
+  <li>
+    <p>一定要按照c++的方式实现类的继承吗？</p>
+  </li>
+</ul>
+
+<p>在学习lua面向对象的过程中我比较喜欢下面两种实现方式：</p>
+
+<h1 id="简单粗暴的实现">简单粗暴的实现</h1>
+
+<blockquote>
+  <p>参考[1]：参考同事的方法，如果借鉴、转载请注明</p>
+</blockquote>
+
+<p>在lua中，我们知道table是万能的一个类型，当我们用table实现一个基类和子类的时候，他们都是确确实实存在的一个个table，都是有地址的。不会说像c++一样，类定义是类定义，只有new出来才是真正可以使用的，而lua却不是这样。所以，最简单的一种方法就是，每次继承基类的时候，直接copy基类的所有内容，函数除外，其他的成员都重新复制一遍，如果是table的话重新构建一个，并且把内容拷贝过来。代码如下：</p>
+
+<p>参考代码：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--lua面向对象：简单粗暴的实现function copytable(tbArg)
+    local tbCollsion = &#123;&#125;
+    
+<pre><code>--local的作用域问题local copy    
+copy = function (obj)
+    if type(obj) ~= &amp;#34;table&amp;#34; thenreturn obj;
+    end--检查是否有嵌套循环的tableif tbCollsion[obj] thenreturn tbCollsion[obj];
+    endlocal tbNew = &#123;&#125;
+    tbCollsion[obj] = tbNew;
+    --递归复制for k, v in pairs(obj) do
+        tbNew[k] = copy(v);
+    end--复制完之后，元表关系也要保留下来return setmetatable(tbNew, getmetatable(obj))
+endreturn copy(tbArg);
+</code></pre>
+<p>endfunction inherit(tbBase, tbClass)<br>    –复制基类local tbNew &#x3D; copytable(tbBase)</p>
+<pre><code>local tm = &#123;&#125;
+tm.__index = tbClass;
+setmetatable(tbNew, tm)
+
+--修改tbBase为tbClass中的成员或者新增加tbClass中的成员if tbClass thenfor k, v in pairs(tbClass) do
+        tbNew[k] = v
+    endendreturn tbNew;
+</code></pre>
+<p>end–使用local tbObject &#x3D; {}<br>local tbFruit &#x3D; inherit(tbObject)<br>local tbApple &#x3D; inherit(tbFruit)<br>local tbBanana &#x3D; inherit(tbFruit)<br>local tbBanana1 &#x3D; inherit(tbFruit)<br>local tbBanana2 &#x3D; inherit(tbFruit, tbBanana1)<br></code></pre></div></div></p>
+<p>优点：</p>
+
+<ul>
+  <li>
+    <p>好理解</p>
+  </li>
+  <li>
+    <p>好用，不会出现共用一个table引用，导致其中一个修改影响了另外一个</p>
+  </li>
+  <li>
+    <p>共享函数引用</p>
+  </li>
+</ul>
+
+<p>缺点：</p>
+
+<ul>
+  <li>
+    <p>真正意义上的面向对象，继承等概念不清晰</p>
+  </li>
+  <li>
+    <p>一个子类new多个对象的概念是没有的，和继承已经混在了一起，所以如果要实现new多个对象的话，有代码冗余</p>
+  </li>
+</ul>
+
+<h1 id="概念意义上的实现">概念意义上的实现</h1>
+
+<blockquote>
+  <p>参考[2]：云风的blog，如果借鉴、转载请注明</p>
+</blockquote>
+
+<p>这种从概念上实现面向对象的方法做到以下几点：</p>
+
+<ul>
+  <li>
+    <p>有类定义和对象的概念，类定义通过new来创建对象，并且同时调用自己的构造函数</p>
+  </li>
+  <li>
+    <p>子类可以访问基类的成员函数</p>
+  </li>
+  <li>
+    <p>类定义不能够调用函数（除了new之外），只有对象才能调用函数</p>
+  </li>
+  <li>
+    <p>构造函数调用有和c++一样的层级关系，先调用父类的构造函数，再调用子类的构造函</p>
+  </li>
+</ul>
+
+<p>参考代码：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--lua面向对象：概念意义上的实现local _class=&#123;&#125;
+ 
+<p>function class(super)<br>    local class_type&#x3D;&#123;&#125;<br>    –注意：因为重载了__newindex函数, 所以ctor不要定义为nil<br>    class_type.ctor&#x3D;false<br>    class_type.super&#x3D;super<br>    class_type.new&#x3D;function(…)<br>            local obj&#x3D;&#123;&#125;<br>            –下面的块只做了一件事：依次从父类到当前子类调用构造函数ctordolocal create<br>                create &#x3D; function(c,…)<br>                    if c.super then<br>                        create(c.super,…)<br>                    endif c.ctor then<br>                        c.ctor(obj,…)<br>                    endend</p>
+<pre><code>            create(class_type,...)
+        endsetmetatable(obj,&#123; __index=_class[class_type] &#125;)
+        return obj
+    end--新加成员：防止定义类调用函数local vtbl=&#123;&#125;
+_class[class_type]=vtbl
+
+setmetatable(class_type,&#123;__newindex=
+    function(t,k,v)
+        vtbl[k]=v
+    end
+&#125;)
+
+--只有定义类修改了__newindex--vbtl只属于定义类--new出来的对象共享所有定义类的引用，但独享自己新增加的成员变量if super thensetmetatable(vtbl,&#123;__index=
+        function(t,k)
+            local ret=_class[super][k]
+            vtbl[k]=ret
+            return ret
+        end
+    &#125;)
+endreturn class_type
+</code></pre>
+<p>end<br></code></pre></div></div></p>
+<p>说明几点：</p>
+
+<ul>
+  <li>只有定义类修改了__newindex</li>
+  <li>vbtl只属于定义类</li>
+  <li>new出来的对象共享所有定义类的引用，但独享自己新增加的成员变量</li>
+</ul>
+
+<p>优点：</p>
+
+<ul>
+  <li>
+    <p>概念上更加清晰，熟悉c++面向对象的很容易了解这个继承的关系</p>
+  </li>
+  <li>
+    <p>写法上感觉很牛逼，做到了定义不能调用函数这一点</p>
+  </li>
+  <li>
+    <p>共享函数引用</p>
+  </li>
+</ul>
+
+<p>缺点：</p>
+
+<ul>
+  <li>
+    <p>概念上清晰的成本是要更多的时间去理解</p>
+  </li>
+  <li>
+    <p>虽然做到了c++类定义和对象上的概念区别，但是还是有多东西没有实现</p>
+  </li>
+  <li>
+    <p>对象也可以定义自己的函数，这一点就直接打破了区分定义和对象的本源，但是价值还是有的</p>
+  </li>
+  <li>
+    <p>所有new出来对象共享类定义的引用对象，包括不需要复用的函数和table。由此多个对象共享一个定义的table很是个问题！</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>针对最后一条，可以通过实现定义的init函数，在init函数给不同的对象初始化不同的数据，即使是table！</p>
+</blockquote>
+
+<h1 id="总结">总结</h1>
+
+<ul>
+  <li>
+    <p>面向对象</p>
+  </li>
+  <li>
+    <p>lua中的实现最主要就是使用talbe的元表和元方法</p>
+  </li>
+  <li>
+    <p>lua本身是用c实现的，可以做到很复杂的事情，但是做到满足自己的需求即可，没有必要搞得很复杂；如果非要苛求的话，往往会适得其反，不仅复杂难理解，性能上也会有影响</p>
+  </li>
+</ul>
+
+<h1 id="参考">参考</h1>
+
+<p>[1]同事</p>
+
+<p>[2]<a target="_blank" rel="noopener" href="http://blog.codingnow.com/cloud/LuaOO">云风blog</a></p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-729_nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lua%E6%A8%A1%E5%9D%97/">nginx编译安装lua模块</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-730_Lua%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">Lua模块与包 · 花生肉泥</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

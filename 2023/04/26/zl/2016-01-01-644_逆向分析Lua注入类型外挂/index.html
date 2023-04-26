@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>逆向分析Lua注入类型外挂 - Lua教程</title>
+
+  
+    <meta name="description" content="&lt;h2 id&#x3D;&quot;相关&quot;&gt;&lt;a href&#x3D;&quot;#相关&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;相关&quot;&gt;&lt;&#x2F;a&gt;相关&lt;&#x2F;h2&gt;&lt;p&gt;该网游类型为横版过关类角色扮演游戏，之前在这上面花了不少时间。刚接触逆向分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逆向分析Lua注入类型外挂">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-644_%E9%80%86%E5%90%91%E5%88%86%E6%9E%90Lua%E6%B3%A8%E5%85%A5%E7%B1%BB%E5%9E%8B%E5%A4%96%E6%8C%82/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="&lt;h2 id&#x3D;&quot;相关&quot;&gt;&lt;a href&#x3D;&quot;#相关&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;相关&quot;&gt;&lt;&#x2F;a&gt;相关&lt;&#x2F;h2&gt;&lt;p&gt;该网游类型为横版过关类角色扮演游戏，之前在这上面花了不少时间。刚接触逆向分析">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224145535.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224145648.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224150333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224150226.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224151404.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224151329.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224152731.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224152908.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224153056.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224154040.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224154107.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224161009.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.292Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.292Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224145535.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">逆向分析Lua注入类型外挂</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%AF%BB%E6%A0%B7%E6%9C%AC"><span class="toc-text">找寻样本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-text">加载器目录结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8A%9F%E8%83%BD%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-text">加载器功能函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E4%B8%BB%E8%A6%81%E9%80%BB%E8%BE%91"><span class="toc-text">加载器主要逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E5%99%A8%E5%88%86%E6%9E%90"><span class="toc-text">登录器分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4pcl9-dll"><span class="toc-text">4pcl9.dll</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#amdd3drt-dll"><span class="toc-text">amdd3drt.dll</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dinput8-dll"><span class="toc-text">dinput8.dll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91"><span class="toc-text">整体逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93"><span class="toc-text">结</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>逆向分析Lua注入类型外挂</span></h1>
+<div class="post-content_wrapper">
+            
+<pre><code>        &lt;h2 id=&quot;相关&quot;&gt;&lt;a href=&quot;#相关&quot; class=&quot;headerlink&quot; title=&quot;相关&quot;&gt;&lt;/a&gt;相关&lt;/h2&gt;&lt;p&gt;该网游类型为横版过关类角色扮演游戏，之前在这上面花了不少时间。刚接触逆向分析，所以比较好奇外挂以及游戏漏洞的原理，故写此记录一下分析过程。  &lt;/p&gt;
+</code></pre>
+<h2 id="找寻样本"><a href="#找寻样本" class="headerlink" title="找寻样本"></a>找寻样本</h2><p>该游戏近年在国内市场效应不佳，所以游戏工作室以及外挂制作等业务逐渐退出国服范围。在谷歌搜索后，发现存在许多类型为<code>Lua 注入</code>的外挂–也就是向游戏注入Lua脚本代码，执行实现非法行为的手段。而其中支持国服的，只有一款，下载后对其进行分析。  </p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>下载下来后，发现该外挂为单文件，对其进行查壳操作。<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224145535.png" alt=""/><br/>为.NET程序，并且无壳，这就相当于开源了。使用Reflector反编译：<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224145648.png" alt=""/><br/>无混淆，直接导出源码，丢入vs2017，方便阅读代码。  </p>
+<h3 id="加载器目录结构："><a href="#加载器目录结构：" class="headerlink" title="加载器目录结构："></a>加载器目录结构：</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224150333.png" alt=""/>  </p>
+<h3 id="加载器功能函数："><a href="#加载器功能函数：" class="headerlink" title="加载器功能函数："></a>加载器功能函数：</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224150226.png" alt=""/>  </p>
+<h3 id="加载器主要逻辑"><a href="#加载器主要逻辑" class="headerlink" title="加载器主要逻辑"></a>加载器主要逻辑</h3><p>WPF程序启动函数:  </p>
+<pre><code class="C#">        private void Application_Startup(object sender, System.Windows.StartupEventArgs e)  
+        &#123;  
+            this.DeleteOld();  
+            this.CreateNew();  
+            Environment.Exit(0);  
+        &#125;  
+
+<pre><code>    private void CreateNew()  
+    &#123;  
+        string location = Assembly.GetExecutingAssembly().Location;  
+        string directoryName = MyWpfExtension.Computer.FileSystem.GetFileInfo(location).DirectoryName;  
+        byte[] lunaLoader = LunaLoader_Launcher.My.Resources.Resources.LunaLoader;  
+        string right = Functions.Random(5).ToString().ToLower();  
+        object obj2 = Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(this.localDirectory, @&amp;#34;&amp;#34;), right), &amp;#34;.exe&amp;#34;);  
+        Functions.RegistryWrite(&amp;#34;LastExecutable_Path&amp;#34;, Conversions.ToString(obj2));  
+        try  
+        &#123;  
+            File.WriteAllBytes(Conversions.ToString(obj2), lunaLoader);  
+        &#125;  
+        catch (Exception exception1)  
+        &#123;  
+            ProjectData.SetProjectError(exception1);  
+            Functions.Message(&amp;#34;Can&amp;#39;t write new program files.&amp;#34;, Conversions.ToString(3));  
+            ProjectData.ClearProjectError();  
+        &#125;  
+        try  
+        &#123;  
+            Process.Start(right, &amp;#34;&amp;#34;&amp;#34; + directoryName + &amp;#34;&amp;#34;&amp;#34;);  
+        &#125;  
+        catch (Exception exception2)  
+        &#123;  
+            ProjectData.SetProjectError(exception2);  
+            Functions.Message(&amp;#34;The application files are corrupted, please disable your anti-virus.&amp;#34;, Conversions.ToString(3));  
+            ProjectData.ClearProjectError();  
+        &#125;  
+    &#125;  
+
+    private void DeleteOld()  
+    &#123;  
+        object obj2 = Functions.RegistryRead(&amp;#34;LastExecutable_Path&amp;#34;);  
+        try  
+        &#123;  
+            if (File.Exists(Conversions.ToString(obj2)))  
+            &#123;  
+                File.Delete(Conversions.ToString(obj2));  
+            &#125;  
+        &#125;  
+        catch (Exception exception1)  
+        &#123;  
+            ProjectData.SetProjectError(exception1);  
+            Functions.Message(&amp;#34;Can&amp;#39;t delete old program files.&amp;#34;, Conversions.ToString(3));  
+            ProjectData.ClearProjectError();  
+        &#125;  
+    &#125;  
+</code></pre>
+<p></code></pre></p>
+<p>整体逻辑非常清晰，删除上一条注册表<code>LastExecutable_Path</code> (<code>SoftwareLunaLoader</code>)的值，随机生成文件名，然后向其写入新文件名，然后在<code>Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)</code>目录中生成程序内的压缩资源。可以肯定此单文件程序为主程序释放器。让我们对释放出来的资源进行分析，由于释放后程序必须由启动器启动，为了调试方便我直接将程序源码修改，PATCH掉了随机文件名部分，指定固定的文件名，方便启动以及调试。  </p>
+<h3 id="登录器分析"><a href="#登录器分析" class="headerlink" title="登录器分析"></a>登录器分析</h3><p>首先先查询壳信息<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224151404.png" alt=""/><br/>显示为<code>ConfuserEx(1.0.0)[-]</code><br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224151329.png" alt=""/><br/>丢入反编译工具中，发现特征，以及字符串等信息都被混淆了。<br/>尝试带壳调试，但是整体堆栈调用太复杂了，并且通信使用了ssl，Hook了发包收包函数也无法获取信息，遂放弃。<br/>此壳为魔改版，原版是开源的，所以原版脱壳工具都无法使用。硬实力还是弱了，拖不下来这个壳。<br/>开始找寻旁路，对该进程进行行为监控。  </p>
+<p>发现其有多次写入文件以及注册表操作：<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224152731.png" alt=""/>  </p>
+<p>挨个分析，由于文件名也是随机生成的，我这里简单定义一下各个dll作用，方便辨识。  </p>
+<h4 id="4pcl9-dll"><a href="#4pcl9-dll" class="headerlink" title="4pcl9.dll"></a>4pcl9.dll</h4><p>功能函数，提供导出函数，为外挂的核心功能dll<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224152908.png" alt=""/>  </p>
+<h4 id="amdd3drt-dll"><a href="#amdd3drt-dll" class="headerlink" title="amdd3drt.dll"></a>amdd3drt.dll</h4><p>无导出函数<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224153056.png" alt=""/><br/>猜测功能为DLL注入，查看DLLMain函数  </p>
+<pre><code class="C">BOOL __stdcall DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)  
+&#123;  
+  int v3; // eax  
+  int v5; // [esp+4h] [ebp-20Ch]  
+  CHAR Filename; // [esp+108h] [ebp-108h]  
+
+<p>  if ( fdwReason &#x3D;&#x3D; 1 &amp;&amp; !dword_10019238 )<br>  &#123;<br>    dword_10019238 &#x3D; 1;<br>    GetModuleFileNameA(0, &amp;Filename, 0x104u);<br>    sub_10003628(&amp;Filename, 0, 0, (int)&amp;v5, 0);<br>    v3 &#x3D; strcmp((const char *)&amp;v5, (const char *)&amp;unk_10016488);<br>    if ( v3 )<br>      v3 &#x3D; -(v3 &lt; 0) | 1;<br>    if ( v3 )<br>      return 0;<br>    sub_10001010((int)&amp;#34;LunaLoader attached!n&amp;#34;);<br>    sub_10001010((int)&amp;#34;nnBy Joni-St, and Ferrums.&amp;#34;);<br>    dword_1001924C &#x3D; (int)GetCurrentProcess();<br>    dword_10019250 &#x3D; (int)hinstDLL;<br>    CreateThread(0, 0, StartAddress, &amp;dword_1001924C, 0, 0);<br>  &#125;<br>  return 1;<br>&#125;<br></code></pre></p>
+<p>可以看到逻辑为，通过dll劫持后，比对进程名字是否为游戏进程，是的话就在游戏（自身）进程内存中创建新的进程并执行<code>StartAddress</code>函数。  </p>
+<p>StartAddress:<br/>主要逻辑用注释标识了。  </p>
+<pre><code class="c">DWORD __stdcall StartAddress(LPVOID lpThreadParameter)  
+&#123;  
+  HMODULE v2; // eax  
+  HMODULE v3; // edi  
+  FARPROC v4; // eax  
+  FARPROC v5; // ebx  
+  FARPROC v6; // eax  
+  HANDLE v7; // eax  
+  HANDLE v8; // ebx  
+  char *v9; // esi  
+  DWORD v10; // ecx  
+  char v11; // ah  
+  DWORD v12; // edx  
+  char *v13; // edi  
+  char v14; // al  
+  char v15; // al  
+  CHAR *v16; // edi  
+  DWORD v17; // edi  
+  int v18; // ecx  
+  char *v19; // edx  
+  LPCSTR v20; // ebx  
+  CHAR *v21; // eax  
+  CHAR *v22; // edi  
+  CHAR *v23; // edi  
+  char *v24; // eax  
+  CHAR v25; // cl  
+  const char *i; // ebx  
+  LPCSTR v27; // edi  
+  int v28; // eax  
+  int *v29; // eax  
+  int v30; // eax  
+  int v31; // ecx  
+  unsigned int v32; // edx  
+  int v33; // ecx  
+  void *v34; // eax  
+  HANDLE v35; // edi  
+  void *v36; // ebx  
+  _DWORD *v37; // esi  
+  int v38; // ST14_4  
+  struct _SYSTEM_INFO SystemInfo; // [esp+0h] [ebp-106ACh]  
+  struct _MEMORY_BASIC_INFORMATION Buffer; // [esp+24h] [ebp-10688h]  
+  DWORD v41; // [esp+40h] [ebp-1066Ch]  
+  DWORD v42; // [esp+44h] [ebp-10668h]  
+  DWORD v43; // [esp+48h] [ebp-10664h]  
+  LPCWSTR lpWideCharStr; // [esp+4Ch] [ebp-10660h]  
+  HANDLE hFile; // [esp+50h] [ebp-1065Ch]  
+  DWORD NumberOfBytesRead; // [esp+54h] [ebp-10658h]  
+  HANDLE *v47; // [esp+58h] [ebp-10654h]  
+  LPCSTR lpszVolumeMountPoint; // [esp+5Ch] [ebp-10650h]  
+  int v49; // [esp+60h] [ebp-1064Ch]  
+  char v50; // [esp+64h] [ebp-10648h]  
+  __int16 v51; // [esp+390h] [ebp-1031Ch]  
+  char v52; // [esp+10064h] [ebp-648h]  
+  CHAR LibFileName; // [esp+10168h] [ebp-544h]  
+  CHAR MultiByteStr; // [esp+1026Ch] [ebp-440h]  
+  __int128 v55; // [esp+10370h] [ebp-33Ch]  
+  __int128 v56; // [esp+10380h] [ebp-32Ch]  
+  __int128 v57; // [esp+10390h] [ebp-31Ch]  
+  __int128 v58; // [esp+103A0h] [ebp-30Ch]  
+  __int128 v59; // [esp+103B0h] [ebp-2FCh]  
+  __int128 v60; // [esp+103C0h] [ebp-2ECh]  
+  __int128 v61; // [esp+103D0h] [ebp-2DCh]  
+  __int128 v62; // [esp+103E0h] [ebp-2CCh]  
+  __int128 v63; // [esp+103F0h] [ebp-2BCh]  
+  __int128 v64; // [esp+10400h] [ebp-2ACh]  
+  __int128 v65; // [esp+10410h] [ebp-29Ch]  
+  __int128 v66; // [esp+10420h] [ebp-28Ch]  
+  __int128 v67; // [esp+10430h] [ebp-27Ch]  
+  __int128 v68; // [esp+10440h] [ebp-26Ch]  
+  __int128 v69; // [esp+10450h] [ebp-25Ch]  
+  __int128 v70; // [esp+10460h] [ebp-24Ch]  
+  __int128 v71; // [esp+10470h] [ebp-23Ch]  
+  __int128 v72; // [esp+10480h] [ebp-22Ch]  
+  __int128 v73; // [esp+10490h] [ebp-21Ch]  
+  __int128 v74; // [esp+104A0h] [ebp-20Ch]  
+  __int128 v75; // [esp+104B0h] [ebp-1FCh]  
+  __int128 v76; // [esp+104C0h] [ebp-1ECh]  
+  __int128 v77; // [esp+104D0h] [ebp-1DCh]  
+  __int128 v78; // [esp+104E0h] [ebp-1CCh]  
+  __int128 v79; // [esp+104F0h] [ebp-1BCh]  
+  __int128 v80; // [esp+10500h] [ebp-1ACh]  
+  __int128 v81; // [esp+10510h] [ebp-19Ch]  
+  __int128 v82; // [esp+10520h] [ebp-18Ch]  
+  __int128 v83; // [esp+10530h] [ebp-17Ch]  
+  __int128 v84; // [esp+10540h] [ebp-16Ch]  
+  __int128 v85; // [esp+10550h] [ebp-15Ch]  
+  __int128 v86; // [esp+10560h] [ebp-14Ch]  
+  __int128 v87; // [esp+10570h] [ebp-13Ch]  
+  __int128 v88; // [esp+10580h] [ebp-12Ch]  
+  __int128 v89; // [esp+10590h] [ebp-11Ch]  
+  __int128 v90; // [esp+105A0h] [ebp-10Ch]  
+  __int128 v91; // [esp+105B0h] [ebp-FCh]  
+  __int128 v92; // [esp+105C0h] [ebp-ECh]  
+  __int128 v93; // [esp+105D0h] [ebp-DCh]  
+  __int128 v94; // [esp+105E0h] [ebp-CCh]  
+  __int128 v95; // [esp+105F0h] [ebp-BCh]  
+  __int128 v96; // [esp+10600h] [ebp-ACh]  
+  __int128 v97; // [esp+10610h] [ebp-9Ch]  
+  __int128 v98; // [esp+10620h] [ebp-8Ch]  
+  __int128 v99; // [esp+10630h] [ebp-7Ch]  
+  __int128 v100; // [esp+10640h] [ebp-6Ch]  
+  __int128 v101; // [esp+10650h] [ebp-5Ch]  
+  __int128 v102; // [esp+10660h] [ebp-4Ch]  
+  __int128 v103; // [esp+10670h] [ebp-3Ch]  
+  __int128 v104; // [esp+10680h] [ebp-2Ch]  
+  int v105; // [esp+10690h] [ebp-1Ch]  
+  int v106; // [esp+10694h] [ebp-18h]  
+  int v107; // [esp+10698h] [ebp-14h]  
+  __int16 v108; // [esp+1069Ch] [ebp-10h]  
+  int (*v109)(void); // [esp+106A0h] [ebp-Ch]  
+  __int16 v110; // [esp+106A4h] [ebp-8h]  
+  char v111; // [esp+106A6h] [ebp-6h]  
+
+<p>  v47 &#x3D; (HANDLE <em>)lpThreadParameter;<br>  CoInitialize(0);<br>  if ( SHGetKnownFolderPath(&amp;unk_10011190, 0, 0, &amp;lpWideCharStr) )<br>    return 1;<br>  MultiByteStr &#x3D; 0;<br>  WideCharToMultiByte(0, 0, lpWideCharStr, -1, &amp;MultiByteStr, 260, 0, 0);<br>  CoTaskMemFree((LPVOID)lpWideCharStr);<br>  sub_10003628(&amp;MultiByteStr, (int)&amp;v52, 0, 0, 0);<br>  _makepath(&amp;LibFileName, 0, &amp;v52, &amp;#34;4pcl9.dll&amp;#34;, 0);  &#x2F;&#x2F;获取4pcl9.dll绝对路径<br>  v2 &#x3D; LoadLibraryA(&amp;LibFileName);  &#x2F;&#x2F;动态加载4pcl9.dll<br>  v3 &#x3D; v2;<br>  if ( !v2 )<br>  &#123;<br>    MessageBoxA(0, &amp;#34;Lua initialization failed.&amp;#34;, &amp;#34;LunaLoader&amp;#34;, 0);<br>    MessageBoxA((HWND)v3, &amp;LibFileName, &amp;#34;LunaLoader&amp;#34;, (UINT)v3);<br>    return 0;<br>  &#125;<br>  v4 &#x3D; GetProcAddress(v2, &amp;#34;luaL_newstate&amp;#34;);  &#x2F;&#x2F;初始化lua加载器<br>  v5 &#x3D; v4;<br>  v109 &#x3D; (int (</em>)(void))v4;<br>  dword_10019248 &#x3D; (int (__cdecl *)(_DWORD, _DWORD))GetProcAddress(v3, &amp;#34;luaL_loadstring&amp;#34;); &#x2F;&#x2F;获取函数地址<br>  dword_10019244 &#x3D; (int (__cdecl *)(_DWORD, _DWORD, _DWORD))GetProcAddress(v3, &amp;#34;lua_dump&amp;#34;);<br>  v6 &#x3D; GetProcAddress(v3, &amp;#34;lua_settop&amp;#34;);<br>  dword_1001923C &#x3D; (int (__cdecl *)(_DWORD, _DWORD))v6;<br>  if ( v5 &amp;&amp; dword_10019248 &amp;&amp; dword_10019244 &amp;&amp; v6 )<br>  &#123;<br>    GetFileAttributesA(&amp;#34;...\elsword.exe&amp;#34;);<br>    v7 &#x3D; CreateNamedPipeA(&amp;#34;\.\pipe\LunaLoaderCommandPipe&amp;#34;, 3u, 4u, 1u, 0, 0, 0, 0); &#x2F;&#x2F;创建命名管道与登录器进行交互，获取用户传递的脚本字符串内容并且执行<br>    v8 &#x3D; v7;<br>    hFile &#x3D; v7;<br>    if ( v7 &amp;&amp; v7 !&#x3D; (HANDLE)-1 )<br>    &#123;<br>      if ( ConnectNamedPipe(v7, 0) )<br>      &#123;<br>        v9 &#x3D; (char *)malloc(0x400u);<br>        memset(v9, 0, 0x400u);<br>        if ( !ReadFile(v8, v9, 0x3FFu, &amp;NumberOfBytesRead, 0) )<br>          goto LABEL_71;<br>        v10 &#x3D; NumberOfBytesRead;<br>        if ( NumberOfBytesRead &lt;&#x3D; 1 )<br>          goto LABEL_71;<br>        v11 &#x3D; *v9;<br>        v12 &#x3D; NumberOfBytesRead - 1;<br>        v13 &#x3D; v9;<br>        if ( NumberOfBytesRead !&#x3D; 1 )<br>        &#123;<br>          do<br>          &#123;<br>            v14 &#x3D; (v13++)[1];<br>            v15 &#x3D; v11++ ^ v14;<br>            *(v13 - 1) &#x3D; v15;<br>            –v12;<br>          &#125;<br>          while ( v12 );<br>          v10 &#x3D; NumberOfBytesRead;<br>        &#125;<br>        NumberOfBytesRead &#x3D; v10 - 1;<br>        v9[NumberOfBytesRead] &#x3D; 0;<br>        v16 &#x3D; (CHAR *)malloc(0x400u);<br>        lpszVolumeMountPoint &#x3D; v16;<br>        memset(v16, 0, 0x400u);<br>        if ( !ReadFile(v8, v16, 0x3FFu, &amp;v42, 0) )<br>          goto LABEL_71;<br>        v17 &#x3D; NumberOfBytesRead;<br>        v18 &#x3D; 0;<br>        v19 &#x3D; v9;<br>        if ( NumberOfBytesRead )<br>        &#123;<br>          v20 &#x3D; lpszVolumeMountPoint;<br>          do<br>          &#123;<br>            *v19 ^&#x3D; v20[v18];<br>            ++v19;<br>            v18 &#x3D; v18 + 1 &lt; v42 ? v18 + 1 : 0;<br>            –v17;<br>          &#125;<br>          while ( v17 );<br>          v8 &#x3D; hFile;<br>        &#125;<br>        v21 &#x3D; (CHAR *)malloc(0x10u);<br>        lpszVolumeMountPoint &#x3D; v21;<br>        *(_OWORD *)v21 &#x3D; 0i64;<br>        if ( ReadFile(v8, v21, 0xFu, &amp;v41, 0) )<br>        &#123;<br>          v22 &#x3D; (CHAR *)malloc(0x41u);<br>          memset(v22, 0, 0x41u);<br>          v23 &#x3D; v22 + 1;<br>          GetVolumeNameForVolumeMountPointA(lpszVolumeMountPoint, v23, 0x40u);<br>          v24 &#x3D; (char *)malloc(0x40u);<br>          v25 &#x3D; *v23;<br>          for ( i &#x3D; v24; v25; ++v23 )<br>          &#123;<br>            if ( (v25 &gt;&#x3D; 97 &amp;&amp; v25 &lt;&#x3D; 102 || v25 &gt;&#x3D; 65 &amp;&amp; v25 &lt;&#x3D; 70 || v25 &gt;&#x3D; 48 &amp;&amp; v25 &lt;&#x3D; 57) &amp;&amp; *(v23 - 1) !&#x3D; 109 )<br>              *v24++ &#x3D; v25;<br>            v25 &#x3D; v23[1];<br>          &#125;<br>          *v24 &#x3D; 0;<br>          GetSystemInfo(&amp;SystemInfo);<br>          v27 &#x3D; (LPCSTR)SystemInfo.lpMinimumApplicationAddress;<br>          for ( lpszVolumeMountPoint &#x3D; (LPCSTR)SystemInfo.lpMaximumApplicationAddress;<br>                v27 &lt; lpszVolumeMountPoint;<br>                v27 +&#x3D; Buffer.RegionSize )<br>          &#123;<br>            VirtualQueryEx(*v47, v27, &amp;Buffer, 0x1Cu);<br>            if ( (Buffer.Protect &#x3D;&#x3D; 2 || Buffer.Protect &#x3D;&#x3D; 4 || Buffer.Protect &#x3D;&#x3D; 32 || Buffer.Protect &#x3D;&#x3D; 64)<br>              &amp;&amp; Buffer.State &#x3D;&#x3D; 4096 )<br>            &#123;<br>              v28 &#x3D; strcmp(v9, i);<br>              if ( v28 )<br>                v28 &#x3D; -(v28 &lt; 0) | 1;<br>              if ( !v28 )<br>                sub_10001150((int)Buffer.BaseAddress, Buffer.RegionSize);<br>            &#125;<br>          &#125;<br>          CloseHandle(*v47);<br>          v29 &#x3D; &amp;dword_100187C4;<br>          if ( off_100187C8 )<br>          &#123;<br>            while ( *v29 )<br>            &#123;<br>              v29 +&#x3D; 3;<br>              if ( !v29[1] )<br>                goto LABEL_49;<br>            &#125;<br>          &#125;<br>          else<br>          &#123;<br>LABEL_49:<br>            v30 &#x3D; strcmp(v9, i);<br>            if ( v30 )<br>              v30 &#x3D; -(v30 &lt; 0) | 1;<br>            if ( !v30 )<br>            &#123;<br>              lpszVolumeMountPoint &#x3D; *(LPCSTR *)(**(_DWORD **)(dword_100187D0 + 1) + 4);<br>              v47 &#x3D; (HANDLE <em>)dword_100187C4;<br>              dword_10019240 &#x3D; v109();<br>              if ( dword_10019240 )<br>              &#123;<br>                v55 &#x3D; xmmword_10016850;<br>                v56 &#x3D; xmmword_100166A0;<br>                v57 &#x3D; xmmword_10016910;<br>                v58 &#x3D; xmmword_10016770;<br>                v59 &#x3D; xmmword_100167D0;<br>                v60 &#x3D; xmmword_10016960;<br>                v61 &#x3D; xmmword_10016660;<br>                v62 &#x3D; xmmword_10016840;<br>                v63 &#x3D; xmmword_100166B0;<br>                v64 &#x3D; xmmword_100168F0;<br>                v65 &#x3D; xmmword_10016740;<br>                v66 &#x3D; xmmword_100167C0;<br>                v67 &#x3D; xmmword_10016930;<br>                v68 &#x3D; xmmword_10016680;<br>                v69 &#x3D; xmmword_10016820;<br>                v70 &#x3D; xmmword_100166D0;<br>                v71 &#x3D; xmmword_100168C0;<br>                v72 &#x3D; xmmword_10016730;<br>                v73 &#x3D; xmmword_100167F0;<br>                v74 &#x3D; xmmword_10016940;<br>                v75 &#x3D; xmmword_10016670;<br>                v76 &#x3D; xmmword_10016860;<br>                v77 &#x3D; xmmword_100166E0;<br>                v78 &#x3D; xmmword_10016900;<br>                v79 &#x3D; xmmword_10016760;<br>                v80 &#x3D; xmmword_10016800;<br>                v81 &#x3D; xmmword_10016950;<br>                v82 &#x3D; xmmword_10016650;<br>                v83 &#x3D; xmmword_10016870;<br>                v84 &#x3D; xmmword_100166C0;<br>                v85 &#x3D; xmmword_100168E0;<br>                v86 &#x3D; xmmword_10016780;<br>                v87 &#x3D; xmmword_100167E0;<br>                v88 &#x3D; xmmword_10016790;<br>                v89 &#x3D; xmmword_10016700;<br>                v90 &#x3D; xmmword_10016830;<br>                v91 &#x3D; xmmword_10016710;<br>                v92 &#x3D; xmmword_100167B0;<br>                v93 &#x3D; xmmword_10016810;<br>                v94 &#x3D; xmmword_10016920;<br>                v95 &#x3D; xmmword_10016890;<br>                v31 &#x3D; 0;<br>                v105 &#x3D; -2004716861;<br>                v32 &#x3D; 0;<br>                v96 &#x3D; xmmword_100166F0;<br>                v106 &#x3D; -1359952088;<br>                v97 &#x3D; xmmword_100168A0;<br>                v107 &#x3D; 1973920377;<br>                v98 &#x3D; xmmword_10016720;<br>                v108 &#x3D; -22329;<br>                v99 &#x3D; xmmword_10016880;<br>                v109 &#x3D; (int (</em>)(void))1050454148;<br>                v100 &#x3D; xmmword_10016750;<br>                v110 &#x3D; -5641;<br>                v101 &#x3D; xmmword_100168B0;<br>                v111 &#x3D; 37;<br>                v102 &#x3D; xmmword_100167A0;<br>                v103 &#x3D; xmmword_10016690;<br>                v104 &#x3D; xmmword_100168D0;<br>                do<br>                &#123;<br>                  *((_BYTE *)&amp;v55 + v32) ^&#x3D; *((_BYTE *)&amp;v109 + v31);<br>                  v33 &#x3D; (unsigned int)(v31 + 1) &lt; 7 ? v31 + 1 : 0;<br>                  *((_BYTE *)&amp;v55 + v32 + 1) ^&#x3D; *((_BYTE *)&amp;v109 + v33);<br>                  v32 +&#x3D; 2;<br>                  v31 &#x3D; (unsigned int)(v33 + 1) &lt; 7 ? v33 + 1 : 0;<br>                &#125;<br>                while ( v32 &lt; 0x32E );<br>                v49 &#x3D; 814;<br>                qmemcpy(&amp;v50, &amp;v55, 0x32Cu);<br>                v51 &#x3D; v108;<br>                v34 &#x3D; malloc(0x100000u);<br>                v35 &#x3D; hFile;<br>                v36 &#x3D; v34;<br>                v43 &#x3D; 0;<br>                while ( 1 )<br>                &#123;<br>                  memset(v36, 0, 0x100000u);<br>                  if ( ReadFile(v35, v36, 0xFFFFFu, &amp;v43, 0) &amp;&amp; v43 )<br>                  &#123;<br>                    v37 &#x3D; 0;<br>                    if ( !dword_10019248(dword_10019240, v36) )<br>                    &#123;<br>                      v37 &#x3D; malloc(0x10004u);<br>                      v38 &#x3D; dword_10019240;<br>                      *v37 &#x3D; 0;<br>                      if ( dword_10019244(v38, sub_10001200, v37) )<br>                      &#123;<br>                        j___free_base(v37);<br>                        v37 &#x3D; 0;<br>                      &#125;<br>                    &#125;<br>                    dword_1001923C(dword_10019240, -2);<br>                    if ( v37 )<br>                    &#123;<br>                      ((void (__cdecl *)(LPCSTR, _DWORD *, _DWORD))v47)(lpszVolumeMountPoint, v37 + 1, *v37);<br>                      j___free_base(v37);<br>                    &#125;<br>                  &#125;<br>                  Sleep(0x32u);<br>                &#125;<br>              &#125;<br>              MessageBoxA(0, &amp;#34;Lua init error.&amp;#34;, &amp;#34;LunaLoader&amp;#34;, 0);<br>              return 0;<br>            &#125;<br>          &#125;<br>          MessageBoxA(0, &amp;#34;LunaLoader startup failed.&amp;#34;, &amp;#34;LunaLoader&amp;#34;, 0);<br>        &#125;<br>        else<br>        &#123;<br>LABEL_71:<br>          MessageBoxA(0, &amp;#34;Pipe read error.&amp;#34;, &amp;#34;LunaLoader&amp;#34;, 0);<br>          CloseHandle(v8);<br>        &#125;<br>      &#125;<br>      else<br>      &#123;<br>        MessageBoxA(0, &amp;#34;Unable to connect to communication pipe.&amp;#34;, &amp;#34;LunaLoader&amp;#34;, 0);<br>        CloseHandle(v8);<br>      &#125;<br>    &#125;<br>    else<br>    &#123;<br>      MessageBoxA(0, &amp;#34;Unable to open communication pipe.&amp;#34;, &amp;#34;LunaLoader&amp;#34;, 0);<br>    &#125;<br>  &#125;<br>  else<br>  &#123;<br>    MessageBoxA(0, &amp;#34;Internal error.&amp;#34;, &amp;#34;LunaLoader&amp;#34;, 0);<br>  &#125;<br>  return 0;<br>&#125;<br></code></pre></p>
+<h3 id="dinput8-dll"><a href="#dinput8-dll" class="headerlink" title="dinput8.dll"></a>dinput8.dll</h3><p>Dll劫持<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224154040.png" alt=""/>  </p>
+<p>查看导出函数<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224154107.png" alt=""/>  </p>
+<p>随便查看一个，DllRegisterServer：  </p>
+<pre><code class="c">HRESULT __stdcall DllRegisterServer()  
+&#123;  
+  int (*v1)(void); // [esp+D0h] [ebp-8h]  
+
+<p>  if ( !hModule )<br>    sub_10002670();<br>  v1 &#x3D; (int (*)(void))GetProcAddress(hModule, &amp;#34;DllRegisterServer&amp;#34;);<br>  if ( !v1 )<br>    ExitProcess(0);<br>  return v1();<br>&#125;<br></code></pre></p>
+<p>可以看到很明显的Hook了DllRegisterServer函数，但是并未修改行为。  </p>
+<p>查看到<code>DirectInput8Create</code>函数：  </p>
+<pre><code class="c">__int64 __stdcall DirectInput8Create(int a1, int a2, int a3, _DWORD *a4, int a5)  
+&#123;  
+  int v5; // edx  
+  __int64 v6; // ST10_8  
+  int v8; // [esp+Ch] [ebp-100h]  
+  void *v9; // [esp+14h] [ebp-F8h]  
+  int v10; // [esp+20h] [ebp-ECh]  
+  int v11; // [esp+ECh] [ebp-20h]  
+  int v12; // [esp+F8h] [ebp-14h]  
+  FARPROC v13; // [esp+104h] [ebp-8h]  
+  int savedregs; // [esp+10Ch] [ebp+0h]  
+
+<p>  if ( !hModule )<br>    sub_10002670();<br>  v13 &#x3D; GetProcAddress(hModule, &amp;#34;DirectInput8Create&amp;#34;);<br>  if ( !v13 )<br>    ExitProcess(0);<br>  if ( dword_100B9CE0 )<br>  &#123;<br>    (*(void (__stdcall **)(int))(*(_DWORD *)dword_100B9CE0 + 4))(dword_100B9CE0);<br>    v12 &#x3D; 0;<br>  &#125;<br>  else<br>  &#123;<br>    v12 &#x3D; ((int (__stdcall *)(int, int, int, int <em>, int))v13)(a1, a2, a3, &amp;v11, a5);<br>    if ( !v12 )<br>    &#123;<br>      v9 &#x3D; operator new(8u);<br>      if ( v9 )<br>        v8 &#x3D; sub_10002BA0(v11);<br>      else<br>        v8 &#x3D; 0;<br>      v10 &#x3D; v8;<br>      dword_100B9CE0 &#x3D; v8;<br>      (</em>(void (__stdcall **)(int))(*(_DWORD *)v8 + 4))(v8);<br>    &#125;<br>    CreateThread(0, 0, (LPTHREAD_START_ROUTINE)StartAddress, 0, 0, 0);&#x2F;&#x2F;主要操作<br>  &#125;<br>  *a4 &#x3D; dword_100B9CE0;<br>  sub_10004C30(&amp;savedregs, &amp;dword_1000291C, v12, v5);<br>  return v6;<br>&#125;<br></code></pre></p>
+<p>StartAddress:  </p>
+<pre><code>DWORD __stdcall StartAddress()  
+&#123;  
+  LoadLibraryA(&#34;amdd3drt.dll&#34;);  
+  return 0;  
+&#125;  
+</code></pre><p>加载了amdd3drt.dll。  </p>
+<h3 id="整体逻辑"><a href="#整体逻辑" class="headerlink" title="整体逻辑"></a>整体逻辑</h3><p>至此，整个调用逻辑就已经理清楚了。首先释放器(LunaLoader-Launcher.exe)释放并启动登录器，然后登录器获取游戏进程并且找到其目录，释放dinput8.dll(DLL劫持)到该目录，劫持后，加载amdd3drt.dll（DLL注入），并创建命名管道与登录器进行通信，接收字符串并调用4pcl9.dll（Lua C库）中的方法。  </p>
+<p>搞了半天，其实就是将自己的Lua代码注入到游戏中执行。<br/>然后来看一看提供的外挂脚本是如何实现的。<br/>外挂的主要基于Hook游戏的函数，但是如何获取游戏中的函数以及参数呢？<br/>作者提供了如下脚本:  </p>
+<pre><code class="lua">--&#123; &#34;Name&#34;:&#34;Multi Function Dumper&#34;, &#34;Type&#34;:&#34;Login/Loading Screen&#34;, &#34;Version&#34;: &#34;1.0.0.0&#34; &#125;  
+function file_exists(file)  
+  local f = io.open(file, &#34;rb&#34;)  
+  if f then f:close() end  
+  return f ~= nil  
+end  
+function lines_from(file)  
+  if not file_exists(file) then return &#123;&#125; end  
+  lines = &#123;&#125;  
+  for line in io.lines(file) do  
+    lines[#lines + 1] = line  
+  end  
+  return lines  
+end  
+local lines = lines_from(&#34;_functions.txt&#34;)  
+
+<p>local outfile &#x3D; &amp;#34;_fdResult_clean.txt&amp;#34;<br>local f       &#x3D; io.open(outfile, &amp;#34;wb&amp;#34;)<br>local outfunc &#x3D; function(text)<br>    f:write(text)<br>    f:flush()<br>end<br>local funclist &#x3D; &#123;<br>    &#123;&amp;#34;CX2ItemManager&amp;#34;, &amp;#34;AddShopItemList_LUA&amp;#34;&#125;<br>&#125;<br>local fromfile &#x3D; false<br>if fromfile then<br>    for k,v in pairs(lines) do<br>        one, two &#x3D; lines[k]:match(&amp;#34;([^.]+).([^.]+)&amp;#34;)<br>        table.insert(funclist, &#123; one, two &#125;)<br>        outfunc(&amp;#34;Found: [&amp;#34; .. two .. &amp;#34;]rn&amp;#34;)<br>    end<br>end  </p>
+<p>local dump &#x3D; true<br>if dump then<br>local pack0<br>pack0 &#x3D; function(tbl, idx, a, …)<br>    tbl[idx] &#x3D; a<br>    if a then pack0(tbl, idx + 1, …) end<br>    return tbl<br>end<br>local function pack(…)<br>    return pack0(&#123;&#125;, 1, …)<br>end  </p>
+<p>local tbldump<br>tbldump &#x3D; function(tbl, outfunc)<br>    if type(tbl) &#x3D;&#x3D; &amp;#34;string&amp;#34; then<br>        outfunc(&amp;#34;&amp;#34;&amp;#34;)<br>        outfunc(tbl)<br>        outfunc(&amp;#34;&amp;#34;&amp;#34;)<br>    elseif type(tbl) &#x3D;&#x3D; &amp;#34;table&amp;#34; then<br>        outfunc(&amp;#34;&#123;&amp;#34;)<br>        for k, v in pairs(tbl) do<br>            outfunc(&amp;#34;[&amp;#34;)<br>            tbldump(k, outfunc)<br>            outfunc(&amp;#34;] &#x3D; &amp;#34;)<br>            tbldump(v, outfunc)<br>            outfunc(&amp;#34;, &amp;#34;)<br>        end<br>        outfunc(&amp;#34;&#125;&amp;#34;)<br>    else<br>        outfunc(tostring(tbl))<br>    end<br>end  </p>
+<p>outfunc(&amp;#34;Starting.rn&amp;#34;)  </p>
+<p>for k, v in pairs(funclist) do<br>    local func &#x3D; _G<br>    local enclosing &#x3D; nil<br>    local enclosingKey &#x3D; nil<br>    for meh, fname in ipairs(v) do<br>        enclosing &#x3D; func<br>        enclosingKey &#x3D; fname<br>        func &#x3D; func[fname]<br>    end  </p>
+<pre><code>enclosing[enclosingKey] = function(...)  
+    outfunc(tostring(enclosingKey) .. &amp;#34;(&amp;#34;)  
+    local makecomma = false  
+    for k, v in ipairs(pack(...)) do  
+        if makecomma then outfunc(&amp;#34;, &amp;#34;) end  
+        makecomma = true  
+        tbldump(v, outfunc)  
+    end  
+    outfunc(&amp;#34;)rn&amp;#34;)  
+    return func(...)  
+end  
+
+outfunc(&amp;#34;Installed for &amp;#34; .. tostring(enclosingKey) .. &amp;#34;rn&amp;#34;)  
+</code></pre>
+<p>end<br>end<br></code></pre></p>
+<p>首先可以从全局变量表<code>_G</code>中获取内存中的所有类以及方法名，然后通过上述脚本对该函数进行Hook:  </p>
+<pre><code class="lua">    enclosing[enclosingKey] = function(...)  
+        outfunc(tostring(enclosingKey) .. &#34;(&#34;)  
+        local makecomma = false  
+        for k, v in ipairs(pack(...)) do  
+            if makecomma then outfunc(&#34;, &#34;) end  
+            makecomma = true  
+            tbldump(v, outfunc)  
+        end  
+        outfunc(&#34;)rn&#34;)  
+        return func(...)  
+    end  
+</code></pre>
+<p>通过迭代变长参数<code>for k, v in ipairs(pack(...))</code>获取到参数类型以及参数名，最后再传参调用原函数即可。  </p>
+<h2 id="结"><a href="#结" class="headerlink" title="结"></a>结</h2><p>整体思路比较简单，游戏的反作弊系统几乎没有起到任何作用，除了DLL劫持还有许多方法可以bypass，此游戏之前甚至将明文Lua脚本放置于用户端，当时导致了大批用户使用非法手段影响游戏公平性。而这个外挂利用的是同种方法，基于游戏引擎特性的外挂，稳定性相较于直接修改内存时好了不止一星半点。  </p>
+<pre><code>当前热门游戏中有使用XIGNCODE3的有:  
+
+<p>新玛奇英雄传<br>SF Online<br>黑色沙漠<br>跑跑卡丁车<br>冒险岛ㄧ<br>艾尔之光<br>《反恐精英Online》（游戏橘子）于2018年3月16日移除使用XIGNCODE3<br></code></pre><p>怪不得这些游戏都死的差不多了<br/><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/Lz1y/imggo/master/20190224161009.png" alt=""/>  </p></p>
+<pre><code>    &lt;/div&gt;
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-647_%E5%BC%80%E4%B8%AA%E5%9D%91%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%8Blua/">开个坑学习一下lua</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-645_C%E5%BE%AA%E7%8E%AF%E6%89%A7%E8%A1%8CLua/">C循环执行Lua</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

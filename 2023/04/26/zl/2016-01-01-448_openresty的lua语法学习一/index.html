@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>openresty的lua语法学习一 - Lua教程</title>
+
+  
+    <meta name="description" content="openresty的lua语法学习   lua的popen获取命令的执行结果 1234567891011121314151617181920212223242526272829local myfile &#x3D; io.popen(&amp;#34;pwd&amp;#34;, &amp;#34;r&amp;#34;)if nil &#x3D;&#x3D; myfile then  print(&amp;#34;open file for dir fail!!&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openresty的lua语法学习一">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-448_openresty%E7%9A%84lua%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0%E4%B8%80/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="openresty的lua语法学习   lua的popen获取命令的执行结果 1234567891011121314151617181920212223242526272829local myfile &#x3D; io.popen(&amp;#34;pwd&amp;#34;, &amp;#34;r&amp;#34;)if nil &#x3D;&#x3D; myfile then  print(&amp;#34;open file for dir fail!!&amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.273Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.273Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">openresty的lua语法学习一</span></div><div class="widget-body fs14"><div class="doc-tree active"></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>openresty的lua语法学习一</span></h1>
+<hr/>
+<p>openresty的lua语法学习</p>
+<hr/>
+
+<p>lua的popen获取命令的执行结果</p>
+<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/></pre></td><td class="code"><pre><span class="line"></span><br/><span class="line"><span class="keyword">local</span> myfile = <span class="built_in">io</span>.<span class="built_in">popen</span>(<span class="string">&#34;pwd&#34;</span>, <span class="string">&#34;r&#34;</span>)</span><br/><span class="line"><span class="keyword">if</span> <span class="literal">nil</span> == myfile <span class="keyword">then</span></span><br/><span class="line">  <span class="built_in">print</span>(<span class="string">&#34;open file for dir fail!!&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;n=========command dir result:&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 读取文件内容</span></span><br/><span class="line"><span class="keyword">for</span> cnt <span class="keyword">in</span> myfile:<span class="built_in">lines</span>() <span class="keyword">do</span></span><br/><span class="line">    <span class="built_in">print</span>(cnt)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 关闭文件</span></span><br/><span class="line">myfile:<span class="built_in">close</span>()</span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> secondfile = <span class="built_in">io</span>.<span class="built_in">popen</span>(<span class="string">&#34;ifconfig&#34;</span>)</span><br/><span class="line"><span class="keyword">if</span> <span class="literal">nil</span> == secondfile <span class="keyword">then</span></span><br/><span class="line">  <span class="built_in">print</span>(<span class="string">&#34;open file for ifconfig fail!!&#34;</span>)</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="built_in">print</span>(<span class="string">&#34;n==========command ifconfig result:&#34;</span>)</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 读取文件内容</span></span><br/><span class="line"><span class="keyword">local</span> content = secondfile:<span class="built_in">read</span>(<span class="string">&#34;*a&#34;</span>)</span><br/><span class="line"><span class="built_in">print</span>(content)</span><br/><span class="line"></span><br/><span class="line"><span class="comment">-- 关闭文件</span></span><br/><span class="line">secondfile:<span class="built_in">close</span>()</span><br/></pre></td></tr></tbody></table></figure>
+<p>通过openresty的web服务提供一个接口，执行系统脚本，停止某个服务，并返回结果</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/></pre></td><td class="code"><pre><span class="line"># 调用 http://192.168.1.12/testapi?value=stop</span><br/><span class="line">location = /testapi {</span><br/><span class="line">	default_type &#39;text/plain&#39;;</span><br/><span class="line">	content_by_lua_block {</span><br/><span class="line">		local value = ngx.var.arg_value</span><br/><span class="line">		if value ~= nil then</span><br/><span class="line">			local command = &#34;/usr/bin/bash /usr/local/src/stopService.sh &#34;..value</span><br/><span class="line">			local handle = io.popen(command)   </span><br/><span class="line">			local result = handle:read(&#34;*a&#34;)</span><br/><span class="line">			handle:close()</span><br/><span class="line">			ngx.say(result)</span><br/><span class="line">			ngx.exit(200)</span><br/><span class="line">		else</span><br/><span class="line">			ngx.exit(404)</span><br/><span class="line">		end</span><br/><span class="line">	}</span><br/><span class="line">}</span><br/></pre></td></tr></tbody></table></figure>
+<h1 id="lua语法的字符串分割，自定义方法"><a href="#lua语法的字符串分割，自定义方法" class="headerlink" title="lua语法的字符串分割，自定义方法"></a>lua语法的字符串分割，自定义方法</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/></pre></td><td class="code"><pre><span class="line">--定义函数，分割字符串</span><br/><span class="line"><span class="keyword">function</span> string.split(str, splitParameter) </span><br/><span class="line">    <span class="built_in">local</span> result = {}</span><br/><span class="line">    string.gsub(str,<span class="string">&#39;[^&#39;</span>..splitParameter..<span class="string">&#39;]+&#39;</span>, <span class="keyword">function</span>(w) table.insert(result, w) end)</span><br/><span class="line">    <span class="built_in">return</span> result</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 可能不太好理解的就是 string.gsub中使用了另一个函数</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment"># 先看下string.gsub的使用格式 string.gsub (s, pattern, repl [,m])</span></span><br/><span class="line"><span class="comment"># s 为原字符串， pattern 为匹配的模式  repl 替换的内容  m 只查找pattern匹配的m个子串</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment"># repl 为常规字符串，成功匹配的字串会被repl直接替换</span></span><br/><span class="line"><span class="comment"># repl 是一个表，每次匹配中的第一个子串将会作为整个表的键，取table[匹配子串]来替换所匹配出来的子串，当匹配不成功时，函数会使用整个字符串来作为table的键值</span></span><br/><span class="line"><span class="comment"># repl 为函数，每一次匹配的字串都将作为整个函数的参数，取function(匹配字串)来替换所匹配出来的子串,当匹配不成功时，函数会使用整个字符串来作为函数的参数。如果函数的返回值是一个数字或者是字符串，那么会直接拿来替换，如果它返回false或者nil，替换动作将不会发生，如果返回其他的值将会报错</span></span><br/></pre></td></tr></tbody></table></figure>
+<h1 id="lua语法读取文件"><a href="#lua语法读取文件" class="headerlink" title="lua语法读取文件"></a>lua语法读取文件</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此配置简写nginx的配置文件，动态匹配url，根据文件定义proxy_pass的值</span></span><br/><span class="line"><span class="keyword">function</span> FileRead()</span><br/><span class="line">    <span class="built_in">local</span> file_path = <span class="string">&#34;/usr/local/openresty/nginx/conf/gb/3rd/api-pay-env.conf&#34;</span></span><br/><span class="line">    <span class="built_in">local</span> file = io.open(file_path, <span class="string">&#34;r&#34;</span>)</span><br/><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> file:lines() <span class="keyword">do</span></span><br/><span class="line">        <span class="built_in">local</span> splitValues = string.split(line, <span class="string">&#34;=&#34;</span>)</span><br/><span class="line">        <span class="keyword">if</span> splitValues[1] == location_uri <span class="keyword">then</span>  -- 判断访问的location匹配的uri 是否存在文件</span><br/><span class="line">            <span class="built_in">local</span> proxy_pass_split = string.split(splitValues[2], <span class="string">&#34;/&#34;</span>)[2] -- 获取proxy_pass中的host，将端口去掉</span><br/><span class="line">            <span class="built_in">local</span> valueMatch = string.match(proxy_pass_split, <span class="string">&#34;:&#34;</span>)</span><br/><span class="line">            <span class="keyword">if</span> valueMatch ~= nil <span class="keyword">then</span></span><br/><span class="line">                <span class="built_in">local</span> proxy_pass_split = string.split(proxy_pass_split, <span class="string">&#34;:&#34;</span>)[1]</span><br/><span class="line">            end</span><br/><span class="line"></span><br/><span class="line">            ngx.var.query_host = proxy_pass_split -- 修改nginx设置的query_host值,用于proxy_set_header Host <span class="variable">$query_host</span>;</span><br/><span class="line">            </span><br/><span class="line">            <span class="built_in">local</span> uri = ngx.re.sub(ngx.var.request_uri, <span class="string">&#34;^/.*-api/(.*)&#34;</span>, <span class="string">&#34;<span class="variable">$1</span>&#34;</span>, <span class="string">&#34;o&#34;</span>)</span><br/><span class="line">            <span class="built_in">local</span> resultProxyPass = splitValues[2] .. uri</span><br/><span class="line">            ngx.log(ngx.ERR, <span class="string">&#34;set_host的值: &#34;</span>, proxy_pass_split)</span><br/><span class="line">            ngx.log(ngx.ERR, <span class="string">&#34;proxy_pass的值: &#34;</span>, resultProxyPass)</span><br/><span class="line">            <span class="built_in">return</span> resultProxyPass</span><br/><span class="line">        end</span><br/><span class="line">    end</span><br/><span class="line">end</span><br/><span class="line"></span><br/><span class="line"><span class="comment"># cat /usr/local/openresty/nginx/conf/gb/3rd/api-pay-env.conf</span></span><br/><span class="line">dsi-api=http://beijingxinagwang.com/api/</span><br/><span class="line">sb-api=http://woaibeijing.com:8084/</span><br/><span class="line">im-api=http://it.com/</span><br/></pre></td></tr></tbody></table></figure>
+<h1 id="获取location匹配的url"><a href="#获取location匹配的url" class="headerlink" title="获取location匹配的url"></a>获取location匹配的url</h1><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/></pre></td><td class="code"><pre><span class="line">ngx.var.uri  <span class="comment">--获取访问的url，不带参数</span></span><br/><span class="line">ngx.var.request_uri   <span class="comment">--带参数的url</span></span><br/><span class="line"></span><br/><span class="line"><span class="comment">--获取location匹配的url</span></span><br/><span class="line"><span class="comment">--定义函数，分割url路径</span></span><br/><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">(str, splitParameter)</span></span> </span><br/><span class="line">    <span class="keyword">local</span> result = {}</span><br/><span class="line">    <span class="built_in">string</span>.<span class="built_in">gsub</span>(str,<span class="string">&#39;[^&#39;</span>..splitParameter..<span class="string">&#39;]+&#39;</span>, <span class="function"><span class="keyword">function</span><span class="params">(w)</span></span> <span class="built_in">table</span>.<span class="built_in">insert</span>(result, w) <span class="keyword">end</span>)</span><br/><span class="line">    <span class="keyword">return</span> result</span><br/><span class="line"><span class="keyword">end</span></span><br/><span class="line"></span><br/><span class="line"><span class="keyword">local</span> request_uri = ngx.var.uri <span class="comment">--获取访问的url，不带参数</span></span><br/><span class="line"><span class="keyword">local</span> location_uri = <span class="built_in">string</span>.split(request_uri, <span class="string">&#34;/&#34;</span>)[<span class="number">1</span>]</span><br/></pre></td></tr></tbody></table></figure>
+<h1 id="nginx修改客户访问的uri"><a href="#nginx修改客户访问的uri" class="headerlink" title="nginx修改客户访问的uri"></a>nginx修改客户访问的uri</h1><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/></pre></td><td class="code"><pre><span class="line">rewrite_by_lua<span class="string">&#39;</span></span><br/><span class="line"><span class="string">            local uri = ngx.re.sub(ngx.var.request_uri, &#34;^/.*-api/(.*)&#34;, &#34;/$1&#34;, &#34;o&#34;)</span></span><br/><span class="line"><span class="string">            ngx.req.set_uri(uri)</span></span><br/><span class="line"><span class="string">            ngx.log(ngx.ERR, &#34;set_uri: &#34;, uri)</span></span><br/><span class="line"><span class="string">        &#39;</span>;</span><br/></pre></td></tr></tbody></table></figure>
+<h1 id="lua读取json文件"><a href="#lua读取json文件" class="headerlink" title="lua读取json文件"></a>lua读取json文件</h1><h1 id="通过lua获取get或者post提交的参数"><a href="#通过lua获取get或者post提交的参数" class="headerlink" title="通过lua获取get或者post提交的参数"></a>通过lua获取get或者post提交的参数</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="variable">$service</span> <span class="string">&#39;&#39;</span>;</span><br/><span class="line">           rewrite_by_lua  <span class="string">&#39;</span></span><br/><span class="line"><span class="string">                    local request_method = ngx.var.request_method</span></span><br/><span class="line"><span class="string">                    if request_method == &#34;GET&#34; then</span></span><br/><span class="line"><span class="string">                            local arg = ngx.req.get_uri_args()[&#34;service&#34;] or 0</span></span><br/><span class="line"><span class="string">                            ngx.var.service = arg</span></span><br/><span class="line"><span class="string">                    elseif request_method == &#34;POST&#34; then</span></span><br/><span class="line"><span class="string">                            ngx.req.read_body()</span></span><br/><span class="line"><span class="string">                            local arg = ngx.req.get_post_args()[&#34;service&#34;] or 0</span></span><br/><span class="line"><span class="string">                            ngx.var.service = arg</span></span><br/><span class="line"><span class="string">                    end;&#39;</span>;</span><br/><span class="line">            </span><br/><span class="line">            <span class="keyword">if</span> (<span class="variable">$service</span> = <span class="string">&#39;register&#39;</span>)</span><br/><span class="line">                    {       </span><br/><span class="line">                            proxy_pass http://userinfo;</span><br/><span class="line">                    }</span><br/><span class="line">                            </span><br/><span class="line">            proxy_redirect off;</span><br/><span class="line">            proxy_set_header HOST <span class="variable">$host</span>;</span><br/><span class="line">            proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br/><span class="line">            proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br/><span class="line">    }</span><br/></pre></td></tr></tbody></table></figure>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-446_lua%E5%85%83%E8%A1%A8/">lua元表</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-445_Evaluation%20Indicators/">Evaluation Indicators</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

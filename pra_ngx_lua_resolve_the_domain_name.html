@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>为什么我们的域名不能被解析 - Lua教程</title>
+
+  
+    <meta name="description" content="为什么我们的域名不能被解析最近经常有朋友在使用一个域名地址时发现无法被正确解析 比如在使用 Mysql 实例时某些云会给一个私有的域名搭配自有的 nameserver 使用 12345678local client &#x3D; mysql:new()client:connect(&amp;#123;	host &#x3D; &quot;rdsmxxxxxx.mysql.rds.xxxx.com&quot;,	port &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么我们的域名不能被解析">
+<meta property="og:url" content="https://lua.ren/pra_ngx_lua_resolve_the_domain_name.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="为什么我们的域名不能被解析最近经常有朋友在使用一个域名地址时发现无法被正确解析 比如在使用 Mysql 实例时某些云会给一个私有的域名搭配自有的 nameserver 使用 12345678local client &#x3D; mysql:new()client:connect(&amp;#123;	host &#x3D; &quot;rdsmxxxxxx.mysql.rds.xxxx.com&quot;,	port &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.132Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.132Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="openresty">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets"></div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>为什么我们的域名不能被解析</span></h1>
+<h2 id="为什么我们的域名不能被解析"><a href="#为什么我们的域名不能被解析" class="headerlink" title="为什么我们的域名不能被解析"></a>为什么我们的域名不能被解析</h2><p>最近经常有朋友在使用一个域名地址时发现无法被正确解析</p>
+<p>比如在使用 <code>Mysql</code> 实例时某些云会给一个私有的域名搭配自有的 <code>nameserver</code> 使用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> client = mysql:new()</span><br><span class="line">client:connect(&#123;</span><br><span class="line">	host = <span class="string">&quot;rdsmxxxxxx.mysql.rds.xxxx.com&quot;</span>,</span><br><span class="line">	port = <span class="number">3306</span>,</span><br><span class="line">	database = <span class="string">&quot;test&quot;</span>,</span><br><span class="line">	user = <span class="string">&quot;test&quot;</span>,</span><br><span class="line">	password = <span class="string">&quot;123456&quot;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>以上代码在直接使用时往往会报一个无法解析的错误。那么怎么在 <code>openresty</code> 中使用域名呢</p>
+<span id="more"></span>
+
+<h2 id="搭配-resolver-指令"><a href="#搭配-resolver-指令" class="headerlink" title="搭配 resolver 指令"></a>搭配 resolver 指令</h2><p>我们可以直接在 <code>nginx</code> 的配置文件中使用 <code>resolver</code> 指令直接设置使用的 <code>nameserver</code> 地址。</p>
+<p>官方文档中是这么描述的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	resolver address ... [valid=time] [ipv6=on|off];</span><br><span class="line">Default:	 —</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+
+<p>一个简单的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resolver 8.8.8.8 114.114.114.114 valid=3600s;</span><br></pre></td></tr></table></figure>
+
+<p>不过这样的问题在于 <code>nameserver</code> 被写死在配置文件中，如果使用场景比较复杂或有内部 <code>dns</code> 服务时维护比较麻烦。</p>
+<h2 id="进阶玩法"><a href="#进阶玩法" class="headerlink" title="进阶玩法"></a>进阶玩法</h2><p>我们的代码常常运行在各种云上，为了减少维护成本，我采用了动态读取本机 <code>/etc/resolv.conf</code> 的方法来做。</p>
+<p>废话不说，让我们一睹为快。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="built_in">pcall</span> = <span class="built_in">pcall</span></span><br><span class="line"><span class="keyword">local</span> io_open = <span class="built_in">io</span>.<span class="built_in">open</span></span><br><span class="line"><span class="keyword">local</span> ngx_re_gmatch = ngx.re.<span class="built_in">gmatch</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> ok, new_tab = <span class="built_in">pcall</span>(<span class="built_in">require</span>, <span class="string">&quot;table.new&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> ok <span class="keyword">then</span></span><br><span class="line">    new_tab = <span class="function"><span class="keyword">function</span> <span class="params">(narr, nrec)</span></span> <span class="keyword">return</span> &#123;&#125; <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> _dns_servers = new_tab(<span class="number">5</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> _read_file_data = <span class="function"><span class="keyword">function</span><span class="params">(path)</span></span></span><br><span class="line">    <span class="keyword">local</span> f, err = io_open(<span class="built_in">path</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> f <span class="keyword">or</span> err <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> data = f:<span class="built_in">read</span>(<span class="string">&#x27;*all&#x27;</span>)</span><br><span class="line">    f:<span class="built_in">close</span>()</span><br><span class="line">    <span class="keyword">return</span> data, <span class="literal">nil</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> _read_dns_servers_from_resolv_file = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">    <span class="keyword">local</span> text = _read_file_data(<span class="string">&#x27;/etc/resolv.conf&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> captures, it, err</span><br><span class="line">    it, err = ngx_re_gmatch(text, <span class="string">[[^nameserver\s+(\d+?\.\d+?\.\d+?\.\d+$)]]</span>, <span class="string">&quot;jomi&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> captures, err <span class="keyword">in</span> it <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> err <span class="keyword">then</span></span><br><span class="line">            _dns_servers[#_dns_servers + <span class="number">1</span>] = captures[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">_read_dns_servers_from_resolv_file()</span><br></pre></td></tr></table></figure>
+
+<p>通过上述代码我们成功动态拿到了一组 <code>nameserver</code> 的地址，下面就可以通过 <code>resty.dns.resolver</code> 大杀四方了</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="built_in">require</span> = <span class="built_in">require</span></span><br><span class="line"><span class="keyword">local</span> ngx_re_find = ngx.re.<span class="built_in">find</span></span><br><span class="line"><span class="keyword">local</span> lrucache = <span class="built_in">require</span> <span class="string">&quot;resty.lrucache&quot;</span></span><br><span class="line"><span class="keyword">local</span> resolver = <span class="built_in">require</span> <span class="string">&quot;resty.dns.resolver&quot;</span></span><br><span class="line"><span class="keyword">local</span> cache_storage = lrucache.new(<span class="number">200</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> _is_addr = <span class="function"><span class="keyword">function</span><span class="params">(hostname)</span></span></span><br><span class="line">    <span class="keyword">return</span> ngx_re_find(hostname, <span class="string">[[\d+?\.\d+?\.\d+?\.\d+$]]</span>, <span class="string">&quot;jo&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> _get_addr = <span class="function"><span class="keyword">function</span><span class="params">(hostname)</span></span></span><br><span class="line">    <span class="keyword">if</span> _is_addr(hostname) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> hostname, hostname</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> addr = cache_storage:get(hostname)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> addr <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> addr, hostname</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> r, err = resolver:new(&#123;</span><br><span class="line">        nameservers = _dns_servers,</span><br><span class="line">        retrans = <span class="number">5</span>,  <span class="comment">-- 5 retransmissions on receive timeout</span></span><br><span class="line">        timeout = <span class="number">2000</span>,  <span class="comment">-- 2 sec</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> r <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, hostname</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> answers, err = r:query(hostname, &#123;qtype = r.TYPE_A&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> answers <span class="keyword">or</span> answers.errcode <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, hostname</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, ans <span class="keyword">in</span> <span class="built_in">ipairs</span>(answers) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> ans.address <span class="keyword">then</span></span><br><span class="line">            cache_storage:set(hostname, ans.address, <span class="number">300</span>)</span><br><span class="line">            <span class="keyword">return</span> ans.address, hostname</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, hostname</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">ngx.say(_get_addr(<span class="string">&quot;www.baidu.com&quot;</span>))</span><br><span class="line">ngx.say(_get_addr(<span class="string">&quot;192.168.0.1&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>我这边把解析的结果放入了 <code>lrucache</code> 缓存了 5 分钟，你们同样可以把结果放入 <code>shared</code> 中来减少 <code>worker</code> 查询次数。</p>
+<h2 id="高阶玩法"><a href="#高阶玩法" class="headerlink" title="高阶玩法"></a>高阶玩法</h2><p>现在我们已经实现了自缓存体系的 <code>dns</code> 查询，如果搭配 <code>resty.http</code> 就会达到更好的效果。</p>
+<p>一个简单的例子是，通过解析 <code>uri</code> 得到 <code>hostname</code>、<code>port</code>、<code>path</code>，把 <code>hostname</code> 扔给自缓存 <code>dns</code> 获取结果</p>
+<p>发起 <code>request</code> 请求，<code>addr</code> + <code>port</code> connect 之，设置 <code>header</code> 的 <code>host</code> 为 <code>hostname</code>，<code>path</code> 等值来实现 <code>ip</code> 直接访问等高阶用法。</p>
+<p>这里就不过多的阐述了。</p>
+<h2 id="最终的演示例子如下"><a href="#最终的演示例子如下" class="headerlink" title="最终的演示例子如下"></a>最终的演示例子如下</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> client = mysql:new()</span><br><span class="line">client:connect(&#123;</span><br><span class="line">	host = _get_addr(conf.mysql_hostname),</span><br><span class="line">	port = <span class="number">3306</span>,</span><br><span class="line">	database = <span class="string">&quot;test&quot;</span>,</span><br><span class="line">	user = <span class="string">&quot;test&quot;</span>,</span><br><span class="line">	password = <span class="string">&quot;123456&quot;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何使用-x2F-etc-x2F-hosts-自定义域名"><a href="#如何使用-x2F-etc-x2F-hosts-自定义域名" class="headerlink" title="如何使用 &#x2F;etc&#x2F;hosts 自定义域名"></a>如何使用 &#x2F;etc&#x2F;hosts 自定义域名</h2><p>还有些同学可能会在 <code>hosts</code> 文件中自定义域名和 <code>ip</code>，这时候 <code>resolve</code> 是无法正常解析的。</p>
+<p>这个时候可以借助 <code>dnsmasq</code> 这个服务来缓存我们的 <code>dns</code> 结果，<code>hosts</code> 的定义可以被该服务识别。</p>
+<p>需要在 <code>nginx</code> 的配置文件中，设置 <code>resolver</code> 为 <code>dnsmasq</code> 服务的监听地址即可。</p>
+<p>See:<br><a target="_blank" rel="noopener" href="http://hambut.com/2016/09/09/how-to-resolve-the-domain-name-in-openresty/">http://hambut.com/2016/09/09/how-to-resolve-the-domain-name-in-openresty/</a></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/pra_ngx_lua_lua_opt.html">网上有大量对 Lua 调优的推荐，我们应该如何看待？</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/pra_ngx_lua_phase.html">执行阶段概念</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

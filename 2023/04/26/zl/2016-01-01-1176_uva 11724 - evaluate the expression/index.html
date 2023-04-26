@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>uva 11724 - evaluate the expression - Lua教程</title>
+
+  
+    <meta name="description" content="contents                                                            &lt;&#x2F;div&gt;                   &lt;h2 id&#x3D;&quot;Problem&quot;&gt;Problem&lt;&#x2F;h2&gt;  每個變數皆為正整數，給定一個算術表達式和變數之間的大小關係，請問最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="uva 11724 - evaluate the expression">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1176_uva%2011724%20-%20evaluate%20the%20expression/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="contents                                                            &lt;&#x2F;div&gt;                   &lt;h2 id&#x3D;&quot;Problem&quot;&gt;Problem&lt;&#x2F;h2&gt;  每個變數皆為正整數，給定一個算術表達式和變數之間的大小關係，請問最">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.240Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.240Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">uva 11724 - evaluate the expression</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#toc"><span class="toc-text">contents</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample_Input"><span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sample_Output"><span class="toc-text">Sample Output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solution"><span class="toc-text">Solution</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>uva 11724 - evaluate the expression</span></h1>
+<div id="toc" class="toc-article">
+              <h2 class="toc-title"><span>contents</span></h2>
+              
+                  
+              
+<pre><code>          &lt;/div&gt;
+      
+    
+      &lt;h2 id=&quot;Problem&quot;&gt;Problem&lt;/h2&gt;
+</code></pre>
+<p>每個變數皆為正整數，給定一個算術表達式和變數之間的大小關係，請問最少產生出來的答案為何。</p>
+<h2 id="Sample_Input">Sample Input</h2>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span></div><div class="line"><span class="operator">a</span>+b*c</div><div class="line"><span class="number">2</span></div><div class="line"><span class="operator">a</span>&gt;b</div><div class="line">c&gt;b</div><div class="line">z*(x+y)</div><div class="line"><span class="number">3</span></div><div class="line">z&gt;x</div><div class="line">x&gt;y</div><div class="line">z&gt;y</div><div class="line"><span class="operator">a</span>+b+c+<span class="operator">a</span></div><div class="line"><span class="number">0</span></div></pre></td></tr></tbody></table></figure>
+
+<h2 id="Sample_Output">Sample Output</h2>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Case</span> <span class="number">1</span>: <span class="number">4</span></div><div class="line"><span class="keyword">Case</span> <span class="number">2</span>: <span class="number">9</span></div><div class="line"><span class="keyword">Case</span> <span class="number">3</span>: <span class="number">4</span></div></pre></td></tr></tbody></table></figure>
+
+<h2 id="Solution">Solution</h2>
+<p>先使用 spfa 找到根據 greedy 策略分配的變數值，如果發生負環情況直接輸出 <code>-1</code>。</p>
+<p>然後使用矩陣鏈乘積的 DP 方法進行找到最小答案。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt; </span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;vector&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;queue&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;algorithm&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">char</span> <span class="built_in">exp</span>[<span class="number">1024</span>], cond[<span class="number">1024</span>];</div><div class="line"><span class="keyword">int</span> val[<span class="number">26</span>];</div><div class="line"><span class="keyword">int</span> spfa(<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> g[]) {</div><div class="line">	<span class="stl_container"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;</span> Q;</div><div class="line">	<span class="keyword">int</span> inq[<span class="number">26</span>] = {}, dist[<span class="number">26</span>] = {};</div><div class="line">	<span class="keyword">int</span> cnt[<span class="number">26</span>] = {};</div><div class="line">	<span class="keyword">int</span> u, v;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) {</div><div class="line">		Q.push(i), dist[i] = <span class="number">1</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">while</span> (!Q.empty()) {</div><div class="line">		u = Q.front(), Q.pop();</div><div class="line">		inq[u] = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g[u].size(); i++) {</div><div class="line">			v = g[u][i];</div><div class="line">			<span class="keyword">if</span> (dist[v] &lt; dist[u] + <span class="number">1</span>) {</div><div class="line">				dist[v] = dist[u] + <span class="number">1</span>;</div><div class="line">				<span class="keyword">if</span> (!inq[v]) {</div><div class="line">					inq[v] = <span class="number">1</span>, Q.push(v);</div><div class="line">					<span class="keyword">if</span> (++cnt[v] &gt; <span class="number">26</span>)</div><div class="line">						<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">				}</div><div class="line">			}</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</div><div class="line">		val[i] = dist[i];</div><div class="line">	<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">int</span> used[<span class="number">512</span>][<span class="number">512</span>];</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[<span class="number">512</span>][<span class="number">512</span>];</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> dfs(<span class="keyword">int</span> l, <span class="keyword">int</span> r) {</div><div class="line">	<span class="keyword">if</span> (used[l][r])</div><div class="line">		<span class="keyword">return</span> dp[l][r];</div><div class="line">	<span class="keyword">if</span> (l == r)</div><div class="line">		<span class="keyword">return</span> val[<span class="built_in">exp</span>[l] - <span class="string">&#39;a&#39;</span>];</div><div class="line">	used[l][r] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">long</span> <span class="keyword">long</span> &amp;ret = dp[l][r];</div><div class="line">	ret = <span class="number">1L</span>L&lt;&lt;<span class="number">60</span>;</div><div class="line">	<span class="keyword">int</span> p = <span class="number">0</span>, test = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++) {</div><div class="line">		<span class="keyword">if</span> (<span class="built_in">exp</span>[i] == <span class="string">&#39;(&#39;</span>)	p++;</div><div class="line">		<span class="keyword">if</span> (<span class="built_in">exp</span>[i] == <span class="string">&#39;)&#39;</span>)	p--;</div><div class="line">		<span class="keyword">if</span> (p == <span class="number">0</span> &amp;&amp; <span class="built_in">exp</span>[i] == <span class="string">&#39;+&#39;</span>) {</div><div class="line">			ret = min(ret, dfs(l, i-<span class="number">1</span>) + dfs(i+<span class="number">1</span>, r));</div><div class="line">			test++;</div><div class="line">		}</div><div class="line">		<span class="keyword">if</span> (p == <span class="number">0</span> &amp;&amp; <span class="built_in">exp</span>[i] == <span class="string">&#39;*&#39;</span>) {</div><div class="line">			ret = min(ret, dfs(l, i-<span class="number">1</span>) * dfs(i+<span class="number">1</span>, r));</div><div class="line">			test++;</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">if</span> (test == <span class="number">0</span>)</div><div class="line">		ret = min(ret, dfs(l+<span class="number">1</span>, r-<span class="number">1</span>));</div><div class="line">	<span class="keyword">return</span> ret;</div><div class="line">}</div><div class="line"><span class="keyword">int</span> main() {</div><div class="line">	<span class="keyword">int</span> testcase, cases = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">&#34;%d&#34;</span>, &amp;testcase);</div><div class="line">	<span class="keyword">while</span> (testcase--) {</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">&#34;%s&#34;</span>, <span class="built_in">exp</span>);</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">&#34;%d&#34;</span>, &amp;n);</div><div class="line">		<span class="stl_container"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;</span> g[<span class="number">26</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) {</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">&#34;%s&#34;</span>, cond);</div><div class="line">			g[cond[<span class="number">2</span>]-<span class="string">&#39;a&#39;</span>].push_back(cond[<span class="number">0</span>]-<span class="string">&#39;a&#39;</span>);</div><div class="line">		}</div><div class="line">		<span class="built_in">printf</span>(<span class="string">&#34;Case %d: &#34;</span>, ++cases);</div><div class="line">		<span class="keyword">if</span>(!spfa(g)) {</div><div class="line">			<span class="built_in">puts</span>(<span class="string">&#34;-1&#34;</span>);</div><div class="line">		} <span class="keyword">else</span> {</div><div class="line">			<span class="built_in">memset</span>(used, <span class="number">0</span>, <span class="keyword">sizeof</span>(used));</div><div class="line">			<span class="built_in">printf</span>(<span class="string">&#34;%lldn&#34;</span>, dfs(<span class="number">0</span>, <span class="built_in">strlen</span>(<span class="built_in">exp</span>) - <span class="number">1</span>));</div><div class="line">		}</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">}</div><div class="line"></div><div class="line">3</div><div class="line">a+b*c</div><div class="line">2</div><div class="line">a&gt;b</div><div class="line">c&gt;b</div><div class="line">z*(x+y)</div><div class="line">3</div><div class="line">z&gt;x</div><div class="line">x&gt;y</div><div class="line">z&gt;y</div><div class="line">a+b+c+a</div><div class="line">0</div><div class="line">*/</div></pre></td></tr></tbody></table></figure>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1171_programming%20in%20lua(thrid%20edition)%E7%AC%94%E8%AE%B0---%E7%9B%AE%E5%BD%95/">programming in lua(thrid edition)笔记---目录</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1178_cse201w4_queryevaluation/">cse201w4_queryevaluation</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

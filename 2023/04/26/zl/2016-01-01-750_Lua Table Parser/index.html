@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Lua Table Parser - Lua教程</title>
+
+  
+    <meta name="description" content="PyLuaTblParser类中有两个私有变量：  self.str_praser是类LuaStrParser的实例，用来实现lua字符串的解析。 self.lua_table是一个dict或者list，用来储存从lua table字符串或者其他dict中读取的数据。  接口1234567891011121314151617181920212223def (self, s):读取Lua table">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua Table Parser">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-750_Lua%20Table%20Parser/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="PyLuaTblParser类中有两个私有变量：  self.str_praser是类LuaStrParser的实例，用来实现lua字符串的解析。 self.lua_table是一个dict或者list，用来储存从lua table字符串或者其他dict中读取的数据。  接口1234567891011121314151617181920212223def (self, s):读取Lua table">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.302Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.302Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Lua Table Parser</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-text">接口</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.302Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Lua Table Parser</span></h1>
+<p>PyLuaTblParser类中有两个私有变量：</p>
+<ol>
+<li><code>self.str_praser</code>是类<code>LuaStrParser</code>的实例，用来实现lua字符串的解析。</li>
+<li><code>self.lua_table</code>是一个<code>dict</code>或者<code>list</code>，用来储存从lua table字符串或者其他dict中读取的数据。</li>
+</ol>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="params">(self, s)</span>:</span></span><br/><span class="line">读取Lua table数据，输入s为一个符合Lua table定义的字符串，无返回值</span><br/><span class="line">遇到Lua table格式错误则抛出异常</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dump</span><span class="params">(self)</span>:</span></span><br/><span class="line">根据类中数据返回Lua table字符串</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadLuaTable</span><span class="params">(self, f)</span>:</span></span><br/><span class="line">从文件中读取Lua table字符串，f为文件路径，遇到Lua Table的格式错误则抛出异常，文件操作失败抛出异常</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dumpLuaTable</span><span class="params">(self, f)</span>:</span></span><br/><span class="line">将类中的内容以Lua table格式存入文件，f为文件路径，文件若存在则覆盖，文件操作失败抛出异常</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDict</span><span class="params">(self, d)</span>:</span></span><br/><span class="line">读取dict中的数据，存入类中，只处理数字和字符串两种类型的key，其他类型的key直接忽略</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dumpDict</span><span class="params">(self)</span>:</span></span><br/><span class="line">返回一个dict，包含类中的数据</span><br/><span class="line"></span><br/><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, d)</span>:</span></span><br/><span class="line">用字典d更新类中的数据，类似于字典的update</span><br/><span class="line"></span><br/><span class="line">PyLuaTblParser类支持用[]进行赋值、读写数据的操作，类似字典</span><br/></pre></td></tr></tbody></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br/><span class="line">2</span><br/><span class="line">3</span><br/><span class="line">4</span><br/><span class="line">5</span><br/><span class="line">6</span><br/><span class="line">7</span><br/><span class="line">8</span><br/><span class="line">9</span><br/><span class="line">10</span><br/><span class="line">11</span><br/><span class="line">12</span><br/><span class="line">13</span><br/><span class="line">14</span><br/><span class="line">15</span><br/><span class="line">16</span><br/><span class="line">17</span><br/><span class="line">18</span><br/><span class="line">19</span><br/><span class="line">20</span><br/><span class="line">21</span><br/><span class="line">22</span><br/><span class="line">23</span><br/><span class="line">24</span><br/><span class="line">25</span><br/><span class="line">26</span><br/><span class="line">27</span><br/><span class="line">28</span><br/><span class="line">29</span><br/><span class="line">30</span><br/><span class="line">31</span><br/><span class="line">32</span><br/><span class="line">33</span><br/><span class="line">34</span><br/><span class="line">35</span><br/><span class="line">36</span><br/><span class="line">37</span><br/><span class="line">38</span><br/><span class="line">39</span><br/><span class="line">40</span><br/><span class="line">41</span><br/><span class="line">42</span><br/><span class="line">43</span><br/><span class="line">44</span><br/><span class="line">45</span><br/><span class="line">46</span><br/><span class="line">47</span><br/><span class="line">48</span><br/><span class="line">49</span><br/><span class="line">50</span><br/><span class="line">51</span><br/><span class="line">52</span><br/><span class="line">53</span><br/><span class="line">54</span><br/><span class="line">55</span><br/><span class="line">56</span><br/><span class="line">57</span><br/><span class="line">58</span><br/><span class="line">59</span><br/><span class="line">60</span><br/><span class="line">61</span><br/><span class="line">62</span><br/><span class="line">63</span><br/><span class="line">64</span><br/><span class="line">65</span><br/><span class="line">66</span><br/><span class="line">67</span><br/><span class="line">68</span><br/><span class="line">69</span><br/><span class="line">70</span><br/><span class="line">71</span><br/><span class="line">72</span><br/><span class="line">73</span><br/><span class="line">74</span><br/><span class="line">75</span><br/><span class="line">76</span><br/><span class="line">77</span><br/><span class="line">78</span><br/><span class="line">79</span><br/><span class="line">80</span><br/><span class="line">81</span><br/><span class="line">82</span><br/><span class="line">83</span><br/><span class="line">84</span><br/><span class="line">85</span><br/><span class="line">86</span><br/><span class="line">87</span><br/><span class="line">88</span><br/><span class="line">89</span><br/><span class="line">90</span><br/><span class="line">91</span><br/><span class="line">92</span><br/><span class="line">93</span><br/><span class="line">94</span><br/><span class="line">95</span><br/><span class="line">96</span><br/><span class="line">97</span><br/><span class="line">98</span><br/><span class="line">99</span><br/><span class="line">100</span><br/><span class="line">101</span><br/><span class="line">102</span><br/><span class="line">103</span><br/><span class="line">104</span><br/><span class="line">105</span><br/><span class="line">106</span><br/><span class="line">107</span><br/><span class="line">108</span><br/><span class="line">109</span><br/><span class="line">110</span><br/><span class="line">111</span><br/><span class="line">112</span><br/><span class="line">113</span><br/><span class="line">114</span><br/><span class="line">115</span><br/><span class="line">116</span><br/><span class="line">117</span><br/><span class="line">118</span><br/><span class="line">119</span><br/><span class="line">120</span><br/><span class="line">121</span><br/><span class="line">122</span><br/><span class="line">123</span><br/><span class="line">124</span><br/><span class="line">125</span><br/><span class="line">126</span><br/><span class="line">127</span><br/><span class="line">128</span><br/><span class="line">129</span><br/><span class="line">130</span><br/><span class="line">131</span><br/><span class="line">132</span><br/><span class="line">133</span><br/><span class="line">134</span><br/><span class="line">135</span><br/><span class="line">136</span><br/><span class="line">137</span><br/><span class="line">138</span><br/><span class="line">139</span><br/><span class="line">140</span><br/><span class="line">141</span><br/><span class="line">142</span><br/><span class="line">143</span><br/><span class="line">144</span><br/><span class="line">145</span><br/><span class="line">146</span><br/><span class="line">147</span><br/><span class="line">148</span><br/><span class="line">149</span><br/><span class="line">150</span><br/><span class="line">151</span><br/><span class="line">152</span><br/><span class="line">153</span><br/><span class="line">154</span><br/><span class="line">155</span><br/><span class="line">156</span><br/><span class="line">157</span><br/><span class="line">158</span><br/><span class="line">159</span><br/><span class="line">160</span><br/><span class="line">161</span><br/><span class="line">162</span><br/><span class="line">163</span><br/><span class="line">164</span><br/><span class="line">165</span><br/><span class="line">166</span><br/><span class="line">167</span><br/><span class="line">168</span><br/><span class="line">169</span><br/><span class="line">170</span><br/><span class="line">171</span><br/><span class="line">172</span><br/><span class="line">173</span><br/><span class="line">174</span><br/><span class="line">175</span><br/><span class="line">176</span><br/><span class="line">177</span><br/><span class="line">178</span><br/><span class="line">179</span><br/><span class="line">180</span><br/><span class="line">181</span><br/><span class="line">182</span><br/><span class="line">183</span><br/><span class="line">184</span><br/><span class="line">185</span><br/><span class="line">186</span><br/><span class="line">187</span><br/><span class="line">188</span><br/><span class="line">189</span><br/><span class="line">190</span><br/><span class="line">191</span><br/><span class="line">192</span><br/><span class="line">193</span><br/><span class="line">194</span><br/><span class="line">195</span><br/><span class="line">196</span><br/><span class="line">197</span><br/><span class="line">198</span><br/><span class="line">199</span><br/><span class="line">200</span><br/><span class="line">201</span><br/><span class="line">202</span><br/><span class="line">203</span><br/><span class="line">204</span><br/><span class="line">205</span><br/><span class="line">206</span><br/><span class="line">207</span><br/><span class="line">208</span><br/><span class="line">209</span><br/><span class="line">210</span><br/><span class="line">211</span><br/><span class="line">212</span><br/><span class="line">213</span><br/><span class="line">214</span><br/><span class="line">215</span><br/><span class="line">216</span><br/><span class="line">217</span><br/><span class="line">218</span><br/><span class="line">219</span><br/><span class="line">220</span><br/><span class="line">221</span><br/><span class="line">222</span><br/><span class="line">223</span><br/><span class="line">224</span><br/><span class="line">225</span><br/><span class="line">226</span><br/><span class="line">227</span><br/><span class="line">228</span><br/><span class="line">229</span><br/><span class="line">230</span><br/><span class="line">231</span><br/><span class="line">232</span><br/><span class="line">233</span><br/><span class="line">234</span><br/><span class="line">235</span><br/><span class="line">236</span><br/><span class="line">237</span><br/><span class="line">238</span><br/><span class="line">239</span><br/><span class="line">240</span><br/><span class="line">241</span><br/><span class="line">242</span><br/><span class="line">243</span><br/><span class="line">244</span><br/><span class="line">245</span><br/><span class="line">246</span><br/><span class="line">247</span><br/><span class="line">248</span><br/><span class="line">249</span><br/><span class="line">250</span><br/><span class="line">251</span><br/><span class="line">252</span><br/><span class="line">253</span><br/><span class="line">254</span><br/><span class="line">255</span><br/><span class="line">256</span><br/><span class="line">257</span><br/><span class="line">258</span><br/><span class="line">259</span><br/><span class="line">260</span><br/><span class="line">261</span><br/><span class="line">262</span><br/><span class="line">263</span><br/><span class="line">264</span><br/><span class="line">265</span><br/><span class="line">266</span><br/><span class="line">267</span><br/><span class="line">268</span><br/><span class="line">269</span><br/><span class="line">270</span><br/><span class="line">271</span><br/><span class="line">272</span><br/><span class="line">273</span><br/><span class="line">274</span><br/><span class="line">275</span><br/><span class="line">276</span><br/><span class="line">277</span><br/><span class="line">278</span><br/><span class="line">279</span><br/><span class="line">280</span><br/><span class="line">281</span><br/><span class="line">282</span><br/><span class="line">283</span><br/><span class="line">284</span><br/><span class="line">285</span><br/><span class="line">286</span><br/><span class="line">287</span><br/><span class="line">288</span><br/><span class="line">289</span><br/><span class="line">290</span><br/><span class="line">291</span><br/><span class="line">292</span><br/><span class="line">293</span><br/><span class="line">294</span><br/><span class="line">295</span><br/><span class="line">296</span><br/><span class="line">297</span><br/><span class="line">298</span><br/><span class="line">299</span><br/><span class="line">300</span><br/><span class="line">301</span><br/><span class="line">302</span><br/><span class="line">303</span><br/><span class="line">304</span><br/><span class="line">305</span><br/><span class="line">306</span><br/><span class="line">307</span><br/><span class="line">308</span><br/><span class="line">309</span><br/><span class="line">310</span><br/><span class="line">311</span><br/><span class="line">312</span><br/><span class="line">313</span><br/><span class="line">314</span><br/><span class="line">315</span><br/><span class="line">316</span><br/><span class="line">317</span><br/><span class="line">318</span><br/><span class="line">319</span><br/><span class="line">320</span><br/><span class="line">321</span><br/><span class="line">322</span><br/><span class="line">323</span><br/><span class="line">324</span><br/><span class="line">325</span><br/><span class="line">326</span><br/><span class="line">327</span><br/><span class="line">328</span><br/><span class="line">329</span><br/><span class="line">330</span><br/><span class="line">331</span><br/><span class="line">332</span><br/><span class="line">333</span><br/><span class="line">334</span><br/><span class="line">335</span><br/><span class="line">336</span><br/><span class="line">337</span><br/><span class="line">338</span><br/><span class="line">339</span><br/><span class="line">340</span><br/><span class="line">341</span><br/><span class="line">342</span><br/><span class="line">343</span><br/><span class="line">344</span><br/><span class="line">345</span><br/><span class="line">346</span><br/><span class="line">347</span><br/><span class="line">348</span><br/><span class="line">349</span><br/><span class="line">350</span><br/><span class="line">351</span><br/><span class="line">352</span><br/><span class="line">353</span><br/><span class="line">354</span><br/><span class="line">355</span><br/><span class="line">356</span><br/><span class="line">357</span><br/><span class="line">358</span><br/><span class="line">359</span><br/><span class="line">360</span><br/><span class="line">361</span><br/><span class="line">362</span><br/><span class="line">363</span><br/><span class="line">364</span><br/><span class="line">365</span><br/><span class="line">366</span><br/><span class="line">367</span><br/><span class="line">368</span><br/><span class="line">369</span><br/><span class="line">370</span><br/><span class="line">371</span><br/><span class="line">372</span><br/><span class="line">373</span><br/><span class="line">374</span><br/><span class="line">375</span><br/><span class="line">376</span><br/><span class="line">377</span><br/><span class="line">378</span><br/><span class="line">379</span><br/><span class="line">380</span><br/><span class="line">381</span><br/><span class="line">382</span><br/><span class="line">383</span><br/><span class="line">384</span><br/><span class="line">385</span><br/><span class="line">386</span><br/><span class="line">387</span><br/><span class="line">388</span><br/><span class="line">389</span><br/><span class="line">390</span><br/><span class="line">391</span><br/><span class="line">392</span><br/><span class="line">393</span><br/><span class="line">394</span><br/><span class="line">395</span><br/><span class="line">396</span><br/><span class="line">397</span><br/><span class="line">398</span><br/><span class="line">399</span><br/><span class="line">400</span><br/><span class="line">401</span><br/><span class="line">402</span><br/><span class="line">403</span><br/><span class="line">404</span><br/><span class="line">405</span><br/><span class="line">406</span><br/><span class="line">407</span><br/><span class="line">408</span><br/><span class="line">409</span><br/><span class="line">410</span><br/><span class="line">411</span><br/><span class="line">412</span><br/><span class="line">413</span><br/><span class="line">414</span><br/><span class="line">415</span><br/><span class="line">416</span><br/><span class="line">417</span><br/><span class="line">418</span><br/><span class="line">419</span><br/><span class="line">420</span><br/><span class="line">421</span><br/><span class="line">422</span><br/><span class="line">423</span><br/><span class="line">424</span><br/><span class="line">425</span><br/><span class="line">426</span><br/><span class="line">427</span><br/><span class="line">428</span><br/><span class="line">429</span><br/><span class="line">430</span><br/><span class="line">431</span><br/><span class="line">432</span><br/><span class="line">433</span><br/><span class="line">434</span><br/><span class="line">435</span><br/><span class="line">436</span><br/><span class="line">437</span><br/><span class="line">438</span><br/><span class="line">439</span><br/><span class="line">440</span><br/></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LuaStrParser</span>:</span></span><br/><span class="line">    __spaceChars = [<span class="string">&#39; &#39;</span>, <span class="string">&#39;t&#39;</span>, <span class="string">&#39;n&#39;</span>, <span class="string">&#39;r&#39;</span>]</span><br/><span class="line">    __stopChars = [<span class="string">&#39; &#39;</span>, <span class="string">&#39;t&#39;</span>, <span class="string">&#39;n&#39;</span>, <span class="string">&#39;r&#39;</span>, <span class="string">&#39;=&#39;</span>, <span class="string">&#39;,&#39;</span>, <span class="string">&#39;;&#39;</span>, <span class="string">&#39;}&#39;</span>, <span class="string">&#39;]&#39;</span>]</span><br/><span class="line">    keyTypes = [int, float, str]</span><br/><span class="line"></span><br/><span class="line">    __specialChars = {</span><br/><span class="line">        <span class="string">&#39;a&#39;</span>: <span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>: <span class="string">&#39;b&#39;</span>, <span class="string">&#39;f&#39;</span>: <span class="string">&#39;f&#39;</span>, <span class="string">&#39;n&#39;</span>: <span class="string">&#39;n&#39;</span>, <span class="string">&#39;r&#39;</span>: <span class="string">&#39;r&#39;</span>, <span class="string">&#39;t&#39;</span>: <span class="string">&#39;t&#39;</span>, <span class="string">&#39;v&#39;</span>: <span class="string">&#39;v&#39;</span>,</span><br/><span class="line">        <span class="string">&#39;\&#39;</span>: <span class="string">&#39;\&#39;</span>, <span class="string">&#39;&#34;&#39;</span>: <span class="string">&#39;&#34;&#39;</span>, <span class="string">&#34;&#39;&#34;</span>: <span class="string">&#34;&#39;&#34;</span>,</span><br/><span class="line">    }</span><br/><span class="line"></span><br/><span class="line">    __reverseSpecialChars = {</span><br/><span class="line">        <span class="string">&#39;a&#39;</span>: <span class="string">&#39;\a&#39;</span>, <span class="string">&#39;b&#39;</span>: <span class="string">&#39;\b&#39;</span>, <span class="string">&#39;f&#39;</span>: <span class="string">&#39;\f&#39;</span>, <span class="string">&#39;n&#39;</span>: <span class="string">&#39;\n&#39;</span>, <span class="string">&#39;r&#39;</span>: <span class="string">&#39;\r&#39;</span>, <span class="string">&#39;t&#39;</span>: <span class="string">&#39;\t&#39;</span>, <span class="string">&#39;v&#39;</span>: <span class="string">&#39;\v&#39;</span>,</span><br/><span class="line">        <span class="string">&#39;\&#39;</span>: <span class="string">&#39;\\&#39;</span>, <span class="string">&#39;&#34;&#39;</span>: <span class="string">&#39;\&#34;&#39;</span>, <span class="string">&#34;&#39;&#34;</span>: <span class="string">&#34;\&#39;&#34;</span></span><br/><span class="line">    }</span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br/><span class="line">        self.__lua_object = <span class="literal">None</span></span><br/><span class="line">        self.__lua_str = <span class="literal">None</span></span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__jumpSpace</span><span class="params">(self, string, loc)</span>:</span></span><br/><span class="line">        <span class="keyword">while</span> loc &lt; len(string) <span class="keyword">and</span> string[loc] <span class="keyword">in</span> self.__spaceChars:</span><br/><span class="line">            loc += <span class="number">1</span></span><br/><span class="line">        <span class="keyword">return</span> loc</span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getBackSlashNum</span><span class="params">(self, lua_str, loc)</span>:</span></span><br/><span class="line">        backslash_num = <span class="number">0</span></span><br/><span class="line">        <span class="keyword">while</span> loc &gt;= <span class="number">0</span> <span class="keyword">and</span> lua_str[loc] == <span class="string">&#39;\&#39;</span>:</span><br/><span class="line">            loc -= <span class="number">1</span></span><br/><span class="line">            backslash_num += <span class="number">1</span></span><br/><span class="line">        <span class="keyword">return</span> backslash_num</span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getStringEnd</span><span class="params">(self, lua_str, loc, quote)</span>:</span></span><br/><span class="line">        result = loc + <span class="number">1</span></span><br/><span class="line">        <span class="keyword">if</span> lua_str[loc] == quote:</span><br/><span class="line">            end = lua_str.find(quote, loc + <span class="number">1</span>)</span><br/><span class="line">            <span class="keyword">if</span> end != loc + <span class="number">1</span>:</span><br/><span class="line">                at_end = <span class="literal">False</span></span><br/><span class="line">                <span class="keyword">while</span> <span class="keyword">not</span> at_end:</span><br/><span class="line">                    <span class="keyword">if</span> self.__getBackSlashNum(lua_str, end - <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span>:</span><br/><span class="line">                        at_end = <span class="literal">True</span></span><br/><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> at_end:</span><br/><span class="line">                        end = lua_str.find(quote, end + <span class="number">1</span>)</span><br/><span class="line">            <span class="keyword">if</span> end &lt; <span class="number">0</span>:</span><br/><span class="line">                <span class="keyword">raise</span> Exception(<span class="string">&#34;wrong quotes!&#34;</span>)</span><br/><span class="line">            result = end</span><br/><span class="line">        <span class="keyword">return</span> result</span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getStringConent</span><span class="params">(self, lua_str, loc)</span>:</span></span><br/><span class="line">        <span class="string">&#34;&#34;&#34;</span></span><br/><span class="line"><span class="string">        return the string in the  @para lua_str</span></span><br/><span class="line"><span class="string">        thee result contain the quotes&#34;&#34;&#34;</span></span><br/><span class="line">        loc = self.__jumpSpace(lua_str, loc)</span><br/><span class="line">        result = <span class="literal">None</span></span><br/><span class="line">        <span class="keyword">if</span> lua_str[loc] == <span class="string">&#39;&#34;&#39;</span> <span class="keyword">or</span> lua_str[loc] == <span class="string">&#34;&#39;&#34;</span>:</span><br/><span class="line">            end = self.__getStringEnd(lua_str, loc, lua_str[loc])</span><br/><span class="line">            result = lua_str[loc: end + <span class="number">1</span>]</span><br/><span class="line">            loc = end + <span class="number">1</span></span><br/><span class="line">        <span class="keyword">return</span> result, loc</span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__removeComment</span><span class="params">(self, lua_str)</span>:</span></span><br/><span class="line">        result = <span class="string">&#34;&#34;</span></span><br/><span class="line">        loc = <span class="number">0</span></span><br/><span class="line">        <span class="keyword">while</span> loc &lt; len(lua_str):</span><br/><span class="line">            </span><br/><span class="line">            <span class="keyword">if</span> lua_str[loc] == <span class="string">&#39;&#34;&#39;</span> <span class="keyword">or</span> lua_str[loc] == <span class="string">&#34;&#39;&#34;</span>:</span><br/><span class="line">                string, loc = self.__getStringConent(lua_str, loc)</span><br/><span class="line">                result += string</span><br/><span class="line">            <span class="comment"># remove comment</span></span><br/><span class="line">            <span class="keyword">elif</span> lua_str[loc] == <span class="string">&#39;-&#39;</span>:</span><br/><span class="line">                <span class="keyword">if</span> loc + <span class="number">1</span> &lt; len(lua_str) <span class="keyword">and</span> lua_str[loc + <span class="number">1</span>] == <span class="string">&#39;-&#39;</span>:</span><br/><span class="line">                    loc += <span class="number">2</span></span><br/><span class="line">                    <span class="comment"># multi line comments</span></span><br/><span class="line">                    <span class="keyword">if</span> loc + <span class="number">1</span> &lt; len(lua_str) <span class="keyword">and</span> lua_str[loc:loc + <span class="number">2</span>] == <span class="string">&#39;[[&#39;</span>:</span><br/><span class="line">                        loc = lua_str.find(<span class="string">&#39;]]&#39;</span>, loc + <span class="number">1</span>) + <span class="number">2</span></span><br/><span class="line">                    <span class="comment"># single line comment</span></span><br/><span class="line">                    <span class="keyword">else</span>:</span><br/><span class="line">                        loc = lua_str.find(<span class="string">&#39;n&#39;</span>, loc + <span class="number">1</span>) + <span class="number">1</span></span><br/><span class="line">                    <span class="comment"># add a space after remove the comment</span></span><br/><span class="line">                    result += <span class="string">&#39; &#39;</span></span><br/><span class="line">                <span class="keyword">else</span>:</span><br/><span class="line">                    result += lua_str[loc]</span><br/><span class="line">                    loc += <span class="number">1</span></span><br/><span class="line">            <span class="comment"># remove &#39;r&#39;</span></span><br/><span class="line">            <span class="keyword">elif</span> lua_str[loc] == <span class="string">&#39;r&#39;</span>:</span><br/><span class="line">                loc += <span class="number">1</span></span><br/><span class="line">                <span class="keyword">continue</span></span><br/><span class="line">            <span class="keyword">else</span>:</span><br/><span class="line">                result += lua_str[loc]</span><br/><span class="line">                loc += <span class="number">1</span></span><br/><span class="line">        <span class="keyword">return</span> result</span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getRightBrace</span><span class="params">(self, lua_str, loc)</span>:</span></span><br/><span class="line">        loc = lua_str.find(<span class="string">&#39;{&#39;</span>, loc) + <span class="number">1</span></span><br/><span class="line">        left_barce_num = <span class="number">0</span></span><br/><span class="line">        <span class="keyword">while</span> loc &lt; len(lua_str):</span><br/><span class="line">            <span class="keyword">if</span> lua_str[loc] == <span class="string">&#39;&#34;&#39;</span> <span class="keyword">or</span> lua_str[loc] == <span class="string">&#34;&#39;&#34;</span>:</span><br/><span class="line">                loc = self.__getStringEnd(lua_str, loc, lua_str[loc]) + <span class="number">1</span></span><br/><span class="line">            <span class="keyword">elif</span> lua_str[loc] == <span class="string">&#39;{&#39;</span>:</span><br/><span class="line">                left_barce_num -= <span class="number">1</span></span><br/><span class="line">                loc += <span class="number">1</span></span><br/><span class="line">            <span class="keyword">elif</span> lua_str[loc] == <span class="string">&#39;}&#39;</span>:</span><br/><span class="line">                left_barce_num += <span class="number">1</span></span><br/><span class="line">                <span class="keyword">if</span> left_barce_num &gt;= <span class="number">1</span>:</span><br/><span class="line">                    <span class="keyword">break</span></span><br/><span class="line">                loc += <span class="number">1</span></span><br/><span class="line">            <span class="keyword">else</span>:</span><br/><span class="line">                loc += <span class="number">1</span></span><br/><span class="line">        <span class="keyword">if</span> loc == len(lua_str):</span><br/><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">&#34;wrong number of brace&#34;</span>)</span><br/><span class="line">        <span class="keyword">return</span> loc</span><br/><span class="line"></span><br/><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getRightBracket</span><span class="params">(self, lua_str, loc)</span>:</span></span><br/><span class="line">        loc = lua_str.find(<span class="string">&#39;[&#39;</span>, loc) + <span class="number">1</span></span><br/><span class="line">        <span class="keyword">while</span> loc &lt; len(lua_str):</span><br/><span class="line">            <span class="keyword">if</span> lua_str[loc] == <span class="string">&#39;&#34;&#39;</span> <span class="keyword">or</span> lua_str[loc] == <span class="string">&#34;&#39;&#34;</span>:</span><br/><span class="line">                loc = self.__getStringEnd(lua_str, loc, lua_str[loc]) + <span class="number">1</span></span><br/><span class="line">            <span class="keyword">elif</span> lua_str[loc] == <span class="string">&#39;]&#39;</span>:</span><br/><span class="line">                <span class="keyword">break</span></span><br/><span class="line">            <span class="keyword">else</span>:</span><br/><span class="line">                loc += <span class="number">1</span></span><br
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-748_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E5%9B%9B)/">深入 Lua Garbage Collector(四)</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-747_(%E8%AF%91)tolua%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C/">(译)tolua参考手册</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

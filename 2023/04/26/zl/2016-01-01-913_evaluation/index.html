@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>evaluation - Lua教程</title>
+
+  
+    <meta name="description" content="An Empirical Evaluation of In-Memory Multi-Version Concurrency Control介绍MVCC是目前最流行的并发控制协议，本文是论文原文的翻译，省略掉实验部分，感兴趣的同学可以去参照论文原文。这篇论文从4个方面分析了MVCC设计取舍，包括如下:   concurrency control protocol  version storage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="evaluation">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-913_evaluation/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="An Empirical Evaluation of In-Memory Multi-Version Concurrency Control介绍MVCC是目前最流行的并发控制协议，本文是论文原文的翻译，省略掉实验部分，感兴趣的同学可以去参照论文原文。这篇论文从4个方面分析了MVCC设计取舍，包括如下:   concurrency control protocol  version storage">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029103341751.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029103554828.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029105631639.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029111315549.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029112911934.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191031113148916.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191031114538968.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/WX20191107-135056@2x.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191107151059457.png">
+<meta property="og:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191107151710062.png">
+<meta property="article:published_time" content="2023-04-26T05:16:12.317Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.317Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029103341751.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">evaluation</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#An-Empirical-Evaluation-of-In-Memory-Multi-Version-Concurrency-Control"><span class="toc-text">An Empirical Evaluation of In-Memory Multi-Version Concurrency Control</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MVCC%E6%A6%82%E8%BF%B0"><span class="toc-text">MVCC概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DBMS%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">DBMS元数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#concurrency-control-protocol"><span class="toc-text">concurrency control protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Timestamp-orderding-MVTO"><span class="toc-text">Timestamp orderding(MVTO)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Optimistic-concurency-control-MVOCC"><span class="toc-text">Optimistic concurency control(MVOCC)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Two-phase-Locking-MV2PL"><span class="toc-text">Two-phase Locking(MV2PL)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Serialization-Certifier"><span class="toc-text">Serialization Certifier</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version-storage"><span class="toc-text">Version storage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Append-only-storage"><span class="toc-text">Append-only storage</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Time-travel-storage"><span class="toc-text">Time-travel storage</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Delta-storage"><span class="toc-text">Delta storage</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A8%E8%AE%BA"><span class="toc-text">讨论</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Garbage-Collection"><span class="toc-text">Garbage Collection</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Tuple-level-Garbage-Collection"><span class="toc-text">Tuple-level Garbage Collection</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Transaction-level-Garbage-Collection"><span class="toc-text">Transaction-level Garbage Collection</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A8%E8%AE%BA-1"><span class="toc-text">讨论</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86"><span class="toc-text">索引管理</span></a></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.317Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>evaluation</span></h1>
+<h2 id="An-Empirical-Evaluation-of-In-Memory-Multi-Version-Concurrency-Control"><a href="#An-Empirical-Evaluation-of-In-Memory-Multi-Version-Concurrency-Control" class="headerlink" title="An Empirical Evaluation of In-Memory Multi-Version Concurrency Control"></a>An Empirical Evaluation of In-Memory Multi-Version Concurrency Control</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><em>MVCC</em>是目前最流行的并发控制协议，本文是论文原文的翻译，省略掉实验部分，感兴趣的同学可以去参照论文原文。这篇论文从4个方面分析了<em>MVCC</em>设计取舍，包括如下: </p>
+<ul>
+<li><em>concurrency control protocol</em> </li>
+<li><em>version storage</em> </li>
+<li><em>garbage collection</em></li>
+<li><em>index management</em></li>
+</ul>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h5 id="MVCC概述"><a href="#MVCC概述" class="headerlink" title="MVCC概述"></a><em>MVCC</em>概述</h5><p><em>MVCC<em>最大的优点是能够让数据库有更大的并发量，例如一个使用</em>MVCC<em>的数据库管理系统(</em>DBMS</em>)可以同时让一个事务读取一条数据的老版本而另一个事务更新同一条数据。<em>MVCC<em>的这些优点让它成为了近几年数据库的最佳选择，下表(</em>表1</em>)总结了近三十年来数据库<em>MVCC</em>的一些实现。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029103341751.png" alt=""/></p>
+<h5 id="DBMS元数据"><a href="#DBMS元数据" class="headerlink" title="DBMS元数据"></a>DBMS元数据</h5><p><em>MVCC DBMS</em>为事务以及元组维护着一些相似的元数据。 </p>
+<ul>
+<li><p>每一个事务都有一个全局唯一且递增的事务<em>Tid</em>，并发控制协议会使用<em>Tid</em>标识被访问的元组。</p>
+</li>
+<li><p>每一个元组的头部有四个元数据字段，如<em>图1</em>。<em>txn-id</em>是元组的<em>write-lock</em>，如果一个元组没有被<em>write-locked</em>，那么这个字段就为<em>0</em>。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029103554828.png" style="zoom:50%;"/>
+
+<p>当一个事务<em>T</em>(<em>Tid</em>)更新元组时，<em>DBMS<em>会检查该元组是否为</em>0<em>，如果为</em>0<em>，那么</em>DBMS<em>使用原子性操作设置</em>txn-id<em>为</em>Tid<em>。任何事务尝试更新一个</em>txn-id<em>不为</em>0<em>或不等于</em>Tid<em>的元组时都会被</em>DBMS</em> <em>abort</em>掉。<em>begin-ts</em>和<em>end-ts</em>表示元组的生命周期，这两个字段的初始值都为<em>0</em>。当元组被删除掉后，<em>DBMS</em>会设置<em>begin-ts</em>为<em>INF</em>。最后一个字段<em>pointer</em>存储着下一个版本元组的地址。</p>
+</li>
+</ul>
+<h3 id="concurrency-control-protocol"><a href="#concurrency-control-protocol" class="headerlink" title="concurrency control protocol"></a>concurrency control protocol</h3><p>每一个<em>DBMS</em>都包含并发控制协议，并发控制协议起着控制事务访问特定元组，事务是否能提交的作用。</p>
+<h5 id="Timestamp-orderding-MVTO"><a href="#Timestamp-orderding-MVTO" class="headerlink" title="Timestamp orderding(MVTO)"></a>Timestamp orderding(<em>MVTO</em>)</h5><p><em>MVTO</em>除了<em>表1</em>元组所有的字段外，<em>MVTO</em>还包含了一个额外的字段<em>read-ts</em>，这个字段表示最后一个读取该元组的事务。</p>
+<p>当事务在元组<em>A</em>发起一个读操作，<em>DBMS<em>会查找</em>begin-ts</em> &lt;= <em>Tid</em> &lt;= <em>end-ts*的元组，如下图</em>(a)<em>，如果元组<em>Ax</em>的写锁(*txn-id == 0 || txn-id == Tid</em>)没有被其他事务获取到，那么事务<em>T</em>被允许访问<em>Ax</em>，<em>MVTO</em>不允许事务<em>read uncommitted</em>。如果事务不能访问<em>Ax</em>，那么就只能访问<em>Ax</em>的老版本数据。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029105631639.png" style="zoom:67%;"/>
+
+<p><em>MVTO</em>总是更新元组的最新的版本，如果没有活跃的事务获取到<em>Bx</em>的写锁并且<em>Tid</em>比<em>Bx</em>的<em>read-ts</em>大，事务<em>T</em>会新建一个版本<em>Bx+1</em>，设置<em>Bx+1</em>的<em>txn-id</em>为<em>Tid</em>，当<em>T</em>提交的时候，<em>DBMS</em>分别设置<em>Bx+1</em>的<em>begin-ts</em>和<em>end-ts</em>为<em>Tid</em>和<em>INF</em>，<em>Bx</em>的<em>end-ts</em>为<em>Tid</em>。</p>
+<h5 id="Optimistic-concurency-control-MVOCC"><a href="#Optimistic-concurency-control-MVOCC" class="headerlink" title="Optimistic concurency control(MVOCC)"></a>Optimistic concurency control(<em>MVOCC</em>)</h5><p>乐观并发控制的(<em>OCC</em>)的初衷在于<em>DBMS</em>假设事务之间冲突很少，因此事务不需要锁来协调访问控制，这就减少了事务持有锁的时间。</p>
+<p><em>MVOCC<em>协议分为三个阶段。当一个事务开始时，事务处于</em>read phase<em>，在这个阶段里面，事务可以对元组读写操作，和</em>MVTO<em>一样，当事务读一个元组时，</em>DBMS<em>会搜索该事务可见的版本(</em>begin-ts &lt;= Tid &lt;= end-ts</em>)。当事务写一个元组时，只有<em>write-lock</em>没有被其他事务获取到才行，例如事务<em>T</em>更新<em>Bx</em>时，<em>DBMS</em>会新建一个<em>Bx+1</em>版本的元组并且设置<em>Bx+1</em>的<em>txn-id</em>为<em>Tid</em>。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029111315549.png" alt="image-20191029111315549" style="zoom:67%;"/>
+
+<p>当事务提交时候，事务进入<em>validate phase</em>，<em>DBMS</em>会验证事务的<em>read-set</em>是否被其他事务更新过，如果事务通过了<em>validate phase</em>的检查，那么事务就进入到<em>write phase</em>，<em>DBMS</em>会把事务写的数据写到文件，并且把元组的<em>begin-ts</em>设置到<em>Tid</em>，<em>end-ts</em>设置为<em>INF</em>。<em>MVOCC</em>和<em>MVTO</em>相比，<em>MVOCC</em>把事务分成了三个阶段，其中的<em>validate phase</em>就是检查事务的元组是否已经被其他事务写过了，<em>MVTO</em>并没有这个阶段，取而代之的是用<em>read-ts</em>来标识事务的顺序，保证了事务的隔离性。</p>
+<h5 id="Two-phase-Locking-MV2PL"><a href="#Two-phase-Locking-MV2PL" class="headerlink" title="Two-phase Locking(MV2PL)"></a>Two-phase Locking(<em>MV2PL</em>)</h5><p>两阶段加锁有两个阶段，第一个阶段是<em>膨胀阶段</em>，在这个阶段里面，事务只能获取锁，不能释放锁，第二个阶段是<em>收缩阶段</em>，在这个阶段里面事务只能释放锁不能获取锁。<em>MV2PL</em>的写锁是<em>txn-id</em>，读锁是<em>read-cnt</em>，<em>read-cnt</em>表示当前读取这个元组的活跃事务。当事务读一个元组时，<em>DBMS</em>会搜索事务可见的版本，当这个版本是可见时，如果该版本的<em>txn-id</em>为0，事务会增加<em>read-cnt</em>。同样的，只有<em>txn-id</em>为<em>0</em>并且<em>read-cnt</em>为0时，事务才能进行写操作。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191029112911934.png" alt="image-20191029112911934" style="zoom:67%;"/>
+
+<p><em>2PL</em>协议的关键点在于对死锁的处理上，之前的研究表明<em>no-wait</em>策略是扩展性最强的策略。当事务发现不能获取到锁时，事务直接<em>abort</em>，因为事务从不等待，那么我们也就不需要一个后台线程来探测死锁了。</p>
+<h5 id="Serialization-Certifier"><a href="#Serialization-Certifier" class="headerlink" title="Serialization Certifier"></a>Serialization Certifier</h5><p>这个策略我没有过深入的研究，不过有一篇<em>PostgreSQL<em>的论文是和这个主题相关的(</em>Serializable Snapshot Isolation in PostgreSQL</em>)，论文主要是依靠检测事务之间的依赖来实现隔离性的，如果事务之间的依赖有问题，那么<em>DBMS</em>会通过一些策略<em>abort</em>掉一些事务。</p>
+<h3 id="Version-storage"><a href="#Version-storage" class="headerlink" title="Version storage"></a>Version storage</h3><p>版本存储具体说明了系统是如何存储元组的版本以及每个版本都包含哪些信息。<em>DBMS</em>采用元组的<em>pointer</em>字段形成了版本数据的链表，这个链表允许定位对事务可见的版本。链表的头可以是最新的版本，也可以是最老的版本，论文主要偏向于<em>UPDATE</em>操作时的取舍，因为<em>UPDATE</em>操作才会增加新版本数据。</p>
+<h5 id="Append-only-storage"><a href="#Append-only-storage" class="headerlink" title="Append-only storage"></a>Append-only storage</h5><p>在这种存储结构中，事务更新数据时首先会从表中获取一个空的<em>slot</em>，然后把之前的版本数据复制到这个空的<em>slot</em>，最后把要更新的数据更新到这个<em>slot</em>中。<em>Append-only storage</em>设计的关键点在于如何管理版本链表的顺序，这个顺序隐含着事务更新索引的频率。</p>
+<h6 id="Oldest-to-Newest"><a href="#Oldest-to-Newest" class="headerlink" title="Oldest-to-Newest"></a>Oldest-to-Newest</h6><p>在<em>O2N</em>这种顺序中，链表头部是最老版本的数据，如下图。<em>O2N</em>的优点在于不需要在更新数据的时候调整索引的指针，但是缺点也很显然，<em>DBMS</em>需要遍历一个长链表才能到达最新的数据。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191031113148916.png" alt="image-20191031113148916" style="zoom:67%;"/>
+
+<h6 id="Newest-to-Oldest"><a href="#Newest-to-Oldest" class="headerlink" title="Newest-to-Oldest"></a>Newest-to-Oldest</h6><p>在<em>N2O</em>这种顺序中，链表头部是最新版本的数据，如下图。大多数<em>DBMS</em>都会访问最新版本的数据，因此<em>N2O</em>不需要遍历一个长链表，但是<em>N2O</em>的缺点是不论何时链表的头部发生了变化，<em>DBMS</em>都会去更新所有的索引去指向最新的链表头部。在下面的章节里面，我们会讨论引入一个间接的映射层来提供索引到间接层，间接层到物理数据的映射，索引指向间接层而不是直接的物理地址。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191031114538968.png" alt="image-20191031114538968" style="zoom:67%;"/>
+
+<h5 id="Time-travel-storage"><a href="#Time-travel-storage" class="headerlink" title="Time-travel storage"></a>Time-travel storage</h5><p><em>Time-travel strorage</em>类似于上面的<em>append-only storage</em>，不同点在于老版本数据存储在分开的表中。<em>DBMS</em>存储了一个主版本在主表中以及一些其他的版本在另外一个分开的表中。<em>time-travel storage</em>引入了一些<em>GC</em>中的消耗，当进行<em>GC</em>时，<em>DBMS</em>需要把<em>time-travel storage</em>表中的数据拷贝到主表中。为了简单起见，论文只考虑了主表中是主版本的情况。</p>
+<p>当更新一个元组时，<em>DBMS</em>在<em>time-travel</em>表中首先获取到一个空的<em>slot</em>，然后从主表中拷贝数据到这个空的<em>slot</em>中，然后再更新数据的主版本。索引总是指向数据的主版本，所以索引数据不用修改。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/WX20191107-135056@2x.png" alt="WX20191107-135056@2x" style="zoom:67%;"/>
+
+<h5 id="Delta-storage"><a href="#Delta-storage" class="headerlink" title="Delta storage"></a>Delta storage</h5><p>在<em>delta storage<em>中，数据库主版本在主表中，增量修改的版本在</em>delta table<em>中。当更新一个元组时，</em>DBMS<em>并不会拷贝整个元组而是只把被修改的字段拷贝到</em>delta table<em>中。只更新元组的部分字段时，这种方案特别适合，但是在读占大多数请求的时，这种方案带来的消耗很大，因为读一行数据需要</em>DBMS<em>遍历版本链表多个字段的多个版本(</em>读放大</em>)。</p>
+<h5 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h5><p>没有一种方案是通用的，数据库的不同负载，不同方案有最优的表现。<em>append-only</em>方案对于<em>large scan</em>的分析查询很合适，因为数据都是连续存放在内存中，这减少了<em>cpu</em>的<em>cache miss</em>，数据都连续在内存中也是硬件进行<em>prefetch</em>的理想条件。但是当访问老版本的数据时，<em>DBMS</em>必须遍历版本链表才能定位到一个合适的版本，<em>append-only</em>方案也直接暴露了数据的物理地址给索引，引入了额外的索引管理消耗。</p>
+<p>所有的存储方案都需要在<em>DBMS</em>中集中分配数据，多线程访问会导致访问竞争。一种解决方案是<em>DBMS</em>维护一块额外的内存区域使用并且每次增长的大小固定，每个工作线程都从一个地方获取内存，这也是一种分区的方案，因此也减少了访问竞争。</p>
+<h4 id="Garbage-Collection"><a href="#Garbage-Collection" class="headerlink" title="Garbage Collection"></a>Garbage Collection</h4><p><em>MVCC</em>在更新数据时会新增数据，如果不及时清理掉废弃的数据那么磁盘空间肯定会使用完，在访问数据的时候，<em>DBMS</em>会遍历版本链表，如果链表过长，也会影响数据库的性能，所以数据库的性能和<em>GC</em>有着密切的关系。</p>
+<p><em>GC</em>步骤被分为三步：</p>
+<ul>
+<li>检测过期的版本</li>
+<li>把版本数据从相关链表以及索引中<em>unlink</em></li>
+<li>回收掉数据的存储空间</li>
+</ul>
+<p><em>DBMS<em>认为如果数据是无效的(</em>比如由abort的事务生成</em>)或者数据对现有的活跃事务不可见，那么数据就是过期的，对于不可见的版本，需要满足条件是<em>版本end-ts &lt; Tid</em>。</p>
+<p>目前有两种<em>MVCC GC</em>实现，不同的地方是他们如何检测过期的版本。第一种是<em>tuple level GC</em>，<em>DBMS</em>会去检查单个元组的可见性。第二种<em>transaction-level GC</em>会去检测完成事务的创建数据的版本是否可见。需要注意的是不是每一种<em>GC</em>方式都与所有的存储方案兼容。</p>
+<h5 id="Tuple-level-Garbage-Collection"><a href="#Tuple-level-Garbage-Collection" class="headerlink" title="Tuple-level Garbage Collection"></a>Tuple-level Garbage Collection</h5><h6 id="Backgroup-Vacuuming-VAC"><a href="#Backgroup-Vacuuming-VAC" class="headerlink" title="Backgroup Vacuuming(VAC)"></a>Backgroup Vacuuming(VAC)</h6><p><em>DBMS</em>中有一个后台线程定期扫描数据库来找到过期的版本。在上面的<em>表1</em>中可以看出这是最常见的方式，实现很容易并且可以和所有的版本存储访问兼容。但是这种方式的扩展性不好，一种更好的扩展性方式在论文<em>SpeedyTransactionsin Multicore In-Memory Databases</em>中，在<em>GC</em>过程中还有另外一种优化，用一个<em>bitmap</em>来标记出脏的数据块。</p>
+<h6 id="Cooperative-Cleaning-COOP"><a href="#Cooperative-Cleaning-COOP" class="headerlink" title="Cooperative Cleaning(COOP)"></a>Cooperative Cleaning(COOP)</h6><p>事务执行的时候，<em>DBMS</em>会遍历整个版本链表来找到可见的版本，把过期的数据注册到一个全局的数据结构中。因为没有专门的<em>GC</em>线程，所以这种方式扩展性良好，但是<em>COOP</em>只适用于<em>O2N</em>存储。<em>COOP</em>的一个缺点是如果数据没有被访问到，那么过期的版本数据就不会被清理到，在<em>SQL Server Hekaton</em>中，这被称为<em>dusty corner</em>。<em>DBMS</em>可以和<em>VAC</em>一样定期来一次<em>complete GC</em>来克服这个缺点。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191107151059457.png" alt="image-20191107151059457" style="zoom:67%;"/>
+
+<h5 id="Transaction-level-Garbage-Collection"><a href="#Transaction-level-Garbage-Collection" class="headerlink" title="Transaction-level Garbage Collection"></a>Transaction-level Garbage Collection</h5><p>在这种<em>GC</em>机制中，数据进行<em>GC</em>的粒度是事务。<em>DBMS</em>认为当一个事务创建数据所有的版本对当前活跃事务不可见时，事务是过期的。当<em>epoch</em>结束时，属于这个<em>epoch</em>的事务生成数据的版本都是过期的，可以安全的删除掉。这种方式的缺点是<em>DBMS</em>得追踪事务的<em>read/write set</em>而不仅仅是使用<em>epoch</em>。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://worstenemy.github.io//2019/10/31/evaluation-mvcc/image-20191107151710062.png" alt="image-20191107151710062" style="zoom:67%;"/>
+
+<h5 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h5><p><em>Tuple-level gc</em>是最常见的<em>GC</em>方式，在上面两种方式中，增加<em>GC</em>线程的数目都可以加速<em>GC</em>。数据库性能会在长事务情况下下降，这是因为在长事务情况下产生的数据不会及时被回收掉。</p>
+<h4 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h4><p>所有的<em>MVCC DBMS</em>都独立于版本信息管理索引。因此，在索引中存在一个<em>key</em>意味着在数据库中存储着某个版本的数据，但是索引并不知道到底是哪个版本存储着的数据匹配。定义<em>index entry</em>为<em>key/value</em>对，<em>key</em>是指向元组的被索引字段，<em>value</em>是指向对应的元组。<em>DBMS</em>会根据<em>value</em>的指针遍历版本链表来找到可见的元组。</p>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-912_redis%E7%BC%96%E5%86%99lua%E8%84%9A%E6%9C%AC/">redis编写lua脚本</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-914_Lua%20%E5%AD%A6%E4%B9%A0%20chapter29%20/">Lua 学习 chapter29</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

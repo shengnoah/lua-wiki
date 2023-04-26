@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>programming in lua(thrid edition)笔记---目录 - Lua教程</title>
+
+  
+    <meta name="description" content="看到第四章的时候，发现Lua的靓点好多，在编程中会提供很多便利，但是由于这些东西都是新的，刚开始学容易忘，回过头再去书里找又太麻烦，尤其是我看的电子书，所以才想到要记下来。这是我第一次写读书笔记，希望可以做完做好。 Programming in Lua, Thrid EditionI The Language1 Getting Started2 Types and Values3 Expressi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="programming in lua(thrid edition)笔记---目录">
+<meta property="og:url" content="https://lua.ren/2023/04/26/zl/2016-01-01-1171_programming%20in%20lua(thrid%20edition)%E7%AC%94%E8%AE%B0---%E7%9B%AE%E5%BD%95/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="看到第四章的时候，发现Lua的靓点好多，在编程中会提供很多便利，但是由于这些东西都是新的，刚开始学容易忘，回过头再去书里找又太麻烦，尤其是我看的电子书，所以才想到要记下来。这是我第一次写读书笔记，希望可以做完做好。 Programming in Lua, Thrid EditionI The Language1 Getting Started2 Types and Values3 Expressi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.240Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.240Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua文章">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">programming in lua(thrid edition)笔记---目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Programming-in-Lua-Thrid-Edition"><span class="toc-text">Programming in Lua, Thrid Edition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-The-Language"><span class="toc-text">I The Language</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Getting-Started"><span class="toc-text">1 Getting Started</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Types-and-Values"><span class="toc-text">2 Types and Values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Expressions"><span class="toc-text">3 Expressions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Statements"><span class="toc-text">4 Statements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Functions"><span class="toc-text">5 Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-More-about-Functions"><span class="toc-text">6 More about Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Iterators-and-the-Generic-for"><span class="toc-text">7 Iterators and the Generic for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Compilation-Execution-and-Errors"><span class="toc-text">8 Compilation, Execution, and Errors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Coroutines"><span class="toc-text">9 Coroutines</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Coroutines"><span class="toc-text">10 Coroutines</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#II-Tables-and-Objects"><span class="toc-text">II Tables and Objects</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-Data-Structures"><span class="toc-text">11 Data Structures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Data-Files-and-Persistence"><span class="toc-text">12 Data Files and Persistence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-Metatables-and-Metamethods"><span class="toc-text">13 Metatables and Metamethods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-The-Environment"><span class="toc-text">14 The Environment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-Modules-and-Packages"><span class="toc-text">15 Modules and Packages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-Object-Oriented-Programming"><span class="toc-text">16 Object-Oriented Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-Weak-Tables-and-Finalizers"><span class="toc-text">17 Weak Tables and Finalizers</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#III-The-Standard-Libraries"><span class="toc-text">III The Standard Libraries</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#18-The-Mathematical-Library"><span class="toc-text">18 The Mathematical Library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-The-Bitwise-Library"><span class="toc-text">19 The Bitwise Library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-The-Table-Library"><span class="toc-text">20 The Table Library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-The-String-Library"><span class="toc-text">21 The String Library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-The-I-O-Library"><span class="toc-text">22 The I&#x2F;O Library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-The-Operating-System-Library"><span class="toc-text">23 The Operating System Library</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-The-Debug-Library"><span class="toc-text">24 The Debug Library</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IV-The-C-API"><span class="toc-text">IV The C API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#25-An-Overview-of-the-C-API"><span class="toc-text">25 An Overview of the C API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-Extending-Your-Application"><span class="toc-text">26 Extending Your Application</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-Calling-C-from-Lua"><span class="toc-text">27 Calling C from Lua</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#28-Techniques-for-Writing-C-Functions"><span class="toc-text">28 Techniques for Writing C Functions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29-User-Defined-Types-in-C"><span class="toc-text">29 User-Defined Types in C</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30-Managing-Resources"><span class="toc-text">30 Managing Resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31-Threads-and-States"><span class="toc-text">31 Threads and States</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-Memory-Management"><span class="toc-text">32 Memory Management</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>programming in lua(thrid edition)笔记---目录</span></h1>
+<p>看到第四章的时候，发现Lua的靓点好多，在编程中会提供很多便利，但是由于这些东西都是新的，刚开始学容易忘，回过头再去书里找又太麻烦，尤其是我看的电子书，所以才想到要记下来。这是我第一次写读书笔记，希望可以做完做好。<br/></p>
+<h2 id="Programming-in-Lua-Thrid-Edition"><a href="#Programming-in-Lua-Thrid-Edition" class="headerlink" title="Programming in Lua, Thrid Edition"></a>Programming in Lua, Thrid Edition</h2><h2 id="I-The-Language"><a href="#I-The-Language" class="headerlink" title="I The Language"></a>I The Language</h2><h3 id="1-Getting-Started"><a href="#1-Getting-Started" class="headerlink" title="1 Getting Started"></a>1 Getting Started</h3><h3 id="2-Types-and-Values"><a href="#2-Types-and-Values" class="headerlink" title="2 Types and Values"></a>2 Types and Values</h3><h3 id="3-Expressions"><a href="#3-Expressions" class="headerlink" title="3 Expressions"></a>3 Expressions</h3><h3 id="4-Statements"><a href="#4-Statements" class="headerlink" title="4 Statements"></a>4 Statements</h3><h3 id="5-Functions"><a href="#5-Functions" class="headerlink" title="5 Functions"></a>5 Functions</h3><h3 id="6-More-about-Functions"><a href="#6-More-about-Functions" class="headerlink" title="6 More about Functions"></a>6 More about Functions</h3><h3 id="7-Iterators-and-the-Generic-for"><a href="#7-Iterators-and-the-Generic-for" class="headerlink" title="7 Iterators and the Generic for"></a>7 Iterators and the Generic for</h3><h3 id="8-Compilation-Execution-and-Errors"><a href="#8-Compilation-Execution-and-Errors" class="headerlink" title="8 Compilation, Execution, and Errors"></a>8 Compilation, Execution, and Errors</h3><h3 id="9-Coroutines"><a href="#9-Coroutines" class="headerlink" title="9 Coroutines"></a>9 Coroutines</h3><h3 id="10-Coroutines"><a href="#10-Coroutines" class="headerlink" title="10 Coroutines"></a>10 Coroutines</h3><h2 id="II-Tables-and-Objects"><a href="#II-Tables-and-Objects" class="headerlink" title="II Tables and Objects"></a>II Tables and Objects</h2><h3 id="11-Data-Structures"><a href="#11-Data-Structures" class="headerlink" title="11 Data Structures"></a>11 Data Structures</h3><h3 id="12-Data-Files-and-Persistence"><a href="#12-Data-Files-and-Persistence" class="headerlink" title="12 Data Files and Persistence"></a>12 Data Files and Persistence</h3><h3 id="13-Metatables-and-Metamethods"><a href="#13-Metatables-and-Metamethods" class="headerlink" title="13 Metatables and Metamethods"></a>13 Metatables and Metamethods</h3><h3 id="14-The-Environment"><a href="#14-The-Environment" class="headerlink" title="14 The Environment"></a>14 The Environment</h3><h3 id="15-Modules-and-Packages"><a href="#15-Modules-and-Packages" class="headerlink" title="15 Modules and Packages"></a>15 Modules and Packages</h3><h3 id="16-Object-Oriented-Programming"><a href="#16-Object-Oriented-Programming" class="headerlink" title="16 Object-Oriented Programming"></a>16 Object-Oriented Programming</h3><h3 id="17-Weak-Tables-and-Finalizers"><a href="#17-Weak-Tables-and-Finalizers" class="headerlink" title="17 Weak Tables and Finalizers"></a>17 Weak Tables and Finalizers</h3><h2 id="III-The-Standard-Libraries"><a href="#III-The-Standard-Libraries" class="headerlink" title="III The Standard Libraries"></a>III The Standard Libraries</h2><h3 id="18-The-Mathematical-Library"><a href="#18-The-Mathematical-Library" class="headerlink" title="18 The Mathematical Library"></a>18 The Mathematical Library</h3><h3 id="19-The-Bitwise-Library"><a href="#19-The-Bitwise-Library" class="headerlink" title="19 The Bitwise Library"></a>19 The Bitwise Library</h3><h3 id="20-The-Table-Library"><a href="#20-The-Table-Library" class="headerlink" title="20 The Table Library"></a>20 The Table Library</h3><h3 id="21-The-String-Library"><a href="#21-The-String-Library" class="headerlink" title="21 The String Library"></a>21 The String Library</h3><h3 id="22-The-I-O-Library"><a href="#22-The-I-O-Library" class="headerlink" title="22 The I/O Library"></a>22 The I/O Library</h3><h3 id="23-The-Operating-System-Library"><a href="#23-The-Operating-System-Library" class="headerlink" title="23 The Operating System Library"></a>23 The Operating System Library</h3><h3 id="24-The-Debug-Library"><a href="#24-The-Debug-Library" class="headerlink" title="24 The Debug Library"></a>24 The Debug Library</h3><h2 id="IV-The-C-API"><a href="#IV-The-C-API" class="headerlink" title="IV The C API"></a>IV The C API</h2><h3 id="25-An-Overview-of-the-C-API"><a href="#25-An-Overview-of-the-C-API" class="headerlink" title="25 An Overview of the C API"></a>25 An Overview of the C API</h3><h3 id="26-Extending-Your-Application"><a href="#26-Extending-Your-Application" class="headerlink" title="26 Extending Your Application"></a>26 Extending Your Application</h3><h3 id="27-Calling-C-from-Lua"><a href="#27-Calling-C-from-Lua" class="headerlink" title="27 Calling C from Lua"></a>27 Calling C from Lua</h3><h3 id="28-Techniques-for-Writing-C-Functions"><a href="#28-Techniques-for-Writing-C-Functions" class="headerlink" title="28 Techniques for Writing C Functions"></a>28 Techniques for Writing C Functions</h3><h3 id="29-User-Defined-Types-in-C"><a href="#29-User-Defined-Types-in-C" class="headerlink" title="29 User-Defined Types in C"></a>29 User-Defined Types in C</h3><h3 id="30-Managing-Resources"><a href="#30-Managing-Resources" class="headerlink" title="30 Managing Resources"></a>30 Managing Resources</h3><h3 id="31-Threads-and-States"><a href="#31-Threads-and-States" class="headerlink" title="31 Threads and States"></a>31 Threads and States</h3><h3 id="32-Memory-Management"><a href="#32-Memory-Management" class="headerlink" title="32 Memory Management"></a>32 Memory Management</h3>
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-1172_lua%20non-preemptive%20multithreading/">lua non-preemptive multithreading</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-1176_uva%2011724%20-%20evaluate%20the%20expression/">uva 11724 - evaluate the expression</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

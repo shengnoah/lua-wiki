@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>go3.2 - Lua教程</title>
+
+  
+    <meta name="description" content="3.2 切片在go中，你一般很少直接使用数组。相反，你会使用切片。切片是一个轻量级的结构体封装，这个结构体被封装后，代表一个数组的一部分。这里指出了一些创建切片的方式，并指出我们以后会在何时使用这些方式。 第一种方式和我们创建一个数组时有点细微的变化： scores :&#x3D; []int&amp;#123;1,4,293,4,9&amp;#125; 和声明数组不同的是，声明切片不需要在方括号中指定其大小。理解2中不同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go3.2">
+<meta property="og:url" content="https://lua.ren/go3.2.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="3.2 切片在go中，你一般很少直接使用数组。相反，你会使用切片。切片是一个轻量级的结构体封装，这个结构体被封装后，代表一个数组的一部分。这里指出了一些创建切片的方式，并指出我们以后会在何时使用这些方式。 第一种方式和我们创建一个数组时有点细微的变化： scores :&#x3D; []int&amp;#123;1,4,293,4,9&amp;#125; 和声明数组不同的是，声明切片不需要在方括号中指定其大小。理解2中不同">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-26T05:16:12.087Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.087Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets"></div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Go%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/">Go基础入门教程</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>go3.2</span></h1>
+<h1 id="3-2-切片"><a href="#3-2-切片" class="headerlink" title="3.2 切片"></a>3.2 切片</h1><p>在go中，你一般很少直接使用数组。相反，你会使用切片。切片是一个轻量级的结构体封装，这个结构体被封装后，代表一个数组的一部分。这里指出了一些创建切片的方式，并指出我们以后会在何时使用这些方式。</p>
+<p>第一种方式和我们创建一个数组时有点细微的变化：</p>
+<p><code>scores := []int&#123;1,4,293,4,9&#125;</code></p>
+<p>和声明数组不同的是，声明切片不需要在方括号中指定其大小。理解2中不同的方式创建切片，下面使用另外一种方式创建切片，这里使用<code>make</code>：</p>
+<p><code>scores := make([]int, 10)</code></p>
+<p>我们使用<code>make</code>，没有使用<code>new</code>，是因为创建一个切片不仅仅是分配一段内存（<code>new</code>只能分配一段内存）。需要特别指出的是，我们需要为底层数组分配内存，并且也要初始化这个切片。在上面的例子中，我们初始化了一个长度和容量都是10的切片。长度表示切片的长度，容量表示底层数组的大小。在使用<code>make</code>创建切片时，我们可以分别的指定长度和容量大小：</p>
+<p><code>scores := make([]int, 0, 10)</code></p>
+<p>上面创建了一个长度为0但是容量为10的切片。（如果你留意过，你会发现<code>make</code>和<code>len</code>实现了重载。go语言的一些特性会让你有点失望，因为有些特性是没有暴露出来给开发者使用。）</p>
+<p>要更好的理解切片长度和容量之间的相互作用，让我们看下面的例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    scores := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    scores[<span class="number">5</span>] = <span class="number">9033</span></span><br><span class="line">    fmt.Println(scores)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子不能运行。为什么？因为我们创建的切片长度是0。是的，这个底层的数组有10个元素。但是为了访问切片元素，我们需要明确的扩展切片。一种扩展切片的方式是使用<code>append</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    scores := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    scores = <span class="built_in">append</span>(scores, <span class="number">5</span>)</span><br><span class="line">    fmt.Println(scores) <span class="comment">// 打印：[5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是这改变为了我们之前代码的意图。当往一个长度为0的切片上添加元素时，这个元素会被赋值给切片的第一个元素。不管出于什么原因，那段不能运行的代码想给切片的第6个元素赋值。为了到达这个目的，我们可以再切分一直我们的切片：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    scores := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    scores = scores[<span class="number">0</span>:<span class="number">6</span>]</span><br><span class="line">    scores[<span class="number">5</span>] = <span class="number">9033</span></span><br><span class="line">    fmt.Println(scores)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调整切片的大小上限是多少？这个上限就是切片的容量大小，在上面的例子中，上限是10。你也许会认为，这实际没有解决定长数组的问题。事实证明，<code>append</code>比较特殊。如果底层的数组已经达到上限，<code>append</code>会重新创建一个更大的数组，并将所有的值复制过去（这就是动态数组的工作原理，例如php、python、ruby和javascript等等）。这就是为什么我们在上面的例子中使用<code>append</code>。我们必须将<code>append</code>返回的值重新赋予给<code>scores</code>变量：如果原始切片没有更多的空间时，<code>append</code>可能会创建一个新值。</p>
+<p>如果我告诉你go扩展数组使用的是2倍算法（2x algorithm）。你能猜出下面代码将输出什么吗？</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    scores := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">5</span>)</span><br><span class="line">    c := <span class="built_in">cap</span>(scores)</span><br><span class="line">    fmt.Println(c)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">25</span>; i++ &#123;</span><br><span class="line">        scores = <span class="built_in">append</span>(scores, i)</span><br><span class="line">        <span class="comment">// 如果容量已经改变，go为了容下这些新数据，不得不增长数组的长度        </span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">cap</span>(scores) != c &#123;</span><br><span class="line">        c = <span class="built_in">cap</span>(scores)</span><br><span class="line">        fmt.Println(c)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>切片<code>scores</code>的初始容量是5。但是为了容纳20个元素，切片的容量必须扩展3次，分别是10、20和40。</p>
+<p>作为最后一个例子，思考一下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    scores := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">5</span>)</span><br><span class="line">    scores = <span class="built_in">append</span>(scores, <span class="number">9332</span>)</span><br><span class="line">    fmt.Println(scores)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当面的代码输出是<code>[0, 0, 0, 0, 0, 9332]</code>。也许你认为应该是<code>[9332, 0, 0, 0, 0]</code>。对人类来说，这似乎更合乎逻辑。但是对于编译器来说，你是要告诉它往一个已经拥有5个元素的切片添加一个值。</p>
+<p>最后，这里提供了4种常用的方式去初始化一个切片：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">names := []<span class="type">string</span>&#123;<span class="string">&quot;leto&quot;</span>, <span class="string">&quot;jessica&quot;</span>, <span class="string">&quot;paul&quot;</span>&#125;</span><br><span class="line">checks := <span class="built_in">make</span>([]<span class="type">bool</span>, <span class="number">10</span>)</span><br><span class="line"><span class="keyword">var</span> names []<span class="type">string</span></span><br><span class="line">scores := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<p>你该使用哪一个？第一种你不需要太多的说明。但是使用这种方式你得提前知道你想往数组存放的值。</p>
+<p>第二种方式在你想往切片的特定位置写入一个值时很有用，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">extractPowers</span><span class="params">(saiyans []*Saiyans)</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    powers := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="built_in">len</span>(saiyans))</span><br><span class="line">    <span class="keyword">for</span> index, saiyan := <span class="keyword">range</span> saiyans &#123;</span><br><span class="line">    powers[index] = saiyan.Power</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> powers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第三种方式会返回一个空切片，一般和<code>append</code>一起使用，此时切片的元素数量是未知的。</p>
+<p>最后一种方式可以让我们指定切片的初始容量。当我们大概知道需要多少元素时很有用。即使你知道元素的个数，<code>append</code>也能被使用，这主要取决于个人喜好：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">extractPowers</span><span class="params">(saiyans []*Saiyans)</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    powers := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="built_in">len</span>(saiyans))</span><br><span class="line">    <span class="keyword">for</span> _, saiyan := <span class="keyword">range</span> saiyans &#123;</span><br><span class="line">        powers = <span class="built_in">append</span>(powers, saiyan.Power)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> powers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>切片作为一个数组的封装是一个非常有用的概念。很多语言都有类似的概念。javascript和ruby的数组都有一个<code>slice</code>方法。你也可以在ruby中通过<code>[START..END]</code>得到一个切片，或者在python中通过<code>[START:END]</code>得到一个切片。然而，在一些语言中，切片确实是从原始数组拷贝而来的新数组。如果我们使用<code>ruby</code>，下面代码将输出什么？</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scores = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">slice = scores[<span class="number">2.</span><span class="number">.4</span>]</span><br><span class="line">slice[<span class="number">0</span>] = <span class="number">999</span></span><br><span class="line">puts scores</span><br></pre></td></tr></table></figure>
+
+<p>答案是<code>[1, 2, 3, 4, 5]</code>。因为切片<code>slice</code>是由值拷贝组成的一个全新数组。现在，同等情况下看go：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scores := []<span class="type">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;</span><br><span class="line">slice := scores[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line">slice[<span class="number">0</span>] = <span class="number">999</span></span><br><span class="line">fmt.Println(scores)</span><br></pre></td></tr></table></figure>
+
+<p>输出是<code>[1, 2, 999, 4, 5]</code>。</p>
+<p>这会如何改变你的代码。例如，很多函数需要一个位置参数。在javascript中，如你我们想在前五个字符后查找一个字符串中的第一个空白符（对，切片也当字符串处理），我们可以这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">haystack = <span class="string">&quot;the spice must flow&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(haystack.<span class="title function_">indexOf</span>(<span class="string">&quot; &quot;</span>, <span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+
+<p>在go中，我们使用切片：</p>
+<p><code>strings.Index(haystack[5:], &quot; &quot;)</code></p>
+<p>从上面例子中，我们可以看出<code>[X:]</code>表示<code>X</code>到结尾的一种缩写。而<code>[:X]</code>是开始到<code>X</code>的一种缩写。不像其他语言，go不支持负值索引。如果我们想要切片所有元素，但除了最后一个，我们可以这样写：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scores := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">scores = scores[:<span class="built_in">len</span>(scores)<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>上述是一种从一个乱序的切片中去除一个值的有效方法。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    scores := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">    scores = removeAtIndex(scores, <span class="number">2</span>)</span><br><span class="line">    fmt.Println(scores)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">removeAtIndex</span><span class="params">(source []<span class="type">int</span>, index <span class="type">int</span>)</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    lastIndex := <span class="built_in">len</span>(source) - <span class="number">1</span></span><br><span class="line">    <span class="comment">//swap the last value and the value we want to remove</span></span><br><span class="line">    source[index], source[lastIndex] = source[lastIndex], source[index]</span><br><span class="line">    <span class="keyword">return</span> source[:lastIndex]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，我们已经学习了切片，我们来学习一下另外一个常用的内置函数：<code>copy</code>。<code>copy</code>是众多函数中重点显示出切片如何改变我们代码方式的函数之一。正常情况下，拷贝一个数组到另外一个数组的方法需要5个参数：<code>source</code>，<code>sourceStart</code>，<code>count</code>，<code>destination</code>和<code>destinationStart</code>。但是在切片中，我们只需要2个参数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;math/rand&quot;</span></span><br><span class="line">    <span class="string">&quot;sort&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    scores := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">        scores[i] = <span class="type">int</span>(rand.Int31n(<span class="number">1000</span>))</span><br><span class="line">    &#125;</span><br><span class="line">    sort.Ints(scores)</span><br><span class="line">    worst := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">5</span>)</span><br><span class="line">    <span class="built_in">copy</span>(worst, scores[:<span class="number">5</span>])</span><br><span class="line">    fmt.Println(worst)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>花点时间研究上面的代码。试着改变一些代码。如果你使用<code>copy(worst[2:4], scores[:5])</code>方式去复制看看会发生什么，或者试着复制多于或者少于5个值到<code>worst</code>。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
+<li><a href="directory.md">目录</a></li>
+<li>上一节：<a href="3.1.md">数组</a></li>
+<li>下一节：<a href="3.3.md">映射</a></li>
+</ul>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/go3.3.html">go3.3</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/go3.4.html">go3.4</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

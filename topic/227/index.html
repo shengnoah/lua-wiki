@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head><!-- hexo injector head_begin start --><script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- hexo injector head_begin end -->
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>深入探究MoonScript的类实现 - Lua教程</title>
+
+  
+    <meta name="description" content="深入探究MoonScript的类实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入探究MoonScript的类实现">
+<meta property="og:url" content="https://lua.ren/topic/227/index.html">
+<meta property="og:site_name" content="Lua教程">
+<meta property="og:description" content="深入探究MoonScript的类实现">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-09-17T14:50:18.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:16:12.108Z">
+<meta property="article:author" content="糖果的实验室">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Lua教程</div><div class="sub cap">Lua基础入门教程</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">Lua教程</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">深入探究MoonScript的类实现</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">（An in-depth look into the MoonScript class implementation）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">简单例子（A simple example）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">类对象（The class object）</span></a></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/topic/">topic</a></div><div id="post-meta">发布于&nbsp;<time datetime="2016-09-17T14:50:18.000Z">2016-09-17</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>深入探究MoonScript的类实现</span></h1>
+<p><span style="color:blue"></span> <h5>（An in-depth look into the MoonScript class implementation）</h5> </p>
+<p>Posted July 05, 2015 by leafo (@moonscript) · Tags: lua, moonscript<br>Tweet</p>
+<blockquote>MoonScript’s class system is great balance of functionality and brevity. It’s simple to get started with, doesn’t impose many restrictions, and is incredibly flexible when you need to do advanced things or bend the rules.</blockquote> 
+
+<p>MoonScript的类系统功能设计的简洁明了，容易上手，无过多的牵绊， 是一款可以方便灵活使用的高级货。</p>
+<blockquote>Even if you have no intention of using MoonScript, understanding the class system implementation is a good exercise for understanding some of the more complicated parts of Lua.</blockquote> 
+
+<p>即使你对MoonScript不感冒，理解类系统的实现，也是一次对lua高端用法深入理解的契机。</p>
+<li>例子（A simple example）
+<ul>
+类对象（The class object）
+基类（The base object）
+</ul>
+</li> 
+<li>类与继承（Classes with inheritance）</li>
+<li>类使用的提示与技巧（Class tips and tricks）
+<ul>
+添加__tostring和其它的meta方法。（Adding __tostring and other metamethods）
+添加类声明的new方法。（Adding a new method to a class after declaration）
+转换一个已经存在表结构为一个实例。（Converting an existing table to an instance）
+给一个实例添加__index的meta属性。（Adding __index metafield to an instance）
+</ul>
+</li> 
+<li>特性增强（Future improvements）</li> 
+<li>尾声（Closing）</li> 
+
+<h3>简单例子（A simple example）</h3> 
+<blockquote>Lets start with a typical class in MoonScript:</blockquote> 
+
+<p>我们来创建一个典型的MoonScript类。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Player</span><br><span class="line">  new: (@x, @y) =&gt;</span><br><span class="line"></span><br><span class="line">  say_hello: =&gt;</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Greetings! I&#x27;m at #&#123;@x&#125;, #&#123;@y&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>And take a look at the generated Lua: (Warning: there’s a lot going on, scroll past for analysis of each component)</blockquote> 
+
+<p>看由MoonScript翻译生成的Lua代码（提示：内容比较多，注意看每个部分。）</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> Player</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="keyword">local</span> _base_0 = &#123;</span><br><span class="line">    say_hello = <span class="function"><span class="keyword">function</span><span class="params">(self)</span></span></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">print</span>(<span class="string">&quot;Greetings! I&#x27;m at &quot;</span> .. <span class="built_in">tostring</span>(<span class="built_in">self</span>.x) .. <span class="string">&quot;, &quot;</span> .. <span class="built_in">tostring</span>(<span class="built_in">self</span>.y))</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  &#125;</span><br><span class="line">  _base_0.<span class="built_in">__index</span> = _base_0</span><br><span class="line">  <span class="keyword">local</span> _class_0 = <span class="built_in">setmetatable</span>(&#123;</span><br><span class="line">    __init = <span class="function"><span class="keyword">function</span><span class="params">(self, x, y)</span></span></span><br><span class="line">      <span class="built_in">self</span>.x, <span class="built_in">self</span>.y = x, y</span><br><span class="line">    <span class="keyword">end</span>,</span><br><span class="line">    __base = _base_0,</span><br><span class="line">    __name = <span class="string">&quot;Player&quot;</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    <span class="built_in">__index</span> = _base_0,</span><br><span class="line">    <span class="built_in">__call</span> = <span class="function"><span class="keyword">function</span><span class="params">(cls, ...)</span></span></span><br><span class="line">      <span class="keyword">local</span> _self_0 = <span class="built_in">setmetatable</span>(&#123;&#125;, _base_0)</span><br><span class="line">      cls.__init(_self_0, ...)</span><br><span class="line">      <span class="keyword">return</span> _self_0</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  &#125;)</span><br><span class="line">  _base_0.__class = _class_0</span><br><span class="line">  Player = _class_0</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>Lets go from the outside in. The result of the class expression is a new local variable called Player. Nothing else is made available on the calling scope.</blockquote> 
+
+<p>彻底看一下，类表达式产生了一个叫Palyer的局部变量， 超出作用域的调用不了。</p>
+<blockquote>The class’s internal objects are created inside of a Lua do end block, this ensures that they are scoped to just the class in question. The two internal objects are _class_0 and _base_0.</blockquote> 
+
+
+<p>类的内部对象，是在do和end 声明块之间定义的，确保子对象的作用域只在类里，两个内部对象，_class_0和_base_0。</p>
+<blockquote>The resulting local, Player is assigned _class_0.</blockquote> 
+
+<p>结果也是局部的，Player最终的是用_class_0赋予的。</p>
+<blockquote>The numbers at the end of these variables are not fixed, they come from MoonScript’s local name generator. They will increment if you nest classes. You should never write code that depends on their names.</blockquote> 
+
+<p>这些变量结尾的数字是不能改的， 是由MoonScript的本地名称生成的。如果你有新类，他会自增长，你写的代码不要和这名字产生直接的依赖。</p>
+<h3>类对象（The class object）</h3> 
+
+<blockquote>The class object, aka _class_0 in the generated code, is a Lua table that represents the class. To create a new instance we call the class object as if it were a function. We can see here that it’s not actually a function.</blockquote> 
+
+<p>类对象， aka _class_0 是一个生成的代码，是lua的table结构来表示类，创建一个新的实例，我们调用调用类对象就像他是函数一样，但实际上它又不是一个函数。</p>
+<blockquote>In order to make a Lua table callable it must implement the __call metamethod.</blockquote> 
+
+<p>为了让一个lua table可调用，就必须实现一个__call的meta方法。</p>
+<blockquote>Here’s the extracted class object’s creation:</blockquote> 
+
+<p>这里展开了类对象的创建</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> _class_0 = <span class="built_in">setmetatable</span>(&#123;</span><br><span class="line">  __init = <span class="function"><span class="keyword">function</span><span class="params">(self, x, y)</span></span></span><br><span class="line">    <span class="built_in">self</span>.x, <span class="built_in">self</span>.y = x, y</span><br><span class="line">  <span class="keyword">end</span>,</span><br><span class="line">  __base = _base_0,</span><br><span class="line">  __name = <span class="string">&quot;Player&quot;</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">  <span class="built_in">__index</span> = _base_0,</span><br><span class="line">  <span class="built_in">__call</span> = <span class="function"><span class="keyword">function</span><span class="params">(cls, ...)</span></span></span><br><span class="line">    <span class="keyword">local</span> _self_0 = <span class="built_in">setmetatable</span>(&#123;&#125;, _base_0)</span><br><span class="line">    cls.__init(_self_0, ...)</span><br><span class="line">    <span class="keyword">return</span> _self_0</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>The Lua function setmetatable sets the metatable of the first argument to the second argument. It then returns the first argument. This means the value of _class_0 is the modified version of the first table.</blockquote> 
+
+<p>lua的setmetatables函数设置，第一个参数到第二个参数的meta表结构(metatable)。返回的是第一个参数。意味_class_0的值第一个talbe的版本是可被编辑的。</p>
+<blockquote>The table _class_0 is very basic. It has the constructor we created (with new) stored in __init, the base object stored in __base and the name of the class stored in __name.</blockquote> 
+
+<p>表 _class_0非常的基础。它是我们创建并存储在__init中的一个构造器， 基类对象是存在 __base中，并且类的名存在__name中。</p>
+<p>Unlike the generated names, these names are unchanging and safe to use in your code. Because they are stored directly on the class object we can access them with dot syntax:</p>
+<p>不像自动生成的那些名字，这个名字不能改变，可以安全的在你的代码中使用。因为它是直接存在类对象中的，我们可以直接用”.”进行访问。</p>
+<blockquote>
+print(Player.__name) --> prints "Player"
+</blockquote> 
+
+
+<p>Two metafields are provided on the class objects metatable: __index and __call.</p>
+<p>meta字段(metafiels)被提供在class对象的meta表中(metatable)。</p>
+<p>The __call function is what is called when we create a new instance: Player() It’s responsible for creating a new table to be the instance, providing it with a metatable, then calling the constructor.</p>
+<p>__call函数会在我们创建一个新实例时被调用：Player()的职责是把一个新表给成一个实例，提供一个meta表（metatable）, 当我们调用构造函数时。</p>
+<p>You can can see how the _base_0 is used directly as the metatable of the object.</p>
+<p>你可看到_base_0是如何被用作对象的meta表的。(metatable)</p>
+<p>Additionally, the class object has an __index metafield set to the base. This has a lot of implications. The most important is you can access any fields from base directly on the class object, assuming they haven’t been shadowed by any fields directly on the class object.</p>
+<p>The base object</p>
+<p>local _base_0 &#x3D; {<br>  say_hello &#x3D; function(self)<br>    return print(“Greetings! I’m at “ .. tostring(self.x) .. “, “ .. tostring(self.y))<br>  end<br>}<br>_base_0.__index &#x3D; _base_0<br>_base_0.__class &#x3D; _class_0</p>
+<pre><code>
+The base object, __base_0 is a regular Lua table. It holds all the instance methods of the class. Our example from above implemented a say_hello method which is compiled directly into the base.
+
+The base object has a circular reference to itself in the __index field.
+
+This lets us use the base object directly as the metatable of instances. The __index property is where instance methods are fetched from. Since it points to itself, the instance methods can be pulled directly from the metatable without any indirection.
+
+Likewise, this also lets us implement other metamethods directly as instance methods of the class. I&#39;ll have an example below.
+
+It’s a very cool concept, and definitely worth taking a moment to understand.
+
+Lastly, a reference to the class placed on the base object with the name __class. This is how the @@ operator accesses the class object.
+
+Classes with inheritance
+
+Super invocation has changed a bit in MoonScript 0.4.0
+Classes that inherit from other classes in MoonScript introduce a few more ideas. The extends keyword is used for inheritance:
+
+
+class SizedPlayer extends Player
+  new: (@size, ...) =&gt;
+    super ...
+
+  say_hello: =&gt;
+    super!
+    print &quot;I&#39;m #&#123;@size&#125; tall&quot;
+
+
+Here’s the resulting Lua:
+
+
+local SizedPlayer
+do
+  local _parent_0 = Player
+  local _base_0 = &#123;
+    say_hello = function(self)
+      _parent_0.say_hello(self)
+      return print(&quot;I&#39;m &quot; .. tostring(self.size) .. &quot; tall&quot;)
+    end
+  &#125;
+  _base_0.__index = _base_0
+  setmetatable(_base_0, _parent_0.__base)
+  local _class_0 = setmetatable(&#123;
+    __init = function(self, size, ...)
+      self.size = size
+      return _parent_0.__init(self, ...)
+    end,
+    __base = _base_0,
+    __name = &quot;SizedPlayer&quot;,
+    __parent = _parent_0
+  &#125;, &#123;
+    __index = function(cls, name)
+      local val = rawget(_base_0, name)
+      if val == nil then
+        return _parent_0[name]
+      else
+        return val
+      end
+    end,
+    __call = function(cls, ...)
+      local _self_0 = setmetatable(&#123;&#125;, _base_0)
+      cls.__init(_self_0, ...)
+      return _self_0
+    end
+  &#125;)
+  _base_0.__class = _class_0
+  if _parent_0.__inherited then
+    _parent_0.__inherited(_parent_0, _class_0)
+  end
+  SizedPlayer = _class_0
+end
+
+
+
+The majority of the generated code is the same as a regular class. Here are the differences:
+
+local _parent_0 = Player
+There’s a new local variable inside the do end block called _parent_0 that holds a reference to the parent class.
+
+
+local _base_0 = &#123;
+  -- ...
+&#125;
+_base_0.__index = _base_0
+setmetatable(_base_0, _parent_0.__base)
+
+
+The metatable of the base is set to the base of the parent class. This establishes the inheritance chain for instances. If a method can’t be found on the class’s base, then the parent class’s base is automatically searched due to how __index works.
+
+There’s a slight disadvantage to this. Metamethods are fetched with rawget, so metamethod inheritance does not work by default. We can work around this with the __inherited callback discussed below.
+
+
+local _class_0 = setmetatable(&#123;
+  -- ...
+  __parent = _parent_0
+&#125;, &#123;
+  -- ...
+&#125;
+
+
+The parent class is stored on the class object in a field called __parent. This gives you an easy way to reference the parent class object.
+
+
+&#123;
+  __index = function(cls, name)
+    local val = rawget(_base_0, name)
+    if val == nil then
+      return _parent_0[name]
+    else
+      return val
+    end
+  end,
+  -- ...
+&#125;
+
+
+
+The __index metafield on the class object is now a function, instead of a reference to the base (which is a table). rawget is used control the precedence of the properties. If the field can’t be found directly on the base then the parent class is searched.
+
+Remember that class objects also pull fields from their bases, so this has the effect of searching both the parent class object and the parent class’s base. Even though we&#39;ve used rawget on the base, we can still get access to the parent class’s base.
+
+
+if _parent_0.__inherited then
+  _parent_0.__inherited(_parent_0, _class_0)
+end
+
+
+Lastly, we now have a class callback. When a subclass is created and the parent class has a method __inherited then it is called with the class object that has just been created.
+
+The __inherited method works directly with class objects, no instances are involved.
+
+
+local _base_0 = &#123;
+  say_hello = function(self)
+    _parent_0.say_hello(self)
+    return print(&quot;I&#39;m &quot; .. tostring(self.size) .. &quot; tall&quot;)
+  end
+&#125;
+
+
+
+In the example I included a method that calls super. All MoonScript does is provide sugar for calling the method of the same name on the parent class.
+
+Class tips and tricks
+
+Now that you have an understanding of how a class in MoonScript is implemented, it’s easy to see how we can work with the internals to accomplish new things.
+
+Adding __tostring and other metamethods
+
+If you want your instances to have a string representation you can implement a __tostring method in the metatable.
+
+As we saw above, the metatable has an __index field set to itself, we just need to implement metamethods as instance methods:
+
+
+class Player
+  new: (@x, @y) =&gt;
+
+  __tostring: =&gt;
+    &quot;Player(#&#123;@x&#125;, #&#123;@y&#125;)&quot;
+
+print Player(2, 8) --&gt; &quot;Player(2, 8)&quot;
+
+
+
+All of Lua’s metamethods work (except __index, see below). Here’s an example of a vector class with overloaded operators:
+
+
+class Vector
+  new: (@x, @y) =&gt;
+
+  __tostring: =&gt;
+    &quot;Vector(#&#123;@x&#125;, #&#123;@y&#125;)&quot;
+
+  __add: (other) =&gt;
+    Vector @x + other.x, @y + other.y
+
+  __sub: (other) =&gt;
+    Vector @x - other.x, @y - other.y
+
+  __mul: (other) =&gt;
+    if type(other) == &quot;number&quot;
+      -- scale
+      Vector @x * other, @y * other
+    else
+      -- dot product
+      Vector @x * other.x + @y * other.y
+
+print Vector(1,2) * 5 + Vector(3,3) --&gt; Vector(8, 13)
+
+
+I mentioned above that metamethod inheritance does not work:
+
+
+class Thing
+  __tostring: =&gt; &quot;Thing&quot;
+
+class BetterThing extends Thing
+
+print BetterThing! --&gt; table: 0x1057290
+We can work around this by using the __inherited callback:
+
+class Thing
+  __tostring: =&gt; &quot;Thing&quot;
+  __inherited: (cls) =&gt;
+    cls.__base.__tostring = @__tostring
+
+class BetterThing extends Thing
+
+print BetterThing! --&gt; Thing
+
+
+Adding a new method to a class after declaration
+
+Now that we know about __base it’s easy to add new methods to classes that don’t have them.
+
+
+class Player
+  new: (@name) =&gt;
+
+-- add the new method
+Player.__base.jump = =&gt;
+  print &quot;#&#123;@name&#125; is jumping!&quot;
+
+Player(&quot;Adam&quot;)\jump! --&gt; Adam is jumping!
+
+
+
+
+
+
+
+
+We can extend this concept even further to dynamically generate methods:
+
+
+class Player
+  new: (@name) =&gt;
+
+  for dir in *&#123;&quot;north&quot;, &quot;west&quot;, &quot;east&quot;, &quot;south&quot;&#125;
+    @__base[&quot;go_#&#123;dir&#125;&quot;]: =&gt;
+      print &quot;#&#123;@name&#125; is going #&#123;dir&#125;&quot;
+
+Player(&quot;Lee&quot;)\go_east! --&gt; Lee is going east
+
+
+Converting an existing table to an instance
+
+Sometimes you might already have a table that you&#39;d like to convert to an instance of a class without having to copy it. Now that we know how the __init method works we can use setmetatable to accomplish a similar result:
+
+
+class Rect
+  area: =&gt; @w * @h
+
+some_obj = &#123; w: 15, h: 3 &#125;
+
+-- apply the metatable
+setmetatable(some_obj, Rect.__base)
+
+print some_obj\area! --&gt; 45
+
+
+This same method can be used to convert on object from type to another.
+
+Adding __index metafield to an instance
+
+MoonScript uses the __index metafield on class instances in order to allow instance properties to be looked up. If we just replace __inde with another implementation without any consideration we would break the instance. We&#39;ll have to chain our custom __index with the old one.
+
+Here’s how we might implement getter methods:
+
+
+class Thing
+  getters: &#123;
+    age: =&gt;
+      os.time! - @created_at
+  &#125;
+
+  new: =&gt;
+    @created_at = os.time!
+
+    mt = getmetatable @
+    old_index = mt.__index
+
+    mt.__index = (name) =&gt;
+      if getter = old_index.getters[name]
+        getter @
+      else
+        if type(old_index) == &quot;function&quot;
+          old_index @, name
+        else
+          old_index[name]
+
+t = Thing!
+print t.age
+
+
+Its’s important that you don’t try to access self (without rawget) within the __index metamethod, otherwise you&#39;ll cause an infinite loop.
+Writing that massive implementation in the constructor isn’t ideal. Here’s a base class that automatically upgrades anyone who inherits with getter functionality:
+
+
+class HasGetters
+  getters: &#123;&#125;
+  __inherited: (cls) =&gt;
+    old_init = cls.__init
+    cls.__init = (...) =&gt;
+      old_init @, ...
+
+      mt = getmetatable @
+      old_index = mt.__index
+
+      mt.__index = (name) =&gt;
+        if getter = old_index.getters[name]
+          getter @
+        else
+          if type(old_index) == &quot;function&quot;
+            old_index @, name
+          else
+            old_index[name]
+
+class BetterThing extends HasGetters
+  getters: &#123;
+    age: =&gt;
+      os.time! - @created_at
+  &#125;
+
+  new: =&gt;
+    @created_at = os.time!
+
+t = BetterThing!
+print t.age
+
+
+The clever part here is replacing the __init method on the base class with a custom one that automatically injects support for getters.
+
+&lt;h3&gt;特性增强（Future improvements）&lt;/h3&gt; 
+
+The class system is far from perfect. Here are some future improvements that I&#39;d like to add:
+
+There’s no way to determine which order methods are added to a class. If you&#39;re going to be triggering side effects from method creation then your options are limited.
+The MoonScript class meta-properties use double underscore just like Lua. If Lua ever decides to use any of the same names then there will be conflicts.
+Closing
+
+&lt;blockquote&gt;Not all of the functionality of MoonScript classes was covered in this guide. You can learn more on the Object Oriented Programming section of the MoonScript documentation.&lt;/blockquote&gt; 
+
+不是所有的MoonScript的类功能都在这篇中会讲到。学习更多关于OOP的部分，可以看MoonScript的文档。
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>Candylab 糖果的实验室 <a href="https://lua.ren/">https://lua.ren</a></p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/topic/224/">Lapis的数据库查询分页功能</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/topic/229/">Lapis如何读写HTTP的Header数据</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。</p>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
