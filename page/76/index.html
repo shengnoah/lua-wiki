@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,17 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-295_lua%E7%89%88%E6%9C%AC%E5%8F%98%E5%8C%96/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-299_How%20%20computer%20program%20are%20interpreted%20and%20evaluate/">
+<article class="md-text"><h2 class="post-title">How  computer program are interpreted and evaluated</h2><div class="excerpt"><p>
+
+花了一些时间重新捋了一遍自己关于解释器的学习笔记：CS 61A Summer 2018 Lecture 20: Interpreters
+
+稍稍得了一些门道，把自己的想法记录一下。
+
+自己目前的编程以动态语言 Python 为主，想要对动态语言有一个完整的理解和掌握，解释器这部分是必须要掌握的点。
+
+简单来说，解释器就是程序的求值器。当我们花费心思构建起针对一个个功能实现的程序之后，下一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-295_lua%E7%89%88%E6%9C%AC%E5%8F%98%E5%8C%96/">
 <article class="md-text"><h2 class="post-title">lua版本变化</h2><div class="excerpt"><p>从 Lua 5.1 迁移到 5.2
 5.2中抛弃module，建议使用require进行加载， 可能是考虑到Module定义对全局表的污染
 
@@ -183,9 +193,6 @@ x: (where x is not one of the magic characters ^$()%.[]*+-?) represents the char
 关于模型的评估结果
 
 关于评估有两个基本的概念，一个是错误率(error rate)$$ E=a/m $$ ，另外一个是精度（accuracy) $$ A=1-a/m $$ ,我们将分类错误的样本数目称为错误率，把实际预测输出与真实输出称为训练误差(training error...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-285_%E6%A2%A6%E5%B9%BB%E6%89%8B%E6%B8%B8%E9%83%A8%E5%88%86Luac%E5%8F%8D%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">梦幻手游部分Luac反编译失败的解决方法</h2><div class="excerpt"><p>  这一篇是去年学习破解梦幻西游手游lua代码时记录的一些问题，今天将其整理并共享出来，所以不一定适合现在版本的梦幻手游，大家还是以参考为目的呗。lua相关的文章（共4篇）到此也写完了，如果以后还有新的东西会继续更新，接下来会写几篇关于2018 腾讯游戏安全竞赛的详细分析，敬请期待。
-十二处bug修复  当时反编译梦幻西游手游时遇到的问题大约有12个，修改完基本上可以完美复现lua源码，这里...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

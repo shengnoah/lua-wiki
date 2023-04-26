@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,9 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-183_The%20Environment%20Model%20of%20Evaluation/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-180_Lua%20string.find%20%E4%B8%AD%E7%9A%84%20%E2%80%9C%E5%9D%91%E2%80%9D%20/">
+<article class="md-text"><h2 class="post-title">Lua string.find 中的 “坑”</h2><div class="excerpt"><p>我们的线上环境，ngx_lua api 都是以模块形式加载到 lua 级别的 vm 中，已达到最大性能。而且我们并没有使用传统的 “包” 的形式来加载(也就是 require &#34;xx.xx.xx&#34; )，而是直接以模块名为加载( require &#34;xx&#34; )，这就意味着我们需要不断的来动态设置 package.path 来配合 require 的机制。于是我们写...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-183_The%20Environment%20Model%20of%20Evaluation/">
 <article class="md-text"><h2 class="post-title">The Environment Model of Evaluation</h2><div class="excerpt"><p>&lt;p&gt;这是 sicp 第三章中的 The Environment Model of Evaluation 的总结和一道习题的回顾。&lt;/p&gt;
 
 因为 procedure 在调用过程中会有参数的引入，嵌套的调用，define 变量的定义和作用域等。
@@ -185,15 +187,6 @@ Lua全部都是用C语言实现的，可以到官网去下载源码，自己编�
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-16_LeetCode%C2%A0399.%C2%A0Evaluate%20Division%20%C2%A0/">
 <article class="md-text"><h2 class="post-title">LeetCode 399. Evaluate Division  </h2><div class="excerpt"><p>            &lt;i class=&quot;mobile-toggle&quot; style=&quot;display:none;&quot;&gt;&lt;img src=&quot;https://img.dazhuanlan.com/2019/11/26/5ddcf6326f021.png&quot;&gt;&lt;/i&gt;
             &lt;di...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-169_Lua%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%E7%9A%84%E8%AE%B0%E5%BD%95/">
-<article class="md-text"><h2 class="post-title">Lua的一些坑的记录</h2><div class="excerpt"><p>Lua是一门很小巧的编程语言，不过使用过程中发下一些容易出现问题的地方，这里记录一下（API正常使用不记录）。记录时使用的版本是官方Lua 5.3.4版本源码.
-
-Lua的table区分数组部分和哈希表部分，数组部分索引从1开始，而不是0-based
-
-Lua的C API中的lua_isstring和lua_isnumber有点坑
-
-
-1234567891011121314151617181...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

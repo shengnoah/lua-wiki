@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,10 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/pra_ngx_lua_debug.html">
+  <div class="post-list post"><a class="post-card post " href="/pra_ngx_lua_ffi.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>调用其他 C 函数动态库Linux 下的动态库一般都以 .so 结束命名，而 Windows 下一般都以 .dll 结束命名。Lua 作为一种嵌入式语言，和 C 具有非常好的亲缘性，这也是 Lua 赖以生存、发展的根本，所以 Nginx + Lua&#x3D;OpenResty，魔法就这么神奇的发生了。
+NgxLuaModule 里面尽管提供了十分丰富的 API，但他一定不可能满足我们的形形...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_ngx_lua_debug.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>调试调试是一个程序猿非常重要的能力，人写的程序总会有 bug，所以需要 debug。如何方便和快速的定位 bug，是我们讨论的重点，只要 bug 能定位，解决就不是问题。
 对于熟悉用 Visual Studio 和 Eclipse 这些强大的集成开发环境的来做 C++ 和 Java 的同学来说，OpenResty 的 debug 要原始很多，但是对于习惯 Python 开发的同学来说，又是那...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_hot_load.html">
@@ -149,11 +152,6 @@ Nginx 示例配置：
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>负载均衡负载均衡（Load balancing）是一种计算机网络技术，用来在多个计算机（计算机集群）、网络连接、CPU、磁盘驱动器或其他资源中分配负载，以达到最佳化资源使用、最大化吞吐率、最小化响应时间、同时避免过载的目的。
 使用带有负载均衡的多个服务器组件，取代单一的组件，可以通过冗余提高可靠性。负载均衡服务通常是由专用软体和硬件来完成。
 负载均衡最重要的一个应用是利用多台服务器提供单一服...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_nginx_co-work_of_location.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>location 之间的配合rewrite 指令介绍Nginx 中 location 之间的配合，主要是通过 rewrite 指令来进行的。有这些指令会与 rewrite 指令协同使用：set、if 、return、break。rewrite 的基本规则如下：
-
-语法:	rewrite regex replacement [flag];上下文环境:	server, location, if
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

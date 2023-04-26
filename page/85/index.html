@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,21 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-217_C++%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%B7%BB%E5%8A%A0%E8%B0%83%E7%94%A8Lua%E8%84%9A%E6%9C%AC/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-213_Lua%20Study/">
+<article class="md-text"><h2 class="post-title">Lua Study</h2><div class="excerpt"><p>    &lt;p&gt;本文并不会把Lua语言的所有内容都包含在内，只对个人学习过程中感觉比较重要的部分做一个记录，以便回顾。&lt;/p&gt;
+
+
+类型学习语言首先要了解它提供的类型，Lua语言提供了如下几种。
+
+nil
+boolean
+number
+string
+userdata
+function
+thread
+tableLua中只有nil和boolean中的false视为条件（条件...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-217_C++%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%B7%BB%E5%8A%A0%E8%B0%83%E7%94%A8Lua%E8%84%9A%E6%9C%AC/">
 <article class="md-text"><h2 class="post-title">C++项目中添加调用Lua脚本</h2><div class="excerpt"><p>    &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;http://xtutu.me/#%E5%89%8D%E8%A8%80&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近想着，如果进程在运行时，可以调用Lua...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-21_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
 <article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。
@@ -207,10 +221,6 @@ a.x...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于
 
 我们把学习器实际预测输出和样本真实输出之间的差异称为误差。学习器在训练集上的误差称为经验误差；在新样本上的误差称为泛化误差。显然，我们希望得到泛化误差小的学习器。然而，在现实中，我们并不知道新的样本什么样，能做的只是去最小化经验误差。
 我们希望得到泛化能力强的学...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.250Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-200_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>            &lt;p&gt;归并排序（Merge Sort，台湾译作：合并排序）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。&lt;/p&gt;
-
-归并操作(Merge)，也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。归并排序有多路归并排序、两路归并排序, 可用...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.250Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

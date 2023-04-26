@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,11 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-840_Lua%E6%BA%90%E7%A0%81%E7%AC%94%E8%AE%B0/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-862_nginx+lua/">
+<article class="md-text"><h2 class="post-title">nginx+lua</h2><div class="excerpt"><p>1. 安装lua编译器LuaJIT#wget http://luajit.org/download/LuaJIT-2.0.3.tar.gz#tar -xzvf LuaJIT-2.0.3.tar.gz#cd LuaJIT 2.0.3#make &amp;&amp; make install
+安装完成后配置环境变量，使nginx可找到luajit
+#export LUAJIT_LIB=/usr/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-840_Lua%E6%BA%90%E7%A0%81%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">Lua源码笔记</h2><div class="excerpt"><p>用Lua开发游戏已经有一段时间了，但是对Lua的理解还一直停留在浅层。最近想深入研究下，于是着手开始看Lua源码，并在本文记录知识点。
 模块GC1.基本数据结构Lua的基本数据结构是一个类型union+type。相关的核心代码如下：
 12345678910111213141516171819202122232425262728293031323334353637383940414243444...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
@@ -167,8 +171,6 @@ function read_only(inputTable)
     local travelled_tables = &#123;&#125;
     
 &lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span cla...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-847_luajava%E7%9A%84%E9%8C%AF%E8%AA%A4%E4%BF%A1%E6%81%AF%E8%BC%B8%E5%87%BA/">
-<article class="md-text"><h2 class="post-title">luajava的錯誤信息輸出</h2><div class="excerpt"><p>最近在填新坑, 打算用lua作為腳本語言, 於是選擇了luajava來跑腳本.始終我對lua不熟, 錯誤是難免的了, 不料luajava居然沒有輸出錯誤信息orz(事實上連普通的輸出都沒找到, 反正我直接寫了個print函數…)既然找不到輸出, 那我只好想辦法把luajava的錯誤信息轉去調用自己寫的print了, 於是我想到了或許可以像Java中的try ... catch ...來攔住錯...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

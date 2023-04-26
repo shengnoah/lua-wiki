@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,41 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-880_lua%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90webhooks%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-87_Lua%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+<article class="md-text"><h2 class="post-title">Lua 数据类型</h2><div class="excerpt"><p>
+
+
+数据类型
+描述
+
+
+
+
+nil
+这个最简单，只有值nil属于该类，表示一个无效值（在条件表达式中相当于false）。
+
+
+boolean
+包含两个值：false和true。
+
+
+number
+表示双精度类型的实浮点数
+
+
+string
+字符串由一对双引号或单引号来表示
+
+
+function
+由 C 或 Lua 编写的函数
+
+
+userdata   
+表示任意存储在变量中的C数据结构
+
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-880_lua%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90webhooks%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">
 <article class="md-text"><h2 class="post-title">lua脚本解析webhooks实现自动部署</h2><div class="excerpt"><p>码云配置webhooks实现自动部署的方式有很多，可以把项目放在github用github的webhooks，但是github只能创建公开项目私有项目是要钱的。也可以使用一种相对麻烦的方式，可以在vps上建一个git仓库每次提交到vps上之后触发hook去更新blog，这种方法相对麻烦而且vps上的项目容易丢失。所以最后选择了码云，在码云上初始化一个blog项目，之后配置一个webhooks...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-881_Lua%E4%B8%AD%E7%9A%84%E8%A1%A8%E6%93%8D%E4%BD%9C/">
 <article class="md-text"><h2 class="post-title">Lua中的表操作</h2><div class="excerpt"><p>「�TODO�」: 表的查找和新增元素
@@ -177,11 +211,6 @@ Number
 16进制表示也可以用2进制指数方式  0x2.2p2 等于(2+2/1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.313Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-866_Nginx_Lua_Module%E6%89%A9%E5%B1%95%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE_%E9%80%82%E7%94%A8%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F/">
 <article class="md-text"><h2 class="post-title">Nginx_Lua_Module扩展的安装与配置_适用于Ubuntu系统</h2><div class="excerpt"><p>Lua 是一个简洁、轻量、可扩展的脚本语言，也是号称性能最高的脚本语言，用在很多需要性能的地方，比如：游戏脚本，nginx，wireshark的脚本。很多应用程序使用Lua作为自己的嵌入式脚本语言，以此来实现可配置性、可扩展性。Lua原生支持的数据类型非常之少，它只提供了nil、数字（缺省是双精度浮点数，可配置）、布尔量、字符串、表、子程序、协程（coroutine）以及用户自定义数据这8种...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.313Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-865_Evaluation%20methods%20for%20unsupervised%20word%20embedding/">
-<article class="md-text"><h2 class="post-title">Evaluation methods for unsupervised word embeddings</h2><div class="excerpt"><p>本文研究了无监督词向量的评价方法。
-动机
-词向量的评价可分为外在评价和内在评价。外在评价将词向量运用在下游任务观察性能的提升，但只能显示出词向量的好处，无法清晰地将词向量与性能度量连接在一起。内在评价通过回答词语之间的语义关系和句法关系的询问得到。但这些数据集都是收集自过去其他领域的工作，而非精心构建，不能反映语料库的统计学特征。
-故本文研究了不同评价指标之间的关系，提出了一种新的评价方法，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.313Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

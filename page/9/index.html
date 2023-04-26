@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/"><span class="title">Lua的and与or</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,25 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-926_Lua/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-921_Lua%20%E5%AD%A6%E4%B9%A0%20chapter22%20/">
+<article class="md-text"><h2 class="post-title">Lua 学习 chapter22</h2><div class="excerpt"><p>目录
+
+  具有动态名称的全局变量
+  非全局环境
+  环境和模块
+  _ENV和load
+
+
+
+  只有疯狂过，你才知道自己究竟能不能成功。
+
+
+具有动态名称的全局变量
+
+在lua中，所有的全局变量都被存在_G中，通过_G[name]可以访问到任意一个全局变量。在lua中，全局变量不需要声明就可以直接使用，但是这个可能会造成非常难以查询的bug，所以我们可以对全局变量进行简单的封装。
+
+1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.318Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-926_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>  Lua函数定义格式：
   optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
   function_body
@@ -196,14 +214,6 @@ LuaPerfect基于纯C++实现了独立的Lua编辑和调试工具：
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-90_Lua%E5%85%83%E8%A1%A8/">
 <article class="md-text"><h2 class="post-title">Lua元表</h2><div class="excerpt"><p>在 Lua 5.1 语言中，元表 (metatable) 的表现行为类似于 C++ 语言中的操作符重载，例如我们可以重载 “add” 元方法 (metamethod)，来计算两个 Lua 数组的并集；或者重载 “index” 方法，来定义我们自己的 Hash 函数。
 预定义操作集合其实不仅仅是LUA, 在大多数编程语言中，每一种类型的值，都有 一套预定义的操作集合。例如，整形的数值可以进行加...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.317Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-911_%E6%AF%8F%E5%91%A8%E4%B8%80%E8%AE%BA%E6%96%87%EF%BC%9AAn%20Empirical%20Evaluation%20of%20In/">
-<article class="md-text"><h2 class="post-title">每周一论文：An Empirical Evaluation of In</h2><div class="excerpt"><p>论文概要多版本并发控制(Multi-Version Concurrency Control，以下简称MVCC) 是当今数据库领域最流行的并发控制实现，MVCC 在最大化并发度的情况下尽可能保证事务的正确性，其好处有：
-
-写不会阻塞读
-只读事务无需数据库锁就能支持可重复读
-可以很好地支持历史数据查询
-
-MVCC 的关键在于首先假设数据库读写冲突不会很大，其次通过维护同一份数据的多个版本，是的事...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.317Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>
