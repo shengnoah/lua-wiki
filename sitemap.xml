@@ -2,7 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lua.ren/2023/04/26/suricata-lua-mysql/</loc>
+    <loc>https://lua.ren/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2023-04-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lua.ren/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    
+    <lastmod>2023-04-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lua.ren/2023/04/26/sec/suricata-lua-mysql/</loc>
     
     <lastmod>2023-04-26</lastmod>
     

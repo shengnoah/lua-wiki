@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,19 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/if_else.html">
+  <div class="post-list post"><a class="post-card post " href="/function_result.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>函数返回值Lua 具有一项与众不同的特性，允许函数返回多个值。Lua 的库函数中，有一些就是返回多个值。
+
+示例代码：使用库函数 string.find，在源字符串中查找目标字符串，若查找成功，则返回目标字符串在源字符串中的起始位置和结束位置的下标。
+
+12local s, e = string.find(&quot;hello world&quot;, &quot;llo&quot;)pr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/function_parameter.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>函数的参数按值传递Lua 函数的参数大部分是按值传递的。值传递就是调用函数时，实参把它的值通过赋值运算传递给形参，然后形参的改变和实参就没有关系了。在这个过程中，实参是通过它在参数表中的位置与形参匹配起来的。
+
+示例代码：
+
+1234567891011121314151617local function swap(a, b) --定义函数swap,函数内部进行交换两个变量的值   local...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/if_else.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>控制结构 if-elseif-else 是我们熟知的一种控制结构。Lua 跟其他语言一样，提供了if-else 的控制结构。因为是大家熟悉的语法，本节只简单介绍一下它的使用方法。
 单个 if 分支 型1234x = 10if x &gt; 0 then    print(&quot;x is a positive number&quot;)end
 
@@ -140,12 +152,6 @@ setmetatable(table, metatabl...</p></div><div class="meta cap"><span class="cap"
 </a><a class="post-card post " href="/pra_flame_when.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>什么时候使用一般来说，当发现CPU的占用率和实际业务应该出现的占用率不相符，或者对nginx worker的资源使用率（CPU，内存，磁盘IO）出现怀疑的情况下，都可以使用火焰图进行抓取。另外，对CPU占用率低、吐吞量低的情况也可以使用火焰图的方式排查程序中是否有阻塞调用导致整个架构的吞吐量低下。
 关于Github上提供的由perl脚本完成的栈抓取的程序是一个傻瓜化的stap脚本，如果有需要...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/FFI.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>FFIFFI 库，是 LuaJIT 中最重要的一个扩展库。它允许从纯 Lua 代码调用外部C函数，使用 C 数据结构。有了它，就不用再像 Lua 标准 math 库一样，编写 Lua 扩展库。把开发者从开发 Lua 扩展 C 库（语言&#x2F;功能绑定库）的繁重工作中释放出来。
-FFI 库最大限度的省去了使用 C 手工编写繁重的 Lua&#x2F;C 绑定的需要。不需要学习一门独立&#x2...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/array_size.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>判断数组大小table.getn(t) 等价于 #t 但计算的是数组元素，不包括 hash 键值。而且数组是以第一个 nil 元素来判断数组结束。 # 只计算 array 的元素个数，它实际上调用了对象的 metatable 的__len函数。对于有 __len 方法的函数返回函数返回值，不然就返回数组成员数目。
-Lua 中，数组的实现方式其实类似于 C++ 中的 map，对于数组中所有的值...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

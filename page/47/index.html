@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,26 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-567_%E5%9C%A8openresty%E4%B8%AD%E6%98%AF%E4%BD%BF%E7%94%A8lua%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0%E6%96%B0%E8%80%81%E8%B7%AF%E7%94%B1%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-564_Lua%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">Lua远程调用的实现方法</h2><div class="excerpt"><p>游戏开发中，客户端、服务端之间的交互是很频繁的，尤其是逻辑玩法的实现，需要大量的交互。
+
+如果所有的交互都按功能构建出不同的协议，这样即繁琐又不方便修改。
+
+通过Lua，使用远程调用可以极大的方便客户端、服务器的通信。
+
+在Lua中，通过C++告诉对方，我要调用哪个函数、传递哪些参数，来执行相关的功能。
+
+这样就不用定义一大串协议，而只需定义一种：远程调用协议。
+
+如果要对方执行相应的函数，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.284Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-565_RedisLua%E8%84%9A%E6%9C%AC/">
+<article class="md-text"><h2 class="post-title">RedisLua脚本</h2><div class="excerpt"><p>Lua脚本
+使用脚本可以直接在服 务器端执行 Redis 命令,一般的数据 处理操作可以直接使用 Lua 语言或者 Lua 解释器提供的函数 库来完成,不必再返回 给客户端进行处理。
+
+所有脚本都是以事 务的形式来执行的,脚本在 执行过程中不会被其他工作打断,也不会引起任何 竞争条件,完全可以使用 Lua 脚本来代替事 务和乐观锁。
+
+所有脚本都是可重用的,也即是 说,重复执行相同的操作 时...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.284Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-567_%E5%9C%A8openresty%E4%B8%AD%E6%98%AF%E4%BD%BF%E7%94%A8lua%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0%E6%96%B0%E8%80%81%E8%B7%AF%E7%94%B1%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/">
 <article class="md-text"><h2 class="post-title">在openresty中是使用lua脚本实现新老路由平滑升级</h2><div class="excerpt"><p>想升级PHP框架phalcon到3.x, 但是发现升级后与老版本基本不兼容, 也就意味着代码基本要重写了。考虑到不可能一下把所有的接口切换到新的框架上去（不能短时间内全部迁移所有的接口，新的框架提供的接口需要测试时间）。想到的方案是， 一方面提供新的接口使用新的框架编写，然后网关判断， 如果是新的接口就路由到新的框架部署的服务器上。空闲的时间，慢慢的把老的接口往新的框架上迁移。一下简单的实现...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.284Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-566_tolua%E4%B9%8Bwrap%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8/">
 <article class="md-text"><h2 class="post-title">tolua之wrap文件的原理与使用</h2><div class="excerpt"><p>每个wrap文件都是对一个c#类的包装，在lua中，通过对wrap类中的函数调用，间接的对c#实例进行操作。
@@ -160,28 +179,6 @@ Lua为协程提供了3个基础接口：create，resume和yield。
 
 
   创建一个新的协程，并为它的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-553_Lua%E4%B8%8EC%E7%9A%84%E4%BA%A4%E4%BA%92/">
-<article class="md-text"><h2 class="post-title">Lua与C的交互</h2><div class="excerpt"><p>Lua与C的交互
-
-Lua是一个嵌入式的语言，它不仅可以是一个独立运行的程序，也可以是一个用来嵌入其它应用的程序库。
-
-C API是一个C代码与Lua进行交互的函数集，它由以下几部分构成：
-
-1、  读写Lua全局变量的函数；
-
-2、  调用Lua函数的函数；
-
-3、  运行Lua代码片段的函数；
-
-4、  注册C函数后可以在Lua中被调用的函数；
-
-在C和LUA之间交互的关键在于一个虚拟栈...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-550_Lua%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Lua入门笔记</h2><div class="excerpt"><p>
-          
-          
-        &lt;div class=&quot;post-gallery-row&quot;&gt;
-          &lt;a class=&quot;post-gallery-img fancybox&quot; href=&quot;https://yunfwe.github.io//uploads/photos/1518315...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

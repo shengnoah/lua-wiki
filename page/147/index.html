@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,15 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/go1.0.html">
+  <div class="post-list post"><a class="post-card post " href="/go2.2.html">
+<article class="md-text"><h2 class="post-title">go2.2</h2><div class="excerpt"><p>2.2 结构体上的函数我们可以将一个方法和一个结构体关联：
+12345678type Saiyan struct &#123;	Name string	Power int&#125;func (s *Saiyan) Super() &#123;	s.Power += 10000&#125;
+
+在上面的代码中，我们可以说类型*Saiyan是Super方法的接收者。可以向下面代码一样调用Supe...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.086Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go1.3.html">
+<article class="md-text"><h2 class="post-title">go1.3 类c语法</h2><div class="excerpt"><p>1.3 类c语法一般来说，如果一门语言具有类c语法，意味着当你习惯使用其他类c语言例如c、c++、java、javascript和c#，然后你就会发现go语言和它们也类似，至少表面上是。例如，使用&amp;&amp;表示一个布尔运算AND,==用于相等比较，&#123;和&#125;表示一个代码段的开始和结束，并且数组的索引值是从0开始。
+类c语法也意味着一行代码以分号结尾，条件语句使用圆括...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.086Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go1.0.html">
 <article class="md-text"><h2 class="post-title">go1.0 基础知识</h2><div class="excerpt"><p>第1章 基础知识go是一种编译型、具有静态类型和类c语言语法的语言，并具备垃圾回收机制，这是什么意思呢？
 链接
 目录
@@ -169,20 +177,6 @@ server &#123;
         set $a hello;
         echo_exec /bar;
     &#1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.083Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/agentzh-nginx-guide-03.html">
-<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（三）也有一些内建变量是支持改写的，其中一个例子是 $args. 这个变量在读取时返回当前请求的 URL 参数串（即请求 URL 中问号后面的部分，如果有的话），而在赋值时可以直接修改参数串。我们来看一个例子：
-location /test &#123;
-    set $orig_args $args;
-    set $args &quot;a=3&amp;b=4&q...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.083Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/agentzh-nginx-guide-04.html">
-<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（四）在设置了“取处理程序”的情况下，Nginx 变量也可以选择将其值容器用作缓存，这样在多次读取变量的时候，就只需要调用“取处理程序”计算一次。我们下面就来看一个这样的例子：
-map $args $foo &#123;
-    default     0;
-    debug       1;
-&#125;
-
-server &#123;
-    listen 8080;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.083Z">2023-04-26</time></span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

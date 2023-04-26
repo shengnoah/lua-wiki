@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,21 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-642_Lua%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-63_lua%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B/">
+<article class="md-text"><h2 class="post-title">lua字符串类型</h2><div class="excerpt"><p>Lua中字符串结构体的定义是:
+typedef union TString &#123;
+  L_Umaxalign dummy;  /* ensures maximum alignment for strings */
+  struct &#123;
+    CommonHeader;
+    lu_byte reserved;
+    unsigned int hash;
+    siz...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.291Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-640_%E6%B5%85%E6%9E%90android%E6%89%8B%E6%B8%B8lua%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86%EF%BC%88%E5%89%8D%E4%BC%A0%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">浅析android手游lua脚本的加密与解密（前传）</h2><div class="excerpt"><p>  为了能让一些同学更好的学习lua的逆向，我把收集的一些资料组合成一篇lua加解密的相关工作给大家参考，当然，看这篇文章之前还是需要一些lua的基础知识，这里推荐云风大佬的《Lua源码欣赏》[19]，建议结合搜索引擎学习之。
+  文章分2部分介绍，第1部分介绍lua加解密的相关文章介绍，第2部分介绍lua的相关工具。
+
+相关工作：  这一节介绍了互联网上对lua的各种相关文章，包括lua的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.291Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-642_Lua%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
 <article class="md-text"><h2 class="post-title">Lua之面向对象个人总结</h2><div class="excerpt"><p>
 
 面向对象的三个特征：封装、继承和多态。Lua并没有类，没有直接实现面向对象的方法。不过Lua的Table，有内部对象和内部方法。Lua的面向对象主要是通过Table来模拟面向对象。
@@ -179,27 +193,6 @@ Sample_1:local tab1 = {	[1] = 1,	[2] = 2,	[3] = 3,	[4] = 4,} for ke...</p></div>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-624_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>由于lua的编译速度相当快，而且这种迭代编译的过程仅仅在程序加载的时候进行一次，故而可以带来性能的提高；一些在系统初始化可以决定的参数（比如从配置文件中读出来的数据直接编译为常量置入程序中。
 1234567891011121314151617local select = selectlocal setmetatable = setmetatablelocal getfenv = getfen...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-627_%E6%B5%85%E8%B0%88Lua%E5%8D%8F%E7%A8%8B%20%5B%20%E5%A5%94%E8%B7%91%E7%9A%84%E8%9C%97%E7%89%9B%20%5D/">
-<article class="md-text"><h2 class="post-title">浅谈Lua协程 [ 奔跑的蜗牛 ]</h2><div class="excerpt"><p>
-      撰写于 2018-05-09
-      
-    &lt;span id=&quot;post-title-updated&quot;&gt;修改于 2018-05-10&lt;/span&gt;
-  
-  
-  
-&lt;/p&gt;
-
-&lt;p&gt;很多脚本语言都有线程的概念，lua也不例外，但是lua的线程有点特殊，不能算作是真正的线程，叫做协程（coroutine...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-629_Style%20Transfer%20in%20Text%20Exploration%20and%20Evaluation/">
-<article class="md-text"><h2 class="post-title">Style Transfer in Text Exploration and Evaluation</h2><div class="excerpt"><p>Abstract
-2 main problems in Style Transfer:
-
-Lack of parallel data
-
-Model learn from non-parallel data
-Learn separate content representations and style representations using adversarial networks.
-
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

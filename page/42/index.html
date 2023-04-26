@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,27 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-61_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-616_Lua%E7%9A%84require%E6%9C%BA%E5%88%B6/">
+<article class="md-text"><h2 class="post-title">Lua的require机制</h2><div class="excerpt"><p>今天仔细读了文档，弄清楚了Lua的模块require机制。
+Lua是通过require函数来加载模块的，只需提供模块的名字，即可通过require(modname)来加载模块。
+Lua是如何通过modname来载入.lua或.so的呢？
+
+默认加载过程
+
+  package.loaded[modname]中存了模块的数据，有则直接返回
+  顺序遍历package.searchers，获取lo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-617_Lua%E6%BA%90%E7%A0%81%E5%88%86%E4%BA%AB%20Gc%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89%E6%B5%81%E7%A8%8B%E4%B9%8B%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1/">
+<article class="md-text"><h2 class="post-title">Lua源码分享 Gc篇（三）流程之创建对象</h2><div class="excerpt"><p>[TOC]
+
+前面两篇主要介绍一些基础，帮助后面gc流程理解的。像是饭前的开胃菜一般，让你后面容易吃的更多。接下来几篇都是gc流程相关
+
+
+这里列出几个问题，你可以直接跳过。当然，有所了解的按照自己的理解去回答一下，或许会有一些新的想法。如果你都会回答的很清晰了，那么接下来的系列几乎可以不怎么看了。
+
+（1）对象的颜色变化过程？
+（2）新创建对象和gc流程是怎么关联的？
+（3）什么时候gc？...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-61_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>8 Compilation, Execution, and Errors
 
 dofile()实现：1234function (filename)	local f = assert(loadfile(filename))	return f()end
@@ -149,19 +169,6 @@ for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z1-
 <article class="md-text"><h2 class="post-title">Ubuntu18.04 Nginx+Lua+GraphicsMagick图片缩放</h2><div class="excerpt"><p>自己搭建的图片服务器，有图片缩放的需求，大致思路是可以使用nginx调用lua，使用GraphicMagick的命令来做图片缩放
 说明文件夹规划lua.jaychang.cn(如/var/filebase)
 12345678910111213jaychang@nginx:~$ tree /var/filebase//var/filebase/├── avatar.png├── cache│ ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-604_Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20%E2%80%94%20Table%EF%BC%88%E4%B8%89%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">Lua数据结构 — Table（三）</h2><div class="excerpt"><p>
-            文章目录
-            
-                    
-                
-      &lt;/div&gt;
-    
-    &lt;p&gt;前面（一）、（二）里面其实已经把一些常用的数据类型（数值、布尔、字符串）说明了，这次要描述的是Table，Table在Lua里是一种常用的数据类型，是Lua里的精髓之一，其效率必须得...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-605_ulua%E7%83%AD%E6%9B%B4%E6%96%B0%E5%B0%8F%E8%AF%95/">
-<article class="md-text"><h2 class="post-title">ulua热更新小试</h2><div class="excerpt"><p>传说中的热更新在Unity中是怎样实现的:)
-写在前面　　热更新技术在游戏行业可以说是大名鼎鼎了，虽然苹果前段时间禁止了JSPatch等热更新技术，但目前来看，苹果并没有禁止游戏引擎的热更新技术。某种程度上说明了热更新在游戏中的重要性。而ulua作为一款优秀的unity3d热更新插件，完美解决了Unity游戏热更新的问题。
-什么是热更新　　热更新一般用于网络游戏中。其指的是在不重新下载客户端...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

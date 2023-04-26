@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,31 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-489_Lua%E6%A0%87%E5%87%86%E5%BA%93/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-487_Lua%20%E5%AD%A6%E4%B9%A0%20chapter4%20/">
+<article class="md-text"><h2 class="post-title">Lua 学习 chapter4</h2><div class="excerpt"><p>目录
+
+  字符串常量
+  强制类型转换
+  字符串的标准库
+  Unicode编码
+
+
+
+  I think you should do your best when you are work.
+
+
+字符串常量
+
+在lua中你可以使用一对双引号或者单引号来声明字符串常量。
+它们两个是等价的，唯一区别在于，使用双引号声明的字符串中出现单引号，单引号不需要转义。在单引号中出现双引号也是一样的。...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-485_Nginx%20Lua%20Backdoor%20/">
+<article class="md-text"><h2 class="post-title">Nginx Lua Backdoor</h2><div class="excerpt"><p>在先知看到了apache利用lua留后门，就想着用nginx也试试安装有ngx_lua模块，在openresty和tengine中是默认安装了ngx_lua模块的。我这里拿openresty举例，你可以在这里下载win平台打包好的。步骤找到conf/nginx.conf，在server块中添加路由1
+2
+3
+4
+location = /a.php &#123;  
+    default_t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-489_Lua%E6%A0%87%E5%87%86%E5%BA%93/">
 <article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>lua标准库之数学库
 数学库概念数学库由算术函数的标准集合组成；比如三角函数（sin、cos、tan、asin、acos、etc）幂指函数（exp、log、log10），舍入函数（floor、ceil）、max、min，加上一个变量pi，数学库也定义了一个幂操作符 ^ 
 
@@ -206,33 +230,6 @@ function dofile(filename)
 <article class="md-text"><h2 class="post-title">浅析C++与Lua数据交互层</h2><div class="excerpt"><p>背景
 
 ​	C++作为服务器端开发的主流语言，相比其他语言有明显的性能优势，但是它的技术门槛比较高，不支持热更新，无法进行迅速的需求迭代和线上问题的响应。另外，C++内存管理的特点，技术人员对指针的使用不当，可能会造成宕机。因此，现在越来越多的技术团队会选择在C++中嵌入脚本语言，C++提供底层支持，脚本语言进行业务逻辑的开发。这样的好处，一方面将开发人员进行划分，C++代码的维护只由核心人...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-491_Lua%20%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E4%B8%8E%E7%BC%93%E5%AD%98%20/">
-<article class="md-text"><h2 class="post-title">Lua 的标准输出与缓存</h2><div class="excerpt"><p>最近我遇到了个奇怪的问题，我的一个 Lua 脚本需要通过 shell 的重定向将输出追加到一个日志文件中。但是那个 Lua 脚本的输出在日志文件里看来却不是实时的，输出的文本直到脚本结束时才能看到。
-
-在 shell 下运行这个程序，是可以看到实时输出的：
-
--- buffer_test.lua
-local socket = require &#34;socket&#34;
-
-local c...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-493_How%20TLA+%20Evaluation%20Next%20Action/">
-<article class="md-text"><h2 class="post-title">How TLA+ Evaluation Next Action</h2><div class="excerpt"><p>TLC是如何计算状态的
-
-当TLC计算一个invariant，直接计算值，返回TRUE/FALSE
-当TLC计算Init和Next，返回一个状态集合（这个集合被加入到sq中）:
-
-
-  Init: 所有可能的初始状态；
-  Next：所有可能的后继状态；
-
-
-TLC如何计算Next
-
-
-  状态：是对变量的赋值；
-  TLC计算一个状态s的后继状态：
-    
-      对所有unprim...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

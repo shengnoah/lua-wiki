@@ -34,20 +34,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>Suricata如何用Lua处理MySQL协议的数据 - Lua教程</title>
+  <title>Lazygit的常用快捷键 - Lua教程</title>
 
   
-    <meta name="description" content="Suricata 是一个高性能的开源入侵检测系统（IDS）和入侵预防系统（IPS），它支持嗅探和分析网络流量。Suricata 通过配置规则集来检测具有特定模式的网络流量，但是对于某些特殊情况，我们需要使用 Lua 脚本来实现自定义的流量分析。 下面是使用 Lua 脚本来检测 MySQL 流量端口号的示例：  首先，在 Suricata 的配置文件中添加以下行：  1234567app-layer">
+    <meta name="description" content="以下是 Lazygit 的一些常用快捷键：  h: 查看提交历史 t: 列出所有文件 a: 添加新文件或者修改已有文件 c: 提交更改 C: 在提交前编辑提交信息 p: 推送更改到远程仓库 P: 拉取远程仓库的更改 f: 显示与指定文件相关的操作 F: 执行与指定文件相关的操作 s: 切换到不同的分支 S: 合并与指定分支 b: 创建新分支 r: 重命名当前分支 X: 删除当前分支 &#x2F;: 搜索 q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Suricata如何用Lua处理MySQL协议的数据">
-<meta property="og:url" content="https://lua.ren/2023/04/26/suricata-lua-mysql/index.html">
+<meta property="og:title" content="Lazygit的常用快捷键">
+<meta property="og:url" content="https://lua.ren/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/index.html">
 <meta property="og:site_name" content="Lua教程">
-<meta property="og:description" content="Suricata 是一个高性能的开源入侵检测系统（IDS）和入侵预防系统（IPS），它支持嗅探和分析网络流量。Suricata 通过配置规则集来检测具有特定模式的网络流量，但是对于某些特殊情况，我们需要使用 Lua 脚本来实现自定义的流量分析。 下面是使用 Lua 脚本来检测 MySQL 流量端口号的示例：  首先，在 Suricata 的配置文件中添加以下行：  1234567app-layer">
+<meta property="og:description" content="以下是 Lazygit 的一些常用快捷键：  h: 查看提交历史 t: 列出所有文件 a: 添加新文件或者修改已有文件 c: 提交更改 C: 在提交前编辑提交信息 p: 推送更改到远程仓库 P: 拉取远程仓库的更改 f: 显示与指定文件相关的操作 F: 执行与指定文件相关的操作 s: 切换到不同的分支 S: 合并与指定分支 b: 创建新分支 r: 重命名当前分支 X: 删除当前分支 &#x2F;: 搜索 q">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-26T05:51:29.467Z">
-<meta property="article:modified_time" content="2023-04-26T06:47:15.185Z">
+<meta property="article:published_time" content="2023-04-26T07:29:35.744Z">
+<meta property="article:modified_time" content="2023-04-26T07:30:10.155Z">
 <meta property="article:author" content="糖果的实验室">
-<meta property="article:tag" content="流量分析">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
 <meta name="twitter:card" content="summary">
   
   
@@ -97,52 +97,30 @@
       
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/2023/04/26/suricata-lua-mysql/">Suricata如何用Lua处理MySQL协议的数据</a></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">Lazygit的常用快捷键</a></div></div>
 
 <article class='md-text content blog'>
-<h1 class="article-title"><span>Suricata如何用Lua处理MySQL协议的数据</span></h1>
-<p>Suricata 是一个高性能的开源入侵检测系统（IDS）和入侵预防系统（IPS），它支持嗅探和分析网络流量。Suricata 通过配置规则集来检测具有特定模式的网络流量，但是对于某些特殊情况，我们需要使用 Lua 脚本来实现自定义的流量分析。</p>
-<p>下面是使用 Lua 脚本来检测 MySQL 流量端口号的示例：</p>
-<ol>
-<li>首先，在 Suricata 的配置文件中添加以下行：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app-layer-protocol-detection:</span><br><span class="line">        protocols:</span><br><span class="line">          mysql:</span><br><span class="line">            enabled: yes</span><br><span class="line">            detection-ports:</span><br><span class="line">              dp: <span class="number">3306</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这将启用 MySQL 协议检测，并将其绑定到默认端口 3306。</p>
-<ol start="2">
-<li>接着，我们需要使用 Lua 脚本来访问 MySQL 协议的端口号：</li>
-</ol>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">match</span><span class="params">(args)</span></span></span><br><span class="line">    <span class="keyword">local</span> payload = SC(&#123;<span class="built_in">type</span>=<span class="string">&quot;mysql&quot;</span>&#125;).payload</span><br><span class="line">    <span class="keyword">if</span> payload <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> port = payload:get_u16()</span><br><span class="line">        <span class="keyword">if</span> port == <span class="number">3306</span> <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这个脚本会获取 MySQL 协议的载荷，并从中提取端口号。如果端口号为 3306，则返回 1，否则返回 0。</p>
-<ol start="3">
-<li>最后，将脚本保存到 Suricata 规则文件夹中，并在规则文件中添加以下行：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert tcp any any -&gt; any <span class="number">3306</span> (msg:<span class="string">&quot;MySQL traffic on port 3306&quot;</span>; lua:match; sid:<span class="number">1000001</span>; rev:<span class="number">1</span>;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这个规则会在端口号为 3306 的 TCP 流量上触发，并调用 Lua 脚本来检查是否是 MySQL 流量。如果是，则触发警报并记录日志。</p>
-<p>注意：以上示例仅供参考，实际应用中可能需要根据具体需求进行修改。</p>
-<p>Suricata 可以通过许多不同的方式来识别流量数据中的协议，其中一种方法是使用应用层协议检测（App-Layer Protocol Detection）功能。</p>
-<p>应用层协议检测可以检测和解码各种网络协议，并将其转换为 Suricata 内部格式的数据结构，以便后续处理。Suricata 支持的协议包括 HTTP、FTP、SMTP、TLS、SSH、DNS 和各种数据库协议等等。</p>
-<p>以下是如何配置 Suricata 进行应用层协议检测的示例：</p>
-<ol>
-<li>在 Suricata 配置文件中启用应用层协议检测功能：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app-layer-protocol-detection:</span><br><span class="line">    enabled: yes</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>配置需要检测的协议及其端口号，例如 HTTP 和 HTTPS：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app-layer-protocol-detection:</span><br><span class="line">    protocols:</span><br><span class="line">      http:</span><br><span class="line">        enabled: yes</span><br><span class="line">        detection-ports:</span><br><span class="line">          dp: <span class="number">80</span>,<span class="number">8080</span>,<span class="number">3128</span></span><br><span class="line">      tls:</span><br><span class="line">        enabled: yes</span><br><span class="line">        detection-ports:</span><br><span class="line">          dp: <span class="number">443</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这将启用 HTTP 和 TLS 协议检测，并在默认端口上进行检测。</p>
-<ol start="3">
-<li>配置规则来检测指定协议的流量，例如 HTTP 流量：</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert http $EXTERNAL_NET any -&gt; $HOME_NET <span class="title function_">any</span> <span class="params">(msg:<span class="string">&quot;HTTP traffic detected&quot;</span>; sid:<span class="number">1000001</span>; rev:<span class="number">1</span>;)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这个规则会在外部网络到内部网络的 HTTP 流量上触发，并记录日志和警报。</p>
-<p>注意：以上示例仅供参考，实际应用中可能需要根据具体需求进行修改。</p>
+<h1 class="article-title"><span>Lazygit的常用快捷键</span></h1>
+<p>以下是 Lazygit 的一些常用快捷键：</p>
+<ul>
+<li><code>h</code>: 查看提交历史</li>
+<li><code>t</code>: 列出所有文件</li>
+<li><code>a</code>: 添加新文件或者修改已有文件</li>
+<li><code>c</code>: 提交更改</li>
+<li><code>C</code>: 在提交前编辑提交信息</li>
+<li><code>p</code>: 推送更改到远程仓库</li>
+<li><code>P</code>: 拉取远程仓库的更改</li>
+<li><code>f</code>: 显示与指定文件相关的操作</li>
+<li><code>F</code>: 执行与指定文件相关的操作</li>
+<li><code>s</code>: 切换到不同的分支</li>
+<li><code>S</code>: 合并与指定分支</li>
+<li><code>b</code>: 创建新分支</li>
+<li><code>r</code>: 重命名当前分支</li>
+<li><code>X</code>: 删除当前分支</li>
+<li><code>/</code>: 搜索</li>
+<li><code>q</code>: 退出</li>
+</ul>
+<p>在主界面中按下 <code>?</code> 键，将列出所有可用的快捷键和相应的说明。除了上述快捷键外，还可以使用 Ctrl 和 Alt 等组合键，以获取更多功能和选项。</p>
 
 
 <div class="article-footer reveal fs14"></div>

@@ -1,4 +1,6 @@
-https://lua.ren/2023/04/26/suricata-lua-mysql/
+https://lua.ren/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/
+https://lua.ren/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/
+https://lua.ren/2023/04/26/sec/suricata-lua-mysql/
 https://lua.ren/2023/04/26/2017-03-03-resty-http-for-graylog/
 https://lua.ren/2023/04/26/hello-world/
 https://lua.ren/agentzh-nginx-guide-01.html
@@ -6,5 +8,3 @@ https://lua.ren/topic/ChatGPT-lua-unit/
 https://lua.ren/agentzh-nginx-guide-02.html
 https://lua.ren/agentzh-nginx-guide-03.html
 https://lua.ren/agentzh-nginx-guide-04.html
-https://lua.ren/agentzh-nginx-guide-05.html
-https://lua.ren/agentzh-nginx-guide-08.html

@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,61 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-862_nginx+lua/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-861_Lua%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">Lua远程调用的实现方法</h2><div class="excerpt"><p>游戏开发中，客户端、服务端之间的交互是很频繁的，尤其是逻辑玩法的实现，需要大量的交互。
+
+如果所有的交互都按功能构建出不同的协议，这样即繁琐又不方便修改。
+
+通过Lua，使用远程调用可以极大的方便客户端、服务器的通信。
+
+在Lua中，通过C++告诉对方，我要调用哪个函数、传递哪些参数，来执行相关的功能。
+
+这样就不用定义一大串协议，而只需定义一种：远程调用协议。
+
+如果要对方执行相应的函数，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-859_lua%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/">
+<article class="md-text"><h2 class="post-title">lua学习的查缺补漏</h2><div class="excerpt"><p>目录
+
+  多行注释
+  取整
+  长字符串
+  字符串标准库
+  lua中安全访问
+  表
+  可变长参数
+  输入和输出
+  lua运行一段程序
+
+
+
+  认真学习，增强自己的能力和知识面。
+
+
+多行注释
+
+1
+2
+3
+4
+--[[
+fdsa
+fdas
+]]
+
+
+取整
+
+为了做到公平性取整，应该做到3.5+0.5为偶数则进位，而2.5+0.5为奇数不进位。
+
+1
+2
+3
+4
+5
+6
+7
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-862_nginx+lua/">
 <article class="md-text"><h2 class="post-title">nginx+lua</h2><div class="excerpt"><p>1. 安装lua编译器LuaJIT#wget http://luajit.org/download/LuaJIT-2.0.3.tar.gz#tar -xzvf LuaJIT-2.0.3.tar.gz#cd LuaJIT 2.0.3#make &amp;&amp; make install
 安装完成后配置环境变量，使nginx可找到luajit
 #export LUAJIT_LIB=/usr/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
@@ -160,17 +214,6 @@ wday：本周中的第几天（第一天...</p></div><div class="meta cap"><span
 
 1 数组Lua库和长度操作符都遵循索引从1开始的约定。
 2 多维数组123456789101112131415mt = {}for i=1, N do    mt[i] = {}    for j=1, M do        mt[i][j] = 0    endend--合并索引（i*常量 + j）mt = {}f...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-845_Lua%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Lua笔记</h2><div class="excerpt"><p>最近使用Lua过程中的一些笔记记录，零零散散的，主要有以下这么些内容：
-
-版本兼容性处理常接触到的Lua版本有5.1、5.2和5.3，在Lua中可以通过_VERSION获取版本：
-1234567if _VERSION == &#34;Lua 5.3&#34; then   print(&#34;5.3&#34;)elseif _VERSION == &#34;Lua 5.2&#34; the...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-846_lua%20table%E5%8F%AA%E8%AF%BB/">
-<article class="md-text"><h2 class="post-title">lua table只读</h2><div class="excerpt"><p>
-function read_only(inputTable)
-    local travelled_tables = &#123;&#125;
-    
-&lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span cla...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

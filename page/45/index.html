@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,18 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-587_%E7%89%B9%E5%BE%81%E9%87%8D%E8%A6%81%E6%80%A7%E8%AF%84%E4%BC%B0(Feature%20Importance%20Evaluation)/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-586_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>14 The Environment这章有点难理解，有些段落反复看了好多遍才感觉好像是看懂了。
+
+Lua将所有全局变量存储在一个叫做global environment的table中
+1for n in pairs(_G) do print(n) end
+
+对于动态变量名，可动态创建chunk并编译：
+1234x = 1varname = &#34;x&#34;value = loadstr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-585_Object%20Detection%20Evaluation/">
+<article class="md-text"><h2 class="post-title">Object Detection Evaluation</h2><div class="excerpt"><p>提供者：刘晓下载地址：http://www.cvlibs.net/datasets/kitti/eval_object.php
+Object Detection Evaluation 2012，是一个车辆检测或者定位有关的数据集。物体检测和物体方向估计基准包括7481个训练图像和7518个测试图像，共包含80.256个标记物体。所有图像都是彩色的，并保存为PNG。为了评估，我们计算物体检测和...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-587_%E7%89%B9%E5%BE%81%E9%87%8D%E8%A6%81%E6%80%A7%E8%AF%84%E4%BC%B0(Feature%20Importance%20Evaluation)/">
 <article class="md-text"><h2 class="post-title">特征重要性评估(Feature Importance Evaluation)</h2><div class="excerpt"><p>特征对目标变量预测的相对重要性，可以通过决策树中使用特征作为决策节点的相对顺序来评估。决策树顶部使用的特征，将对更多样本的最终预测决策做出贡献。因此，可以通过每个特征对最终预测做出贡献的样本比例，来评估该特征的重要性。
 通过对多个随机树中的预期贡献率取平均，可以减少这种估计的方差。
 sklearn.ensemble模块包含两个基于随机决策树的平均算法：Random Forest 和 Extr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
@@ -151,45 +162,6 @@ Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码
 
 
 12345curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gztar zxf lua-5.3.5.tar.gzcd lua-5.3.5make linux...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-574_LUA_API/">
-<article class="md-text"><h2 class="post-title">LUA_API</h2><div class="excerpt"><p>
-                        
-
-
-
-编译使用 lua api 的 c 语言程序
-
-
-  gcc temp.c -o temp -llua -lm -ldl
-
-
-生成动态链接库供 lua 程序调用
-
-
-  gcc temp.c -o temp.so -fPIV -shared
-
-
-LUA_API
-
-定义
-/*
-@@ LUA_API is a mark for all co...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-576_luajit/">
-<article class="md-text"><h2 class="post-title">luajit</h2><div class="excerpt"><p>JIT = Just In TimeIOS中禁止使用（不让自主申请内存）
-解释执行：
-效率低
-代码暴露
-
-静态编译
-不够灵活，无法热更新
-平台兼容性差
-
-JIT：
-效率：高于解释执行，低于静态编译。
-安全性：一般都先转换成字节码
-热更新：无论源码还是字节码本质都是自愿文件。
-兼容性：虚拟机会处理平台差异，对用户透明。
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

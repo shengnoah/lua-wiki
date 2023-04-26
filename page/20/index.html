@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,34 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-820_Lua%E7%AC%94%E8%AE%B0%20%E8%BF%AD%E4%BB%A3%E5%99%A8/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-814_Lua%E4%B8%AD%E7%9A%84%E5%8D%8F%E7%A8%8B/">
+<article class="md-text"><h2 class="post-title">Lua中的协程</h2><div class="excerpt"><p>Lua中的协程和其他变量一样，都是第一类值（first-class alue），可以被保存在变量中，可以被作为参数传递，可以被函数返回。
+协程有4种状态：挂起（suspended），运行（running），死亡（dead）和正常（normal）。
+Lua为协程提供了3个基础接口：create，resume和yield。
+
+#coroutine.create
+
+
+  创建一个新的协程，并为它的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-818_Lua%20%E5%AD%A6%E4%B9%A0%20chapter24%20/">
+<article class="md-text"><h2 class="post-title">Lua 学习 chapter24</h2><div class="excerpt"><p>目录
+
+  协程
+  yield
+
+
+
+  人人真真的生活过，学习过，改变过，努力过，才能创造出一个满意的自己。
+
+
+协程
+
+
+  协程是一系列的可执行语句，拥有自己的栈、局部变量和指令指针，同时协程又与其他协程共享了全局变量和其他几乎一切资源。线程和协程的主要区别在于，一个线程程序可以并行运行多个线程，而协程却需要彼此协作的运行，即任意指定时刻只能有一个协程运行。
+
+
+协程相关的函数都在c...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-820_Lua%E7%AC%94%E8%AE%B0%20%E8%BF%AD%E4%BB%A3%E5%99%A8/">
 <article class="md-text"><h2 class="post-title">Lua笔记 迭代器</h2><div class="excerpt"><p>Lua中的迭代器提供的是一种遍历表中所有元素的机制，它通常是函数的形式，每次调用函数，返回“下一个”值。Lua中的迭代器有两种实现方式，基于闭包（closure）或者基于协程（coroutine）。以下会通过一个实例来分别讨论两种迭代器的实现。
 
 为更好演示迭代器的功能并逐步实现一个迭代器函数，本文结合一个需求的场景，从一个字符串中拆出一个一个的UTF8字符，即每次调用迭代器函数会返回下一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
@@ -159,30 +186,6 @@ fir...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于
 创建新的table时不会创建元表
 getmetatable(table) 获取table或者userdata类型变量的元表
 setmetatable(t,ot) 设置table或者userdat...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-821_Lua%E5%92%8CC++%E7%9A%84%E4%BA%A4%E4%BA%92%20/">
-<article class="md-text"><h2 class="post-title">Lua和C++的交互</h2><div class="excerpt"><p>目录
-
-  Lua堆栈
-  Lua堆栈操作
-  C++调用lua
-  Lua调用C++
-
-
-
-  There is something beautiful， just to find it.
-
-
-Lua堆栈
-
-要理解Lua和C++的交互，首先要清楚Lua堆栈。简单来说Lua和C++交互是通过一个无处不在的虚拟堆栈来的。
-
-在Lua中，lua堆栈是一个结构，堆栈的索引可以是整数或者负数，+1表...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-803_Lua%20%E7%AC%94%E8%AE%B0%20string_table_function%E7%9F%A5%E8%AF%86%E7%82%B9/">
-<article class="md-text"><h2 class="post-title">Lua 笔记 string_table_function知识点</h2><div class="excerpt"><p>本文涉及到一些关于string、table和function的细碎知识点，一些常用操作的背后逻辑。本文是用于记录一次技术分享，部分内容与之前的一篇Lua的笔记有重叠。
-本文参考和使用的lua源码基于Lua 5.3.5，编写的lua脚本运行于OSX系统，使用的是64位的lua运行库。
-
-评估方法纯lua侧的对于代码执行耗时的评估和执行过程中产生的堆内存的分析。
-时间分析对应于cpu负载，借助o...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

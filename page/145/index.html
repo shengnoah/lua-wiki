@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,17 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/go2.6.html">
+  <div class="post-list post"><a class="post-card post " href="/go2.4.html">
+<article class="md-text"><h2 class="post-title">go2.4</h2><div class="excerpt"><p>2.4 new尽管没有构造函数，go有一个内置的函数new，可以用来分配一个类型需要的内存。new(X)和&amp;X&#123;&#125;是等效的：
+123goku := new(Saiyan)// 等效goku := &amp;Saiyan&#123;&#125;
+
+用那种方式取决于你，但是你会发现，当需要去初始化结构体字段时，大多数人更喜欢使用后者，因为后者更易读：
+12345678...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go2.5.html">
+<article class="md-text"><h2 class="post-title">go2.5</h2><div class="excerpt"><p>2.5 结构体字段在之前的例子中，我们已经知道Saiyan有2个字段Name和Power,类型分别是字符串型和整型。字段可以是任意的类型，包括其他结构体类型或者我们还没有接触过的类型如：数组、映射、接口和函数类型。
+例如，我们可以扩展Saiyan的定义：
+12345type Saiyan struct &#123;    Name string    Power int    Father ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go2.6.html">
 <article class="md-text"><h2 class="post-title">go2.6</h2><div class="excerpt"><p>2.6 组合go支持组合，即一种结构体包含另外一个结构体。在一些语言中，这叫混入类或者特性。语言总是不能实现简明的组合机制。在java中：
 123456789101112131415161718public class Person &#123;    private String name;    public String getName() &#123;        return t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go2.8.html">
@@ -159,13 +169,6 @@ scores := []int&#123;1,4,293,4,9&#125;
 123a := make([]Saiyan, 10)//或者b := make([]*Saiyan, 10)
 
 很多开发人员认为传递b至一个函数或者让函数返回b效率更高。然而，这里传递或者返回的都是一个切片的拷贝，这本身就是一个引用。所以就传递或者返回...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go1.1.html">
-<article class="md-text"><h2 class="post-title">go1.1 编译</h2><div class="excerpt"><p>1.1 编译编译是一个将源代码翻译成更低级语言的过程，例如汇编语言（例如go），或者其他中间语言（例如java和c#）。
-编译型语言在使用过程中会有点不方便，因为编译过程比较耗时。如果不得不花掉几十分钟或者几个小时编译，那么很难实现快速迭代开发。在设计go语言时，编译速度是主要的设计目标之一。对于大项目开发人员来说，这里有一个好消息，通过使用解释型语言，我们常能获得快速的反馈周期。
-编译型语...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.086Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go1.2.html">
-<article class="md-text"><h2 class="post-title">go1.2 静态类型</h2><div class="excerpt"><p>1.2 静态类型静态类型语言意味着变量必须指定一个类型，例如整型、字符串、布尔型和数组等。可以在声明变量时指定变量类型。大多数情况下，让编译器自动去推断变量类型（我们将看到一些简单的例子）。
-关于静态类型，有许多相关内容可以介绍，但是我相信，要理解静态类型最好的方法就是去阅读代码。如果你使用过动态类型语言，你可能会觉得静态类型有点繁琐。你的想法没错，但是静态类型也有很多优点，尤其在编译静态类...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.086Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

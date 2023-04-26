@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/"><span class="title">evaluate(input_sentence)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/"><span class="title">OpenWRT路由器设置界面中的Lua填坑</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/"><span class="title">深入 Lua Garbage Collector(三)</span></a><a class="item title" href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/"><span class="title">Evaluating Polynomials</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,21 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-852_lua/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-851_spark%20rdd,%20pipeline,%20lazyevaluation/">
+<article class="md-text"><h2 class="post-title">spark rdd, pipeline, lazyevaluation</h2><div class="excerpt"><p>一直以来写代码不求甚解，感觉这样不好，从今天开始起读各数据框架的源代码，学习学习再学习  
+今天看的是pyspark里lazy evaluation的处理，python和scala不同不是函数式的。那这是怎么办到的呢？  
+首先所有的数据集在spark内部都叫做rdd，这在pyspark里也有定义：  
+class RDD(object):
+
+&lt;span class=&quot;str...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-853_LeetCode%20150.%20Evaluate%20Reverse%20Polish%20Notation/">
+<article class="md-text"><h2 class="post-title">LeetCode 150. Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>题目描述根据逆波兰表示法（后缀表达式），求表达式的值。
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
+说明：
+整数除法只保留整数部分。给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。
+tag基本计算器题 栈
+样例1234567891011121314151617181920212223输入: [&#34...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-852_lua/">
 <article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>设计目的其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
 Lua 特性
 轻量级: 它用标准C语言编写并以源代码形式开放，编译后仅仅一百余K，可以很方便的嵌入别的程序里。
@@ -168,60 +182,6 @@ Creates a new coroutine, with body f. f must be a function. Returns this new cor
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-85_lua%E8%A7%A3%E6%9E%90/">
 <article class="md-text"><h2 class="post-title">lua解析</h2><div class="excerpt"><p>本lua版本为5.2.1
 在lua的源码中，lua.c 实现了可执行的解释器，用于解释执行.out文件，luac.c 实现了字节码的编译器，用于将.lua文件编译为.out文件，即字节码文件。更加宏观的东西，则在打印的两份文档里，此处不详述，由于整个读入解析到解释执行的过程是先从读入.lua文件开始的，所以我这份lua源码解析大业便先从这luac.c文件的阅读学习开始了，以下是它的main程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-861_Lua%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">Lua远程调用的实现方法</h2><div class="excerpt"><p>游戏开发中，客户端、服务端之间的交互是很频繁的，尤其是逻辑玩法的实现，需要大量的交互。
-
-如果所有的交互都按功能构建出不同的协议，这样即繁琐又不方便修改。
-
-通过Lua，使用远程调用可以极大的方便客户端、服务器的通信。
-
-在Lua中，通过C++告诉对方，我要调用哪个函数、传递哪些参数，来执行相关的功能。
-
-这样就不用定义一大串协议，而只需定义一种：远程调用协议。
-
-如果要对方执行相应的函数，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-859_lua%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/">
-<article class="md-text"><h2 class="post-title">lua学习的查缺补漏</h2><div class="excerpt"><p>目录
-
-  多行注释
-  取整
-  长字符串
-  字符串标准库
-  lua中安全访问
-  表
-  可变长参数
-  输入和输出
-  lua运行一段程序
-
-
-
-  认真学习，增强自己的能力和知识面。
-
-
-多行注释
-
-1
-2
-3
-4
---[[
-fdsa
-fdas
-]]
-
-
-取整
-
-为了做到公平性取整，应该做到3.5+0.5为偶数则进位，而2.5+0.5为奇数不进位。
-
-1
-2
-3
-4
-5
-6
-7
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>
