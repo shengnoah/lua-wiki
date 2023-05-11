@@ -110,37 +110,44 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-189_lua%20c%20api%20/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-185_%5BLua/">
+<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>    &lt;h2 id=&quot;介绍&quot;&gt;介绍&lt;/h2&gt;
+
+官网地址：
+
+http://www.lua.org/home.html
+
+Lua是脚本语言，可以自己运行，可以嵌入C语言运行，也可以把C语言嵌入Lua运行。
+
+Lua全部都是用C语言实现的，可以到官网去下载源码，自己编译，编译过程很简单，没什么错误。
+
+源码目录结构：
+
+
+
+编译源码
+
+需要在VS中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-187_lua%20lapis%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">lua lapis安装</h2><div class="excerpt"><p>
+    
+    
+    
+&lt;section class=&quot;article-body markdown-body&quot;&gt;
+    
+    &lt;h3 id=&quot;lapis安装&quot;&gt;
+
+lapis安装
+lapis是lua中的web框架，基于openresty,直接和nginx整合在一起，支持lua和moonscript.
+
+
+安装ope...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-189_lua%20c%20api%20/">
 <article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>   一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C/C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C/C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 进程示例 #include &lt;stdio.h...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-188_luajava%E7%9A%84%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E8%BE%93%E5%87%BA/">
 <article class="md-text"><h2 class="post-title">luajava的错误信息输出</h2><div class="excerpt"><p>最近在填新坑, 打算用lua作为脚本语言, 于是选择了luajava来跑脚本.
 始终我对lua不熟, 错误是难免的了, 不料luajava居然没有输出错误信息orz(事实上连普通的输出都没找到, 反正我直接写了个print函数…)
 既然找不到输出, 那我只好想办法把luajava的错误信息转去调用自己写的print了, 于是我想到了或许可以像Java中的try ... catch ...来拦...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-182_Lua%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81%20/">
-<article class="md-text"><h2 class="post-title">Lua运行时更新代码</h2><div class="excerpt"><p>            &lt;p&gt;      最近沉迷lua脚本热更，想说这个可以提高多少菜鸡的调试效率，找了网上好多文章，但是都不行，尝试了很久，并且自己测试和学习，写了一遍，勉强能热更了（还是有个问题，要按2次才能输出正确热更的值，一直找不到，有人找到麻烦告诉我一下308164213）。下面记录一下找热更的过程。&lt;/p&gt;
-
-一、用来卸载表格的加载
-–最简单粗暴的热更新...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-186_Nginx%20%E4%BD%BF%E7%94%A8%20lua/">
-<article class="md-text"><h2 class="post-title">Nginx 使用 lua</h2><div class="excerpt"><p>    &lt;ul id=&quot;markdown-toc&quot;&gt;
-
-  1. 软件版本
-  2. 环境准备
-  3. 软件安装
-  4.  配置lua脚本
-  5. 配置php
-  6. 配置日志，记录post请求的request_body 和response_body
-
-
-1. 软件版本
-
-
-  系统  centos6.7X86_64
-
-  nginx   1.11.5...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-16_LeetCode%C2%A0399.%C2%A0Evaluate%20Division%20%C2%A0/">
-<article class="md-text"><h2 class="post-title">LeetCode 399. Evaluate Division  </h2><div class="excerpt"><p>            &lt;i class=&quot;mobile-toggle&quot; style=&quot;display:none;&quot;&gt;&lt;img src=&quot;https://img.dazhuanlan.com/2019/11/26/5ddcf6326f021.png&quot;&gt;&lt;/i&gt;
-            &lt;di...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-169_Lua%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%E7%9A%84%E8%AE%B0%E5%BD%95/">
 <article class="md-text"><h2 class="post-title">Lua的一些坑的记录</h2><div class="excerpt"><p>Lua是一门很小巧的编程语言，不过使用过程中发下一些容易出现问题的地方，这里记录一下（API正常使用不记录）。记录时使用的版本是官方Lua 5.3.4版本源码.
 
@@ -150,6 +157,17 @@ Lua的C API中的lua_isstring和lua_isnumber有点坑
 
 
 1234567891011121314151617181...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-16_LeetCode%C2%A0399.%C2%A0Evaluate%20Division%20%C2%A0/">
+<article class="md-text"><h2 class="post-title">LeetCode 399. Evaluate Division  </h2><div class="excerpt"><p>            &lt;i class=&quot;mobile-toggle&quot; style=&quot;display:none;&quot;&gt;&lt;img src=&quot;https://img.dazhuanlan.com/2019/11/26/5ddcf6326f021.png&quot;&gt;&lt;/i&gt;
+            &lt;di...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-171_lua%E4%B8%8ECpp%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D/">
+<article class="md-text"><h2 class="post-title">lua与Cpp传递参数接口介绍</h2><div class="excerpt"><p>最近在开源代码中遇到MySQL-Proxy, 其允许lua脚本实现用户的个性化配置, lua脚本可以引用C/C++的动态链接库完成一些复杂的功能. 本文对最近接触到的lua和C/C++混合的相关接口使用做个总结. 本文的完整代码在文末的附录中, 代码测试在Ubuntu16.04+lua5.1下完成, 不同版本可能API有所变化, 可以参考文末给出的官方文档链接.
+
+相关环境配置首先, 要在C...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-172_Lua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+<article class="md-text"><h2 class="post-title">Lua面向对象程序设计 · 花生肉泥</h2><div class="excerpt"><p>类lua不存在类的概念，每个对象定义他自己的行为并拥有自己的形状（shape）。然而，依据基于原型的语言，在lua中仿效类的概念并不难。
+在lua中，使用继承的思想，很容易实现prototype（原型），如果我们有两个对象a和b，我们想让b作为a的原型，只需要1setmetatable(a,{__index = b})
+这样，对象a调用任何不存在的成员函数都会到对象b中去找，术语上，可以将b...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-173_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">Lua程序设计（1）</h2><div class="excerpt"><p>Lua中的字符串。
 
@@ -159,10 +177,6 @@ Lua语言中的字符串是不可变值。
 像Lua语言中的其他对象（表、函数等）一样，Lua语言中的字符串也是自动内存管理的对象之一，Lua会负责字符串的分配和释放。
 
 可以使用长度操作符#获取字符串的长度，该操作符返回字符串占用的字节...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-171_lua%E4%B8%8ECpp%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D/">
-<article class="md-text"><h2 class="post-title">lua与Cpp传递参数接口介绍</h2><div class="excerpt"><p>最近在开源代码中遇到MySQL-Proxy, 其允许lua脚本实现用户的个性化配置, lua脚本可以引用C/C++的动态链接库完成一些复杂的功能. 本文对最近接触到的lua和C/C++混合的相关接口使用做个总结. 本文的完整代码在文末的附录中, 代码测试在Ubuntu16.04+lua5.1下完成, 不同版本可能API有所变化, 可以参考文末给出的官方文档链接.
-
-相关环境配置首先, 要在C...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-174_%5BLua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>读书笔记： Programming in Lua, 4th Edition.
 
@@ -176,8 +190,6 @@ one string      another string
 
 
 计算字符串长度...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-175_Unity%E5%B8%B8%E8%A7%81lua%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/">
-<article class="md-text"><h2 class="post-title">Unity常见lua解决方案性能比较</h2><div class="excerpt"><p>之前由于项目需要，我比较了下Unity常见的几个lua解决方案；最近应鑫哥约稿，整理了一下。Unity不支持热更新这事情一直是一个谜一样的痛点，特别是在我第一个项目上线之后，发现每次更新代价太大了…可惜官方Roadmap上迟迟没有出现这个功能。昨天在群里还看到琨少说天下直接热更新Python脚本，羡慕嫉妒ing。为了解决这个问题，uwa之前分享过Android平台热更新解决方案：直接替换dl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

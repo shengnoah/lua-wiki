@@ -110,31 +110,24 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-142_Lua_Notes/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-141_LUA5.1%E8%B0%83%E7%94%A8C%E5%87%BD%E6%95%B0/">
+<article class="md-text"><h2 class="post-title">LUA5.1调用C函数</h2><div class="excerpt"><p>Lua利用一个虚拟的栈(stack)来给C传递值或从C获取值。每当Lua调用C函数，都会获得一个新的栈，该栈初始包含所有的调用C函数所需要的参数值（Lua传给C函数的调用实参），并且C函数执行完毕后，会把返回值压入这个栈（Lua从中拿到C函数调用结果）本文展示了如何在lua中调用c函数的一种方法:通过将c函数编译成库文件(如Linux的.so),成为Lua的模块luaclib.c123456...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-142_Lua_Notes/">
 <article class="md-text"><h2 class="post-title">Lua_Notes</h2><div class="excerpt"><p>lua脚本语言学习记录      
 Vim下Lua的补全（只能实现到支持Lua标准库）使用Vundle + vim-lua-ftplugin + vim-misc1、安装Vundle2、在命令行输入vim ~/.vimrc对.vimrc文件进行修改3、在My Bundles here：下加入，并保存退出：    Bundle ‘xolox/vim-lua-ftplugin’    Bundl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-144_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>归并排序（Merge Sort，台湾译作：合并排序）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
+
+归并操作(Merge)，也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。归并排序有多路归并排序、两路归并排序, 可用于内排序，也可以用于外排序。这里仅对内排序的两路归并方法进行讨...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-145_Lua%20C%20API%20%E6%95%99%E7%A8%8B%20/">
+<article class="md-text"><h2 class="post-title">Lua C API 教程</h2><div class="excerpt"><p>Lua 的 C API 是一个 C 代码与 Lua 进行交互的函数集，也就是宿主程序跟 Lua 通讯用的一组 C 函数。它由以下部分组成：读写Lua全局变量的函数，调用Lua函数的函数，运行 Lua 代码片段的函数，注册 C 函数然后可以在 Lua 中被调用的函数，等等。
+头文件在任何调用Lua的 C程序中都必选包含以下3个文件 ：
+123#include &lt;lauxlib.h&gt;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-143_Linux%20%E4%B8%8B%20lua%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AE%89%E8%A3%85%20luafilesystem/">
 <article class="md-text"><h2 class="post-title">Linux 下 lua 开发环境安装及安装 luafilesystem</h2><div class="excerpt"><p>火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。
 最近一直再折腾这个，干脆就稍微整理下。以防后面继续跳坑！
 安装：
 1.先安装 lua 的相关依赖安装 C 开发环境由于 gcc 包需要依赖 binutils 和 cpp 包，另外 make 包也是在编译中常用的，所以一共需要 9 个包来完成安装，因...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-144_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>归并排序（Merge Sort，台湾译作：合并排序）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
-
-归并操作(Merge)，也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。归并排序有多路归并排序、两路归并排序, 可用于内排序，也可以用于外排序。这里仅对内排序的两路归并方法进行讨...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-140_Unity%E4%B8%AD%E4%BD%BF%E7%94%A8sLua%E7%9A%84%20%E8%B6%85%E4%B8%B6%E7%AE%80%E5%8D%95%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B(%E4%BA%8C)/">
-<article class="md-text"><h2 class="post-title">Unity中使用sLua的 超丶简单基础教程(二)</h2><div class="excerpt"><p>
-前言Unity中使用sLua的 超丶简单基础教程(一)
-上一篇博客讲了一下简单调用LuaState读取Lua代码并执行
-本篇要讲一下如何更改路径并使得Lua可以调用UnityEngine代码的方法
-虽然简短但也是长时间爬坑试验出来的(因为基础教程真的好少啊….)希望对大家有帮助..
-
-正文在创建一个新的场景,一个新的CreateEmpty把C#脚本挂上去代码如下:
-123456789101...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-145_Lua%20C%20API%20%E6%95%99%E7%A8%8B%20/">
-<article class="md-text"><h2 class="post-title">Lua C API 教程</h2><div class="excerpt"><p>Lua 的 C API 是一个 C 代码与 Lua 进行交互的函数集，也就是宿主程序跟 Lua 通讯用的一组 C 函数。它由以下部分组成：读写Lua全局变量的函数，调用Lua函数的函数，运行 Lua 代码片段的函数，注册 C 函数然后可以在 Lua 中被调用的函数，等等。
-头文件在任何调用Lua的 C程序中都必选包含以下3个文件 ：
-123#include &lt;lauxlib.h&gt;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-12_lua%20table%E5%8F%AA%E8%AF%BB/">
 <article class="md-text"><h2 class="post-title">lua table只读</h2><div class="excerpt"><p>          &lt;div class=&quot;language-lua highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 
@@ -153,17 +146,38 @@ a = “dudor”
 a = [[dudor]]
 上面三个值是相等的。
 其中由N级中括号定义的方式比较特别，在别的语言中很少见到。N级中括号是在两个中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-133_Lua%E5%85%83%E8%A1%A8/">
-<article class="md-text"><h2 class="post-title">Lua元表</h2><div class="excerpt"><p>javascript语言本身不支持面向对象，ES2015中增加了class关键字，却不过是prototype语法糖而已，本质上prototype形式的面向对象只能算是一种“模拟”，这其中很重要的原因之一是js从来没有一套完美的深拷贝方案，子类只能借助原型链获取父类方法的引用，这不能算是严格意义的继承，当然也就算不上面向对象。
-和js一样，lua的面向对象需要通过table来模拟，有些行为很像...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-136_Lua%20table%E3%80%81%E6%A8%A1%E5%9D%97%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-<article class="md-text"><h2 class="post-title">Lua table、模块与面向对象</h2><div class="excerpt"><p>很久之前接触过lua，最近在工作中又用到了一些，对lua这门语言又有了新的认识和理解。Lua是一门很简洁高效的语言,在openresty项目中大量使用，游戏开发中也使用lua来写一些脚本。在这里记录一下自己对lua中面向对象的理解。
-table在lua中是一种kv的数据结构，也指由一些辅助函数组成的库。如：
-local tb = &#123;name=&#34;zhangsan&#34;, ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-137_Evaluation%20of%20Word%20Vector%20Representations%20by%20Subsp/">
-<article class="md-text"><h2 class="post-title">Evaluation of Word Vector Representations by Subspace Alignment</h2><div class="excerpt"><p>无监督学习的词向量的评价通常与下游应用没有很大的关联，本文将提出QVEC的评价方法。
-Introduction缺乏标准化的对比方式是因为词向量的每个维度依然是无法解释的，如何去给一个无法解释的表示打分依然是不明确的。
-本文通过将distribution word vector和人工标注的word vector对其，然后计算每一维的相关度，相加之后就得到了distribution word v...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-131_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>9 Coroutines
+
+协程和线程的相同点：1It is a line of execution, with its own stack, its own local variables, and its own instruction pointer; but it shares global variables and mostly anything else with other ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-134_Lua%E5%AD%A6%E4%B9%A0/">
+<article class="md-text"><h2 class="post-title">Lua学习</h2><div class="excerpt"><p>简介
+Lua是脚本型语言
+动态编译
+动态执行
+每次修改不需要重新编译链接执行
+
+
+运行时编译而并非运行前编译
+
+
+是C语言编写的
+速度比C语言快
+
+特性Lua的Hello World1print(&#34;Hello world&#34;)
+Lua行末不要分号
+Lua的括号12345do    ……    ……    ……end
+Lua语言几乎用不到大括号，取而代之的是do…end
+Lua的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-135_Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20%E2%80%94%20Udata%EF%BC%88%E4%BA%94%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">Lua数据结构 — Udata（五）</h2><div class="excerpt"><p>
+            文章目录
+            
+                    
+                
+      &lt;/div&gt;
+    
+    &lt;p&gt;&lt;strong&gt;Udata负责存储userdata的数据&lt;/strong&gt;，这部分其实很简单，但是为了保证系列文章的完整性，还是写一篇出来补全。&lt;/p&...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

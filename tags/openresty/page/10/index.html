@@ -112,9 +112,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：openresty</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/agentzh-nginx-guide-06.html">
-<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（六）Nginx 内建变量用在“子请求”的上下文中时，其行为也会变得有些微妙。
-前面在 （三） 中我们已经知道，许多内建变量都不是简单的“存放值的容器”，它们一般会通过注册“存取处理程序”来表现得与众不同，而它们即使有存放值的容器，也只是用于缓存“存取处理程序”的计算结果。我们之前讨论过的 $args 变量正是通过它的“取处理程序”来返回当前请求的 URL 参数串。因为当...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/agentzh-nginx-guide-08.html">
+<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（八）与 $arg_XXX 类似，我们在 （二） 中提到过的内建变量 $cookie_XXX 变量也会在名为 XXX 的 cookie 不存在时返回特殊值“没找到”：
+location /test &#123;
+    content_by_lua &#39;
+        if ngx.var.cookie_user == nil then
+            n...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/agentzh-nginx-guide-01.html">
 <article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>目录
 缘起
@@ -161,8 +164,8 @@ server &#123;
 <article class="md-text"><h2 class="post-title">Apache APISIX在SAE应用市场发布</h2><div class="excerpt"><p>Apache APISIX在SAE应用市场发布</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2019-12-09T00:50:18.000Z">2019-12-09</time></span><span class="cap breadcrumb">网关</span></div></article>
 </a><a class="post-card post " href="/%E7%BD%91%E5%85%B3/apisix-dashboard/">
 <article class="md-text"><h2 class="post-title">APISIX后台管理路由创建接口</h2><div class="excerpt"><p>APISIX后台管理路由创建接口</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2019-12-06T00:50:18.000Z">2019-12-06</time></span><span class="cap breadcrumb">网关</span></div></article>
-</a><a class="post-card post " href="/2019/10/11/2019-12-04-openresty-so/">
-<article class="md-text"><h2 class="post-title">Openresty Nginx Tengine添加动态so库</h2><div class="excerpt"><p>Openresty Nginx Tengine添加动态so库</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2019-10-11T00:50:18.000Z">2019-10-11</time></span><span class="cap breadcrumb">动态库</span></div></article>
+</a><a class="post-card post " href="/2019/10/11/2019-11-28-apisix/">
+<article class="md-text"><h2 class="post-title">APISIX后台管理</h2><div class="excerpt"><p>APISIX后台管理</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2019-10-11T00:50:18.000Z">2019-10-11</time></span><span class="cap breadcrumb">网关</span></div></article>
 </a></div>
   
 

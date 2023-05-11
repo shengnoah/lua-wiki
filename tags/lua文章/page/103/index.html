@@ -127,21 +127,8 @@
 Factory Pattern Wiki
 
   In object-oriented programming (OOP), a factory is an object for creating other objects – formally a fact...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1108_design%20pattern%20-%20decorator%20pattern%20in%20c++%20and%20lua/">
-<article class="md-text"><h2 class="post-title">design pattern - decorator pattern in c++ and lua</h2><div class="excerpt"><p>
-  What is Decorator Pattern
-  Example in C++
-  Example in Lua
-
-
-
-
-
-
-
-Decorator Pattern Wiki
-
-  In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-110_lua%20%E5%8D%8F%E7%A8%8B%E5%92%8C%E7%8A%B6%E6%80%81/">
+<article class="md-text"><h2 class="post-title">lua 协程和状态</h2><div class="excerpt"><p>协程(协同式多线程)是一种用户级的非抢占式线程。用户级是指它的切换和调度由用户控制，非抢占指一个协程只有在其挂起(yield)或者协程结束才会返回。协程和C线程一样，有自己的堆栈，自己的局部变量，自己的指令指针，并且和其它协程共享全局变量等信息。用户可以实现自己调度协程，这主要得益于yield函数可以自动保存协程当前上下文，这样当挂起的协程被唤醒(resume)时，会从yield处继续向下执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1109_design%20pattern%20-%20observer%20pattern%20in%20c++%20and%20lua/">
 <article class="md-text"><h2 class="post-title">design pattern - observer pattern in c++ and lua</h2><div class="excerpt"><p>
   What is Observer Pattern
@@ -157,6 +144,21 @@ Decorator Pattern Wiki
 Observer Pattern Wiki
 
   The observer pattern is a software design pattern in which an object, called the subject, maintains a l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1108_design%20pattern%20-%20decorator%20pattern%20in%20c++%20and%20lua/">
+<article class="md-text"><h2 class="post-title">design pattern - decorator pattern in c++ and lua</h2><div class="excerpt"><p>
+  What is Decorator Pattern
+  Example in C++
+  Example in Lua
+
+
+
+
+
+
+
+Decorator Pattern Wiki
+
+  In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1110_design%20pattern%20-%20strategy%20pattern%20in%20c++%20and%20lua/">
 <article class="md-text"><h2 class="post-title">design pattern - strategy pattern in c++ and lua</h2><div class="excerpt"><p>
   What is Strategy Pattern
@@ -172,20 +174,6 @@ Observer Pattern Wiki
 Strategy Pattern Wiki
 
   In computer programming, the strategy pattern (also known as the policy pattern) is a behavioural softw...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-110_lua%20%E5%8D%8F%E7%A8%8B%E5%92%8C%E7%8A%B6%E6%80%81/">
-<article class="md-text"><h2 class="post-title">lua 协程和状态</h2><div class="excerpt"><p>协程(协同式多线程)是一种用户级的非抢占式线程。用户级是指它的切换和调度由用户控制，非抢占指一个协程只有在其挂起(yield)或者协程结束才会返回。协程和C线程一样，有自己的堆栈，自己的局部变量，自己的指令指针，并且和其它协程共享全局变量等信息。用户可以实现自己调度协程，这主要得益于yield函数可以自动保存协程当前上下文，这样当挂起的协程被唤醒(resume)时，会从yield处继续向下执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.235Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1093_%E7%BC%96%E8%AF%91luajitx86%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
-<article class="md-text"><h2 class="post-title">编译luajitx86动态链接库</h2><div class="excerpt"><p>1.下载并解压LuaJIThttp://luajit.org/download.html
-2.修改为静态编译打开LuaJIT目录srcmsvcbuild.bat搜索替换LJARCH=x64为LJARCH=x86搜索替换/MD为/MT
-3.使用VS命令提示符cd /d LuaJIT目录src编译DLL：msvcbuild.bat编译LIB：msvcbuild.bat static</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1094_lua%E5%B0%86json%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E4%B8%BAtable/">
-<article class="md-text"><h2 class="post-title">lua将json字符串转为table</h2><div class="excerpt"><p>
-    文章目录
-    
-&lt;/div&gt;
-
-
-&lt;h3 id=&quot;json字符串转为table&quot;&gt;&lt;a href=&quot;#json字符串转为table&quot; class=&quot;headerlink&quot; title=&quot;json字符串转为table&quot;&gt;&lt;/a&gt;json字符串转为tabl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1092_%5Bulua%5D%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D/">
 <article class="md-text"><h2 class="post-title">开发工具介绍</h2><div class="excerpt"><p>
       
@@ -193,10 +181,28 @@ Strategy Pattern Wiki
       
       
     </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1093_%E7%BC%96%E8%AF%91luajitx86%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+<article class="md-text"><h2 class="post-title">编译luajitx86动态链接库</h2><div class="excerpt"><p>1.下载并解压LuaJIThttp://luajit.org/download.html
+2.修改为静态编译打开LuaJIT目录srcmsvcbuild.bat搜索替换LJARCH=x64为LJARCH=x86搜索替换/MD为/MT
+3.使用VS命令提示符cd /d LuaJIT目录src编译DLL：msvcbuild.bat编译LIB：msvcbuild.bat static</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1095_lua%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/">
+<article class="md-text"><h2 class="post-title">lua发送http请求</h2><div class="excerpt"><p>
+    文章目录
+    
+&lt;/div&gt;
+
+
+&lt;h3 id=&quot;直接发送&quot;&gt;&lt;a href=&quot;#直接发送&quot; class=&quot;headerlink&quot; title=&quot;直接发送&quot;&gt;&lt;/a&gt;直接发送&lt;/h3&gt;&lt;figure class=&quot;highl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1096_lua%E6%89%93%E5%8D%B0%E8%A1%A8%E6%A0%BC/">
 <article class="md-text"><h2 class="post-title">lua打印表格</h2><div class="excerpt"><p>Lua打印表格function print_table(t)    local cache = {}    local function print_table_sub (t, indent)        if (cache[tostring(t)]) then            print(indent  ..  &#34;*&#34;  ..  tostring(t))      ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1098_evaluate%20division/">
-<article class="md-text"><h2 class="post-title">evaluate division</h2><div class="excerpt"><p>思路巧妙的方法，化为双向图，例如等式a / b = 2.0，可以转化为两条边：，，其长度分别为2.0，0.5。对queries的每一项，先判断2个点是否都出现，然后判断是不是自己到自己，最后用dfs进行搜索，然后用递归进行每条边权重的相乘，如果最后找不到路径，则返回-1.0。12345678910111213141516171819202122232425262728293031323334...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1097_lua%E4%B8%AD%E6%89%A7%E8%A1%8Cshell/">
+<article class="md-text"><h2 class="post-title">lua中执行shell</h2><div class="excerpt"><p>
+    文章目录
+    
+&lt;/div&gt;
+
+
+&lt;h3 id=&quot;直接执行Shell&quot;&gt;&lt;a href=&quot;#直接执行Shell&quot; class=&quot;headerlink&quot; title=&quot;直接执行Shell&quot;&gt;&lt;/a&gt;直接执行Shell&lt;/h3&gt;&lt;p&gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.234Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

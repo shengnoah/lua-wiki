@@ -110,15 +110,36 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1070_lua%E7%BC%96%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">lua编程</h2><div class="excerpt"><p>Lua一共包含8个基本数据类型
-nil:        print(type(nil))
-boolean:    print(type(true))
-number:     print(type(2.0))
-string:     print(type(&#34;abc&#34;))
-function:   print(type(type))
-userdata:
-thread:     pr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1073_lua%E4%B8%AD%E4%B9%9F%E8%83%BD%E7%94%A8%E4%B8%8Ago%E8%AF%AD%E8%A8%80%E7%9A%84strings%E5%8C%85/">
+<article class="md-text"><h2 class="post-title">lua中也能用上go语言的strings包</h2><div class="excerpt"><p>lua内置的库非常小，我们可以将Go语言的strings包引入到Lua环境。
+
+
+
+下面是具体的例子。
+
+hello.go:
+
+package main
+
+import (
+    &#34;github.com/yuin/gopher-lua&#34;
+
+    strings &#34;github.com/chai2010/glua-strings&#34;
+)
+
+func main(...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1075_port%20lua%20to%20web%20environment%20using%20webassembly/">
+<article class="md-text"><h2 class="post-title">port lua to web environment using webassembly</h2><div class="excerpt"><p>
+WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable target for compilation of high-level languages like C/C++/Rust, enab...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1077_openresty_log_by_lua_file/">
+<article class="md-text"><h2 class="post-title">openresty_log_by_lua_file</h2><div class="excerpt"><p>set the log in nginx.conf1234567891011121314location /docs {	keepalive_timeout 0;	default_type &#39;text/html&#39;;	set $res &#34;&#34;;	set_by_lua_file $res /opt/openresty/set_by.lua;	rewrite_by_l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1076_interfacing%20lua%20with%20c/">
+<article class="md-text"><h2 class="post-title">interfacing lua with c</h2><div class="excerpt"><p>Lua is a lightweight, multi-paradigm programming language designed primarily for embedded use in applications. Roberto Ierusalimschy, the author of Lua, said that Lua is like passing a language thr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1072_some%20valuable%20yii2%20extension/">
+<article class="md-text"><h2 class="post-title">some valuable yii2 extension</h2><div class="excerpt"><p>Yii2 extension http://codemix.github.io/yii2-bs3activeform/horizontal.html
+ http://demos.krajee.com/ </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1078_openresty_balancer_by_lua_file/">
+<article class="md-text"><h2 class="post-title">openresty_balancer_by_lua_file</h2><div class="excerpt"><p>set the balancer in nginx.conf12345678910upstream default_doc_upstream {		server 192.168.1.170:8081;	# tomcat-8	server 192.168.1.170:8082;	# tomcat-9	server 192.168.1.170:8083;	balancer_by_lua_file...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1074_%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lua/">
 <article class="md-text"><h2 class="post-title">编译安装lua</h2><div class="excerpt"><p>下载:
 
@@ -139,40 +160,13 @@ lua-5.1.5 $ make linux
 
 lua-5.1.5 $ sudo make install
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1073_lua%E4%B8%AD%E4%B9%9F%E8%83%BD%E7%94%A8%E4%B8%8Ago%E8%AF%AD%E8%A8%80%E7%9A%84strings%E5%8C%85/">
-<article class="md-text"><h2 class="post-title">lua中也能用上go语言的strings包</h2><div class="excerpt"><p>lua内置的库非常小，我们可以将Go语言的strings包引入到Lua环境。
-
-
-
-下面是具体的例子。
-
-hello.go:
-
-package main
-
-import (
-    &#34;github.com/yuin/gopher-lua&#34;
-
-    strings &#34;github.com/chai2010/glua-strings&#34;
-)
-
-func main(...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1077_openresty_log_by_lua_file/">
-<article class="md-text"><h2 class="post-title">openresty_log_by_lua_file</h2><div class="excerpt"><p>set the log in nginx.conf1234567891011121314location /docs {	keepalive_timeout 0;	default_type &#39;text/html&#39;;	set $res &#34;&#34;;	set_by_lua_file $res /opt/openresty/set_by.lua;	rewrite_by_l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1076_interfacing%20lua%20with%20c/">
-<article class="md-text"><h2 class="post-title">interfacing lua with c</h2><div class="excerpt"><p>Lua is a lightweight, multi-paradigm programming language designed primarily for embedded use in applications. Roberto Ierusalimschy, the author of Lua, said that Lua is like passing a language thr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1079_lua%E7%9A%84%E4%B8%80%E7%A7%8Dcontinue%E5%AE%9E%E7%8E%B0/">
-<article class="md-text"><h2 class="post-title">lua的一种continue实现</h2><div class="excerpt"><p>Lua中没有continue，通过另一种方式实现了continue的功能for var=exp1,exp2 do 	while true do 		if condition expressions  do			break		end		other statements		...		...		break	endend</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1078_openresty_balancer_by_lua_file/">
-<article class="md-text"><h2 class="post-title">openresty_balancer_by_lua_file</h2><div class="excerpt"><p>set the balancer in nginx.conf12345678910upstream default_doc_upstream {		server 192.168.1.170:8081;	# tomcat-8	server 192.168.1.170:8082;	# tomcat-9	server 192.168.1.170:8083;	balancer_by_lua_file...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1075_port%20lua%20to%20web%20environment%20using%20webassembly/">
-<article class="md-text"><h2 class="post-title">port lua to web environment using webassembly</h2><div class="excerpt"><p>
-WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable target for compilation of high-level languages like C/C++/Rust, enab...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-107_Lua%E5%AD%A6%E4%B9%A0%E9%9A%8F%E7%AC%94/">
 <article class="md-text"><h2 class="post-title">Lua学习随笔</h2><div class="excerpt"><p>昨天刚立了FLAG，今天就来还愿了。因为是工作中接触到的，已经用了几次，比较熟悉。昨晚在晚上大概搜了下，看了两个教程，看进去了，今早又看了将近两小时，看到了些基础的东西。
 我是在Windows上练习LUA，所以只用下个软件就可以开始了，非常方便。下载入口
 下载后安装即可，使用方法就是首先打开SciTE，然后在里面直接敲代码，保存为以lua结尾的文件，按F5就可以看到运行结果了。
 首先是注释，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1079_lua%E7%9A%84%E4%B8%80%E7%A7%8Dcontinue%E5%AE%9E%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">lua的一种continue实现</h2><div class="excerpt"><p>Lua中没有continue，通过另一种方式实现了continue的功能for var=exp1,exp2 do 	while true do 		if condition expressions  do			break		end		other statements		...		...		break	endend</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1055_leetcode.150%20evaluate%20reverse%20polish%20notation/">
 <article class="md-text"><h2 class="post-title">leetcode.150 evaluate reverse polish notation</h2><div class="excerpt"><p>题意
 计算逆波兰法表示的算式解法

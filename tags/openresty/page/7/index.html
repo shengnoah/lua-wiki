@@ -112,37 +112,36 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：openresty</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/for.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>for 控制结构Lua 提供了一组传统的、小巧的控制结构，包括用于条件判断的 if 用于迭代的 while、repeat 和 for，本章节主要介绍 for 的使用。
-for 数字型for 语句有两种形式：数字 for（numeric for）和范型 for（generic for）。
+  <div class="post-list post"><a class="post-card post " href="/function_before_use.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>调用代码前先定义函数Lua 里面的函数必须放在调用的代码之前，下面的代码是一个常见的错误：
+1234567-- test.lua 文件local i = 100i = add_one(i)function add_one(i)	return i + 1end
 
-数字型 for 的语法如下：
-
-123for var = begin, finish, step do ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/function_descrip.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 函数在 Lua 中，函数是一种对语句和表达式进行抽象的主要机制。函数既可以完成某项特定的任务，也可以只做一些计算并返回结果。在第一种情况中，一句函数调用被视为一条语句；而在第二种情况中，则将其视为一句表达式。
-
-示例代码：
-
-123print(&quot;hello world!&quot;)        -- 用 print() 函数输出 hello world！local m ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+我们将得到如下错误：
+12345# luajit test.lualuajit: test.lua:2: attempt to ca...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/function_define.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>函数定义Lua 使用关键字 function 定义函数，语法如下：
 123function function_name (arc)  -- arc 表示参数列表，函数的参数列表可以为空   -- bodyend
 
 上面的语法定义了一个全局函数，名为 function_name. 全局函数本质上就是函数类型的值赋给了一个全局变量，即上面的语法等价于
 123function_name = fun...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/function_result.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>函数返回值Lua 具有一项与众不同的特性，允许函数返回多个值。Lua 的库函数中，有一些就是返回多个值。
-
-示例代码：使用库函数 string.find，在源字符串中查找目标字符串，若查找成功，则返回目标字符串在源字符串中的起始位置和结束位置的下标。
-
-12local s, e = string.find(&quot;hello world&quot;, &quot;llo&quot;)pr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/function_parameter.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>函数的参数按值传递Lua 函数的参数大部分是按值传递的。值传递就是调用函数时，实参把它的值通过赋值运算传递给形参，然后形参的改变和实参就没有关系了。在这个过程中，实参是通过它在参数表中的位置与形参匹配起来的。
 
 示例代码：
 
 1234567891011121314151617local function swap(a, b) --定义函数swap,函数内部进行交换两个变量的值   local...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/function_descrip.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 函数在 Lua 中，函数是一种对语句和表达式进行抽象的主要机制。函数既可以完成某项特定的任务，也可以只做一些计算并返回结果。在第一种情况中，一句函数调用被视为一条语句；而在第二种情况中，则将其视为一句表达式。
+
+示例代码：
+
+123print(&quot;hello world!&quot;)        -- 用 print() 函数输出 hello world！local m ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/function_result.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>函数返回值Lua 具有一项与众不同的特性，允许函数返回多个值。Lua 的库函数中，有一些就是返回多个值。
+
+示例代码：使用库函数 string.find，在源字符串中查找目标字符串，若查找成功，则返回目标字符串在源字符串中的起始位置和结束位置的下标。
+
+12local s, e = string.find(&quot;hello world&quot;, &quot;llo&quot;)pr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/if_else.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>控制结构 if-elseif-else 是我们熟知的一种控制结构。Lua 跟其他语言一样，提供了if-else 的控制结构。因为是大家熟悉的语法，本节只简单介绍一下它的使用方法。
 单个 if 分支 型1234x = 10if x &gt; 0 then    print(&quot;x is a positive number&quot;)end
@@ -153,10 +152,8 @@ for 数字型for 语句有两种形式：数字 for（numeric for）和范型 fo
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>局部变量Lua 的设计有一点很奇怪，在一个 block 中的变量，如果之前没有定义过，那么认为它是一个全局变量，而不是这个 block 的局部变量。这一点和别的语言不同。容易造成不小心覆盖了全局同名变量的错误。
 定义Lua 中的局部变量要用 local 关键字来显式定义，不使用 local 显式定义的变量就是全局变量：
 12g_var = 1         -- global varloc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/metatable.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>元表在 Lua 5.1 语言中，元表 (metatable) 的表现行为类似于 C++ 语言中的操作符重载，例如我们可以重载 “__add” 元方法 (metamethod) ，来计算两个 Lua 数组的并集；或者重载 “__index” 方法，来定义我们自己的 Hash 函数。Lua 提供了两个十分重要的用来处理元表的方法，如下：
-
-setmetatable(table, metatabl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/main.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 入门Lua 是一个小巧的脚本语言。是巴西里约热内卢天主教大学（Pontifical Catholic University of Rio de Janeiro）里的一个研究小组，由 Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo所组成并于 1993 年开发。其设计目的是为了嵌入应用程序中，从而为应用...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/math_library.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>数学库Lua 数学库由一组标准的数学函数构成。数学库的引入丰富了 Lua 编程语言的功能，同时也方便了程序的编写。常用数学函数见下表：
 
@@ -164,8 +161,8 @@ setmetatable(table, metatabl...</p></div><div class="meta cap"><span class="cap"
 示例代码：
 
 123456789101112131415161718192021222324print(math.pi)           --&gt;output  3.1415926535898print(math.rad(180))     --...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/main.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 入门Lua 是一个小巧的脚本语言。是巴西里约热内卢天主教大学（Pontifical Catholic University of Rio de Janeiro）里的一个研究小组，由 Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo所组成并于 1993 年开发。其设计目的是为了嵌入应用程序中，从而为应用...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/module.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>模块从 Lua 5.1 语言添加了对模块和包的支持。一个 Lua 模块的数据结构是用一个 Lua 值（通常是一个 Lua 表或者 Lua 函数）。一个 Lua 模块代码就是一个会返回这个 Lua 值的代码块。可以使用内建函数 require() 来加载和缓存模块。简单的说，一个代码模块就是一个程序库，可以通过 require 来加载。模块加载后的结果通过是一个 Lua table，这个表就像...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
 </a></div>
   
 

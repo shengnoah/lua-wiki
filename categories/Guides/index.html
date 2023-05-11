@@ -126,6 +126,14 @@ Fork 源码
 
 提交分支:
  1$ git push origin new_featu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.126Z">2023-04-26</time></span><span class="cap breadcrumb">Guides</span></div></article>
+</a><a class="post-card post " href="/orange_usages.html">
+<article class="md-text"><h2 class="post-title">使用场景</h2><div class="excerpt"><p>Orange是基于插件设计的，基本思想是通过实现各种插件灵活的在Nginx的各个执行阶段进行逻辑处理。
+Orange提供的默认插件功能如下：
+
+全局的监控插件，可统计API访问情况、Nginx连接情况、流量统计、QPS等
+自定义监控，可根据配置的规则筛选监控项，统计其各个指标
+rewrite插件，可通过UI配置各种rewrite策略，省去手写nginx rewrite，然后重启的麻烦
+red...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.126Z">2023-04-26</time></span><span class="cap breadcrumb">Guides</span></div></article>
 </a><a class="post-card post " href="/orange_about.html">
 <article class="md-text"><h2 class="post-title">关于Orange</h2><div class="excerpt"><p>欢迎使用Orange，使用过程中如碰到问题，请到Github进行提问。
 关于Orange是一个基于OpenResty的API Gateway，提供API及自定义规则的监控和管理，如访问统计、流量切分、API重定向、API鉴权、WEB防火墙等功能。它有以下特性：
@@ -136,14 +144,6 @@ Fork 源码
 默认内置的插件
 全局状态统计
 自...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.126Z">2023-04-26</time></span><span class="cap breadcrumb">Guides</span></div></article>
-</a><a class="post-card post " href="/orange_usages.html">
-<article class="md-text"><h2 class="post-title">使用场景</h2><div class="excerpt"><p>Orange是基于插件设计的，基本思想是通过实现各种插件灵活的在Nginx的各个执行阶段进行逻辑处理。
-Orange提供的默认插件功能如下：
-
-全局的监控插件，可统计API访问情况、Nginx连接情况、流量统计、QPS等
-自定义监控，可根据配置的规则筛选监控项，统计其各个指标
-rewrite插件，可通过UI配置各种rewrite策略，省去手写nginx rewrite，然后重启的麻烦
-red...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.126Z">2023-04-26</time></span><span class="cap breadcrumb">Guides</span></div></article>
 </a><a class="post-card post " href="/orange_issues.html">
 <article class="md-text"><h2 class="post-title">常见问题</h2><div class="excerpt"><p>Orange依赖的OpenResty版本是多少？Orange的监控插件需要统计http的某些状态数据，所以需要编译OpenResty时添加--with-http_stub_status_module。由于使用了*_block指令，所以OpenResty的版本最好在1.9.7.3以上.
 start.sh脚本无法启动检查OpenResty和lor是否安装成功。命令行要能直接执行Nginx -v和...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.126Z">2023-04-26</time></span><span class="cap breadcrumb">Guides</span></div></article>

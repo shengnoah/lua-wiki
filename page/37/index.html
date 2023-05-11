@@ -110,16 +110,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-665_Ubuntu18.04%20Tengine+Lua+GraphicsMagick%E5%9B%BE%E7%89%87%E7%BC%A9%E6%94%BE/">
-<article class="md-text"><h2 class="post-title">Ubuntu18.04 Tengine+Lua+GraphicsMagick图片缩放</h2><div class="excerpt"><p>自己搭建的图片服务器，有图片缩放的需求，大致思路是可以使用nginx调用lua，使用GraphicMagick的命令来做图片缩放
-说明文件夹规划lua.jaychang.cn(如/var/filebase)
-12345678910111213jaychang@tengine:~$ tree /var/filebase//var/filebase/├── avatar.png├── cache...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-66_Lua%20table%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Lua table 学习笔记</h2><div class="excerpt"><p>Lua table定义
-table类型实现了“关联数组”。“关联数组” 是一种具有特殊索引方式的数组，索引可为字符串string或(整)数number类型.
-
-local corp = &#123;
-    web = &#34;www.google.com&#34;,   --索引为字符串，key = &#34;web&#34;, value = &#34;www.google.com&#...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-669_Lua%20C%20API/">
+<article class="md-text"><h2 class="post-title">Lua C API</h2><div class="excerpt"><p>
+云风Blog：Lua C API 的正确用法
+C读取和调用Lua文件的库：lua.h, lauxlib.h, lualib.h
+包括：读写Lua全局变量的函数、调用Lua函数的函数、运行Lua代码片段的函数、注册C函数然后可以在Lua中被调用的函数
+C和Lua之间的数据交换，通过对栈上的值进行操作。栈的使用解决：Lua会自动进行垃圾回收，而C要求显示的分配内存单元；Lua中的动态类型和C的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-670_Lua%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6/">
 <article class="md-text"><h2 class="post-title">Lua语言进阶</h2><div class="excerpt"><p>
 0x01 Lua中什么值为假？12nilfalse
@@ -134,6 +130,12 @@ lua会自动在string 和numbers之间自动运行类型转换，当一个字符
 <article class="md-text"><h2 class="post-title">Lua入门教程：垃圾回收</h2><div class="excerpt"><p>Lua 使用的是自动内存管理，所以我们不需要自己手动取删除创建后的对象，Lua 通过垃圾回收（garbage collection）的方式自动删除成为来及的对象，从而将程序员从内存管理的负担中解放出来。
 虽然在理想的环境中，垃圾回收对我们来说是不可见的，但其却不是万能的，比如某些关键的性能点，我们可能需要停止垃圾回收，或者让它只在特定的时间点运行，这就需要额外的垃圾回收方式来辅助。
 Lua ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-66_Lua%20table%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Lua table 学习笔记</h2><div class="excerpt"><p>Lua table定义
+table类型实现了“关联数组”。“关联数组” 是一种具有特殊索引方式的数组，索引可为字符串string或(整)数number类型.
+
+local corp = &#123;
+    web = &#34;www.google.com&#34;,   --索引为字符串，key = &#34;web&#34;, value = &#34;www.google.com&#...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-668_Lua%20oop/">
 <article class="md-text"><h2 class="post-title">Lua oop</h2><div class="excerpt"><p>Lua 是一门很简单的语言. 本身语言设计中没有原生的 oop 设计, 但是我们可以使用 setmetatable 来做一个伪装的 class.
 
@@ -151,26 +153,6 @@ fraction_a = &#123...</p></div><div class="meta cap"><span class="cap" id="post-
 local socket = require &#34;socket&#34;
 
 local const &#x...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-654_nginx%20lua%20%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%20%C2%AB%20%E8%AF%97%E5%AE%81/">
-<article class="md-text"><h2 class="post-title">nginx lua 编译安装 « 诗宁</h2><div class="excerpt"><p>
-  编译安装脚本
-  主配置文件
-  systemd启动配置
-  启动脚本
-
-
-编译安装脚本
-
-
-  nginx-lua-build.sh
-
-
-#!/bin/bash
-#Date:2018-09-03
-#Written by magic5650.
-#Readme:install nginx + lua.
-
-#step 0mkdir &#x2F;usr&#x2F;local&#x2F;ngi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-656_150.%20Evaluate%20Reverse%20Polish%20Notation/">
 <article class="md-text"><h2 class="post-title">150. Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>每日一题 2019 - 05 - 12
 
@@ -180,18 +162,30 @@ Valid operators are +, -, *, /. Each operand may be an integer or another expres
 Note:
 
 Divi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-659_%E9%AB%98%E5%B9%B6%E5%8F%91%E6%8A%A2%E7%BA%A2%E5%8C%85%E6%96%B9%E6%A1%88%EF%BC%8D%EF%BC%8D%E5%9F%BA%E4%BA%8ERedis%20lua%E6%96%B9%E6%A1%88/">
-<article class="md-text"><h2 class="post-title">高并发抢红包方案－－基于Redis lua方案</h2><div class="excerpt"><p> Redis 2.6 内置Lua解释器
-
-Lua由标准C编写而成，代码简洁优美，完整的Lua解释器不过200k，极易嵌入到其他程序。
-Lua和C/C++代码交互容易， 性能和灵活性大大提高。
-可作为扩展脚本，也可以作为普通的配置文件，实现复杂的配置逻辑，并且容易理解和维护.
-
-Redis–lua脚本
-减少网络开销：本来多次网络请求的操作，可以用一个请求完成，原先5次请求的逻辑放在redis服...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-657_Redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81Lua%E8%84%9A%E6%9C%AC/">
 <article class="md-text"><h2 class="post-title">Redis实现分布式锁Lua脚本</h2><div class="excerpt"><p>简单锁采用键值对存储，键是锁的标识，值是全局唯一值（如uuid）。
 获取锁1234567891011121314local key = KEYS[1] -- 锁标识local value = ARGV[1] -- 全局唯一值local ttl = tonumber(ARGV[2]) or 0 -- 过期时间，默认不过期if (redis.call(&#39;setnx&#39;, key, ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-658_LUA%20%E4%B8%8E%20C/">
+<article class="md-text"><h2 class="post-title">LUA 与 C</h2><div class="excerpt"><p>栈
+使用栈进行lua和C数据交换
+要将一个值传给lua，需要先将该值压入栈，然后调用lua api函数，lua会从栈中获取该值并从栈中弹出
+入栈API
+123456void lua_pushnil(lua_State *);void lua_pushboolean(lua_State *, int bool);void lua_pushstring(lua_State *, const ch...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-65_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>4 Statements
+
+多重赋值：先求出所有值，再赋值
+
+交换两值
+1x, y = y, x
+
+多余的变量赋nil，多余的值丢弃
+
+用局部变量保护全局变量
+1local foo = foo
+
+if-then-elseif-else-end充当switch
+1234567891011if op == &#34;+&#34; then	r = a + belseif op == &#34;-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.293Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

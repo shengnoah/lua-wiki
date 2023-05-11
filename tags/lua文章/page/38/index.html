@@ -112,15 +112,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-647_%E5%BC%80%E4%B8%AA%E5%9D%91%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%8Blua/">
-<article class="md-text"><h2 class="post-title">开个坑学习一下lua</h2><div class="excerpt"><p>再次好久没有更新blog，主要是感觉没有什么记录的东西。最近通读了云风大神的blog，只能感叹人与人差距之大，有时确实难以企及，但仍希望能有一丝靠近。
-在工作中对lua有一些接触，开个坑mark一下，准备用一段时间通读一下lua的代码，大概20k行左右，对于一门语言来说确实足够精简。
-2016.05.18</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-644_%E9%80%86%E5%90%91%E5%88%86%E6%9E%90Lua%E6%B3%A8%E5%85%A5%E7%B1%BB%E5%9E%8B%E5%A4%96%E6%8C%82/">
-<article class="md-text"><h2 class="post-title">逆向分析Lua注入类型外挂</h2><div class="excerpt"><p>
-            
-        &lt;h2 id=&quot;相关&quot;&gt;&lt;a href=&quot;#相关&quot; class=&quot;headerlink&quot; title=&quot;相关&quot;&gt;&lt;/a&gt;相关&lt;/h2&gt;&lt;p&gt;该网游类型为横版过关类角色扮演游戏，之前在这上面花了不少时间。刚接触逆...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-645_C%E5%BE%AA%E7%8E%AF%E6%89%A7%E8%A1%8CLua/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-645_C%E5%BE%AA%E7%8E%AF%E6%89%A7%E8%A1%8CLua/">
 <article class="md-text"><h2 class="post-title">C循环执行Lua</h2><div class="excerpt"><p>
     文章目录
     
@@ -137,6 +129,26 @@
 
 
 在有了基本的Lua知识和cocos2dx ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-649_%E4%BD%BF%E7%94%A8%E5%85%83%E8%A1%A8%E4%BC%98%E5%8C%96%20Lua%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+<article class="md-text"><h2 class="post-title">使用元表优化 Lua 配置文件</h2><div class="excerpt"><p>
+配置文件
+在游戏工程中，通常有大量配置是由策划提供，再转换成程序方便读取的格式添加到工程中。
+在我参与的Cocos2dx-Lua工程中，策划通常在Excel中配置，再通过脚本转换为Lua-Table的文件。
+比如常见的道具表转换后：
+-- PropModel.lua
+PropModel = &#123;
+    [1001] = &#123;
+        ID          = 1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-64_%5BLeetCode%5DEvaluate%20Reverse%20Polish%20Notation/">
+<article class="md-text"><h2 class="post-title">Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>题目描述Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+Valid operators are +, -, *, /. Each operand may be an integer or another expression.
+Some examples:12[&#34;2&#34;, &#...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-646_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AF%B9%E5%87%BD%E6%95%B0%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记：对函数的深入理解</h2><div class="excerpt"><p>
+    闭包
+lua中的函数都可以认为是闭包，只不过为了便于理解还是用了函数的概念。
+lua中函数的返回值可以是匿名函数，也就是闭包。以下面的代码为例，提出一个概念：非局部的变量。在下面的代码中，匿名函数访问了一个变量i，它对于newCount来说是局部变量，对于匿名函数来说是既不是局部变量也不是全局变量，在lua中这个称谓非局部的变量。
+在lua中一个闭包指的是一个函数和该函数所需要访问...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-650_Lua%20%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">Lua 笔记</h2><div class="excerpt"><p>词法约定变量是以字母或下划线开头的字母下划线数字序列，不要使用下划线加大写字母的标识符，因为Lua的保留字是这种形式Lua的保留字：
 
@@ -177,16 +189,10 @@ while
 
 
 在Lua中大小...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-649_%E4%BD%BF%E7%94%A8%E5%85%83%E8%A1%A8%E4%BC%98%E5%8C%96%20Lua%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-<article class="md-text"><h2 class="post-title">使用元表优化 Lua 配置文件</h2><div class="excerpt"><p>
-配置文件
-在游戏工程中，通常有大量配置是由策划提供，再转换成程序方便读取的格式添加到工程中。
-在我参与的Cocos2dx-Lua工程中，策划通常在Excel中配置，再通过脚本转换为Lua-Table的文件。
-比如常见的道具表转换后：
--- PropModel.lua
-PropModel = &#123;
-    [1001] = &#123;
-        ID          = 1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-647_%E5%BC%80%E4%B8%AA%E5%9D%91%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%8Blua/">
+<article class="md-text"><h2 class="post-title">开个坑学习一下lua</h2><div class="excerpt"><p>再次好久没有更新blog，主要是感觉没有什么记录的东西。最近通读了云风大神的blog，只能感叹人与人差距之大，有时确实难以企及，但仍希望能有一丝靠近。
+在工作中对lua有一些接触，开个坑mark一下，准备用一段时间通读一下lua的代码，大概20k行左右，对于一门语言来说确实足够精简。
+2016.05.18</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-651_lua/">
 <article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>
   
@@ -208,10 +214,6 @@ PropModel = &#123;
 
 
 lua-intf 提供了...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-64_%5BLeetCode%5DEvaluate%20Reverse%20Polish%20Notation/">
-<article class="md-text"><h2 class="post-title">Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>题目描述Evaluate the value of an arithmetic expression in Reverse Polish Notation.
-Valid operators are +, -, *, /. Each operand may be an integer or another expression.
-Some examples:12[&#34;2&#34;, &#...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-653_%E5%9F%BA%E4%BA%8ENginx%20Lua%20%E5%92%8CNetflix%20Eureka%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/">
 <article class="md-text"><h2 class="post-title">基于Nginx Lua 和Netflix Eureka的微服务网关</h2><div class="excerpt"><p>依赖：lua-resty-http
 基于Nginx&amp;Lua 和Netflix Eureka的微服务网关。

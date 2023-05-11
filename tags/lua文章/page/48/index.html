@@ -112,24 +112,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-556_Ubuntu%2016.04%20%E5%AE%89%E8%A3%85%20Lua/">
-<article class="md-text"><h2 class="post-title">Ubuntu 16.04 安装 Lua</h2><div class="excerpt"><p>在 Linux 系统上使用以下命令编译安装 Lua：
-curl -R -O http://www.lua.org/ftp/lua-5.3.3.tar.gz
-tar zxf lua-5.3.3.tar.gz
-cd lua-5.3.3
-make linux test
-
-安装 make编译过程如果提示以下信息则需要先安装 make：
-# make linux test
-The program &#...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-558_Linux%20lua%E5%8F%8A%E4%BE%9D%E8%B5%96%E5%BA%93%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">Linux lua及依赖库安装</h2><div class="excerpt"><p>lua5.2暂时不使用，使用lua5.1+luarocks
-
-看readline软件包是否安装（dpkg -l | grep -i 软件名）
-是否安装ncurses安装包（ncurses安装包 ）
-是否安装libncurses5-dev 或libncursesw5-dev软件包（apt-get install libncurses5-dev）
-
-ncurses-5.9.tar.gz$ ./c...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-557_Lua%E7%89%B9%E5%88%AB%E4%B9%8B%E5%A4%84%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Lua特别之处笔记</h2><div class="excerpt"><p>
+          
+            
+          &lt;a href=&quot;/2015/02/02/gdb_tutorial/&quot; rel=&quot;next&quot; title=&quot;GDB基础教程&quot;&gt;
+            &lt;i class=&quot;fa fa-chevron-left&quot;&gt;&lt;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-555_lua%205.4%E5%88%86%E4%BB%A3%E7%A0%94%E7%A9%B6%E5%8F%8Aluajit%E5%88%86%E4%BB%A3%E7%A7%BB%E6%A4%8D/">
 <article class="md-text"><h2 class="post-title">lua 5.4分代研究及luajit分代移植</h2><div class="excerpt"><p>lua垃圾回收发展历程
 为什么不用引用计数？
@@ -142,12 +130,14 @@ ncurses-5.9.tar.gz$ ./c...</p></div><div class="meta cap"><span class="cap" id="
 
 5.1引入了分步gc，整个gc过程可以分为好几步，穿插在运行过程中
 5....</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-557_Lua%E7%89%B9%E5%88%AB%E4%B9%8B%E5%A4%84%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Lua特别之处笔记</h2><div class="excerpt"><p>
-          
-            
-          &lt;a href=&quot;/2015/02/02/gdb_tutorial/&quot; rel=&quot;next&quot; title=&quot;GDB基础教程&quot;&gt;
-            &lt;i class=&quot;fa fa-chevron-left&quot;&gt;&lt;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-558_Linux%20lua%E5%8F%8A%E4%BE%9D%E8%B5%96%E5%BA%93%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">Linux lua及依赖库安装</h2><div class="excerpt"><p>lua5.2暂时不使用，使用lua5.1+luarocks
+
+看readline软件包是否安装（dpkg -l | grep -i 软件名）
+是否安装ncurses安装包（ncurses安装包 ）
+是否安装libncurses5-dev 或libncursesw5-dev软件包（apt-get install libncurses5-dev）
+
+ncurses-5.9.tar.gz$ ./c...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-559_TypeEvaluator%20%E5%92%8C%20TimeInterpolator/">
 <article class="md-text"><h2 class="post-title">TypeEvaluator 和 TimeInterpolator</h2><div class="excerpt"><p>本文看看 TypeEvaluator 和 TimeInterpolator 的源码。
 
@@ -162,13 +152,31 @@ ncurses-5.9.tar.gz$ ./c...</p></div><div class="meta cap"><span class="cap" id="
 
 交互方式首先，在终端输入lua，进入交互模式
 123[work@fanruo ~]$ luaLu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-553_Lua%E4%B8%8EC%E7%9A%84%E4%BA%A4%E4%BA%92/">
+<article class="md-text"><h2 class="post-title">Lua与C的交互</h2><div class="excerpt"><p>Lua与C的交互
+
+Lua是一个嵌入式的语言，它不仅可以是一个独立运行的程序，也可以是一个用来嵌入其它应用的程序库。
+
+C API是一个C代码与Lua进行交互的函数集，它由以下几部分构成：
+
+1、  读写Lua全局变量的函数；
+
+2、  调用Lua函数的函数；
+
+3、  运行Lua代码片段的函数；
+
+4、  注册C函数后可以在Lua中被调用的函数；
+
+在C和LUA之间交互的关键在于一个虚拟栈...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-560_TeX%E7%9A%84%E5%AE%B6%E6%97%8F%EF%BC%9ALaTeX%EF%BC%8C%20pdfTeX%EF%BC%8C%20XeTeX%EF%BC%8C%20LuaTeX%E5%92%8CConTeXt/">
+<article class="md-text"><h2 class="post-title">TeX的家族：LaTeX， pdfTeX， XeTeX， LuaTeX和ConTeXt</h2><div class="excerpt"><p>最近这段时间一直在研究LaTeX，但是一直被各种各样的词汇搞到晕头转向，后来找到了两篇文章，文章中对于各种名词的解释比较到位，并从TeX的发展讲解了整个历史，其中一个作者更是绘制出了整个家族树，对于理解TeX的历史很有帮助，奈何两篇文章都是英文，这么好的文章应该分享给国内的朋友们，同时也为了回忆一下自己之前学的英语，这里翻译了其中的一篇文章，如果有错误，还望大家原谅ShareLaTeX刚刚支...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-55_redis%20lua%E8%84%9A%E6%9C%AC%E5%AE%9E%E8%B7%B5/">
 <article class="md-text"><h2 class="post-title">redis lua脚本实践</h2><div class="excerpt"><p>redis lua简介Lua 脚本功能是Reids2.6版本的最大亮点， 通过内嵌对Lua环境的支持，Redis解决了长久以来不能高效地处理CAS（check-and-set）命令的缺点，并且可以通过组合使用多个命令，轻松实现以前很难实现或者不能高效实现的模式。
 基本命令EVAL与EVALSHA通过内置的Lua解释器，可以使用EVAL命令对Lua脚本进行求值。
 
 script参数是一段Lua...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-560_TeX%E7%9A%84%E5%AE%B6%E6%97%8F%EF%BC%9ALaTeX%EF%BC%8C%20pdfTeX%EF%BC%8C%20XeTeX%EF%BC%8C%20LuaTeX%E5%92%8CConTeXt/">
-<article class="md-text"><h2 class="post-title">TeX的家族：LaTeX， pdfTeX， XeTeX， LuaTeX和ConTeXt</h2><div class="excerpt"><p>最近这段时间一直在研究LaTeX，但是一直被各种各样的词汇搞到晕头转向，后来找到了两篇文章，文章中对于各种名词的解释比较到位，并从TeX的发展讲解了整个历史，其中一个作者更是绘制出了整个家族树，对于理解TeX的历史很有帮助，奈何两篇文章都是英文，这么好的文章应该分享给国内的朋友们，同时也为了回忆一下自己之前学的英语，这里翻译了其中的一篇文章，如果有错误，还望大家原谅ShareLaTeX刚刚支...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.283Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-540_1.1%20lua%20%E7%AE%80%E4%BB%8B/">
+<article class="md-text"><h2 class="post-title">1.1 lua 简介</h2><div class="excerpt"><p>简介Lua（发音： /ˈluːə/）程序设计语言是一个简洁、轻量、可扩展的脚本语言，Lua在葡萄牙语中的意思是月亮。Lua 是巴西里约热内卢天主教大学（Pontifical Catholic University of Rio de Janeiro）里的一个研究小组，由Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figuei...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-53_Lua%E7%BC%96%E7%A8%8B/">
 <article class="md-text"><h2 class="post-title">Lua编程</h2><div class="excerpt"><p>1. 将字符串分割成一个一个单元，存在表中
 
@@ -177,8 +185,6 @@ script参数是一段Lua...</p></div><div class="meta cap"><span class="cap" id=
   local tb = &#123;&#125;
   for utfChar in string.gmatch(s, &#34;[%z1-127194-244][128-191]*&#34;) do  
       table.insert(...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-540_1.1%20lua%20%E7%AE%80%E4%BB%8B/">
-<article class="md-text"><h2 class="post-title">1.1 lua 简介</h2><div class="excerpt"><p>简介Lua（发音： /ˈluːə/）程序设计语言是一个简洁、轻量、可扩展的脚本语言，Lua在葡萄牙语中的意思是月亮。Lua 是巴西里约热内卢天主教大学（Pontifical Catholic University of Rio de Janeiro）里的一个研究小组，由Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figuei...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

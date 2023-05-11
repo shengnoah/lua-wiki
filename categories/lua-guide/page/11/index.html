@@ -117,16 +117,19 @@
 在 Lua 语言中，数组是用整数索引表实现的。数组的大小并不固定，随着数组元素的增加，它可以动态地增加内存空间大小。  
 一维数组一维数组可以使用一个简单的表结构表示。可以通过一个简单循环初始化数组或者读取数组中数据。示例代码如下所示：  
 1234567891011121314151617array = &#123;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-basic-syntax/">
-<article class="md-text"><h2 class="post-title">Lua基本语法</h2><div class="excerpt"><p>基本语法Lua 学起来非常简单。现在，让我们开始创建我们的第一个 Lua 程序吧！  
-第一个 Lua 程序Lua 提供交互式编程模式。在这个模式下，你可以一条一条地输入命令，然后立即就可以得到结果。你可以在 shell 中使用 lua -i 或者 lua 命令启动。输入命令后，按下回车键，就启动了交互模式，显示如下：  
-1234567$ lua -i $ Lua 5.1.4  Copyr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-break/">
 <article class="md-text"><h2 class="post-title">Break语句</h2><div class="excerpt"><p>#break 语句  
 程序在解释执行过程中，在循环内遇到 break 语句时，循环将立即结束。程序将循环语句的下一条语句开始执行。如果你是在嵌套循环（即，一个循环内还有一个循环语句）内使用 break 语句，break 只结束内层循环，并从该代码块后的第一条语句处开始执行。  
 ##语法  
 break 语句的语法如下所示：  
 12345678break;```  ##流程图：  ![]...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-basic-syntax/">
+<article class="md-text"><h2 class="post-title">Lua基本语法</h2><div class="excerpt"><p>基本语法Lua 学起来非常简单。现在，让我们开始创建我们的第一个 Lua 程序吧！  
+第一个 Lua 程序Lua 提供交互式编程模式。在这个模式下，你可以一条一条地输入命令，然后立即就可以得到结果。你可以在 shell 中使用 lua -i 或者 lua 命令启动。输入命令后，按下回车键，就启动了交互模式，显示如下：  
+1234567$ lua -i $ Lua 5.1.4  Copyr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-coroutines/">
+<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
+上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-data-types/">
 <article class="md-text"><h2 class="post-title">数据类型</h2><div class="excerpt"><p>数据类型Lua 是动态类型编程语言，变量没有类型，只有值才有类型。值可以存储在变量中，作为参数传递或者作为返回值。尽管在 Lua 中没有变量数据类型，但是值是有类型的。下面的列表中列出了数据类型： 
 
@@ -140,9 +143,6 @@ break 语句的语法如下所示：
     
     
      ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-coroutines/">
-<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
-上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a></div>
   
 

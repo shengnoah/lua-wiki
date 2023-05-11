@@ -110,11 +110,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/go6.2.html">
-<article class="md-text"><h2 class="post-title">go6.2</h2><div class="excerpt"><p>6.2 同步创建一个协程没有什么难度，并且启动很多协程开销也不大。但是，并发执行的代码需要协同。为了帮助我们解决这个问题，go提供了通道（channels）。在学习通道之前，我认为有必要先学习了并发编程的基本知识。
-在编写并发执行的代码时，你需要特别的关注在哪里和如何读写一个值。出于某些原因，例如没有垃圾回收的语言，需要你从一个新的角度去考虑你的数据，总是警惕着可能存在的危险。例如：
-123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go6.3.html">
+  <div class="post-list post"><a class="post-card post " href="/go6.3.html">
 <article class="md-text"><h2 class="post-title">go6.3</h2><div class="excerpt"><p>6.3 通道并发编程的挑战主要在于数据共享。如果你的go协程没有共享数据，你就不需要担心同步他们。但是，对于所有的系统，这不是一个选择。实际上，很多系统以完全相反的目标构建：在多个请求中共享数据。内存缓存或者数据库都是这方面的好例子。这正变得越来越流行的事实。
 通道通过解决数据共享问题，让并发编程变得更加清晰。通道是一个通信管道，它用于go协程之间传递数据。换句话说，go协程可以通过通道，传...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go6.4.html">
@@ -126,17 +122,6 @@ go协程很有效的抽象了我们需要并发执行的代码。通道通过消
 关于本书授权许可本书中的内容使用 CC BY-NC-SA 4.0（署名 - 非商业性使用 - 相同方式共享4.0许可协议）授权。你不必为此书付费。你可以免费的复制、发布、修改或者展示此书。但是，这本书的版权归原作者Karl Seguin所有，不要将此书用于商业目的。
 关于许可证的全部内容你可以浏览以下网站：
 http://creativecommons.org/licenses/by-nc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/gogetting-started.html">
-<article class="md-text"><h2 class="post-title">gogetting-started</h2><div class="excerpt"><p>准备工作链接
-目录
-上一章：引言
-下一章：第1章
-
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/goconclusion.html">
-<article class="md-text"><h2 class="post-title">goconclusion</h2><div class="excerpt"><p>6.4 总结我最近听go被描述成一门无聊的语言。无聊时因为很容易学，容易写，更重要的是容易读。也许，我实际帮了个倒忙。我已经用了3章谈论类型并介绍了如何声明变量。
-如果你有静态类型语言的编程背景，最好情况下，我们看到的大多数可能只是复习一下而已。go语言让指针用起来更明显且易用了，并且go将数组封装成切片，对经验丰富的java和c#程序员来说，不是什么压倒性的优势。
-如果你主要是使用动态型语...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/godirectory.html">
 <article class="md-text"><h2 class="post-title">godirectory</h2><div class="excerpt"><p>目录
 关于本书
@@ -168,6 +153,17 @@ http://creativecommons.org/licenses/by-nc...</p></div><div class="meta cap"><spa
 2.6 组合
 2.7 指针类型和值类型
 2.8 继续...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/goconclusion.html">
+<article class="md-text"><h2 class="post-title">goconclusion</h2><div class="excerpt"><p>6.4 总结我最近听go被描述成一门无聊的语言。无聊时因为很容易学，容易写，更重要的是容易读。也许，我实际帮了个倒忙。我已经用了3章谈论类型并介绍了如何声明变量。
+如果你有静态类型语言的编程背景，最好情况下，我们看到的大多数可能只是复习一下而已。go语言让指针用起来更明显且易用了，并且go将数组封装成切片，对经验丰富的java和c#程序员来说，不是什么压倒性的优势。
+如果你主要是使用动态型语...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/gogetting-started.html">
+<article class="md-text"><h2 class="post-title">gogetting-started</h2><div class="excerpt"><p>准备工作链接
+目录
+上一章：引言
+下一章：第1章
+
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/gointroduction.html">
 <article class="md-text"><h2 class="post-title">gointroduction</h2><div class="excerpt"><p>引言当开始学习一门新的语言时，我总有一种既爱又恨的感觉。一方面，语言是我们做事情的基础，即使是小的变化，也会带来明显的效果。当一些事情恍然大悟时，会给如何编程带来持久的影响，并且能够重新定义你关于其他语言的期望。不利的一面是，语言设计是一个持续的过程。学习新的关键字、系统类型、编码风格、新的库、社区和范例，似乎很难解释这些需要付出许多努力。和那些我们必须学习的事相比较，花费时间去学习新语言常...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go3.5.html">
@@ -175,6 +171,12 @@ http://creativecommons.org/licenses/by-nc...</p></div><div class="meta cap"><spa
 这里有一些边界例子我们没有涉及到，但是你不太可能遇见这些例子。另外，如果你遇到了，希望我们已经打下的基础能让你理解这是怎么回事。
 链接
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go4.2.html">
+<article class="md-text"><h2 class="post-title">go4.2</h2><div class="excerpt"><p>4.2 接口接口是一种类型，它只定义了声明，没有具体实现。例如：
+123type Logger interface &#123;    Log(message string)&#125;
+
+你也许觉得奇怪，这样做有什么用。接口可以使你的代码从具体的实现中去耦。例如，我们可以会有很多种类型的loggers：
+123type SqlLogger struct &#123; ... &#125;t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go4.0.html">
 <article class="md-text"><h2 class="post-title">go4.0</h2><div class="excerpt"><p>4.0 代码组织和接口现在是时候来看看如何组织我们的代码了。
 链接

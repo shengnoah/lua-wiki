@@ -110,8 +110,9 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-544_Lua%20%E8%AF%AD%E8%A8%80%E5%88%9D%E8%AF%86/">
-<article class="md-text"><h2 class="post-title">Lua 语言初识</h2><div class="excerpt"><p>Lua 是一个小巧的脚本语言 Lua脚本可以很容易的被C/C++ 代码调用，也可以反过来调用C/C++的函数，这使得Lua在应用程序中可以被广泛应用。不仅仅作为扩展脚本，也可以作为普通的配置文件，代替XML,ini等文件格式，并且更容易理解和维护。[2] Lua由标准C编写而成，代码简洁优美，几乎在所有操作系统和平台上都可以编译，运行。[2] 一个完整的Lua解释器不过200k，在目前所有脚...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-545_Lua%20%E5%85%83%E8%A1%A8%E5%92%8C%E5%85%83%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">Lua 元表和元方法</h2><div class="excerpt"><p>table 作为 Lua 中唯一的数据结构，我们可以利用 table 实现面向对象编程中的类、继承、多重继承等等。在这就介绍一下和 table 密切相关的 Lua 元表和元方法。
+Lua 中的每个值都有一个元表。table 和 userdata 可以有各自独立的元表，而其他类型的值则共享其类型所属的单一元表。任何 table 都可以作为任何值的元表，而一组相关的 table 也可以共享一个通...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-548_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%BA%8C)/">
 <article class="md-text"><h2 class="post-title">深入 Lua Garbage Collector(二)</h2><div class="excerpt"><p>
 
@@ -121,6 +122,10 @@ Lua垃圾回收器函数Lua 提供了以下函数 collectgarbage ([opt [, arg]])
 collectgarbage(“collect”): 做一次完整的垃圾收集循环。通过参数 opt 它提供了一组不同的功能：
 
 collectgarbage(“count”): 以 K 字节数为单位返回 Lua ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-546_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E6%95%B0%E5%80%BC/">
+<article class="md-text"><h2 class="post-title">Lua入门教程：数值</h2><div class="excerpt"><p>Lua 5.2 以及之前的版本，所有数值类型都是以双精度浮点数表示，并且所有浮点型数值最大都是 2^54，但是 Lua 5.3 版本引入了整形，最大可用 64 位表示。
+数值表示方式Lua 数值默认是十进制表示，除了整形之外，其他小数或者指数都会当做浮点型数值。我们可以使用函数 type 来获数值类型，他们都是使用 number 表示数值：
+1234567&gt; 1         &gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-549_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记三</h2><div class="excerpt"><p>Lua中可以用三种方式定义字符串：
 
@@ -129,25 +134,6 @@ collectgarbage(“count”): 以 K 字节数为单位返回 Lua ...</p></div><di
 [[ ]]   [[hello world]]
 
 字符串操作1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950print(string.upper...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-541_Lua%E5%8D%8F%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>
-  Lua的协程
-
-
-Lua的协程
-
-  定义
-    
-      两个子过程通过相互协作完成某个任务，用它可以实现协作式多任务，
-      协程(coroutine)技术本质上是一种程序控制机制
-    
-  
-  分类
-    
-      对称协程(asymmetric)
-        
-          当前协程将控制权让给另外一个协程，协程之间的优先级是平等的
-     ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-52_lua%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89/">
 <article class="md-text"><h2 class="post-title">lua函数定义</h2><div class="excerpt"><p>FuncStateproto结构数组保存函数原型信息;prev保存父函数体指针；actvar保存定义的局部变量；upvalues保存upvalue
 Lua源码中,专门有一个结构体FuncState用来保存函数相关的信息.其实,即使没有创建任何函数,对于Lua而言也有一个最外层的FuncState数据.这个结构体的定义:
@@ -184,16 +170,6 @@ Lua 中支持的数据结构包括：
     
     
       LUA_TBOO...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-531_LUA%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/">
-<article class="md-text"><h2 class="post-title">LUA面向对象编程技巧</h2><div class="excerpt"><p>LUA中的对象我们知道，对象由属性和方法组成。LUA中最基本的结构是table，So 必须用table描述对象的属性。lua中的function可以用来表示方法。那么LUA中的类可以通过table + function模拟出来。至于继承，可以通过metetable模拟出来（不推荐用，只模拟最基本的对象大部分时间够用了）。
-MetatableLua中的metatable 类似于C++中的虚函数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-534_Evaluation%20metrics%20Recall,%20Precision,%20BLEU%20and%20MET/">
-<article class="md-text"><h2 class="post-title">Evaluation metrics Recall, Precision, BLEU and METEOR</h2><div class="excerpt"><p>
-
-考虑一个机器学习问题，我们想评价(evaluate)一个给定模型的好坏，在一些情况下我们可以直接用准确率(accuracy)，但是accuracy并不是在所有情况都适用。
-比如考虑一个垃圾邮件分类问题，如果一个模型对100封邮件（其中含有10封垃圾邮件）进行预测，该模型将所有邮件都识别成非垃圾邮件，这样准确率为90%。但是显然这个模型是有很大问题的，因为它对垃圾邮件的预测全部失败。在这种...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-529_lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84table%E7%9A%84%E9%94%AE%E5%80%BC%E5%AD%98%E5%8F%96%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
-<article class="md-text"><h2 class="post-title">lua数据结构table的键值存取过程源码分析</h2><div class="excerpt"><p>一、相关数据结构定义1、Table结构定义1234567891011typedef struct  {  CommonHeader;  lu_byte flags;     lu_byte lsizenode;  /* log2 of size of `node&#39; array */  struct  *metatable;  TValue *array;  /* array part...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-532_lua%20%E5%8E%9F%E7%94%9Fapi%E8%A7%A3%E8%AF%BB/">
 <article class="md-text"><h2 class="post-title">lua 原生api解读</h2><div class="excerpt"><p>
   简介
@@ -213,6 +189,16 @@ MetatableLua中的metatable 类似于C++中的虚函数...</p></div><div class="
 简介
 
 研究lua也有一段时间了，对lua也算是小有了解，对于lua的api可能和其他脚...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-531_LUA%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/">
+<article class="md-text"><h2 class="post-title">LUA面向对象编程技巧</h2><div class="excerpt"><p>LUA中的对象我们知道，对象由属性和方法组成。LUA中最基本的结构是table，So 必须用table描述对象的属性。lua中的function可以用来表示方法。那么LUA中的类可以通过table + function模拟出来。至于继承，可以通过metetable模拟出来（不推荐用，只模拟最基本的对象大部分时间够用了）。
+MetatableLua中的metatable 类似于C++中的虚函数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-529_lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84table%E7%9A%84%E9%94%AE%E5%80%BC%E5%AD%98%E5%8F%96%E8%BF%87%E7%A8%8B%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+<article class="md-text"><h2 class="post-title">lua数据结构table的键值存取过程源码分析</h2><div class="excerpt"><p>一、相关数据结构定义1、Table结构定义1234567891011typedef struct  {  CommonHeader;  lu_byte flags;     lu_byte lsizenode;  /* log2 of size of `node&#39; array */  struct  *metatable;  TValue *array;  /* array part...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-534_Evaluation%20metrics%20Recall,%20Precision,%20BLEU%20and%20MET/">
+<article class="md-text"><h2 class="post-title">Evaluation metrics Recall, Precision, BLEU and METEOR</h2><div class="excerpt"><p>
+
+考虑一个机器学习问题，我们想评价(evaluate)一个给定模型的好坏，在一些情况下我们可以直接用准确率(accuracy)，但是accuracy并不是在所有情况都适用。
+比如考虑一个垃圾邮件分类问题，如果一个模型对100封邮件（其中含有10封垃圾邮件）进行预测，该模型将所有邮件都识别成非垃圾邮件，这样准确率为90%。但是显然这个模型是有很大问题的，因为它对垃圾邮件的预测全部失败。在这种...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

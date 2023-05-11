@@ -112,40 +112,33 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-113_Erlang+Lua%E7%9A%84%E4%B8%80%E6%AC%A1%E9%87%8D%E6%9E%84/">
-<article class="md-text"><h2 class="post-title">Erlang+Lua的一次重构</h2><div class="excerpt"><p>目前所在的项目基于erlang cluster搭建框架，再接入lua用于写逻辑。由于之前有一些erlang+lua的开发经验，因此着手项目的重构和优化，过程中一些体会，记录于此。
-先简述一下项目架构，erlang做集群，网络层，节点交互，DB交互等，lua层只写逻辑。一个erlang的Actor持有一个luastate，为了加速erlang和lua之间的交互效率：
-
-将逻辑数据置于lua中而...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.237Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1139_Lua-beautify/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1139_Lua-beautify/">
 <article class="md-text"><h2 class="post-title">Lua-beautify</h2><div class="excerpt"><p>
             
 
 function blahblahblah(x)  –local table &#x3D; {asd &#x3D; 123, x &#x3D; 0.34,  }  if x ~&#x3D; 3 thenprint( x )elseif x &#x3D;&#x3D; &amp;#34;string&amp;#34; then    my_custom_functi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.237Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-113_Erlang+Lua%E7%9A%84%E4%B8%80%E6%AC%A1%E9%87%8D%E6%9E%84/">
+<article class="md-text"><h2 class="post-title">Erlang+Lua的一次重构</h2><div class="excerpt"><p>目前所在的项目基于erlang cluster搭建框架，再接入lua用于写逻辑。由于之前有一些erlang+lua的开发经验，因此着手项目的重构和优化，过程中一些体会，记录于此。
+先简述一下项目架构，erlang做集群，网络层，节点交互，DB交互等，lua层只写逻辑。一个erlang的Actor持有一个luastate，为了加速erlang和lua之间的交互效率：
+
+将逻辑数据置于lua中而...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.237Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1112_Lua-table/">
 <article class="md-text"><h2 class="post-title">Lua-table</h2><div class="excerpt"><p>by Mingyang Guan2017/9/16 14:00:13 
 table.pack() and table.unpack()  pack函数主要是获取一个索引从一开始的table，并对这个table预定义一个字段n，表示该表的长度。例如： 
 th&gt; t = table.pack(&#34;a&#34;, &#34;b&#34;, &#34;c&#34;)
 
 th&gt; t&...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1113_lua%20%E7%BC%96%E7%A8%8B%E4%B9%8B%20hello%20world/">
+<article class="md-text"><h2 class="post-title">lua 编程之 hello world</h2><div class="excerpt"><p>今天开始我要学 Lua 了，之所以要学习它，确实也是游戏开发目前需要的，涉及到热更新技术，Lua 相对来说还是比较成熟的，而且就目前主流的各种 Lua 框架的出现，学习 Lua 以及使用 Lua 的难度也是大大降低了。
+
+
+首先来看下 Lua 是什么，Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1114_evaluation%20of%20association%20patterns/">
 <article class="md-text"><h2 class="post-title">evaluation of association patterns</h2><div class="excerpt"><p>This article is the note for reading _Introduction to Data Mining_ .
 _Chapter 6. Association Analysis: Basic Concepts and Algorithms_
 — Evaluation of Association Patterns.
 
 GeneralAs the size and d...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1113_lua%20%E7%BC%96%E7%A8%8B%E4%B9%8B%20hello%20world/">
-<article class="md-text"><h2 class="post-title">lua 编程之 hello world</h2><div class="excerpt"><p>今天开始我要学 Lua 了，之所以要学习它，确实也是游戏开发目前需要的，涉及到热更新技术，Lua 相对来说还是比较成熟的，而且就目前主流的各种 Lua 框架的出现，学习 Lua 以及使用 Lua 的难度也是大大降低了。
-
-
-首先来看下 Lua 是什么，Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1115_lua%E7%83%AD%E6%9B%B4%E6%96%B0/">
-<article class="md-text"><h2 class="post-title">lua热更新</h2><div class="excerpt"><p>热更新，不停机更新，是在不重新下载安装包，甚至不重启游戏的情况下对游戏进行更新。
-
-12345678910111213function (module_name)    local old_module = _G[module_name]    package.loaded[module_name] = nil    require (module_name)    local new_mo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1117_1.2%20lua%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">1.2 lua 环境安装</h2><div class="excerpt"><p>linux 系统安装lualinux &amp; Mac上安装 Lua 安装非常简单，只需要下载源码包并在终端解压编译即可，本文使用了5.3.4版本进行安装：
-12345curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gztar zxf lua-5.3.4.tar.gzcd lua-5.3.4make linux testmake instal...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1111_systematic%20evaluation%20of%20isoform%20function%20in%20liter/">
 <article class="md-text"><h2 class="post-title">systematic evaluation of isoform function in literature reports of alternative splicing</h2><div class="excerpt"><p>
 MathJax.Hub.Config({
@@ -156,6 +149,16 @@ MathJax.Hub.Config({
 
 Classify distinct functions of isoforms 
 Literature-based analysis of experimental evidence for functionally distinct ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1115_lua%E7%83%AD%E6%9B%B4%E6%96%B0/">
+<article class="md-text"><h2 class="post-title">lua热更新</h2><div class="excerpt"><p>热更新，不停机更新，是在不重新下载安装包，甚至不重启游戏的情况下对游戏进行更新。
+
+12345678910111213function (module_name)    local old_module = _G[module_name]    package.loaded[module_name] = nil    require (module_name)    local new_mo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1116_2.2%20lua%20%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+<article class="md-text"><h2 class="post-title">2.2 lua 基础数据类型</h2><div class="excerpt"><p>lua 是一门极其精简的语言，内置类型只要nil,boolean,number等三种基本类型，以及string,table等二种组合类型。没有C/C++ 等语言中的class、struct等复杂类型，这些类型可以通过table来实现。同时，不同于其他语言（如C/C++和java），function在lua中也作为一个一级类型。
+nilnil 是一种类型，Lua 将 nil 用于表示“无效值”...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1117_1.2%20lua%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">1.2 lua 环境安装</h2><div class="excerpt"><p>linux 系统安装lualinux &amp; Mac上安装 Lua 安装非常简单，只需要下载源码包并在终端解压编译即可，本文使用了5.3.4版本进行安装：
+12345curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gztar zxf lua-5.3.4.tar.gzcd lua-5.3.4make linux testmake instal...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1118_evaluation-measure/">
 <article class="md-text"><h2 class="post-title">evaluation-measure</h2><div class="excerpt"><p>分类问题precision(精确率)P = frac{TP}{TP+FP} tag{1}recall(召回率)R = frac{TP}{TP+FN} tag{2}$F_1$精确率和召回率的调和均值，
 
@@ -163,9 +166,6 @@ begin{align*}
 frac{2}{F_1} & = frac{1}{P} + frac{1}{R}\
 F_1 & = frac{2TP}{2TP + FP + FN} tag{3}
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1116_2.2%20lua%20%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-<article class="md-text"><h2 class="post-title">2.2 lua 基础数据类型</h2><div class="excerpt"><p>lua 是一门极其精简的语言，内置类型只要nil,boolean,number等三种基本类型，以及string,table等二种组合类型。没有C/C++ 等语言中的class、struct等复杂类型，这些类型可以通过table来实现。同时，不同于其他语言（如C/C++和java），function在lua中也作为一个一级类型。
-nilnil 是一种类型，Lua 将 nil 用于表示“无效值”...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

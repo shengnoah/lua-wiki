@@ -112,7 +112,21 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：topic</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-790_Lua%20%E5%AD%A6%E4%B9%A0%20chapter2%20/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-789_Lua%E7%AC%94%E8%AE%B0%E6%95%88%E7%8E%87%E6%80%A7%E8%83%BD/">
+<article class="md-text"><h2 class="post-title">Lua笔记效率性能</h2><div class="excerpt"><p>本文使用对比测评的方式比较了几种Lua中代码和方式，并做了简要的总结和分析。结合其中结论，可指导写出质量更高、性能更优的脚本。本文基于Lua5.1，大部分内容也同样适用于Lua5.2和5.3。本文中引用到的Lua源代码都取自Lua 5.1.5版本。
+
+评测方法主要有运行时间和产生GC两个指标，以下是获取运行时间和内存用量/GC的方法：
+获取运行时间为了更好地做比较，使用下边的方法来记录代码的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-792_%E9%87%87%E8%AE%BF%20Lua%20%E5%8F%91%E6%98%8E%E4%BA%BA/">
+<article class="md-text"><h2 class="post-title">采访 Lua 发明人</h2><div class="excerpt"><p>
+                        
+                            
+                                
+                                
+                            &lt;div class=&quot;entry&quot;&gt;
+
+           ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-790_Lua%20%E5%AD%A6%E4%B9%A0%20chapter2%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter2</h2><div class="excerpt"><p>目录
 
   Eeight Queen
@@ -136,20 +150,6 @@ Eight Queen
 通过一个表来存储，键值表示行，值表示列。
 
 判断...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-791_LuaFramework/">
-<article class="md-text"><h2 class="post-title">LuaFramework</h2><div class="excerpt"><p>思考并回答以下问题：
-
-在上一篇文章LuaFramework-1中，介绍了LuaFramework加载面板的方法，但这个方法并不适用于其它Prefab资源，在这套框架中非面板型资源的加载方法另有套路。
-创建一个预制体打开上次使用的工程，打开Main场景，创建一个名为ImgOrc的Image，图片就选例子用的兽人头像。在Assets/LuaFramework/CustomPrj目录下新建一个P...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-792_%E9%87%87%E8%AE%BF%20Lua%20%E5%8F%91%E6%98%8E%E4%BA%BA/">
-<article class="md-text"><h2 class="post-title">采访 Lua 发明人</h2><div class="excerpt"><p>
-                        
-                            
-                                
-                                
-                            &lt;div class=&quot;entry&quot;&gt;
-
-           ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-773_%E7%94%A8%20lua%20%E6%A8%A1%E6%8B%9F%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%20%C2%B7%20dcf's%20blog/">
 <article class="md-text"><h2 class="post-title">用 lua 模拟面向对象 · dcf's blog</h2><div class="excerpt"><p>
   
@@ -186,30 +186,6 @@ userdata: 任意存储在变量中的C数据解雇
 thread: 表示执行的独立线路，用于执行协同程序
 table: 关联数据
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-776_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>LuaInterface 库LuaInterface下载地址
-
-LuaInterface是一个用于在Lua语言和Microsoft .NET平台的公共语言运行时（CLR）之间集成的库。 Lua脚本可以使用它来实例化CLR对象，访问属性，调用方法，甚至使用Lua函数处理事件。
-LuaInterface.Lua类是CLR访问Lua解释器的主要接口，一个LuaInterface.Lua类对象就代表...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-777_Lua%20%E5%AD%A6%E4%B9%A0%20chapter30%20%E7%BC%96%E5%86%99c%E5%87%BD%E6%95%B0%E7%9A%84%E6%8A%80%E5%B7%A7%20/">
-<article class="md-text"><h2 class="post-title">Lua 学习 chapter30 编写c函数的技巧</h2><div class="excerpt"><p>目录
-
-  数组操作
-  字符串操作
-  在c函数中保存状态
-
-
-
-  生活总需要一点仪式感，然后慢慢的像那个趋向完美的自己靠近。
-
-
-数组操作
-
-Lua中的数组就是以特殊的方式使用边。像lua_setttable and lua_gettable这种用来操作的通用函数，也可以用于操作数组，不过C API为使用整数索引的表访问和更新提供了专门的函数：
-
-1
-2
-void lua_geti (...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-775_Lua%20Learning%20Notes/">
 <article class="md-text"><h2 class="post-title">Lua Learning Notes</h2><div class="excerpt"><p>注释
 -- 单行注释
@@ -226,6 +202,11 @@ local c = 0
 变量没有类型, 默认为全局变量, 使用local关键字声明局部变量, 要删除变量只需要将其赋值为nil即可
 a, b = 10, 3 * 5 -- 同时赋值多个变量
 print(a..&#...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-776_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>LuaInterface 库LuaInterface下载地址
+
+LuaInterface是一个用于在Lua语言和Microsoft .NET平台的公共语言运行时（CLR）之间集成的库。 Lua脚本可以使用它来实例化CLR对象，访问属性，调用方法，甚至使用Lua函数处理事件。
+LuaInterface.Lua类是CLR访问Lua解释器的主要接口，一个LuaInterface.Lua类对象就代表...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-779_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>简单模式和完全模式
 简单模式（simple model）拥有一个当前输入文件和一个当前输出文件，并且提供针对这些文件相关的操作。
@@ -248,6 +229,16 @@ r
 只...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-778_lua%E7%B1%BB%E6%9C%BA%E5%88%B6/">
 <article class="md-text"><h2 class="post-title">lua类机制</h2><div class="excerpt"><p>lua类机制的简易实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576local _class={} function (super)	local clas...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-780_Lua%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
+<article class="md-text"><h2 class="post-title">Lua之面向对象个人总结</h2><div class="excerpt"><p>
+
+面向对象的三个特征：封装、继承和多态。Lua并没有类，没有直接实现面向对象的方法。不过Lua的Table，有内部对象和内部方法。Lua的面向对象主要是通过Table来模拟面向对象。
+
+
+
+封装在Lua之Table学习中，曾以Computer为例子，介绍了Table 也是可以有自己内部的属性和方法。
+
+1234567891011121314local CPU = { name = &#39...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.305Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

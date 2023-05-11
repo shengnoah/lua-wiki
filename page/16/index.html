@@ -140,18 +140,6 @@ class RDD(object):
 整数除法只保留整数部分。给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。
 tag基本计算器题 栈
 样例1234567891011121314151617181920212223输入: [&#34...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-852_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>设计目的其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
-Lua 特性
-轻量级: 它用标准C语言编写并以源代码形式开放，编译后仅仅一百余K，可以很方便的嵌入别的程序里。
-可扩展: Lua提供了非常易于使用的扩展接口和机制：由宿主语言(通常是C或C++)提供这些功能，Lua可以使用它们，就像是本来就内置的功能一样。
-其它特性:
-支持面向过程(procedure-orie...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-855_lua%20%E5%85%83%E8%A1%A8%E5%AD%A6%E4%B9%A0/">
-<article class="md-text"><h2 class="post-title">lua 元表学习</h2><div class="excerpt"><p>Lua 中的每个值都有一个元表。table 和 userdata 可以有各自独立的原表，其他类型的值则共享其类型所属的单一元素。Lua 在创建新的 table 的时候不会创建元表。
-12t = {}print(getmetatable(t)) 
-可以使用 setmetatable 来修改或设置 table 的元表：
-123t1 = {}setmetatable(t,t1)print(getm...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-854_lua/">
 <article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>
         之前项目中用到 openresty 作为 Web Api  的开发平台, 用 openresty 很适合开发以 http 接口形式
@@ -159,6 +147,18 @@ Lua 特性
 只需要写业务代码将各种数据读取,加工,输出,就是充当胶水的角色.
 
 最重要的一点是, openr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-855_lua%20%E5%85%83%E8%A1%A8%E5%AD%A6%E4%B9%A0/">
+<article class="md-text"><h2 class="post-title">lua 元表学习</h2><div class="excerpt"><p>Lua 中的每个值都有一个元表。table 和 userdata 可以有各自独立的原表，其他类型的值则共享其类型所属的单一元素。Lua 在创建新的 table 的时候不会创建元表。
+12t = {}print(getmetatable(t)) 
+可以使用 setmetatable 来修改或设置 table 的元表：
+123t1 = {}setmetatable(t,t1)print(getm...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-852_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>设计目的其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
+Lua 特性
+轻量级: 它用标准C语言编写并以源代码形式开放，编译后仅仅一百余K，可以很方便的嵌入别的程序里。
+可扩展: Lua提供了非常易于使用的扩展接口和机制：由宿主语言(通常是C或C++)提供这些功能，Lua可以使用它们，就像是本来就内置的功能一样。
+其它特性:
+支持面向过程(procedure-orie...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-857_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">lua学习笔记（五）</h2><div class="excerpt"><p>Lua模块与包模块类似于一个封装库
 创建方法：
@@ -168,13 +168,14 @@ Lua 特性
 返回该table
 
 123456789101112131415161718192021-- 定义一个名为mymodule的模块mymodule={}-- 定义一个常量mymodule.constant=&#34;这是一个常量&#34;-- 定义一个函数function ()    io.wr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-856_Lua%20Iterator/">
-<article class="md-text"><h2 class="post-title">Lua Iterator</h2><div class="excerpt"><p>前言由于工作的关系其实我平时写Lua还是很多的，然而一个偶然的机会发现了其实我对Lua的迭代的认识还不够，这里记录一下。
-READ THE MANUAL强调一下，一定要看守手册Lua5.1手册
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-858_%5BLua%5D%20Coroutine%E5%8D%8F%E7%A8%8B/">
+<article class="md-text"><h2 class="post-title">Coroutine协程</h2><div class="excerpt"><p>Coroutine Manipulation
 
-我们来看下Lua中的For
+coroutine.create (f)
 
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+Creates a new coroutine, with body f. f must be a function. Returns this new coroutine, an object with type “thread”.
+
+创建一个新的协程。f必须是一个函数。返回值是这个新的协程，返回值...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

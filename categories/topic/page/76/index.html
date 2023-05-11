@@ -112,46 +112,41 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：topic</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-295_lua%E7%89%88%E6%9C%AC%E5%8F%98%E5%8C%96/">
-<article class="md-text"><h2 class="post-title">lua版本变化</h2><div class="excerpt"><p>从 Lua 5.1 迁移到 5.2
-5.2中抛弃module，建议使用require进行加载， 可能是考虑到Module定义对全局表的污染
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-297_Evaluating%20Fuzz%20Testing/">
+<article class="md-text"><h2 class="post-title">Evaluating Fuzz Testing</h2><div class="excerpt"><p>1 介绍信息量太大回头再写。。
+# 一天后更新
+不想写了差不多就下面这些内容吧。。
+2 背景2.1 fuzzing流程
+fuzzing的核心算法
+initSeedCorpus：初始化新的输入
+isDone：决定fuzzing是否停止
+choose：从队列中选择至少一个种子输入进行变异
+mutate：从至少一个种子输入和观察到的现象中产生新的候选种子
+eval：评价程序的种子产生观察现象
+is...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-298_lua%E7%94%A8%E6%B3%952/">
+<article class="md-text"><h2 class="post-title">lua用法2</h2><div class="excerpt"><p>从给定的字符串得到块(函数)。lua5.3使用load()替换loadstring(). 
+一般如下用法：assert(loadstring(script))()f = loadstring(&#34;a = 1&#34;)语义上相当于：f = loadstring(&#34;function() a = 1 end&#34;)复杂用法如下：下面是动态加载字符串，并执行，结果为一个table...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-299_How%20%20computer%20program%20are%20interpreted%20and%20evaluate/">
+<article class="md-text"><h2 class="post-title">How  computer program are interpreted and evaluated</h2><div class="excerpt"><p>
 
-在5.1版本，可以理解为每个chunk都具有自己的环境表，然后通过setfenv/getfenv进行设置和操作。Lua5.2开始取消了环境表的概念，取消setfenv/getfenv方法，增加了_Env来管理。
+花了一些时间重新捋了一遍自己关于解释器的学习笔记：CS 61A Summer 2018 Lecture 20: Interpreters
 
-_G 和 _Env*
+稍稍得了一些门道，把自己的想法记录一下。
 
+自己目前的编程以动态语言 Python 为主，想要对动态语言有一个完整的理解和掌握，解释器这部分是必须要掌握的点。
 
-_G 是放在...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-296_lua%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/">
-<article class="md-text"><h2 class="post-title">lua代码风格</h2><div class="excerpt"><p>
-      
-      
-
-  
-    
-  
-
-
-
-  
-  
-
-
-      
-&lt;/header&gt;
-&lt;div class=&quot;entry&quot;&gt;
-  
-    &lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&qu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-2_AutoToolboxPopluate/">
-<article class="md-text"><h2 class="post-title">AutoToolboxPopluate</h2><div class="excerpt"><p>                    &lt;p&gt;摘要:AutoToolboxPopluate&lt;/p&gt;
-                &lt;br /&gt;
-                &lt;p&gt;从 Visual Studio 2005 之后就会把 User Control 是否显示在 Toolbox 透过设定来决定是否显示(载入)，&lt;br&gt;透...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+简单来说，解释器就是程序的求值器。当我们花费心思构建起针对一个个功能实现的程序之后，下一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-29_2.4%20lua%20%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84/">
 <article class="md-text"><h2 class="post-title">2.4lua控制结构</h2><div class="excerpt"><p>流程控制语句对于程序设计来说特别重要，它可以用于设定程序的逻辑结构。一般需要与条件判断语句结合使用。Lua 语言提供的控制结构有 if，while，repeat，for，并提供 break 关键字来满足更丰富的需求。
 if/elseif-else 是我们熟知的一种控制结构。Lua 跟其他语言一样，提供了 if-else 的控制结构。语法上更接近shell的语言，逻辑结构上和其他语言没有较大的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-300_lua%E7%94%A8%E6%B3%95/">
 <article class="md-text"><h2 class="post-title">lua用法</h2><div class="excerpt"><p>从给定的字符串得到块(函数)。lua5.3使用load()替换loadstring(). 
 一般如下用法：assert(loadstring(script))()f = loadstring(&#34;a = 1&#34;)语义上相当于：f = loadstring(&#34;function() a = 1 end&#34;)复杂用法如下：下面是动态加载字符串，并执行，结果为一个table...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-2_AutoToolboxPopluate/">
+<article class="md-text"><h2 class="post-title">AutoToolboxPopluate</h2><div class="excerpt"><p>                    &lt;p&gt;摘要:AutoToolboxPopluate&lt;/p&gt;
+                &lt;br /&gt;
+                &lt;p&gt;从 Visual Studio 2005 之后就会把 User Control 是否显示在 Toolbox 透过设定来决定是否显示(载入)，&lt;br&gt;透...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-301_luasocket%20getaddrinfo%20nil%20%E9%97%AE%E9%A2%98%20/">
 <article class="md-text"><h2 class="post-title">luasocket getaddrinfo nil 问题</h2><div class="excerpt"><p>使用 luarocks 安装 luasocket，在调用 bind 时，报：
 
@@ -165,9 +160,6 @@ Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio
 &gt;
 &gt; do
 &gt;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-298_lua%E7%94%A8%E6%B3%952/">
-<article class="md-text"><h2 class="post-title">lua用法2</h2><div class="excerpt"><p>从给定的字符串得到块(函数)。lua5.3使用load()替换loadstring(). 
-一般如下用法：assert(loadstring(script))()f = loadstring(&#34;a = 1&#34;)语义上相当于：f = loadstring(&#34;function() a = 1 end&#34;)复杂用法如下：下面是动态加载字符串，并执行，结果为一个table...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-284_LUA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE/">
 <article class="md-text"><h2 class="post-title">LUA正则表达</h2><div class="excerpt"><p>##LUA正则表达
 规则
@@ -175,6 +167,9 @@ x: (where x is not one of the magic characters ^$()%.[]*+-?) represents the char
 .: (a dot) represents all characters.
 %a: represents all letters.
 %c: represents all con...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-285_%E6%A2%A6%E5%B9%BB%E6%89%8B%E6%B8%B8%E9%83%A8%E5%88%86Luac%E5%8F%8D%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">梦幻手游部分Luac反编译失败的解决方法</h2><div class="excerpt"><p>  这一篇是去年学习破解梦幻西游手游lua代码时记录的一些问题，今天将其整理并共享出来，所以不一定适合现在版本的梦幻手游，大家还是以参考为目的呗。lua相关的文章（共4篇）到此也写完了，如果以后还有新的东西会继续更新，接下来会写几篇关于2018 腾讯游戏安全竞赛的详细分析，敬请期待。
+十二处bug修复  当时反编译梦幻西游手游时遇到的问题大约有12个，修改完基本上可以完美复现lua源码，这里...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-286_evaluation%20and%20selection%20%C2%B7%20ngc7293's%20blog/">
 <article class="md-text"><h2 class="post-title">evaluation and selection · ngc7293's blog</h2><div class="excerpt"><p>我们通过对一些方法比如错误率，召回率，ROC等来评价某个模型的优劣，并选择更好的ml算法
 
@@ -185,9 +180,6 @@ x: (where x is not one of the magic characters ^$()%.[]*+-?) represents the char
 关于模型的评估结果
 
 关于评估有两个基本的概念，一个是错误率(error rate)$$ E=a/m $$ ，另外一个是精度（accuracy) $$ A=1-a/m $$ ,我们将分类错误的样本数目称为错误率，把实际预测输出与真实输出称为训练误差(training error...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-285_%E6%A2%A6%E5%B9%BB%E6%89%8B%E6%B8%B8%E9%83%A8%E5%88%86Luac%E5%8F%8D%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">梦幻手游部分Luac反编译失败的解决方法</h2><div class="excerpt"><p>  这一篇是去年学习破解梦幻西游手游lua代码时记录的一些问题，今天将其整理并共享出来，所以不一定适合现在版本的梦幻手游，大家还是以参考为目的呗。lua相关的文章（共4篇）到此也写完了，如果以后还有新的东西会继续更新，接下来会写几篇关于2018 腾讯游戏安全竞赛的详细分析，敬请期待。
-十二处bug修复  当时反编译梦幻西游手游时遇到的问题大约有12个，修改完基本上可以完美复现lua源码，这里...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

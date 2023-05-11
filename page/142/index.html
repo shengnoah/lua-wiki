@@ -110,11 +110,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-basic-syntax/">
-<article class="md-text"><h2 class="post-title">Lua基本语法</h2><div class="excerpt"><p>基本语法Lua 学起来非常简单。现在，让我们开始创建我们的第一个 Lua 程序吧！  
-第一个 Lua 程序Lua 提供交互式编程模式。在这个模式下，你可以一条一条地输入命令，然后立即就可以得到结果。你可以在 shell 中使用 lua -i 或者 lua 命令启动。输入命令后，按下回车键，就启动了交互模式，显示如下：  
-1234567$ lua -i $ Lua 5.1.4  Copyr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-TOC/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-TOC/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>
 lua 基础 
 概述
@@ -149,12 +145,24 @@ Web 编程
 
 
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-arrays/">
+<article class="md-text"><h2 class="post-title">数组</h2><div class="excerpt"><p>Lua 数组数组是一组有序的对象排列，既可以是一维的也可以是多维的。  
+在 Lua 语言中，数组是用整数索引表实现的。数组的大小并不固定，随着数组元素的增加，它可以动态地增加内存空间大小。  
+一维数组一维数组可以使用一个简单的表结构表示。可以通过一个简单循环初始化数组或者读取数组中数据。示例代码如下所示：  
+1234567891011121314151617array = &#123;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-break/">
 <article class="md-text"><h2 class="post-title">Break语句</h2><div class="excerpt"><p>#break 语句  
 程序在解释执行过程中，在循环内遇到 break 语句时，循环将立即结束。程序将循环语句的下一条语句开始执行。如果你是在嵌套循环（即，一个循环内还有一个循环语句）内使用 break 语句，break 只结束内层循环，并从该代码块后的第一条语句处开始执行。  
 ##语法  
 break 语句的语法如下所示：  
 12345678break;```  ##流程图：  ![]...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-basic-syntax/">
+<article class="md-text"><h2 class="post-title">Lua基本语法</h2><div class="excerpt"><p>基本语法Lua 学起来非常简单。现在，让我们开始创建我们的第一个 Lua 程序吧！  
+第一个 Lua 程序Lua 提供交互式编程模式。在这个模式下，你可以一条一条地输入命令，然后立即就可以得到结果。你可以在 shell 中使用 lua -i 或者 lua 命令启动。输入命令后，按下回车键，就启动了交互模式，显示如下：  
+1234567$ lua -i $ Lua 5.1.4  Copyr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-coroutines/">
+<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
+上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-data-types/">
 <article class="md-text"><h2 class="post-title">数据类型</h2><div class="excerpt"><p>数据类型Lua 是动态类型编程语言，变量没有类型，只有值才有类型。值可以存储在变量中，作为参数传递或者作为返回值。尽管在 Lua 中没有变量数据类型，但是值是有类型的。下面的列表中列出了数据类型： 
 
@@ -168,30 +176,6 @@ break 语句的语法如下所示：
     
     
      ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-coroutines/">
-<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
-上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/keyboard/2020-09-06-%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E9%80%89%E8%96%84%E8%86%9C%E9%94%AE%E7%9B%98/">
-<article class="md-text"><h2 class="post-title">程序员如何选购薄膜键盘</h2><div class="excerpt"><p>目录{: #toc }
-
- TOC{:toc}
-
-var jd_union_pid="3002832436";var jd_union_euid="";
-
-薄膜键盘就选择品牌和型号，在机械键盘没火这几年之前，像ibm，双飞燕，dell就有经典的薄膜键盘，而且薄膜键盘有的手感也不错，15到20年前就买过一把富勒的键盘。
-​我估计很多人都不太注意这牌子，但这牌子真的有很多年历史了，为啥我印象那么...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">键盘</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/keyboard/2020-09-18-%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/">
-<article class="md-text"><h2 class="post-title">程序员如何选择合适的机械键盘</h2><div class="excerpt"><p>目录{: #toc }
-
- TOC{:toc}
-
-var jd_union_pid="3002833110";var jd_union_euid="";
-
-
-一，最好不要机械键盘，我没有听噪声的癖好，但如果有声音不是很大的，求推荐。
-二，键程不用很大，有反馈的感觉就好，像笔记本键盘一样。
-三，按键稳定，你不能手指放上面晃一晃按键就跟着你跑(夸张说法。。)
-四，能素一点就素一点，这个是次要的，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">机械键盘</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/hello-world/">
 <article class="md-text"><h2 class="post-title">Hello World</h2><div class="excerpt"><p>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
 Qu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span></div></article>
@@ -206,6 +190,10 @@ Qu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&
 </a><a class="post-card post " href="/go6.1.html">
 <article class="md-text"><h2 class="post-title">go6.1</h2><div class="excerpt"><p>6.1 go协程go协程类似一个线程，但是go协程是由go自己调度，而不是系统。在协程中的代码可以和其他代码并发执行。让我们看一个例子：
 1234567891011121314151617package mainimport (    &quot;fmt&quot;    &quot;time&quot;)func main() &#123;    fmt.Println(&quot;sta...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go6.2.html">
+<article class="md-text"><h2 class="post-title">go6.2</h2><div class="excerpt"><p>6.2 同步创建一个协程没有什么难度，并且启动很多协程开销也不大。但是，并发执行的代码需要协同。为了帮助我们解决这个问题，go提供了通道（channels）。在学习通道之前，我认为有必要先学习了并发编程的基本知识。
+在编写并发执行的代码时，你需要特别的关注在哪里和如何读写一个值。出于某些原因，例如没有垃圾回收的语言，需要你从一个新的角度去考虑你的数据，总是警惕着可能存在的危险。例如：
+123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.089Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

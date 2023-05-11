@@ -112,11 +112,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-729_nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lua%E6%A8%A1%E5%9D%97/">
-<article class="md-text"><h2 class="post-title">nginx编译安装lua模块</h2><div class="excerpt"><p>1. 获取nginx源代码1git clone https://github.com/nginx/nginx.git nginx-release
-2. 下载安装LuaJIT1234git clone https://github.com/LuaJIT/LuaJIT.gitcd LuaJITmake make install
-3. 下载lua-nginx-module12wget https:...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-72_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(4)%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AE%9E%E7%8E%B0/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-72_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(4)%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AE%9E%E7%8E%B0/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记(4)面向对象实现</h2><div class="excerpt"><p>百度搜索一下，给出出的解决方案和学习帖子很多，可是我还是有很多的问题！
 
 
@@ -140,15 +136,28 @@
 
 
   参考[1]：参考同事的方法...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-729_nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lua%E6%A8%A1%E5%9D%97/">
+<article class="md-text"><h2 class="post-title">nginx编译安装lua模块</h2><div class="excerpt"><p>1. 获取nginx源代码1git clone https://github.com/nginx/nginx.git nginx-release
+2. 下载安装LuaJIT1234git clone https://github.com/LuaJIT/LuaJIT.gitcd LuaJITmake make install
+3. 下载lua-nginx-module12wget https:...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-732_Luajit%E5%8F%8D%E7%BC%96%E8%AF%91%E4%B9%8B%E6%8E%A2%E7%B4%A2%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Luajit反编译之探索记</h2><div class="excerpt"><p>
+  
+  由于工作需求，要反编译一个luajit编译过的文件。百度反编译luajit，得到的信息是目前没有此类成熟的反编译器。所以，如果你用luajit编译了代码，基本上不用担心被别人破解（2015.12）。
+
+虽然没有luaj反编译器，但是不代表反编译不可能。至少，人肉反编译是可以的，哈。因为我只需要反编译一个文件，所以采取人肉的方式，也许是可行的。
+
+首先，在github上面找到了唯一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-730_Lua%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
 <article class="md-text"><h2 class="post-title">Lua模块与包 · 花生肉泥</h2><div class="excerpt"><p>lua的模块是由变量，函数等已知元素组成的table，因此创建一个模块很简单，就是创建一个table，然后把需要导出的常量，函数放入其中，最后返回这个table就行。
 例：123456789101112131415161718192021-- 定义一个名为module的模块module = {}-- 定义一个常量module.constant = &#34;这是一个常量&#34;-- 定义一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-727_lua%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">lua简明教程</h2><div class="excerpt"><p>前言lua是一种轻量小巧的脚本语言。
-lua特性1.轻量级，编译后不过200K2.可扩展性3.自动内存管理4.支持面向过程编程和函数式编程……
-
-lua应用场景1.游戏开发2.独立应用脚本3.web应用脚本4.扩展和数据库插件5.安全系统
-安装使用安装问题1.编译lua时，提示1lua.c:80:31: fatal error: readline/readline.h: No such fi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-728_LUAWAF/">
+<article class="md-text"><h2 class="post-title">LUAWAF</h2><div class="excerpt"><p>LUAWAFLUAWAF是我编写的一个针对Nginx的Web应用提供安全防护的Web应用防火墙。
+支持平台目前WAF只支持Windows平台
+安装1，使用本软件最好直接在OpenResty官网下载OpenResty，OpenResty自身带有Nginx
+2，将该WAF下载到OpenResty的lua目录下，解压即可
+3，日志读写的文件必须给与相应的权限
+使用说明1，需要在nginx.conf...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-731_cocos2dx%20lua%20%E7%BB%91%E5%AE%9A%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98/">
 <article class="md-text"><h2 class="post-title">cocos2dx lua 绑定详解与实战</h2><div class="excerpt"><p>我们平时在开发cocos2dx lua游戏的时候的，会遇到这样的情况：
 
@@ -158,27 +167,18 @@ lua应用场景1.游戏开发2.独立应用脚本3.web应用脚本4.扩展和数
 
 
 为了更好的理解这...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-725_Lua%20%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%20/">
-<article class="md-text"><h2 class="post-title">Lua 正确处理可变参数</h2><div class="excerpt"><p>为了在 Lua 里处理可变参数，我们可能会写下面这样的代码：
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-726_%5B%E8%AF%91%5DPerformance%20evaluation%20of%20MQTT%20and%20CoAP%20via%20a%20c/">
+<article class="md-text"><h2 class="post-title">Performance evaluation of MQTT and CoAP via a common middleware</h2><div class="excerpt"><p>　　Performance evaluation of MQTT and CoAP via a common middleware（全文翻译）
 
-local function args(...)
-    if next(&#123;...&#125;) then
-        for _, v in ipairs&#123;...&#125; do
-            print(v)
-        end
-    else
-        print(&#34;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-732_Luajit%E5%8F%8D%E7%BC%96%E8%AF%91%E4%B9%8B%E6%8E%A2%E7%B4%A2%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Luajit反编译之探索记</h2><div class="excerpt"><p>
-  
-  由于工作需求，要反编译一个luajit编译过的文件。百度反编译luajit，得到的信息是目前没有此类成熟的反编译器。所以，如果你用luajit编译了代码，基本上不用担心被别人破解（2015.12）。
-
-虽然没有luaj反编译器，但是不代表反编译不可能。至少，人肉反编译是可以的，哈。因为我只需要反编译一个文件，所以采取人肉的方式，也许是可行的。
-
-首先，在github上面找到了唯一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+12345678910Dinesh ThangavelFaculty of Engineering National University of SingaporeXiaoping MaSense and Sense-Abilities, Inst...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-710_Lua%E5%85%83%E8%A1%A8%20%5B%20Chuang%20Yu%20%5D/">
 <article class="md-text"><h2 class="post-title">Lua元表</h2><div class="excerpt"><p>javascript语言本身不支持面向对象，ES2015中增加了class关键字，却不过是prototype语法糖而已，本质上prototype形式的面向对象只能算是一种“模拟”，这其中很重要的原因之一是js从来没有一套完美的深拷贝方案，子类只能借助原型链获取父类方法的引用，这不能算是严格意义的继承，当然也就算不上面向对象。
 和js一样，lua的面向对象需要通过table来模拟，有些行为很像...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-711_Lua%20Module%20%E5%AE%9E%E8%B7%B5%20%C2%B7%20Pan's%20paper/">
+<article class="md-text"><h2 class="post-title">Lua Module 实践 · Pan's paper</h2><div class="excerpt"><p>最近用openresty写接口，每个接口都要要链接数据库，写一个通用的模块来实现，顺便学习下lua module的相关知识。
+
+lua 模块Lua中的一个模块就是一个table，table元素包括变量，函数等。“因此创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table”。
+123456789101112131415161718192021...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-713_In%20place%20iterative%20policy%20evaluation/">
 <article class="md-text"><h2 class="post-title">In place iterative policy evaluation</h2><div class="excerpt"><p>
       	
@@ -187,11 +187,6 @@ local function args(...)
 
   使用两个数组，其中一个数组存储上一轮迭代的状态价值，另外一个数组存储本轮迭代中的状态价值，本轮迭代总是从上一轮迭代（老的）的状态价值取值，这样在迭代过程中老的状态价值不会受到影响。
   使用一个数组来存储状态价值，并在迭代时实时更新状态价值，这样在迭代过程中能够更早的利...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-711_Lua%20Module%20%E5%AE%9E%E8%B7%B5%20%C2%B7%20Pan's%20paper/">
-<article class="md-text"><h2 class="post-title">Lua Module 实践 · Pan's paper</h2><div class="excerpt"><p>最近用openresty写接口，每个接口都要要链接数据库，写一个通用的模块来实现，顺便学习下lua module的相关知识。
-
-lua 模块Lua中的一个模块就是一个table，table元素包括变量，函数等。“因此创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table”。
-123456789101112131415161718192021...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

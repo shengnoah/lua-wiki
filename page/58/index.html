@@ -110,28 +110,11 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-468_Lua%20%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0/">
-<article class="md-text"><h2 class="post-title">Lua 什么是闭包函数</h2><div class="excerpt"><p>为路由器写脚本，顺带学了一下lua.对闭包函数做个理解笔记
-普通函数内部可以直接读取全局变量。如：1234567local n = 1function f1( ... )    return nendprint(f1())        --1
-但普通函数内部却无法读取一个与自己不同作用域的局部变量。如：12345678910function f1( ... )    local n = 1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-465_Lua%E7%AC%94%E8%AE%B0%E6%95%88%E7%8E%87%E6%80%A7%E8%83%BD/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-465_Lua%E7%AC%94%E8%AE%B0%E6%95%88%E7%8E%87%E6%80%A7%E8%83%BD/">
 <article class="md-text"><h2 class="post-title">Lua笔记效率性能</h2><div class="excerpt"><p>本文使用对比测评的方式比较了几种Lua中代码和方式，并做了简要的总结和分析。结合其中结论，可指导写出质量更高、性能更优的脚本。本文基于Lua5.1，大部分内容也同样适用于Lua5.2和5.3。本文中引用到的Lua源代码都取自Lua 5.1.5版本。
 
 评测方法主要有运行时间和产生GC两个指标，以下是获取运行时间和内存用量/GC的方法：
 获取运行时间为了更好地做比较，使用下边的方法来记录代码的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-470_%E6%BA%AA%E6%B5%81%20WarKey%203.0%20%E8%AE%BA%E5%9D%9B%E9%A2%84%E8%A7%88%E7%89%88%20%E5%8F%91%E5%B8%83%EF%BC%8C%E6%94%AF%E6%8C%81Lua%E8%84%9A%E6%9C%AC/">
-<article class="md-text"><h2 class="post-title">溪流 WarKey 3.0 论坛预览版 发布，支持Lua脚本</h2><div class="excerpt"><p>昨晚搞到近 2 点，终于把相关部分搞完了，放出个预览版玩玩。这一版本将支持组合键，比如，可以分别改Q、Ctrl+Q、Alt+Q 等，也将支持所有鼠标操作。此外，增加了一个脚本系统，允许用户进行更大程度上的自定义。
-
-猛击这里下载
-
-脚本使用 lua 语言，格式大致为（正式版出来之前可能还会有改动）：
-----------------------------------------------...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-46_nginx_lua%20%E6%89%A9%E5%B1%95%E8%AE%A9%20nginx%20%E6%8B%A5%E6%9C%89%E5%8F%AF%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/">
-<article class="md-text"><h2 class="post-title">nginx_lua 扩展让 nginx 拥有可编程能力</h2><div class="excerpt"><p>公司使用 lighttpd 的比较多, 主要是接入层的一些工作，而且增加了一些很多自己的模块防火墙等等. 后来nginx开始流行起来因为 lighttpd 和 nginx整体是实现方式比较类似(个人感觉nginx 借鉴了 lighttpd的实现方式)，都使用了多进程异步非阻塞处理请求I/O和timer，对于静态文件服务使用sendfile系统调用.  作为静态文件server和接入层来说 l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-467_ubuntu%E9%85%8D%E7%BD%AElua%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E8%BF%9B%E8%A1%8Cc%E4%B8%8Elua%E7%9A%84%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8/">
-<article class="md-text"><h2 class="post-title">ubuntu配置lua环境，并进行c与lua的相互调用</h2><div class="excerpt"><p>先查看一下apt可获取的lua版本我们选择lua5.1版本进行安装1sudo apt install lua5.1
-安装完之后测试一下是否安装成功，如果可以正常使用，则lua环境已经安装完毕。
-2.安装lua相关的c库lua环境安装完毕，但是此时在c中还不能对lua进行调用，或者生成供lua调用的c库，因为还没有安装lua的c库，通过下面这条命令安装相应的库文件和头文件1sudo apt-g...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-466_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
 <article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>设有一组关键字｛K1， K2，…， Kn｝；排序开始就认为 K1 是一个有序序列；让 K2 插入上述表长为 1 的有序序列，使之成为一个表长为 2 的有序序列；然后让 K3 插入上述表长为 2 的有序序列，使之成为一个表长为 3 的有序序列；依次类推，最后让 Kn 插入上述表长为 n-1 的有序序列，得一个表长为 n 的有序序列。
 
@@ -139,6 +122,23 @@
 
 
   从第一个元素开始，该元素可以认为已经被排...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-467_ubuntu%E9%85%8D%E7%BD%AElua%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%B9%B6%E8%BF%9B%E8%A1%8Cc%E4%B8%8Elua%E7%9A%84%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8/">
+<article class="md-text"><h2 class="post-title">ubuntu配置lua环境，并进行c与lua的相互调用</h2><div class="excerpt"><p>先查看一下apt可获取的lua版本我们选择lua5.1版本进行安装1sudo apt install lua5.1
+安装完之后测试一下是否安装成功，如果可以正常使用，则lua环境已经安装完毕。
+2.安装lua相关的c库lua环境安装完毕，但是此时在c中还不能对lua进行调用，或者生成供lua调用的c库，因为还没有安装lua的c库，通过下面这条命令安装相应的库文件和头文件1sudo apt-g...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-468_Lua%20%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0/">
+<article class="md-text"><h2 class="post-title">Lua 什么是闭包函数</h2><div class="excerpt"><p>为路由器写脚本，顺带学了一下lua.对闭包函数做个理解笔记
+普通函数内部可以直接读取全局变量。如：1234567local n = 1function f1( ... )    return nendprint(f1())        --1
+但普通函数内部却无法读取一个与自己不同作用域的局部变量。如：12345678910function f1( ... )    local n = 1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-46_nginx_lua%20%E6%89%A9%E5%B1%95%E8%AE%A9%20nginx%20%E6%8B%A5%E6%9C%89%E5%8F%AF%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B/">
+<article class="md-text"><h2 class="post-title">nginx_lua 扩展让 nginx 拥有可编程能力</h2><div class="excerpt"><p>公司使用 lighttpd 的比较多, 主要是接入层的一些工作，而且增加了一些很多自己的模块防火墙等等. 后来nginx开始流行起来因为 lighttpd 和 nginx整体是实现方式比较类似(个人感觉nginx 借鉴了 lighttpd的实现方式)，都使用了多进程异步非阻塞处理请求I/O和timer，对于静态文件服务使用sendfile系统调用.  作为静态文件server和接入层来说 l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-471_Lua%E6%A8%A1%E5%9D%97%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8LuaRocks/">
+<article class="md-text"><h2 class="post-title">Lua模块的包管理器LuaRocks</h2><div class="excerpt"><p>
+LuaRocks是Lua模块的包管理器。它允许你创建和安装Lua模块，作为独立包名为rocks。 您可以在Unix和Windows上下载并安装LuaRocks。LuaRocks是免费软件，使用与Lua相同的许可证。  
+
+@[TOC]
+官方 ：https://luarocks.org/
+linux系统下安装安装包列表：http://luarocks.github.io/luarocks/r...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-472_Lua%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/">
 <article class="md-text"><h2 class="post-title">Lua类的实现思路</h2><div class="excerpt"><p>复习下lua的元表元方法，浅尝辄止。
 目标是用lua实现以下C++例子的功能。123456789101112131415161718192021222324252627class {public:	std::string	mName;	Anima(){}	Anima(const std::string&amp; str) : mName(str) {}	void SetName(const ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
@@ -152,34 +152,21 @@ Lua语言拥有控制权，而C语言被用作库，此时的C代码被称为库
 
 应用代码和库代码都适用相同的API和Lua语言通信，这些API称为C API。
 一个简单的独立解释器：12345678910111213141516171819202122232425...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-471_Lua%E6%A8%A1%E5%9D%97%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8LuaRocks/">
-<article class="md-text"><h2 class="post-title">Lua模块的包管理器LuaRocks</h2><div class="excerpt"><p>
-LuaRocks是Lua模块的包管理器。它允许你创建和安装Lua模块，作为独立包名为rocks。 您可以在Unix和Windows上下载并安装LuaRocks。LuaRocks是免费软件，使用与Lua相同的许可证。  
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-470_%E6%BA%AA%E6%B5%81%20WarKey%203.0%20%E8%AE%BA%E5%9D%9B%E9%A2%84%E8%A7%88%E7%89%88%20%E5%8F%91%E5%B8%83%EF%BC%8C%E6%94%AF%E6%8C%81Lua%E8%84%9A%E6%9C%AC/">
+<article class="md-text"><h2 class="post-title">溪流 WarKey 3.0 论坛预览版 发布，支持Lua脚本</h2><div class="excerpt"><p>昨晚搞到近 2 点，终于把相关部分搞完了，放出个预览版玩玩。这一版本将支持组合键，比如，可以分别改Q、Ctrl+Q、Alt+Q 等，也将支持所有鼠标操作。此外，增加了一个脚本系统，允许用户进行更大程度上的自定义。
 
-@[TOC]
-官方 ：https://luarocks.org/
-linux系统下安装安装包列表：http://luarocks.github.io/luarocks/r...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-451_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>
-一、Lua安装及常用库的安装
-1.1 Ubuntu
-1.2 OS X
-1.3 luasocket库的安装
-1.4 lua-cjson库的安装
+猛击这里下载
 
+脚本使用 lua 语言，格式大致为（正式版出来之前可能还会有改动）：
+----------------------------------------------...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.275Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-452_Goto%20in%20LuaJIT%20/">
+<article class="md-text"><h2 class="post-title">Goto in LuaJIT</h2><div class="excerpt"><p>Lua 在 5.2 之后的版本，加入了 goto 这个关键字，用来控制程序跳转到指定 label。我们可以利用这个特性，来模拟 continue 的实现。需要注意的是 goto 只能跳转到 label，而 ::name:: 的格式就可以设置一个 label。
 
-二、HelloWorld
-三、数据类型 有8种基本数据类型
-四、函数 第一类值
-函数
-闭包
-
-
-五、控制语句
-六、逻辑运算符 and、or、not
-七、协同程序 coroutine
-7.1 创建协同
-7.2 协同的三个状态:挂起态（suspend...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.274Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+for i=1,5 do
+    if i == 3 then
+        goto continue
+    end
+    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.274Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

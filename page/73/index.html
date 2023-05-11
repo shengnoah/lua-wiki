@@ -110,18 +110,16 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-335_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>  Lua函数定义格式：
-  optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
-  function_body
-  return result_params_comma_separated
-  end
-说明：
-1）optional_function_sc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-338_lua%E5%87%BD%E6%95%B0%E4%B8%8Eupavalue/">
-<article class="md-text"><h2 class="post-title">lua函数与upavalue</h2><div class="excerpt"><p>Lua中的所谓upvalue是一类比较特殊的值，可以理解为在某函数内引用外部的数据。
-函数定义中用到了pushclosure这个函数用于将函数的定义Proto结构体指针push到父函数的数组中，在这个函数内，还建立了有关upvalue相关的逻辑：
-static void pushclosure (LexState *ls, FuncState *func, expdesc *v) &#123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-333_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8C%87%E4%BB%A4/">
+<article class="md-text"><h2 class="post-title">Lua源码阅读：表操作的指令</h2><div class="excerpt"><p>表操作的相关指令。
+
+创建表：创建一个空表，代码：
+1local p = {}
+对应的OPCODE为OP_NEWTABLE，用于创建一个表，将结果存入寄存器。
+1OP_NEWTABLE,
+simpleexp最终调用Constructor 函数，这个函数专门负责构造表。
+解析表的信息会存放在 ConsControl 结构体中：
+1234567struct  {  expdesc v;  /* ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-334_Lua%E7%BC%96%E7%A8%8B3%E4%B9%8B%E5%8F%98%E9%87%8F/">
 <article class="md-text"><h2 class="post-title">Lua编程3之变量</h2><div class="excerpt"><p>思考并回答以下问题：1.a, b, c = 0 a和b和c的值分别是多少？2.多值赋值的两种常用场景是什么？3.局部变量的作用域是什么？使用局部变量的两个好处是什么？4.全局变量_G是什么类型？有什么作用？5.全局环境存在什么问题？
 
@@ -129,6 +127,16 @@ static void pushclosure (LexState *ls, FuncState *func, expdesc *v) &#123...</p>
 变量在使用前，必须在代码中进行声明，即创建该变量。
 编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。
 Lua变量有三种类型：全...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-336_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">Lua程序设计（4）</h2><div class="excerpt"><p>Lua的输入输出、补充知识
+
+输入输出单就Lua语言而言，只提供了ISO C语言标准支持的功能，即基本的文件操作等。
+简单I/O模型简单模型虚拟了一个当前输入流和一个当前输出流。函数io.input和函数io.output可以用于改变当前的输入输出流，调用io.input会以只读模式打开指定文件，并将文件设置为当前输入流。之后所有的输入都将来自该文件，除非再次调用io.input。
+io.w...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-338_lua%E5%87%BD%E6%95%B0%E4%B8%8Eupavalue/">
+<article class="md-text"><h2 class="post-title">lua函数与upavalue</h2><div class="excerpt"><p>Lua中的所谓upvalue是一类比较特殊的值，可以理解为在某函数内引用外部的数据。
+函数定义中用到了pushclosure这个函数用于将函数的定义Proto结构体指针push到父函数的数组中，在这个函数内，还建立了有关upvalue相关的逻辑：
+static void pushclosure (LexState *ls, FuncState *func, expdesc *v) &#123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-337_Lua%20%E5%AD%A6%E4%B9%A0%20chapter10%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter10</h2><div class="excerpt"><p>目录
 
@@ -159,38 +167,36 @@ Lua变量有三种类型：全...</p></div><div class="meta cap"><span class="ca
 
 
 还有一些...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-336_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">Lua程序设计（4）</h2><div class="excerpt"><p>Lua的输入输出、补充知识
-
-输入输出单就Lua语言而言，只提供了ISO C语言标准支持的功能，即基本的文件操作等。
-简单I/O模型简单模型虚拟了一个当前输入流和一个当前输出流。函数io.input和函数io.output可以用于改变当前的输入输出流，调用io.input会以只读模式打开指定文件，并将文件设置为当前输入流。之后所有的输入都将来自该文件，除非再次调用io.input。
-io.w...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-339_C++%E4%B8%8ELua%E6%9C%AC%E8%B4%A8%E5%8E%9F%E5%A7%8B%E4%BA%A4%E4%BA%92API/">
 <article class="md-text"><h2 class="post-title">C++与Lua本质原始交互API</h2><div class="excerpt"><p>
           
             
           &lt;a href=&quot;/2015/11/11/lua_pairs_ipairs/&quot; rel=&quot;next&quot; title=&quot;Lua中ipairs和pairs的区别与使用&quot;&gt;
             &lt;i class=&quot;fa fa-chevron...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-314_lua%E8%BF%AD%E4%BB%A3%E5%99%A8/">
+<article class="md-text"><h2 class="post-title">lua迭代器</h2><div class="excerpt"><p>前言迭代器就是一种可以遍历一种集合中所有元素的机制，在Lua中，通常将迭代器表示为函数。每调用一次函数，就返回集合中的“下一个”元素。每个迭代器都需要在每次成功调用之后保存一些状态，这样才能知道它所在的位置及如何走到下一个位置，通过之前博文的总结，闭包对于这样的任务提供了极佳的支持。现在我们就用代码来实现一个简单的迭代器。
+function values(tb)
+     local i =...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-316_Valuable%20Web/">
+<article class="md-text"><h2 class="post-title">Valuable Web</h2><div class="excerpt"><p>这篇文章整理一下曾经在Google Reader上订阅的有价值的Blog。这些Blog都曾经或多或少的改变了我对待工作和生活的态度，谢谢这些作者。
+
+##Google Reader中的好网站
+这些网站曾经在黑暗中为我点亮一盏盏指路的灯，希望你也能从中受益。
+
+Mind Hacks 刘未鹏的Blog，每一篇文章都很有营养，值得细读。不过貌似最近两年更新频率不高了。
+
+… TODO</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-315_Lua%E7%BC%96%E7%A8%8B5%E4%B9%8B%E5%87%BD%E6%95%B0/">
+<article class="md-text"><h2 class="post-title">Lua编程5之函数</h2><div class="excerpt"><p>思考并回答以下问题：1.编程中最重要的是什么？2.描述一下函数的两种用途。3.如何指定为局部函数？4.函数可以返回多个值吗？如何返回？5.foo = function(x) return 2 * x end 如何调用？6.Lua中实参和形参的数量不一致如何处理？7.可变参数是什么意思？如何使用？动手实现print(“平均值为”,average(10,5,3,4,5,6))
+
+
+编程中最重要的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-317_OpenResty%E8%BF%90%E8%A1%8CLua%E7%A4%BA%E4%BE%8B/">
 <article class="md-text"><h2 class="post-title">OpenResty运行Lua示例</h2><div class="excerpt"><p>OpenResty 是一个基于 Nginx 与 Lua 的高性能 Web 平台。
 更多信息，参考 OpenResty 官网。
 安装过程跟 Nginx 基本相同，区别在于安装完成之后，默认安装了很多 Module。
 安装完成后，执行 ./nginx -V 的结果
 nginx version: openresty/1.13.6.2built by gcc 4.8.5 20150623 (Red ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-313_%E6%AF%8F%E5%91%A8%E4%B8%80%E8%AE%BA%E6%96%87%EF%BC%9AAn%20Empirical%20Evaluation%20of%20In/">
-<article class="md-text"><h2 class="post-title">每周一论文：An Empirical Evaluation of In</h2><div class="excerpt"><p>论文概要多版本并发控制(Multi-Version Concurrency Control，以下简称MVCC) 是当今数据库领域最流行的并发控制实现，MVCC 在最大化并发度的情况下尽可能保证事务的正确性，其好处有：
-
-写不会阻塞读
-只读事务无需数据库锁就能支持可重复读
-可以很好地支持历史数据查询
-
-MVCC 的关键在于首先假设数据库读写冲突不会很大，其次通过维护同一份数据的多个版本，是的事...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-318_lua%20c%20api%20/">
-<article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>一 registry registry 是一个单独的表，用来保存 lua 中的全局变量，同时 lua 代码不能直接访问（只能通过 c 函数接口访问）。registry 通过伪索引（LUA_REGISTRYINDEX）访问，伪索引类似于栈上的索引，但是它的关联数据并未在栈中。 registry 的存在是用来解决一个问题：在 c 动态库中如何保存一个 lua 状态机的全局变量。如果使用 c 的全...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-314_lua%E8%BF%AD%E4%BB%A3%E5%99%A8/">
-<article class="md-text"><h2 class="post-title">lua迭代器</h2><div class="excerpt"><p>前言迭代器就是一种可以遍历一种集合中所有元素的机制，在Lua中，通常将迭代器表示为函数。每调用一次函数，就返回集合中的“下一个”元素。每个迭代器都需要在每次成功调用之后保存一些状态，这样才能知道它所在的位置及如何走到下一个位置，通过之前博文的总结，闭包对于这样的任务提供了极佳的支持。现在我们就用代码来实现一个简单的迭代器。
-function values(tb)
-     local i =...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.261Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

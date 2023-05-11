@@ -118,6 +118,12 @@
 ##语法  
 嵌套 if 语句的语法规则如下：  
 1234567891011121314if( boolean_expression 1)then   --[ 如果布尔表达式 1 为真...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/loop/">
+<article class="md-text"><h2 class="post-title">Lua循环嵌套</h2><div class="excerpt"><p>#Lua 循环嵌套  
+Lua 编程语言允许使用循环嵌套。接下来这一节中将用例子来说嵌套循环的使用方法：  
+##语法  
+for 循环嵌套的语法如下：  
+1234567891011for init,max/min value, incrementdo   for init,max/min value, increment   do      statement(s)   end   st...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/object-oriented/">
 <article class="md-text"><h2 class="post-title">Lua面向对象</h2><div class="excerpt"><p>Lua 面向对象面向对象概述面向对象编程技术是目前最常用的编程技术之一。目前大量的编程语言都支持面向对象的特性： 
 
@@ -132,6 +138,36 @@
 面向对象的特征
     类（class）：类是可以创建对象，并为状态（成员变量）提供初值及行为实现的可扩展模板。
     对象（objects）：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/operators/">
+<article class="md-text"><h2 class="post-title">操作符</h2><div class="excerpt"><p>操作符操作符是用于告诉解释器执行特定的数学或逻辑运算的符号。Lua 语言有丰富的内置操作符，主要包括以下几类：  
+
+    算术运算操作符
+    关系运算操作符
+    逻辑运算操作符
+    其它操作符
+
+这篇教程将会依次介绍以上四类操作符。  
+
+算术去处操作符下面的表中列出了所有 Lua 语言支持的算术运算操作符。假设 A 变量的值为 10，B 变量的值为 20，则：  
+
+   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/overview/">
+<article class="md-text"><h2 class="post-title">概述</h2><div class="excerpt"><p>概述Lua 是用 C 语言开发的可扩展的轻量级编程语言。它起源于 1993 年由 Roberto lerusalimschy,Luiz Henrique de Figueiredo 与 Waddemar Celes 领导的一个内部项目。设计者的初衷是希望 Lua 可以成为一款整合 C 语言代码以及其它传统语言代码的软件。这种整合会带来很多好处，它让你不需要重复做 C 语言已经做的很好的工作，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/until/">
+<article class="md-text"><h2 class="post-title">repeat...until 循环</h2><div class="excerpt"><p>#repeat…until 循环  
+与 for 和 while 循环中先检测条件再决定是否执行循环不同，repeat…until 先执行循环再检测条件判断是否再次执行。除了 repeat…until 循环一定会执行一次之外，repeat…until 与 while 循环很相似。  
+##语法  
+Lua 语言中 repeat…until 循环的语法如下：  
+123456789101112...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/libraries/">
+<article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>Lua 标准库Lua 标准库利用 C 语言 API 实现并提供了丰富的函数，它们内置于 Lua 语言中。该标准库不仅可以提供 Lua 语言内服务，还能提供外部服务，比如文件或数据库的操作。  
+这些标准库使用标准的 C API 接口实现，它们作为独立的 C 语言模块提供给使用者。主要包括以下的内容：
+
+    基本库，包括协程子库
+    模块库
+    字符串操作
+    表操作
+    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/facilities/">
 <article class="md-text"><h2 class="post-title">Lua操作系统工具库</h2><div class="excerpt"><p>Lua 操作系统工具库在很多应用中，我们都需要访问到操作系统级别的函数，操作系统库就给我们提供了这样的工具。下面的列表给出操作系统工具包提供的方法：  
 
@@ -146,42 +182,6 @@
     
         2
   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/loop/">
-<article class="md-text"><h2 class="post-title">Lua循环嵌套</h2><div class="excerpt"><p>#Lua 循环嵌套  
-Lua 编程语言允许使用循环嵌套。接下来这一节中将用例子来说嵌套循环的使用方法：  
-##语法  
-for 循环嵌套的语法如下：  
-1234567891011for init,max/min value, incrementdo   for init,max/min value, increment   do      statement(s)   end   st...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/until/">
-<article class="md-text"><h2 class="post-title">repeat...until 循环</h2><div class="excerpt"><p>#repeat…until 循环  
-与 for 和 while 循环中先检测条件再决定是否执行循环不同，repeat…until 先执行循环再检测条件判断是否再次执行。除了 repeat…until 循环一定会执行一次之外，repeat…until 与 while 循环很相似。  
-##语法  
-Lua 语言中 repeat…until 循环的语法如下：  
-123456789101112...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/overview/">
-<article class="md-text"><h2 class="post-title">概述</h2><div class="excerpt"><p>概述Lua 是用 C 语言开发的可扩展的轻量级编程语言。它起源于 1993 年由 Roberto lerusalimschy,Luiz Henrique de Figueiredo 与 Waddemar Celes 领导的一个内部项目。设计者的初衷是希望 Lua 可以成为一款整合 C 语言代码以及其它传统语言代码的软件。这种整合会带来很多好处，它让你不需要重复做 C 语言已经做的很好的工作，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/libraries/">
-<article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>Lua 标准库Lua 标准库利用 C 语言 API 实现并提供了丰富的函数，它们内置于 Lua 语言中。该标准库不仅可以提供 Lua 语言内服务，还能提供外部服务，比如文件或数据库的操作。  
-这些标准库使用标准的 C API 接口实现，它们作为独立的 C 语言模块提供给使用者。主要包括以下的内容：
-
-    基本库，包括协程子库
-    模块库
-    字符串操作
-    表操作
-    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/operators/">
-<article class="md-text"><h2 class="post-title">操作符</h2><div class="excerpt"><p>操作符操作符是用于告诉解释器执行特定的数学或逻辑运算的符号。Lua 语言有丰富的内置操作符，主要包括以下几类：  
-
-    算术运算操作符
-    关系运算操作符
-    逻辑运算操作符
-    其它操作符
-
-这篇教程将会依次介绍以上四类操作符。  
-
-算术去处操作符下面的表中列出了所有 Lua 语言支持的算术运算操作符。假设 A 变量的值为 10，B 变量的值为 20，则：  
-
-   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/libraries/">
 <article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>Lua 标准库Lua 标准库利用 C 语言 API 实现并提供了丰富的函数，它们内置于 Lua 语言中。该标准库不仅可以提供 Lua 语言内服务，还能提供外部服务，比如文件或数据库的操作。  
 这些标准库使用标准的 C API 接口实现，它们作为独立的 C 语言模块提供给使用者。主要包括以下的内容：

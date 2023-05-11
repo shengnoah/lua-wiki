@@ -112,7 +112,15 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-173_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-171_lua%E4%B8%8ECpp%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D/">
+<article class="md-text"><h2 class="post-title">lua与Cpp传递参数接口介绍</h2><div class="excerpt"><p>最近在开源代码中遇到MySQL-Proxy, 其允许lua脚本实现用户的个性化配置, lua脚本可以引用C/C++的动态链接库完成一些复杂的功能. 本文对最近接触到的lua和C/C++混合的相关接口使用做个总结. 本文的完整代码在文末的附录中, 代码测试在Ubuntu16.04+lua5.1下完成, 不同版本可能API有所变化, 可以参考文末给出的官方文档链接.
+
+相关环境配置首先, 要在C...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-172_Lua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+<article class="md-text"><h2 class="post-title">Lua面向对象程序设计 · 花生肉泥</h2><div class="excerpt"><p>类lua不存在类的概念，每个对象定义他自己的行为并拥有自己的形状（shape）。然而，依据基于原型的语言，在lua中仿效类的概念并不难。
+在lua中，使用继承的思想，很容易实现prototype（原型），如果我们有两个对象a和b，我们想让b作为a的原型，只需要1setmetatable(a,{__index = b})
+这样，对象a调用任何不存在的成员函数都会到对象b中去找，术语上，可以将b...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-173_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%881%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">Lua程序设计（1）</h2><div class="excerpt"><p>Lua中的字符串。
 
 字符串Lua语言中的字符串是一串字节组成的序列，Lua核心并不关心这些字节究竟以何种方式编码文本。
@@ -121,10 +129,6 @@ Lua语言中的字符串是不可变值。
 像Lua语言中的其他对象（表、函数等）一样，Lua语言中的字符串也是自动内存管理的对象之一，Lua会负责字符串的分配和释放。
 
 可以使用长度操作符#获取字符串的长度，该操作符返回字符串占用的字节...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-171_lua%E4%B8%8ECpp%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D/">
-<article class="md-text"><h2 class="post-title">lua与Cpp传递参数接口介绍</h2><div class="excerpt"><p>最近在开源代码中遇到MySQL-Proxy, 其允许lua脚本实现用户的个性化配置, lua脚本可以引用C/C++的动态链接库完成一些复杂的功能. 本文对最近接触到的lua和C/C++混合的相关接口使用做个总结. 本文的完整代码在文末的附录中, 代码测试在Ubuntu16.04+lua5.1下完成, 不同版本可能API有所变化, 可以参考文末给出的官方文档链接.
-
-相关环境配置首先, 要在C...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-174_%5BLua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>读书笔记： Programming in Lua, 4th Edition.
 
@@ -138,37 +142,25 @@ one string      another string
 
 
 计算字符串长度...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-175_Unity%E5%B8%B8%E8%A7%81lua%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/">
-<article class="md-text"><h2 class="post-title">Unity常见lua解决方案性能比较</h2><div class="excerpt"><p>之前由于项目需要，我比较了下Unity常见的几个lua解决方案；最近应鑫哥约稿，整理了一下。Unity不支持热更新这事情一直是一个谜一样的痛点，特别是在我第一个项目上线之后，发现每次更新代价太大了…可惜官方Roadmap上迟迟没有出现这个功能。昨天在群里还看到琨少说天下直接热更新Python脚本，羡慕嫉妒ing。为了解决这个问题，uwa之前分享过Android平台热更新解决方案：直接替换dl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-176_%E5%9F%BA%E4%BA%8EOpenResty%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENginx+LUA%E5%B9%B6%E5%AE%9E%E7%8E%B0%E8%AF%B7%E6%B1%82%E5%88%86%E5%8F%91%E7%9A%84%E5%8F%8C%E5%B1%82Nginx%E6%9E%B6%E6%9E%84%E7%AD%96%E7%95%A5/">
 <article class="md-text"><h2 class="post-title">基于OpenResty安装配置Nginx+LUA并实现请求分发的双层Nginx架构策略</h2><div class="excerpt"><p>台CentOS6.x192.168.1.210192.168.1.211192.168.1.212网络拓扑210和211作为应用层web服务器212作为网络请求分发代理服务器
 Step1:安装Linux依赖1yum install -y readline-devel pcre-devel openssl-devel gcc
 Step2:安装Nginx Openresty12345678910...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-175_Unity%E5%B8%B8%E8%A7%81lua%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/">
+<article class="md-text"><h2 class="post-title">Unity常见lua解决方案性能比较</h2><div class="excerpt"><p>之前由于项目需要，我比较了下Unity常见的几个lua解决方案；最近应鑫哥约稿，整理了一下。Unity不支持热更新这事情一直是一个谜一样的痛点，特别是在我第一个项目上线之后，发现每次更新代价太大了…可惜官方Roadmap上迟迟没有出现这个功能。昨天在群里还看到琨少说天下直接热更新Python脚本，羡慕嫉妒ing。为了解决这个问题，uwa之前分享过Android平台热更新解决方案：直接替换dl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-177_Lua%20string.find%20%E4%B8%AD%E7%9A%84%20%E2%80%9C%E5%9D%91%E2%80%9D%20/">
 <article class="md-text"><h2 class="post-title">Lua string.find 中的 “坑”</h2><div class="excerpt"><p>我们的线上环境，ngx_lua api 都是以模块形式加载到 lua 级别的 vm 中，已达到最大性能。而且我们并没有使用传统的 “包” 的形式来加载(也就是 require &#34;xx.xx.xx&#34; )，而是直接以模块名为加载( require &#34;xx&#34; )，这就意味着我们需要不断的来动态设置 package.path 来配合 require 的机制。于是我们写...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-172_Lua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
-<article class="md-text"><h2 class="post-title">Lua面向对象程序设计 · 花生肉泥</h2><div class="excerpt"><p>类lua不存在类的概念，每个对象定义他自己的行为并拥有自己的形状（shape）。然而，依据基于原型的语言，在lua中仿效类的概念并不难。
-在lua中，使用继承的思想，很容易实现prototype（原型），如果我们有两个对象a和b，我们想让b作为a的原型，只需要1setmetatable(a,{__index = b})
-这样，对象a调用任何不存在的成员函数都会到对象b中去找，术语上，可以将b...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-160_Evaluation%20metrics%20for%20generation%20based%20models%20in%20/">
-<article class="md-text"><h2 class="post-title">Evaluation metrics for generation based models in NLP</h2><div class="excerpt"><p>Evaluation metrics for generation based models in NLPBLEU转自： http://www.cnblogs.com/by-dream/p/7679284.html 
-n-gramBLEU 采用一种N-gram的匹配规则，原理比较简单，就是比较译文和参考译文之间n组词的相似的一个占比。
-　　例如：
-　　　　原文：今天天气不错
-　　　　机器译文...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-162_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(1)%20%E5%85%83%E8%A1%A8/">
-<article class="md-text"><h2 class="post-title">Lua学习笔记(1) 元表</h2><div class="excerpt"><p>[TOC]
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-159_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>16 Object-oriented Programming
 
-基本
+对象和方法1234567891011Account = {	balance = 0,	withdraw = function (self, v)		self.balance = self.balance - v	end}function (v)	self.balance = self.balance + vendAccount....</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-15_lua%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E6%B3%9B%E5%9E%8Bfor/">
+<article class="md-text"><h2 class="post-title">lua 迭代器和泛型for</h2><div class="excerpt"><p>          &lt;h2 id=&quot;迭代器和闭包&quot;&gt;迭代器和闭包&lt;/h2&gt;
 
-1. 概念
-定义：Lua 中的每个值都可以用一个 metatable。 这个 metatable 就是一个原始的 Lua table ， 它用来定义原始值在特定操作下的行为。 你可以通过在 metatable 中的特定域设一些值来改变拥有这个 metatable 的值 的指定操作之行为。[1]
 
-2. 例子
-
-看一个例子就能够很好理解metatable的用法了
-
--- ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  迭代器可以遍历集合的每一个元素，在lua中常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。
+  迭代器需要保留上一次成功调用的状态和下一次成功调用的状态，也就是它知道来自于哪里和将要前往哪里。闭包可以实现这个任务。
+  闭包是一个内部函数，它可以访问...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-161_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>3 Expressions
 

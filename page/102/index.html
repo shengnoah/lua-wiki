@@ -110,18 +110,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1113_lua%20%E7%BC%96%E7%A8%8B%E4%B9%8B%20hello%20world/">
-<article class="md-text"><h2 class="post-title">lua 编程之 hello world</h2><div class="excerpt"><p>今天开始我要学 Lua 了，之所以要学习它，确实也是游戏开发目前需要的，涉及到热更新技术，Lua 相对来说还是比较成熟的，而且就目前主流的各种 Lua 框架的出现，学习 Lua 以及使用 Lua 的难度也是大大降低了。
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1114_evaluation%20of%20association%20patterns/">
+<article class="md-text"><h2 class="post-title">evaluation of association patterns</h2><div class="excerpt"><p>This article is the note for reading _Introduction to Data Mining_ .
+_Chapter 6. Association Analysis: Basic Concepts and Algorithms_
+— Evaluation of Association Patterns.
 
-
-首先来看下 Lua 是什么，Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1115_lua%E7%83%AD%E6%9B%B4%E6%96%B0/">
-<article class="md-text"><h2 class="post-title">lua热更新</h2><div class="excerpt"><p>热更新，不停机更新，是在不重新下载安装包，甚至不重启游戏的情况下对游戏进行更新。
-
-12345678910111213function (module_name)    local old_module = _G[module_name]    package.loaded[module_name] = nil    require (module_name)    local new_mo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1117_1.2%20lua%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">1.2 lua 环境安装</h2><div class="excerpt"><p>linux 系统安装lualinux &amp; Mac上安装 Lua 安装非常简单，只需要下载源码包并在终端解压编译即可，本文使用了5.3.4版本进行安装：
-12345curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gztar zxf lua-5.3.4.tar.gzcd lua-5.3.4make linux testmake instal...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+GeneralAs the size and d...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1111_systematic%20evaluation%20of%20isoform%20function%20in%20liter/">
 <article class="md-text"><h2 class="post-title">systematic evaluation of isoform function in literature reports of alternative splicing</h2><div class="excerpt"><p>
 MathJax.Hub.Config({
@@ -132,6 +126,16 @@ MathJax.Hub.Config({
 
 Classify distinct functions of isoforms 
 Literature-based analysis of experimental evidence for functionally distinct ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1115_lua%E7%83%AD%E6%9B%B4%E6%96%B0/">
+<article class="md-text"><h2 class="post-title">lua热更新</h2><div class="excerpt"><p>热更新，不停机更新，是在不重新下载安装包，甚至不重启游戏的情况下对游戏进行更新。
+
+12345678910111213function (module_name)    local old_module = _G[module_name]    package.loaded[module_name] = nil    require (module_name)    local new_mo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1116_2.2%20lua%20%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+<article class="md-text"><h2 class="post-title">2.2 lua 基础数据类型</h2><div class="excerpt"><p>lua 是一门极其精简的语言，内置类型只要nil,boolean,number等三种基本类型，以及string,table等二种组合类型。没有C/C++ 等语言中的class、struct等复杂类型，这些类型可以通过table来实现。同时，不同于其他语言（如C/C++和java），function在lua中也作为一个一级类型。
+nilnil 是一种类型，Lua 将 nil 用于表示“无效值”...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1117_1.2%20lua%20%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">1.2 lua 环境安装</h2><div class="excerpt"><p>linux 系统安装lualinux &amp; Mac上安装 Lua 安装非常简单，只需要下载源码包并在终端解压编译即可，本文使用了5.3.4版本进行安装：
+12345curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gztar zxf lua-5.3.4.tar.gzcd lua-5.3.4make linux testmake instal...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1118_evaluation-measure/">
 <article class="md-text"><h2 class="post-title">evaluation-measure</h2><div class="excerpt"><p>分类问题precision(精确率)P = frac{TP}{TP+FP} tag{1}recall(召回率)R = frac{TP}{TP+FN} tag{2}$F_1$精确率和召回率的调和均值，
 
@@ -139,19 +143,17 @@ begin{align*}
 frac{2}{F_1} & = frac{1}{P} + frac{1}{R}\
 F_1 & = frac{2TP}{2TP + FP + FN} tag{3}
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1116_2.2%20lua%20%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-<article class="md-text"><h2 class="post-title">2.2 lua 基础数据类型</h2><div class="excerpt"><p>lua 是一门极其精简的语言，内置类型只要nil,boolean,number等三种基本类型，以及string,table等二种组合类型。没有C/C++ 等语言中的class、struct等复杂类型，这些类型可以通过table来实现。同时，不同于其他语言（如C/C++和java），function在lua中也作为一个一级类型。
-nilnil 是一种类型，Lua 将 nil 用于表示“无效值”...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1122_%E5%BA%94(luan)%E6%9C%89(qi)%E5%B0%BD(ba)%E6%9C%89(zao)/">
-<article class="md-text"><h2 class="post-title">应(luan)有(qi)尽(ba)有(zao)</h2><div class="excerpt"><p>记录一些看到的有用的知识
-金钱格式化用正则魔法实现：1234var test1 = &#39;1234567890&#39;var format = test1.replace(/B(?=(d{3})+(?!d))/g, &#39;,&#39;)console.log(format) 
-非正则的优雅实现：123456 function (str) {       return str.spl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-111_Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 <article class="md-text"><h2 class="post-title">Lua数据结构的实现</h2><div class="excerpt"><p>
 《Lua程序设计》笔记：高效地使用table来实现一些传统的数据结构
 
 1 数组Lua库和长度操作符都遵循索引从1开始的约定。
 2 多维数组123456789101112131415mt = {}for i=1, N do    mt[i] = {}    for j=1, M do        mt[i][j] = 0    endend--合并索引（i*常量 + j）mt = {}f...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1120_leetcode%20150.%20evaluate%20reverse%20polish%20notation/">
+<article class="md-text"><h2 class="post-title">leetcode 150. evaluate reverse polish notation</h2><div class="excerpt"><p>150. Evaluate Reverse Polish NotationDifficulty: Medium
+Evaluate the value of an arithmetic expression in .
+Valid operators are +, -, *, /. Each operand may be an integer or another expression.
+Not...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.236Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1125_unity%20hotfix%20solution%20(xlua,%20assetbundle)/">
 <article class="md-text"><h2 class="post-title">unity hotfix solution (xlua, assetbundle)</h2><div class="excerpt"><p>
                 

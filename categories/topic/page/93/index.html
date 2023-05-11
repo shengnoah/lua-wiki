@@ -126,22 +126,10 @@ a = “dudor”
 a = [[dudor]]
 上面三个值是相等的。
 其中由N级中括号定义的方式比较特别，在别的语言中很少见到。N级中括号是在两个中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-133_Lua%E5%85%83%E8%A1%A8/">
-<article class="md-text"><h2 class="post-title">Lua元表</h2><div class="excerpt"><p>javascript语言本身不支持面向对象，ES2015中增加了class关键字，却不过是prototype语法糖而已，本质上prototype形式的面向对象只能算是一种“模拟”，这其中很重要的原因之一是js从来没有一套完美的深拷贝方案，子类只能借助原型链获取父类方法的引用，这不能算是严格意义的继承，当然也就算不上面向对象。
-和js一样，lua的面向对象需要通过table来模拟，有些行为很像...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-136_Lua%20table%E3%80%81%E6%A8%A1%E5%9D%97%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-<article class="md-text"><h2 class="post-title">Lua table、模块与面向对象</h2><div class="excerpt"><p>很久之前接触过lua，最近在工作中又用到了一些，对lua这门语言又有了新的认识和理解。Lua是一门很简洁高效的语言,在openresty项目中大量使用，游戏开发中也使用lua来写一些脚本。在这里记录一下自己对lua中面向对象的理解。
-table在lua中是一种kv的数据结构，也指由一些辅助函数组成的库。如：
-local tb = &#123;name=&#34;zhangsan&#34;, ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-137_Evaluation%20of%20Word%20Vector%20Representations%20by%20Subsp/">
-<article class="md-text"><h2 class="post-title">Evaluation of Word Vector Representations by Subspace Alignment</h2><div class="excerpt"><p>无监督学习的词向量的评价通常与下游应用没有很大的关联，本文将提出QVEC的评价方法。
-Introduction缺乏标准化的对比方式是因为词向量的每个维度依然是无法解释的，如何去给一个无法解释的表示打分依然是不明确的。
-本文通过将distribution word vector和人工标注的word vector对其，然后计算每一维的相关度，相加之后就得到了distribution word v...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-138_Lua%E9%97%AD%E5%8C%85/">
-<article class="md-text"><h2 class="post-title">Lua闭包</h2><div class="excerpt"><p>Lua中的闭包
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-131_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>9 Coroutines
 
-闭包，又称词法闭包或函数闭包，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例^wiki。
-Lua中闭包是一个由一个函数和该函数会访问到的upvalue组成的，其中的upvalu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+协程和线程的相同点：1It is a line of execution, with its own stack, its own local variables, and its own instruction pointer; but it shares global variables and mostly anything else with other ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-134_Lua%E5%AD%A6%E4%B9%A0/">
 <article class="md-text"><h2 class="post-title">Lua学习</h2><div class="excerpt"><p>简介
 Lua是脚本型语言
@@ -161,10 +149,6 @@ Lua行末不要分号
 Lua的括号12345do    ……    ……    ……end
 Lua语言几乎用不到大括号，取而代之的是do…end
 Lua的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-131_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>9 Coroutines
-
-协程和线程的相同点：1It is a line of execution, with its own stack, its own local variables, and its own instruction pointer; but it shares global variables and mostly anything else with other ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-135_Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20%E2%80%94%20Udata%EF%BC%88%E4%BA%94%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">Lua数据结构 — Udata（五）</h2><div class="excerpt"><p>
             文章目录
@@ -174,6 +158,22 @@ Lua的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布
       &lt;/div&gt;
     
     &lt;p&gt;&lt;strong&gt;Udata负责存储userdata的数据&lt;/strong&gt;，这部分其实很简单，但是为了保证系列文章的完整性，还是写一篇出来补全。&lt;/p&...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-136_Lua%20table%E3%80%81%E6%A8%A1%E5%9D%97%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+<article class="md-text"><h2 class="post-title">Lua table、模块与面向对象</h2><div class="excerpt"><p>很久之前接触过lua，最近在工作中又用到了一些，对lua这门语言又有了新的认识和理解。Lua是一门很简洁高效的语言,在openresty项目中大量使用，游戏开发中也使用lua来写一些脚本。在这里记录一下自己对lua中面向对象的理解。
+table在lua中是一种kv的数据结构，也指由一些辅助函数组成的库。如：
+local tb = &#123;name=&#34;zhangsan&#34;, ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-133_Lua%E5%85%83%E8%A1%A8/">
+<article class="md-text"><h2 class="post-title">Lua元表</h2><div class="excerpt"><p>javascript语言本身不支持面向对象，ES2015中增加了class关键字，却不过是prototype语法糖而已，本质上prototype形式的面向对象只能算是一种“模拟”，这其中很重要的原因之一是js从来没有一套完美的深拷贝方案，子类只能借助原型链获取父类方法的引用，这不能算是严格意义的继承，当然也就算不上面向对象。
+和js一样，lua的面向对象需要通过table来模拟，有些行为很像...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-137_Evaluation%20of%20Word%20Vector%20Representations%20by%20Subsp/">
+<article class="md-text"><h2 class="post-title">Evaluation of Word Vector Representations by Subspace Alignment</h2><div class="excerpt"><p>无监督学习的词向量的评价通常与下游应用没有很大的关联，本文将提出QVEC的评价方法。
+Introduction缺乏标准化的对比方式是因为词向量的每个维度依然是无法解释的，如何去给一个无法解释的表示打分依然是不明确的。
+本文通过将distribution word vector和人工标注的word vector对其，然后计算每一维的相关度，相加之后就得到了distribution word v...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-138_Lua%E9%97%AD%E5%8C%85/">
+<article class="md-text"><h2 class="post-title">Lua闭包</h2><div class="excerpt"><p>Lua中的闭包
+
+闭包，又称词法闭包或函数闭包，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例^wiki。
+Lua中闭包是一个由一个函数和该函数会访问到的upvalue组成的，其中的upvalu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.243Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-11_Lua%E7%AE%80%E4%BB%8B/">
 <article class="md-text"><h2 class="post-title">Lua简介</h2><div class="excerpt"><p>    &lt;h1 id=&quot;Lua_u662F_u4EC0_u4E48&quot;&gt;
 

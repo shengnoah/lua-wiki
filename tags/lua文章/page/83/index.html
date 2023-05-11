@@ -112,18 +112,10 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-242_Mac%E4%B8%8B%E7%BC%96%E5%86%99lua%E7%9A%84C%E6%A8%A1%E5%9D%97/">
-<article class="md-text"><h2 class="post-title">Mac下编写lua的C模块</h2><div class="excerpt"><p>&lt;p&gt;最近在研究lua下protobuf的使用，必然就会接触到了云风大侠的pbc，github上下了源码进行编译，发现想要把binding下面的测试代码运行起来，还是有一些坑点的。&lt;/p&gt;
-
-在 /binding/lua53 目录下有 Makefile pbc-lua53.c protobuf.lua test.lua几个主要的文档。
-
-调用的层次大概是：test.l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.253Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-223_%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Redis%E6%89%A7%E8%A1%8CLua%E8%84%9A%E6%9C%AC/">
-<article class="md-text"><h2 class="post-title">如何使用Redis执行Lua脚本</h2><div class="excerpt"><p>    &lt;h3&gt;&lt;span id=&quot;为什么要使用lua脚本&quot;&gt;为什么要使用Lua脚本？&lt;/span&gt;&lt;/h3&gt;
-
-lua脚本有很多的优点，但是对于我来说我使用它只因为它能保证原子性。为什么它能保证原子性你就使用它呢？一个简单的例子，在我们的Java代码中，一个简单的++i都不能保证原子性更别提复杂的情况了。但是使用lua在执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-222_Lua%20%E5%9C%A8%20Android%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%B8%8B,%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8/">
-<article class="md-text"><h2 class="post-title">Lua 在 Android 中应用下,具体使用</h2><div class="excerpt"><p>    &lt;p&gt;转载请附原文链接：&lt;a href=&quot;http://yongyu.itscoder.com/2018/04/16/yongyu_20180416_lua_android_two/#more&quot; target=&quot;_blank&quot; rel=&quot;external noopener noreferrer&quot;&gt; L...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-243_lua%E5%AD%A6%E4%B9%A01/">
+<article class="md-text"><h2 class="post-title">lua学习1</h2><div class="excerpt"><p>类型与值Lua是一种动态语言，没有定义类型的语法，每个值都携带了自身的类型信息。
+Lua中有8种基础类型：nil、boolean、number、string、userdata、function、thread、table。函数type可以返回值的类型。
+123456print(type("hello"))           print(type(1))                 pri...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.253Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-220_Lua%20%E5%AD%A6%E4%B9%A0%20chapter7%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter7</h2><div class="excerpt"><p>            &lt;h3 id=&quot;目录&quot;&gt;目录&lt;/h3&gt;
 
@@ -146,21 +138,23 @@ I/O库把当前的输入流初始化为进程的标准输入(C中的stdin...</p>
           &lt;a href=&quot;https://hulinhong.com/2015/07/11/redis%E6%A6%82%E8%A6%...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-224_Lua%20string.find%20%E4%B8%AD%E7%9A%84%20%E2%80%9C%E5%9D%91%E2%80%9D%20/">
 <article class="md-text"><h2 class="post-title">Lua string.find 中的 “坑”</h2><div class="excerpt"><p>            &lt;p&gt;我们的线上环境，ngx_lua api 都是以模块形式加载到 lua 级别的 vm 中，已达到最大性能。而且我们并没有使用传统的 “包” 的形式来加载(也就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;require &quot;xx.xx.xx&quot;&lt;/code&gt; )，而是直接...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-222_Lua%20%E5%9C%A8%20Android%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%B8%8B,%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8/">
+<article class="md-text"><h2 class="post-title">Lua 在 Android 中应用下,具体使用</h2><div class="excerpt"><p>    &lt;p&gt;转载请附原文链接：&lt;a href=&quot;http://yongyu.itscoder.com/2018/04/16/yongyu_20180416_lua_android_two/#more&quot; target=&quot;_blank&quot; rel=&quot;external noopener noreferrer&quot;&gt; L...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-223_%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Redis%E6%89%A7%E8%A1%8CLua%E8%84%9A%E6%9C%AC/">
+<article class="md-text"><h2 class="post-title">如何使用Redis执行Lua脚本</h2><div class="excerpt"><p>    &lt;h3&gt;&lt;span id=&quot;为什么要使用lua脚本&quot;&gt;为什么要使用Lua脚本？&lt;/span&gt;&lt;/h3&gt;
+
+lua脚本有很多的优点，但是对于我来说我使用它只因为它能保证原子性。为什么它能保证原子性你就使用它呢？一个简单的例子，在我们的Java代码中，一个简单的++i都不能保证原子性更别提复杂的情况了。但是使用lua在执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-225_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>    &lt;p&gt;1   变量在使用前，必须在代码中进行声明，即创建改变量；&lt;br&gt;    Lua的变量类型：全局变量、局部变量、表中的域；&lt;br&gt;    Lua的变量全是全局变量，即便是语句块或者是函数里，除非使用local显示声明为局部变量；&lt;br&gt;    局部变量的作用域从声明的位置开始，到所在语句块结束；&lt;br&gt;    变量的默...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-226_Ngx_lua%E4%B8%80%E9%94%AE%E6%88%AA%E6%B5%81%E7%B3%BB%E7%BB%9F/">
 <article class="md-text"><h2 class="post-title">Ngx_lua一键截流系统</h2><div class="excerpt"><p>    &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;https://fankeke.github.io/#%E8%83%8C%E6%99%AF&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;由于某些服务的流量过大...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-229_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>            &lt;p&gt;选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。&lt;/p&gt;
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-228_Programming%20in%20Lua%E6%91%98%E5%BD%95/">
+<article class="md-text"><h2 class="post-title">Programming in Lua摘录</h2><div class="excerpt"><p>    &lt;p&gt;“袁承志知道若再谦逊，那就是瞧人不起，展开五行拳，发拳当胸打去。荣彩和旁观三人本来都以为他武功有独到之秘，哪知使出来的竟是武林中最寻常不过的五行拳。&lt;/p&gt;
 
-选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-22_lua%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
-<article class="md-text"><h2 class="post-title">lua垃圾回收</h2><div class="excerpt"><p>采用垃圾回收机制对所有的lua对象(GCObject)进行管理。Lua虚拟机会定期运行GC，释放掉已经不再被被引用到的lua对象。
-基本算法【标记清除】
-基本的垃圾回收算法被称为”mark-and-sweep”算法。算法本身其实很简单。
-1.系统管理着所有已经创建了的对象。每个对象都有对其他对象的引用。
-2.root集合代表着已知的系统级别的对象引用。
-3.从root集合出发，就可以访问到系...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+敌对三人登时意存轻视，温青脸上不自禁露出失望的神色。
+“荣彩心中暗喜，双拳如风，连抢三下攻势，满拟自己的大力魔爪手江南独步，三四招之间就可破去对方五行拳，那知袁承志轻描淡写的一一化解。再拆数招，荣...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-227_OpenResty%E4%B8%AD%E4%BD%BF%E7%94%A8Lua%E7%9A%84MongoDB%E5%BA%93%EF%BC%8C%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E8%8A%82%E7%9C%81%E8%BF%9E%E6%8E%A5%E8%AE%A4%E8%AF%81%E6%97%B6%E9%97%B4/">
+<article class="md-text"><h2 class="post-title">OpenResty中使用Lua的MongoDB库，使用连接池节省连接认证时间</h2><div class="excerpt"><p>&lt;p&gt;因为服务器的mongodb开启了auth认证的，所以每次连接都要验证密码，测试了下GitHub上面的几个lua的mongodb库，无论是官方的&lt;a href=&quot;https://github.com/mongodb-labs/mongorover&quot; title=&quot;mongorover&quot; target=&quot;_blank&qu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

@@ -118,11 +118,6 @@
 </a><a class="post-card post " href="/pra_ngx_lua_log.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>正确的记录日志看过本章第一节的同学应该还记得，log_by_lua 是一个请求阶段最后发生的，文件操作是阻塞的（FreeBSD 直接无视），Nginx 为了实时高效的给请求方应答后，日志记录是在应答后异步记录完成的。由此可见如果我们有日志输出的情况，最好统一到 log_by_lua 阶段。如果我们自定义放在 content_by_lua 阶段，那么将线性的增加请求处理时间。
 在公司某个定制化...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_ngx_lua_continue_after_eof.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>请求返回后继续执行在一些请求中，我们会做一些日志的推送、用户数据的统计等和返回给终端数据无关的操作。而这些操作，即使你用异步非阻塞的方式，在终端看来，也是会影响速度的。这个和我们的原则：终端请求，需要用最快的速度返回给终端，是冲突的。
-这时候，最理想的是，获取完给终端返回的数据后，就断开连接，后面的日志和统计等动作，在断开连接后，后台继续完成即可。
-怎么做到呢？我们先看其中的一种方法：
-12...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_lua-limit.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>动态限速
 内容来源于openresty讨论组，点击这里
@@ -130,15 +125,20 @@
 在我们的应用场景中，有大量的限制并发、下载传输速率这类要求。突发性的网络峰值会对企业用户的网络环境带来难以预计的网络灾难。
 Nginx 示例配置：
 1234567891011location /download_internal/ &#123;    internal;    send_timeout 10s;    limit_co...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_nginx_balancer.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>负载均衡负载均衡（Load balancing）是一种计算机网络技术，用来在多个计算机（计算机集群）、网络连接、CPU、磁盘驱动器或其他资源中分配负载，以达到最佳化资源使用、最大化吞吐率、最小化响应时间、同时避免过载的目的。
-使用带有负载均衡的多个服务器组件，取代单一的组件，可以通过冗余提高可靠性。负载均衡服务通常是由专用软体和硬件来完成。
-负载均衡最重要的一个应用是利用多台服务器提供单一服...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_ngx_lua_cache.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>缓存缓存的原则缓存是一个大型系统中非常重要的一个组成部分。在硬件层面，大部分的计算机硬件都会用缓存来提高速度，比如 CPU 会有多级缓存、RAID 卡也有读写缓存。在软件层面，我们用的数据库就是一个缓存设计非常好的例子，在 SQL 语句的优化、索引设计、磁盘读写的各个地方，都有缓存，建议大家在设计自己的缓存之前，先去了解下 MySQL 里面的各种缓存机制，感兴趣的可以去看下High Perf...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_nginx_co-work_of_location.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>location 之间的配合rewrite 指令介绍Nginx 中 location 之间的配合，主要是通过 rewrite 指令来进行的。有这些指令会与 rewrite 指令协同使用：set、if 、return、break。rewrite 的基本规则如下：
 
 语法:	rewrite regex replacement [flag];上下文环境:	server, location, if
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_nginx_balancer.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>负载均衡负载均衡（Load balancing）是一种计算机网络技术，用来在多个计算机（计算机集群）、网络连接、CPU、磁盘驱动器或其他资源中分配负载，以达到最佳化资源使用、最大化吞吐率、最小化响应时间、同时避免过载的目的。
+使用带有负载均衡的多个服务器组件，取代单一的组件，可以通过冗余提高可靠性。负载均衡服务通常是由专用软体和硬件来完成。
+负载均衡最重要的一个应用是利用多台服务器提供单一服...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/add_new_lua_api.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>如何对NginxLuaModule添加新API本文真正的目的，绝对不是告诉大家如何在 Nginx Lua module 添加新 api 这么点东西。而是以此为例，告诉大家 Nginx 模块开发环境搭建、码字编译、编写测试用例、代码提交、申请代码合并等。给大家顺路普及一下 git 的使用。
+目前有个应用场景，需要获取当前 Nginx worker 数量的需要，所以添加一个新的接口 ngx.co...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_nginx_if_is_evil.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>if 是邪恶的当在 location 区块中使用 if 指令的时候会有一些问题, 在某些情况下它并不按照你的预期运行而是做一些完全不同的事情。而在另一些情况下他甚至会出现段错误。一般来说避免使用 if 指令是个好主意。
 在 location 区块里 if 指令下唯一 100% 安全的指令应该只有:
@@ -146,35 +146,24 @@ Nginx 示例配置：
 return …;rewrite … last;
 
 除此以外的指令都可能导致不可预期的行为,...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_nginx_match_uri.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>如何匹配 URIlocation 语法:	location 参数 uri &#123; 配置内容 &#125;location 块可存在的的上下文环境包括 server 块 和 location 块。server 块不用解释，但可以存在于 location 块的原因是：location 块允许嵌套。
+
+location 参数
+
+
+
+
+符号
+匹配模式
+优先级
+
+
+
+&#x3D;
+字符串精确匹配...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_nginx_nginx.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>NginxNginx (“engine x”) 是一个高性能的 HTTP 和反向代理服务器，也是一个 IMAP&#x2F;POP3&#x2F;SMTP 代理服务器。Nginx 是由 Igor Sysoev 为俄罗斯著名的 Rambler.ru 站点开发的，第一个公开版本 0.1.0 发布于 2004 年 10 月 4 日。其将源代码以类 BSD 许可证的形式发布，因它的稳定性、丰富的功能集、...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_nginx_nginx_brief.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>Nginx 新手起步为什选择 Nginx为什么选择 Nginx？因为它具有以下特点：
-1、处理响应请求很快
-在正常的情况下，单次请求会得到更快的响应。在高峰期，Nginx 可以比其它的 Web 服务器更快的响应请求。
-2、高并发连接
-在互联网快速发展，互联网用户数量不断增加的今天，一些大公司、网站都需要面对高并发请求，如果有一个能够在峰值顶住 10 万以上并发请求的 Server，肯定会得到...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_nginx_nginx_local_pcre.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>location 匹配规则语法规则
-location [&#x3D;||*|^~] &#x2F;uri&#x2F; { … }
-
-
-
-
-模式
-含义
-
-
-
-location &#x3D; &#x2F;uri
-&#x3D; 表示精确匹配，只有完全匹配上才能生效
-
-
-location ^~ &#x2F;uri
-^~ 开头对URL路径进行前缀匹配，并且在正则之前。
-
-
-location ~ patt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.130Z">2023-04-26</time></span></div></article>
 </a></div>
   
 

@@ -110,18 +110,10 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-153_Lua%E8%A1%A8%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96/">
-<article class="md-text"><h2 class="post-title">Lua表存储优化</h2><div class="excerpt"><p>用Python脚本实现对 Lua表的压缩
-
-
-
-问题在研发过程中，通常会定义一些Excel表格，规定行列值让策划填写，然后，转成lua的table文件，直接使用。
-但是，随着研发进行，项目迭代，表格将越来越大。
-如果表格中存在大量重复数据，或者表格中很多列数值重复，则可以通过数据压缩给表减减肥。
-解决利用python实现lua表的数据压缩
-
-excel表内存在大量 同列不同行 内容一致
-ex...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-152_%E4%BD%BF%E7%94%A8Redis+Lua%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%99%90%E6%B5%81/">
+<article class="md-text"><h2 class="post-title">使用Redis+Lua实现分布式限流</h2><div class="excerpt"><p>分布式限流分布式限流最关键的是要将限流服务做成原子化,而解决方案可以使用 Redis+Lua 或者 Nginx+Lua 技术实现,通过这两种技术可以实现高并发和高性能。本文使用 Redis+Lua 实现时间窗内某个接口的请求数限流，实现了该功能后可以改造为限流总并发/请求数和限制总资源数。
+Redis+Lua实现脚本
+12345678910local key = KEYS[1] local ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-154_LuaT%E5%BC%80%E5%8F%91/">
 <article class="md-text"><h2 class="post-title">LuaT开发</h2><div class="excerpt"><p>
 准备
@@ -143,6 +135,18 @@ LuaT维基开发文档
 LuaT实例教程：儿童手表小游戏开发
 Air800连接阿里云物联网
 Air800(GPRS+GPS模块)连...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-153_Lua%E8%A1%A8%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96/">
+<article class="md-text"><h2 class="post-title">Lua表存储优化</h2><div class="excerpt"><p>用Python脚本实现对 Lua表的压缩
+
+
+
+问题在研发过程中，通常会定义一些Excel表格，规定行列值让策划填写，然后，转成lua的table文件，直接使用。
+但是，随着研发进行，项目迭代，表格将越来越大。
+如果表格中存在大量重复数据，或者表格中很多列数值重复，则可以通过数据压缩给表减减肥。
+解决利用python实现lua表的数据压缩
+
+excel表内存在大量 同列不同行 内容一致
+ex...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-155_lua%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 <article class="md-text"><h2 class="post-title">lua开发环境搭建</h2><div class="excerpt"><p>Lua的官方网站：www.lua.orgwin下lua源码编译：进入源码src目录下，执行make mingw（前提已经安装了MinGW）  
 -lua直接执行脚本文件
@@ -180,10 +184,6 @@ Luac — 编...</p></div><div class="meta cap"><span class="cap" id="post-meta">
 
   
 &lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quot;/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-152_%E4%BD%BF%E7%94%A8Redis+Lua%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%99%90%E6%B5%81/">
-<article class="md-text"><h2 class="post-title">使用Redis+Lua实现分布式限流</h2><div class="excerpt"><p>分布式限流分布式限流最关键的是要将限流服务做成原子化,而解决方案可以使用 Redis+Lua 或者 Nginx+Lua 技术实现,通过这两种技术可以实现高并发和高性能。本文使用 Redis+Lua 实现时间窗内某个接口的请求数限流，实现了该功能后可以改造为限流总并发/请求数和限制总资源数。
-Redis+Lua实现脚本
-12345678910local key = KEYS[1] local ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-157_UtraEdit%20%E6%94%AF%E6%8C%81Lua%E9%AB%98%E4%BA%AE/">
 <article class="md-text"><h2 class="post-title">UtraEdit 支持Lua高亮</h2><div class="excerpt"><p>UtraEdit  支持Lua高亮，网上已经有很多方法，但是都是基于相对老一点的
 UE，在15.10版本中，UE支持Lua高亮的方法如下：
@@ -219,8 +219,15 @@ repeatable, reproducible, and comparable还没实现
 function deepcopy( src )
     local lookup_table = &#123;&#125;
     local function _...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-141_LUA5.1%E8%B0%83%E7%94%A8C%E5%87%BD%E6%95%B0/">
-<article class="md-text"><h2 class="post-title">LUA5.1调用C函数</h2><div class="excerpt"><p>Lua利用一个虚拟的栈(stack)来给C传递值或从C获取值。每当Lua调用C函数，都会获得一个新的栈，该栈初始包含所有的调用C函数所需要的参数值（Lua传给C函数的调用实参），并且C函数执行完毕后，会把返回值压入这个栈（Lua从中拿到C函数调用结果）本文展示了如何在lua中调用c函数的一种方法:通过将c函数编译成库文件(如Linux的.so),成为Lua的模块luaclib.c123456...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-140_Unity%E4%B8%AD%E4%BD%BF%E7%94%A8sLua%E7%9A%84%20%E8%B6%85%E4%B8%B6%E7%AE%80%E5%8D%95%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B(%E4%BA%8C)/">
+<article class="md-text"><h2 class="post-title">Unity中使用sLua的 超丶简单基础教程(二)</h2><div class="excerpt"><p>
+前言Unity中使用sLua的 超丶简单基础教程(一)
+上一篇博客讲了一下简单调用LuaState读取Lua代码并执行
+本篇要讲一下如何更改路径并使得Lua可以调用UnityEngine代码的方法
+虽然简短但也是长时间爬坑试验出来的(因为基础教程真的好少啊….)希望对大家有帮助..
+
+正文在创建一个新的场景,一个新的CreateEmpty把C#脚本挂上去代码如下:
+123456789101...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.244Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

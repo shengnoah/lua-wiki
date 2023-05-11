@@ -112,7 +112,40 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1003_lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1007_Lua%E8%AF%AD%E6%B3%95%E9%80%9F%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Lua语法速记</h2><div class="excerpt"><p>基础语法速记
+单行注释 --
+多行注释 —[[]]—
+数据类型，nil、boolean、number、string、、table、function、userdata和thread
+不等于，~=
+逻辑运算符，and，or，not
+
+
+分支结构if else 分支结构1234567891011score = 60if (score &gt;= 80) then4print(&#34;优秀&#34...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1002_Lua%20%E5%AD%A6%E4%B9%A0%20chapter7%20/">
+<article class="md-text"><h2 class="post-title">Lua 学习 chapter7</h2><div class="excerpt"><p>目录
+
+  简单I/O模型
+  完整I/O模型
+  其它文件操作
+  其它系统调用
+
+
+
+  I want to have a talk with you my heart.
+
+
+简单I/O模型
+
+对于文件操作，I/O提供了两种不同的模型。简单模型虚拟了一个当前输入流和一个当前的输出流，其I/O是通过这些流实现的。
+
+I/O库把当前的输入流初始化为进程的标准输入(C中的stdin),将当前的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1006_OpenResty%20Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">OpenResty Lua学习笔记</h2><div class="excerpt"><p>由于公司C端业务的 Nginx 框架使用的是OpenResty。在上一篇文章学习了 Nginx 基础知识后，决定再学习一下 Lua 和 OpenResty。本文记录了自己学习过程中的一些笔记和总结，尝试了OpenResty在本地搭建简单的API Server框架的demo，包括处理接口路由以及操作 Redis 的的流程。通过学习，未将来可能涉及到OpenResty的开发做一些准备。
+
+
+Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1003_lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
 <article class="md-text"><h2 class="post-title">lua快速入门</h2><div class="excerpt"><p>
             概览：协同程序提供了一种协作式的多线程。每个协同程序都等于是一个线程。一对yield-resume可以将执行权在不同线程间切换。然而与常规多线程不同，协程是非抢先式的。
 
@@ -125,39 +158,6 @@ Lua版本：Lua 5.3.5
 Lua将所有关于协同程序的函数放在了一个名叫”coroutine“的table中。
 
 create函数用于创...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1005_Lua%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">Lua语言学习（二）</h2><div class="excerpt"><p>
-      	
-      		接下来的几篇是根据 Lua-Users wiki 梳理的一些细节
-
-
-
-赋值
-
-&gt; i = 7
-&gt; i, x = i + 1, i
-&gt; print(i, x)
-8   7
-
-
-Lua 会先计算等号右侧的 i + 1 和 i 的值，然后第二行就变成了i, x = 8, 7，然后从右向左分配，x = 7，i = 8
-
-关于从右向左分配可以看下面...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1007_Lua%E8%AF%AD%E6%B3%95%E9%80%9F%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Lua语法速记</h2><div class="excerpt"><p>基础语法速记
-单行注释 --
-多行注释 —[[]]—
-数据类型，nil、boolean、number、string、、table、function、userdata和thread
-不等于，~=
-逻辑运算符，and，or，not
-
-
-分支结构if else 分支结构1234567891011score = 60if (score &gt;= 80) then4print(&#34;优秀&#34...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1006_OpenResty%20Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">OpenResty Lua学习笔记</h2><div class="excerpt"><p>由于公司C端业务的 Nginx 框架使用的是OpenResty。在上一篇文章学习了 Nginx 基础知识后，决定再学习一下 Lua 和 OpenResty。本文记录了自己学习过程中的一些笔记和总结，尝试了OpenResty在本地搭建简单的API Server框架的demo，包括处理接口路由以及操作 Redis 的的流程。通过学习，未将来可能涉及到OpenResty的开发做一些准备。
-
-
-Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

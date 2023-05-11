@@ -110,27 +110,11 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-file-io/">
-<article class="md-text"><h2 class="post-title">Lua文件I/O</h2><div class="excerpt"><p>Lua 文件 I&#x2F;OLua 的 IO 库用于读取或操作文件。Lua IO 库提供两类文件操作，它们分别是隐式文件描述符(implict file descriptors)和显式文件描述符(explicit file descriptors)。
-在接下来的例子的，我们会用到一个示例文件 test.lua，文件内容如下：  
-123456-- sample test.lua-- sam...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-functions/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-functions/">
 <article class="md-text"><h2 class="post-title">Lua函数</h2><div class="excerpt"><p>Lua 函数函数用于将一组语句组合起来完成一个任务。你可以将你的代码分割到不同的函数中。如何将你的代码分到不同的函数中完全由你自己决定，不过一般会按照逻辑功能进行划分，每个函数都执行一个特定的任务。 
 在 Lua 中提供了大量的内置函数供我们使用。例如，print() 函数用于将输入的参数输出到终端。 
 函数往往也被称作方法，子例程或过程等等。  
 函数定义Lua 中函数定义的语法如下所示：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-game-programming/">
-<article class="md-text"><h2 class="post-title">Lua游戏开发</h2><div class="excerpt"><p>Lua 游戏开发Lua 语言因其结构和语法的简洁性而在各类游戏引擎中被广泛使用。游戏对图形画面要求非常苛刻，这无疑需消耗大量的内存空间，而这些内存空间的管理是非常棘手的问题。Lua 语言有自动的垃圾回收机制，这种自动化的内存管理机制也使得 Lua 受到游戏引擎开发者的青睐。著名的 Lua 游戏引擎主要包括：  
-
-    Cornoa SDK
-    Gideros Mobile
-    S...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-if-else-if-statement/">
-<article class="md-text"><h2 class="post-title">Lua中的 if...else 语句</h2><div class="excerpt"><p>#Lua 中的 if…else 语句  
-如果 if 语句后面跟上 else 语句，那么条件为假时就执行 else 语句的代码。  
-##语法  
-Lua 语言中 if…else 语句的语法如下所示：  
-1234567891011121314151617if(boolean_expression)then   --[ 如何条件为真，则执行此处代码。 --]else   --[ 如何条件为假...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-garbage-collection/">
 <article class="md-text"><h2 class="post-title">Lua垃圾回收机制</h2><div class="excerpt"><p>Lua 垃圾回收机制Lua 通过特定算法的垃圾回收机制实现自动内存管理。由于自动内存管理机制的存在，作为程序开发人员：  
 
@@ -139,16 +123,49 @@ Lua 语言中 if…else 语句的语法如下所示：
   
 Lua 的垃圾回收器会不断运行去收集不再被 Lua 程序访问的对象。  
 所有的对象，包括表、userdata、函数、线程、字符串等都由自动内存...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-iterators/">
-<article class="md-text"><h2 class="post-title">Lua迭代器</h2><div class="excerpt"><p>Lua 迭代器迭代器是用于遍历集合或容器中元素的一种结构。在 Lua 语言中，集合往往指的是可以用来创建各种数据结构的表。比如，数组就是用表来创建的。  
-通用迭代器通用迭代器可以访问集合中的键值对。下面是通用迭代器的一个简单例子：  
-12345678910array = &#123;&quot;Lua&quot;, &quot;Tutorial&quot;&#125;for key,va...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-if-else-if-statement/">
+<article class="md-text"><h2 class="post-title">Lua中的 if...else 语句</h2><div class="excerpt"><p>#Lua 中的 if…else 语句  
+如果 if 语句后面跟上 else 语句，那么条件为假时就执行 else 语句的代码。  
+##语法  
+Lua 语言中 if…else 语句的语法如下所示：  
+1234567891011121314151617if(boolean_expression)then   --[ 如何条件为真，则执行此处代码。 --]else   --[ 如何条件为假...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-if-statement/">
 <article class="md-text"><h2 class="post-title">Lua中的if语句</h2><div class="excerpt"><p>#Lua 中的 if 语句  
 if　语句包括一个布尔表达式和一个或多个语句。　　
 ##语法  
 Lua 语言 if 语句的语法如下：  
 123456789101112131415if(boolean_expression)then   --[如果布尔表达式为真，statement(s) 执行。--]end```  如果布尔表达式计算结果为真，则 if 语句内的代码块执行；如果布尔表达式计...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-iterators/">
+<article class="md-text"><h2 class="post-title">Lua迭代器</h2><div class="excerpt"><p>Lua 迭代器迭代器是用于遍历集合或容器中元素的一种结构。在 Lua 语言中，集合往往指的是可以用来创建各种数据结构的表。比如，数组就是用表来创建的。  
+通用迭代器通用迭代器可以访问集合中的键值对。下面是通用迭代器的一个简单例子：  
+12345678910array = &#123;&quot;Lua&quot;, &quot;Tutorial&quot;&#125;for key,va...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-game-programming/">
+<article class="md-text"><h2 class="post-title">Lua游戏开发</h2><div class="excerpt"><p>Lua 游戏开发Lua 语言因其结构和语法的简洁性而在各类游戏引擎中被广泛使用。游戏对图形画面要求非常苛刻，这无疑需消耗大量的内存空间，而这些内存空间的管理是非常棘手的问题。Lua 语言有自动的垃圾回收机制，这种自动化的内存管理机制也使得 Lua 受到游戏引擎开发者的青睐。著名的 Lua 游戏引擎主要包括：  
+
+    Cornoa SDK
+    Gideros Mobile
+    S...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/keyboard/2020-09-06-%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E9%80%89%E8%96%84%E8%86%9C%E9%94%AE%E7%9B%98/">
+<article class="md-text"><h2 class="post-title">程序员如何选购薄膜键盘</h2><div class="excerpt"><p>目录{: #toc }
+
+ TOC{:toc}
+
+var jd_union_pid="3002832436";var jd_union_euid="";
+
+薄膜键盘就选择品牌和型号，在机械键盘没火这几年之前，像ibm，双飞燕，dell就有经典的薄膜键盘，而且薄膜键盘有的手感也不错，15到20年前就买过一把富勒的键盘。
+​我估计很多人都不太注意这牌子，但这牌子真的有很多年历史了，为啥我印象那么...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">键盘</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/keyboard/2020-09-18-%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/">
+<article class="md-text"><h2 class="post-title">程序员如何选择合适的机械键盘</h2><div class="excerpt"><p>目录{: #toc }
+
+ TOC{:toc}
+
+var jd_union_pid="3002833110";var jd_union_euid="";
+
+
+一，最好不要机械键盘，我没有听噪声的癖好，但如果有声音不是很大的，求推荐。
+二，键程不用很大，有反馈的感觉就好，像笔记本键盘一样。
+三，按键稳定，你不能手指放上面晃一晃按键就跟着你跑(夸张说法。。)
+四，能素一点就素一点，这个是次要的，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">机械键盘</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-Home/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua基础教程
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span></div></article>
@@ -157,11 +174,6 @@ Lua 语言 if 语句的语法如下：
 这篇教程不仅包括 Lua 编程语言的基本知识，还包括 Lua 语言在各类应用场景中的应用。  
 适用人群这篇教程主要是为 Lua 语言的初学者准备的。不过，其中也包含了既适合初学者也适合高级用户的主题。  
 学习前途建议您在开始学习这篇教程之前先掌握...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-arrays/">
-<article class="md-text"><h2 class="post-title">数组</h2><div class="excerpt"><p>Lua 数组数组是一组有序的对象排列，既可以是一维的也可以是多维的。  
-在 Lua 语言中，数组是用整数索引表实现的。数组的大小并不固定，随着数组元素的增加，它可以动态地增加内存空间大小。  
-一维数组一维数组可以使用一个简单的表结构表示。可以通过一个简单循环初始化数组或者读取数组中数据。示例代码如下所示：  
-1234567891011121314151617array = &#123;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.090Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

@@ -110,10 +110,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-592_tolua%E5%8E%9F%E7%90%86/">
-<article class="md-text"><h2 class="post-title">tolua原理</h2><div class="excerpt"><p>tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？创建一个 userdata ，存放 C/C++ 对象指针，然后给 userdata 添加元表，用index 和newindex 元方法映射 C/C++ 中的对象方法。
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-593_%E5%9C%A8redis%E4%B8%AD%E4%BD%BF%E7%94%A8Lua%E8%84%9A%E6%9C%AC/">
+<article class="md-text"><h2 class="post-title">在redis中使用Lua脚本</h2><div class="excerpt"><p>脚本介绍Redis在2.6版本中推出了脚本功能,使用Lua语言(一种“卫星语言”,能够方便地嵌入到其他语言中使用)编写脚本传到Redis中执行。在Lua脚本中可以调用大部分的Redis命令,使用脚本的好处如下:
 
-c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中（_R[mt] = name），并且设置这些类型的继承关系(通过_R...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+减少网络开销: 多个redis请求可以在一个脚本中一次发送一个请求,减少网络往返时延。
+
+原子操作: Redis会将整个脚本作为一个整体执行，中间不会被其他命令插入。编写脚本的过程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-594_399.%20Evaluate%20Division/">
 <article class="md-text"><h2 class="post-title">399. Evaluate Division</h2><div class="excerpt"><p>
 &lt;a href=&quot;https://techlarry.github.io/tags/Leetcode/&quot; style=&quot;color:white&quot; class=&quot;tag&quot;&gt; Leetcode &lt;/a&gt;
@@ -121,13 +123,6 @@ c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中
 
 
 &lt;a href=&quot;https://techlarry.github.io/tags/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-595_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>7 Iterators and the Generic for
-
-用闭包编写迭代器可以存储状态，先写一个迭代器生成器，然后生成新的迭代器1234function (t)	local i = 0	return function () i = i + 1； return t[i] endend
-
-
-在while循环中使用迭代器1234567t = {10, 20, 30}iter = value...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-596_linux%E5%B8%B8%E7%94%A8%E5%BA%93%E7%9A%84lua%E7%A7%BB%E6%A4%8D%EF%BC%9Alibmcrypt%E7%9A%84lua%E6%8F%92%E4%BB%B6/">
 <article class="md-text"><h2 class="post-title">linux常用库的lua移植：libmcrypt的lua插件</h2><div class="excerpt"><p>openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openrestylualibresty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。        下载libmcrypt的源代码，解压...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-597_Lua%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
@@ -136,17 +131,10 @@ c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中
 
 写代码如同写文章，每个人或多或少都有自己的风格。我们在进行产品开发的过程中，更多的是团队上的协作与交流而非单打独斗。所以，为了 提高开发效率，降低维护成本，促进团队合作，代码的审查，整理出这篇文章。
 借助于《Python风格指南》中的警告词，在此处引用一下：代码的阅读频率比编写的要高得多，本风格指南旨在通过一致性提高代码的可读性。一致性在...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-599_%E4%BD%BF%E7%94%A8%E5%85%83%E8%A1%A8%E4%BC%98%E5%8C%96%20Lua%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%20II/">
-<article class="md-text"><h2 class="post-title">使用元表优化 Lua 配置文件 II</h2><div class="excerpt"><p>
-上回提到元表优化 Lua 配置文件，以减少重复字段，节省内存开销。
-除了这种直接地减少内存开销的方法，使用元表还能实现数据的延迟加载，从另一个角度节约内存。
-延迟加载
--- PropModel.lua
-PropModel = &#123;
-    [1001] = &#123;
-        ID   = 1001,
-        name = &#34;道具1001&#34;,
-  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-592_tolua%E5%8E%9F%E7%90%86/">
+<article class="md-text"><h2 class="post-title">tolua原理</h2><div class="excerpt"><p>tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？创建一个 userdata ，存放 C/C++ 对象指针，然后给 userdata 添加元表，用index 和newindex 元方法映射 C/C++ 中的对象方法。
+
+c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中（_R[mt] = name），并且设置这些类型的继承关系(通过_R...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-59_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(6)table.sort/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记(6)table.sort</h2><div class="excerpt"><p>[TOC]
 
@@ -161,12 +149,24 @@ local tbTest = &#123;
 &#125;
 
 – 比较函数func...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-593_%E5%9C%A8redis%E4%B8%AD%E4%BD%BF%E7%94%A8Lua%E8%84%9A%E6%9C%AC/">
-<article class="md-text"><h2 class="post-title">在redis中使用Lua脚本</h2><div class="excerpt"><p>脚本介绍Redis在2.6版本中推出了脚本功能,使用Lua语言(一种“卫星语言”,能够方便地嵌入到其他语言中使用)编写脚本传到Redis中执行。在Lua脚本中可以调用大部分的Redis命令,使用脚本的好处如下:
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-599_%E4%BD%BF%E7%94%A8%E5%85%83%E8%A1%A8%E4%BC%98%E5%8C%96%20Lua%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%20II/">
+<article class="md-text"><h2 class="post-title">使用元表优化 Lua 配置文件 II</h2><div class="excerpt"><p>
+上回提到元表优化 Lua 配置文件，以减少重复字段，节省内存开销。
+除了这种直接地减少内存开销的方法，使用元表还能实现数据的延迟加载，从另一个角度节约内存。
+延迟加载
+-- PropModel.lua
+PropModel = &#123;
+    [1001] = &#123;
+        ID   = 1001,
+        name = &#34;道具1001&#34;,
+  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-595_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>7 Iterators and the Generic for
 
-减少网络开销: 多个redis请求可以在一个脚本中一次发送一个请求,减少网络往返时延。
+用闭包编写迭代器可以存储状态，先写一个迭代器生成器，然后生成新的迭代器1234function (t)	local i = 0	return function () i = i + 1； return t[i] endend
 
-原子操作: Redis会将整个脚本作为一个整体执行，中间不会被其他命令插入。编写脚本的过程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+
+在while循环中使用迭代器1234567t = {10, 20, 30}iter = value...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-5_%5BSQL%5D%E5%8D%87%E7%BA%A7SQL%20Server%20Evaluation%20%E7%89%88%E6%9C%AC%E6%88%90%E4%B8%BA%E6%AD%A3%E5%BC%8F%E7%89%88%E6%9C%AC/">
 <article class="md-text"><h2 class="post-title">SQL升级SQL Server Evaluation 版本成为正式版本</h2><div class="excerpt"><p>                    &lt;p&gt;如果不小心安装错 SQL Server 为 Evaluation 的版本，要小心当超过 180 天之后，系统就会无法正常使用了&lt;/p&gt;
                 &lt;br /&gt;

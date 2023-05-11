@@ -110,25 +110,35 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-76_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%BA%94)/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-771_The%20Evaluation%20of%20Sentence%20Similarity/">
+<article class="md-text"><h2 class="post-title">The Evaluation of Sentence Similarity</h2><div class="excerpt"><p>I am trying to write my first english blog based on two reasons: First, the data set used in this blog is english; Second, I’d like to expand my reach and attract more audiences, although I should ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-76_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%BA%94)/">
 <article class="md-text"><h2 class="post-title">深入 Lua Garbage Collector(五)</h2><div class="excerpt"><p>
 
 有了前几天的基础，我们可以从顶向下来读 lua gc 部分的代码了。慢慢的，感觉我这个系列都可以叫跟着云风一起看Lua源码了，虽然自己看的是最新的5.3。挖个坑，之后应该会真的跟着云风大大的那本readinglua一起看完lua的最新源码。
 
 lua_gc我们知道，lua 对外的 API 中，一切和 gc 打交道的都通过 lua_gc 。C 语言构建系统时，一般不讲设计模式。但模式还是存...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-767_Lua%20%E5%9C%A8%20Android%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%B8%8B,%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8/">
-<article class="md-text"><h2 class="post-title">Lua 在 Android 中应用下,具体使用</h2><div class="excerpt"><p>转载请附原文链接： Lua 在 Android 中应用下,具体使用
-一、概要在上一章节中介绍了  Android 中如何引入 Lua  ，本章节主要介绍 Lua 在 Android 中的具体使用，本章节主要分为两个部分，第一部分是使用 Lua API 绘制 Android 的 View ，第二部分是介绍学习 Lua 和 Android 之间函数回调及参数传递。
-二、调用 Lua 布局 And...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-771_The%20Evaluation%20of%20Sentence%20Similarity/">
-<article class="md-text"><h2 class="post-title">The Evaluation of Sentence Similarity</h2><div class="excerpt"><p>I am trying to write my first english blog based on two reasons: First, the data set used in this blog is english; Second, I’d like to expand my reach and attract more audiences, although I should ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-772_%E5%9C%A8Lua%E4%B8%AD%E8%B0%83%E7%94%A8C%E5%87%BD%E6%95%B0/">
 <article class="md-text"><h2 class="post-title">在Lua中调用C函数</h2><div class="excerpt"><p>Lua调用C语言中的函数是通过栈来进行参数传递的，这与大部分编程语言的内部函数调用的实现一致。我们先实现如下C代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-765_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">
+<article class="md-text"><h2 class="post-title">Lua string 哈希碰撞</h2><div class="excerpt"><p>Lua 中 40 字节以下的字符串会被内部化到一张表中(Lua 5.3)，这张表挂在 global state 结构下。对于短字符串，相同的串在同一虚拟机上只会存在一份，这被称为字符串的内部化。
+
+
+  其实字符串在 Lua VM 中是以两种内部形式保存的：短字符串及长字符串。其界限默认设置为40（字节）
+
+
+对于比较长的字符串（32字节以上），为了加快哈希过程，计算字符串哈希值是跳跃进行的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-751_lua%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9Credis%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/">
 <article class="md-text"><h2 class="post-title">lua脚本操作redis数据库介绍</h2><div class="excerpt"><p>前言 为什么要用lua脚本操作redis数据库?1.减少开销—减少向redis服务器的请求次数2.原子操作—redis将lua脚本作为一个原子执行3.可复用—其他客户端可以使用已经执行过的lua脚本4.增加redis灵活性—lua脚本可以帮助redis做更多的事情
 lua脚本本身体积小,启动速度快.
 因此,从redis 2.6.0开始,redis在服务器端内置lua解释器
 EVAL命令语法E...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-753_python%20dictionary%20lua%20table/">
+<article class="md-text"><h2 class="post-title">python dictionary lua table</h2><div class="excerpt"><p>python dictionary 与 lua table
+
+
+公司前端的技术栈是 C++ &amp; lua &amp; python, C++、lua做业务开发，python做工具。lua特别好用的东西就是load, 将某些数据（一般是excel）转成lua的table存储，用的时候直接load进来。但是，有些数据，并不是excel转过来的，通过多个excel来组成。
+例如：描述: 一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-752_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
 <article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>冒泡排序（Bubble Sort，台湾译为：泡沫排序或气泡排序）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。
 
@@ -137,24 +147,44 @@ EVAL命令语法E...</p></div><div class="meta cap"><span class="cap" id="post-m
 
   有一个长度为n的序列，一共需要n次外循环
   在一次外循环里，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-754_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E5%85%83%E8%A1%A8%E4%B8%8E%E5%85%83%E6%96%B9%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">Lua入门教程：元表与元方法</h2><div class="excerpt"><p>Lua 语言中每中类型的值都有一套可预见的操作集合，比如可以将数字相加，将字符串连接，还可以在表中插入键值对。但我们却无法直接将两个表相加，无法对表进行直接比较，除非我们使用元表。元表可以修改一个值在面对未知操作时的行为。例如，我们对两个表 a 和 b 执行 a + b 操作，Lua 在试图将两个表相加时，会检查其中某个表是否含有元表(metatable)，且元表中是否含有 __add 字段...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-753_python%20dictionary%20lua%20table/">
-<article class="md-text"><h2 class="post-title">python dictionary lua table</h2><div class="excerpt"><p>python dictionary 与 lua table
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-755_lua%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%9A%84%E4%BA%8C%E4%B8%89%E5%9D%91/">
+<article class="md-text"><h2 class="post-title">lua全局变量的二三坑</h2><div class="excerpt"><p>
+  
+  
+  lua全局变量的二三坑 | CloudKey Ocean
+
+  
+
+  
+&lt;meta name=&quot;keywords&quot; content=&quot;ngx-lua,&quot;/&gt;
+
+  
 
 
-公司前端的技术栈是 C++ &amp; lua &amp; python, C++、lua做业务开发，python做工具。lua特别好用的东西就是load, 将某些数据（一般是excel）转成lua的table存储，用的时候直接load进来。但是，有些数据，并不是excel转过来的，通过多个excel来组成。
-例如：描述: 一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-757_Mac%E4%B8%8A%E6%90%AD%E5%BB%BAlua%E7%8E%AF%E5%A2%83%E5%B9%B6%E8%BF%9E%E6%8E%A5mysql/">
-<article class="md-text"><h2 class="post-title">Mac上搭建lua环境并连接mysql</h2><div class="excerpt"><p>Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。(以上摘抄自菜鸟教程)
-鉴于Lua的诸多优势，我想在接下来的开发中应用Lua去完成一些需要脚本实现的工作。本文将记录我在Mac上搭建Lua的开发环境搭建以及实现对mysql的数据库访问。
-1. Lua安装源码编译安装12345curl -R -O h...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+&lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-756_%E6%83%85%E8%BF%81QQ%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%96%B0%E5%8A%9F%E8%83%BD%E5%8F%AF%E4%BD%BF%E7%94%A8lua%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8F%92%E4%BB%B6%E5%95%A6%20%C2%B7%20%E6%83%85%E8%BF%81%E7%BE%8E%E5%A5%BD%E6%97%B6%E5%85%89%E8%BF%BD%E5%BF%86/">
 <article class="md-text"><h2 class="post-title">情迁QQ机器人新功能可使用lua脚本编写机器人插件啦 · 情迁美好时光追忆</h2><div class="excerpt"><p>本文将详细介绍Lua机器人插件的使用方法，更详细的内容也可以参考简书哦!机器人1.9.0支持lua插件加载，支持手机端lua编写插件 机器人内置lua编辑器，可以测试，运行机器人功能，lua是一种脚本语言，解释运行，随意修改，无需编译，便于修改和分享，操作简单，开发成本低，传播更方便。
 
 
 本文章转载自情迁简书 https://www.jianshu.com/p/92c7bf329653 
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-754_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E5%85%83%E8%A1%A8%E4%B8%8E%E5%85%83%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">Lua入门教程：元表与元方法</h2><div class="excerpt"><p>Lua 语言中每中类型的值都有一套可预见的操作集合，比如可以将数字相加，将字符串连接，还可以在表中插入键值对。但我们却无法直接将两个表相加，无法对表进行直接比较，除非我们使用元表。元表可以修改一个值在面对未知操作时的行为。例如，我们对两个表 a 和 b 执行 a + b 操作，Lua 在试图将两个表相加时，会检查其中某个表是否含有元表(metatable)，且元表中是否含有 __add 字段...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

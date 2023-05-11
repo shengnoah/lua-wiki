@@ -110,10 +110,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-385_Redis%20Lua%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%AD%A6%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">Redis Lua脚本中学教程（下）</h2><div class="excerpt"><p> 在中学教程的上半部分我们介绍了Redis Lua相关的命令，没有看过或者忘记的同学可以步行前往直接使用机票Redis Lua脚本中学教程（上）。今天我们来简单学习一下Lua的语法。
-在介绍Lua语法之前，先来介绍一下Lua的身世。Lua是由简称为PUC-Rio的团队设计、开发和维护的。Lua在葡萄牙语中是月亮的意思，所以它不是简写，而是一个名词。所以只能写成Lua，而不能写成LUA或者其他...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-387_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-387_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%94)/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记(五)</h2><div class="excerpt"><p>
 错误处理
 assert
@@ -134,14 +131,14 @@ debug
 一般在Lua中可以使用assert和error来处理错误。
 assert简单实例：
 123456local function add(a,b)    assert(type(a)...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-389_Lua%E4%B9%8BTable%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
-<article class="md-text"><h2 class="post-title">Lua之Table个人总结</h2><div class="excerpt"><p>
-在lua中Table是数组和集合的混合物。作为数组时，可以使用除了nil以外的值作为索引。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-388_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记一</h2><div class="excerpt"><p>PS:由于公司项目中用到Lua,所以准备学习一下，这里做下学习笔记。
 
+Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
 
-
-Table的构造利用下标来标明元素123456local table  = {}table[1]=&#39;hello&#39;table[5]=&#39;world&#39;for i,v in pairs(table)do    print(table[i])end
-输出121	hello...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+基本语法交互式编程lua -i 进入交互式编程
+脚本式编程新建一个hello.lua文件，将lua代码写在hello.lua中
+print(&#34;Hello world&...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-38_Lua%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%20Gc%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20%20%20%E5%89%AF%E6%9C%AC/">
 <article class="md-text"><h2 class="post-title">Lua源码分析 Gc篇（二）数据结构   副本</h2><div class="excerpt"><p>[TOC]
 
@@ -152,34 +149,31 @@ Table的构造利用下标来标明元素123456local table  = {}table[1]=&#39;he
 
 定义
 下面是lua_State的定义，会看到栈的身影，to...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-389_Lua%E4%B9%8BTable%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
+<article class="md-text"><h2 class="post-title">Lua之Table个人总结</h2><div class="excerpt"><p>
+在lua中Table是数组和集合的混合物。作为数组时，可以使用除了nil以外的值作为索引。
+
+
+
+Table的构造利用下标来标明元素123456local table  = {}table[1]=&#39;hello&#39;table[5]=&#39;world&#39;for i,v in pairs(table)do    print(table[i])end
+输出121	hello...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-390_PIL.9Lua%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/">
 <article class="md-text"><h2 class="post-title">PIL.9Lua中的闭包</h2><div class="excerpt"><p>Lua中的函数是 第一类的值加上合适的词法域。那么，函数是第一类值意味着什么呢？这是说，在Lua中，一个函数，就是一个和 数字或字符串一样具有某些权限的值。一个程序可以把函数存储在变量中（全局或者局部都可以）和表中，把函数作为参数传递给其他函数，或者以函数作为值返回。
 
 函数具有词法域又是什么意思呢？就是说函数可以访问他们包裹函数的变量。
 这两个特性给了Lua巨大的弹性；具体点说，一个程序在...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-388_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">
-<article class="md-text"><h2 class="post-title">Lua学习笔记一</h2><div class="excerpt"><p>PS:由于公司项目中用到Lua,所以准备学习一下，这里做下学习笔记。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-386_Lua/">
+<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>Lua是一个简洁，轻量，可扩展的脚本语言。其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
+Lua源码结构
+虚拟机核心功能lapi.c lctype.c ldebug.c ldo.c lfunc.c lgc.c lmem.c lobject.c lopcodes.c lstate.c lstring.c ltable.c ltm.c lvm.c lzio.c
 
-Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
-
-基本语法交互式编程lua -i 进入交互式编程
-脚本式编程新建一个hello.lua文件，将lua代码写在hello.lua中
-print(&#34;Hello world&...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+源码解...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-371_Sol2%E5%AE%9E%E7%8E%B0Cpp%E5%92%8CLua%E7%BB%91%E5%AE%9A/">
 <article class="md-text"><h2 class="post-title">Sol2实现Cpp和Lua绑定</h2><div class="excerpt"><p>
           
             
           &lt;a href=&quot;/2018/06/17/cpp11_raw_string/&quot; rel=&quot;next&quot; title=&quot;C++11的Raw String Literals&quot;&gt;
             &lt;i class=&quot;fa fa-chev...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.266Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-374_Lua%20Table%E5%A2%9E%E5%88%A0%E6%8E%92%E5%BA%8F/">
-<article class="md-text"><h2 class="post-title">Lua Table增删排序</h2><div class="excerpt"><p>谨慎使用 table[index]=nil 删除某索引下的值，原table其他隐藏索引编号不会发生改变！且这种方法会导致索引产生空缺不连续，也会影响ipairs方法的遍历，pairs方法不受影响
-t = &#123;
-    1,
-    2,
-    3
-&#125;
-
-–插入函数(table,位置（可选），值)table.insert(t,1,10)table.insert(t,&#39...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.266Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-373_%E7%BB%93%E5%90%88Fluentd%E5%AE%9E%E7%8E%B0ngx_lua_waf%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA/">
 <article class="md-text"><h2 class="post-title">结合Fluentd实现ngx_lua_waf页面展示</h2><div class="excerpt"><p>0x00 概述最近在看lua_waf,看看怎么搞个web界面出来，于是有了这篇笔记。
 
@@ -191,15 +185,30 @@ ngx_lua_waf，是一个轻量级、高性能的WAF模块。
 防止sql注入，本地包含，部分溢出，fuzzing测试，XSS, SSRF等web攻击
 防止svn/备份之类文件泄漏
 防止A...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.266Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-372_Lua%20%E5%AD%A6%E4%B9%A0%20chapter12%20/">
-<article class="md-text"><h2 class="post-title">Lua 学习 chapter12</h2><div class="excerpt"><p>目录
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-375_cocos2dx%20lua%20%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E8%A1%8C(%E7%BC%96%E8%AF%91%E8%B0%83%E8%AF%95%E8%BF%90%E8%A1%8C%E6%89%93%E5%8C%85)/">
+<article class="md-text"><h2 class="post-title">cocos2dx lua 常见命令行(编译调试运行打包)</h2><div class="excerpt"><p>
+cocos 命令
 
-  日期和时间
-  日期和时间的处理
+Cocos2d-x 带有一个命令行工具：cocos 这是一个跨平台的工具，你可以用它创建项目、运行项目、发布项目。
 
 
 
-  What is the cost of lies? It’s not that we’ll mistake them for the truth. The real danger is that if we hear enough lies, then we no longer recognize the truth at all. W...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.266Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+
+命令行工具适用于所有 Cocos2d-x 支持的平台，包括：iOS、Android、Mac、Linux、Windows、Web。不用 IDE，只用命令行，你就能完成所有的工作！
+
+
+本文选自cocos2dx官方文档，只做记录！
+
+项目创建使用 co...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.266Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-374_Lua%20Table%E5%A2%9E%E5%88%A0%E6%8E%92%E5%BA%8F/">
+<article class="md-text"><h2 class="post-title">Lua Table增删排序</h2><div class="excerpt"><p>谨慎使用 table[index]=nil 删除某索引下的值，原table其他隐藏索引编号不会发生改变！且这种方法会导致索引产生空缺不连续，也会影响ipairs方法的遍历，pairs方法不受影响
+t = &#123;
+    1,
+    2,
+    3
+&#125;
+
+–插入函数(table,位置（可选），值)table.insert(t,1,10)table.insert(t,&#39...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.266Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

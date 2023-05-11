@@ -151,10 +151,10 @@ export LANG=&#34;en_US.UTF-8&#34;
 unset GIT_DIR 
 
 <p>NowPath&#x3D;<code>pwd</code><br>WebSite&#x3D;&amp;#34;&#x2F;www&amp;#34;<br>BlogPath&#x3D;&amp;#34;&#x2F;www&#x2F;blog&amp;#34;</p>
-<p>if [ ! -d &amp;#34;$BlogPath&amp;#34; ]; then<br>  cd $WebSite<br>  git clone <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#46;&#111;&#x73;&#99;&#104;&#x69;&#110;&#x61;&#x2e;&#110;&#101;&#116;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#46;&#111;&#x73;&#99;&#104;&#x69;&#110;&#x61;&#x2e;&#110;&#101;&#116;</a>:sunblog&#x2F;blog.git<br>  cd $BlogPath<br>else<br>  cd $BlogPath<br>  git fetch –all<br>  git reset –hard origin&#x2F;master<br>fi</p>
+<p>if [ ! -d &amp;#34;$BlogPath&amp;#34; ]; then<br>  cd $WebSite<br>  git clone <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#x74;&#46;&#111;&#115;&#99;&#x68;&#x69;&#x6e;&#x61;&#46;&#110;&#101;&#x74;">&#103;&#105;&#116;&#64;&#103;&#105;&#x74;&#46;&#111;&#115;&#99;&#x68;&#x69;&#x6e;&#x61;&#46;&#110;&#101;&#x74;</a>:sunblog&#x2F;blog.git<br>  cd $BlogPath<br>else<br>  cd $BlogPath<br>  git fetch –all<br>  git reset –hard origin&#x2F;master<br>fi</p>
 <p>hexo clean<br>hexo g</p>
 <p>#awk &#39;{message&#x3D;&amp;#34;亲爱的&amp;#34;$1&amp;#34;，您所关注的博客Sun‘s Blog已更新，快去围观吧！<a target="_blank" rel="noopener" href="https://www.sunsblog.cn&/#34;;tittle=&#34;Sun%E2%80%99s">https://www.sunsblog.cn&#34;;tittle=&#34;Sun’s</a> Blog更新&amp;#34;;system(&amp;#34;echo &amp;#34;&amp;#34;message&amp;#34;&amp;#34; | mail -s &amp;#34;&amp;#34;tittle&amp;#34;&amp;#34; &amp;#34;$2);}&#39; &#x2F;www&#x2F;mail.txt</p>
-<p>echo 您的博客已成功更新，<a target="_blank" rel="noopener" href="https://www.sunsblog.cn/">https://www.sunsblog.cn</a> | mail -s 博客更新成功 <a href="mailto:&#x61;&#x64;&#x6d;&#105;&#110;&#64;&#x73;&#x75;&#110;&#115;&#x62;&#108;&#111;&#103;&#x2e;&#99;&#110;">&#x61;&#x64;&#x6d;&#105;&#110;&#64;&#x73;&#x75;&#110;&#115;&#x62;&#108;&#111;&#103;&#x2e;&#99;&#110;</a></p>
+<p>echo 您的博客已成功更新，<a target="_blank" rel="noopener" href="https://www.sunsblog.cn/">https://www.sunsblog.cn</a> | mail -s 博客更新成功 <a href="mailto:&#97;&#x64;&#x6d;&#105;&#110;&#x40;&#115;&#117;&#110;&#115;&#98;&#108;&#x6f;&#103;&#46;&#99;&#x6e;">&#97;&#x64;&#x6d;&#105;&#110;&#x40;&#115;&#117;&#110;&#115;&#98;&#108;&#x6f;&#103;&#46;&#99;&#x6e;</a></p>
 <p>cd $NowPath<br>echo &amp;#34;deploy done&amp;#34;<br>exit 0<br></code></pre><p>脚本会去判断blog文件夹是否存在不存在就clone否则强制更新，每次更新成功之后都会向你自己或者其他人发送邮件，我这里使用awk读取mail<br/>.txt中的qq好友的邮箱账号去发送邮件，由于同一时间发送大量邮件可能会存在vps被封的风险。所以最好还是不要大量发送，只是每次给自己或者几个重要的人发送就好了。感兴趣的话可以自己研究awk以及sendmail。</p></p>
 
 
@@ -163,7 +163,7 @@ unset GIT_DIR
 
 </article>
 
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-87_Lua%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Lua 数据类型</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-881_Lua%E4%B8%AD%E7%9A%84%E8%A1%A8%E6%93%8D%E4%BD%9C/">Lua中的表操作</a></div></section></div>
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/26/zl/2016-01-01-87_Lua%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Lua 数据类型</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/26/zl/2016-01-01-882_Lua%20Study/">Lua Study</a></div></section></div>
 
 
 

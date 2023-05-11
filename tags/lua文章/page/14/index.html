@@ -112,21 +112,42 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-880_lua%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90webhooks%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-87_Lua%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+<article class="md-text"><h2 class="post-title">Lua 数据类型</h2><div class="excerpt"><p>
+
+
+数据类型
+描述
+
+
+
+
+nil
+这个最简单，只有值nil属于该类，表示一个无效值（在条件表达式中相当于false）。
+
+
+boolean
+包含两个值：false和true。
+
+
+number
+表示双精度类型的实浮点数
+
+
+string
+字符串由一对双引号或单引号来表示
+
+
+function
+由 C 或 Lua 编写的函数
+
+
+userdata   
+表示任意存储在变量中的C数据结构
+
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-880_lua%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90webhooks%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">
 <article class="md-text"><h2 class="post-title">lua脚本解析webhooks实现自动部署</h2><div class="excerpt"><p>码云配置webhooks实现自动部署的方式有很多，可以把项目放在github用github的webhooks，但是github只能创建公开项目私有项目是要钱的。也可以使用一种相对麻烦的方式，可以在vps上建一个git仓库每次提交到vps上之后触发hook去更新blog，这种方法相对麻烦而且vps上的项目容易丢失。所以最后选择了码云，在码云上初始化一个blog项目，之后配置一个webhooks...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-881_Lua%E4%B8%AD%E7%9A%84%E8%A1%A8%E6%93%8D%E4%BD%9C/">
-<article class="md-text"><h2 class="post-title">Lua中的表操作</h2><div class="excerpt"><p>「�TODO�」: 表的查找和新增元素
-取长度操作Lua中可以用 # 符号对表进行取长度操作. 对Lua中的表进行取长度操作时, 如果没有该表的元方法 __len, 则该取长度操作只对表的数组部分进行. 
-取长度的入口函数为 luaH_getn, 该函数的目的是找到表 t 的一个边界值i, 并且t[i]不为nil, t[i+1]为nil (如果t[1]为nil, 则i为0) 它的伪代码如下:...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-879_(2)%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E7%BC%93%E5%AD%98%E3%80%81HTTPS%E3%80%81Openresty+Lua/">
-<article class="md-text"><h2 class="post-title">(2)静态资源服务器、缓存、HTTPS、Openresty+Lua</h2><div class="excerpt"><p>1.alias 与 root
-访问固定目录的做法
-Location / {	alias dlib/;}
-root 的问题：会把url 的路径带到文件目录中来，所以通常使用alias
-2.gzip
-gzip_min_length 1;表示小于1字节的就不再压缩了。因为有的文件小，一个TCP报文就发出去了。这时候如果还做gzip压缩，消耗CPU。意义不大了。
-3.auto_index
-应用场景：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-882_Lua%20Study/">
 <article class="md-text"><h2 class="post-title">Lua Study</h2><div class="excerpt"><p>本文并不会把Lua语言的所有内容都包含在内，只对个人学习过程中感觉比较重要的部分做一个记录，以便回顾。
 
@@ -150,6 +171,10 @@ local function chsize(char)
         if not char then
             print(“not char”)
   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-881_Lua%E4%B8%AD%E7%9A%84%E8%A1%A8%E6%93%8D%E4%BD%9C/">
+<article class="md-text"><h2 class="post-title">Lua中的表操作</h2><div class="excerpt"><p>「�TODO�」: 表的查找和新增元素
+取长度操作Lua中可以用 # 符号对表进行取长度操作. 对Lua中的表进行取长度操作时, 如果没有该表的元方法 __len, 则该取长度操作只对表的数组部分进行. 
+取长度的入口函数为 luaH_getn, 该函数的目的是找到表 t 的一个边界值i, 并且t[i]不为nil, t[i+1]为nil (如果t[1]为nil, 则i为0) 它的伪代码如下:...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-883_%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84lua%E5%AE%9E%E7%8E%B0/">
 <article class="md-text"><h2 class="post-title">快速排序算法的lua实现</h2><div class="excerpt"><p>1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556-- 快速排序算法的实现--[[	设要排序的数组是A[0]……A[N-1]，首先任意选取一个数据（通常选用数组的第一个数）作为关键数据，然后将所有比它小的数都放到它左边，所有比它大的数都放...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.314Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-863_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
@@ -177,13 +202,13 @@ Number
 
 全部用浮点表示
 16进制表示也可以用2进制指数方式  0x2.2p2 等于(2+2/1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.313Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-866_Nginx_Lua_Module%E6%89%A9%E5%B1%95%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE_%E9%80%82%E7%94%A8%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F/">
-<article class="md-text"><h2 class="post-title">Nginx_Lua_Module扩展的安装与配置_适用于Ubuntu系统</h2><div class="excerpt"><p>Lua 是一个简洁、轻量、可扩展的脚本语言，也是号称性能最高的脚本语言，用在很多需要性能的地方，比如：游戏脚本，nginx，wireshark的脚本。很多应用程序使用Lua作为自己的嵌入式脚本语言，以此来实现可配置性、可扩展性。Lua原生支持的数据类型非常之少，它只提供了nil、数字（缺省是双精度浮点数，可配置）、布尔量、字符串、表、子程序、协程（coroutine）以及用户自定义数据这8种...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.313Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-865_Evaluation%20methods%20for%20unsupervised%20word%20embedding/">
 <article class="md-text"><h2 class="post-title">Evaluation methods for unsupervised word embeddings</h2><div class="excerpt"><p>本文研究了无监督词向量的评价方法。
 动机
 词向量的评价可分为外在评价和内在评价。外在评价将词向量运用在下游任务观察性能的提升，但只能显示出词向量的好处，无法清晰地将词向量与性能度量连接在一起。内在评价通过回答词语之间的语义关系和句法关系的询问得到。但这些数据集都是收集自过去其他领域的工作，而非精心构建，不能反映语料库的统计学特征。
 故本文研究了不同评价指标之间的关系，提出了一种新的评价方法，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.313Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-866_Nginx_Lua_Module%E6%89%A9%E5%B1%95%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE_%E9%80%82%E7%94%A8%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F/">
+<article class="md-text"><h2 class="post-title">Nginx_Lua_Module扩展的安装与配置_适用于Ubuntu系统</h2><div class="excerpt"><p>Lua 是一个简洁、轻量、可扩展的脚本语言，也是号称性能最高的脚本语言，用在很多需要性能的地方，比如：游戏脚本，nginx，wireshark的脚本。很多应用程序使用Lua作为自己的嵌入式脚本语言，以此来实现可配置性、可扩展性。Lua原生支持的数据类型非常之少，它只提供了nil、数字（缺省是双精度浮点数，可配置）、布尔量、字符串、表、子程序、协程（coroutine）以及用户自定义数据这8种...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.313Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

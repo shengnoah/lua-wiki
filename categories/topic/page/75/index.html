@@ -112,32 +112,21 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：topic</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-306_Lua%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%8F%8ABasic%20Functions/">
-<article class="md-text"><h2 class="post-title">Lua基本类型及Basic Functions</h2><div class="excerpt"><p>Lua基本类型及Basic Functions 
-    
-      
-      
-        
-&lt;/div&gt;
-&lt;div class=&quot;content&quot;&gt;
-  
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-309_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua string hash 算法</h2><div class="excerpt"><p>我在前一篇文章介绍过下面这 3 个字符串拥有相同的 hash，会导致 Hash Dos 问题：
 
-概述
-
-Lua的基本类型
-
-基本类型
+&#34;0000000000000000000000000000000000&#34;
+&#34;f0l0l0w0m0e0n0t0w0i0t0t0e0r0?0:0)0&#34;
+&#34;x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0&#34;
 
 
-e.g.
-
-function testType()
-    print (string.format(&#34;the type of ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-308_redis%E9%9B%86%E7%BE%A4%E5%8F%8Angx_lua%E6%8E%A5%E5%85%A5%E6%96%B9%E6%A1%88/">
-<article class="md-text"><h2 class="post-title">redis集群及ngx_lua接入方案</h2><div class="excerpt"><p>背景介绍精细化分流和降级的项目依赖redis存放分流和降级规则，为了保证redis的高可用，需避免其单点故障和数据丢失。整个系统的架构图如下：
- 
-在管理端，通过多个管理实例来避免管理端的单点问题，将策略规则写入redis。在业务端，多个Nginx代理从redis中读出策略规则并缓存在本地的lua缓存中，结合用户请求，最终将其分流到不同的上游集群。
-尝试解决将管理机和业务机如何正确接入red...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+但是 Lua 并没有将...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-307_lua%E6%A8%A1%E5%9D%97%E6%B3%A8%E5%86%8C/">
+<article class="md-text"><h2 class="post-title">lua模块注册</h2><div class="excerpt"><p>Lua自带的模块并不多,好处就是Lua足够的小,毕竟它的设计目标是定位成一个嵌入式的轻量级语言的.
+相关的函数index2adrstatic TValue *index2adr (lua_State *L, int idx) &#123;
+  if (idx &gt; 0) &#123;
+    TValue *o = L-&gt;base + (idx - 1);
+    api_chec...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-30_lua_use_default_type/">
 <article class="md-text"><h2 class="post-title">lua_use_default_type</h2><div class="excerpt"><p>
         
@@ -166,9 +155,6 @@ app.lua 是整个项目的主入口，你...</p></div><div class="meta cap"><spa
 函数在Lua语言中，函数是对语句和表达式进行抽象的主要方式。函数调用时都需要使用一对圆括号把参数列表扩起来，无论函数需不需要参数。当函数只有一个参数，且该参数是字符串常量或表构造器的时候，括号是可选的。
 一例：
 1234567function  (a)	local sum = 0	for i = 1,#a do		sum = sum + a[i]	end	return s...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-293_Lua%20%E8%AF%AD%E8%A8%80%E7%AE%80%E8%BF%B0/">
-<article class="md-text"><h2 class="post-title">Lua 语言简述</h2><div class="excerpt"><p>Lua 介绍Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放。其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
-环境安装（mac）使用 homebrew ：[homebrew 安装 lua 环境]1$ brew install lua安装完成后，打开terminal，执行如下命令，启动lua交互式编程[启动 lua 交互式编程]123$ lua -...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-294_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记</h2><div class="excerpt"><p>Lua 是一种高性能, 解释型, 面向对象的语句, 广泛用于各种项目的内嵌语言, 如 redis, nginx, scrapy, 愤怒的小鸟, 魔兽世界等等.
 本文主要介绍 Lua 的语法.
@@ -176,28 +162,39 @@ app.lua 是整个项目的主入口，你...</p></div><div class="meta cap"><spa
 1. 数据类型lua 是一个动态类型语言,一个变量可以存储类型的值.Lua 常用数据类型:
 
 空(nil):    空类型只包含一个值,即nil . nil表示空, 没有赋值的变量或标的字段都是 ni...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-297_Evaluating%20Fuzz%20Testing/">
-<article class="md-text"><h2 class="post-title">Evaluating Fuzz Testing</h2><div class="excerpt"><p>1 介绍信息量太大回头再写。。
-# 一天后更新
-不想写了差不多就下面这些内容吧。。
-2 背景2.1 fuzzing流程
-fuzzing的核心算法
-initSeedCorpus：初始化新的输入
-isDone：决定fuzzing是否停止
-choose：从队列中选择至少一个种子输入进行变异
-mutate：从至少一个种子输入和观察到的现象中产生新的候选种子
-eval：评价程序的种子产生观察现象
-is...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-299_How%20%20computer%20program%20are%20interpreted%20and%20evaluate/">
-<article class="md-text"><h2 class="post-title">How  computer program are interpreted and evaluated</h2><div class="excerpt"><p>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-293_Lua%20%E8%AF%AD%E8%A8%80%E7%AE%80%E8%BF%B0/">
+<article class="md-text"><h2 class="post-title">Lua 语言简述</h2><div class="excerpt"><p>Lua 介绍Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放。其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
+环境安装（mac）使用 homebrew ：[homebrew 安装 lua 环境]1$ brew install lua安装完成后，打开terminal，执行如下命令，启动lua交互式编程[启动 lua 交互式编程]123$ lua -...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-296_lua%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/">
+<article class="md-text"><h2 class="post-title">lua代码风格</h2><div class="excerpt"><p>
+      
+      
 
-花了一些时间重新捋了一遍自己关于解释器的学习笔记：CS 61A Summer 2018 Lecture 20: Interpreters
+  
+    
+  
 
-稍稍得了一些门道，把自己的想法记录一下。
 
-自己目前的编程以动态语言 Python 为主，想要对动态语言有一个完整的理解和掌握，解释器这部分是必须要掌握的点。
 
-简单来说，解释器就是程序的求值器。当我们花费心思构建起针对一个个功能实现的程序之后，下一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  
+  
+
+
+      
+&lt;/header&gt;
+&lt;div class=&quot;entry&quot;&gt;
+  
+    &lt;h1 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&qu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-295_lua%E7%89%88%E6%9C%AC%E5%8F%98%E5%8C%96/">
+<article class="md-text"><h2 class="post-title">lua版本变化</h2><div class="excerpt"><p>从 Lua 5.1 迁移到 5.2
+5.2中抛弃module，建议使用require进行加载， 可能是考虑到Module定义对全局表的污染
+
+在5.1版本，可以理解为每个chunk都具有自己的环境表，然后通过setfenv/getfenv进行设置和操作。Lua5.2开始取消了环境表的概念，取消setfenv/getfenv方法，增加了_Env来管理。
+
+_G 和 _Env*
+
+
+_G 是放在...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.259Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

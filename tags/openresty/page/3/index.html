@@ -112,9 +112,10 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：openresty</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/pra_ngx_lua_timer.html">
-<article class="md-text"><h2 class="post-title">定时任务</h2><div class="excerpt"><p>定时任务在请求返回后继续执行章节中，我们介绍了一种实现的方法，这里我们介绍一种更优雅更通用的方法：ngx.timer.at()。这个函数是在后台用 Nginx 轻线程（light thread），在指定的延时后，调用指定的函数。有了这种机制，ngx_lua 的功能得到了非常大的扩展，我们有机会做一些更有想象力的功能出来。比如批量提交和 cron 任务。
-需要特别注意的是：有一些 ngx_lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/pra_ngx_lua_sleep.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>sleep这是一个比较常见的功能，你会怎么做呢？Google 一下，你会找到Lua 的官方指南，
+里面介绍了 10 种 sleep 不同的方法（操作系统不一样，方法还有区别），选择一个用，然后你就杯具了:( 你会发现 Nginx 高并发的特性不见了！
+在 OpenResty 里面选择使用库的时候，有一个基本的原则：尽量使用 OpenResty 的库函数，尽量不用 Lua 的库函数，因为 Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_whats_cosocket.html">
 <article class="md-text"><h2 class="post-title">怎样理解cosocket</h2><div class="excerpt"><p>怎样理解cosocket笔者认为，cosocket 是 OpenResty 世界中技术、实用价值最高部分。让我们可以用非常低廉的成本，优雅的姿势，比传统 socket 编程效率高好几倍的方式进行网络编程。无论资源占用、执行效率、并发能力都非常出色。
 鲁迅有句名言“其实世界上本没有路，走的人多了便有了路”，其实对于 cosocket 的中文翻译貌似我也碰到了类似的问题。当我想给大家一个正面解释...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
@@ -126,17 +127,20 @@ Nginx 是 HTTP 7 层协议的实现者，相对普通防火墙从通讯协议有
 Ng...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_capture.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>body 在 location 中的传递</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_ngx_lua_cache.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>缓存缓存的原则缓存是一个大型系统中非常重要的一个组成部分。在硬件层面，大部分的计算机硬件都会用缓存来提高速度，比如 CPU 会有多级缓存、RAID 卡也有读写缓存。在软件层面，我们用的数据库就是一个缓存设计非常好的例子，在 SQL 语句的优化、索引设计、磁盘读写的各个地方，都有缓存，建议大家在设计自己的缓存之前，先去了解下 MySQL 里面的各种缓存机制，感兴趣的可以去看下High Perf...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_ngx_lua_ffi.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>调用其他 C 函数动态库Linux 下的动态库一般都以 .so 结束命名，而 Windows 下一般都以 .dll 结束命名。Lua 作为一种嵌入式语言，和 C 具有非常好的亲缘性，这也是 Lua 赖以生存、发展的根本，所以 Nginx + Lua&#x3D;OpenResty，魔法就这么神奇的发生了。
-NgxLuaModule 里面尽管提供了十分丰富的 API，但他一定不可能满足我们的形形...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_ngx_lua_debug.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>调试调试是一个程序猿非常重要的能力，人写的程序总会有 bug，所以需要 debug。如何方便和快速的定位 bug，是我们讨论的重点，只要 bug 能定位，解决就不是问题。
-对于熟悉用 Visual Studio 和 Eclipse 这些强大的集成开发环境的来做 C++ 和 Java 的同学来说，OpenResty 的 debug 要原始很多，但是对于习惯 Python 开发的同学来说，又是那...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_ngx_lua_continue_after_eof.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>请求返回后继续执行在一些请求中，我们会做一些日志的推送、用户数据的统计等和返回给终端数据无关的操作。而这些操作，即使你用异步非阻塞的方式，在终端看来，也是会影响速度的。这个和我们的原则：终端请求，需要用最快的速度返回给终端，是冲突的。
+这时候，最理想的是，获取完给终端返回的数据后，就断开连接，后面的日志和统计等动作，在断开连接后，后台继续完成即可。
+怎么做到呢？我们先看其中的一种方法：
+12...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_hot_load.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>热装载代码在 OpenResty 中，提及热加载代码，估计大家的第一反应是 Lua_code_cache 这个开关。在开发阶段我们把它配置成 Lua_code_cache off，是很方便、有必要的，修改完代码，肯定都希望自动加载最新的代码（否则我们就要噩梦般的 reload 服务，然后再测试脚本）。
 禁用 Lua 代码缓存（即配置 Lua_code_cache off）只是为了开发便利，一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_ngx_lua_debug.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>调试调试是一个程序猿非常重要的能力，人写的程序总会有 bug，所以需要 debug。如何方便和快速的定位 bug，是我们讨论的重点，只要 bug 能定位，解决就不是问题。
+对于熟悉用 Visual Studio 和 Eclipse 这些强大的集成开发环境的来做 C++ 和 Java 的同学来说，OpenResty 的 debug 要原始很多，但是对于习惯 Python 开发的同学来说，又是那...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_ngx_lua_ffi.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>调用其他 C 函数动态库Linux 下的动态库一般都以 .so 结束命名，而 Windows 下一般都以 .dll 结束命名。Lua 作为一种嵌入式语言，和 C 具有非常好的亲缘性，这也是 Lua 赖以生存、发展的根本，所以 Nginx + Lua&#x3D;OpenResty，魔法就这么神奇的发生了。
+NgxLuaModule 里面尽管提供了十分丰富的 API，但他一定不可能满足我们的形形...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.131Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_how_one_instance_time.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>如何只启动一个 timer 工作？
 应用场景

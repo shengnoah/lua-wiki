@@ -112,16 +112,14 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-58_Lua%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C%E4%B8%8B%E5%8D%8A%E9%83%A8%E5%88%86/">
-<article class="md-text"><h2 class="post-title">Lua参考手册下半部分</h2><div class="excerpt"><p>当前大部分来源是5.1的标准
-lua_Readertypedef const char * (*lua_Reader) (lua_State *L, void *data, size_t *size);
-lua_load 用到的读取器函数， 每次它需要一块新的 chunk 的时候， lua_load 就调用读取器， 每次都会传入一个参数 data 。 读取器需要返回含有新的 chunk 的一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-589_%E5%85%A8%E7%AB%99%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%8A%93%E5%8F%96%E7%9A%84ngx_lua%E6%96%B9%E6%A1%88/">
-<article class="md-text"><h2 class="post-title">全站静态资源抓取的ngx_lua方案</h2><div class="excerpt"><p>一些方案，没有一一测试：SiteSucker、httrack、idm、nomder、webzip、Teleport Pro、wget
-webzip有乱码问题，？和后面一个英文字符被合成了一个中文乱码，原因不明，最终采用的是wget的方案：  
-wget -e robots=off -w 1 -x -np -p -m -k -t 1 -X/upload/ http://domain
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-586_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>14 The Environment这章有点难理解，有些段落反复看了好多遍才感觉好像是看懂了。
 
-简洁地把...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+Lua将所有全局变量存储在一个叫做global environment的table中
+1for n in pairs(_G) do print(n) end
+
+对于动态变量名，可动态创建chunk并编译：
+1234x = 1varname = &#34;x&#34;value = loadstr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-590_fflua%E6%9B%B4%E6%96%B0/">
 <article class="md-text"><h2 class="post-title">fflua更新</h2><div class="excerpt"><p>简介：fflua 发布了有段时间了，很多网友都用了，并且提供了一些很好的反馈。其中一个就是c++接口注册到lua中时，对引用的支持。这样使用起来更加方便。
 原有方式：fflua 中注册c++的类用如下方式：
@@ -132,15 +130,9 @@ Evaluate the value of an arithmetic expression in Reverse Polish Notation.Valid 
 
 思路分析
   逆波兰表示法，又称为后缀表示法，是一种不需要括号的一种四...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-571_nginx%20+%20lua%20%E5%BC%80%E5%8F%91%E4%B8%AD%E8%BF%87%E7%A8%8B%E4%B8%AD%20post%20body%20%E8%BF%87%E5%A4%A7%E8%BF%94%E5%9B%9E%204xx/">
-<article class="md-text"><h2 class="post-title">nginx + lua 开发中过程中 post body 过大返回 4xx</h2><div class="excerpt"><p>背景基于 OpenResty 提供 post 接口，调用方调用该接口 post 数据，该接口接收 post 过来的数据，复用 Nginx access 日志落盘。
-问题当用户的 body 体过大时，ngx.req.get_body_data() 读请求体，会出现读取不到直接返回 nil 的情况。
-问题原因究其原因，主要是 Nginx 诞生之初主要是为了解决负载均衡情况，而这种情况，是不需要读...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-572_Redis%E6%85%A2%E6%9F%A5%E8%AF%A2%E3%80%81Pipeline%E3%80%81%E4%BA%8B%E5%8A%A1%E4%B8%8ELua%E3%80%81Bitmaps%E3%80%81%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
-<article class="md-text"><h2 class="post-title">Redis慢查询、Pipeline、事务与Lua、Bitmaps、发布订阅</h2><div class="excerpt"><p>
-Redis提供的5种数据结构已经足够强大，但除此之外，Redis还提供了诸如慢查询分析、功能强大的Redis Shell、Pipeline、事务与Lua脚本、Bitmaps、HyperLogLog、发布订阅、GEO等附加功能，这些功能可以在某些场景发挥重要的作用。
-
-慢查询分析许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-585_Object%20Detection%20Evaluation/">
+<article class="md-text"><h2 class="post-title">Object Detection Evaluation</h2><div class="excerpt"><p>提供者：刘晓下载地址：http://www.cvlibs.net/datasets/kitti/eval_object.php
+Object Detection Evaluation 2012，是一个车辆检测或者定位有关的数据集。物体检测和物体方向估计基准包括7481个训练图像和7518个测试图像，共包含80.256个标记物体。所有图像都是彩色的，并保存为PNG。为了评估，我们计算物体检测和...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.286Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-573_Mac%E4%B8%8B%E5%AE%89%E8%A3%85lua/">
 <article class="md-text"><h2 class="post-title">Mac下安装lua</h2><div class="excerpt"><p>
 Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
@@ -149,45 +141,11 @@ Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码
 
 
 12345curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gztar zxf lua-5.3.5.tar.gzcd lua-5.3.5make linux...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-574_LUA_API/">
-<article class="md-text"><h2 class="post-title">LUA_API</h2><div class="excerpt"><p>
-                        
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-572_Redis%E6%85%A2%E6%9F%A5%E8%AF%A2%E3%80%81Pipeline%E3%80%81%E4%BA%8B%E5%8A%A1%E4%B8%8ELua%E3%80%81Bitmaps%E3%80%81%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
+<article class="md-text"><h2 class="post-title">Redis慢查询、Pipeline、事务与Lua、Bitmaps、发布订阅</h2><div class="excerpt"><p>
+Redis提供的5种数据结构已经足够强大，但除此之外，Redis还提供了诸如慢查询分析、功能强大的Redis Shell、Pipeline、事务与Lua脚本、Bitmaps、HyperLogLog、发布订阅、GEO等附加功能，这些功能可以在某些场景发挥重要的作用。
 
-
-
-编译使用 lua api 的 c 语言程序
-
-
-  gcc temp.c -o temp -llua -lm -ldl
-
-
-生成动态链接库供 lua 程序调用
-
-
-  gcc temp.c -o temp.so -fPIV -shared
-
-
-LUA_API
-
-定义
-/*
-@@ LUA_API is a mark for all co...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-576_luajit/">
-<article class="md-text"><h2 class="post-title">luajit</h2><div class="excerpt"><p>JIT = Just In TimeIOS中禁止使用（不让自主申请内存）
-解释执行：
-效率低
-代码暴露
-
-静态编译
-不够灵活，无法热更新
-平台兼容性差
-
-JIT：
-效率：高于解释执行，低于静态编译。
-安全性：一般都先转换成字节码
-热更新：无论源码还是字节码本质都是自愿文件。
-兼容性：虚拟机会处理平台差异，对用户透明。
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+慢查询分析许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-575_%E5%85%A5%E8%81%8C%E4%BD%9C%E4%B8%9A%E4%B9%8B%20json%20%E6%95%B0%E6%8D%AE%E4%B8%8E%20lua%20value%20%E8%BD%AC%E6%8D%A2/">
 <article class="md-text"><h2 class="post-title">入职作业之 json 数据与 lua value 转换</h2><div class="excerpt"><p>题目任务描述：封装json格式的数据与lua value间的互相转换功能
 
@@ -210,6 +168,38 @@ JIT：
 
 
 这些图的描述能力应该等同BNF，所以需要处...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-571_nginx%20+%20lua%20%E5%BC%80%E5%8F%91%E4%B8%AD%E8%BF%87%E7%A8%8B%E4%B8%AD%20post%20body%20%E8%BF%87%E5%A4%A7%E8%BF%94%E5%9B%9E%204xx/">
+<article class="md-text"><h2 class="post-title">nginx + lua 开发中过程中 post body 过大返回 4xx</h2><div class="excerpt"><p>背景基于 OpenResty 提供 post 接口，调用方调用该接口 post 数据，该接口接收 post 过来的数据，复用 Nginx access 日志落盘。
+问题当用户的 body 体过大时，ngx.req.get_body_data() 读请求体，会出现读取不到直接返回 nil 的情况。
+问题原因究其原因，主要是 Nginx 诞生之初主要是为了解决负载均衡情况，而这种情况，是不需要读...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-576_luajit/">
+<article class="md-text"><h2 class="post-title">luajit</h2><div class="excerpt"><p>JIT = Just In TimeIOS中禁止使用（不让自主申请内存）
+解释执行：
+效率低
+代码暴露
+
+静态编译
+不够灵活，无法热更新
+平台兼容性差
+
+JIT：
+效率：高于解释执行，低于静态编译。
+安全性：一般都先转换成字节码
+热更新：无论源码还是字节码本质都是自愿文件。
+兼容性：虚拟机会处理平台差异，对用户透明。
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-577_Lua%E8%AF%AD%E6%B3%95%E9%82%AE%E7%AE%B1sina/">
+<article class="md-text"><h2 class="post-title">Lua语法邮箱sina</h2><div class="excerpt"><p>
+  Lua是一个以性能著称的轻量级的脚本语言。可以跨平台运行解析，而不需要编译的过程。Lua是一个区分大小写的编程语言。
+
+
+Lua语法学习
+
+变量
+
+1、标识符
+Lua中使用标识符定义一个变量，标识符由字母，数字，下划线组成。最好不要使用下划线加大写字母的标识符，因为Lua的保留字也是这样。一般约定，以下划线开头连接一串大写字母的名字（如_VERSION)被保留用于Lua内部全局变量。
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

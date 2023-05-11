@@ -110,16 +110,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-571_nginx%20+%20lua%20%E5%BC%80%E5%8F%91%E4%B8%AD%E8%BF%87%E7%A8%8B%E4%B8%AD%20post%20body%20%E8%BF%87%E5%A4%A7%E8%BF%94%E5%9B%9E%204xx/">
-<article class="md-text"><h2 class="post-title">nginx + lua 开发中过程中 post body 过大返回 4xx</h2><div class="excerpt"><p>背景基于 OpenResty 提供 post 接口，调用方调用该接口 post 数据，该接口接收 post 过来的数据，复用 Nginx access 日志落盘。
-问题当用户的 body 体过大时，ngx.req.get_body_data() 读请求体，会出现读取不到直接返回 nil 的情况。
-问题原因究其原因，主要是 Nginx 诞生之初主要是为了解决负载均衡情况，而这种情况，是不需要读...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-572_Redis%E6%85%A2%E6%9F%A5%E8%AF%A2%E3%80%81Pipeline%E3%80%81%E4%BA%8B%E5%8A%A1%E4%B8%8ELua%E3%80%81Bitmaps%E3%80%81%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
-<article class="md-text"><h2 class="post-title">Redis慢查询、Pipeline、事务与Lua、Bitmaps、发布订阅</h2><div class="excerpt"><p>
-Redis提供的5种数据结构已经足够强大，但除此之外，Redis还提供了诸如慢查询分析、功能强大的Redis Shell、Pipeline、事务与Lua脚本、Bitmaps、HyperLogLog、发布订阅、GEO等附加功能，这些功能可以在某些场景发挥重要的作用。
-
-慢查询分析许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-573_Mac%E4%B8%8B%E5%AE%89%E8%A3%85lua/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-573_Mac%E4%B8%8B%E5%AE%89%E8%A3%85lua/">
 <article class="md-text"><h2 class="post-title">Mac下安装lua</h2><div class="excerpt"><p>
 Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
 以官网的Lua 5.3.5版本为例。
@@ -127,6 +118,74 @@ Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码
 
 
 12345curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gztar zxf lua-5.3.5.tar.gzcd lua-5.3.5make linux...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-572_Redis%E6%85%A2%E6%9F%A5%E8%AF%A2%E3%80%81Pipeline%E3%80%81%E4%BA%8B%E5%8A%A1%E4%B8%8ELua%E3%80%81Bitmaps%E3%80%81%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
+<article class="md-text"><h2 class="post-title">Redis慢查询、Pipeline、事务与Lua、Bitmaps、发布订阅</h2><div class="excerpt"><p>
+Redis提供的5种数据结构已经足够强大，但除此之外，Redis还提供了诸如慢查询分析、功能强大的Redis Shell、Pipeline、事务与Lua脚本、Bitmaps、HyperLogLog、发布订阅、GEO等附加功能，这些功能可以在某些场景发挥重要的作用。
+
+慢查询分析许多存储系统（例如MySQL）提供慢查询日志帮助开发和运维人员定位系统存在的慢操作。所谓慢查询日志就是系统在命令执...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-575_%E5%85%A5%E8%81%8C%E4%BD%9C%E4%B8%9A%E4%B9%8B%20json%20%E6%95%B0%E6%8D%AE%E4%B8%8E%20lua%20value%20%E8%BD%AC%E6%8D%A2/">
+<article class="md-text"><h2 class="post-title">入职作业之 json 数据与 lua value 转换</h2><div class="excerpt"><p>题目任务描述：封装json格式的数据与lua value间的互相转换功能
+
+下载ECMA-404的描述文件，观察json的数据格式。
+
+根据描述，一个json value可以是这些类型: object, array, number, string, true, false, or null。
+
+
+
+
+
+下面是描述几种数据类型的图。
+
+
+
+
+
+
+
+
+
+这些图的描述能力应该等同BNF，所以需要处...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-571_nginx%20+%20lua%20%E5%BC%80%E5%8F%91%E4%B8%AD%E8%BF%87%E7%A8%8B%E4%B8%AD%20post%20body%20%E8%BF%87%E5%A4%A7%E8%BF%94%E5%9B%9E%204xx/">
+<article class="md-text"><h2 class="post-title">nginx + lua 开发中过程中 post body 过大返回 4xx</h2><div class="excerpt"><p>背景基于 OpenResty 提供 post 接口，调用方调用该接口 post 数据，该接口接收 post 过来的数据，复用 Nginx access 日志落盘。
+问题当用户的 body 体过大时，ngx.req.get_body_data() 读请求体，会出现读取不到直接返回 nil 的情况。
+问题原因究其原因，主要是 Nginx 诞生之初主要是为了解决负载均衡情况，而这种情况，是不需要读...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-576_luajit/">
+<article class="md-text"><h2 class="post-title">luajit</h2><div class="excerpt"><p>JIT = Just In TimeIOS中禁止使用（不让自主申请内存）
+解释执行：
+效率低
+代码暴露
+
+静态编译
+不够灵活，无法热更新
+平台兼容性差
+
+JIT：
+效率：高于解释执行，低于静态编译。
+安全性：一般都先转换成字节码
+热更新：无论源码还是字节码本质都是自愿文件。
+兼容性：虚拟机会处理平台差异，对用户透明。
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-577_Lua%E8%AF%AD%E6%B3%95%E9%82%AE%E7%AE%B1sina/">
+<article class="md-text"><h2 class="post-title">Lua语法邮箱sina</h2><div class="excerpt"><p>
+  Lua是一个以性能著称的轻量级的脚本语言。可以跨平台运行解析，而不需要编译的过程。Lua是一个区分大小写的编程语言。
+
+
+Lua语法学习
+
+变量
+
+1、标识符
+Lua中使用标识符定义一个变量，标识符由字母，数字，下划线组成。最好不要使用下划线加大写字母的标识符，因为Lua的保留字也是这样。一般约定，以下划线开头连接一串大写字母的名字（如_VERSION)被保留用于Lua内部全局变量。
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-578_lua%E5%AD%A6%E4%B9%A0/">
+<article class="md-text"><h2 class="post-title">lua学习</h2><div class="excerpt"><p>一、注释单行注释：两个破折号多行注释：[[ … ]]
+二、变量和流程控制所有的数字类型都是double
+num=42
+字符串是Immutable的，和python一样
+s = &#39;walternate&#39;
+t = &#34;double-quotes are also fine&#34;
+u = [[ Double brackets
+          start and end...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-574_LUA_API/">
 <article class="md-text"><h2 class="post-title">LUA_API</h2><div class="excerpt"><p>
                         
@@ -150,65 +209,6 @@ LUA_API
 定义
 /*
 @@ LUA_API is a mark for all co...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-576_luajit/">
-<article class="md-text"><h2 class="post-title">luajit</h2><div class="excerpt"><p>JIT = Just In TimeIOS中禁止使用（不让自主申请内存）
-解释执行：
-效率低
-代码暴露
-
-静态编译
-不够灵活，无法热更新
-平台兼容性差
-
-JIT：
-效率：高于解释执行，低于静态编译。
-安全性：一般都先转换成字节码
-热更新：无论源码还是字节码本质都是自愿文件。
-兼容性：虚拟机会处理平台差异，对用户透明。
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-575_%E5%85%A5%E8%81%8C%E4%BD%9C%E4%B8%9A%E4%B9%8B%20json%20%E6%95%B0%E6%8D%AE%E4%B8%8E%20lua%20value%20%E8%BD%AC%E6%8D%A2/">
-<article class="md-text"><h2 class="post-title">入职作业之 json 数据与 lua value 转换</h2><div class="excerpt"><p>题目任务描述：封装json格式的数据与lua value间的互相转换功能
-
-下载ECMA-404的描述文件，观察json的数据格式。
-
-根据描述，一个json value可以是这些类型: object, array, number, string, true, false, or null。
-
-
-
-
-
-下面是描述几种数据类型的图。
-
-
-
-
-
-
-
-
-
-这些图的描述能力应该等同BNF，所以需要处...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-578_lua%E5%AD%A6%E4%B9%A0/">
-<article class="md-text"><h2 class="post-title">lua学习</h2><div class="excerpt"><p>一、注释单行注释：两个破折号多行注释：[[ … ]]
-二、变量和流程控制所有的数字类型都是double
-num=42
-字符串是Immutable的，和python一样
-s = &#39;walternate&#39;
-t = &#34;double-quotes are also fine&#34;
-u = [[ Double brackets
-          start and end...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-577_Lua%E8%AF%AD%E6%B3%95%E9%82%AE%E7%AE%B1sina/">
-<article class="md-text"><h2 class="post-title">Lua语法邮箱sina</h2><div class="excerpt"><p>
-  Lua是一个以性能著称的轻量级的脚本语言。可以跨平台运行解析，而不需要编译的过程。Lua是一个区分大小写的编程语言。
-
-
-Lua语法学习
-
-变量
-
-1、标识符
-Lua中使用标识符定义一个变量，标识符由字母，数字，下划线组成。最好不要使用下划线加大写字母的标识符，因为Lua的保留字也是这样。一般约定，以下划线开头连接一串大写字母的名字（如_VERSION)被保留用于Lua内部全局变量。
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.285Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-579_Lua%20%E5%AD%A6%E4%B9%A0%20chapter25%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter25</h2><div class="excerpt"><p>目录
 

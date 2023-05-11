@@ -112,29 +112,28 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-60_Lua%E5%8F%98%E9%87%8F%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-606_lua%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A6%82%E8%BF%B0/">
+<article class="md-text"><h2 class="post-title">lua虚拟机概述</h2><div class="excerpt"><p>何为虚拟机用于模拟计算机运行的程序.是个中间层,它处于脚本语言和硬件之间的一个程序.每一门脚本语言都会有自己定义的opcode(”操作码”),可以理解为这门程序自己定义的”汇编语言”.一般的编译型语言,比如C等,经过编译器编译之后生成的都是与当前硬件环境相匹配的汇编代码;而脚本型的语言,经过前端的处理之后,生成的就是opcode,再将该opcode放在这门语言的虚拟机中执行.虚拟机是作为单独...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-609_%E5%A6%82%E4%BD%95%E7%94%A8%20openresty%20+%20lua%20%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%BD%91%E7%AB%99/">
+<article class="md-text"><h2 class="post-title">如何用 openresty + lua 快速搭建一个简单网站</h2><div class="excerpt"><p>最近在折腾 OpenResty，OpenResty 就不用多介绍了，这方面国内质量好的资料也不多，如果非要选一个入门级别的资料，自然是《OpenResty 最佳实践》。断断续续看了一些 Lua 的语法和 OpenResty 基础，就想做点什么练练手。碰巧某天。同事介绍了几个 OpenResty 的 lua 库，一看刚刚好，可以做来搭个简单的网站。那么我们就开始吧…
+
+安装 OpenResty...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-60_Lua%E5%8F%98%E9%87%8F%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
 <article class="md-text"><h2 class="post-title">Lua变量 · 花生肉泥</h2><div class="excerpt"><p>lua中有三种变量：全局变量，局部变量，还有table的域
 在变量的首次赋值之前，变量的值均为nil
 全局变量全局变量不需要声明，给一个变量赋值后即创建了这个全局变量，访问一个没有初始化的全局变量也不会出错，只不过得到的结果是：nil123print(a)     a = 1print(a)     -- 1
 当你想删除一个全局变量，只需要将变量赋值为nil
 当且仅当一个变量不等于nil时，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-609_%E5%A6%82%E4%BD%95%E7%94%A8%20openresty%20+%20lua%20%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%BD%91%E7%AB%99/">
-<article class="md-text"><h2 class="post-title">如何用 openresty + lua 快速搭建一个简单网站</h2><div class="excerpt"><p>最近在折腾 OpenResty，OpenResty 就不用多介绍了，这方面国内质量好的资料也不多，如果非要选一个入门级别的资料，自然是《OpenResty 最佳实践》。断断续续看了一些 Lua 的语法和 OpenResty 基础，就想做点什么练练手。碰巧某天。同事介绍了几个 OpenResty 的 lua 库，一看刚刚好，可以做来搭个简单的网站。那么我们就开始吧…
-
-安装 OpenResty...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-610_Lua%E5%87%BD%E6%95%B0%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
 <article class="md-text"><h2 class="post-title">Lua函数 · 花生肉泥</h2><div class="excerpt"><p>函数的构建lua编程语言函数定义格式如下：1234optional_function_scope function  (argument1,argument2,argument3...,argumentn)     function_body     return result_parames_comma_separatedend
 【解析】
 optional_function_scope：该...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-601_Java%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8%E9%99%90%E6%B5%81%20Redis%20+%20Lua%20%E5%AE%9E%E8%B7%B5/">
-<article class="md-text"><h2 class="post-title">Java并发：分布式应用限流 Redis + Lua 实践</h2><div class="excerpt"><p>任何限流都不是漫无目的的，也不是一个开关就可以解决的问题，常用的限流算法有：令牌桶，漏桶。在之前的文章中，也讲到过，但是那是基于单机场景来写。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-593_%E5%9C%A8redis%E4%B8%AD%E4%BD%BF%E7%94%A8Lua%E8%84%9A%E6%9C%AC/">
+<article class="md-text"><h2 class="post-title">在redis中使用Lua脚本</h2><div class="excerpt"><p>脚本介绍Redis在2.6版本中推出了脚本功能,使用Lua语言(一种“卫星语言”,能够方便地嵌入到其他语言中使用)编写脚本传到Redis中执行。在Lua脚本中可以调用大部分的Redis命令,使用脚本的好处如下:
 
-之前文章：接口限流算法：漏桶算法&amp;令牌桶算法
-然而再牛逼的机器，再优化的设计，对于特殊场景我们也是要特殊处理的。就拿秒杀来说，可能会有百万级别的用户进行抢购，而商品数量远远小于用户数量。如果这些请求都进入队列或者查询缓存，对于最终结果没有任...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-592_tolua%E5%8E%9F%E7%90%86/">
-<article class="md-text"><h2 class="post-title">tolua原理</h2><div class="excerpt"><p>tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？创建一个 userdata ，存放 C/C++ 对象指针，然后给 userdata 添加元表，用index 和newindex 元方法映射 C/C++ 中的对象方法。
+减少网络开销: 多个redis请求可以在一个脚本中一次发送一个请求,减少网络往返时延。
 
-c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中（_R[mt] = name），并且设置这些类型的继承关系(通过_R...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+原子操作: Redis会将整个脚本作为一个整体执行，中间不会被其他命令插入。编写脚本的过程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-594_399.%20Evaluate%20Division/">
 <article class="md-text"><h2 class="post-title">399. Evaluate Division</h2><div class="excerpt"><p>
 &lt;a href=&quot;https://techlarry.github.io/tags/Leetcode/&quot; style=&quot;color:white&quot; class=&quot;tag&quot;&gt; Leetcode &lt;/a&gt;
@@ -142,13 +141,6 @@ c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中
 
 
 &lt;a href=&quot;https://techlarry.github.io/tags/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-595_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>7 Iterators and the Generic for
-
-用闭包编写迭代器可以存储状态，先写一个迭代器生成器，然后生成新的迭代器1234function (t)	local i = 0	return function () i = i + 1； return t[i] endend
-
-
-在while循环中使用迭代器1234567t = {10, 20, 30}iter = value...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-596_linux%E5%B8%B8%E7%94%A8%E5%BA%93%E7%9A%84lua%E7%A7%BB%E6%A4%8D%EF%BC%9Alibmcrypt%E7%9A%84lua%E6%8F%92%E4%BB%B6/">
 <article class="md-text"><h2 class="post-title">linux常用库的lua移植：libmcrypt的lua插件</h2><div class="excerpt"><p>openresty的lua方案效率不错，缺点是库不全，php现成的接口应用改成lua并不容易，比如libmcrypt，这个php常用的加密库（其实nginx的lua模块加密还有个不错的原生方案，openssl，在openrestylualibresty目录下，特定的加密方式需要自行修改），第三方C库在lua里使用都可以依照本文的方法来处理。        下载libmcrypt的源代码，解压...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-597_Lua%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
@@ -157,17 +149,24 @@ c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中
 
 写代码如同写文章，每个人或多或少都有自己的风格。我们在进行产品开发的过程中，更多的是团队上的协作与交流而非单打独斗。所以，为了 提高开发效率，降低维护成本，促进团队合作，代码的审查，整理出这篇文章。
 借助于《Python风格指南》中的警告词，在此处引用一下：代码的阅读频率比编写的要高得多，本风格指南旨在通过一致性提高代码的可读性。一致性在...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-599_%E4%BD%BF%E7%94%A8%E5%85%83%E8%A1%A8%E4%BC%98%E5%8C%96%20Lua%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%20II/">
-<article class="md-text"><h2 class="post-title">使用元表优化 Lua 配置文件 II</h2><div class="excerpt"><p>
-上回提到元表优化 Lua 配置文件，以减少重复字段，节省内存开销。
-除了这种直接地减少内存开销的方法，使用元表还能实现数据的延迟加载，从另一个角度节约内存。
-延迟加载
--- PropModel.lua
-PropModel = &#123;
-    [1001] = &#123;
-        ID   = 1001,
-        name = &#34;道具1001&#34;,
-  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-592_tolua%E5%8E%9F%E7%90%86/">
+<article class="md-text"><h2 class="post-title">tolua原理</h2><div class="excerpt"><p>tolua++如何将c++对象导入到lua里？lua如何能够访问c++对象成员？创建一个 userdata ，存放 C/C++ 对象指针，然后给 userdata 添加元表，用index 和newindex 元方法映射 C/C++ 中的对象方法。
+
+c++层新建一个元表作为类型（通过tolua_usertype）放在注册表中（_R[mt] = name），并且设置这些类型的继承关系(通过_R...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-59_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(6)table.sort/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记(6)table.sort</h2><div class="excerpt"><p>[TOC]
+
+
+简单来说就是table.sort的第二个参数支持自定义比较函数，这类似于c++的容器支持自定义比较函数一样，代码如下：
+
+local tbTest = &#123;
+    &#123;1, 3&#125;,
+    &#123;3, 5&#125;,
+    &#123;5, 4&#125;,
+    &#123;2, 3&#125;,
+&#125;
+
+– 比较函数func...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.287Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

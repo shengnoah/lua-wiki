@@ -110,40 +110,40 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/pra_redis_out_package.html">
+  <div class="post-list post"><a class="post-card post " href="/pra_postgres_not_support_transaction.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>不支持事务我们继续上一章节的内容，大家应该记得我们 Lua 代码中是如何完成 ngx_postgres 模块调用的。我们把他简单改造一下，让他更接近真实代码。
+123456789101112131415161718192021222324252627282930313233343536	local json = require &quot;cjson&quot;	function db_ex...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_postgres_timeout.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>超时当我们所有数据库的 SQL 语句是通过子查询方式完成，对于超时的控制往往很容易被大家忽略。因为大家在代码里看不到任何调用 set_timeout 的地方。实际上 PostgreSQL 已经为我们预留好了两个设置。
+请参考下面这段配置：
+12345678910111213location /postgres &#123;    internal;    default_type text/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_postgres_sql_inject.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>SQL 注入有使用 SQL 语句操作数据库的经验朋友，应该都知道使用 SQL 过程中有一个安全问题叫 SQL 注入。所谓 SQL 注入，就是通过把 SQL 命令插入到 Web 表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的 SQL 命令。为了防止 SQL 注入，在生产环境中使用 OpenResty 的时候就要注意添加防范代码。
+延续之前的 ngx_postgres 调...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_postgres_how_to_use.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>PostgresNginxModule 模块的调用方式ngx_postgres 模块使用方法12345678910111213location /postgres &#123;    internal;    default_type text/html;    set_by_lua $query_sql &#x27;return ngx.unescape_uri(ngx.var.arg_s...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_redis_out_package.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>Redis 接口的二次封装
 先看一下官方的调用示例代码：
 
 1234567891011121314151617181920212223242526local redis = require &quot;resty.redis&quot;local red = redis:new()red:set_timeout(1000) -- 1 seclocal ok, err = red:connec...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_redis_dynamic_redis_module_method.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>动态生成的 lua-resty-redis 模块方法刚接触 lua-resty-redis 的文档的时候，你可能会惊讶于上面列出的方法之少。Redis 有好几十个命令，而Method一节列出的方法却寥寥无几。事实上，如果仔细阅读了文档，你会在 Method 一节的开头读到这么一段话：
-
-All of the Redis commands have their own methods with...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_redis_pub_sub_package.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>Redis 接口的二次封装（发布订阅）其实这一小节完全可以放到上一个小节，只是这里用了完全不同的玩法，所以我还是决定单拿出来分享一下这个小细节。
+上一小节有关订阅部分的代码，请看：
+1234567891011121314151617181920212223242526function _M.subscribe( self, channel )    local redis, err = re...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_redis_auth_connect.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>访问有授权验证的 Redis对于有授权验证的 Redis，正确的认证方法，请参考下面例子：
 123456789101112131415161718192021222324252627282930313233343536373839404142434445server &#123;    location /test &#123;        content_by_lua_block &#1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_redis_pipeline.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>pipeline 压缩请求数量通常情况下，我们每个操作 Redis 的命令都以一个 TCP 请求发送给 Redis，这样的做法简单直观。然而，当我们有连续多个命令需要发送给 Redis 时，如果每个命令都以一个数据包发送给 Redis，将会降低服务端的并发能力。
 为什么呢？大家知道每发送一个 TCP 报文，会存在网络延时及操作系统的处理延时。大部分情况下，网络延时要远大于 CPU 的处理延时...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_redis_pub_sub_package.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>Redis 接口的二次封装（发布订阅）其实这一小节完全可以放到上一个小节，只是这里用了完全不同的玩法，所以我还是决定单拿出来分享一下这个小细节。
-上一小节有关订阅部分的代码，请看：
-1234567891011121314151617181920212223242526function _M.subscribe( self, channel )    local redis, err = re...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_redis_script.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>script 压缩复杂请求从pipeline章节，我们知道对于多个简单的 Redis 命令可以汇聚到一个请求中，提升服务端的并发能力。然而，在有些场景下，我们每次命令的输入需要引用上个命令的输出，甚至可能还要对第一个命令的输出做一些加工，再把加工结果当成第二个命令的输入。pipeline 难以处理这样的场景。庆幸的是，我们可以用 Redis 里的 script 来压缩这些复杂命令。
 scri...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_postgres_how_to_use.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>PostgresNginxModule 模块的调用方式ngx_postgres 模块使用方法12345678910111213location /postgres &#123;    internal;    default_type text/html;    set_by_lua $query_sql &#x27;return ngx.unescape_uri(ngx.var.arg_s...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_postgres_not_support_transaction.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>不支持事务我们继续上一章节的内容，大家应该记得我们 Lua 代码中是如何完成 ngx_postgres 模块调用的。我们把他简单改造一下，让他更接近真实代码。
-123456789101112131415161718192021222324252627282930313233343536	local json = require &quot;cjson&quot;	function db_ex...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_postgres_sql_inject.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>SQL 注入有使用 SQL 语句操作数据库的经验朋友，应该都知道使用 SQL 过程中有一个安全问题叫 SQL 注入。所谓 SQL 注入，就是通过把 SQL 命令插入到 Web 表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的 SQL 命令。为了防止 SQL 注入，在生产环境中使用 OpenResty 的时候就要注意添加防范代码。
-延续之前的 ngx_postgres 调...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_postgres_timeout.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>超时当我们所有数据库的 SQL 语句是通过子查询方式完成，对于超时的控制往往很容易被大家忽略。因为大家在代码里看不到任何调用 set_timeout 的地方。实际上 PostgreSQL 已经为我们预留好了两个设置。
-请参考下面这段配置：
-12345678910111213location /postgres &#123;    internal;    default_type text/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_redis_dynamic_redis_module_method.html">
+<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>动态生成的 lua-resty-redis 模块方法刚接触 lua-resty-redis 的文档的时候，你可能会惊讶于上面列出的方法之少。Redis 有好几十个命令，而Method一节列出的方法却寥寥无几。事实上，如果仔细阅读了文档，你会在 Method 一节的开头读到这么一段话：
+
+All of the Redis commands have their own methods with...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

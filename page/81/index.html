@@ -110,24 +110,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-259_Lua%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
-<article class="md-text"><h2 class="post-title">Lua 快速入门</h2><div class="excerpt"><p>    &lt;p&gt;Lua 是一门强大、快速、轻量的嵌入式脚本语言，那么我们如何才能够快速学习和掌握 Lua 语言呢？在这我将分享一下我的 Lua 快速入门经验，希望对大家有所帮助。&lt;/p&gt;
-
-Lua 的安装过程可以参考 Lua 官网 或云风翻译的 Lua 5.3 参考手册。
-在 Mac OS 上安装
-从 Lua 官网下载 Lua 最新的源码，然后解压。
-打开终端，并 cd...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-258_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>    &lt;p&gt;Lua支持两种形式的函数调用，一种对调用过程的堆栈进行保护，即使中间过程出错，也不至于让进程退出，也就是pcall，一般在使用C调用Lua写的脚本函数时，都采用pcall方式。&lt;/p&gt;
-
-对比起一般的函数调用方式，pcall多做了这些事情：
-对函数调用前的Lua堆栈进行保护在调用完毕之后恢复，支持传入出错时的函数在调用出错时调用。
-来依次看这个过程。
-
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-262_399%20Evaluate%20Division/">
-<article class="md-text"><h2 class="post-title">399 Evaluate Division</h2><div class="excerpt"><p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answe...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-260_Lua%20%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%20/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-260_Lua%20%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%20/">
 <article class="md-text"><h2 class="post-title">Lua 正确处理可变参数</h2><div class="excerpt"><p>            &lt;p&gt;为了在 Lua 里处理可变参数，我们可能会写下面这样的代码：&lt;/p&gt;
 
 local function args(...)
@@ -135,6 +118,25 @@ local function args(...)
         for _, v in ipairs&#123;...&#125; do
             print(v)
         e...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-25_Lua%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+<article class="md-text"><h2 class="post-title">Lua 面向对象</h2><div class="excerpt"><p>
+                        
+
+
+
+隐藏 self 参数
+
+用 lua 进行面向对象的编程
+
+  声明方法和调用方法统一用 &#34;:&#34;
+  属性的定义和调用全部用   &#34;.&#34;
+
+
+定义的时候冒号默认接收 self 参数，调用的时候默认传递调用者自身作为参数，而点号要显式传递或接收 self 参数。
+
+一个简单的类
+
+function clas...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-261_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%9B%9B)/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记(四)</h2><div class="excerpt"><p>
 协同
@@ -155,6 +157,13 @@ I/O文档
 协同协同，即coroutine与线程比较类似：拥有独立的堆栈，独立的局部变量，独立的命令指针，以及与其它的协同进程共享全局变量等等。
 协同与线程的区别一个具有多线程的进程可以同时运行几个线程，而协同进程却需要彼此协作的运行。
 在任一指定时刻只有一个协同进程在运行...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-262_399%20Evaluate%20Division/">
+<article class="md-text"><h2 class="post-title">399 Evaluate Division</h2><div class="excerpt"><p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answe...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-254_Lua%E4%B8%ADipairs%E5%92%8Cpairs%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+<article class="md-text"><h2 class="post-title">Lua中ipairs和pairs的区别与使用</h2><div class="excerpt"><p>    &lt;div class=&quot;post-nav&quot;&gt;
+      &lt;div class=&quot;post-nav-next post-nav-item&quot;&gt;
+        
+          &lt;a href=&quot;https://hulinhong.com/2015/11/11/lua_cpp_toluapp_tutor...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.255Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-244_Lua%20%E5%AD%A6%E4%B9%A0%20chapter3%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter3</h2><div class="excerpt"><p>            &lt;h3 id=&quot;目录&quot;&gt;目录&lt;/h3&gt;
 
@@ -185,6 +194,11 @@ Lua源码阅读：本篇转载于LuaSource
 第五篇：C API
 
 lua.c12345678910111213141516int  (int argc, char **argv) {  int sta...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.254Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-246_Lua%E7%9A%84win%E5%92%8Clinux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+<article class="md-text"><h2 class="post-title">Lua的win和linux环境搭建</h2><div class="excerpt"><p>    &lt;div class=&quot;post-nav&quot;&gt;
+      &lt;div class=&quot;post-nav-next post-nav-item&quot;&gt;
+        
+          &lt;a href=&quot;https://hulinhong.com/2015/11/03/Linux%E5%B8%B8%E7%94%...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.254Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-247_Lua%20%E5%AD%A6%E4%B9%A0%20chapter23%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter23</h2><div class="excerpt"><p>            &lt;h3 id=&quot;目录&quot;&gt;目录&lt;/h3&gt;
 
@@ -230,10 +244,6 @@ lua.c12345678910111213141516int  (int argc, char **argv) {  int sta...</p></div>
 
 前言Lua的基础教程其实感觉都已经快接近尾声了，这次就直接把面向对象的这个部分以及一些其他的东西讲清楚，然后就结尾吧，其实大部分编程语言的内涵都是共通的，最主要的还是应用的问题。（只有实践才是检验真理的唯一标准！）
 正文推荐网站Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.254Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-249_%E6%B5%85%E6%9E%90android%E6%89%8B%E6%B8%B8lua%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86%EF%BC%88%E5%90%8E%E7%BB%AD%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">浅析android手游lua脚本的加密与解密（后续）</h2><div class="excerpt"><p>    &lt;p&gt;  趁着周末，把lua的后续文章也写完了。&lt;/p&gt;
-
-反编译对抗  众所周知，反汇编/反编译 工具在逆向人员工作中第一步被使用，其地位非常之高，而对于软件保护者来说，如何对抗 反汇编/反编译 就显得尤为重要。例如，动态调试中对OD的的检测、内核调试对windbg的破坏、加壳加花对IDA静态分析的阻碍、apktool的bug导致对修改后的apk反编译失败、...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.254Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

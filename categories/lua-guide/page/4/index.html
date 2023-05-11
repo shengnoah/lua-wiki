@@ -112,21 +112,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：lua_guide</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/lua_guide/functions/">
-<article class="md-text"><h2 class="post-title">Lua函数</h2><div class="excerpt"><p>Lua 函数函数用于将一组语句组合起来完成一个任务。你可以将你的代码分割到不同的函数中。如何将你的代码分到不同的函数中完全由你自己决定，不过一般会按照逻辑功能进行划分，每个函数都执行一个特定的任务。 
-在 Lua 中提供了大量的内置函数供我们使用。例如，print() 函数用于将输入的参数输出到终端。 
-函数往往也被称作方法，子例程或过程等等。  
-函数定义Lua 中函数定义的语法如下所示：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/file-io/">
-<article class="md-text"><h2 class="post-title">Lua文件I/O</h2><div class="excerpt"><p>Lua 文件 I&#x2F;OLua 的 IO 库用于读取或操作文件。Lua IO 库提供两类文件操作，它们分别是隐式文件描述符(implict file descriptors)和显式文件描述符(explicit file descriptors)。
-在接下来的例子的，我们会用到一个示例文件 test.lua，文件内容如下：  
-123456-- sample test.lua-- sam...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/if-else-if-statement/">
-<article class="md-text"><h2 class="post-title">Lua中的 if...else 语句</h2><div class="excerpt"><p>#Lua 中的 if…else 语句  
-如果 if 语句后面跟上 else 语句，那么条件为假时就执行 else 语句的代码。  
-##语法  
-Lua 语言中 if…else 语句的语法如下所示：  
-1234567891011121314151617if(boolean_expression)then   --[ 如何条件为真，则执行此处代码。 --]else   --[ 如何条件为假...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/lua_guide/programming/">
+<article class="md-text"><h2 class="post-title">Lua游戏开发</h2><div class="excerpt"><p>Lua 游戏开发Lua 语言因其结构和语法的简洁性而在各类游戏引擎中被广泛使用。游戏对图形画面要求非常苛刻，这无疑需消耗大量的内存空间，而这些内存空间的管理是非常棘手的问题。Lua 语言有自动的垃圾回收机制，这种自动化的内存管理机制也使得 Lua 受到游戏引擎开发者的青睐。著名的 Lua 游戏引擎主要包括：  
+
+    Cornoa SDK
+    Gideros Mobile
+    S...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/collection/">
 <article class="md-text"><h2 class="post-title">Lua垃圾回收机制</h2><div class="excerpt"><p>Lua 垃圾回收机制Lua 通过特定算法的垃圾回收机制实现自动内存管理。由于自动内存管理机制的存在，作为程序开发人员：  
 
@@ -135,18 +126,34 @@ Lua 语言中 if…else 语句的语法如下所示：
   
 Lua 的垃圾回收器会不断运行去收集不再被 Lua 程序访问的对象。  
 所有的对象，包括表、userdata、函数、线程、字符串等都由自动内存...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/if-else-if-statement/">
+<article class="md-text"><h2 class="post-title">Lua中的 if...else 语句</h2><div class="excerpt"><p>#Lua 中的 if…else 语句  
+如果 if 语句后面跟上 else 语句，那么条件为假时就执行 else 语句的代码。  
+##语法  
+Lua 语言中 if…else 语句的语法如下所示：  
+1234567891011121314151617if(boolean_expression)then   --[ 如何条件为真，则执行此处代码。 --]else   --[ 如何条件为假...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/statement/">
 <article class="md-text"><h2 class="post-title">Lua中的if语句</h2><div class="excerpt"><p>#Lua 中的 if 语句  
 if　语句包括一个布尔表达式和一个或多个语句。　　
 ##语法  
 Lua 语言 if 语句的语法如下：  
 123456789101112131415if(boolean_expression)then   --[如果布尔表达式为真，statement(s) 执行。--]end```  如果布尔表达式计算结果为真，则 if 语句内的代码块执行；如果布尔表达式计...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/io/">
+<article class="md-text"><h2 class="post-title">Lua文件I/O</h2><div class="excerpt"><p>Lua 文件 I&#x2F;OLua 的 IO 库用于读取或操作文件。Lua IO 库提供两类文件操作，它们分别是隐式文件描述符(implict file descriptors)和显式文件描述符(explicit file descriptors)。
+在接下来的例子的，我们会用到一个示例文件 test.lua，文件内容如下：  
+123456-- sample test.lua-- sam...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/statement/">
 <article class="md-text"><h2 class="post-title">Lua中的嵌套 if 语句</h2><div class="excerpt"><p>#Lua 中的嵌套 if 语句  
 在 Lua 语言中，你可以合法的嵌套使用 if-else 语句。这也就是说，你可以在一个 if 或 if-else 语句内再使用一个　if 或 if-else 语句。  
 ##语法  
 嵌套 if 语句的语法规则如下：  
 1234567891011121314if( boolean_expression 1)then   --[ 如果布尔表达式 1 为真...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/loop/">
+<article class="md-text"><h2 class="post-title">Lua循环嵌套</h2><div class="excerpt"><p>#Lua 循环嵌套  
+Lua 编程语言允许使用循环嵌套。接下来这一节中将用例子来说嵌套循环的使用方法：  
+##语法  
+for 循环嵌套的语法如下：  
+1234567891011for init,max/min value, incrementdo   for init,max/min value, increment   do      statement(s)   end   st...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/object-oriented/">
 <article class="md-text"><h2 class="post-title">Lua面向对象</h2><div class="excerpt"><p>Lua 面向对象面向对象概述面向对象编程技术是目前最常用的编程技术之一。目前大量的编程语言都支持面向对象的特性： 
 
@@ -161,32 +168,21 @@ Lua 语言 if 语句的语法如下：
 面向对象的特征
     类（class）：类是可以创建对象，并为状态（成员变量）提供初值及行为实现的可扩展模板。
     对象（objects）：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/facilities/">
-<article class="md-text"><h2 class="post-title">Lua操作系统工具库</h2><div class="excerpt"><p>Lua 操作系统工具库在很多应用中，我们都需要访问到操作系统级别的函数，操作系统库就给我们提供了这样的工具。下面的列表给出操作系统工具包提供的方法：  
+</a><a class="post-card post " href="/lua_guide/operators/">
+<article class="md-text"><h2 class="post-title">操作符</h2><div class="excerpt"><p>操作符操作符是用于告诉解释器执行特定的数学或逻辑运算的符号。Lua 语言有丰富的内置操作符，主要包括以下几类：  
 
-    
-        S.N.
-        函数与功能
-    
-    
-        1
-        os.clock()：以秒为单位返回程序运行所用 CPU 时间的近似值。
-    
-    
-        2
-  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/loop/">
-<article class="md-text"><h2 class="post-title">Lua循环嵌套</h2><div class="excerpt"><p>#Lua 循环嵌套  
-Lua 编程语言允许使用循环嵌套。接下来这一节中将用例子来说嵌套循环的使用方法：  
-##语法  
-for 循环嵌套的语法如下：  
-1234567891011for init,max/min value, incrementdo   for init,max/min value, increment   do      statement(s)   end   st...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/until/">
-<article class="md-text"><h2 class="post-title">repeat...until 循环</h2><div class="excerpt"><p>#repeat…until 循环  
-与 for 和 while 循环中先检测条件再决定是否执行循环不同，repeat…until 先执行循环再检测条件判断是否再次执行。除了 repeat…until 循环一定会执行一次之外，repeat…until 与 while 循环很相似。  
-##语法  
-Lua 语言中 repeat…until 循环的语法如下：  
-123456789101112...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+    算术运算操作符
+    关系运算操作符
+    逻辑运算操作符
+    其它操作符
+
+这篇教程将会依次介绍以上四类操作符。  
+
+算术去处操作符下面的表中列出了所有 Lua 语言支持的算术运算操作符。假设 A 变量的值为 10，B 变量的值为 20，则：  
+
+   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/overview/">
+<article class="md-text"><h2 class="post-title">概述</h2><div class="excerpt"><p>概述Lua 是用 C 语言开发的可扩展的轻量级编程语言。它起源于 1993 年由 Roberto lerusalimschy,Luiz Henrique de Figueiredo 与 Waddemar Celes 领导的一个内部项目。设计者的初衷是希望 Lua 可以成为一款整合 C 语言代码以及其它传统语言代码的软件。这种整合会带来很多好处，它让你不需要重复做 C 语言已经做的很好的工作，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.095Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a></div>
   
 

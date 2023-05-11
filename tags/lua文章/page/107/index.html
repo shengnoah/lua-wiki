@@ -112,16 +112,33 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1078_openresty_balancer_by_lua_file/">
-<article class="md-text"><h2 class="post-title">openresty_balancer_by_lua_file</h2><div class="excerpt"><p>set the balancer in nginx.conf12345678910upstream default_doc_upstream {		server 192.168.1.170:8081;	# tomcat-8	server 192.168.1.170:8082;	# tomcat-9	server 192.168.1.170:8083;	balancer_by_lua_file...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1075_port%20lua%20to%20web%20environment%20using%20webassembly/">
-<article class="md-text"><h2 class="post-title">port lua to web environment using webassembly</h2><div class="excerpt"><p>
-WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable target for compilation of high-level languages like C/C++/Rust, enab...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1074_%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lua/">
+<article class="md-text"><h2 class="post-title">编译安装lua</h2><div class="excerpt"><p>下载:
+
+build $ wget https://www.lua.org/ftp/lua-5.1.5.tar.gz
+
+
+解压:
+
+build $ tar xf lua-5.1.5.tar.gz
+
+
+make:
+
+lua-5.1.5 $ make linux
+
+
+安装:
+
+lua-5.1.5 $ sudo make install
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-107_Lua%E5%AD%A6%E4%B9%A0%E9%9A%8F%E7%AC%94/">
 <article class="md-text"><h2 class="post-title">Lua学习随笔</h2><div class="excerpt"><p>昨天刚立了FLAG，今天就来还愿了。因为是工作中接触到的，已经用了几次，比较熟悉。昨晚在晚上大概搜了下，看了两个教程，看进去了，今早又看了将近两小时，看到了些基础的东西。
 我是在Windows上练习LUA，所以只用下个软件就可以开始了，非常方便。下载入口
 下载后安装即可，使用方法就是首先打开SciTE，然后在里面直接敲代码，保存为以lua结尾的文件，按F5就可以看到运行结果了。
 首先是注释，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1079_lua%E7%9A%84%E4%B8%80%E7%A7%8Dcontinue%E5%AE%9E%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">lua的一种continue实现</h2><div class="excerpt"><p>Lua中没有continue，通过另一种方式实现了continue的功能for var=exp1,exp2 do 	while true do 		if condition expressions  do			break		end		other statements		...		...		break	endend</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.232Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1055_leetcode.150%20evaluate%20reverse%20polish%20notation/">
 <article class="md-text"><h2 class="post-title">leetcode.150 evaluate reverse polish notation</h2><div class="excerpt"><p>题意
 计算逆波兰法表示的算式解法
@@ -130,6 +147,10 @@ class Solution &#123;
 
   Stack&lt;Integer&gt; integers &#x3D; new Stack&lt;&gt;();
   public int evalRPN(String[] tokens) &#123;      for(String token: to...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1058_the%20programming%20language%20lua%20and%20openresty/">
+<article class="md-text"><h2 class="post-title">the programming language lua and openresty</h2><div class="excerpt"><p>
+
+The Programming Language Lua and OpenResty</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1057_lua%20string%20hash%20%E7%AE%97%E6%B3%95/">
 <article class="md-text"><h2 class="post-title">lua string hash 算法</h2><div class="excerpt"><p>我在前一篇文章介绍过下面这 3 个字符串拥有相同的 hash，会导致 Hash Dos 问题：
 
@@ -139,20 +160,6 @@ class Solution &#123;
 
 
 但是 Lua 并没有将...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1058_the%20programming%20language%20lua%20and%20openresty/">
-<article class="md-text"><h2 class="post-title">the programming language lua and openresty</h2><div class="excerpt"><p>
-
-The Programming Language Lua and OpenResty</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1060_%5Bpublication%5D%20design%20and%20implementation%20of%20credit%20/">
-<article class="md-text"><h2 class="post-title">design and implementation of credit evaluation system for healthy aged service</h2><div class="excerpt"><p>
-      
-
-
-
-We introduce Collie，an online platform to assess the quality of nursing home service powered by machine learning, which enables user to choose a serial of selected algorithms for differe...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1061_%E5%BC%80%E6%BA%90%20waf%20demo%20%E7%B3%BB%E5%88%97%20%5B%20lua%20waf%20%5D/">
-<article class="md-text"><h2 class="post-title">开源 waf demo 系列 [ lua waf ]</h2><div class="excerpt"><p>1nginx-1.12.1 + php5.5.38 + mysql-5.5.32 + centOS6.8_x64 + LuaWaf
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1059_lua%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">
 <article class="md-text"><h2 class="post-title">lua基本语法</h2><div class="excerpt"><p>
 注释
@@ -172,6 +179,19 @@ We introduce Collie，an online platform to assess the quality of nursing home s
 赋值语句
 
 12345678-- 交换两个变量值    a, b = b, a-- 多个变量赋值    a,b,c = 1,2,3  --按照等号后面的数值位置赋值,如果缺...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1061_%E5%BC%80%E6%BA%90%20waf%20demo%20%E7%B3%BB%E5%88%97%20%5B%20lua%20waf%20%5D/">
+<article class="md-text"><h2 class="post-title">开源 waf demo 系列 [ lua waf ]</h2><div class="excerpt"><p>1nginx-1.12.1 + php5.5.38 + mysql-5.5.32 + centOS6.8_x64 + LuaWaf
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-105_ngx_lua%E7%81%B5%E6%B4%BB%E5%AE%9A%E5%88%B6fastcgi_cache%E7%BC%93%E5%AD%98key/">
+<article class="md-text"><h2 class="post-title">ngx_lua灵活定制fastcgi_cache缓存key</h2><div class="excerpt"><p>Web开发常见的几种缓存
+
+常用缓存（memcached和redis）
+Nginx的缓存（标准模块缓存: proxy_cache和fastcgi_cache / 第三方模块做缓存: ngx_lua）
+CDN缓存
+浏览器缓存（Cache-Control和LocalStorage）
+
+
+proxy_cache和fastcgi_cacheproxy_cache和fastcgi_cache都为Ngi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1062_lua%E4%B8%AD%E7%9A%84io%E5%BA%93/">
 <article class="md-text"><h2 class="post-title">lua中的io库</h2><div class="excerpt"><p>– write输出是print简化版输出，不会自动换行,不可以..等复杂操作io.write(‘okn’)io.write(string.format(“sin(3) = %.4fn”,math.sin(3)))
 – read从当前输入中读取 all line *number 

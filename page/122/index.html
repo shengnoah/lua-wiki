@@ -110,8 +110,8 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/pra_postgres_health_check.html">
-<article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>健康监测</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.133Z">2023-04-26</time></span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/pra_ngx_lua_lua_opt.html">
+<article class="md-text"><h2 class="post-title">网上有大量对 Lua 调优的推荐，我们应该如何看待？</h2><div class="excerpt"><p>网上有大量对 Lua 调优的推荐，我们应该如何看待？Lua 的解析器有官方的 standard Lua 和 LuaJIT，需要明确一点的是目前大量的优化文章都比较陈旧，而且都是针对 standard Lua 解析器的，standard Lua 解析器在性能上需要书写者自己规避，才能写出高性能来。需要各位看官注意的是，OpenResty 最新版默认已经绑定 LuaJIT，优化手段和方法已经略有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_lua-variable-scope.html">
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>变量的共享范围
 本章内容来自openresty讨论组 这里
@@ -122,8 +122,6 @@
 12345678910111213-- mo.lualocal showJs = function...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_on_abort.html">
 <article class="md-text"><h2 class="post-title">请求中断后的处理</h2><div class="excerpt"><p>请求中断后的处理</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_ngx_lua_lua_opt.html">
-<article class="md-text"><h2 class="post-title">网上有大量对 Lua 调优的推荐，我们应该如何看待？</h2><div class="excerpt"><p>网上有大量对 Lua 调优的推荐，我们应该如何看待？Lua 的解析器有官方的 standard Lua 和 LuaJIT，需要明确一点的是目前大量的优化文章都比较陈旧，而且都是针对 standard Lua 解析器的，standard Lua 解析器在性能上需要书写者自己规避，才能写出高性能来。需要各位看官注意的是，OpenResty 最新版默认已经绑定 LuaJIT，优化手段和方法已经略有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_resolve_the_domain_name.html">
 <article class="md-text"><h2 class="post-title">为什么我们的域名不能被解析</h2><div class="excerpt"><p>为什么我们的域名不能被解析最近经常有朋友在使用一个域名地址时发现无法被正确解析
 比如在使用 Mysql 实例时某些云会给一个私有的域名搭配自有的 nameserver 使用
@@ -139,6 +137,9 @@
 <article class="md-text"><h2 class="post-title">非队列性质</h2><div class="excerpt"><p>ngx.shared.DICT 非队列性质&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
 执行阶段和主要函数请参考HttpLuaModule#ngx.shared.DICT
 非队列性质ngx.shared.DICT 的实现是采用红黑树实现，当申请的缓存被占用完后如果有新数据需要存储则采用 LRU 算法淘汰掉...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_ngx_lua_timer.html">
+<article class="md-text"><h2 class="post-title">定时任务</h2><div class="excerpt"><p>定时任务在请求返回后继续执行章节中，我们介绍了一种实现的方法，这里我们介绍一种更优雅更通用的方法：ngx.timer.at()。这个函数是在后台用 Nginx 轻线程（light thread），在指定的延时后，调用指定的函数。有了这种机制，ngx_lua 的功能得到了非常大的扩展，我们有机会做一些更有想象力的功能出来。比如批量提交和 cron 任务。
+需要特别注意的是：有一些 ngx_lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_ngx_lua_use_case.html">
 <article class="md-text"><h2 class="post-title">典型应用场景</h2><div class="excerpt"><p>典型应用场景可以这样说，任何一个开发语言、开发框架，都有它存在的明确目的，重心是为了解决什么问题。没有说我们学习一门语言或技术，就可以解决所有的问题。同样的，OpenResty 的存在也有其自身适用的应用场景。
 其实官网 wiki 已经列了出来：
@@ -149,9 +150,9 @@
 <article class="md-text"><h2 class="post-title">openresty best practices</h2><div class="excerpt"><p>sleep这是一个比较常见的功能，你会怎么做呢？Google 一下，你会找到Lua 的官方指南，
 里面介绍了 10 种 sleep 不同的方法（操作系统不一样，方法还有区别），选择一个用，然后你就杯具了:( 你会发现 Nginx 高并发的特性不见了！
 在 OpenResty 里面选择使用库的时候，有一个基本的原则：尽量使用 OpenResty 的库函数，尽量不用 Lua 的库函数，因为 Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/pra_ngx_lua_timer.html">
-<article class="md-text"><h2 class="post-title">定时任务</h2><div class="excerpt"><p>定时任务在请求返回后继续执行章节中，我们介绍了一种实现的方法，这里我们介绍一种更优雅更通用的方法：ngx.timer.at()。这个函数是在后台用 Nginx 轻线程（light thread），在指定的延时后，调用指定的函数。有了这种机制，ngx_lua 的功能得到了非常大的扩展，我们有机会做一些更有想象力的功能出来。比如批量提交和 cron 任务。
-需要特别注意的是：有一些 ngx_lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/pra_ngx_lua_whats_cosocket.html">
+<article class="md-text"><h2 class="post-title">怎样理解cosocket</h2><div class="excerpt"><p>怎样理解cosocket笔者认为，cosocket 是 OpenResty 世界中技术、实用价值最高部分。让我们可以用非常低廉的成本，优雅的姿势，比传统 socket 编程效率高好几倍的方式进行网络编程。无论资源占用、执行效率、并发能力都非常出色。
+鲁迅有句名言“其实世界上本没有路，走的人多了便有了路”，其实对于 cosocket 的中文翻译貌似我也碰到了类似的问题。当我想给大家一个正面解释...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.132Z">2023-04-26</time></span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

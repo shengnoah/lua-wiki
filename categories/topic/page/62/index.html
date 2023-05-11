@@ -112,35 +112,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：topic</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-419_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua string hash 算法</h2><div class="excerpt"><p>我在前一篇文章介绍过下面这 3 个字符串拥有相同的 hash，会导致 Hash Dos 问题：
-
-&#34;0000000000000000000000000000000000&#34;
-&#34;f0l0l0w0m0e0n0t0w0i0t0t0e0r0?0:0)0&#34;
-&#34;x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0&#34;
-
-
-但是 Lua 并没有将...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-420_%5B%E8%BD%AC%5D%E5%9C%A8Lua%E4%B8%AD%E4%BD%BF%E7%94%A8gettext%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/">
-<article class="md-text"><h2 class="post-title">在Lua中使用gettext实现多语言支持</h2><div class="excerpt"><p>本文系转载，原文链接：http://zengrong.net/post/1986.htm感谢原作者无私分享。
-在Lua中使用gettext实现多语言支持
-2016-06-07更新：加入gettext包含的工具简介。
-
-
-GNU gettext 是一套优秀的国际化工具。在 linux 中被大量采用。wordpress 也使用 gettext 实现多语言支持。
-本文介绍如何在 quick-coc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-423_leetcode150.Evaluate%20Reverse%20Polish%20Notation/">
-<article class="md-text"><h2 class="post-title">leetcode150.Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>题目要求Evaluate the value of an arithmetic expression in Reverse Polish Notation.
-
-Valid operators are +, -, *, &#x2F;. Each operand may be an integer or another expression.
-Some examples:  [&amp;#34;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-422_%E9%9A%8F%E6%9C%BA%E5%8F%96n%E4%B8%AA%E4%B8%8D%E7%9B%B8%E5%90%8C%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%88Lua%EF%BC%89%20%E6%9C%A8%E4%B9%8B%E5%AD%90%E5%8D%97/">
-<article class="md-text"><h2 class="post-title">随机取n个不相同的元素（Lua） 木之子南</h2><div class="excerpt"><p>随机取n个不相同的元素（Lua实现）
-一些逻辑逻辑需求要在一个长度为m数组中取出n个不同的元素（m &gt; n），一般第一想法是随机出一个下标，然后删除对应的元素，以此来取出不同的元素。本篇文章介绍一个不需要删除操作的方法。代码如下：
--- 假设长度m为10，随机取出个数为n=3
-local table = &#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 0&#125;
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-41_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%80)/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-41_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%80)/">
 <article class="md-text"><h2 class="post-title">深入 Lua Garbage Collector(一)</h2><div class="excerpt"><p>看到一个 Bob Nystrom 写的 C 语言实现的 Garbage Collector 
 借着这个小程序顺便深入地了解一下Lua的垃圾回收机制
 
@@ -149,11 +121,62 @@ Garbage Collector算法小结这是之前做的一点小笔记：
 C Garbage Collector首先还是先来看看这个 C 的基本的垃圾回收器
 采用的算法用的是经典的 Mark &amp; Sweep 算法
 在上面的笔记里面已经介绍的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-423_leetcode150.Evaluate%20Reverse%20Polish%20Notation/">
+<article class="md-text"><h2 class="post-title">leetcode150.Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>题目要求Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+
+Valid operators are +, -, *, &#x2F;. Each operand may be an integer or another expression.
+Some examples:  [&amp;#34;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-421_lua%E4%B8%89%E7%A7%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">
+<article class="md-text"><h2 class="post-title">lua三种字符串拼接性能分析</h2><div class="excerpt"><p>说明lua中提供了3中字符串拼接函数，测试在日常使用情况下，各种拼接字符串的性能对比。
+测试环境操作系统：Debian GNU/Linux 8CPU：Intel(R) Xeon(R) CPU E5-2640 v2 @ 2.00GHz内存：64Glua环境：LuaJIT-2.1.0-beta3 (测试的时候关闭jit)
+ 
+测试普通日常使用性能分析日常拼接字符串的时候一般都是多个已存在的变量，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-420_%5B%E8%BD%AC%5D%E5%9C%A8Lua%E4%B8%AD%E4%BD%BF%E7%94%A8gettext%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/">
+<article class="md-text"><h2 class="post-title">在Lua中使用gettext实现多语言支持</h2><div class="excerpt"><p>本文系转载，原文链接：http://zengrong.net/post/1986.htm感谢原作者无私分享。
+在Lua中使用gettext实现多语言支持
+2016-06-07更新：加入gettext包含的工具简介。
+
+
+GNU gettext 是一套优秀的国际化工具。在 linux 中被大量采用。wordpress 也使用 gettext 实现多语言支持。
+本文介绍如何在 quick-coc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-419_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua string hash 算法</h2><div class="excerpt"><p>我在前一篇文章介绍过下面这 3 个字符串拥有相同的 hash，会导致 Hash Dos 问题：
+
+&#34;0000000000000000000000000000000000&#34;
+&#34;f0l0l0w0m0e0n0t0w0i0t0t0e0r0?0:0)0&#34;
+&#34;x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0&#34;
+
+
+但是 Lua 并没有将...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-424_Unity%20Excel%E5%AF%BC%E8%A1%A8%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%AF%BC%E6%88%90Lua%EF%BC%8C%E6%94%AF%E6%8C%81%E5%B5%8C%E5%A5%97%E7%BB%93%E6%9E%84%20%E6%9C%A8%E4%B9%8B%E5%AD%90%E5%8D%97/">
 <article class="md-text"><h2 class="post-title">Unity Excel导表工具，导成Lua，支持嵌套结构 木之子南</h2><div class="excerpt"><p>为什么要使用导表工具？
 几乎所有游戏公司数据由策划来配置，程序负责逻辑，策划看不懂代码，excel是可以相对具象的让策划了解一个模块的数据配置，起到了策划和程序之间的桥梁作用，也可以方便策划对数据的把控。
 
 根据各个公司各个项目的不同，导表工具的输出形式不同，输出形式有：json，sqlite，txt，lua等，根据不同的项目需求，可以选不同的导表工具。本文章主要是介绍Excel导出Lua文...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-422_%E9%9A%8F%E6%9C%BA%E5%8F%96n%E4%B8%AA%E4%B8%8D%E7%9B%B8%E5%90%8C%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%88Lua%EF%BC%89%20%E6%9C%A8%E4%B9%8B%E5%AD%90%E5%8D%97/">
+<article class="md-text"><h2 class="post-title">随机取n个不相同的元素（Lua） 木之子南</h2><div class="excerpt"><p>随机取n个不相同的元素（Lua实现）
+一些逻辑逻辑需求要在一个长度为m数组中取出n个不同的元素（m &gt; n），一般第一想法是随机出一个下标，然后删除对应的元素，以此来取出不同的元素。本篇文章介绍一个不需要删除操作的方法。代码如下：
+-- 假设长度m为10，随机取出个数为n=3
+local table = &#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 0&#125;
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-426_cocos2dx%20lua%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6%E8%AF%A6%E8%A7%A3/">
+<article class="md-text"><h2 class="post-title">cocos2dx lua注册事件详解</h2><div class="excerpt"><p>最近在学习cocos2dx lua的时候，遇到了一些关于事件注册的逻辑！
+结合用户实际操作和游戏的真实需求，关于事件在游戏中还是使用非常多的，所以特此记录一下
+
+事件(源自网络)
+
+事件是可以被控件识别的操作。如按下确定按钮，选择某个单选按钮或者复选框。每一种控件有自己可以识别的事件，如窗体的加载、单击、双击等事件，编辑框（文本框）的文本改变事件，等等。
+
+
+
+事件是用户对窗口上各种组件的操...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-427_cocos2dx%20lua%20%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+<article class="md-text"><h2 class="post-title">cocos2dx lua 常见错误汇总与解决方案</h2><div class="excerpt"><p>cocos2dx lua开比较苦恼的是，没办法断点或者直接一步一步调试处理，但是幸好官方有点良心，给了一个打印的调试Log，我们可以使用它调试和查找对应的错误。
+这里就记录一些，个人学习和实战中遇到的一些错误和问题的总结
+
+
+not found view “ApiTest” in search paths “app.views”  
+ApiTest不在Views里面或者名字写错了，或者没有初...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-425_Ansible%20Role%20%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%20%E4%B9%8B%E3%80%90lua%E3%80%91/">
 <article class="md-text"><h2 class="post-title">Ansible Role 系统环境 之【lua】</h2><div class="excerpt"><p>
   Ansible Role: lua    
@@ -175,29 +198,6 @@ C Garbage Collector首先还是先来看看这个 C 的基本的垃圾回收器
 介绍
 
 Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-427_cocos2dx%20lua%20%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
-<article class="md-text"><h2 class="post-title">cocos2dx lua 常见错误汇总与解决方案</h2><div class="excerpt"><p>cocos2dx lua开比较苦恼的是，没办法断点或者直接一步一步调试处理，但是幸好官方有点良心，给了一个打印的调试Log，我们可以使用它调试和查找对应的错误。
-这里就记录一些，个人学习和实战中遇到的一些错误和问题的总结
-
-
-not found view “ApiTest” in search paths “app.views”  
-ApiTest不在Views里面或者名字写错了，或者没有初...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-421_lua%E4%B8%89%E7%A7%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">
-<article class="md-text"><h2 class="post-title">lua三种字符串拼接性能分析</h2><div class="excerpt"><p>说明lua中提供了3中字符串拼接函数，测试在日常使用情况下，各种拼接字符串的性能对比。
-测试环境操作系统：Debian GNU/Linux 8CPU：Intel(R) Xeon(R) CPU E5-2640 v2 @ 2.00GHz内存：64Glua环境：LuaJIT-2.1.0-beta3 (测试的时候关闭jit)
- 
-测试普通日常使用性能分析日常拼接字符串的时候一般都是多个已存在的变量，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-426_cocos2dx%20lua%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6%E8%AF%A6%E8%A7%A3/">
-<article class="md-text"><h2 class="post-title">cocos2dx lua注册事件详解</h2><div class="excerpt"><p>最近在学习cocos2dx lua的时候，遇到了一些关于事件注册的逻辑！
-结合用户实际操作和游戏的真实需求，关于事件在游戏中还是使用非常多的，所以特此记录一下
-
-事件(源自网络)
-
-事件是可以被控件识别的操作。如按下确定按钮，选择某个单选按钮或者复选框。每一种控件有自己可以识别的事件，如窗体的加载、单击、双击等事件，编辑框（文本框）的文本改变事件，等等。
-
-
-
-事件是用户对窗口上各种组件的操...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.271Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

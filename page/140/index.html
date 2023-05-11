@@ -110,34 +110,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-operating-system-facilities/">
-<article class="md-text"><h2 class="post-title">Lua操作系统工具库</h2><div class="excerpt"><p>Lua 操作系统工具库在很多应用中，我们都需要访问到操作系统级别的函数，操作系统库就给我们提供了这样的工具。下面的列表给出操作系统工具包提供的方法：  
-
-    
-        S.N.
-        函数与功能
-    
-    
-        1
-        os.clock()：以秒为单位返回程序运行所用 CPU 时间的近似值。
-    
-    
-        2
-  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-operators/">
-<article class="md-text"><h2 class="post-title">操作符</h2><div class="excerpt"><p>操作符操作符是用于告诉解释器执行特定的数学或逻辑运算的符号。Lua 语言有丰富的内置操作符，主要包括以下几类：  
-
-    算术运算操作符
-    关系运算操作符
-    逻辑运算操作符
-    其它操作符
-
-这篇教程将会依次介绍以上四类操作符。  
-
-算术去处操作符下面的表中列出了所有 Lua 语言支持的算术运算操作符。假设 A 变量的值为 10，B 变量的值为 20，则：  
-
-   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-repeat-until/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-repeat-until/">
 <article class="md-text"><h2 class="post-title">repeat...until 循环</h2><div class="excerpt"><p>#repeat…until 循环  
 与 for 和 while 循环中先检测条件再决定是否执行循环不同，repeat…until 先执行循环再检测条件判断是否再次执行。除了 repeat…until 循环一定会执行一次之外，repeat…until 与 while 循环很相似。  
 ##语法  
@@ -152,8 +125,40 @@ Lua 语言中 repeat…until 循环的语法如下：
     字符串操作
     表操作
     ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-overview/">
-<article class="md-text"><h2 class="post-title">概述</h2><div class="excerpt"><p>概述Lua 是用 C 语言开发的可扩展的轻量级编程语言。它起源于 1993 年由 Roberto lerusalimschy,Luiz Henrique de Figueiredo 与 Waddemar Celes 领导的一个内部项目。设计者的初衷是希望 Lua 可以成为一款整合 C 语言代码以及其它传统语言代码的软件。这种整合会带来很多好处，它让你不需要重复做 C 语言已经做的很好的工作，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-object-oriented/">
+<article class="md-text"><h2 class="post-title">Lua面向对象</h2><div class="excerpt"><p>Lua 面向对象面向对象概述面向对象编程技术是目前最常用的编程技术之一。目前大量的编程语言都支持面向对象的特性： 
+
+    C++
+    Java
+    Objective-C
+    Smalltalk
+    C#
+    Ruby
+
+
+面向对象的特征
+    类（class）：类是可以创建对象，并为状态（成员变量）提供初值及行为实现的可扩展模板。
+    对象（objects）：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-nested-loop/">
+<article class="md-text"><h2 class="post-title">Lua循环嵌套</h2><div class="excerpt"><p>#Lua 循环嵌套  
+Lua 编程语言允许使用循环嵌套。接下来这一节中将用例子来说嵌套循环的使用方法：  
+##语法  
+for 循环嵌套的语法如下：  
+1234567891011for init,max/min value, incrementdo   for init,max/min value, increment   do      statement(s)   end   st...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.092Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-decision-making/">
+<article class="md-text"><h2 class="post-title">Lua判断</h2><div class="excerpt"><p>决策决策结构要求程序开发人员设置一个或多测试或计算条件。如果条件计算结果为真，则执行一个或多个语句；如果条件为假，则执行另外的语句。 
+下面是大多数程序语言中的决策结构的一般形式：  
+  
+Lua 语言中所有布尔真和非 nil 值都当作真；把所有的布尔假和 nil 作为假。请注意，Lua 中的零会被当作真，而其它大部分语言会将零当作假。
+Lua 语言提供了如下几类决策语句。点击下面的链接查...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-database-access/">
+<article class="md-text"><h2 class="post-title">Lua数据库访问</h2><div class="excerpt"><p>Lua 数据库访问简单的数据操作，我们用文件就可以处理。但是，某些时候文件操作存在性能、扩展性等问题。这时候，我们就需要使用数据库。LuaSQL 是一个提供数据库操作的库，它支持多种 SQL 数据库的操作。包括：  
+
+    SQLite
+    MySQL
+    ODBC
+  
+在本教程中，我们会讲解用 Lua 语言对 MySQL 数据库与 SQLite 数据库进行操作。这些操作具有一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-debugging/">
 <article class="md-text"><h2 class="post-title">Lua调试</h2><div class="excerpt"><p>Lua 调试Lua 提供一个调试库，这个库中提供了创建自己的调试器所需的所有原语函数。虽然，Lua 没有内置调试器，但是开发者们为 Lua 开发了许多的开源调试器。 
 Lua 调试库包括的函数如下表所示。
@@ -169,14 +174,10 @@ Lua 调试库包括的函数如下表所示。
 <article class="md-text"><h2 class="post-title">Lua运行环境</h2><div class="excerpt"><p>Lua 运行环境本地环境搭建在本地搭建 Lua 编程语言的开发运行环境，你需要在你的计算机上安装如下三个软件：(1) 文本编辑器。(2)  Lua 解释器。（3）Lua 编译器。  
 文本编辑器文本编辑器用来编辑你的程序代码。有如下几款常用的文本编辑器软件：Windows notepad、Brief、Epsilon、EMACS、vim&#x2F;vi。
 在不同的操作系统中有各自不同的编辑器，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-database-access/">
-<article class="md-text"><h2 class="post-title">Lua数据库访问</h2><div class="excerpt"><p>Lua 数据库访问简单的数据操作，我们用文件就可以处理。但是，某些时候文件操作存在性能、扩展性等问题。这时候，我们就需要使用数据库。LuaSQL 是一个提供数据库操作的库，它支持多种 SQL 数据库的操作。包括：  
-
-    SQLite
-    MySQL
-    ODBC
-  
-在本教程中，我们会讲解用 Lua 语言对 MySQL 数据库与 SQLite 数据库进行操作。这些操作具有一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-file-io/">
+<article class="md-text"><h2 class="post-title">Lua文件I/O</h2><div class="excerpt"><p>Lua 文件 I&#x2F;OLua 的 IO 库用于读取或操作文件。Lua IO 库提供两类文件操作，它们分别是隐式文件描述符(implict file descriptors)和显式文件描述符(explicit file descriptors)。
+在接下来的例子的，我们会用到一个示例文件 test.lua，文件内容如下：  
+123456-- sample test.lua-- sam...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-error-handling/">
 <article class="md-text"><h2 class="post-title">Lua错误处理</h2><div class="excerpt"><p>Lua 错误处理为什么需要错误处理机制在真实的系统中程序往往非常复杂，它们经常涉及到文件操作、数据库事务操作或网络服务调用等，这个时候错误处理就显得非常重要。不关注错误处理可能在处理诸如涉密或金融交易这些业务时造成重大的损失。无论什么时候，程序开发都要求小心地做好错误处理工作。在 Lua 中错误可以被分为两类：  
 
@@ -185,12 +186,6 @@ Lua 调试库包括的函数如下表所示。
 
 
 语法错误语法错误是由于不正确的使...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-decision-making/">
-<article class="md-text"><h2 class="post-title">Lua判断</h2><div class="excerpt"><p>决策决策结构要求程序开发人员设置一个或多测试或计算条件。如果条件计算结果为真，则执行一个或多个语句；如果条件为假，则执行另外的语句。 
-下面是大多数程序语言中的决策结构的一般形式：  
-  
-Lua 语言中所有布尔真和非 nil 值都当作真；把所有的布尔假和 nil 作为假。请注意，Lua 中的零会被当作真，而其它大部分语言会将零当作假。
-Lua 语言提供了如下几类决策语句。点击下面的链接查...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.091Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

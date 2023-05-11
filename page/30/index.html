@@ -110,40 +110,54 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-737_LuCI%E7%9A%84uci%E4%BD%BF%E7%94%A8%EF%BC%88lua%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">LuCI的uci使用（lua）</h2><div class="excerpt"><p>add123local uci = require(&#34;luci.model.uci&#34;).cursor()uci:add(&#34;wireless&#34;, &#34;wifi-iface&#34;)uci:commit(&#34;wireless&#34;)
-actual result：
-config wifi-iface 一句会添加至 /etc/config/wirel...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.301Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-736_Rstudio%E7%BC%96%E8%AF%91Rmd%E6%8A%A5%E9%94%99%EF%BC%9Athe%20fontspec%20package%20requires%20eithe/">
-<article class="md-text"><h2 class="post-title">Rstudio编译Rmd报错：the fontspec package requires either XeTeX or LuaTeX.</h2><div class="excerpt"><p>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-742_%E5%9F%BA%E4%BA%8EOpenResty%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENginx+LUA%E5%B9%B6%E5%AE%9E%E7%8E%B0%E8%AF%B7%E6%B1%82%E5%88%86%E5%8F%91%E7%9A%84%E5%8F%8C%E5%B1%82Nginx%E6%9E%B6%E6%9E%84%E7%AD%96%E7%95%A5/">
+<article class="md-text"><h2 class="post-title">基于OpenResty安装配置Nginx+LUA并实现请求分发的双层Nginx架构策略</h2><div class="excerpt"><p>台CentOS6.x192.168.1.210192.168.1.211192.168.1.212网络拓扑210和211作为应用层web服务器212作为网络请求分发代理服务器
+Step1:安装Linux依赖1yum install -y readline-devel pcre-devel openssl-devel gcc
+Step2:安装Nginx Openresty12345678910...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.301Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-741_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(3)%20%E5%85%B3%E4%BA%8Epairs%E5%92%8Cipairs/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记(3) 关于pairs和ipairs</h2><div class="excerpt"><p>[TOC]
 
-对于一些常规的报告，我一般是会写一个脚本来自动运行、生成格式化的模板。然后通过 R 的软件包 knitr 来实现自动化报告效果。这样可以十分方便的把数据分析与数据报告结合在一起，如果在分析端的脚本有变化，我们只需要把主要精力放在修改 R 脚本就可以了，而在报告端，在每次生成报告时会自动根据分析脚本生成的数据进行更新，从而完成「时时更新与可重复研究」的伟大目标。
-比如，我们公司目前要求每周...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.301Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+
+
+pairs
+
+遍历table
+
+local tbTestPairs =&#123;
+    [1] = 1,
+    nTest_1 = 2,
+    szTest = &#34;test&#34;,
+    tbTest = &#123;&#125;,
+    nTest_2,
+&#125;
+
+for k, v in pairs(tbTestPairs) do    pr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.301Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-722_FFLIB%E4%B9%8BFFLUA%E2%80%94%E2%80%94C++%E5%B5%8C%E5%85%A5Lua%E6%89%A9%E5%B1%95Lua%E5%88%A9%E5%99%A8/">
+<article class="md-text"><h2 class="post-title">FFLIB之FFLUA——C++嵌入Lua&扩展Lua利器</h2><div class="excerpt"><p>摘要:在使用C++做服务器开发中，经常会使用到脚本技术，Lua是最优秀的嵌入式脚本之一。Lua的轻量、小巧、概念之简单，都使他变得越来越受欢迎。本人也使用过python做嵌入式脚本，二者各有特点，关于python之后会写相关的文章，python对于我而言更喜欢用来编写工具，我前边一些相关的算法也是用python来实现的。今天主要讲Lua相关的开发技术。Lua具有如下特点：
+
+Lua 拥有虚拟...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-723_C++%E4%B8%8ELua%E6%9C%AC%E8%B4%A8%E5%8E%9F%E5%A7%8B%E4%BA%A4%E4%BA%92API/">
 <article class="md-text"><h2 class="post-title">C++与Lua本质原始交互API</h2><div class="excerpt"><p>
           
             
           &lt;a href=&quot;/2015/11/10/kmp/&quot; rel=&quot;next&quot; title=&quot;KMP查找子字符串&quot;&gt;
             &lt;i class=&quot;fa fa-chevron-left&quot;&gt;&lt;/i&gt; ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-722_FFLIB%E4%B9%8BFFLUA%E2%80%94%E2%80%94C++%E5%B5%8C%E5%85%A5Lua%E6%89%A9%E5%B1%95Lua%E5%88%A9%E5%99%A8/">
-<article class="md-text"><h2 class="post-title">FFLIB之FFLUA——C++嵌入Lua&扩展Lua利器</h2><div class="excerpt"><p>摘要:在使用C++做服务器开发中，经常会使用到脚本技术，Lua是最优秀的嵌入式脚本之一。Lua的轻量、小巧、概念之简单，都使他变得越来越受欢迎。本人也使用过python做嵌入式脚本，二者各有特点，关于python之后会写相关的文章，python对于我而言更喜欢用来编写工具，我前边一些相关的算法也是用python来实现的。今天主要讲Lua相关的开发技术。Lua具有如下特点：
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-725_Lua%20%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%20/">
+<article class="md-text"><h2 class="post-title">Lua 正确处理可变参数</h2><div class="excerpt"><p>为了在 Lua 里处理可变参数，我们可能会写下面这样的代码：
 
-Lua 拥有虚拟...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-726_%5B%E8%AF%91%5DPerformance%20evaluation%20of%20MQTT%20and%20CoAP%20via%20a%20c/">
-<article class="md-text"><h2 class="post-title">Performance evaluation of MQTT and CoAP via a common middleware</h2><div class="excerpt"><p>　　Performance evaluation of MQTT and CoAP via a common middleware（全文翻译）
+local function args(...)
+    if next(&#123;...&#125;) then
+        for _, v in ipairs&#123;...&#125; do
+            print(v)
+        end
+    else
+        print(&#34;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-727_lua%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
+<article class="md-text"><h2 class="post-title">lua简明教程</h2><div class="excerpt"><p>前言lua是一种轻量小巧的脚本语言。
+lua特性1.轻量级，编译后不过200K2.可扩展性3.自动内存管理4.支持面向过程编程和函数式编程……
 
-12345678910Dinesh ThangavelFaculty of Engineering National University of SingaporeXiaoping MaSense and Sense-Abilities, Inst...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-728_LUAWAF/">
-<article class="md-text"><h2 class="post-title">LUAWAF</h2><div class="excerpt"><p>LUAWAFLUAWAF是我编写的一个针对Nginx的Web应用提供安全防护的Web应用防火墙。
-支持平台目前WAF只支持Windows平台
-安装1，使用本软件最好直接在OpenResty官网下载OpenResty，OpenResty自身带有Nginx
-2，将该WAF下载到OpenResty的lua目录下，解压即可
-3，日志读写的文件必须给与相应的权限
-使用说明1，需要在nginx.conf...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-729_nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lua%E6%A8%A1%E5%9D%97/">
-<article class="md-text"><h2 class="post-title">nginx编译安装lua模块</h2><div class="excerpt"><p>1. 获取nginx源代码1git clone https://github.com/nginx/nginx.git nginx-release
-2. 下载安装LuaJIT1234git clone https://github.com/LuaJIT/LuaJIT.gitcd LuaJITmake make install
-3. 下载lua-nginx-module12wget https:...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+lua应用场景1.游戏开发2.独立应用脚本3.web应用脚本4.扩展和数据库插件5.安全系统
+安装使用安装问题1.编译lua时，提示1lua.c:80:31: fatal error: readline/readline.h: No such fi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-72_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(4)%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AE%9E%E7%8E%B0/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记(4)面向对象实现</h2><div class="excerpt"><p>百度搜索一下，给出出的解决方案和学习帖子很多，可是我还是有很多的问题！
 
@@ -168,15 +182,21 @@ Lua 拥有虚拟...</p></div><div class="meta cap"><span class="cap" id="post-me
 
 
   参考[1]：参考同事的方法...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-729_nginx%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lua%E6%A8%A1%E5%9D%97/">
+<article class="md-text"><h2 class="post-title">nginx编译安装lua模块</h2><div class="excerpt"><p>1. 获取nginx源代码1git clone https://github.com/nginx/nginx.git nginx-release
+2. 下载安装LuaJIT1234git clone https://github.com/LuaJIT/LuaJIT.gitcd LuaJITmake make install
+3. 下载lua-nginx-module12wget https:...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-732_Luajit%E5%8F%8D%E7%BC%96%E8%AF%91%E4%B9%8B%E6%8E%A2%E7%B4%A2%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Luajit反编译之探索记</h2><div class="excerpt"><p>
+  
+  由于工作需求，要反编译一个luajit编译过的文件。百度反编译luajit，得到的信息是目前没有此类成熟的反编译器。所以，如果你用luajit编译了代码，基本上不用担心被别人破解（2015.12）。
+
+虽然没有luaj反编译器，但是不代表反编译不可能。至少，人肉反编译是可以的，哈。因为我只需要反编译一个文件，所以采取人肉的方式，也许是可行的。
+
+首先，在github上面找到了唯一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-730_Lua%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
 <article class="md-text"><h2 class="post-title">Lua模块与包 · 花生肉泥</h2><div class="excerpt"><p>lua的模块是由变量，函数等已知元素组成的table，因此创建一个模块很简单，就是创建一个table，然后把需要导出的常量，函数放入其中，最后返回这个table就行。
 例：123456789101112131415161718192021-- 定义一个名为module的模块module = {}-- 定义一个常量module.constant = &#34;这是一个常量&#34;-- 定义一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-727_lua%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">lua简明教程</h2><div class="excerpt"><p>前言lua是一种轻量小巧的脚本语言。
-lua特性1.轻量级，编译后不过200K2.可扩展性3.自动内存管理4.支持面向过程编程和函数式编程……
-
-lua应用场景1.游戏开发2.独立应用脚本3.web应用脚本4.扩展和数据库插件5.安全系统
-安装使用安装问题1.编译lua时，提示1lua.c:80:31: fatal error: readline/readline.h: No such fi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

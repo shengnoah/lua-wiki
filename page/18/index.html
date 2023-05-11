@@ -110,25 +110,13 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-842_lua%E8%AF%AD%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">lua语法</h2><div class="excerpt"><p>lua特性开源，轻量级，c语言编写实现，实现面向对象有点绕，执行效率高
-lua开发环境
-linux
-123456789101112131415-- 下载lua包、解压wget -c http://www.lua.org/ftp/lua-5.3.0.tar.gztar zxvf lua-5.3.0.tar.gz-- 下载libreadline相关支持sudo apt-get install l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-843_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F/">
-<article class="md-text"><h2 class="post-title">Lua学习笔记——时间和日期</h2><div class="excerpt"><p>思维导图首先我们看一张思维导图：
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-844_%E5%9F%BA%E4%BA%8ELua%E7%9A%84State%20Pattern/">
+<article class="md-text"><h2 class="post-title">基于Lua的State Pattern</h2><div class="excerpt"><p>代码来自于最近写的Pacman，更多请查看 – https://github.com/bennychen/Moai-based-Pacman
 
-备注：
-1. 纪元：一个固定日期，在 POSIX 和 Windows 平台中这个固定日期是 Jan 01, 1970, 00:00 UTC。
-2. 日期表：在 lua 中表示时间的一种方式，这个表具有以下几个重要字段：year、month、day、hour、        min、sec、wday、yday、isdst。
+class.lua实现了在Lua中创建类的模拟，非常方便。class.lua参考自http://lua-users.org/wiki/SimpleLuaClasses
 
-wday：本周中的第几天（第一天...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-848_Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9E%E7%8E%B0/">
-<article class="md-text"><h2 class="post-title">Lua数据结构的实现</h2><div class="excerpt"><p>
-《Lua程序设计》笔记：高效地使用table来实现一些传统的数据结构
-
-1 数组Lua库和长度操作符都遵循索引从1开始的约定。
-2 多维数组123456789101112131415mt = {}for i=1, N do    mt[i] = {}    for j=1, M do        mt[i][j] = 0    endend--合并索引（i*常量 + j）mt = {}f...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+-- class.lua
+-- Compatible with Lua 5.1 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-845_Lua%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">Lua笔记</h2><div class="excerpt"><p>最近使用Lua过程中的一些笔记记录，零零散散的，主要有以下这么些内容：
 
@@ -142,24 +130,31 @@ function read_only(inputTable)
 &lt;span class=&quot;kd&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span cla...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-847_luajava%E7%9A%84%E9%8C%AF%E8%AA%A4%E4%BF%A1%E6%81%AF%E8%BC%B8%E5%87%BA/">
 <article class="md-text"><h2 class="post-title">luajava的錯誤信息輸出</h2><div class="excerpt"><p>最近在填新坑, 打算用lua作為腳本語言, 於是選擇了luajava來跑腳本.始終我對lua不熟, 錯誤是難免的了, 不料luajava居然沒有輸出錯誤信息orz(事實上連普通的輸出都沒找到, 反正我直接寫了個print函數…)既然找不到輸出, 那我只好想辦法把luajava的錯誤信息轉去調用自己寫的print了, 於是我想到了或許可以像Java中的try ... catch ...來攔住錯...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-84_Wireshark%E9%85%8D%E7%BD%AELua%E6%8F%92%E4%BB%B6/">
-<article class="md-text"><h2 class="post-title">Wireshark配置Lua插件</h2><div class="excerpt"><p>版权声明：本文为 Jiawei Xu 于2019年4月28日所写，未经允许不得转载。
-配置方法在wireshark的安装目录下面编辑init.lua文件，例如mac上：
-1vim /Applications/Wireshark.app/Contents/Resources/share/wireshark/init.lua
-最后一行如果没有加添加，否则修改：dofile(&#34;YOURFI...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-842_lua%E8%AF%AD%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">lua语法</h2><div class="excerpt"><p>lua特性开源，轻量级，c语言编写实现，实现面向对象有点绕，执行效率高
+lua开发环境
+linux
+123456789101112131415-- 下载lua包、解压wget -c http://www.lua.org/ftp/lua-5.3.0.tar.gztar zxvf lua-5.3.0.tar.gz-- 下载libreadline相关支持sudo apt-get install l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-848_Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">Lua数据结构的实现</h2><div class="excerpt"><p>
+《Lua程序设计》笔记：高效地使用table来实现一些传统的数据结构
+
+1 数组Lua库和长度操作符都遵循索引从1开始的约定。
+2 多维数组123456789101112131415mt = {}for i=1, N do    mt[i] = {}    for j=1, M do        mt[i][j] = 0    endend--合并索引（i*常量 + j）mt = {}f...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-849_%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3xLua%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86/">
 <article class="md-text"><h2 class="post-title">深入理解xLua热更新原理</h2><div class="excerpt"><p>热更新简介热更新是指在不需要重新编译打包游戏的情况下，在线更新游戏中的一些非核心代码和资源，比如活动运营和打补丁。热更新分为资源热更新和代码热更新两种，代码热更新实际上也是把代码当成资源的一种热更新，但通常所说的热更新一般是指代码热更新。资源热更新主要通过AssetBundle来实现，在Unity编辑器内为游戏中所用到的资源指定AB包的名称和后缀，然后进行打包并上传服务器，待游戏运行时动态加...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-850_Survey%20of%20Federated%20Learning%20and%20Idea%20Evaluation/">
 <article class="md-text"><h2 class="post-title">Survey of Federated Learning and Idea Evaluation</h2><div class="excerpt"><p>第一类是联邦学习开创者讲述联邦学习problem setting，以及几个常用的算法的文章，这类工作目前显然不能再做了，但需要阅读。
 Federated Optimization: Distributed Optimization Beyond the Datacenter这篇文章是联邦学习的雏形，在2015年就被提交至arxiv上，所使用的算法与现版本有所区别，与之前的两个学习算法有相当大...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-82_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">Lua程序设计（6）</h2><div class="excerpt"><p>Lua中的数据结构：数组、链表、队列等
-
-数组：在Lua语言中使用整数来索引表就可以实现数组，因此数组的大小不用非得是固定的，而是可以按需增长的。
-在Lua语言中一般以1作为数组的起始索引。
-矩阵及多维数组：使用一个不规则数组：即数组的数组，一个所有元素均是另一个表的表。
-这种矩阵在创建时必须显式的创建每一行，一方面更加具体，另一方面增加了更多的灵活性。
-将两个索引合并为一个：我们通过将第一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.310Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-84_Wireshark%E9%85%8D%E7%BD%AELua%E6%8F%92%E4%BB%B6/">
+<article class="md-text"><h2 class="post-title">Wireshark配置Lua插件</h2><div class="excerpt"><p>版权声明：本文为 Jiawei Xu 于2019年4月28日所写，未经允许不得转载。
+配置方法在wireshark的安装目录下面编辑init.lua文件，例如mac上：
+1vim /Applications/Wireshark.app/Contents/Resources/share/wireshark/init.lua
+最后一行如果没有加添加，否则修改：dofile(&#34;YOURFI...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.311Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-828_%E5%AE%89%E5%8D%93%E4%B8%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E8%BF%90%E8%A1%8C64%E4%BD%8DLuaJIT%E5%AD%97%E8%8A%82%E7%A0%81/">
+<article class="md-text"><h2 class="post-title">安卓上为什么不能运行64位LuaJIT字节码</h2><div class="excerpt"><p>
+      
+    &lt;h3 id=&quot;安卓上为什么不能运行64位LuaJIT字节码&quot;&gt;&lt;a href=&quot;#安卓上为什么不能运行64位LuaJIT字节码&quot; class=&quot;headerlink&quot; title=&quot;安卓上为什么不能运行64位LuaJIT字节码&quot;&gt;&lt;/a&gt;安卓上为什么不...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.310Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

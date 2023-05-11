@@ -115,13 +115,10 @@
     12345# .bashrcexport OPENRESTY=/usr/local/Cellar/openresty/1.13.6.1export LUAJIT_LIB=$OPENRESTY/luajit/libexport LUAJIT_INC=$OPENRESTY/luajit/include/luajit-2.1
 下载 luarocks 解压：
 12345678./confi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1064_lua%E4%B8%B2%E8%A1%8C%E5%8C%96_%E5%BA%8F%E5%88%97%E5%8C%96serialization%EF%BC%88%E4%B8%B2%E8%A1%8C%E6%B5%81_%E5%AD%97%E8%8A%82%E6%B5%81%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">lua串行化_序列化serialization（串行流_字节流）</h2><div class="excerpt"><p>杂乱字符串转义显示处理-- 匹配符方式 string.format
--- [=[...]=]方式
-a = &#39;a &#34;program lua [[ ]]]]&#34;&#39;
-print(string.format(&#39;%q&#39;,a))
-serialize(a) -- [=[a &#34;program lua [[ ]]]]&#34;]=]
-number、stir...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1068_pil.29lua%E4%B8%AD%E8%B0%83%E7%94%A8c%E5%87%BD%E6%95%B0/">
+<article class="md-text"><h2 class="post-title">pil.29lua中调用c函数</h2><div class="excerpt"><p>我们在说Lua调用C函数的时候，不是说Lua可以调用所有的C函数，我们必须在传递参数和获得结果之间遵从一些协议。同时，必须要注册C函数，也就是说，要以合适的方式给Lua这个函数的地址。
+我们先来看一个简单的函数：
+static int (lua_State *L) {	double d = lua_tonumber(L, 1);	lua_pushnumber(L, sin(d));	retu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.231Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1041_lua/">
 <article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>
             Contents
@@ -131,6 +128,18 @@ number、stir...</p></div><div class="meta cap"><span class="cap" id="post-meta"
     &lt;/div&gt;
     
     &lt;h5 id=&quot;command&quot;&gt;&lt;a href=&quot;#command&quot; class=&quot;headerlink&quot; title=&quot;command&quot...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1044_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>lua语法相对简洁它最大的特点就是用同步的代码逻辑实现非阻塞的调用，其次它有单进程内的 LRU cache 和进程间的 share DICT cache，而且它是揉合 nginx 和 LuaJIT 而产生的
+参考资料openresty最佳实践
+
+
+            &lt;hr/&gt;
+
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1042_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>  Lua语句有以下几种循环处理方式：   1 ）  while循环   2 ）for    循环   3 ）repeat…until   4 ） 循环的嵌套
+  Lua 支持的循环控制语句：     break语句
+  Lua 提供的控制结构语句：    1）if语句    2）if…else 语句    3）if嵌套语句</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1043_mac%20%E4%B8%8A%E5%AE%89%E8%A3%85lua/">
 <article class="md-text"><h2 class="post-title">mac 上安装lua</h2><div class="excerpt"><p>我使用的版本是5.3.3,在命令端按照以下输入：
 Step1:打开命令终端
@@ -141,14 +150,6 @@ Step5:make macosx test
 Step6:sudo make install
 
 执行完S...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1044_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>lua语法相对简洁它最大的特点就是用同步的代码逻辑实现非阻塞的调用，其次它有单进程内的 LRU cache 和进程间的 share DICT cache，而且它是揉合 nginx 和 LuaJIT 而产生的
-参考资料openresty最佳实践
-
-
-            &lt;hr/&gt;
-
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1045_matrix%20transform%20for%20luastg/">
 <article class="md-text"><h2 class="post-title">matrix transform for luastg</h2><div class="excerpt"><p>Another time copy from css (first attempt is ease function)
 
@@ -158,6 +159,16 @@ From css3 animation, we have matrix, matrix3d method to describe transform of a 
 
 For 2d image:
 0. translate, ske...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1048_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E8%BF%AD%E4%BB%A3%E5%92%8C%E9%97%AD%E5%8C%85/">
+<article class="md-text"><h2 class="post-title">lua学习笔记：迭代和闭包</h2><div class="excerpt"><p>
+                
+                    
+                    JVM学习笔记11：synchronized的实现
+                    
+                        编程语言
+                    
+                
+            </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1046_luaframework%20puremvc/">
 <article class="md-text"><h2 class="post-title">luaframework puremvc</h2><div class="excerpt"><p>
                 
@@ -168,22 +179,8 @@ For 2d image:
                     
                 
             </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1042_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>  Lua语句有以下几种循环处理方式：   1 ）  while循环   2 ）for    循环   3 ）repeat…until   4 ） 循环的嵌套
-  Lua 支持的循环控制语句：     break语句
-  Lua 提供的控制结构语句：    1）if语句    2）if…else 语句    3）if嵌套语句</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1047_xlua%E6%91%98%E8%A6%81/">
-<article class="md-text"><h2 class="post-title">xlua摘要</h2><div class="excerpt"><p>
-                
-                    
-                    JVM学习笔记11：synchronized的实现
-                    
-                        编程语言
-                    
-                
-            </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1048_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E8%BF%AD%E4%BB%A3%E5%92%8C%E9%97%AD%E5%8C%85/">
-<article class="md-text"><h2 class="post-title">lua学习笔记：迭代和闭包</h2><div class="excerpt"><p>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1049_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%87%BD%E6%95%B0%E6%B7%B1%E5%85%A5/">
+<article class="md-text"><h2 class="post-title">lua学习笔记：函数深入</h2><div class="excerpt"><p>
                 
                     
                     JVM学习笔记11：synchronized的实现

@@ -110,18 +110,8 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1049_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%87%BD%E6%95%B0%E6%B7%B1%E5%85%A5/">
-<article class="md-text"><h2 class="post-title">lua学习笔记：函数深入</h2><div class="excerpt"><p>
-                
-                    
-                    JVM学习笔记11：synchronized的实现
-                    
-                        编程语言
-                    
-                
-            </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1051_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">lua学习笔记：基本语法</h2><div class="excerpt"><p>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1047_xlua%E6%91%98%E8%A6%81/">
+<article class="md-text"><h2 class="post-title">xlua摘要</h2><div class="excerpt"><p>
                 
                     
                     JVM学习笔记11：synchronized的实现
@@ -145,22 +135,28 @@
 
 lua全局环境变量保存在_G的table中,内容如下：
 123456789101112131415161718192021222324252627282930313233343536373839assert  function: 0collectgarbage...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1052_do%20something%20valuable/">
-<article class="md-text"><h2 class="post-title">do something valuable</h2><div class="excerpt"><p>真诚地重复做不变、简单的事情</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1051_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">lua学习笔记：基本语法</h2><div class="excerpt"><p>
+                
+                    
+                    JVM学习笔记11：synchronized的实现
+                    
+                        编程语言
+                    
+                
+            </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1054_leetcode%20%20150%20evaluate%20reverse%20polish%20notation/">
 <article class="md-text"><h2 class="post-title">leetcode  150 evaluate reverse polish notation</h2><div class="excerpt"><p>Evaluate the value of an arithmetic expression in Reverse Polish Notation.
 Valid operators are +, -, *, /. Each operand may be an integer or another expression.
 Note:
 
 Division between two integers...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1052_do%20something%20valuable/">
+<article class="md-text"><h2 class="post-title">do something valuable</h2><div class="excerpt"><p>真诚地重复做不变、简单的事情</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1053_evaluate/">
 <article class="md-text"><h2 class="post-title">evaluate</h2><div class="excerpt"><p>Evaluate the value of an arithmetic expression in Reverse Polish Notation.Valid operators are+,-,*,/. Each operand may be an integer or another expression.Some examples:
 
  [“2”, “1”, “+”, “3”, ““] ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.230Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1029_lua%E9%AA%9A%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/">
-<article class="md-text"><h2 class="post-title">lua骚操作一览</h2><div class="excerpt"><p>前言做了三年的游戏开发，其中有两年都在使用Lua这一脚本语言，想着是时候写点什么东西输出一下，算是给个交代。本文既不是讲Lua入门，也不会讲到Lua虚拟机那么深，读者尽可放大心随意看。
-类的实现原生Lua是不支持面向对象编程的。那怎么办呢？使用prototype模式即可。
-首先读者需要知道Lua的原方法和原表这一知识点。如果接触过c++或者c#的同学应该知道我们可以对一些类的操作做重载(ov...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.229Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1030_txlualesson/">
 <article class="md-text"><h2 class="post-title">txlualesson</h2><div class="excerpt"><p>
                         
@@ -170,6 +166,10 @@ TXLuaLesson
                 &lt;/div&gt;
 
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.229Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1029_lua%E9%AA%9A%E6%93%8D%E4%BD%9C%E4%B8%80%E8%A7%88/">
+<article class="md-text"><h2 class="post-title">lua骚操作一览</h2><div class="excerpt"><p>前言做了三年的游戏开发，其中有两年都在使用Lua这一脚本语言，想着是时候写点什么东西输出一下，算是给个交代。本文既不是讲Lua入门，也不会讲到Lua虚拟机那么深，读者尽可放大心随意看。
+类的实现原生Lua是不支持面向对象编程的。那怎么办呢？使用prototype模式即可。
+首先读者需要知道Lua的原方法和原表这一知识点。如果接触过c++或者c#的同学应该知道我们可以对一些类的操作做重载(ov...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.229Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1031_evaluate%20division/">
 <article class="md-text"><h2 class="post-title">evaluate division</h2><div class="excerpt"><p>
 问题来源

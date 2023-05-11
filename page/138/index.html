@@ -110,13 +110,38 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua/2016-06-01-Home/">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua基础教程permalink: &#x2F;lua_guide&#x2F;lua教程&#x2F;Home&#x2F;
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-strings/">
+<article class="md-text"><h2 class="post-title">Lua字符串</h2><div class="excerpt"><p>Lua 字符串字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。
+
+    单引号字符串
+    双引号字符串
+    [[和]]之间的字符串
+  
+
+上面三种初始化方式的示例如下：  
+1234567891011string1 = &quot;Lua&quot;print(&quot;\&quot;String 1 is\&quot;&quot;,str...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-while/">
+<article class="md-text"><h2 class="post-title">Lua的while循环</h2><div class="excerpt"><p>#Lua while 循环  
+在 Lua 语言中，只要 while 循环条件为真，while 语句就会一直执行，直到 while 循环条件为假为止。  
+#语法  
+Lua 语言中 while 循环的语法如下所示：  
+1234567891011121314151617while(condition)do   statement(s)end```  其中，statement(s) 可能只是...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-11-for/">
+<article class="md-text"><h2 class="post-title">Lua中的for循环</h2><div class="excerpt"><p>1
+Lua 中的 for 循环for 循环控制结构可以让你高效地写出需要执行特定次数的循环代码。  
+语法Lua 语言中 for 循环的语法如下：  
+1234for init,max/min value, incrementdo   statement(s)end
+
+下面是 for 循环执行的流程：  
+
+    init 首先执行并且只执行一次。在这一步骤中，你需要声明并初始化循环控制变...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua/2016-06-01-README/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 中文指南permalink: &#x2F;lua_guide&#x2F;README&#x2F;Lua 语言是基于 C 语言之上的开源编程语言。它的价值在于其跨平台的特性，从大型服务器系统到小型移动应用都可以看到它的身影。
 这篇教程不仅包括 Lua 编程语言的基本知识，还包括 Lua 语言在各类应用场景中的应用。  
 适用人群这篇教程主要是为 Lua 语言的初学者准备的。不过，其中也...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua/2016-06-01-Home/">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua基础教程permalink: &#x2F;lua_guide&#x2F;lua教程&#x2F;Home&#x2F;
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/2023/04/26/lua/2016-06-01-TOC/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>
 lua 基础 
@@ -161,41 +186,15 @@ Web 编程
 <article class="md-text"><h2 class="post-title">Lua基本语法</h2><div class="excerpt"><p>基本语法Lua 学起来非常简单。现在，让我们开始创建我们的第一个 Lua 程序吧！  
 第一个 Lua 程序Lua 提供交互式编程模式。在这个模式下，你可以一条一条地输入命令，然后立即就可以得到结果。你可以在 shell 中使用 lua -i 或者 lua 命令启动。输入命令后，按下回车键，就启动了交互模式，显示如下：  
 1234567$ lua -i $ Lua 5.1.4  Copyr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/coroutines/">
-<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
-上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/break/">
 <article class="md-text"><h2 class="post-title">Break语句</h2><div class="excerpt"><p>#break 语句  
 程序在解释执行过程中，在循环内遇到 break 语句时，循环将立即结束。程序将循环语句的下一条语句开始执行。如果你是在嵌套循环（即，一个循环内还有一个循环语句）内使用 break 语句，break 只结束内层循环，并从该代码块后的第一条语句处开始执行。  
 ##语法  
 break 语句的语法如下所示：  
 12345678break;```  ##流程图：  ![]...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/types/">
-<article class="md-text"><h2 class="post-title">数据类型</h2><div class="excerpt"><p>数据类型Lua 是动态类型编程语言，变量没有类型，只有值才有类型。值可以存储在变量中，作为参数传递或者作为返回值。尽管在 Lua 中没有变量数据类型，但是值是有类型的。下面的列表中列出了数据类型： 
-
-    
-        值类型
-        描述
-    
-    
-        nil
-        用于区分值是否有数据，nil 表示没有数据。
-    
-    
-     ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-strings/">
-<article class="md-text"><h2 class="post-title">Lua字符串</h2><div class="excerpt"><p>Lua 字符串字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。
-
-    单引号字符串
-    双引号字符串
-    [[和]]之间的字符串
-  
-
-上面三种初始化方式的示例如下：  
-1234567891011string1 = &quot;Lua&quot;print(&quot;\&quot;String 1 is\&quot;&quot;,str...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-tables/">
-<article class="md-text"><h2 class="post-title">Lua表</h2><div class="excerpt"><p>Lua 表在 Lua 语言中，表是唯一可以用来创建不同数据类型的数据结构，比如常见的数组和字典都是用表来创建的。 Lua 语言中经常到关联数组这种数据类型，它不仅可以用数值作为索引值，除了 nil 以外的字符串同样可以作为其索引。表没有固定的大小，当数据量增加时表会自动增大。  
-Lua 语言中的各种结构表示都用到了表，包括包（package）的表示。当我们使用方法 string.forma...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/coroutines/">
+<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
+上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

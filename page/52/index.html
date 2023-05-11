@@ -110,68 +110,42 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-518_Sol2%E5%AE%9E%E7%8E%B0Cpp%E5%92%8CLua%E7%BB%91%E5%AE%9A/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-521_Lua/">
+<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>Lua 字符串操作
+
+
+函数
+功能
+
+
+
+string.upper(argument)
+字符串全部转为大写字母
+
+
+string.lower(argument)
+字符串全部转为小写字母
+
+
+string.gsub(mainString,findString,replaceString,num)
+字符串替换
+
+
+string.find (str, substr, [init, [end]])
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-518_Sol2%E5%AE%9E%E7%8E%B0Cpp%E5%92%8CLua%E7%BB%91%E5%AE%9A/">
 <article class="md-text"><h2 class="post-title">Sol2实现Cpp和Lua绑定</h2><div class="excerpt"><p>
           
             
           &lt;a href=&quot;/2018/06/17/cpp11_raw_string/&quot; rel=&quot;next&quot; title=&quot;C++11的Raw String Literals&quot;&gt;
             &lt;i class=&quot;fa fa-chev...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-520_Lua%E5%8C%B9%E9%85%8D%E7%AC%A6%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
-<article class="md-text"><h2 class="post-title">Lua匹配符 · 花生肉泥</h2><div class="excerpt"><p>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-519_Lua%E4%B8%AD%E7%9A%84%E5%B0%81%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">Lua中的封装</h2><div class="excerpt"><p>Lua中没有private，table中的key/value可以随意访问，利用metatable虽然可以施加一些限制，但是实际上有各种方法可以绕过这些限制。
+下面介绍一种方法，实现真正的封装。
 
-
-字符类
-说明
-
-
-
-
-.
-与任何字符配对
-
-
-%a
-与任何字母配对
-
-
-%c
-与任何控制符配对（例如n）
-
-
-%d
-与任何数字配对
-
-
-%l
-与任何小写字母配对
-
-
-%p
-与任何标点（punctuation）配对
-
-
-%s
-与空白字符配对
-
-
-%u
-与任何大写字母配对
-
-
-%w
-与任何字母/数字配对
-
-
-%x
-与任何十六进制数配对
-
-
-%z
-与任何代表0的字符配对
-
-
-%x
-与字符x配...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+local LuaClass = require &#34;LuaClass&#34;
+local TestClass = LuaClass(&#34;TestClass&#34;)
+local P...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-522_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%880%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">Lua程序设计（0）</h2><div class="excerpt"><p>Lua程序设计的第一篇，主要内容是基本语法以及运算符。
 
@@ -183,9 +157,15 @@
 
 另一种运行程序段的方式：dofile
 我们可以同时...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-523_lua%E6%94%AF%E6%8C%81init64/">
-<article class="md-text"><h2 class="post-title">lua支持init64</h2><div class="excerpt"><p>lua5.3提供了很多很好的特性例如string.pack unpack这样的好东西，同时还支持ini64.在lua之前的版本中number只有一种类型double.对于init64基本按照int来处理. 对于64位的解决方案有很多种,基本的思路都是使用8byte的string或者lightuserdata或者userdata修改元表来实现.
-luajit使用userdata重载元表运算符实...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-525_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BString/">
+<article class="md-text"><h2 class="post-title">Lua源码阅读：基本数据类型String</h2><div class="excerpt"><p>Lua中对于String的实现。
+
+Lua使用TString结构体代表一个字符串对象。
+12345678910111213141516171819** Header for string value; string bytes follow the end of this structure** (aligned according to &#39;UTString&#39;; see ne...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-526_Lua%20String%E5%87%BD%E6%95%B0/">
+<article class="md-text"><h2 class="post-title">Lua String函数</h2><div class="excerpt"><p>local str = “hellolua，helloworld”–返回索引，找不到返回nilprint(string.find(str,”hello”))–匹配返回字符串，一般用于判断字符串是否存在print(string.match(str,”hello”))– 字符串截取(str,位置(包含当前位置),长度（负数反向,-1表示截取全部）)print(string.sub(str,5,-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-527_org.springframework.expression.spel.SpelEvaluation/">
+<article class="md-text"><h2 class="post-title">SpelEvaluationException</h2><div class="excerpt"><p></p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-524_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>
   Lua 巴西里约热内卢天主教大学 1993年 脚本语言  标准 C 语言
@@ -200,13 +180,6 @@ luajit使用userdata重载元表运算符实...</p></div><div class="meta cap"><
     编译官方源码（windews 编译相对较繁琐，要有编译程序，比如 vs，windows 建议使用 LuaForWindows 安装包；linux 和 macos 相对简单，在下载的源源文件的 doc 中有编译步骤）
 
 &lt;p&gt;&lt;a ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-525_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BString/">
-<article class="md-text"><h2 class="post-title">Lua源码阅读：基本数据类型String</h2><div class="excerpt"><p>Lua中对于String的实现。
-
-Lua使用TString结构体代表一个字符串对象。
-12345678910111213141516171819** Header for string value; string bytes follow the end of this structure** (aligned according to &#39;UTString&#39;; see ne...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-527_org.springframework.expression.spel.SpelEvaluation/">
-<article class="md-text"><h2 class="post-title">SpelEvaluationException</h2><div class="excerpt"><p></p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-528_Lua%E6%A0%87%E5%87%86%E5%BA%93/">
 <article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>string库概念lua解释器对字符串支持有限，一个程序可以创建字符并连接字符串，但是不能截取子串，检查字符串的大小，内容等，操作字符串的功能基本来自string库
 lua5.1中字符串库的所有函数如下
@@ -231,31 +204,9 @@ rep
 返回字符串s的n个拷贝
 string.rep(“abcd”,2)
 abcd...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-521_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>Lua 字符串操作
-
-
-函数
-功能
-
-
-
-string.upper(argument)
-字符串全部转为大写字母
-
-
-string.lower(argument)
-字符串全部转为小写字母
-
-
-string.gsub(mainString,findString,replaceString,num)
-字符串替换
-
-
-string.find (str, substr, [init, [end]])
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-526_Lua%20String%E5%87%BD%E6%95%B0/">
-<article class="md-text"><h2 class="post-title">Lua String函数</h2><div class="excerpt"><p>local str = “hellolua，helloworld”–返回索引，找不到返回nilprint(string.find(str,”hello”))–匹配返回字符串，一般用于判断字符串是否存在print(string.match(str,”hello”))– 字符串截取(str,位置(包含当前位置),长度（负数反向,-1表示截取全部）)print(string.sub(str,5,-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-523_lua%E6%94%AF%E6%8C%81init64/">
+<article class="md-text"><h2 class="post-title">lua支持init64</h2><div class="excerpt"><p>lua5.3提供了很多很好的特性例如string.pack unpack这样的好东西，同时还支持ini64.在lua之前的版本中number只有一种类型double.对于init64基本按照int来处理. 对于64位的解决方案有很多种,基本的思路都是使用8byte的string或者lightuserdata或者userdata修改元表来实现.
+luajit使用userdata重载元表运算符实...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

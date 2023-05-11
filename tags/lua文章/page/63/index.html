@@ -112,7 +112,13 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-409_%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Lua%20(Memory)%20Profiler/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-410_Lua%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+<article class="md-text"><h2 class="post-title">Lua语法基础 · 花生肉泥</h2><div class="excerpt"><p>词法约定标识符标识符可以是任意非数字开头的字母、数字、下划线组成的字符串
+标识符用来命名变量，或作为表的域名
+Lua是一个大小写敏感的语言
+1234andAndAND三者不一样
+关键字一下列出了lua的保留关键字。保留关键字不能作为常量或者变量或者其他用户自定义标识符123456and          break     do          elseelseif       end  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-409_%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Lua%20(Memory)%20Profiler/">
 <article class="md-text"><h2 class="post-title">一个简单的Lua (Memory) Profiler</h2><div class="excerpt"><p>Lua没有内置的Profiler，但是提供了一些相关的接口，可以用来实现一个简单的Lua Profiler。
 
 
@@ -133,26 +139,14 @@
 <article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>13 Metatables and Metamethods
 
 metatable和metamethod可以允许我们对一个值做未定义的操作，Lua中的每个值都可以有一个metatable，table和userdata有自己的metatable，其他类型的值对于本类型的所有值共享一个metatable，Lua创建的表默认无metatable。12t = {}print(getmetatable(...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-410_Lua%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
-<article class="md-text"><h2 class="post-title">Lua语法基础 · 花生肉泥</h2><div class="excerpt"><p>词法约定标识符标识符可以是任意非数字开头的字母、数字、下划线组成的字符串
-标识符用来命名变量，或作为表的域名
-Lua是一个大小写敏感的语言
-1234andAndAND三者不一样
-关键字一下列出了lua的保留关键字。保留关键字不能作为常量或者变量或者其他用户自定义标识符123456and          break     do          elseelseif       end  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-413_Lua%E4%BD%9C%E5%9B%BE%E6%95%99%E7%A8%8B%E4%B9%8Blua%E5%9F%BA%E7%A1%80/">
-<article class="md-text"><h2 class="post-title">Lua作图教程之lua基础</h2><div class="excerpt"><p>一、什么是Lua？Lua 是一个小巧的脚本语言，巴西里约热内卢天主教大学里的一个研究小组于1993年开发，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。Lua由标准C编写而成，几乎在所有操作系统和平台上都可以编译，运行。一个完整的Lua解释器不过200k，在目前所有脚本引擎中，Lua的速度是最快的。这一切都决定了Lua是作为嵌入式脚本的最佳选择。相比Python和P...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-411_cocos2dx%20lua%20TableView(ScrollView,%20ListView)%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8%E5%AE%9E/">
 <article class="md-text"><h2 class="post-title">cocos2dx lua TableView(ScrollView, ListView)介绍与使用实战</h2><div class="excerpt"><p>在众多移动应用中，能看到各式各样的列表/表格数据
 
 不管是iOS中的UITableView/UICollectionView/UIScrollView,还是Android中的ListView/CircleView，都是实际项目开发中使用最平凡，也是最重要的功能。
 
 为了用户考虑，也为了性能考虑， 我们一般都会重复利用所创建的列表项，这样就避免了界面卡顿。cocos2dx lua 3.x中有一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-418_lua%E9%80%9A%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-<article class="md-text"><h2 class="post-title">lua通用数据类型</h2><div class="excerpt"><p>TValue结构TValue这个结构体是Lua的通用结构体,,Lua中的所有的数据都可以使用这个结构体来表示.很容易想到,在面向对象中,这个结构体是一个基类,派生出来的都是其他的子类.
-TValue结构体内部有几个宏, 展开之后就是这样的:
-typedef struct lua_TValue &#123;
-    union &#123;
-      union GCObject &#123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-413_Lua%E4%BD%9C%E5%9B%BE%E6%95%99%E7%A8%8B%E4%B9%8Blua%E5%9F%BA%E7%A1%80/">
+<article class="md-text"><h2 class="post-title">Lua作图教程之lua基础</h2><div class="excerpt"><p>一、什么是Lua？Lua 是一个小巧的脚本语言，巴西里约热内卢天主教大学里的一个研究小组于1993年开发，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。Lua由标准C编写而成，几乎在所有操作系统和平台上都可以编译，运行。一个完整的Lua解释器不过200k，在目前所有脚本引擎中，Lua的速度是最快的。这一切都决定了Lua是作为嵌入式脚本的最佳选择。相比Python和P...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-412_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>table 操作
 
@@ -168,6 +162,18 @@ table.concat (table [, step [, start [, end]]])
 
 table.insert (table, [pos,] value)
 在table的数组部分指定位置(pos)插入值为value的一个元...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-414_Lua%E5%85%83%E8%A1%A8%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+<article class="md-text"><h2 class="post-title">Lua元表 · 花生肉泥</h2><div class="excerpt"><p>Metatable元表lua中的每个值都可以用一个metatable
+两个table类型的变量，你是无法直接用 + 操作的，如果你定义了一个指定的函数，就可以进行了
+setmetatable(table,metatable)：对指定table设置元表（metatable），如果元表中存在__metatable键值，setmetatable会失败
+getmetatable(table)：返回对...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-417_cocos2dx%20lua%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8B%E5%8D%8F%E6%88%90%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98/">
+<article class="md-text"><h2 class="post-title">cocos2dx lua 多线程之协成理解与实战</h2><div class="excerpt"><p>lua是不支持多线程的，一般都是协同来调用的。但是lua却可以调用c函数。于是，我们通过lua调用C接口起一个线程，实现lua多线程的使用。子线程再调用lua中的function。就可以通过子线程获取一些数据。单纯的人儿，以为一切都是美好的。
+
+问题就出现C调用lua中的function, 将数据传给lua。
+
+
+lua的运行首先我们需要知道，lua是解释性语言。是在执行的时候才分配堆栈空间...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-415_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">
 <article class="md-text"><h2 class="post-title">Lua string 哈希碰撞</h2><div class="excerpt"><p>Lua 中 40 字节以下的字符串会被内部化到一张表中(Lua 5.3)，这张表挂在 global state 结构下。对于短字符串，相同的串在同一虚拟机上只会存在一份，这被称为字符串的内部化。
 
@@ -176,18 +182,12 @@ table.insert (table, [pos,] value)
 
 
 对于比较长的字符串（32字节以上），为了加快哈希过程，计算字符串哈希值是跳跃进行的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-417_cocos2dx%20lua%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8B%E5%8D%8F%E6%88%90%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98/">
-<article class="md-text"><h2 class="post-title">cocos2dx lua 多线程之协成理解与实战</h2><div class="excerpt"><p>lua是不支持多线程的，一般都是协同来调用的。但是lua却可以调用c函数。于是，我们通过lua调用C接口起一个线程，实现lua多线程的使用。子线程再调用lua中的function。就可以通过子线程获取一些数据。单纯的人儿，以为一切都是美好的。
-
-问题就出现C调用lua中的function, 将数据传给lua。
-
-
-lua的运行首先我们需要知道，lua是解释性语言。是在执行的时候才分配堆栈空间...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-414_Lua%E5%85%83%E8%A1%A8%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
-<article class="md-text"><h2 class="post-title">Lua元表 · 花生肉泥</h2><div class="excerpt"><p>Metatable元表lua中的每个值都可以用一个metatable
-两个table类型的变量，你是无法直接用 + 操作的，如果你定义了一个指定的函数，就可以进行了
-setmetatable(table,metatable)：对指定table设置元表（metatable），如果元表中存在__metatable键值，setmetatable会失败
-getmetatable(table)：返回对...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-418_lua%E9%80%9A%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+<article class="md-text"><h2 class="post-title">lua通用数据类型</h2><div class="excerpt"><p>TValue结构TValue这个结构体是Lua的通用结构体,,Lua中的所有的数据都可以使用这个结构体来表示.很容易想到,在面向对象中,这个结构体是一个基类,派生出来的都是其他的子类.
+TValue结构体内部有几个宏, 展开之后就是这样的:
+typedef struct lua_TValue &#123;
+    union &#123;
+      union GCObject &#123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.270Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

@@ -112,19 +112,23 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-228_Programming%20in%20Lua%E6%91%98%E5%BD%95/">
-<article class="md-text"><h2 class="post-title">Programming in Lua摘录</h2><div class="excerpt"><p>    &lt;p&gt;“袁承志知道若再谦逊，那就是瞧人不起，展开五行拳，发拳当胸打去。荣彩和旁观三人本来都以为他武功有独到之秘，哪知使出来的竟是武林中最寻常不过的五行拳。&lt;/p&gt;
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-229_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>            &lt;p&gt;选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。&lt;/p&gt;
 
-敌对三人登时意存轻视，温青脸上不自禁露出失望的神色。
-“荣彩心中暗喜，双拳如风，连抢三下攻势，满拟自己的大力魔爪手江南独步，三四招之间就可破去对方五行拳，那知袁承志轻描淡写的一一化解。再拆数招，荣...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-22_lua%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+<article class="md-text"><h2 class="post-title">lua垃圾回收</h2><div class="excerpt"><p>采用垃圾回收机制对所有的lua对象(GCObject)进行管理。Lua虚拟机会定期运行GC，释放掉已经不再被被引用到的lua对象。
+基本算法【标记清除】
+基本的垃圾回收算法被称为”mark-and-sweep”算法。算法本身其实很简单。
+1.系统管理着所有已经创建了的对象。每个对象都有对其他对象的引用。
+2.root集合代表着已知的系统级别的对象引用。
+3.从root集合出发，就可以访问到系...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-230_Lua%E5%92%8CC#%E4%BA%A4%E4%BA%92/">
 <article class="md-text"><h2 class="post-title">Lua和C#交互</h2><div class="excerpt"><p>    &lt;p&gt;项目中一直使用tolua框架，底层使用C#开发，逻辑使用lua开发。借助tolua的源码，研究一下lua与C#是如何互相调用的，然后自己写了个简单的demo作为记录。&lt;/p&gt;
 
 Demo里没有拿lua的源码编译，而是直接使用lua的静态库，将lua库中的方法封装成为动态库dll给C#使用。涉及到两个工程：
 
 首先是c++的dll工程，包含了lua库的一些...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-227_OpenResty%E4%B8%AD%E4%BD%BF%E7%94%A8Lua%E7%9A%84MongoDB%E5%BA%93%EF%BC%8C%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E8%8A%82%E7%9C%81%E8%BF%9E%E6%8E%A5%E8%AE%A4%E8%AF%81%E6%97%B6%E9%97%B4/">
-<article class="md-text"><h2 class="post-title">OpenResty中使用Lua的MongoDB库，使用连接池节省连接认证时间</h2><div class="excerpt"><p>&lt;p&gt;因为服务器的mongodb开启了auth认证的，所以每次连接都要验证密码，测试了下GitHub上面的几个lua的mongodb库，无论是官方的&lt;a href=&quot;https://github.com/mongodb-labs/mongorover&quot; title=&quot;mongorover&quot; target=&quot;_blank&qu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-232_Lua%E7%BC%96%E7%A8%8B2%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 <article class="md-text"><h2 class="post-title">Lua编程2之数据类型</h2><div class="excerpt"><p>    &lt;p&gt;思考并回答以下问题：&lt;br&gt;1.nil 的“删除”作用怎么理解？如何删除table里的一个值？&lt;br&gt;2.怎么比较一个变量是否为nil？&lt;br&gt;3.数字零和空字符串为真吗？假有哪些？&lt;br&gt;4.如何表示块字符串？如何避免误解析的发生？&lt;br&gt;5.显式转换函数有哪些？&lt;br&gt;6.如何计算字符串的长...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-231_Lua%20Learning%20Notes/">
@@ -143,10 +147,6 @@ local c = 0
 变量没有类型, 默认为全局变量, 使用local关键字声明局部变量, 要删除变量只需要将其赋值为nil即可
 a, b = 10, 3 * 5 -- 同时赋值多个变量
 print(a..','..b) -- '10, 15...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.252Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-210_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>            &lt;p&gt;选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。&lt;/p&gt;
-
-选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-211_Lua%20%E5%AD%A6%E4%B9%A0%20chapter17%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter17</h2><div class="excerpt"><p>            &lt;h3 id=&quot;目录&quot;&gt;目录&lt;/h3&gt;
 
@@ -173,32 +173,23 @@ local mod = require "mod"
 mod.foo()
 
 local m &#x3D; require “...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-214_lua%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
-<article class="md-text"><h2 class="post-title">lua 基础知识学习总结</h2><div class="excerpt"><p>    &lt;ul id=&quot;markdown-toc&quot;&gt;
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-209_Redis%E4%B9%8BLua%E8%84%9A%E6%9C%AC/">
+<article class="md-text"><h2 class="post-title">Redis之Lua脚本</h2><div class="excerpt"><p>    &lt;p&gt;Redis中内嵌了对Lua环境的支持，允许开发者使用Lua语言编写脚本传到Redis中执行，直接在服务端原子的执行多个Redis命令。&lt;/p&gt;
 
-  一、lua 基本语法
-  二、lua 数据类型及操作
+使用Lua脚本的好处：
 
+减少网络开销，在Lua脚本中可以把多个命令放在同一个脚本中运行
+原子操作，redis会将整个脚本作为一个整体执行，中间不会被其他命令插入
+复用性，客户端发送的脚本会永远存储在redis...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-210_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>            &lt;p&gt;选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。&lt;/p&gt;
 
+选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-212_Lazy%20Evaluation%20%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">Lazy Evaluation 的原理与实现</h2><div class="excerpt"><p>&lt;p&gt;Lazy Evaluation 是Haskell进程的求值方式。当把一个表达式与一个变量绑定时，这个表达式并没有被立即求值，而是当它的结果需要被其他的计算用到时才会求值。因此，在调用函数时，参数也不会在调用前求值，
 
-  lua 学习总结文档
-
-
-一、lua 基本语法
-
-二、lua 数据类型及操作
-
-lua 是动态类型语言，变量无需声明定义，可以直接进行赋值操作。主要包含如下表格中的数据类型：
-
-
-
-
-  nil （空）
-
-
-nil 表示一种无效的值，它只...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-216_Lua%E7%BC%96%E7%A8%8B6%E4%B9%8Btable/">
-<article class="md-text"><h2 class="post-title">Lua编程6之table</h2><div class="excerpt"><p>    &lt;p&gt;思考并回答以下问题：&lt;br&gt;1.如何初始化表并指定值？&lt;br&gt;2.a和b指向同一个table1，a设置为nil，b还可以访问table1的元素吗？&lt;br&gt;3.table.concat、table.insert、table.remove、table.sort的含义分别是什么？&lt;br&gt;4.#为什么得不到正确的table长度...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+而是当它的值被用到是才会求值。Technically, lazy evaluation means call-by-name plus Sharing.
+La...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.251Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-213_Lua%20Study/">
 <article class="md-text"><h2 class="post-title">Lua Study</h2><div class="excerpt"><p>    &lt;p&gt;本文并不会把Lua语言的所有内容都包含在内，只对个人学习过程中感觉比较重要的部分做一个记录，以便回顾。&lt;/p&gt;
 

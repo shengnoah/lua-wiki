@@ -117,13 +117,13 @@
 12t = {}print(getmetatable(t)) 
 可以使用 setmetatable 来修改或设置 table 的元表：
 123t1 = {}setmetatable(t,t1)print(getm...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-854_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>
-        之前项目中用到 openresty 作为 Web Api  的开发平台, 用 openresty 很适合开发以 http 接口形式
-提供的服务. openresty 可以使用 lua 进行逻辑控制,加上完备的组件driver(redis, mysql, rabbitmq 等),
-只需要写业务代码将各种数据读取,加工,输出,就是充当胶水的角色.
-
-最重要的一点是, openr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-852_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>设计目的其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
+Lua 特性
+轻量级: 它用标准C语言编写并以源代码形式开放，编译后仅仅一百余K，可以很方便的嵌入别的程序里。
+可扩展: Lua提供了非常易于使用的扩展接口和机制：由宿主语言(通常是C或C++)提供这些功能，Lua可以使用它们，就像是本来就内置的功能一样。
+其它特性:
+支持面向过程(procedure-orie...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-857_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">lua学习笔记（五）</h2><div class="excerpt"><p>Lua模块与包模块类似于一个封装库
 创建方法：
@@ -133,25 +133,6 @@
 返回该table
 
 123456789101112131415161718192021-- 定义一个名为mymodule的模块mymodule={}-- 定义一个常量mymodule.constant=&#34;这是一个常量&#34;-- 定义一个函数function ()    io.wr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-856_Lua%20Iterator/">
-<article class="md-text"><h2 class="post-title">Lua Iterator</h2><div class="excerpt"><p>前言由于工作的关系其实我平时写Lua还是很多的，然而一个偶然的机会发现了其实我对Lua的迭代的认识还不够，这里记录一下。
-READ THE MANUAL强调一下，一定要看守手册Lua5.1手册
-
-我们来看下Lua中的For
-
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-860_Lua%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%20/">
-<article class="md-text"><h2 class="post-title">Lua学习总结</h2><div class="excerpt"><p>目录
-
-  总结
-
-
-
-  每个人都在犯错，只有在错误中找到自己的不足，并且去改变，这样你才能够成就一个完美的自己
-
-
-总结
-断断续续，慢慢悠悠，终于在不知道过了自己定的时间线多久之后，自己完成了自己给自己当初设定的目标，经历了这些之后，自己对于lua的理解深刻和明白了很多很多。在日常的开发过程中，自己每时每刻都在使用lua，但是仅仅是使用，当其变通了些之后，自己就转不过来了，所以自己还是要...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-858_%5BLua%5D%20Coroutine%E5%8D%8F%E7%A8%8B/">
 <article class="md-text"><h2 class="post-title">Coroutine协程</h2><div class="excerpt"><p>Coroutine Manipulation
 
@@ -160,21 +141,6 @@ coroutine.create (f)
 Creates a new coroutine, with body f. f must be a function. Returns this new coroutine, an object with type “thread”.
 
 创建一个新的协程。f必须是一个函数。返回值是这个新的协程，返回值...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-85_lua%E8%A7%A3%E6%9E%90/">
-<article class="md-text"><h2 class="post-title">lua解析</h2><div class="excerpt"><p>本lua版本为5.2.1
-在lua的源码中，lua.c 实现了可执行的解释器，用于解释执行.out文件，luac.c 实现了字节码的编译器，用于将.lua文件编译为.out文件，即字节码文件。更加宏观的东西，则在打印的两份文档里，此处不详述，由于整个读入解析到解释执行的过程是先从读入.lua文件开始的，所以我这份lua源码解析大业便先从这luac.c文件的阅读学习开始了，以下是它的main程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-861_Lua%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">Lua远程调用的实现方法</h2><div class="excerpt"><p>游戏开发中，客户端、服务端之间的交互是很频繁的，尤其是逻辑玩法的实现，需要大量的交互。
-
-如果所有的交互都按功能构建出不同的协议，这样即繁琐又不方便修改。
-
-通过Lua，使用远程调用可以极大的方便客户端、服务器的通信。
-
-在Lua中，通过C++告诉对方，我要调用哪个函数、传递哪些参数，来执行相关的功能。
-
-这样就不用定义一大串协议，而只需定义一种：远程调用协议。
-
-如果要对方执行相应的函数，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-859_lua%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F/">
 <article class="md-text"><h2 class="post-title">lua学习的查缺补漏</h2><div class="excerpt"><p>目录
 
@@ -217,6 +183,40 @@ fdas
 6
 7
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-856_Lua%20Iterator/">
+<article class="md-text"><h2 class="post-title">Lua Iterator</h2><div class="excerpt"><p>前言由于工作的关系其实我平时写Lua还是很多的，然而一个偶然的机会发现了其实我对Lua的迭代的认识还不够，这里记录一下。
+READ THE MANUAL强调一下，一定要看守手册Lua5.1手册
+
+我们来看下Lua中的For
+
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-860_Lua%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%20/">
+<article class="md-text"><h2 class="post-title">Lua学习总结</h2><div class="excerpt"><p>目录
+
+  总结
+
+
+
+  每个人都在犯错，只有在错误中找到自己的不足，并且去改变，这样你才能够成就一个完美的自己
+
+
+总结
+断断续续，慢慢悠悠，终于在不知道过了自己定的时间线多久之后，自己完成了自己给自己当初设定的目标，经历了这些之后，自己对于lua的理解深刻和明白了很多很多。在日常的开发过程中，自己每时每刻都在使用lua，但是仅仅是使用，当其变通了些之后，自己就转不过来了，所以自己还是要...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-85_lua%E8%A7%A3%E6%9E%90/">
+<article class="md-text"><h2 class="post-title">lua解析</h2><div class="excerpt"><p>本lua版本为5.2.1
+在lua的源码中，lua.c 实现了可执行的解释器，用于解释执行.out文件，luac.c 实现了字节码的编译器，用于将.lua文件编译为.out文件，即字节码文件。更加宏观的东西，则在打印的两份文档里，此处不详述，由于整个读入解析到解释执行的过程是先从读入.lua文件开始的，所以我这份lua源码解析大业便先从这luac.c文件的阅读学习开始了，以下是它的main程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-861_Lua%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">Lua远程调用的实现方法</h2><div class="excerpt"><p>游戏开发中，客户端、服务端之间的交互是很频繁的，尤其是逻辑玩法的实现，需要大量的交互。
+
+如果所有的交互都按功能构建出不同的协议，这样即繁琐又不方便修改。
+
+通过Lua，使用远程调用可以极大的方便客户端、服务器的通信。
+
+在Lua中，通过C++告诉对方，我要调用哪个函数、传递哪些参数，来执行相关的功能。
+
+这样就不用定义一大串协议，而只需定义一种：远程调用协议。
+
+如果要对方执行相应的函数，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.312Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-862_nginx+lua/">
 <article class="md-text"><h2 class="post-title">nginx+lua</h2><div class="excerpt"><p>1. 安装lua编译器LuaJIT#wget http://luajit.org/download/LuaJIT-2.0.3.tar.gz#tar -xzvf LuaJIT-2.0.3.tar.gz#cd LuaJIT 2.0.3#make &amp;&amp; make install
 安装完成后配置环境变量，使nginx可找到luajit

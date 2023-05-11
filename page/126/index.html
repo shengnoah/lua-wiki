@@ -117,27 +117,27 @@
 示例代码：test1.lua
 
 12345678910print(1 + 2)       --&gt;打印 3print(5 / 10)      --&gt;打印 0.5。 这是Lua不同于c语言的print(5.0 / 10)    --&gt;打印 0.5。 浮点数相除的结果是浮点数-- print(10 / 0)   --&gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/re.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>正则表达式在 OpenResty 中，同时存在两套正则表达式规范： Lua 语言的规范和 ngx.re.* 的规范，即使您对 Lua 语言中的规范非常熟悉，我们仍不建议使用 Lua 中的正则表达式。一是因为 Lua 中正则表达式的性能并不如 ngx.re.* 中的正则表达式优秀；二是 Lua 中的正则表达式并不符合 POSIX 规范，而 ngx.re.* 中实现的是标准的 POSIX 规范，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/string_library.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>String 库Lua 字符串库包含很多强大的字符操作函数。字符串库中的所有函数都导出在模块 string 中。在 Lua 5.1 中，它还将这些函数导出作为 string 类型的方法。这样假设要返回一个字符串转的大写形式，可以写成 ans = string.upper(s) ,也能写成 ans = s:upper()。为了避免与之前版本不兼容，此处使用前者。
+Lua 字符串总是由字节构成的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/repeat.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>repeat 控制结构Lua 中的 repeat 控制结构类似于其他语言（如：C++语言）中的 do-while，但是控制方式是刚好相反的。简单点说，执行 repeat 循环体后，直到 until 的条件为真时才结束，而其他语言（如：C++语言）的 do-while 则是当条件为假时就结束循环。
 
 以下代码将会形成死循环：
 
 1234x = 10repeat    print(x)until...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/re.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>正则表达式在 OpenResty 中，同时存在两套正则表达式规范： Lua 语言的规范和 ngx.re.* 的规范，即使您对 Lua 语言中的规范非常熟悉，我们仍不建议使用 Lua 中的正则表达式。一是因为 Lua 中正则表达式的性能并不如 ngx.re.* 中的正则表达式优秀；二是 Lua 中的正则表达式并不符合 POSIX 规范，而 ngx.re.* 中实现的是标准的 POSIX 规范，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/string_library.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>String 库Lua 字符串库包含很多强大的字符操作函数。字符串库中的所有函数都导出在模块 string 中。在 Lua 5.1 中，它还将这些函数导出作为 string 类型的方法。这样假设要返回一个字符串转的大写形式，可以写成 ans = string.upper(s) ,也能写成 ans = s:upper()。为了避免与之前版本不兼容，此处使用前者。
-Lua 字符串总是由字节构成的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/time_date_function.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>日期时间函数在 Lua 中，函数 time、date 和 difftime 提供了所有的日期和时间功能。
+在 OpenResty 的世界里，不推荐使用这里的标准时间函数，因为这些函数通常会引发不止一个昂贵的系统调用，同时无法为 LuaJIT JIT 编译，对性能造成较大影响。推荐使用 ngx_lua 模块提供的带缓存的时间接口，如 ngx.today, ngx.time, ngx.utcti...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/what_jit.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>什么是 JIT ？自从 OpenResty 1.5.8.1 版本之后，默认捆绑的 Lua 解释器就被替换成了 LuaJIT ，而不在是标准 Lua。单从名字上，我们就可以直接看到这个新的解释器多了一个 JIT，接下来我们就一起来聊聊这个 JIT 是个什么东东。
+我们先来看一下 LuaJIT 官方站点的解释： LuaJIT is a Just-In-Time Compilerfor the L...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/table_library.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>table 库table 库是由一些辅助函数构成的，这些函数将 table 作为数组来操作。
 下标从 1 开始在 Lua 中，数组下标从 1 开始计数。
 官方解释：Lua lists have a base index of 1 because it was thought to be most friendly for non-programmers, as it makes indice...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/what_jit.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>什么是 JIT ？自从 OpenResty 1.5.8.1 版本之后，默认捆绑的 Lua 解释器就被替换成了 LuaJIT ，而不在是标准 Lua。单从名字上，我们就可以直接看到这个新的解释器多了一个 JIT，接下来我们就一起来聊聊这个 JIT 是个什么东东。
-我们先来看一下 LuaJIT 官方站点的解释： LuaJIT is a Just-In-Time Compilerfor the L...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/time_date_function.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>日期时间函数在 Lua 中，函数 time、date 和 difftime 提供了所有的日期和时间功能。
-在 OpenResty 的世界里，不推荐使用这里的标准时间函数，因为这些函数通常会引发不止一个昂贵的系统调用，同时无法为 LuaJIT JIT 编译，对性能造成较大影响。推荐使用 ngx_lua 模块提供的带缓存的时间接口，如 ngx.today, ngx.time, ngx.utcti...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/while.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>while 型控制结构Lua 跟其他常见语言一样，提供了 while 控制结构，语法上也没有什么特别的。但是没有提供 do-while 型的控制结构，但是提供了功能相当的 repeat。
 while 型控制结构语法如下，当表达式值为假（即false或nil）时结束循环。也可以使用 break 语言提前跳出循环。
@@ -145,8 +145,13 @@ while 型控制结构语法如下，当表达式值为假（即false或nil）时
 
 
 示例代码，求 1 + 2 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/not_use_lib.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>不用标准库</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.129Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/for.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>for 控制结构Lua 提供了一组传统的、小巧的控制结构，包括用于条件判断的 if 用于迭代的 while、repeat 和 for，本章节主要介绍 for 的使用。
+for 数字型for 语句有两种形式：数字 for（numeric for）和范型 for（generic for）。
+
+数字型 for 的语法如下：
+
+123for var = begin, finish, step do ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/function_before_use.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>调用代码前先定义函数Lua 里面的函数必须放在调用的代码之前，下面的代码是一个常见的错误：
 1234567-- test.lua 文件local i = 100i = add_one(i)function add_one(i)	return i + 1end

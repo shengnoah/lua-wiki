@@ -112,10 +112,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-116_skynet%20lua%E6%9C%8D%E5%8A%A1/">
-<article class="md-text"><h2 class="post-title">skynet lua服务</h2><div class="excerpt"><p>C模块的导出从skynet核心模块来看，它只认得C服务，每个服务被编译为动态库，在需要时由skynet加载。skynet提供发送消息和注册回调函数的接口，并保证消息的正确到达，并调用目标服务回调函数。其它东西，如消息调度，线程池等，对于用户来说都是透明的。
-skynet服务可以由lua编写，因此skynet将C模块核心接口通过skynet/lualib-src/lua-skynet.c导出为...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1170_programming%20in%20lua(thrid%20edition)%E7%AC%94%E8%AE%B0---10%20complete%20/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1170_programming%20in%20lua(thrid%20edition)%E7%AC%94%E8%AE%B0---10%20complete%20/">
 <article class="md-text"><h2 class="post-title">programming in lua(thrid edition)笔记---10 complete examples</h2><div class="excerpt"><p>10 Complete Examples本章分析了三个例程：八皇后问题、单词频数统计、马尔可夫链算法，是对之前所学的应用，几乎没有新的东西，所以本章笔记较少。
 
 用逻辑运算充当三目运算
@@ -123,8 +120,26 @@ skynet服务可以由lua编写，因此skynet将C模块核心接口通过skynet/
 
 用or实现将table中新元素初始化0
 1234local counter =...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1166_evaluate%20reverse%20polish%20notation/">
-<article class="md-text"><h2 class="post-title">evaluate reverse polish notation</h2><div class="excerpt"><p>Evaluate Reverse Polish Notation12345678910111213141516171819202122232425262728293031public int (String[] tokens) {    Stack&lt;String&gt; operator = new Stack&lt;String&gt;();    Stack&lt;Integer&...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-116_skynet%20lua%E6%9C%8D%E5%8A%A1/">
+<article class="md-text"><h2 class="post-title">skynet lua服务</h2><div class="excerpt"><p>C模块的导出从skynet核心模块来看，它只认得C服务，每个服务被编译为动态库，在需要时由skynet加载。skynet提供发送消息和注册回调函数的接口，并保证消息的正确到达，并调用目标服务回调函数。其它东西，如消息调度，线程池等，对于用户来说都是透明的。
+skynet服务可以由lua编写，因此skynet将C模块核心接口通过skynet/lualib-src/lua-skynet.c导出为...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1168_install%20luajit%20in%20nginx/">
+<article class="md-text"><h2 class="post-title">install luajit in nginx</h2><div class="excerpt"><p>
+        https://github.com/openresty/lua-nginx-module
+
+安装
+
+  安装 LuaJit
+  下载 ngx_devel_kit
+  下载 ngx_lua
+  下载 Nginx
+
+
+ wget &#39;http://nginx.org/download/nginx-1.9.7.tar.gz&#39;
+ tar -xzvf nginx-1....</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1171_programming%20in%20lua(thrid%20edition)%E7%AC%94%E8%AE%B0---%E7%9B%AE%E5%BD%95/">
+<article class="md-text"><h2 class="post-title">programming in lua(thrid edition)笔记---目录</h2><div class="excerpt"><p>看到第四章的时候，发现Lua的靓点好多，在编程中会提供很多便利，但是由于这些东西都是新的，刚开始学容易忘，回过头再去书里找又太麻烦，尤其是我看的电子书，所以才想到要记下来。这是我第一次写读书笔记，希望可以做完做好。
+Programming in Lua, Thrid EditionI The Language1 Getting Started2 Types and Values3 Expre...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1173_lua%20tutorial/">
 <article class="md-text"><h2 class="post-title">lua tutorial</h2><div class="excerpt"><p>
     
@@ -141,9 +156,6 @@ Lua 是巴西里约热内卢天主教大学（Pontifical Catholic ...</p></div><
 
 Lua Coroutine is a kind of collaborative multithreading, equivalent to a thread. A pair yield-resume switches control from one thread to another.
 However, unlike “real” m...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1171_programming%20in%20lua(thrid%20edition)%E7%AC%94%E8%AE%B0---%E7%9B%AE%E5%BD%95/">
-<article class="md-text"><h2 class="post-title">programming in lua(thrid edition)笔记---目录</h2><div class="excerpt"><p>看到第四章的时候，发现Lua的靓点好多，在编程中会提供很多便利，但是由于这些东西都是新的，刚开始学容易忘，回过头再去书里找又太麻烦，尤其是我看的电子书，所以才想到要记下来。这是我第一次写读书笔记，希望可以做完做好。
-Programming in Lua, Thrid EditionI The Language1 Getting Started2 Types and Values3 Expre...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1176_uva%2011724%20-%20evaluate%20the%20expression/">
 <article class="md-text"><h2 class="post-title">uva 11724 - evaluate the expression</h2><div class="excerpt"><p>
               contents
@@ -156,15 +168,6 @@ Programming in Lua, Thrid EditionI The Language1 Getting Started2 Types and Valu
       &lt;h2 id=&quot;Problem&quot;&gt;Problem&lt;/h2&gt;
 
 每個變數皆為正整數，給定一個算術表達式和變數之間的大小關係，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1178_cse201w4_queryevaluation/">
-<article class="md-text"><h2 class="post-title">cse201w4_queryevaluation</h2><div class="excerpt"><p>查询处理概述查询处理的基本步骤：
-
-语法分析与翻译查询处理中系统首先必须把查询语句翻译成系统的内部表示形式。该翻译过程类似于编译器的语法分析器所做的工作。在此过程中，语法分析器检查用户查询的语法，验证查询中出现的关系名是数据库中的关系名等。系统构造该查询语句的语法分析树表示，然后将之翻译成关系代数表达式。
-优化查询执行引擎（query-execution engine）接受一个查询执行计划（...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1174_centos%20%E5%AE%89%E8%A3%85lua%205.3/">
-<article class="md-text"><h2 class="post-title">centos 安装lua 5.3</h2><div class="excerpt"><p>按照官网教程，执行以下命令1234curl -R -O http://www.lua.org/ftp/lua-5.3.3.tar.gztar zxf lua-5.3.3.tar.gzcd lua-5.3.3make linux test
-但其实lua并未安装，许多博文都是建立软链接，但其实makefile文件中已经写好了，只需install就可以了1make linux install
-升级...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1175_%E3%80%8C%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E3%80%8D%2019.%20Partial%20Evaluation/">
 <article class="md-text"><h2 class="post-title">19. Partial Evaluation</h2><div class="excerpt"><p>TBD
 
@@ -174,6 +177,13 @@ Programming in Lua, Thrid EditionI The Language1 Getting Started2 Types and Valu
             &lt;hr style=&quot;visibility: hidden;&quot;/&gt;
 
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1174_centos%20%E5%AE%89%E8%A3%85lua%205.3/">
+<article class="md-text"><h2 class="post-title">centos 安装lua 5.3</h2><div class="excerpt"><p>按照官网教程，执行以下命令1234curl -R -O http://www.lua.org/ftp/lua-5.3.3.tar.gztar zxf lua-5.3.3.tar.gzcd lua-5.3.3make linux test
+但其实lua并未安装，许多博文都是建立软链接，但其实makefile文件中已经写好了，只需install就可以了1make linux install
+升级...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1177_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">lua学习笔记</h2><div class="excerpt"><p>输出、注释、全局变量12345678910print(&#34;hello world&#34;)--[[abcd is hhhasdassadd]]--print(b)   --nilb=10print(b)   --10
+数据类型12345678nil			--相当于其他语言的null（python中的None），（在表达式中相当于false）boolean     --true fal...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.240Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

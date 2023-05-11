@@ -110,21 +110,30 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-460_lua%E5%85%83%E8%A1%A8%E8%AF%A6%E8%A7%A3/">
-<article class="md-text"><h2 class="post-title">lua元表详解</h2><div class="excerpt"><p>元表的作用元表是用来定义对table或userdata操作方式的表
-举个例子123local t1 = {1}local t2 = {2}local t3 = t1 + t2
-我们直接对两个table执行＋运算，会报错
-1lua: /usercode/file.lua:3: attempt to perform arithmetic on local &#39;t1&#39; (a tabl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.274Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-440_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。
-
-分治法的基本思想是：将原问题分解为若干个规模更小但结构与原问题相似的子问题。递归地解这些子问题，然后将这些子问题的解组合为原问题的解。
-
-算法步骤
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-45_Notepad++%E9%85%8D%E7%BD%AElua%E7%8E%AF%E5%A2%83/">
+<article class="md-text"><h2 class="post-title">Notepad++配置lua环境</h2><div class="excerpt"><p>[TOC]
 
 
-  从数列中挑出一个元素，称为 “基准”（pivot）
-  重新排序数列，所有元素比基准值小的摆放在基准前面，所有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+
+0.前提准备
+
+
+  装好了lua
+
+
+1. 安装NppExec插件
+
+(1)菜单栏-&gt;插件-&gt;Plugin Manager-&gt;Show Plugin Manager
+
+(2)按键盘NppExec，会检索到这个插件
+
+(3)安装重启
+
+2. 配置命令
+
+(1)按F6
+
+(2)拷贝下面命令到对话框中，修改lua.exe为自己的安装路径，注意：lua.exe的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.274Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-441_Lua%E4%BD%9C%E5%9B%BE%E6%95%99%E7%A8%8B%E4%B9%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
 <article class="md-text"><h2 class="post-title">Lua作图教程之设计模式</h2><div class="excerpt"><p>前言前段时间学校游戏开发课大作业，做了一个Roguelike的恐怖游戏。搜集整理了一些迷宫生成的算法。
 当初也受了indienova上一些文章的启发。现在在此把学到的一些东西理一理分享出来。
@@ -143,18 +152,31 @@ local function args(...)
         end
     else
         print(&#34;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-446_lua%E5%85%83%E8%A1%A8/">
-<article class="md-text"><h2 class="post-title">lua元表</h2><div class="excerpt"><p>在 Lua table 中我们可以访问对应的key来得到value值，但是却无法对两个 table 进行操作。
-因此 Lua 提供了元表(Metatable)，允许我们改变table的行为，每个行为关联了对应的元方法。
-例如，使用元表我们可以定义Lua如何计算两个table的相加操作a+b。
-当Lua试图对两个表进行相加时，先检查两者之一是否有元表，之后检查是否有一个叫”add”的字段，若找...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-448_openresty%E7%9A%84lua%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0%E4%B8%80/">
-<article class="md-text"><h2 class="post-title">openresty的lua语法学习一</h2><div class="excerpt"><p>
-openresty的lua语法学习
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-440_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>快速排序使用分治法（Divide and conquer）策略来把一个序列（list）分为两个子序列（sub-lists）。
+
+分治法的基本思想是：将原问题分解为若干个规模更小但结构与原问题相似的子问题。递归地解这些子问题，然后将这些子问题的解组合为原问题的解。
+
+算法步骤
 
 
-lua的popen获取命令的执行结果
-1234567891011121314151617181920212223242526272829local myfile = io.popen(&#34;pwd&#34;, &#34;r&#34;)if nil == myfile then  print(&#34;open file for dir fail!...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  从数列中挑出一个元素，称为 “基准”（pivot）
+  重新排序数列，所有元素比基准值小的摆放在基准前面，所有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-443_%E5%AF%B9LuaJIT%E5%88%B6%E4%BD%9C%E7%9A%84%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E5%8D%95%E4%BF%AE%E6%94%B9%EF%BC%88%E4%B8%80%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">对LuaJIT制作的游戏的简单修改（一）</h2><div class="excerpt"><p>本次修改的游戏是一个使用了LuaJIT制作的梦幻西游类单机游戏，名字叫做《梦战：碧海旭梦》。 这个游戏在我的硬盘里放了有很长一段时间了，当时水平有限，就没有再修改，直到这几天才重新开始研究。 网上关于LuaJIT的分析资料并不多，而有关单机游戏修改的是没有了，所以我基本上是从零开始研究。 经过几天不断的研究，终于对LuaJIT有了一点点了解，也找到了一些修改的方法。 不过说实话研究这个东西没...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-444_%E8%B4%A2%E5%8A%A1%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%B0%E5%80%BC%20Financial%20Analysis%20and%20Valuation/">
+<article class="md-text"><h2 class="post-title">财务分析与估值 Financial Analysis and Valuation</h2><div class="excerpt"><p>
+入门别放弃。
+
+企业的价值评估和资产评估是两个不同的概念。
+估值——对企业或股权进行估值的过程。
+价值组成/来源：主营业务、非经营性净资产——&gt;企业价值 ——&gt;价值分配：负债、其他资本索取权、普通股权益
+两类思路：
+
+贴现现金流方法：通过企业创造的（或者股东能够获得的）未来收益进行估值。
+乘数法：通过与其他同类型企业的比较进行估值。
+
+资金的时间价值：今天的一块钱 != 明天的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-445_Evaluation%20Indicators/">
 <article class="md-text"><h2 class="post-title">Evaluation Indicators</h2><div class="excerpt"><p>假设测试集中有类别为A、B、C的三种class。现在要对class A 的recall、precision和AP进行评估。
 
@@ -183,24 +205,21 @@ True Positive
 
 
 公式...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-446_lua%E5%85%83%E8%A1%A8/">
+<article class="md-text"><h2 class="post-title">lua元表</h2><div class="excerpt"><p>在 Lua table 中我们可以访问对应的key来得到value值，但是却无法对两个 table 进行操作。
+因此 Lua 提供了元表(Metatable)，允许我们改变table的行为，每个行为关联了对应的元方法。
+例如，使用元表我们可以定义Lua如何计算两个table的相加操作a+b。
+当Lua试图对两个表进行相加时，先检查两者之一是否有元表，之后检查是否有一个叫”add”的字段，若找...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-447_Nginx%E5%AE%89%E8%A3%85Lua%E6%A8%A1%E5%9D%97/">
 <article class="md-text"><h2 class="post-title">Nginx安装Lua模块</h2><div class="excerpt"><p>NGINX安装LUA（基于LNMP）：1.下载安装LuaJIT 2.1：http://luajit.org/download.html
 12345wget http://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gztar zxf LuaJIT-2.1.0-beta3.tar.gzcd LuaJIT-2.1.0-beta3make PREFIX=/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-444_%E8%B4%A2%E5%8A%A1%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%B0%E5%80%BC%20Financial%20Analysis%20and%20Valuation/">
-<article class="md-text"><h2 class="post-title">财务分析与估值 Financial Analysis and Valuation</h2><div class="excerpt"><p>
-入门别放弃。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-448_openresty%E7%9A%84lua%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0%E4%B8%80/">
+<article class="md-text"><h2 class="post-title">openresty的lua语法学习一</h2><div class="excerpt"><p>
+openresty的lua语法学习
 
-企业的价值评估和资产评估是两个不同的概念。
-估值——对企业或股权进行估值的过程。
-价值组成/来源：主营业务、非经营性净资产——&gt;企业价值 ——&gt;价值分配：负债、其他资本索取权、普通股权益
-两类思路：
 
-贴现现金流方法：通过企业创造的（或者股东能够获得的）未来收益进行估值。
-乘数法：通过与其他同类型企业的比较进行估值。
-
-资金的时间价值：今天的一块钱 != 明天的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-443_%E5%AF%B9LuaJIT%E5%88%B6%E4%BD%9C%E7%9A%84%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E5%8D%95%E4%BF%AE%E6%94%B9%EF%BC%88%E4%B8%80%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">对LuaJIT制作的游戏的简单修改（一）</h2><div class="excerpt"><p>本次修改的游戏是一个使用了LuaJIT制作的梦幻西游类单机游戏，名字叫做《梦战：碧海旭梦》。 这个游戏在我的硬盘里放了有很长一段时间了，当时水平有限，就没有再修改，直到这几天才重新开始研究。 网上关于LuaJIT的分析资料并不多，而有关单机游戏修改的是没有了，所以我基本上是从零开始研究。 经过几天不断的研究，终于对LuaJIT有了一点点了解，也找到了一些修改的方法。 不过说实话研究这个东西没...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+lua的popen获取命令的执行结果
+1234567891011121314151617181920212223242526272829local myfile = io.popen(&#34;pwd&#34;, &#34;r&#34;)if nil == myfile then  print(&#34;open file for dir fail!...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.273Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

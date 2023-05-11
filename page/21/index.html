@@ -110,9 +110,10 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-822_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">lua学习笔记（三）</h2><div class="excerpt"><p>Lua函数函数定义123456[local] function (argument1,argument2)    -- do something    [return result]		-- 可以返回多个值，每个值以逗号隔开end-- 函数名表示该函数的引用，与C/C++的函数指针类似
-可变参数1234567891011121314151617181920212223242526272829...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-820_Lua%E7%AC%94%E8%AE%B0%20%E8%BF%AD%E4%BB%A3%E5%99%A8/">
+<article class="md-text"><h2 class="post-title">Lua笔记 迭代器</h2><div class="excerpt"><p>Lua中的迭代器提供的是一种遍历表中所有元素的机制，它通常是函数的形式，每次调用函数，返回“下一个”值。Lua中的迭代器有两种实现方式，基于闭包（closure）或者基于协程（coroutine）。以下会通过一个实例来分别讨论两种迭代器的实现。
+
+为更好演示迭代器的功能并逐步实现一个迭代器函数，本文结合一个需求的场景，从一个字符串中拆出一个一个的UTF8字符，即每次调用迭代器函数会返回下一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-826_nginx%20lua%20waf/">
 <article class="md-text"><h2 class="post-title">nginx lua waf</h2><div class="excerpt"><p>ngx_lua_waf是一个基于lua-nginx-module(openresty)的web应用防火墙###用途：
 防止sql注入，本地包含，部分溢出，fuzzing测试，xss,SSRF等web攻击
@@ -129,30 +130,32 @@
 创建新的table时不会创建元表
 getmetatable(table) 获取table或者userdata类型变量的元表
 setmetatable(t,ot) 设置table或者userdat...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-821_Lua%E5%92%8CC++%E7%9A%84%E4%BA%A4%E4%BA%92%20/">
-<article class="md-text"><h2 class="post-title">Lua和C++的交互</h2><div class="excerpt"><p>目录
-
-  Lua堆栈
-  Lua堆栈操作
-  C++调用lua
-  Lua调用C++
-
-
-
-  There is something beautiful， just to find it.
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-824_Lua%20%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/">
+<article class="md-text"><h2 class="post-title">Lua 初步学习</h2><div class="excerpt"><p>1 所谓的“交互式编程”   Lua提供了交互式编程模式,我们可以在命令行中输入程序并立即查看效果。   Lua 交互式编程模式可以通过命令 lua -i 或 lua 来启用
+2 所谓的“脚本式编程”   我们将代码写入.lua文件，然后执行，就是脚本式编程。   eg:   WangBingdeMacBook-Pro:~ wangbing$ cd /Users/wangbing/Deskt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-805_lua%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+<article class="md-text"><h2 class="post-title">lua 基础知识学习总结</h2><div class="excerpt"><p>
+  一、lua 基本语法
+  二、lua 数据类型及操作
 
 
-Lua堆栈
 
-要理解Lua和C++的交互，首先要清楚Lua堆栈。简单来说Lua和C++交互是通过一个无处不在的虚拟堆栈来的。
+  lua 学习总结文档
 
-在Lua中，lua堆栈是一个结构，堆栈的索引可以是整数或者负数，+1表...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-803_Lua%20%E7%AC%94%E8%AE%B0%20string_table_function%E7%9F%A5%E8%AF%86%E7%82%B9/">
-<article class="md-text"><h2 class="post-title">Lua 笔记 string_table_function知识点</h2><div class="excerpt"><p>本文涉及到一些关于string、table和function的细碎知识点，一些常用操作的背后逻辑。本文是用于记录一次技术分享，部分内容与之前的一篇Lua的笔记有重叠。
-本文参考和使用的lua源码基于Lua 5.3.5，编写的lua脚本运行于OSX系统，使用的是64位的lua运行库。
 
-评估方法纯lua侧的对于代码执行耗时的评估和执行过程中产生的堆内存的分析。
-时间分析对应于cpu负载，借助o...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+一、lua 基本语法
+
+二、lua 数据类型及操作
+
+lua 是动态类型语言，变量无需声明定义，可以直接进行赋值操作。主要包含如下表格中的数据类型：
+
+
+  
+    nil：表示一个无效值
+    boolean：包含两个值：false 和 true。
+    number：表示双精度类型的实浮...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-804_NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining%20opinions%20from%20instructor%20eval/">
+<article class="md-text"><h2 class="post-title">NLP论文学习笔记（一）——Mining opinions from instructor evaluation reviews a deep learning approach</h2><div class="excerpt"><p>论文时间：2019.5一，论文摘要Mining opinions from instructor evaluation reviews a deep learning approach，即通过深度学习的方法来挖掘评教文本中的情感。Student evaluations of teaching (SET)提供了丰富的教学及老师授课情况信息，可以用来改善授课质量或评估教师水平。文章主要对比了传统...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-807_evaluate(input_sentence)/">
 <article class="md-text"><h2 class="post-title">evaluate(input_sentence)</h2><div class="excerpt"><p>详细的记录 evaluate函数的实现。解决报错
 12345678910111213141516171819ValueError                                Traceback (most recent call last)&lt;ipython-input-44-2ec1176683f0&gt; in &lt;module&gt;----&gt; 1 tr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
@@ -176,23 +179,19 @@ Lua堆栈
 在lua中，除法运算操作的永远是浮点数而且产生的结果也是浮点数。
 
 在新的版本中针对于整数除法引入了一个floor除...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-804_NLP%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94Mining%20opinions%20from%20instructor%20eval/">
-<article class="md-text"><h2 class="post-title">NLP论文学习笔记（一）——Mining opinions from instructor evaluation reviews a deep learning approach</h2><div class="excerpt"><p>论文时间：2019.5一，论文摘要Mining opinions from instructor evaluation reviews a deep learning approach，即通过深度学习的方法来挖掘评教文本中的情感。Student evaluations of teaching (SET)提供了丰富的教学及老师授课情况信息，可以用来改善授课质量或评估教师水平。文章主要对比了传统...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-811_%E7%BB%93%E5%90%88Fluentd%E5%AE%9E%E7%8E%B0ngx_lua_waf%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA/">
-<article class="md-text"><h2 class="post-title">结合Fluentd实现ngx_lua_waf页面展示</h2><div class="excerpt"><p>0x00 概述最近在看lua_waf,看看怎么搞个web界面出来，于是有了这篇笔记。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-809_Lua%E7%9A%84win%E5%92%8Clinux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+<article class="md-text"><h2 class="post-title">Lua的win和linux环境搭建</h2><div class="excerpt"><p>
+          
+            
+          &lt;a href=&quot;/2015/11/03/Linux常用命令笔记整理之tcpdump/&quot; rel=&quot;next&quot; title=&quot;Linux常用命令笔记整理之tcpdump&quot;&gt;
+            &lt;i class=&quot;fa fa-che...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-80_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>5 Functions
 
-上图是大佬分享的waf日志处理流程，不过我这篇文章讲的就简单多了，如下, 纯属搞着玩儿：
+当函数参数为literal string或table constructor时，可以不加括号
+12345print &#34;Hello world&#34;dofile &#39;a.lua&#39;print [[a multi-line message]]f{x=10, y=20}type{}
 
-ngx_lua_waf简介
-ngx_lua_waf，是一个轻量级、高性能的WAF模块。
-
-防止sql注入，本地包含，部分溢出，fuzzing测试，XSS, SSRF等web攻击
-防止svn/备份之类文件泄漏
-防止A...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-808_Lua%20%E4%B8%AD%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%20/">
-<article class="md-text"><h2 class="post-title">Lua 中的随机数</h2><div class="excerpt"><p>Lua 随机数算法用的是 libc 中的 rand, 也就是 LCG。然而这个算法的随机性一般。尤其是在一些平台上，当随机种子变化非常小的时候，产生的随机数变化也非常小。这样再经过 Lua 的精度取舍之后，产生的随机序列仍然很相似（伪随机的结果变成可预知性）。
-
-lua-l 上也讨论过这个问题 msg00564，lua 的作者之一 @lhf 给出的解决方案是先弹出前面几个看起来「不怎么随机」...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+:操作符可用于面向对象编程，o:foo(x)相当于o.foo(o...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

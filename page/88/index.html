@@ -110,16 +110,17 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-192_%E5%9F%BA%E4%BA%8EXLua%E7%9A%84Unity%E8%84%9A%E6%9C%AC%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
-<article class="md-text"><h2 class="post-title">基于XLua的Unity脚本框架的设计与实现</h2><div class="excerpt"><p>    &lt;p&gt;摘    要：&lt;br&gt;Unity技术的迅速崛起, 让3D移动游戏逐渐流行。随着游戏系统的不断丰富, 游戏开发迭代速度迅速加快。但Unity的原生C#开发效率较慢, 而且在部分平台上无法进行热更新, 无法满足[…]&lt;/p&gt;
-
-行游戏内容的更新,由于APP Store等一些平台不允许Unity游戏热更新C#进程库,必须使用Lua等脚本语言开发来实...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.249Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-197_%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8LuaPerfect!/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-197_%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8LuaPerfect!/">
 <article class="md-text"><h2 class="post-title">欢迎使用LuaPerfect!</h2><div class="excerpt"><p>简介
 LuaPerfect是腾讯公司开发的专业级的Lua集成开发环境，致力于为广大Lua开发人员提供免费的专业的Lua编辑调试工具。
 LuaPerfect基于纯C++实现了独立的Lua编辑和调试工具：
 1、接入方便：接口风格类似VS，符合VS用户习惯，非插件，接入自动化程度高，无需配置。
 2、调试功能强大：稳定的基础调试功能，强大的表达式监视，悬浮监视，日志跳转，条件断点，Lua异常捕获，L...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.249Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-194_Lua%E7%BC%96%E7%A8%8B7%E4%B9%8Bmetatable/">
+<article class="md-text"><h2 class="post-title">Lua编程7之metatable</h2><div class="excerpt"><p>    &lt;p&gt;思考并回答以下问题：&lt;br&gt;1.如何创建一个空表？&lt;/p&gt;
+
+在 Lua table 中可以访问对应的key来得到value值，但是却无法对两个 table 进行操作。要实现两个table的操作就要使用Lua提供的元表(Metatable)，元表允许我们改变table的行为，每个行为关联了对应的元方法。
+Lua中每一个值都有metatable...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.249Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-178_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AC%AC4%E7%89%88/">
 <article class="md-text"><h2 class="post-title">Lua程序设计第4版</h2><div class="excerpt"><p>Lua语言入门三目运算12((a and b)or c)或(a and b or c)
 
@@ -127,6 +128,15 @@ LuaPerfect基于纯C++实现了独立的Lua编辑和调试工具：
 
 type(nil) == nil 疑惑返回是string类型，用nil做比较应用”nil”
 1234&gt; type(nil) == nil false&gt; type(nil) == &#34;nil&#34...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-180_Lua%20string.find%20%E4%B8%AD%E7%9A%84%20%E2%80%9C%E5%9D%91%E2%80%9D%20/">
+<article class="md-text"><h2 class="post-title">Lua string.find 中的 “坑”</h2><div class="excerpt"><p>我们的线上环境，ngx_lua api 都是以模块形式加载到 lua 级别的 vm 中，已达到最大性能。而且我们并没有使用传统的 “包” 的形式来加载(也就是 require &#34;xx.xx.xx&#34; )，而是直接以模块名为加载( require &#34;xx&#34; )，这就意味着我们需要不断的来动态设置 package.path 来配合 require 的机制。于是我们写...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-179_%E6%9C%80%E8%BF%91%E5%85%B3%E4%BA%8ELua%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AF%87%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">最近关于Lua的学习篇总结（二）</h2><div class="excerpt"><p>
+            Contents
+        
+    &lt;/div&gt;
+    
+    &lt;h2 id=&quot;1-Lua的介绍&quot;&gt;&lt;a href=&quot;#1-Lua的介绍&quot; class=&quot;headerlink&quot; title=&quot;1.Lua的介绍&quot;&gt;&lt;/a&gt;1.Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-181_lua%20__index%E5%92%8C__newindex%E5%85%83%E6%96%B9%E6%B3%95/">
 <article class="md-text"><h2 class="post-title">lua __index和__newindex元方法</h2><div class="excerpt"><p>          &lt;h1 id=&quot;__index&quot;&gt;__index&lt;/h1&gt;
 
@@ -136,15 +146,11 @@ type(nil) == nil 疑惑返回是string类型，用nil做比较应用”nil”
   如果没有这个元方法，返回nil
   
 __index元方法可以是table，也可以是函数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-179_%E6%9C%80%E8%BF%91%E5%85%B3%E4%BA%8ELua%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AF%87%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">最近关于Lua的学习篇总结（二）</h2><div class="excerpt"><p>
-            Contents
-        
-    &lt;/div&gt;
-    
-    &lt;h2 id=&quot;1-Lua的介绍&quot;&gt;&lt;a href=&quot;#1-Lua的介绍&quot; class=&quot;headerlink&quot; title=&quot;1.Lua的介绍&quot;&gt;&lt;/a&gt;1.Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-180_Lua%20string.find%20%E4%B8%AD%E7%9A%84%20%E2%80%9C%E5%9D%91%E2%80%9D%20/">
-<article class="md-text"><h2 class="post-title">Lua string.find 中的 “坑”</h2><div class="excerpt"><p>我们的线上环境，ngx_lua api 都是以模块形式加载到 lua 级别的 vm 中，已达到最大性能。而且我们并没有使用传统的 “包” 的形式来加载(也就是 require &#34;xx.xx.xx&#34; )，而是直接以模块名为加载( require &#34;xx&#34; )，这就意味着我们需要不断的来动态设置 package.path 来配合 require 的机制。于是我们写...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-182_Lua%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81%20/">
+<article class="md-text"><h2 class="post-title">Lua运行时更新代码</h2><div class="excerpt"><p>            &lt;p&gt;      最近沉迷lua脚本热更，想说这个可以提高多少菜鸡的调试效率，找了网上好多文章，但是都不行，尝试了很久，并且自己测试和学习，写了一遍，勉强能热更了（还是有个问题，要按2次才能输出正确热更的值，一直找不到，有人找到麻烦告诉我一下308164213）。下面记录一下找热更的过程。&lt;/p&gt;
+
+一、用来卸载表格的加载
+–最简单粗暴的热更新...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-183_The%20Environment%20Model%20of%20Evaluation/">
 <article class="md-text"><h2 class="post-title">The Environment Model of Evaluation</h2><div class="excerpt"><p>&lt;p&gt;这是 sicp 第三章中的 The Environment Model of Evaluation 的总结和一道习题的回顾。&lt;/p&gt;
 
@@ -157,38 +163,23 @@ Environment
 <article class="md-text"><h2 class="post-title">基于redis+nginx+Lua实现访问白名单黑名单</h2><div class="excerpt"><p>&lt;span hidden itemprop=&quot;author&quot; itemscope itemtype=&quot;http://schema.org/Person&quot;&gt;
   &lt;meta itemprop=&quot;name&quot; content=&quot;刘三儿&quot;&gt;
   &lt;meta itemprop=&quot;de...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-187_lua%20lapis%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">lua lapis安装</h2><div class="excerpt"><p>
-    
-    
-    
-&lt;section class=&quot;article-body markdown-body&quot;&gt;
-    
-    &lt;h3 id=&quot;lapis安装&quot;&gt;
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-186_Nginx%20%E4%BD%BF%E7%94%A8%20lua/">
+<article class="md-text"><h2 class="post-title">Nginx 使用 lua</h2><div class="excerpt"><p>    &lt;ul id=&quot;markdown-toc&quot;&gt;
 
-lapis安装
-lapis是lua中的web框架，基于openresty,直接和nginx整合在一起，支持lua和moonscript.
+  1. 软件版本
+  2. 环境准备
+  3. 软件安装
+  4.  配置lua脚本
+  5. 配置php
+  6. 配置日志，记录post请求的request_body 和response_body
 
 
-安装ope...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-185_%5BLua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>    &lt;h2 id=&quot;介绍&quot;&gt;介绍&lt;/h2&gt;
-
-官网地址：
-
-http://www.lua.org/home.html
-
-Lua是脚本语言，可以自己运行，可以嵌入C语言运行，也可以把C语言嵌入Lua运行。
-
-Lua全部都是用C语言实现的，可以到官网去下载源码，自己编译，编译过程很简单，没什么错误。
-
-源码目录结构：
+1. 软件版本
 
 
+  系统  centos6.7X86_64
 
-编译源码
-
-需要在VS中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  nginx   1.11.5...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

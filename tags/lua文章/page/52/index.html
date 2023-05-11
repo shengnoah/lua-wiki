@@ -114,6 +114,20 @@
 
   <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-527_org.springframework.expression.spel.SpelEvaluation/">
 <article class="md-text"><h2 class="post-title">SpelEvaluationException</h2><div class="excerpt"><p></p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-524_Lua/">
+<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>
+  Lua 巴西里约热内卢天主教大学 1993年 脚本语言  标准 C 语言
+
+
+官网： www.lua.org
+
+搭建环境
+
+
+  
+    编译官方源码（windews 编译相对较繁琐，要有编译程序，比如 vs，windows 建议使用 LuaForWindows 安装包；linux 和 macos 相对简单，在下载的源源文件的 doc 中有编译步骤）
+
+&lt;p&gt;&lt;a ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-528_Lua%E6%A0%87%E5%87%86%E5%BA%93/">
 <article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>string库概念lua解释器对字符串支持有限，一个程序可以创建字符并连接字符串，但是不能截取子串，检查字符串的大小，内容等，操作字符串的功能基本来自string库
 lua5.1中字符串库的所有函数如下
@@ -138,33 +152,9 @@ rep
 返回字符串s的n个拷贝
 string.rep(“abcd”,2)
 abcd...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-521_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>Lua 字符串操作
-
-
-函数
-功能
-
-
-
-string.upper(argument)
-字符串全部转为大写字母
-
-
-string.lower(argument)
-字符串全部转为小写字母
-
-
-string.gsub(mainString,findString,replaceString,num)
-字符串替换
-
-
-string.find (str, substr, [init, [end]])
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-526_Lua%20String%E5%87%BD%E6%95%B0/">
-<article class="md-text"><h2 class="post-title">Lua String函数</h2><div class="excerpt"><p>local str = “hellolua，helloworld”–返回索引，找不到返回nilprint(string.find(str,”hello”))–匹配返回字符串，一般用于判断字符串是否存在print(string.match(str,”hello”))– 字符串截取(str,位置(包含当前位置),长度（负数反向,-1表示截取全部）)print(string.sub(str,5,-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-508_Lua%E5%BE%AA%E7%8E%AF%E4%BC%98%E5%8C%96%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
-<article class="md-text"><h2 class="post-title">Lua循环优化 · 花生肉泥</h2><div class="excerpt"><p>关于大量字符串连接 （速度提升100倍）123456789101112131415161718a = os.clock()local s = &#39;&#39;for i=1,100000 do    s = s .. &#39;a&#39;endb = os.clock()print(b-a)    -- 1.708秒a = os.clock()local s = &#39;&#39;l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-523_lua%E6%94%AF%E6%8C%81init64/">
+<article class="md-text"><h2 class="post-title">lua支持init64</h2><div class="excerpt"><p>lua5.3提供了很多很好的特性例如string.pack unpack这样的好东西，同时还支持ini64.在lua之前的版本中number只有一种类型double.对于init64基本按照int来处理. 对于64位的解决方案有很多种,基本的思路都是使用8byte的string或者lightuserdata或者userdata修改元表来实现.
+luajit使用userdata重载元表运算符实...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-507_Goto%20in%20LuaJIT%20/">
 <article class="md-text"><h2 class="post-title">Goto in LuaJIT</h2><div class="excerpt"><p>Lua 在 5.2 之后的版本，加入了 goto 这个关键字，用来控制程序跳转到指定 label。我们可以利用这个特性，来模拟 continue 的实现。需要注意的是 goto 只能跳转到 label，而 ::name:: 的格式就可以设置一个 label。
 
@@ -173,21 +163,6 @@ for i=1,5 do
         goto continue
     end
     ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-506_%E9%87%87%E8%AE%BF%20Lua%20%E5%8F%91%E6%98%8E%E4%BA%BA/">
-<article class="md-text"><h2 class="post-title">采访 Lua 发明人</h2><div class="excerpt"><p>
-                        
-                            
-                                
-                                
-                            &lt;div class=&quot;entry&quot;&gt;
-
-           ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-50_tolua++%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">tolua++安装</h2><div class="excerpt"><p>
-          
-            
-          &lt;a href=&quot;/2015/11/11/lua_cpp_bind/&quot; rel=&quot;next&quot; title=&quot;C++与Lua本质原始交互API&quot;&gt;
-            &lt;i class=&quot;fa fa-chevron-left&quot...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-509_Lua%E8%84%9A%E6%9C%AC%E5%BC%8F%E7%BC%96%E7%A8%8B/">
 <article class="md-text"><h2 class="post-title">Lua脚本式编程</h2><div class="excerpt"><p>1.基本语法单行注释：–多行注释：–[[ 内容–]]
 lua最好不要使用下划线加大字母的标识符，因为lua的保留字是这样的。lua不允许使用特殊字符如@$%来定义标志符。
@@ -209,6 +184,23 @@ Kafka 集群默认自动分配解析
       Broker3
       Broker4
       ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-508_Lua%E5%BE%AA%E7%8E%AF%E4%BC%98%E5%8C%96%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+<article class="md-text"><h2 class="post-title">Lua循环优化 · 花生肉泥</h2><div class="excerpt"><p>关于大量字符串连接 （速度提升100倍）123456789101112131415161718a = os.clock()local s = &#39;&#39;for i=1,100000 do    s = s .. &#39;a&#39;endb = os.clock()print(b-a)    -- 1.708秒a = os.clock()local s = &#39;&#39;l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-506_%E9%87%87%E8%AE%BF%20Lua%20%E5%8F%91%E6%98%8E%E4%BA%BA/">
+<article class="md-text"><h2 class="post-title">采访 Lua 发明人</h2><div class="excerpt"><p>
+                        
+                            
+                                
+                                
+                            &lt;div class=&quot;entry&quot;&gt;
+
+           ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-50_tolua++%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">tolua++安装</h2><div class="excerpt"><p>
+          
+            
+          &lt;a href=&quot;/2015/11/11/lua_cpp_bind/&quot; rel=&quot;next&quot; title=&quot;C++与Lua本质原始交互API&quot;&gt;
+            &lt;i class=&quot;fa fa-chevron-left&quot...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

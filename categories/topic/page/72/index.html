@@ -112,7 +112,29 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：topic</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-333_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8C%87%E4%BB%A4/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-330_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记</h2><div class="excerpt"><p>基础函数assertassert(v[,message])如果其参数v的值为假（nil或false），它就调用error；否则，返回所有的参数。在错误情况时，message指那个错误对象；如果不提供这个参数，参数默认为”assertionfailed!”
+getmetatablegetmetatable(object)如果object不包含元表，返回nil。否则，如果在该对象的元表中有__m...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-331_Redisson%20lua%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E8%B8%A9%E5%9D%91%E4%B9%8B%E7%A5%9E%E7%A7%98%E7%9A%84%E5%BC%95%E5%8F%B7/">
+<article class="md-text"><h2 class="post-title">Redisson lua脚本执行踩坑之神秘的引号</h2><div class="excerpt"><p>最近项目需求，在redis中需要执行批量删除指定key，并且要支持原子操作，那么当然只有自己写lua脚本了。
+项目中使用的是redisson作为redis连接工具，首先先定义好lua脚本：
+1234private static final String BATCH_DEL_SCRIPT = &#34;for k,v in  pairs(ARGV) do n &#34; +         &...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-332_FSM%20Lua/">
+<article class="md-text"><h2 class="post-title">FSM Lua</h2><div class="excerpt"><p>Finite State Machine
+Description
+
+
+在讲这个设计模式之前, 我先举一个例子, 假如我们现在开发一款游戏, 我们的任务是实现一个角色, 我们需要根据玩家的输入来控制主角的行为。
+那当按下B键时，他应该跳跃但这时有bug，在哪？我们没有阻止主角 “在空中跳跃”，当主角跳起来后持续的按下B键，这样会导致他一直飘在空中，那简单的修复就是添加一个 isJumping ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-335_Lua/">
+<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>  Lua函数定义格式：
+  optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
+  function_body
+  return result_params_comma_separated
+  end
+说明：
+1）optional_function_sc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-333_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E8%A1%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%8C%87%E4%BB%A4/">
 <article class="md-text"><h2 class="post-title">Lua源码阅读：表操作的指令</h2><div class="excerpt"><p>表操作的相关指令。
 
 创建表：创建一个空表，代码：
@@ -122,39 +144,6 @@
 simpleexp最终调用Constructor 函数，这个函数专门负责构造表。
 解析表的信息会存放在 ConsControl 结构体中：
 1234567struct  {  expdesc v;  /* ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-327_%5BLua%5D%20MetaTable%20and%20MetaMethod/">
-<article class="md-text"><h2 class="post-title">MetaTable and MetaMethod</h2><div class="excerpt"><p>比如，我们有两个分数：
-
-fraction_a = &#123;numerator=2, denominator=3&#125;
-fraction_b = &#123;numerator=4, denominator=7&#125;
-
-
-我们想实现分数间的相加：2/3 + 4/7，我们如果要执行： fraction_a + fraction_b，会报错的。
-
-所以，我们可以动用MetaTab...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-332_FSM%20Lua/">
-<article class="md-text"><h2 class="post-title">FSM Lua</h2><div class="excerpt"><p>Finite State Machine
-Description
-
-
-在讲这个设计模式之前, 我先举一个例子, 假如我们现在开发一款游戏, 我们的任务是实现一个角色, 我们需要根据玩家的输入来控制主角的行为。
-那当按下B键时，他应该跳跃但这时有bug，在哪？我们没有阻止主角 “在空中跳跃”，当主角跳起来后持续的按下B键，这样会导致他一直飘在空中，那简单的修复就是添加一个 isJumping ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-331_Redisson%20lua%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E8%B8%A9%E5%9D%91%E4%B9%8B%E7%A5%9E%E7%A7%98%E7%9A%84%E5%BC%95%E5%8F%B7/">
-<article class="md-text"><h2 class="post-title">Redisson lua脚本执行踩坑之神秘的引号</h2><div class="excerpt"><p>最近项目需求，在redis中需要执行批量删除指定key，并且要支持原子操作，那么当然只有自己写lua脚本了。
-项目中使用的是redisson作为redis连接工具，首先先定义好lua脚本：
-1234private static final String BATCH_DEL_SCRIPT = &#34;for k,v in  pairs(ARGV) do n &#34; +         &...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-335_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>  Lua函数定义格式：
-  optional_function_scope function function_name( argument1, argument2, argument3..., argumentn)
-  function_body
-  return result_params_comma_separated
-  end
-说明：
-1）optional_function_sc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-338_lua%E5%87%BD%E6%95%B0%E4%B8%8Eupavalue/">
-<article class="md-text"><h2 class="post-title">lua函数与upavalue</h2><div class="excerpt"><p>Lua中的所谓upvalue是一类比较特殊的值，可以理解为在某函数内引用外部的数据。
-函数定义中用到了pushclosure这个函数用于将函数的定义Proto结构体指针push到父函数的数组中，在这个函数内，还建立了有关upvalue相关的逻辑：
-static void pushclosure (LexState *ls, FuncState *func, expdesc *v) &#123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-334_Lua%E7%BC%96%E7%A8%8B3%E4%B9%8B%E5%8F%98%E9%87%8F/">
 <article class="md-text"><h2 class="post-title">Lua编程3之变量</h2><div class="excerpt"><p>思考并回答以下问题：1.a, b, c = 0 a和b和c的值分别是多少？2.多值赋值的两种常用场景是什么？3.局部变量的作用域是什么？使用局部变量的两个好处是什么？4.全局变量_G是什么类型？有什么作用？5.全局环境存在什么问题？
 
@@ -162,6 +151,16 @@ static void pushclosure (LexState *ls, FuncState *func, expdesc *v) &#123...</p>
 变量在使用前，必须在代码中进行声明，即创建该变量。
 编译程序执行代码之前编译器需要知道如何给语句变量开辟存储区，用于存储变量的值。
 Lua变量有三种类型：全...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-336_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">Lua程序设计（4）</h2><div class="excerpt"><p>Lua的输入输出、补充知识
+
+输入输出单就Lua语言而言，只提供了ISO C语言标准支持的功能，即基本的文件操作等。
+简单I/O模型简单模型虚拟了一个当前输入流和一个当前输出流。函数io.input和函数io.output可以用于改变当前的输入输出流，调用io.input会以只读模式打开指定文件，并将文件设置为当前输入流。之后所有的输入都将来自该文件，除非再次调用io.input。
+io.w...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-338_lua%E5%87%BD%E6%95%B0%E4%B8%8Eupavalue/">
+<article class="md-text"><h2 class="post-title">lua函数与upavalue</h2><div class="excerpt"><p>Lua中的所谓upvalue是一类比较特殊的值，可以理解为在某函数内引用外部的数据。
+函数定义中用到了pushclosure这个函数用于将函数的定义Proto结构体指针push到父函数的数组中，在这个函数内，还建立了有关upvalue相关的逻辑：
+static void pushclosure (LexState *ls, FuncState *func, expdesc *v) &#123...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-337_Lua%20%E5%AD%A6%E4%B9%A0%20chapter10%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter10</h2><div class="excerpt"><p>目录
 
@@ -192,12 +191,6 @@ Lua变量有三种类型：全...</p></div><div class="meta cap"><span class="ca
 
 
 还有一些...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-336_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%884%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">Lua程序设计（4）</h2><div class="excerpt"><p>Lua的输入输出、补充知识
-
-输入输出单就Lua语言而言，只提供了ISO C语言标准支持的功能，即基本的文件操作等。
-简单I/O模型简单模型虚拟了一个当前输入流和一个当前输出流。函数io.input和函数io.output可以用于改变当前的输入输出流，调用io.input会以只读模式打开指定文件，并将文件设置为当前输入流。之后所有的输入都将来自该文件，除非再次调用io.input。
-io.w...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.262Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-339_C++%E4%B8%8ELua%E6%9C%AC%E8%B4%A8%E5%8E%9F%E5%A7%8B%E4%BA%A4%E4%BA%92API/">
 <article class="md-text"><h2 class="post-title">C++与Lua本质原始交互API</h2><div class="excerpt"><p>
           

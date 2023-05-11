@@ -112,47 +112,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-542_Lua%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
-<article class="md-text"><h2 class="post-title">Lua语言学习</h2><div class="excerpt"><p>Lua
-网上教程Lua简明教程
-极客学院Openresty教程
-Windows安装
-使用 tasklist /fi &#34;imagename eq nginx.exe&#34; 命令查看 nginx 进程，其中一个是 master 进程，另一个是 worker 进程
-cmd进入nginx的安装目录，输入start nginx.exe来启动nginx
-cmd进入nginx的安装目录，输入n...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-543_Nginx%20Lua%20Redis%E9%98%B2CC%E6%94%BB%E5%87%BB/">
-<article class="md-text"><h2 class="post-title">Nginx Lua Redis防CC攻击</h2><div class="excerpt"><p> web安全 
-
-
-原理Nginx Lua Redis防止CC攻击实现原理：
-同一个外网IP、同一个网址(ngx.var.request_uri)、同一个客户端(http_user_agent)在某一段时间(CCseconds)内访问某个网址(ngx.var.request_uri)超过指定次数(CCcount)，则禁止这个外网IP+同一个客户端(md5(IP+ngx.var.http_us...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-545_Lua%20%E5%85%83%E8%A1%A8%E5%92%8C%E5%85%83%E6%96%B9%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">Lua 元表和元方法</h2><div class="excerpt"><p>table 作为 Lua 中唯一的数据结构，我们可以利用 table 实现面向对象编程中的类、继承、多重继承等等。在这就介绍一下和 table 密切相关的 Lua 元表和元方法。
-Lua 中的每个值都有一个元表。table 和 userdata 可以有各自独立的元表，而其他类型的值则共享其类型所属的单一元表。任何 table 都可以作为任何值的元表，而一组相关的 table 也可以共享一个通...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-546_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E6%95%B0%E5%80%BC/">
-<article class="md-text"><h2 class="post-title">Lua入门教程：数值</h2><div class="excerpt"><p>Lua 5.2 以及之前的版本，所有数值类型都是以双精度浮点数表示，并且所有浮点型数值最大都是 2^54，但是 Lua 5.3 版本引入了整形，最大可用 64 位表示。
-数值表示方式Lua 数值默认是十进制表示，除了整形之外，其他小数或者指数都会当做浮点型数值。我们可以使用函数 type 来获数值类型，他们都是使用 number 表示数值：
-1234567&gt; 1         &gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-544_Lua%20%E8%AF%AD%E8%A8%80%E5%88%9D%E8%AF%86/">
-<article class="md-text"><h2 class="post-title">Lua 语言初识</h2><div class="excerpt"><p>Lua 是一个小巧的脚本语言 Lua脚本可以很容易的被C/C++ 代码调用，也可以反过来调用C/C++的函数，这使得Lua在应用程序中可以被广泛应用。不仅仅作为扩展脚本，也可以作为普通的配置文件，代替XML,ini等文件格式，并且更容易理解和维护。[2] Lua由标准C编写而成，代码简洁优美，几乎在所有操作系统和平台上都可以编译，运行。[2] 一个完整的Lua解释器不过200k，在目前所有脚...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-548_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%BA%8C)/">
-<article class="md-text"><h2 class="post-title">深入 Lua Garbage Collector(二)</h2><div class="excerpt"><p>
-
-这一篇我们主要介绍一下 Lua 的 GC 机制
-Lua垃圾回收器函数Lua 提供了以下函数 collectgarbage ([opt [, arg]]) 用来控制自动内存管理:
-
-collectgarbage(“collect”): 做一次完整的垃圾收集循环。通过参数 opt 它提供了一组不同的功能：
-
-collectgarbage(“count”): 以 K 字节数为单位返回 Lua ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-549_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/">
-<article class="md-text"><h2 class="post-title">Lua学习笔记三</h2><div class="excerpt"><p>Lua中可以用三种方式定义字符串：
-
-单引号   ‘hello world’
-双引号  “heool world”
-[[ ]]   [[hello world]]
-
-字符串操作1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950print(string.upper...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-541_Lua%E5%8D%8F%E7%A8%8B/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-541_Lua%E5%8D%8F%E7%A8%8B/">
 <article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>
   Lua的协程
 
@@ -171,6 +131,46 @@ Lua的协程
         
           当前协程将控制权让给另外一个协程，协程之间的优先级是平等的
      ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-543_Nginx%20Lua%20Redis%E9%98%B2CC%E6%94%BB%E5%87%BB/">
+<article class="md-text"><h2 class="post-title">Nginx Lua Redis防CC攻击</h2><div class="excerpt"><p> web安全 
+
+
+原理Nginx Lua Redis防止CC攻击实现原理：
+同一个外网IP、同一个网址(ngx.var.request_uri)、同一个客户端(http_user_agent)在某一段时间(CCseconds)内访问某个网址(ngx.var.request_uri)超过指定次数(CCcount)，则禁止这个外网IP+同一个客户端(md5(IP+ngx.var.http_us...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-542_Lua%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">
+<article class="md-text"><h2 class="post-title">Lua语言学习</h2><div class="excerpt"><p>Lua
+网上教程Lua简明教程
+极客学院Openresty教程
+Windows安装
+使用 tasklist /fi &#34;imagename eq nginx.exe&#34; 命令查看 nginx 进程，其中一个是 master 进程，另一个是 worker 进程
+cmd进入nginx的安装目录，输入start nginx.exe来启动nginx
+cmd进入nginx的安装目录，输入n...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-544_Lua%20%E8%AF%AD%E8%A8%80%E5%88%9D%E8%AF%86/">
+<article class="md-text"><h2 class="post-title">Lua 语言初识</h2><div class="excerpt"><p>Lua 是一个小巧的脚本语言 Lua脚本可以很容易的被C/C++ 代码调用，也可以反过来调用C/C++的函数，这使得Lua在应用程序中可以被广泛应用。不仅仅作为扩展脚本，也可以作为普通的配置文件，代替XML,ini等文件格式，并且更容易理解和维护。[2] Lua由标准C编写而成，代码简洁优美，几乎在所有操作系统和平台上都可以编译，运行。[2] 一个完整的Lua解释器不过200k，在目前所有脚...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-545_Lua%20%E5%85%83%E8%A1%A8%E5%92%8C%E5%85%83%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">Lua 元表和元方法</h2><div class="excerpt"><p>table 作为 Lua 中唯一的数据结构，我们可以利用 table 实现面向对象编程中的类、继承、多重继承等等。在这就介绍一下和 table 密切相关的 Lua 元表和元方法。
+Lua 中的每个值都有一个元表。table 和 userdata 可以有各自独立的元表，而其他类型的值则共享其类型所属的单一元表。任何 table 都可以作为任何值的元表，而一组相关的 table 也可以共享一个通...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-548_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%BA%8C)/">
+<article class="md-text"><h2 class="post-title">深入 Lua Garbage Collector(二)</h2><div class="excerpt"><p>
+
+这一篇我们主要介绍一下 Lua 的 GC 机制
+Lua垃圾回收器函数Lua 提供了以下函数 collectgarbage ([opt [, arg]]) 用来控制自动内存管理:
+
+collectgarbage(“collect”): 做一次完整的垃圾收集循环。通过参数 opt 它提供了一组不同的功能：
+
+collectgarbage(“count”): 以 K 字节数为单位返回 Lua ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-546_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E6%95%B0%E5%80%BC/">
+<article class="md-text"><h2 class="post-title">Lua入门教程：数值</h2><div class="excerpt"><p>Lua 5.2 以及之前的版本，所有数值类型都是以双精度浮点数表示，并且所有浮点型数值最大都是 2^54，但是 Lua 5.3 版本引入了整形，最大可用 64 位表示。
+数值表示方式Lua 数值默认是十进制表示，除了整形之外，其他小数或者指数都会当做浮点型数值。我们可以使用函数 type 来获数值类型，他们都是使用 number 表示数值：
+1234567&gt; 1         &gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-549_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记三</h2><div class="excerpt"><p>Lua中可以用三种方式定义字符串：
+
+单引号   ‘hello world’
+双引号  “heool world”
+[[ ]]   [[hello world]]
+
+字符串操作1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950print(string.upper...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.282Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-52_lua%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89/">
 <article class="md-text"><h2 class="post-title">lua函数定义</h2><div class="excerpt"><p>FuncStateproto结构数组保存函数原型信息;prev保存父函数体指针；actvar保存定义的局部变量；upvalues保存upvalue
 Lua源码中,专门有一个结构体FuncState用来保存函数相关的信息.其实,即使没有创建任何函数,对于Lua而言也有一个最外层的FuncState数据.这个结构体的定义:

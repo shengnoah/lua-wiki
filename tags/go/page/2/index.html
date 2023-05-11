@@ -117,6 +117,12 @@
 这里有一些边界例子我们没有涉及到，但是你不太可能遇见这些例子。另外，如果你遇到了，希望我们已经打下的基础能让你理解这是怎么回事。
 链接
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go4.2.html">
+<article class="md-text"><h2 class="post-title">go4.2</h2><div class="excerpt"><p>4.2 接口接口是一种类型，它只定义了声明，没有具体实现。例如：
+123type Logger interface &#123;    Log(message string)&#125;
+
+你也许觉得奇怪，这样做有什么用。接口可以使你的代码从具体的实现中去耦。例如，我们可以会有很多种类型的loggers：
+123type SqlLogger struct &#123; ... &#125;t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go4.0.html">
 <article class="md-text"><h2 class="post-title">go4.0</h2><div class="excerpt"><p>4.0 代码组织和接口现在是时候来看看如何组织我们的代码了。
 链接
@@ -125,25 +131,31 @@
 下一节：包
 
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go4.2.html">
-<article class="md-text"><h2 class="post-title">go4.2</h2><div class="excerpt"><p>4.2 接口接口是一种类型，它只定义了声明，没有具体实现。例如：
-123type Logger interface &#123;    Log(message string)&#125;
-
-你也许觉得奇怪，这样做有什么用。接口可以使你的代码从具体的实现中去耦。例如，我们可以会有很多种类型的loggers：
-123type SqlLogger struct &#123; ... &#125;t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go4.1.html">
-<article class="md-text"><h2 class="post-title">go4.1</h2><div class="excerpt"><p>4.1 包为了理解更复杂的库和组织系统，我们需要学习包。在go语言中，包名和你的go语言工作空间的目录结构有关。如果我们想要构建一个购物系统，我们开始可能以shopping作为包名，并将源代码放入$GOPATH/src/shopping。
-我们不想把一切东西都放入这个文件夹中。例如，可能我想在它自己的文件夹隔离一些数据库逻辑。要达到此目的，我们可以在$GOPATH/src/shopping中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go4.3.html">
+<article class="md-text"><h2 class="post-title">go4.3</h2><div class="excerpt"><p>4.3 继续之前最后，当你试着用go写一些简单的项目之后，你会习惯在go语言的工作空间中组织代码的方式。最重要是的记住go语言中的包名和你的目录结构有密切关系（不仅仅在一个项目中，在整个工作空间都如此）。
+go语言处理类型的可见性方法是简单有效的。也是一致的。还有一些内容我们没有介绍，例如常量和全局变量，但是不用担心，它们的可见性也是遵循同样的规则。
+最后，如果你不熟悉go语言中的接口，你可...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go5.1.html">
 <article class="md-text"><h2 class="post-title">go5.1</h2><div class="excerpt"><p>5.1 错误处理go语言没有异常处理，一般通过返回值处理错误。例如strconv.Atoi函数将一个字符串转换成一个整数：
 12345678910111213141516171819package mainimport (    &quot;fmt&quot;    &quot;os&quot;    &quot;strconv&quot;)func main() &#123;    if ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go5.0.html">
+<article class="md-text"><h2 class="post-title">go5.0</h2><div class="excerpt"><p>5.0 go花絮在这章，我们会介绍一些go语言的特性，这些特性不适合使用在其他地方。
+链接
+目录
+上一章：继续之前
+下一节：错误处理
+
+</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go4.1.html">
+<article class="md-text"><h2 class="post-title">go4.1</h2><div class="excerpt"><p>4.1 包为了理解更复杂的库和组织系统，我们需要学习包。在go语言中，包名和你的go语言工作空间的目录结构有关。如果我们想要构建一个购物系统，我们开始可能以shopping作为包名，并将源代码放入$GOPATH/src/shopping。
+我们不想把一切东西都放入这个文件夹中。例如，可能我想在它自己的文件夹隔离一些数据库逻辑。要达到此目的，我们可以在$GOPATH/src/shopping中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go5.2.html">
+<article class="md-text"><h2 class="post-title">go5.2</h2><div class="excerpt"><p>5.2 defer尽管go语言提供了垃圾回收器，但是有些资源需要我们明确的去释放。例如，当我们处理完一个文件事，需要使用Close()关闭文件。这类代码总是危险的。首先，当我们写一个函数时，很容易忘记关闭在第十行声明的某些东西。另外，一个函数可能会有多个返回点。go的解决方法会是提供了defer关键字：
+12345678910111213141516package mainimport ( ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go5.3.html">
 <article class="md-text"><h2 class="post-title">go5.3</h2><div class="excerpt"><p>5.3 go语言风格大多数使用go语言开发的程序都遵循相同的格式化规则，也就是说，使用tab缩进并且花括号和语句在同一行。
 我知道，你有属于自己的风格，并且你也想坚持下去。我曾经很长一段时间也是这样的。但是我很高兴我最终还是屈服了。就是因为go fmt命令，这个命令易用且权威（所以没有人会为了毫无意义的偏好而争论）。
 当你在工程内部，你可以通过下面的命令将工程下所有文件使用相同的格式化规则：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go5.2.html">
-<article class="md-text"><h2 class="post-title">go5.2</h2><div class="excerpt"><p>5.2 defer尽管go语言提供了垃圾回收器，但是有些资源需要我们明确的去释放。例如，当我们处理完一个文件事，需要使用Close()关闭文件。这类代码总是危险的。首先，当我们写一个函数时，很容易忘记关闭在第十行声明的某些东西。另外，一个函数可能会有多个返回点。go的解决方法会是提供了defer关键字：
-12345678910111213141516package mainimport ( ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go5.4.html">
 <article class="md-text"><h2 class="post-title">go5.4</h2><div class="excerpt"><p>5.4 初始化的ifgo支持一种稍有不同的if语句，一个值可以在条件语句执行前定义并初始化：
 123if x := 10; count &gt; x &#123;    ...&#125;
@@ -152,16 +164,6 @@
 123if err := process(); err != nil &#123;    return err&#125;
 
 比较有趣的是，if语句中定义...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go5.5.html">
-<article class="md-text"><h2 class="post-title">go5.5</h2><div class="excerpt"><p>5.5 空接口和转换在大多数面向对象语言中，都有一种内置的基类，叫object，它是所有其他类的超类。但是go语言不支持继承，所以没有类似超类的概念。go拥有一个没有任何方法的空接口：interface&#123;&#125;。因为每种类型都实现了空接口的0个方法，并且接口都是隐式实现，所以每种类型都实现了空接口的条约。
-如果我们愿意，我们可以通过下面声明方式写一个add函数：
-123fun...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go5.6.html">
-<article class="md-text"><h2 class="post-title">go5.6</h2><div class="excerpt"><p>5.6 字符串和字节数组字符串和字节数组有密切关系，我们可以轻易的将它们转换成对方：
-123stra := &quot;the spice must flow&quot;byts := []byte(stra)strb := string(byts)
-
-事实上，这也是大多数类型的转换方式。一些函数明确指定一个int32或者int64或者相应的无符号类型。你可能会发现你自己不得不像下面一样：
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a></div>
   
 

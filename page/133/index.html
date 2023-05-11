@@ -110,19 +110,22 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/lua_guide/syntax/">
-<article class="md-text"><h2 class="post-title">Lua基本语法</h2><div class="excerpt"><p>基本语法Lua 学起来非常简单。现在，让我们开始创建我们的第一个 Lua 程序吧！  
-第一个 Lua 程序Lua 提供交互式编程模式。在这个模式下，你可以一条一条地输入命令，然后立即就可以得到结果。你可以在 shell 中使用 lua -i 或者 lua 命令启动。输入命令后，按下回车键，就启动了交互模式，显示如下：  
-1234567$ lua -i $ Lua 5.1.4  Copyr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/lua_guide/arrays/">
+<article class="md-text"><h2 class="post-title">数组</h2><div class="excerpt"><p>Lua 数组数组是一组有序的对象排列，既可以是一维的也可以是多维的。  
+在 Lua 语言中，数组是用整数索引表实现的。数组的大小并不固定，随着数组元素的增加，它可以动态地增加内存空间大小。  
+一维数组一维数组可以使用一个简单的表结构表示。可以通过一个简单循环初始化数组或者读取数组中数据。示例代码如下所示：  
+123456789array = &#123;&quot;Lua&quot;,...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/coroutines/">
 <article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
 上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/break/">
-<article class="md-text"><h2 class="post-title">Break语句</h2><div class="excerpt"><p>#break 语句  
-程序在解释执行过程中，在循环内遇到 break 语句时，循环将立即结束。程序将循环语句的下一条语句开始执行。如果你是在嵌套循环（即，一个循环内还有一个循环语句）内使用 break 语句，break 只结束内层循环，并从该代码块后的第一条语句处开始执行。  
-##语法  
-break 语句的语法如下所示：  
-12345678break;```  ##流程图：  ![]...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/access/">
+<article class="md-text"><h2 class="post-title">Lua数据库访问</h2><div class="excerpt"><p>Lua 数据库访问简单的数据操作，我们用文件就可以处理。但是，某些时候文件操作存在性能、扩展性等问题。这时候，我们就需要使用数据库。LuaSQL 是一个提供数据库操作的库，它支持多种 SQL 数据库的操作。包括：  
+
+    SQLite
+    MySQL
+    ODBC
+  
+在本教程中，我们会讲解用 Lua 语言对 MySQL 数据库与 SQLite 数据库进行操作。这些操作具有一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/types/">
 <article class="md-text"><h2 class="post-title">数据类型</h2><div class="excerpt"><p>数据类型Lua 是动态类型编程语言，变量没有类型，只有值才有类型。值可以存储在变量中，作为参数传递或者作为返回值。尽管在 Lua 中没有变量数据类型，但是值是有类型的。下面的列表中列出了数据类型： 
 
@@ -136,24 +139,6 @@ break 语句的语法如下所示：
     
     
      ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/access/">
-<article class="md-text"><h2 class="post-title">Lua数据库访问</h2><div class="excerpt"><p>Lua 数据库访问简单的数据操作，我们用文件就可以处理。但是，某些时候文件操作存在性能、扩展性等问题。这时候，我们就需要使用数据库。LuaSQL 是一个提供数据库操作的库，它支持多种 SQL 数据库的操作。包括：  
-
-    SQLite
-    MySQL
-    ODBC
-  
-在本教程中，我们会讲解用 Lua 语言对 MySQL 数据库与 SQLite 数据库进行操作。这些操作具有一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/decision-making/">
-<article class="md-text"><h2 class="post-title">Lua判断</h2><div class="excerpt"><p>决策决策结构要求程序开发人员设置一个或多测试或计算条件。如果条件计算结果为真，则执行一个或多个语句；如果条件为假，则执行另外的语句。 
-下面是大多数程序语言中的决策结构的一般形式：  
-  
-Lua 语言中所有布尔真和非 nil 值都当作真；把所有的布尔假和 nil 作为假。请注意，Lua 中的零会被当作真，而其它大部分语言会将零当作假。
-Lua 语言提供了如下几类决策语句。点击下面的链接查...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/environment/">
-<article class="md-text"><h2 class="post-title">Lua运行环境</h2><div class="excerpt"><p>Lua 运行环境本地环境搭建在本地搭建 Lua 编程语言的开发运行环境，你需要在你的计算机上安装如下三个软件：(1) 文本编辑器。(2)  Lua 解释器。（3）Lua 编译器。  
-文本编辑器文本编辑器用来编辑你的程序代码。有如下几款常用的文本编辑器软件：Windows notepad、Brief、Epsilon、EMACS、vim&#x2F;vi。
-在不同的操作系统中有各自不同的编辑器，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/debugging/">
 <article class="md-text"><h2 class="post-title">Lua调试</h2><div class="excerpt"><p>Lua 调试Lua 提供一个调试库，这个库中提供了创建自己的调试器所需的所有原语函数。虽然，Lua 没有内置调试器，但是开发者们为 Lua 开发了许多的开源调试器。 
 Lua 调试库包括的函数如下表所示。
@@ -165,6 +150,12 @@ Lua 调试库包括的函数如下表所示。
     
     1
         debug():进入交互式调试模式，在此模式下用户可以用其它函数查看变量的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/decision-making/">
+<article class="md-text"><h2 class="post-title">Lua判断</h2><div class="excerpt"><p>决策决策结构要求程序开发人员设置一个或多测试或计算条件。如果条件计算结果为真，则执行一个或多个语句；如果条件为假，则执行另外的语句。 
+下面是大多数程序语言中的决策结构的一般形式：  
+  
+Lua 语言中所有布尔真和非 nil 值都当作真；把所有的布尔假和 nil 作为假。请注意，Lua 中的零会被当作真，而其它大部分语言会将零当作假。
+Lua 语言提供了如下几类决策语句。点击下面的链接查...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/error-handling/">
 <article class="md-text"><h2 class="post-title">Lua错误处理</h2><div class="excerpt"><p>Lua 错误处理为什么需要错误处理机制在真实的系统中程序往往非常复杂，它们经常涉及到文件操作、数据库事务操作或网络服务调用等，这个时候错误处理就显得非常重要。不关注错误处理可能在处理诸如涉密或金融交易这些业务时造成重大的损失。无论什么时候，程序开发都要求小心地做好错误处理工作。在 Lua 中错误可以被分为两类：  
 
@@ -173,12 +164,19 @@ Lua 调试库包括的函数如下表所示。
 
 
 语法错误语法错误是由于不正确的使...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/programming/">
-<article class="md-text"><h2 class="post-title">Lua游戏开发</h2><div class="excerpt"><p>Lua 游戏开发Lua 语言因其结构和语法的简洁性而在各类游戏引擎中被广泛使用。游戏对图形画面要求非常苛刻，这无疑需消耗大量的内存空间，而这些内存空间的管理是非常棘手的问题。Lua 语言有自动的垃圾回收机制，这种自动化的内存管理机制也使得 Lua 受到游戏引擎开发者的青睐。著名的 Lua 游戏引擎主要包括：  
-
-    Cornoa SDK
-    Gideros Mobile
-    S...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/file-io/">
+<article class="md-text"><h2 class="post-title">Lua文件I/O</h2><div class="excerpt"><p>Lua 文件 I&#x2F;OLua 的 IO 库用于读取或操作文件。Lua IO 库提供两类文件操作，它们分别是隐式文件描述符(implict file descriptors)和显式文件描述符(explicit file descriptors)。
+在接下来的例子的，我们会用到一个示例文件 test.lua，文件内容如下：  
+123456-- sample test.lua-- sam...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/functions/">
+<article class="md-text"><h2 class="post-title">Lua函数</h2><div class="excerpt"><p>Lua 函数函数用于将一组语句组合起来完成一个任务。你可以将你的代码分割到不同的函数中。如何将你的代码分到不同的函数中完全由你自己决定，不过一般会按照逻辑功能进行划分，每个函数都执行一个特定的任务。 
+在 Lua 中提供了大量的内置函数供我们使用。例如，print() 函数用于将输入的参数输出到终端。 
+函数往往也被称作方法，子例程或过程等等。  
+函数定义Lua 中函数定义的语法如下所示：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/environment/">
+<article class="md-text"><h2 class="post-title">Lua运行环境</h2><div class="excerpt"><p>Lua 运行环境本地环境搭建在本地搭建 Lua 编程语言的开发运行环境，你需要在你的计算机上安装如下三个软件：(1) 文本编辑器。(2)  Lua 解释器。（3）Lua 编译器。  
+文本编辑器文本编辑器用来编辑你的程序代码。有如下几款常用的文本编辑器软件：Windows notepad、Brief、Epsilon、EMACS、vim&#x2F;vi。
+在不同的操作系统中有各自不同的编辑器，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.096Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

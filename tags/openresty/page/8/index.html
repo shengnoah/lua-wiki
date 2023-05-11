@@ -112,31 +112,29 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：openresty</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/module.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>模块从 Lua 5.1 语言添加了对模块和包的支持。一个 Lua 模块的数据结构是用一个 Lua 值（通常是一个 Lua 表或者 Lua 函数）。一个 Lua 模块代码就是一个会返回这个 Lua 值的代码块。可以使用内建函数 require() 来加载和缓存模块。简单的说，一个代码模块就是一个程序库，可以通过 require 来加载。模块加载后的结果通过是一个 Lua table，这个表就像...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/metatable.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>元表在 Lua 5.1 语言中，元表 (metatable) 的表现行为类似于 C++ 语言中的操作符重载，例如我们可以重载 “__add” 元方法 (metamethod) ，来计算两个 Lua 数组的并集；或者重载 “__index” 方法，来定义我们自己的 Hash 函数。Lua 提供了两个十分重要的用来处理元表的方法，如下：
+
+setmetatable(table, metatabl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.128Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_flame_what.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>显示的是什么</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_flame_when.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>什么时候使用一般来说，当发现CPU的占用率和实际业务应该出现的占用率不相符，或者对nginx worker的资源使用率（CPU，内存，磁盘IO）出现怀疑的情况下，都可以使用火焰图进行抓取。另外，对CPU占用率低、吐吞量低的情况也可以使用火焰图的方式排查程序中是否有阻塞调用导致整个架构的吞吐量低下。
 关于Github上提供的由perl脚本完成的栈抓取的程序是一个傻瓜化的stap脚本，如果有需要...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/FFI.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>FFIFFI 库，是 LuaJIT 中最重要的一个扩展库。它允许从纯 Lua 代码调用外部C函数，使用 C 数据结构。有了它，就不用再像 Lua 标准 math 库一样，编写 Lua 扩展库。把开发者从开发 Lua 扩展 C 库（语言&#x2F;功能绑定库）的繁重工作中释放出来。
-FFI 库最大限度的省去了使用 C 手工编写繁重的 Lua&#x2F;C 绑定的需要。不需要学习一门独立&#x2...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/array_size.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>判断数组大小table.getn(t) 等价于 #t 但计算的是数组元素，不包括 hash 键值。而且数组是以第一个 nil 元素来判断数组结束。 # 只计算 array 的元素个数，它实际上调用了对象的 metatable 的__len函数。对于有 __len 方法的函数返回函数返回值，不然就返回数组成员数目。
 Lua 中，数组的实现方式其实类似于 C++ 中的 map，对于数组中所有的值...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/build_env.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 环境搭建在Windows上搭建环境从 1.9.3.2 版本开始，OpenResty 正式对外同时公布维护了 Windows 版本，其中直接包含了编译好的最新版本 LuaJIT。由于 Windows 操作系统自身相对良好的二进制兼容性，使用者只需要下载、解压两个步骤即可。
-打开 http://openresty.org ，选择左侧的 Download 连接，这时候我们就可以下载最新版本...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/break.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>break，return 关键字break语句 break 用来终止 while、repeat 和 for 三种循环的执行，并跳出当前循环体，继续执行当前循环之后的语句。下面举一个 while 循环中的 break 的例子来说明：
 1234567891011-- 计算最小的x,使从1到x的所有数相加和大于100sum = 0i = 1while true do    sum = sum + ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/brief.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 简介这一章我们简要地介绍 Lua 语言的基础知识，特别地，我们会有意将讨论放置于 OpenResty 的上下文中。同时，我们并不会回避 LuaJIT 独有的新特性；当然，在遇到这样的独有特性时，我们都会予以说明。我们会关注各个语言结构和标准库函数对性能的潜在影响。在讨论性能相关的问题时，我们只会关心 LuaJIT 实现。
 Lua 是什么?1993 年在巴西里约热内卢天主教大学(Pon...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/class.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 基础数据类型函数 type 能够返回一个值或一个变量所属的类型。
-12345print(type(&quot;hello world&quot;)) --&gt;output:stringprint(type(print))         --&gt;output:functionprint(type(true))          --&gt;output:booleanprin...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/capture.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>ngx.location.capture() 传递消息体
+ngx.location.capture()用于请求的内部转发，在实现上是函数级别的调用，但是在capture前如果调用ngx.req.read_body()，body将被取出，captrue的目标location将不能获取到body，正确地使用示例：
+
+123ngx.req.read_body()local data = ngx.r...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/call_user_func_array.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>全动态函数调用调用回调函数，并把一个数组参数作为回调函数的参数。
 12local args = &#123;...&#125; or &#123;&#125;method_name(unpack(args, 1, table.maxn(args)))
@@ -146,6 +144,21 @@ Lua 是什么?1993 年在巴西里约热内卢天主教大学(Pon...</p></div><d
 
 
 你要调用...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/build_env.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 环境搭建在Windows上搭建环境从 1.9.3.2 版本开始，OpenResty 正式对外同时公布维护了 Windows 版本，其中直接包含了编译好的最新版本 LuaJIT。由于 Windows 操作系统自身相对良好的二进制兼容性，使用者只需要下载、解压两个步骤即可。
+打开 http://openresty.org ，选择左侧的 Download 连接，这时候我们就可以下载最新版本...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/dot_diff.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>点号与冒号操作符的区别
+看下面示例代码：
+
+123local str = &quot;abcde&quot;print(&quot;case 1:&quot;, str:sub(1, 2))print(&quot;case 2:&quot;, str.sub(str, 1, 2))
+
+
+执行结果:
+
+12case 1: abcase 2: ab
+
+冒号操作会带入一个self参数，用来代表自己...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a></div>
   
 

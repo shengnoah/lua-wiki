@@ -114,12 +114,33 @@
 <article class="md-text"><h2 class="post-title">基于OpenResty安装配置Nginx+LUA并实现请求分发的双层Nginx架构策略</h2><div class="excerpt"><p>台CentOS6.x192.168.1.210192.168.1.211192.168.1.212网络拓扑210和211作为应用层web服务器212作为网络请求分发代理服务器
 Step1:安装Linux依赖1yum install -y readline-devel pcre-devel openssl-devel gcc
 Step2:安装Nginx Openresty12345678910...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-175_Unity%E5%B8%B8%E8%A7%81lua%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83/">
+<article class="md-text"><h2 class="post-title">Unity常见lua解决方案性能比较</h2><div class="excerpt"><p>之前由于项目需要，我比较了下Unity常见的几个lua解决方案；最近应鑫哥约稿，整理了一下。Unity不支持热更新这事情一直是一个谜一样的痛点，特别是在我第一个项目上线之后，发现每次更新代价太大了…可惜官方Roadmap上迟迟没有出现这个功能。昨天在群里还看到琨少说天下直接热更新Python脚本，羡慕嫉妒ing。为了解决这个问题，uwa之前分享过Android平台热更新解决方案：直接替换dl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-177_Lua%20string.find%20%E4%B8%AD%E7%9A%84%20%E2%80%9C%E5%9D%91%E2%80%9D%20/">
 <article class="md-text"><h2 class="post-title">Lua string.find 中的 “坑”</h2><div class="excerpt"><p>我们的线上环境，ngx_lua api 都是以模块形式加载到 lua 级别的 vm 中，已达到最大性能。而且我们并没有使用传统的 “包” 的形式来加载(也就是 require &#34;xx.xx.xx&#34; )，而是直接以模块名为加载( require &#34;xx&#34; )，这就意味着我们需要不断的来动态设置 package.path 来配合 require 的机制。于是我们写...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-172_Lua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
-<article class="md-text"><h2 class="post-title">Lua面向对象程序设计 · 花生肉泥</h2><div class="excerpt"><p>类lua不存在类的概念，每个对象定义他自己的行为并拥有自己的形状（shape）。然而，依据基于原型的语言，在lua中仿效类的概念并不难。
-在lua中，使用继承的思想，很容易实现prototype（原型），如果我们有两个对象a和b，我们想让b作为a的原型，只需要1setmetatable(a,{__index = b})
-这样，对象a调用任何不存在的成员函数都会到对象b中去找，术语上，可以将b...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-159_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>16 Object-oriented Programming
+
+对象和方法1234567891011Account = {	balance = 0,	withdraw = function (self, v)		self.balance = self.balance - v	end}function (v)	self.balance = self.balance + vendAccount....</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-15_lua%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E6%B3%9B%E5%9E%8Bfor/">
+<article class="md-text"><h2 class="post-title">lua 迭代器和泛型for</h2><div class="excerpt"><p>          &lt;h2 id=&quot;迭代器和闭包&quot;&gt;迭代器和闭包&lt;/h2&gt;
+
+
+  迭代器可以遍历集合的每一个元素，在lua中常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。
+  迭代器需要保留上一次成功调用的状态和下一次成功调用的状态，也就是它知道来自于哪里和将要前往哪里。闭包可以实现这个任务。
+  闭包是一个内部函数，它可以访问...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-161_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>3 Expressions
+
+a % b == a - math.floor(a / b) * b，可以用于浮点数，x % 1为x的小数部分，x - x % 1为x的整数部分，x-x%0.01可以保留x两位小数，也可以用于角度对360取模和弧度对2PI取模angle%(2*math.pi)
+
+~=与==作用相反
+
+Lua可以根据本地字符编码比较字符串大小
+
+逻辑操作符and，or，not
+
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-160_Evaluation%20metrics%20for%20generation%20based%20models%20in%20/">
 <article class="md-text"><h2 class="post-title">Evaluation metrics for generation based models in NLP</h2><div class="excerpt"><p>Evaluation metrics for generation based models in NLPBLEU转自： http://www.cnblogs.com/by-dream/p/7679284.html 
 n-gramBLEU 采用一种N-gram的匹配规则，原理比较简单，就是比较译文和参考译文之间n组词的相似的一个占比。
@@ -139,29 +160,23 @@ n-gramBLEU 采用一种N-gram的匹配规则，原理比较简单，就是比较
 看一个例子就能够很好理解metatable的用法了
 
 -- ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-161_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>3 Expressions
-
-a % b == a - math.floor(a / b) * b，可以用于浮点数，x % 1为x的小数部分，x - x % 1为x的整数部分，x-x%0.01可以保留x两位小数，也可以用于角度对360取模和弧度对2PI取模angle%(2*math.pi)
-
-~=与==作用相反
-
-Lua可以根据本地字符编码比较字符串大小
-
-逻辑操作符and，or，not
-
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-15_lua%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E6%B3%9B%E5%9E%8Bfor/">
-<article class="md-text"><h2 class="post-title">lua 迭代器和泛型for</h2><div class="excerpt"><p>          &lt;h2 id=&quot;迭代器和闭包&quot;&gt;迭代器和闭包&lt;/h2&gt;
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-163_Lua%20%E5%AD%A6%E4%B9%A0%E6%89%8B%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Lua 学习手记</h2><div class="excerpt"><p>
+  Lua 语法说明
+  Lua 语法优化
+  其他语言调用 Lua
 
 
-  迭代器可以遍历集合的每一个元素，在lua中常常使用函数来描述迭代器，每次调用该函数就返回集合的下一个元素。
-  迭代器需要保留上一次成功调用的状态和下一次成功调用的状态，也就是它知道来自于哪里和将要前往哪里。闭包可以实现这个任务。
-  闭包是一个内部函数，它可以访问...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-159_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>16 Object-oriented Programming
 
-对象和方法1234567891011Account = {	balance = 0,	withdraw = function (self, v)		self.balance = self.balance - v	end}function (v)	self.balance = self.balance + vendAccount....</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  
+    
+      导语 介绍 Lua 的语法和优化细节
+    
+  
+
+
+Lua 是一种轻量小巧的脚本语言，一个完整的 Lua 解释器不过200k，用标准 C 语言编写并以源代码形式开放。但麻雀虽小五脏俱全，Lua
+本身其设计目的就是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。在所有的脚...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-164_golua%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E4%BD%BF%E7%94%A8_linux%20%E5%BA%94%E7%94%A8_%E9%BB%91%E5%85%89%E6%8A%80%E6%9C%AF/">
 <article class="md-text"><h2 class="post-title">golua虚拟机的使用_linux 应用_黑光技术</h2><div class="excerpt"><p>
                     
@@ -169,10 +184,6 @@ Lua可以根据本地字符编码比较字符串大小
             &lt;/div&gt;
             &lt;div class=&quot;article_content&quot;&gt;
                                     &lt;p&gt;&lt;/p&gt;&lt;h1&gt;前言&lt;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-165_Lua%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E5%8D%8F%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">Lua入门教程：协程</h2><div class="excerpt"><p>从多线程的角度来看，协程（coroutine）与线程（thread）类似：协程时一系列的可执行语句，拥有自己的栈、局部变量和指令指针，同时协程又与其他协程共享全局变量和其他几乎一切资源。
-协程与线程的主要区别在于，一个多线程程序可以并行运行多个线程，而协程则需要彼此协作运行，即在任意时刻只能有一个协程运行，且只有当正在运行的协程要求挂起时其执行才会暂停。
-协程基础与协程相关的函数都放在表 c...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

@@ -112,7 +112,11 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/">
+<article class="md-text"><h2 class="post-title">Evaluating Polynomials</h2><div class="excerpt"><p>    &lt;div id=&quot;search-loader&quot; class=&quot;img-wrap&quot;&gt;
+      &lt;div class=&quot;loading&quot;&gt;
+        &lt;img src=&quot;https://img.dazhuanlan.com/2019/11/25/5ddbe656a3805.png...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.325Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/">
 <article class="md-text"><h2 class="post-title">深入 Lua Garbage Collector(三)</h2><div class="excerpt"><p>
 
 Lua 源码阅读的源码来自 lua-5.3.0
@@ -131,15 +135,9 @@ thread
 
 
 其中，只有 string table function thread 四种在 vm 中以引用方式共享，是需要被 GC...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.325Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-9_Evaluating%20Polynomials/">
-<article class="md-text"><h2 class="post-title">Evaluating Polynomials</h2><div class="excerpt"><p>    &lt;div id=&quot;search-loader&quot; class=&quot;img-wrap&quot;&gt;
-      &lt;div class=&quot;loading&quot;&gt;
-        &lt;img src=&quot;https://img.dazhuanlan.com/2019/11/25/5ddbe656a3805.png...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.325Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-986_evaluate(input_sentence)/">
 <article class="md-text"><h2 class="post-title">evaluate(input_sentence)</h2><div class="excerpt"><p>详细的记录 evaluate函数的实现。解决报错
 12345678910111213141516171819ValueError                                Traceback (most recent call last)&lt;ipython-input-44-2ec1176683f0&gt; in &lt;module&gt;----&gt; 1 tr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/">
-<article class="md-text"><h2 class="post-title">OpenWRT路由器设置界面中的Lua填坑</h2><div class="excerpt"><p>刚结束一个急活，主要是整理某个 OpenWRT 路由的设置界面，网页服务主要用的是 Nginx，网页用的是 BackBone 和 jQuery 配合，后端设置服务主要用的是 Lua（由 Nginx 代理）调用 OpenWRT 的 UCI 和 ubus。一开始我以为只需要前端稍微调整下就行了，后来发现后边跟着的 Lua 得一起整，顺带补了不少 OpenWRT 的基础知识，下边简单梳(还)理(债...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-98_Lua%E7%9A%84and%E4%B8%8Eor/">
 <article class="md-text"><h2 class="post-title">Lua的and与or</h2><div class="excerpt"><p>很早就知道lua的and与or的巧妙用法：
 
@@ -153,13 +151,6 @@ if num==1 then
 else
     str = &#34;not one&#34;
 end...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-988_Lua%20table%E3%80%81%E6%A8%A1%E5%9D%97%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-<article class="md-text"><h2 class="post-title">Lua table、模块与面向对象</h2><div class="excerpt"><p>很久之前接触过lua，最近在工作中又用到了一些，对lua这门语言又有了新的认识和理解。Lua是一门很简洁高效的语言,在openresty项目中大量使用，游戏开发中也使用lua来写一些脚本。在这里记录一下自己对lua中面向对象的理解。
-table在lua中是一种kv的数据结构，也指由一些辅助函数组成的库。如：
-local tb = &#123;name=&#34;zhangsan&#34;, ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-990_%E7%BB%99%20Tengine%20%E5%8A%A0%E4%B8%8A%20lua%20%E6%8B%93%E5%B1%95/">
-<article class="md-text"><h2 class="post-title">给 Tengine 加上 lua 拓展</h2><div class="excerpt"><p>Tengine 能动态加载第三方模块，成为我们青睐的选择，我们可以编译动态链接文件，而不需要重新安装 Nginx, 这对在线增强 webservice 很有帮助.感谢 agentzh, lua-nginx-module, 可以让我们使用 lua 增强nginx的功能, 不言而喻，我们必须现有 Lua 的环境，才能运行 ngx_lua;
-编译 nginx_lua官方推荐使用LuaJit,虽然也...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-991_%E5%9F%BA%E4%BA%8EAndroLua_Pro%E7%9A%84Android%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">基于AndroLua_Pro的Android开发笔记</h2><div class="excerpt"><p>
 温馨提示:请使用电脑浏览器打开,以确保最佳的阅读体验,谢谢.(￣▽￣)”
@@ -170,12 +161,29 @@ local tb = &#123;name=&#34;zhangsan&#34;, ...</p></div><div class="meta cap"><sp
 [0]英文大小写忽略[1]文章中的 alua 和 AndroLua的含义一样[2]文章中的 AndroLua_Pro 和 AndroLua+ 的含义一样
 
 我接触androlua时长是两年半了(cxk警告), 因为AndroLua_Pro是真...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-993_idea%E9%85%8D%E7%BD%AElua%E7%8E%AF%E5%A2%83/">
-<article class="md-text"><h2 class="post-title">idea配置lua环境</h2><div class="excerpt"><p>Lua 是一个小巧的脚本语言。它是巴西里约热内卢天主教大学（Pontifical Catholic University of Rio de Janeiro）里的一个由Roberto Ierusalimschy、Waldemar Celes 和 Luiz Henrique de Figueiredo三人所组成的研究小组于1993年开发的。 其设计目的是为了通过灵活嵌入应用程序中从而为应用程序...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-989_OpenWRT%E8%B7%AF%E7%94%B1%E5%99%A8%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84Lua%E5%A1%AB%E5%9D%91/">
+<article class="md-text"><h2 class="post-title">OpenWRT路由器设置界面中的Lua填坑</h2><div class="excerpt"><p>刚结束一个急活，主要是整理某个 OpenWRT 路由的设置界面，网页服务主要用的是 Nginx，网页用的是 BackBone 和 jQuery 配合，后端设置服务主要用的是 Lua（由 Nginx 代理）调用 OpenWRT 的 UCI 和 ubus。一开始我以为只需要前端稍微调整下就行了，后来发现后边跟着的 Lua 得一起整，顺带补了不少 OpenWRT 的基础知识，下边简单梳(还)理(债...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-988_Lua%20table%E3%80%81%E6%A8%A1%E5%9D%97%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+<article class="md-text"><h2 class="post-title">Lua table、模块与面向对象</h2><div class="excerpt"><p>很久之前接触过lua，最近在工作中又用到了一些，对lua这门语言又有了新的认识和理解。Lua是一门很简洁高效的语言,在openresty项目中大量使用，游戏开发中也使用lua来写一些脚本。在这里记录一下自己对lua中面向对象的理解。
+table在lua中是一种kv的数据结构，也指由一些辅助函数组成的库。如：
+local tb = &#123;name=&#34;zhangsan&#34;, ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-992_Mac%E4%B8%8A%E6%90%AD%E5%BB%BAlua%E7%8E%AF%E5%A2%83%E5%B9%B6%E8%BF%9E%E6%8E%A5mysql/">
 <article class="md-text"><h2 class="post-title">Mac上搭建lua环境并连接mysql</h2><div class="excerpt"><p>Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。(以上摘抄自菜鸟教程)
 鉴于Lua的诸多优势，我想在接下来的开发中应用Lua去完成一些需要脚本实现的工作。本文将记录我在Mac上搭建Lua的开发环境搭建以及实现对mysql的数据库访问。
 1. Lua安装源码编译安装12345curl -R -O h...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-990_%E7%BB%99%20Tengine%20%E5%8A%A0%E4%B8%8A%20lua%20%E6%8B%93%E5%B1%95/">
+<article class="md-text"><h2 class="post-title">给 Tengine 加上 lua 拓展</h2><div class="excerpt"><p>Tengine 能动态加载第三方模块，成为我们青睐的选择，我们可以编译动态链接文件，而不需要重新安装 Nginx, 这对在线增强 webservice 很有帮助.感谢 agentzh, lua-nginx-module, 可以让我们使用 lua 增强nginx的功能, 不言而喻，我们必须现有 Lua 的环境，才能运行 ngx_lua;
+编译 nginx_lua官方推荐使用LuaJit,虽然也...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-996_evaluation%20and%20selection%20%C2%B7%20ngc7293's%20blog/">
+<article class="md-text"><h2 class="post-title">evaluation and selection · ngc7293's blog</h2><div class="excerpt"><p>我们通过对一些方法比如错误率，召回率，ROC等来评价某个模型的优劣，并选择更好的ml算法
+
+
+
+模型的评估与选择
+
+关于模型的评估结果
+
+关于评估有两个基本的概念，一个是错误率(error rate)$$ E=a/m $$ ，另外一个是精度（accuracy) $$ A=1-a/m $$ ,我们将分类错误的样本数目称为错误率，把实际预测输出与真实输出称为训练误差(training error...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.324Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

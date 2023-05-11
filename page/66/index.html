@@ -110,17 +110,34 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-393_cocos2dx%20lua%20%E9%97%AD%E5%8C%85(%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0)%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98/">
-<article class="md-text"><h2 class="post-title">cocos2dx lua 闭包(匿名函数)入门实战</h2><div class="excerpt"><p>本文首先通过具体的例子讲解了Lua中闭包的概念，然后总结了闭包的应用场合，最后探讨了Lua中闭包的实现原理。
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-392_lua%E7%B1%BB%E6%9C%BA%E5%88%B6/">
+<article class="md-text"><h2 class="post-title">lua类机制</h2><div class="excerpt"><p>lua类机制的简易实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576local _class={} function (super)	local clas...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-398_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>介绍
 
-闭包的概念
 
-在Lua中，闭包（closure）是由一个函数和该函数会访问到的非局部变量（或者是upvalue）组成的，其中非局部变量（non-local variable）是指不是在局部作用范围内定义的一个变量，但同时又不是一个全局变量，主要应用在嵌套函数和匿名函数里，因此若一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-391_Redis%20%E9%9B%86%E7%BE%A4%20Lua%20%E6%93%8D%E4%BD%9C/">
-<article class="md-text"><h2 class="post-title">Redis 集群 Lua 操作</h2><div class="excerpt"><p>redis 集群的单键操作，基本跟单机版一样，没有太大的区别redis集群的操作相对麻烦一点，由于slot的存在，同一组key可能会被分派到不同的slot中,这会导致lua在执行多键操作时遇到错误
-需要使用redis 的hashtag来将一组类似的key分配到同一个slot中，方便lua操作
-具体原理见redis hash tag
-具体操作方式时对一组key，选取key中的某个部分，前后标记...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+
+
+Lua 是一个小巧的脚本语言。openresty采用的是LuaJIT 2 ，而不是标准的lua。
+解释下什么是jit
+
+
+LuaJIT 的运行时环境包括一个用手写汇编实现的 Lua 解释器和一个可以直接生成机器代码的 JIT 编译器。
+Lua 代码在被执行之前总是会先被 lfn 成 LuaJIT 自己定义的字节码（Byte Code）。关于 LuaJIT 字节码的文档，可以参见...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-395_%E6%B5%85%E8%B0%88%20ngx_lua%20%E5%9C%A8%20UPYUN%20%E7%9A%84%E5%BA%94%E7%94%A8/">
+<article class="md-text"><h2 class="post-title">浅谈 ngx_lua 在 UPYUN 的应用</h2><div class="excerpt"><p>ngx_lua 是一个 NGINX 的第三方扩展模块，它能够将 Lua 代码嵌入到 NGINX 中来执行。
+
+
+
+UPYUN CDN 大量使用了 NGINX 作为反向代理服务器，其中绝大部分的业务逻辑已经由 Lua 来驱动了。
+
+这个主题之前在 OSC 源创会 2014 北京站 和 SegmentFault D-Day 2015 南京站 有做过简单分享，Slide 在这里：《Using ng...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-399_Redis%20Lua%E8%84%9A%E6%9C%AC%E5%A4%A7%E5%AD%A6%E6%95%99%E7%A8%8B/">
+<article class="md-text"><h2 class="post-title">Redis Lua脚本大学教程</h2><div class="excerpt"><p>前面我们已经把Redis Lua相关的基础都介绍过了，如果你可以编写一些简单的Lua脚本，恭喜你已经可以从Lua中学毕业了。
+在大学课程中，我们主要学习Lua脚本调试和Redis中Lua执行原理两部分内容两部分。
+Lua脚本调试Redis从3.2版本开始支持Lua脚本调试，调试器的名字叫做LDB。它有一些重要的特性：
+
+它使用的是服务器-客户端模式，所以是远程调试。Redis服务器就是调试服...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-396_Lua%E6%A0%87%E5%87%86%E5%BA%93/">
 <article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>lua标准库之table库
 table库的概念是由一些操作table的辅助函数组成
@@ -146,12 +163,8 @@ Lua5.1中字符串库的所有函数如下表：先定义一张表 t = {1,2,3}
 
 getn
 取...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-399_Redis%20Lua%E8%84%9A%E6%9C%AC%E5%A4%A7%E5%AD%A6%E6%95%99%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">Redis Lua脚本大学教程</h2><div class="excerpt"><p>前面我们已经把Redis Lua相关的基础都介绍过了，如果你可以编写一些简单的Lua脚本，恭喜你已经可以从Lua中学毕业了。
-在大学课程中，我们主要学习Lua脚本调试和Redis中Lua执行原理两部分内容两部分。
-Lua脚本调试Redis从3.2版本开始支持Lua脚本调试，调试器的名字叫做LDB。它有一些重要的特性：
-
-它使用的是服务器-客户端模式，所以是远程调试。Redis服务器就是调试服...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-394_Lua%20%E6%B1%89%E5%AD%97%E6%8B%BC%E9%9F%B3%E9%A6%96%E5%AD%97%E6%AF%8D%E6%8F%90%E5%8F%96%20/">
+<article class="md-text"><h2 class="post-title">Lua 汉字拼音首字母提取</h2><div class="excerpt"><p>最近项目上有个需求，需要将一些联系人数据按照拼音首字母排序。google 了一番，竟然没有找到一个合适的 Lua 解决方案。倒是找到一个 lua-pinyin，粗略翻了下源码发现其是将所有的中文返回全部完整的拼音，原理是将所有汉字对应拼音创建好数据字典，载入 Lua，之后查询这个字典，返回对应的拼音。但是这对于我这个需求来说显然是太臃肿了，我只需要返回首字母就可以了，却载入一个巨大的字典，感...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-397_LeetCode%20150.%20Evaluate%20Reverse%20Polish%20Notation/">
 <article class="md-text"><h2 class="post-title">LeetCode 150. Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>题目描述根据逆波兰表示法（后缀表达式），求表达式的值。
 有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
@@ -159,20 +172,9 @@ Lua脚本调试Redis从3.2版本开始支持Lua脚本调试，调试器的名字
 整数除法只保留整数部分。给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。
 tag基本计算器题 栈
 样例1234567891011121314151617181920212223输入: [&#34...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-398_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>介绍
-
-
-
-
-Lua 是一个小巧的脚本语言。openresty采用的是LuaJIT 2 ，而不是标准的lua。
-解释下什么是jit
-
-
-LuaJIT 的运行时环境包括一个用手写汇编实现的 Lua 解释器和一个可以直接生成机器代码的 JIT 编译器。
-Lua 代码在被执行之前总是会先被 lfn 成 LuaJIT 自己定义的字节码（Byte Code）。关于 LuaJIT 字节码的文档，可以参见...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-394_Lua%20%E6%B1%89%E5%AD%97%E6%8B%BC%E9%9F%B3%E9%A6%96%E5%AD%97%E6%AF%8D%E6%8F%90%E5%8F%96%20/">
-<article class="md-text"><h2 class="post-title">Lua 汉字拼音首字母提取</h2><div class="excerpt"><p>最近项目上有个需求，需要将一些联系人数据按照拼音首字母排序。google 了一番，竟然没有找到一个合适的 Lua 解决方案。倒是找到一个 lua-pinyin，粗略翻了下源码发现其是将所有的中文返回全部完整的拼音，原理是将所有汉字对应拼音创建好数据字典，载入 Lua，之后查询这个字典，返回对应的拼音。但是这对于我这个需求来说显然是太臃肿了，我只需要返回首字母就可以了，却载入一个巨大的字典，感...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.268Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-383_PIL.33Lua%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%8A%B6%E6%80%81%E6%9C%BA/">
+<article class="md-text"><h2 class="post-title">PIL.33Lua的线程和状态机</h2><div class="excerpt"><p>Lua并不支持真正的多线程，也就是说，抢先的线程间共享内存。缺乏这个支持有两个原因。一是ISO C不提供，所以没有可移植的方式来实现。第二个原因就是我们不认为多线程对Lua是一件好事。
+多线程被开发来针对底层的编程。像信号量和监视器这样的同步算法在操作系统的上下文中被提出。找出并修正与多线程相关的bug是非常困难的，某几个这样的bug还会导致安全问题。而且，在某些非常挑剔的情况下同步会导致巨...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-384_lua%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0/">
 <article class="md-text"><h2 class="post-title">lua字符串学习</h2><div class="excerpt"><p>基础字符串函数
 
@@ -205,15 +207,9 @@ string.sub(s, j, j)
 
 
 模式匹配string.find 函数string.find 函数用于在给定的目标...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-383_PIL.33Lua%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%8A%B6%E6%80%81%E6%9C%BA/">
-<article class="md-text"><h2 class="post-title">PIL.33Lua的线程和状态机</h2><div class="excerpt"><p>Lua并不支持真正的多线程，也就是说，抢先的线程间共享内存。缺乏这个支持有两个原因。一是ISO C不提供，所以没有可移植的方式来实现。第二个原因就是我们不认为多线程对Lua是一件好事。
-多线程被开发来针对底层的编程。像信号量和监视器这样的同步算法在操作系统的上下文中被提出。找出并修正与多线程相关的bug是非常困难的，某几个这样的bug还会导致安全问题。而且，在某些非常挑剔的情况下同步会导致巨...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-386_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>Lua是一个简洁，轻量，可扩展的脚本语言。其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。
-Lua源码结构
-虚拟机核心功能lapi.c lctype.c ldebug.c ldo.c lfunc.c lgc.c lmem.c lobject.c lopcodes.c lstate.c lstring.c ltable.c ltm.c lvm.c lzio.c
-
-源码解...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-385_Redis%20Lua%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%AD%A6%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">Redis Lua脚本中学教程（下）</h2><div class="excerpt"><p> 在中学教程的上半部分我们介绍了Redis Lua相关的命令，没有看过或者忘记的同学可以步行前往直接使用机票Redis Lua脚本中学教程（上）。今天我们来简单学习一下Lua的语法。
+在介绍Lua语法之前，先来介绍一下Lua的身世。Lua是由简称为PUC-Rio的团队设计、开发和维护的。Lua在葡萄牙语中是月亮的意思，所以它不是简写，而是一个名词。所以只能写成Lua，而不能写成LUA或者其他...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.267Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

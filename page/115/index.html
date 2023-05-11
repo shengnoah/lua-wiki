@@ -110,26 +110,24 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1007_Lua%E8%AF%AD%E6%B3%95%E9%80%9F%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Lua语法速记</h2><div class="excerpt"><p>基础语法速记
-单行注释 --
-多行注释 —[[]]—
-数据类型，nil、boolean、number、string、、table、function、userdata和thread
-不等于，~=
-逻辑运算符，and，or，not
-
-
-分支结构if else 分支结构1234567891011score = 60if (score &gt;= 80) then4print(&#34;优秀&#34...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1006_OpenResty%20Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1006_OpenResty%20Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">OpenResty Lua学习笔记</h2><div class="excerpt"><p>由于公司C端业务的 Nginx 框架使用的是OpenResty。在上一篇文章学习了 Nginx 基础知识后，决定再学习一下 Lua 和 OpenResty。本文记录了自己学习过程中的一些笔记和总结，尝试了OpenResty在本地搭建简单的API Server框架的demo，包括处理接口路由以及操作 Redis 的的流程。通过学习，未将来可能涉及到OpenResty的开发做一些准备。
 
 
 Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%A4%9A%E7%BB%B4%E5%BA%A6%E5%88%A4%E6%96%AD/">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>多维度判断我们已经知道一些发现异常的方法了，下面介绍如何使用它们。
-在法庭上，判定一个人有罪或是无罪，需要有多个证据。在风控中判定一次请求是正常或是恶意，也不能简单的只考虑一个证据。
-按照维度整理数据在上一章看到的例子中，通过观察在一台设备上登录的用户数和下单数来推测刷单，这对于一些简单场景也许足够了，但是对于大多数场景都是不够的。
-我们通常将风控信息或者说风控数据按照不同维度组织。相同的一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1003_lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+<article class="md-text"><h2 class="post-title">lua快速入门</h2><div class="excerpt"><p>
+            概览：协同程序提供了一种协作式的多线程。每个协同程序都等于是一个线程。一对yield-resume可以将执行权在不同线程间切换。然而与常规多线程不同，协程是非抢先式的。
+
+
+
+参照书籍：《Lua程序设计（第二版）》
+Lua版本：Lua 5.3.5
+
+协同程序
+Lua将所有关于协同程序的函数放在了一个名叫”coroutine“的table中。
+
+create函数用于创...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.226Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%AE%89%E5%85%A8%E4%BB%8E%E8%87%AA%E8%BA%AB%E5%81%9A%E8%B5%B7/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>安全从自身做起威胁可能来自公司外部，也可能来自公司内部。
 泄露密码每一年都会发生因为密码泄露导致的恶性事件，其中大部分都是人为疏忽导致的。有时被泄露的是企业邮箱，导致了内部信息泄露。甚至出现过服务器密码在github上泄露，导致服务器被黑。
@@ -140,9 +138,44 @@ Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&
 敏感信息禁止在邮件或者第三方提供的工具中沟通
 
 公司无线网络有些公司会为...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%BB%BA%E8%AE%BE%E9%A3%8E%E6%8E%A7%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%9B%A2%E9%98%9F/">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>风控数据分析做风控十分依赖数据，所以以下三个事情将是很重要的：
+
+合理的数据分析发展过程
+合理的数据存储和ETL
+强劲的分析工具
+
+合理的数据分析发展过程
+站在公司角度，业务有优先级，风险也有不同严重性。
+站在团队角度，人力总是有限的，技术的积累也是有先后的。
+
+所以一个公司风控的发展是有次序的，在数据分析的建设上也是有次序的。其实不仅风控数据分析是这样，大部分数据分析都是这样。
+对于这个发...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%A4%9A%E7%BB%B4%E5%BA%A6%E5%88%A4%E6%96%AD/">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>多维度判断我们已经知道一些发现异常的方法了，下面介绍如何使用它们。
+在法庭上，判定一个人有罪或是无罪，需要有多个证据。在风控中判定一次请求是正常或是恶意，也不能简单的只考虑一个证据。
+按照维度整理数据在上一章看到的例子中，通过观察在一台设备上登录的用户数和下单数来推测刷单，这对于一些简单场景也许足够了，但是对于大多数场景都是不够的。
+我们通常将风控信息或者说风控数据按照不同维度组织。相同的一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%BC%82%E5%B8%B8%E5%8F%91%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>异常发现风控的运作过程中，第一个需要了解的是“异常发现”。不是因为它最简单，而是因为
+
+大部分时候异常发现是风控工作的起点
+异常发现是非常重要的一步，风控大量系统、算法、时间都和异常发现有关。这一步就像是提出一个问题。如果你提不出问题，也就谈不到解决问题；其次，提出一个好问题可以让你更快的解决问题。准确的发现异常，就是提出一个好问题
+
+异常可以有很多，例如：
+
+昨天凌晨1点的订单比均值高
+今...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%BD%B1%E5%93%8D%E9%87%8F%E5%8C%96%E8%AF%84%E4%BC%B0%E7%9A%84%E4%B8%A4%E4%B8%AA%E8%A6%81%E7%B4%A0/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>影响量化评估的两个要素前文介绍了“看得清”，你可能会想，看得多清才算是清呢？多清才足够呢？本文就聊一聊影响量化评估的两个要素。
 一个案例12345678910111213141516HR老板问：这个月招聘工作咋样啊？HR：招了3个人（可计数的实物）HR老板：对业务有什么帮助吗？（抽象的价值）HR：帮助挺大的，解决了那个团队没有前端开发的问题HR老板：我是问你价值，对项目有啥帮助吗？HR：因为...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E6%89%8B%E6%9C%BA%E5%8F%B7%E9%A3%8E%E9%99%A9%E8%AF%86%E5%88%AB/">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>手机号风险识别（TBC）上一篇已介绍了IP维度，这一篇聊一聊另一个常见的维度————手机号维度。
+《中华人民共和国网络安全法》要求：
+
+第二十四条 网络运营者为用户办理网络接入、域名注册服务，办理固定电话、移动电话等入网手续，或者为用户提供信息发布、即时通讯等服务，在与用户签订协议或者确认提供服务时，应当要求用户提供真实身份信息。用户不提供真实身份信息的，网络运营者不得为其提供相关服务。
+
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/2023/04/26/risk-management-note/%E7%88%B1%E5%A5%87%E8%89%BA%E4%B8%9A%E5%8A%A1%E9%A3%8E%E6%8E%A7%E7%B3%BB%E7%BB%9F/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>案例：爱奇艺业务风控系统以下内容取自于“爱奇艺技术产品团队”微信公众号、中国系统架构师大会、唯品会SRC城市沙龙的公开内容
 业务风险点爱奇艺作为国内领先的娱乐公司，以下是爱奇艺安全团队需要应对的业务风险点
@@ -154,16 +187,6 @@ Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&
 电商：恶意下单，订单欺诈
 支付：盗号盗卡，洗钱，恶意下单，恶意提现
 其他：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%BC%82%E5%B8%B8%E5%8F%91%E7%8E%B0/">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>异常发现风控的运作过程中，第一个需要了解的是“异常发现”。不是因为它最简单，而是因为
-
-大部分时候异常发现是风控工作的起点
-异常发现是非常重要的一步，风控大量系统、算法、时间都和异常发现有关。这一步就像是提出一个问题。如果你提不出问题，也就谈不到解决问题；其次，提出一个好问题可以让你更快的解决问题。准确的发现异常，就是提出一个好问题
-
-异常可以有很多，例如：
-
-昨天凌晨1点的订单比均值高
-今...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/2023/04/26/risk-management-note/%E7%94%A8%E6%88%B7%E4%B8%9A%E5%8A%A1%E8%A1%8C%E4%B8%BA%E4%B9%A0%E6%83%AF/">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>现在的大型网站都会记录用户的行为，例如用户的浏览记录、停留时长、输入密码的速度、按钮点击等。我们可以用这些数据佐证我们对用户的验证。
 一个用户的历史行为我们可以收集一个用户的历史的业务数据和行为数据，给这个用户打一些标签。例如
@@ -184,28 +207,6 @@ Jim
 Lily
 用户购买了15次，平均每次花1000元
 每次消费能力较...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E7%94%A8%E6%88%B7%E8%AE%BE%E5%A4%87%E8%A1%8C%E4%B8%BA%E4%B9%A0%E6%83%AF/">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>前文介绍了我们可以基于用户的业务行为习惯指定一些风控策略，用户除了在业务行为上有固有习惯，在使用手机时也是有固有习惯的。例如：
-单手或双手打字习惯
-
-滑动手机的习惯
-
-所以当用户账户被其他人使用时，有可能因为习惯不同而被识别出来不是同一个人。
-除了同一个用户的习惯对比，还可以和真人进行对比。如果检测到手机的很多指标都不变，或者和真人的特征差距很大，可以怀疑黑产使用了模拟器。
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/2023/04/26/risk-management-note/%E5%BB%BA%E8%AE%BE%E9%A3%8E%E6%8E%A7%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%9B%A2%E9%98%9F/">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>风控数据分析做风控十分依赖数据，所以以下三个事情将是很重要的：
-
-合理的数据分析发展过程
-合理的数据存储和ETL
-强劲的分析工具
-
-合理的数据分析发展过程
-站在公司角度，业务有优先级，风险也有不同严重性。
-站在团队角度，人力总是有限的，技术的积累也是有先后的。
-
-所以一个公司风控的发展是有次序的，在数据分析的建设上也是有次序的。其实不仅风控数据分析是这样，大部分数据分析都是这样。
-对于这个发...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.225Z">2023-04-26</time></span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

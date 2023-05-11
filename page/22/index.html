@@ -110,19 +110,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-809_Lua%E7%9A%84win%E5%92%8Clinux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-<article class="md-text"><h2 class="post-title">Lua的win和linux环境搭建</h2><div class="excerpt"><p>
-          
-            
-          &lt;a href=&quot;/2015/11/03/Linux常用命令笔记整理之tcpdump/&quot; rel=&quot;next&quot; title=&quot;Linux常用命令笔记整理之tcpdump&quot;&gt;
-            &lt;i class=&quot;fa fa-che...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-80_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>5 Functions
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-803_Lua%20%E7%AC%94%E8%AE%B0%20string_table_function%E7%9F%A5%E8%AF%86%E7%82%B9/">
+<article class="md-text"><h2 class="post-title">Lua 笔记 string_table_function知识点</h2><div class="excerpt"><p>本文涉及到一些关于string、table和function的细碎知识点，一些常用操作的背后逻辑。本文是用于记录一次技术分享，部分内容与之前的一篇Lua的笔记有重叠。
+本文参考和使用的lua源码基于Lua 5.3.5，编写的lua脚本运行于OSX系统，使用的是64位的lua运行库。
 
-当函数参数为literal string或table constructor时，可以不加括号
-12345print &#34;Hello world&#34;dofile &#39;a.lua&#39;print [[a multi-line message]]f{x=10, y=20}type{}
-
-:操作符可用于面向对象编程，o:foo(x)相当于o.foo(o...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+评估方法纯lua侧的对于代码执行耗时的评估和执行过程中产生的堆内存的分析。
+时间分析对应于cpu负载，借助o...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-810_Lua%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%8F%8ABasic%20Functions/">
 <article class="md-text"><h2 class="post-title">Lua基本类型及Basic Functions</h2><div class="excerpt"><p>Lua基本类型及Basic Functions 
     
@@ -144,6 +137,29 @@ e.g.
 
 function testType()
     print (string.format(&#34;the type of ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-808_Lua%20%E4%B8%AD%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%20/">
+<article class="md-text"><h2 class="post-title">Lua 中的随机数</h2><div class="excerpt"><p>Lua 随机数算法用的是 libc 中的 rand, 也就是 LCG。然而这个算法的随机性一般。尤其是在一些平台上，当随机种子变化非常小的时候，产生的随机数变化也非常小。这样再经过 Lua 的精度取舍之后，产生的随机序列仍然很相似（伪随机的结果变成可预知性）。
+
+lua-l 上也讨论过这个问题 msg00564，lua 的作者之一 @lhf 给出的解决方案是先弹出前面几个看起来「不怎么随机」...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-811_%E7%BB%93%E5%90%88Fluentd%E5%AE%9E%E7%8E%B0ngx_lua_waf%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA/">
+<article class="md-text"><h2 class="post-title">结合Fluentd实现ngx_lua_waf页面展示</h2><div class="excerpt"><p>0x00 概述最近在看lua_waf,看看怎么搞个web界面出来，于是有了这篇笔记。
+
+上图是大佬分享的waf日志处理流程，不过我这篇文章讲的就简单多了，如下, 纯属搞着玩儿：
+
+ngx_lua_waf简介
+ngx_lua_waf，是一个轻量级、高性能的WAF模块。
+
+防止sql注入，本地包含，部分溢出，fuzzing测试，XSS, SSRF等web攻击
+防止svn/备份之类文件泄漏
+防止A...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-813_Goto%20in%20LuaJIT%20/">
+<article class="md-text"><h2 class="post-title">Goto in LuaJIT</h2><div class="excerpt"><p>Lua 在 5.2 之后的版本，加入了 goto 这个关键字，用来控制程序跳转到指定 label。我们可以利用这个特性，来模拟 continue 的实现。需要注意的是 goto 只能跳转到 label，而 ::name:: 的格式就可以设置一个 label。
+
+for i=1,5 do
+    if i == 3 then
+        goto continue
+    end
+    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-812_lua%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
 <article class="md-text"><h2 class="post-title">lua使用教程</h2><div class="excerpt"><p>
             文章目录
@@ -155,40 +171,6 @@ function testType()
     &lt;p&gt;闲来无趣，稍微看了一会lua…&lt;/p&gt;
 
 运行1.命令行运行lua命令，在lua的shell中执行语句12345zhubenshuli@raspberrypi /var/www/lua_program $ luaL...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-805_lua%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
-<article class="md-text"><h2 class="post-title">lua 基础知识学习总结</h2><div class="excerpt"><p>
-  一、lua 基本语法
-  二、lua 数据类型及操作
-
-
-
-  lua 学习总结文档
-
-
-一、lua 基本语法
-
-二、lua 数据类型及操作
-
-lua 是动态类型语言，变量无需声明定义，可以直接进行赋值操作。主要包含如下表格中的数据类型：
-
-
-  
-    nil：表示一个无效值
-    boolean：包含两个值：false 和 true。
-    number：表示双精度类型的实浮...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-813_Goto%20in%20LuaJIT%20/">
-<article class="md-text"><h2 class="post-title">Goto in LuaJIT</h2><div class="excerpt"><p>Lua 在 5.2 之后的版本，加入了 goto 这个关键字，用来控制程序跳转到指定 label。我们可以利用这个特性，来模拟 continue 的实现。需要注意的是 goto 只能跳转到 label，而 ::name:: 的格式就可以设置一个 label。
-
-for i=1,5 do
-    if i == 3 then
-        goto continue
-    end
-    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.308Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-794_Lua%E8%BF%AD%E4%BB%A3%E5%99%A8/">
-<article class="md-text"><h2 class="post-title">Lua迭代器</h2><div class="excerpt"><p>标准库提供的几种迭代器：io.lines(迭代文件中的每行),
-pairs(迭代table元素),ipairs(迭代数组元素)
-string.gmatch(迭代字符串中单词)等。
-自定义迭代器迭代器与闭包pairs见next</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.307Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-793_lua%20%E4%B8%8E%20C%20%E4%BA%A4%E4%BA%92/">
 <article class="md-text"><h2 class="post-title">lua 与 C 交互</h2><div class="excerpt"><p>lua和C交互的核心就是lua栈，lua和C的所有数据交互都是通过lua栈来完成的。
 
@@ -200,6 +182,11 @@ string.gmatch(迭代字符串中单词)等。
 使用数据  lua_tostring lua_pcall …
 
 二. 在lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.307Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-794_Lua%E8%BF%AD%E4%BB%A3%E5%99%A8/">
+<article class="md-text"><h2 class="post-title">Lua迭代器</h2><div class="excerpt"><p>标准库提供的几种迭代器：io.lines(迭代文件中的每行),
+pairs(迭代table元素),ipairs(迭代数组元素)
+string.gmatch(迭代字符串中单词)等。
+自定义迭代器迭代器与闭包pairs见next</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.307Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-796_%5BLua%5D%20lua%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7%20/">
 <article class="md-text"><h2 class="post-title">lua性能优化技巧</h2><div class="excerpt"><p>前言
 和在所有其他编程语言中一样，在Lua中，我们依然应当遵循下述两条有关程序优化的箴言：
@@ -207,14 +194,10 @@ string.gmatch(迭代字符串中单词)等。
 原则2：暂时不要做优化（对专家而言）。
 这两条原则对于Lua编程来说尤其有意义，Lua正是因其性能而在脚本语言中鹤立鸡群。
 当然，我们都知道性能是编程中要考量的一个重要因素，指数级时间复杂度的算法会被认为是棘手的问题，绝非偶然。如果计算结果来得太迟，它就是无用的结果。因此，每一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.307Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-795_%E5%9C%A8Lua%E4%B8%AD%E4%BD%BF%E7%94%A8gettext%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81/">
-<article class="md-text"><h2 class="post-title">在Lua中使用gettext实现多语言支持</h2><div class="excerpt"><p>本文系转载，原文链接：http://zengrong.net/post/1986.htm感谢原作者无私分享。
-在Lua中使用gettext实现多语言支持
-2016-06-07更新：加入gettext包含的工具简介。
-
-
-GNU gettext 是一套优秀的国际化工具。在 linux 中被大量采用。wordpress 也使用 gettext 实现多语言支持。
-本文介绍如何在 quick-coc...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.307Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-798_ulua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
+<article class="md-text"><h2 class="post-title">ulua学习笔记1</h2><div class="excerpt"><p>本文为bbbbbbion（可以叫我六饼）原创总结，如有疏漏请各位拍砖留言。转载请尊重原作者成果，保留出处。这一系列用于记录笔者学习ulua热更新的过程。首先来看Windows下lua环境的搭建。  
+环境：lua for windows (lfW)主页：http://luaforwindows.luaforge.net/  
+lua for windows是一整套Lua的开发环境，主要包括：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.307Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

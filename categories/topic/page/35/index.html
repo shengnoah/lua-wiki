@@ -112,18 +112,25 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：topic</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-674_lua%E6%A0%88/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-673_2.5%20lua%20%E5%8F%98%E9%87%8F/">
+<article class="md-text"><h2 class="post-title">2.5 lua 变量</h2><div class="excerpt"><p>全局变量创建一个全局变量全局变量不需要声明，给一个变量赋值即创建了一个全局变量，访问一个没有初始化的变量（默认是全局变量，即，lua的变量默认是全局变量，特别注意）也不会出错，会返回nil。123print(var_a) var_a = 10print(var_a) -- 10
+在命令模式中执行如下：1234Lua 5.3.4  Copyright (C) 1994-2017 Lua.org...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-674_lua%E6%A0%88/">
 <article class="md-text"><h2 class="post-title">lua栈</h2><div class="excerpt"><p>既然Lua虚拟机模拟的是CPU的运作,那么Lua栈模拟的就是内存的角色.在Lua内部,参数的传递是通过Lua栈,同时Lua与C等外部进行交互的时候也是使用的栈.,先关注的是Lua栈的分配,管理和相关的数据结构.
 lua虚拟机在初始化创建lua_State结构体时,会走到stack_init函数中,这个函数主要就是对Lua栈和CallInfo数组的初始化:
 static void stack_...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-673_2.5%20lua%20%E5%8F%98%E9%87%8F/">
-<article class="md-text"><h2 class="post-title">2.5 lua 变量</h2><div class="excerpt"><p>全局变量创建一个全局变量全局变量不需要声明，给一个变量赋值即创建了一个全局变量，访问一个没有初始化的变量（默认是全局变量，即，lua的变量默认是全局变量，特别注意）也不会出错，会返回nil。123print(var_a) var_a = 10print(var_a) -- 10
-在命令模式中执行如下：1234Lua 5.3.4  Copyright (C) 1994-2017 Lua.org...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-675_17.Lazy%20evaluation/">
-<article class="md-text"><h2 class="post-title">17.Lazy evaluation</h2><div class="excerpt"><p> 从效率的角度而言，最好的计算就是不计算。如果必须执行计算，我们可以拖到非计算不可的时候再计算。这种操作广泛适用于各个领域。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-677_Unity%E4%B8%AD%E7%9A%84Lua/">
+<article class="md-text"><h2 class="post-title">Unity中的Lua</h2><div class="excerpt"><p>
+            文章目錄
+        
+            
+        
+    &lt;/div&gt;
+    
+    &lt;p&gt;结合以前的初步学习了解，这一次要对Lua进行进一步的深入学习。&lt;/p&gt;
 
-引用计数123class  { ... };String s1 = &#34;Hello&#34;;String s2 = s1;
-一般来说，s2被s1初始化后，s1与s2都有了自己的值，为了完成这个拷贝初始化，我们需要使用new来分配内存，需要调用strcpy函数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+首先我们要知道Lua是脚本语言，是有自己的虚拟机，是解析执行而非像C#,C++,Java这些编译执行。同时Lua是弱类型语言。
+这里不更多的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-676_Lua%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%20%5B%20%E5%A5%94%E8%B7%91%E7%9A%84%E8%9C%97%E7%89%9B%20%5D/">
 <article class="md-text"><h2 class="post-title">Lua垃圾回收</h2><div class="excerpt"><p>
       撰写于 2018-05-25
@@ -162,6 +169,15 @@ period
 
 
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-678_ulua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
+<article class="md-text"><h2 class="post-title">ulua学习笔记1</h2><div class="excerpt"><p>本文为bbbbbbion（可以叫我六饼）原创总结，如有疏漏请各位拍砖留言。转载请尊重原作者成果，保留出处。这一系列用于记录笔者学习ulua热更新的过程。首先来看Windows下lua环境的搭建。  
+环境：lua for windows (lfW)主页：http://luaforwindows.luaforge.net/  
+lua for windows是一整套Lua的开发环境，主要包括：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-675_17.Lazy%20evaluation/">
+<article class="md-text"><h2 class="post-title">17.Lazy evaluation</h2><div class="excerpt"><p> 从效率的角度而言，最好的计算就是不计算。如果必须执行计算，我们可以拖到非计算不可的时候再计算。这种操作广泛适用于各个领域。
+
+引用计数123class  { ... };String s1 = &#34;Hello&#34;;String s2 = s1;
+一般来说，s2被s1初始化后，s1与s2都有了自己的值，为了完成这个拷贝初始化，我们需要使用new来分配内存，需要调用strcpy函数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-67_%E6%90%AD%E5%BB%BAngx_lua_waf%20%5B%20Hexo%20%5D/">
 <article class="md-text"><h2 class="post-title">搭建ngx_lua_waf</h2><div class="excerpt"><p>
       Created at 2019-05-26
@@ -173,22 +189,6 @@ period
   
   
     ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-678_ulua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/">
-<article class="md-text"><h2 class="post-title">ulua学习笔记1</h2><div class="excerpt"><p>本文为bbbbbbion（可以叫我六饼）原创总结，如有疏漏请各位拍砖留言。转载请尊重原作者成果，保留出处。这一系列用于记录笔者学习ulua热更新的过程。首先来看Windows下lua环境的搭建。  
-环境：lua for windows (lfW)主页：http://luaforwindows.luaforge.net/  
-lua for windows是一整套Lua的开发环境，主要包括：...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-677_Unity%E4%B8%AD%E7%9A%84Lua/">
-<article class="md-text"><h2 class="post-title">Unity中的Lua</h2><div class="excerpt"><p>
-            文章目錄
-        
-            
-        
-    &lt;/div&gt;
-    
-    &lt;p&gt;结合以前的初步学习了解，这一次要对Lua进行进一步的深入学习。&lt;/p&gt;
-
-首先我们要知道Lua是脚本语言，是有自己的虚拟机，是解析执行而非像C#,C++,Java这些编译执行。同时Lua是弱类型语言。
-这里不更多的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-680_Lua%E8%AF%AD%E8%A8%80/">
 <article class="md-text"><h2 class="post-title">Lua语言</h2><div class="excerpt"><p>
   
@@ -217,27 +217,11 @@ lua for windows是一整套Lua的开发环境，主要包括：...</p></div><div
     
       number
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.295Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-663_Lua%20strings/">
-<article class="md-text"><h2 class="post-title">Lua strings</h2><div class="excerpt"><p>字符串或串(String)是由数字、字母、下划线组成的一串字符。Lua 语言中字符串可以使用以下三种方式来表示：
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-664_Lua%E7%9A%84Astar%E5%AE%9E%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">Lua的Astar实现</h2><div class="excerpt"><p>用Lua实现了一个简单的方块A*寻路。A*寻路的原理是会计算路径，产生一个估值f值，这个估值是由起点到走过的路径g值和当前的位置到终点的估值h组成的。取这个估值的最小值来进行寻路，所以A*寻路的效率是由估值函数的效率决定的。代码分析：
 
-单引号间的一串字符。
-双引号间的一串字符。
-[[和]]间的一串字符。
-
-转义字符用于表示不能直接显示的字符，比如后退键，回车键，等。如在字符串转换双引号可以使用 “””。
-所有的转义字符和所对应的意义：
-
-
-
-转义字符
-意义
-ASCII码值（十进制）
-
-
-
-
-a
-响铃(BEL)...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+创建一个节点，该节点保存位置和估值信息，并保留父节点，相当于整个路径是由链式节点组成。
+1234567891011121314151617181920212...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.294Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

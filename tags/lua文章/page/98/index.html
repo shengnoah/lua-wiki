@@ -112,7 +112,20 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1165_lua%E4%B8%AD%E5%8C%AA%E5%A4%B7%E6%89%80%E6%80%9D%E7%9A%84table%E9%95%BF%E5%BA%A6/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1164_lua%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">lua笔记</h2><div class="excerpt"><p>Table of Contents
+
+lua分割字符串
+
+
+
+
+lua分割字符串
+local ngx_find    = ngx.re.find
+
+local function split(str, sep , count)    local t &#x3D; {}    count &#x3D; count or -1
+&lt;span class=&quot;kd&quot;&gt;lo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.239Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1165_lua%E4%B8%AD%E5%8C%AA%E5%A4%B7%E6%89%80%E6%80%9D%E7%9A%84table%E9%95%BF%E5%BA%A6/">
 <article class="md-text"><h2 class="post-title">lua中匪夷所思的table长度</h2><div class="excerpt"><p>s = { 1, 2, 3, 4, 5, 6 }
 print(#s)     -- output: 6
 s[4] = nil
@@ -123,13 +136,8 @@ s[4] = 4
 print(#s)     -- output: 6
 s[4] = nil
 print(#s)     -- outpu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.239Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1160_nginx-lua-redis/">
-<article class="md-text"><h2 class="post-title">nginx-lua-redis</h2><div class="excerpt"><p>lua123apt-get install lua5.1apt-get install liblua5.1-devapt-get install liblua5.1-socket2
-如果liblua5.1-socket2安装不上，需要添加源1deb http:
-然后执行1sudo apt-get update
-扩展lua-redis-parser12345git clone https://...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.239Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1161_mac%E4%B8%8B%E7%BC%96%E7%A0%81%E8%B0%83%E8%AF%95cocos2dx%20lua%E7%9A%84%E5%B7%A5%E5%85%B7/">
-<article class="md-text"><h2 class="post-title">mac下编码调试cocos2dx lua的工具</h2><div class="excerpt"><p>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1162_lua5.1%20tips/">
+<article class="md-text"><h2 class="post-title">lua5.1 tips</h2><div class="excerpt"><p>
       
         Content
       
@@ -141,6 +149,20 @@ print(#s)     -- outpu...</p></div><div class="meta cap"><span class="cap" id="p
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1141_evaluating%20multi-dimensional%20visualizations%20for%20un/">
 <article class="md-text"><h2 class="post-title">evaluating multi-dimensional visualizations for understanding fuzzy clusters.</h2><div class="excerpt"><p>Abstract
     Fuzzy clustering assigns a probability of membership for a datum to a cluster, which veritably reflects real-world clustering scenarios but significantly increases the complexity of un...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1142_language-lua-lang/">
+<article class="md-text"><h2 class="post-title">language-lua-lang</h2><div class="excerpt"><p>
+      欢迎扫码关注微信公众号获取最新动态，读者交流 QQ 群：338272982 。
+      
+      
+      
+        
+          
+        
+      </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1143_evaluate%20reverse%20polish%20notation/">
+<article class="md-text"><h2 class="post-title">evaluate reverse polish notation</h2><div class="excerpt"><p>Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+Valid operators are +, -, *, /. Each operand may be an integer or another expression.
+Some examples:  [“2”, “1”, “+”, “3”,...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1144_(week6)%2001%20evaluating%20a%20learning%20algorithm/">
 <article class="md-text"><h2 class="post-title">(week6) 01 evaluating a learning algorithm</h2><div class="excerpt"><p>
         
@@ -154,28 +176,6 @@ print(#s)     -- outpu...</p></div><div class="meta cap"><span class="cap" id="p
     &lt;/div&gt;
     &lt;div class=&quot;col-md-8 col-md-offset-2&quot;&gt;
           &lt;h2 id=&quot;Eval...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1143_evaluate%20reverse%20polish%20notation/">
-<article class="md-text"><h2 class="post-title">evaluate reverse polish notation</h2><div class="excerpt"><p>Evaluate the value of an arithmetic expression in Reverse Polish Notation.
-Valid operators are +, -, *, /. Each operand may be an integer or another expression.
-Some examples:  [“2”, “1”, “+”, “3”,...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1145_reading%20note%20of%20programming%20in%20lua%204th%20edition%20i/">
-<article class="md-text"><h2 class="post-title">reading note of programming in lua 4th edition i</h2><div class="excerpt"><p>
-      
-      &lt;div id=&quot;toc&quot; class=&quot;toc-article&quot;&gt;
-        &lt;strong class=&quot;toc-title aligncenter&quot;&gt;Content&lt;/strong&gt;
-        &lt;hr/&gt;
-        
-      &l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1142_language-lua-lang/">
-<article class="md-text"><h2 class="post-title">language-lua-lang</h2><div class="excerpt"><p>
-      欢迎扫码关注微信公众号获取最新动态，读者交流 QQ 群：338272982 。
-      
-      
-      
-        
-          
-        
-      </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1146_lua%20user-defined%20types%20in%20c/">
 <article class="md-text"><h2 class="post-title">lua user-defined types in c</h2><div class="excerpt"><p>
       
@@ -188,6 +188,14 @@ Some examples:  [“2”, “1”, “+”, “3”,...</p></div><div class="met
     &lt;div class=&quot;alignright&quot;&gt;
       
       &lt;a href=&quot;javascript:void(0)&quot; class=&quot;share-link bdsharebuttonb...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1145_reading%20note%20of%20programming%20in%20lua%204th%20edition%20i/">
+<article class="md-text"><h2 class="post-title">reading note of programming in lua 4th edition i</h2><div class="excerpt"><p>
+      
+      &lt;div id=&quot;toc&quot; class=&quot;toc-article&quot;&gt;
+        &lt;strong class=&quot;toc-title aligncenter&quot;&gt;Content&lt;/strong&gt;
+        &lt;hr/&gt;
+        
+      &l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.238Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

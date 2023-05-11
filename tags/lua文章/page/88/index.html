@@ -112,7 +112,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-183_The%20Environment%20Model%20of%20Evaluation/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-182_Lua%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81%20/">
+<article class="md-text"><h2 class="post-title">Lua运行时更新代码</h2><div class="excerpt"><p>            &lt;p&gt;      最近沉迷lua脚本热更，想说这个可以提高多少菜鸡的调试效率，找了网上好多文章，但是都不行，尝试了很久，并且自己测试和学习，写了一遍，勉强能热更了（还是有个问题，要按2次才能输出正确热更的值，一直找不到，有人找到麻烦告诉我一下308164213）。下面记录一下找热更的过程。&lt;/p&gt;
+
+一、用来卸载表格的加载
+–最简单粗暴的热更新...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-183_The%20Environment%20Model%20of%20Evaluation/">
 <article class="md-text"><h2 class="post-title">The Environment Model of Evaluation</h2><div class="excerpt"><p>&lt;p&gt;这是 sicp 第三章中的 The Environment Model of Evaluation 的总结和一道习题的回顾。&lt;/p&gt;
 
 因为 procedure 在调用过程中会有参数的引入，嵌套的调用，define 变量的定义和作用域等。
@@ -124,20 +129,23 @@ Environment
 <article class="md-text"><h2 class="post-title">基于redis+nginx+Lua实现访问白名单黑名单</h2><div class="excerpt"><p>&lt;span hidden itemprop=&quot;author&quot; itemscope itemtype=&quot;http://schema.org/Person&quot;&gt;
   &lt;meta itemprop=&quot;name&quot; content=&quot;刘三儿&quot;&gt;
   &lt;meta itemprop=&quot;de...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-187_lua%20lapis%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">lua lapis安装</h2><div class="excerpt"><p>
-    
-    
-    
-&lt;section class=&quot;article-body markdown-body&quot;&gt;
-    
-    &lt;h3 id=&quot;lapis安装&quot;&gt;
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-186_Nginx%20%E4%BD%BF%E7%94%A8%20lua/">
+<article class="md-text"><h2 class="post-title">Nginx 使用 lua</h2><div class="excerpt"><p>    &lt;ul id=&quot;markdown-toc&quot;&gt;
 
-lapis安装
-lapis是lua中的web框架，基于openresty,直接和nginx整合在一起，支持lua和moonscript.
+  1. 软件版本
+  2. 环境准备
+  3. 软件安装
+  4.  配置lua脚本
+  5. 配置php
+  6. 配置日志，记录post请求的request_body 和response_body
 
 
-安装ope...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+1. 软件版本
+
+
+  系统  centos6.7X86_64
+
+  nginx   1.11.5...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-185_%5BLua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>    &lt;h2 id=&quot;介绍&quot;&gt;介绍&lt;/h2&gt;
 
@@ -156,37 +164,26 @@ Lua全部都是用C语言实现的，可以到官网去下载源码，自己编�
 编译源码
 
 需要在VS中...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-187_lua%20lapis%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">lua lapis安装</h2><div class="excerpt"><p>
+    
+    
+    
+&lt;section class=&quot;article-body markdown-body&quot;&gt;
+    
+    &lt;h3 id=&quot;lapis安装&quot;&gt;
+
+lapis安装
+lapis是lua中的web框架，基于openresty,直接和nginx整合在一起，支持lua和moonscript.
+
+
+安装ope...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-189_lua%20c%20api%20/">
 <article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>   一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C/C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C/C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 进程示例 #include &lt;stdio.h...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-188_luajava%E7%9A%84%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E8%BE%93%E5%87%BA/">
 <article class="md-text"><h2 class="post-title">luajava的错误信息输出</h2><div class="excerpt"><p>最近在填新坑, 打算用lua作为脚本语言, 于是选择了luajava来跑脚本.
 始终我对lua不熟, 错误是难免的了, 不料luajava居然没有输出错误信息orz(事实上连普通的输出都没找到, 反正我直接写了个print函数…)
 既然找不到输出, 那我只好想办法把luajava的错误信息转去调用自己写的print了, 于是我想到了或许可以像Java中的try ... catch ...来拦...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-182_Lua%E8%BF%90%E8%A1%8C%E6%97%B6%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81%20/">
-<article class="md-text"><h2 class="post-title">Lua运行时更新代码</h2><div class="excerpt"><p>            &lt;p&gt;      最近沉迷lua脚本热更，想说这个可以提高多少菜鸡的调试效率，找了网上好多文章，但是都不行，尝试了很久，并且自己测试和学习，写了一遍，勉强能热更了（还是有个问题，要按2次才能输出正确热更的值，一直找不到，有人找到麻烦告诉我一下308164213）。下面记录一下找热更的过程。&lt;/p&gt;
-
-一、用来卸载表格的加载
-–最简单粗暴的热更新...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-186_Nginx%20%E4%BD%BF%E7%94%A8%20lua/">
-<article class="md-text"><h2 class="post-title">Nginx 使用 lua</h2><div class="excerpt"><p>    &lt;ul id=&quot;markdown-toc&quot;&gt;
-
-  1. 软件版本
-  2. 环境准备
-  3. 软件安装
-  4.  配置lua脚本
-  5. 配置php
-  6. 配置日志，记录post请求的request_body 和response_body
-
-
-1. 软件版本
-
-
-  系统  centos6.7X86_64
-
-  nginx   1.11.5...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.248Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-16_LeetCode%C2%A0399.%C2%A0Evaluate%20Division%20%C2%A0/">
-<article class="md-text"><h2 class="post-title">LeetCode 399. Evaluate Division  </h2><div class="excerpt"><p>            &lt;i class=&quot;mobile-toggle&quot; style=&quot;display:none;&quot;&gt;&lt;img src=&quot;https://img.dazhuanlan.com/2019/11/26/5ddcf6326f021.png&quot;&gt;&lt;/i&gt;
-            &lt;di...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-169_Lua%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%E7%9A%84%E8%AE%B0%E5%BD%95/">
 <article class="md-text"><h2 class="post-title">Lua的一些坑的记录</h2><div class="excerpt"><p>Lua是一门很小巧的编程语言，不过使用过程中发下一些容易出现问题的地方，这里记录一下（API正常使用不记录）。记录时使用的版本是官方Lua 5.3.4版本源码.
 
@@ -196,6 +193,9 @@ Lua的C API中的lua_isstring和lua_isnumber有点坑
 
 
 1234567891011121314151617181...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-16_LeetCode%C2%A0399.%C2%A0Evaluate%20Division%20%C2%A0/">
+<article class="md-text"><h2 class="post-title">LeetCode 399. Evaluate Division  </h2><div class="excerpt"><p>            &lt;i class=&quot;mobile-toggle&quot; style=&quot;display:none;&quot;&gt;&lt;img src=&quot;https://img.dazhuanlan.com/2019/11/26/5ddcf6326f021.png&quot;&gt;&lt;/i&gt;
+            &lt;di...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.247Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

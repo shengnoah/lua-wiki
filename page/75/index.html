@@ -126,8 +126,6 @@ LUA读书笔记
 在Lua中，一切都是变量，除了关键字。请记住这句话。  
 语句块在C++中是用”{“和”}”括起来的，在Lua中，它是用do 和 end 括起来的  
 请先记住，在Lua中，只有false和nil才计算为false，其它任何数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-304_lua%20c%20api%20/">
-<article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>一 概述 《lua c api》系列文章描述的是 C 语言作为宿主语言，与 Lua 程序通讯的 API 接口。 二 stack Lua 使用虚拟的栈与宿主 C 语言进行通讯，在栈中的每个元素都是 Lua 识别的数据类型。每当 Lua 调用 C 时，被调用的 C 函数都会得到一个新的栈，该栈独立于以前的栈和仍处于活跃状态的 C 函数栈。在此堆栈包含 lua 调用 C 函数的所有参数，C 函数应...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-303_lua%E7%83%AD%E6%9B%B4%E6%96%B0/">
 <article class="md-text"><h2 class="post-title">lua热更新</h2><div class="excerpt"><p>单纯热更新Lua热更新最简单粗暴的热更新就是将package.loaded[modelname]的值置为nil，强制重新加载：
 function reload_module(module_name)
@@ -135,21 +133,8 @@ function reload_module(module_name)
     require(modulename)
 end
 这样做虽然能完成热更，但问题是已经引用了该模块的地方不会得到更新...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-307_lua%E6%A8%A1%E5%9D%97%E6%B3%A8%E5%86%8C/">
-<article class="md-text"><h2 class="post-title">lua模块注册</h2><div class="excerpt"><p>Lua自带的模块并不多,好处就是Lua足够的小,毕竟它的设计目标是定位成一个嵌入式的轻量级语言的.
-相关的函数index2adrstatic TValue *index2adr (lua_State *L, int idx) &#123;
-  if (idx &gt; 0) &#123;
-    TValue *o = L-&gt;base + (idx - 1);
-    api_chec...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-309_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua string hash 算法</h2><div class="excerpt"><p>我在前一篇文章介绍过下面这 3 个字符串拥有相同的 hash，会导致 Hash Dos 问题：
-
-&#34;0000000000000000000000000000000000&#34;
-&#34;f0l0l0w0m0e0n0t0w0i0t0t0e0r0?0:0)0&#34;
-&#34;x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0&#34;
-
-
-但是 Lua 并没有将...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-304_lua%20c%20api%20/">
+<article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>一 概述 《lua c api》系列文章描述的是 C 语言作为宿主语言，与 Lua 程序通讯的 API 接口。 二 stack Lua 使用虚拟的栈与宿主 C 语言进行通讯，在栈中的每个元素都是 Lua 识别的数据类型。每当 Lua 调用 C 时，被调用的 C 函数都会得到一个新的栈，该栈独立于以前的栈和仍处于活跃状态的 C 函数栈。在此堆栈包含 lua 调用 C 函数的所有参数，C 函数应...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-305_Lua%20%E5%AD%A6%E4%B9%A0%20chapter27%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter27</h2><div class="excerpt"><p>目录
 
@@ -236,6 +221,21 @@ function testType()
  
 在管理端，通过多个管理实例来避免管理端的单点问题，将策略规则写入redis。在业务端，多个Nginx代理从redis中读出策略规则并缓存在本地的lua缓存中，结合用户请求，最终将其分流到不同的上游集群。
 尝试解决将管理机和业务机如何正确接入red...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-309_Lua%20string%20hash%20%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua string hash 算法</h2><div class="excerpt"><p>我在前一篇文章介绍过下面这 3 个字符串拥有相同的 hash，会导致 Hash Dos 问题：
+
+&#34;0000000000000000000000000000000000&#34;
+&#34;f0l0l0w0m0e0n0t0w0i0t0t0e0r0?0:0)0&#34;
+&#34;x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0x0&#34;
+
+
+但是 Lua 并没有将...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-307_lua%E6%A8%A1%E5%9D%97%E6%B3%A8%E5%86%8C/">
+<article class="md-text"><h2 class="post-title">lua模块注册</h2><div class="excerpt"><p>Lua自带的模块并不多,好处就是Lua足够的小,毕竟它的设计目标是定位成一个嵌入式的轻量级语言的.
+相关的函数index2adrstatic TValue *index2adr (lua_State *L, int idx) &#123;
+  if (idx &gt; 0) &#123;
+    TValue *o = L-&gt;base + (idx - 1);
+    api_chec...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.260Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-30_lua_use_default_type/">
 <article class="md-text"><h2 class="post-title">lua_use_default_type</h2><div class="excerpt"><p>
         

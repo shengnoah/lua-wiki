@@ -112,7 +112,16 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-769_%E5%88%9D%E8%AF%86lua/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-770_Lua%E7%9A%84require%E6%9C%BA%E5%88%B6/">
+<article class="md-text"><h2 class="post-title">Lua的require机制</h2><div class="excerpt"><p>今天仔细读了文档，弄清楚了Lua的模块require机制。
+Lua是通过require函数来加载模块的，只需提供模块的名字，即可通过require(modname)来加载模块。
+Lua是如何通过modname来载入.lua或.so的呢？
+
+默认加载过程
+
+  package.loaded[modname]中存了模块的数据，有则直接返回
+  顺序遍历package.searchers，获取lo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-769_%E5%88%9D%E8%AF%86lua/">
 <article class="md-text"><h2 class="post-title">初识lua</h2><div class="excerpt"><p>资源下载源代码网址
 lua-protobuf源代码文档
 lua-protobuf源代码下载
@@ -123,19 +132,6 @@ git clone http://www.github.com/starwing/lua-protobuf
 Subversion代码到本地: 复制代码
 
 svn co –depth empty http://www.github.com/starwing/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-766_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>1.下载python2.7安装它并设置C:Python27到path环境变量中。
-2.安装easy_install(可选)使用ez_setup.py进行安装下载完成后双击执行安装文件，即可在C:Python27scripts下安装easy_install添加C:Python27scripts到环境变量path中打开cmd执行下面命令：1easy_install virtualenv
-安装了e...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-770_Lua%E7%9A%84require%E6%9C%BA%E5%88%B6/">
-<article class="md-text"><h2 class="post-title">Lua的require机制</h2><div class="excerpt"><p>今天仔细读了文档，弄清楚了Lua的模块require机制。
-Lua是通过require函数来加载模块的，只需提供模块的名字，即可通过require(modname)来加载模块。
-Lua是如何通过modname来载入.lua或.so的呢？
-
-默认加载过程
-
-  package.loaded[modname]中存了模块的数据，有则直接返回
-  顺序遍历package.searchers，获取lo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-768_FDDB%20datasets%20and%20evaluation%20%C2%B7%20KaLyo's%20Notes/">
 <article class="md-text"><h2 class="post-title">FDDB datasets and evaluation · KaLyo's Notes</h2><div class="excerpt"><p>DATASETS人脸数据集，有大约2800多张图片。这里主要讲其用于人脸检测的部分。这个数据集也可以用于做人脸对齐（face alignment）
 数据集主要来自于网络上新闻媒体里的图片。经过相似图片剔除后留下大约2800多张。分为10个folder，每个folder300张左右。
@@ -143,33 +139,45 @@ Lua是如何通过modname来载入.lua或.so的呢？
 EVALUATION接受输入人脸检测上的评测接受两种类型的输入。
 
 一种是常用的矩形框，包括faster r...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-763_%5BLua%5D%20lua%20%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%AC%AC%E5%87%A0%E4%BD%8D%E6%95%B0%E5%88%B0%E7%AC%AC%E5%87%A0%E4%BD%8D%E6%95%B0%20/">
+<article class="md-text"><h2 class="post-title">lua 从字符串获取指定第几位数到第几位数</h2><div class="excerpt"><p>– 判断utf8字符byte长度
+– 0xxxxxxx - 1 byte
+– 110yxxxx - 192, 2 byte
+– 1110yyyy - 225, 3 byte
+– 11110zzz - 240, 4 byte
+local function chsize(char)
+        if not char then
+            print(“not char”)
+  ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-771_The%20Evaluation%20of%20Sentence%20Similarity/">
+<article class="md-text"><h2 class="post-title">The Evaluation of Sentence Similarity</h2><div class="excerpt"><p>I am trying to write my first english blog based on two reasons: First, the data set used in this blog is english; Second, I’d like to expand my reach and attract more audiences, although I should ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-76_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%BA%94)/">
 <article class="md-text"><h2 class="post-title">深入 Lua Garbage Collector(五)</h2><div class="excerpt"><p>
 
 有了前几天的基础，我们可以从顶向下来读 lua gc 部分的代码了。慢慢的，感觉我这个系列都可以叫跟着云风一起看Lua源码了，虽然自己看的是最新的5.3。挖个坑，之后应该会真的跟着云风大大的那本readinglua一起看完lua的最新源码。
 
 lua_gc我们知道，lua 对外的 API 中，一切和 gc 打交道的都通过 lua_gc 。C 语言构建系统时，一般不讲设计模式。但模式还是存...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-767_Lua%20%E5%9C%A8%20Android%20%E4%B8%AD%E5%BA%94%E7%94%A8%E4%B8%8B,%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8/">
-<article class="md-text"><h2 class="post-title">Lua 在 Android 中应用下,具体使用</h2><div class="excerpt"><p>转载请附原文链接： Lua 在 Android 中应用下,具体使用
-一、概要在上一章节中介绍了  Android 中如何引入 Lua  ，本章节主要介绍 Lua 在 Android 中的具体使用，本章节主要分为两个部分，第一部分是使用 Lua API 绘制 Android 的 View ，第二部分是介绍学习 Lua 和 Android 之间函数回调及参数传递。
-二、调用 Lua 布局 And...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-771_The%20Evaluation%20of%20Sentence%20Similarity/">
-<article class="md-text"><h2 class="post-title">The Evaluation of Sentence Similarity</h2><div class="excerpt"><p>I am trying to write my first english blog based on two reasons: First, the data set used in this blog is english; Second, I’d like to expand my reach and attract more audiences, although I should ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-772_%E5%9C%A8Lua%E4%B8%AD%E8%B0%83%E7%94%A8C%E5%87%BD%E6%95%B0/">
 <article class="md-text"><h2 class="post-title">在Lua中调用C函数</h2><div class="excerpt"><p>Lua调用C语言中的函数是通过栈来进行参数传递的，这与大部分编程语言的内部函数调用的实现一致。我们先实现如下C代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-765_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">
+<article class="md-text"><h2 class="post-title">Lua string 哈希碰撞</h2><div class="excerpt"><p>Lua 中 40 字节以下的字符串会被内部化到一张表中(Lua 5.3)，这张表挂在 global state 结构下。对于短字符串，相同的串在同一虚拟机上只会存在一份，这被称为字符串的内部化。
+
+
+  其实字符串在 Lua VM 中是以两种内部形式保存的：短字符串及长字符串。其界限默认设置为40（字节）
+
+
+对于比较长的字符串（32字节以上），为了加快哈希过程，计算字符串哈希值是跳跃进行的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.304Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-751_lua%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9Credis%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/">
 <article class="md-text"><h2 class="post-title">lua脚本操作redis数据库介绍</h2><div class="excerpt"><p>前言 为什么要用lua脚本操作redis数据库?1.减少开销—减少向redis服务器的请求次数2.原子操作—redis将lua脚本作为一个原子执行3.可复用—其他客户端可以使用已经执行过的lua脚本4.增加redis灵活性—lua脚本可以帮助redis做更多的事情
 lua脚本本身体积小,启动速度快.
 因此,从redis 2.6.0开始,redis在服务器端内置lua解释器
 EVAL命令语法E...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-752_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>冒泡排序（Bubble Sort，台湾译为：泡沫排序或气泡排序）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。
-
-算法步骤
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-753_python%20dictionary%20lua%20table/">
+<article class="md-text"><h2 class="post-title">python dictionary lua table</h2><div class="excerpt"><p>python dictionary 与 lua table
 
 
-  有一个长度为n的序列，一共需要n次外循环
-  在一次外循环里，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+公司前端的技术栈是 C++ &amp; lua &amp; python, C++、lua做业务开发，python做工具。lua特别好用的东西就是load, 将某些数据（一般是excel）转成lua的table存储，用的时候直接load进来。但是，有些数据，并不是excel转过来的，通过多个excel来组成。
+例如：描述: 一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.303Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

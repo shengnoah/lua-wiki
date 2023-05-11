@@ -112,6 +112,11 @@
 
   <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-533_%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93Redis%E7%BB%93%E5%90%88Lua%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/">
 <article class="md-text"><h2 class="post-title">缓存数据库Redis结合Lua脚本解析</h2><div class="excerpt"><p>redis作为一款优秀的缓存数据库，已成为许多的公司项目开发的必备底层数据库之一了，在我们使用redis时，除了平常对五种基础数据结构进行单一操作，有时会需要依赖redis来处理一段相对复杂的逻辑，而这段逻辑可能需要通过redis client发送多条redis命令来达到我们的目的，然而这种处理方式，不仅效率低，而且无法保证事务的原子性；redis从2.6.0版本开始提供了一种新的解决方案，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-535_lua%E4%B8%AD%E7%9A%84C/">
+<article class="md-text"><h2 class="post-title">lua中的C</h2><div class="excerpt"><p>了解lua的内部实现结构有助于更清楚的各个函数是怎么要操作内容及内容的，就从最开始的lua解释器开始进行查看。
+Lua提供了一系列API来让宿主程序和Lua进行通信。所有的API函数和相关的类型和常量都在lua.h内声明。
+虽然我们使用了函数这个术语，但是API中的某些特性可能是以宏的形式提供的。
+和大多数C库一样，Lua API函数不会检查他们参数的有效性和完整性。这可以通过在编译Lua的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-536_NGX_LUA/">
 <article class="md-text"><h2 class="post-title">NGX_LUA</h2><div class="excerpt"><p>
   
@@ -140,19 +145,14 @@
 
   
 &lt;link rel=&quot;icon&quot; href=&quot;/images/favicon.ico&...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-535_lua%E4%B8%AD%E7%9A%84C/">
-<article class="md-text"><h2 class="post-title">lua中的C</h2><div class="excerpt"><p>了解lua的内部实现结构有助于更清楚的各个函数是怎么要操作内容及内容的，就从最开始的lua解释器开始进行查看。
-Lua提供了一系列API来让宿主程序和Lua进行通信。所有的API函数和相关的类型和常量都在lua.h内声明。
-虽然我们使用了函数这个术语，但是API中的某些特性可能是以宏的形式提供的。
-和大多数C库一样，Lua API函数不会检查他们参数的有效性和完整性。这可以通过在编译Lua的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-538_Lua%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C%E4%B8%8A%E5%8D%8A%E9%83%A8%E5%88%86/">
+<article class="md-text"><h2 class="post-title">Lua参考手册上半部分</h2><div class="excerpt"><p>Lua 是一个扩展式程序设计语言，它被设计成支持通用的过程式编程，并有相关数据描述的设施。 Lua 也能对面向对象编程，函数式编程，数据驱动式编程提供很好的支持。 它可以作为一个强大、轻量的脚本语言，供任何需要的程序使用。 Lua 以一个用 clean C 写成的库形式提供。（所谓 Clean C ，指的 ANSI C 和 C++ 中共通的一个子集）作为一个扩展式语言，Lua 没有 “mai...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-537_cocos2dx%20lua%20%E5%AE%89%E5%85%A8%E4%B9%8B%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86%E5%AE%9E%E7%8E%B0/">
 <article class="md-text"><h2 class="post-title">cocos2dx lua 安全之加密与解密实现</h2><div class="excerpt"><p>非常多使用cocos2dx+lua做游戏的同学。都会想到一个问题，我的游戏一旦公布，如何才干保证的我脚本代码不被破解。不泄露代码。尽管这和开源、共享的原则不合。可是代码也是coder的劳动成果，理应得到保护。
 特别是商业游戏更是如此，不希望被别人破解掉源代码而且进行改动。
 今天的话题就是怎样实现lua脚本文件的加密和解密。
 
 我在网络上查过，都没有成熟的解决方式。然后我经过考虑之后，总结出两...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-538_Lua%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C%E4%B8%8A%E5%8D%8A%E9%83%A8%E5%88%86/">
-<article class="md-text"><h2 class="post-title">Lua参考手册上半部分</h2><div class="excerpt"><p>Lua 是一个扩展式程序设计语言，它被设计成支持通用的过程式编程，并有相关数据描述的设施。 Lua 也能对面向对象编程，函数式编程，数据驱动式编程提供很好的支持。 它可以作为一个强大、轻量的脚本语言，供任何需要的程序使用。 Lua 以一个用 clean C 写成的库形式提供。（所谓 Clean C ，指的 ANSI C 和 C++ 中共通的一个子集）作为一个扩展式语言，Lua 没有 “mai...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-539_Offline%20Evaluation%20in%20Recommendation%20System%E8%B0%83%E7%A0%94/">
 <article class="md-text"><h2 class="post-title">Offline Evaluation in Recommendation System调研</h2><div class="excerpt"><p>推荐系统中的评测大致分为三类：离线评测、在线评测、用户调研。在线评测通常将流量随机分配到不同策略下下比较不同策略的优劣（又称A/B test或bucket test），操作简单，效果准确直观，但代价昂贵，可能伤害部分用户的体验；离线评测使用模拟器模拟线上环境获取结果，对线上几乎没有影响，因此一些重要系统通常要先通过离线评测确保算法效果再上线进行对比，但由于离线评测经常引入model bias...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.281Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-516_Lua%E4%BD%9C%E5%9B%BE%E6%95%99%E7%A8%8B%E4%B9%8Blua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
@@ -219,18 +219,67 @@ table
 
 变量使用前必须申明，即创建该变量。
 包括：全局变量，局部变量，表中的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-519_Lua%E4%B8%AD%E7%9A%84%E5%B0%81%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">Lua中的封装</h2><div class="excerpt"><p>Lua中没有private，table中的key/value可以随意访问，利用metatable虽然可以施加一些限制，但是实际上有各种方法可以绕过这些限制。
-下面介绍一种方法，实现真正的封装。
-
-local LuaClass = require &#34;LuaClass&#34;
-local TestClass = LuaClass(&#34;TestClass&#34;)
-local P...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-51_nginx%20+%20lua%20%E5%BC%80%E5%8F%91%E4%B8%AD%E8%BF%87%E7%A8%8B%E4%B8%AD%20post%20body%20%E8%BF%87%E5%A4%A7%E8%BF%94%E5%9B%9E%204xx%20(%E7%BB%AD)/">
 <article class="md-text"><h2 class="post-title">nginx + lua 开发中过程中 post body 过大返回 4xx (续)</h2><div class="excerpt"><p>背景随着业务发展会出现较大的 post body 数据，按照nginx + lua 开发中过程中 post body 过大返回 4xx提到的方式修改后，大部分情况下 post body 正常接收并处理落日志。但会偶现空日志的情况。
 问题分析经过多轮本地和沙盒压测，复现了问题。由于在出现空日志情况是 error 日志并没留下相关信息，随后做了如下处理：
 
 把 error 日志级别调到 debu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-520_Lua%E5%8C%B9%E9%85%8D%E7%AC%A6%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+<article class="md-text"><h2 class="post-title">Lua匹配符 · 花生肉泥</h2><div class="excerpt"><p>
+
+
+字符类
+说明
+
+
+
+
+.
+与任何字符配对
+
+
+%a
+与任何字母配对
+
+
+%c
+与任何控制符配对（例如n）
+
+
+%d
+与任何数字配对
+
+
+%l
+与任何小写字母配对
+
+
+%p
+与任何标点（punctuation）配对
+
+
+%s
+与空白字符配对
+
+
+%u
+与任何大写字母配对
+
+
+%w
+与任何字母/数字配对
+
+
+%x
+与任何十六进制数配对
+
+
+%z
+与任何代表0的字符配对
+
+
+%x
+与字符x配...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.280Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

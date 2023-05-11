@@ -110,7 +110,13 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-650_Lua%20%E7%AC%94%E8%AE%B0/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-646_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AF%B9%E5%87%BD%E6%95%B0%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记：对函数的深入理解</h2><div class="excerpt"><p>
+    闭包
+lua中的函数都可以认为是闭包，只不过为了便于理解还是用了函数的概念。
+lua中函数的返回值可以是匿名函数，也就是闭包。以下面的代码为例，提出一个概念：非局部的变量。在下面的代码中，匿名函数访问了一个变量i，它对于newCount来说是局部变量，对于匿名函数来说是既不是局部变量也不是全局变量，在lua中这个称谓非局部的变量。
+在lua中一个闭包指的是一个函数和该函数所需要访问...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-650_Lua%20%E7%AC%94%E8%AE%B0/">
 <article class="md-text"><h2 class="post-title">Lua 笔记</h2><div class="excerpt"><p>词法约定变量是以字母或下划线开头的字母下划线数字序列，不要使用下划线加大写字母的标识符，因为Lua的保留字是这种形式Lua的保留字：
 
 
@@ -150,16 +156,10 @@ while
 
 
 在Lua中大小...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-649_%E4%BD%BF%E7%94%A8%E5%85%83%E8%A1%A8%E4%BC%98%E5%8C%96%20Lua%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-<article class="md-text"><h2 class="post-title">使用元表优化 Lua 配置文件</h2><div class="excerpt"><p>
-配置文件
-在游戏工程中，通常有大量配置是由策划提供，再转换成程序方便读取的格式添加到工程中。
-在我参与的Cocos2dx-Lua工程中，策划通常在Excel中配置，再通过脚本转换为Lua-Table的文件。
-比如常见的道具表转换后：
--- PropModel.lua
-PropModel = &#123;
-    [1001] = &#123;
-        ID          = 1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-647_%E5%BC%80%E4%B8%AA%E5%9D%91%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%8Blua/">
+<article class="md-text"><h2 class="post-title">开个坑学习一下lua</h2><div class="excerpt"><p>再次好久没有更新blog，主要是感觉没有什么记录的东西。最近通读了云风大神的blog，只能感叹人与人差距之大，有时确实难以企及，但仍希望能有一丝靠近。
+在工作中对lua有一些接触，开个坑mark一下，准备用一段时间通读一下lua的代码，大概20k行左右，对于一门语言来说确实足够精简。
+2016.05.18</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-651_lua/">
 <article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>
   
@@ -181,10 +181,6 @@ PropModel = &#123;
 
 
 lua-intf 提供了...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-64_%5BLeetCode%5DEvaluate%20Reverse%20Polish%20Notation/">
-<article class="md-text"><h2 class="post-title">Evaluate Reverse Polish Notation</h2><div class="excerpt"><p>题目描述Evaluate the value of an arithmetic expression in Reverse Polish Notation.
-Valid operators are +, -, *, /. Each operand may be an integer or another expression.
-Some examples:12[&#34;2&#34;, &#...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.292Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-653_%E5%9F%BA%E4%BA%8ENginx%20Lua%20%E5%92%8CNetflix%20Eureka%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/">
 <article class="md-text"><h2 class="post-title">基于Nginx Lua 和Netflix Eureka的微服务网关</h2><div class="excerpt"><p>依赖：lua-resty-http
 基于Nginx&amp;Lua 和Netflix Eureka的微服务网关。
@@ -238,16 +234,9 @@ statements之间的分号可选
 Lua 中不能改变其他类型的元表（除了使用调试库），必须使用C API才能做到。
 
 元表也是普通的table，定义了原始值在某些特定操作下的行为。你可通过在值的原表中设置特定的字段来改变作用于该值的操...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.291Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-639_Lua%20%E5%AD%A6%E4%B9%A0%20chapter13%20/">
-<article class="md-text"><h2 class="post-title">Lua 学习 chapter13</h2><div class="excerpt"><p>目录
-
-  位和字节
-  无符号的输出
-  打包和解包二进制数据
-
-
-
-  What is the cost of lies? It’s not that we’ll mistake them for the truth. The real danger is that if we hear enough lies, then we no longer recognize the truth...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.291Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-638_Lua%20C%20API%20%E6%95%99%E7%A8%8B%20/">
+<article class="md-text"><h2 class="post-title">Lua C API 教程</h2><div class="excerpt"><p>前一篇文章介绍了怎么从 C 程序中调用 Lua 代码。但内容并没有深入，还有很多东西需要反复去尝试，并且需要通过 Lua 辅助来调用 C 程序。 本章将着重介绍如何继续扩展你的 Lua 程序 - 在Lua中调用C函数。
+剖析一个 Lua 程序对 C 的调用从 Lua 的角度来看，调用 C 程序其实就是调用一个模块，在Lua中一个代码块称为chunk，一个chunk里面通常有若干函数，这些函数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.291Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

@@ -121,6 +121,16 @@
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1081_evaluate%20data%20for%20machine%20learning/">
 <article class="md-text"><h2 class="post-title">evaluate data for machine learning</h2><div class="excerpt"><p>“The data determines the upper bound of the machine learning model. The machine learning models approximate that upper bound.” I heard these words from my mentor during my first week internship in ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1085_wsta%2020%20-%20evaluation%20and%20re-ranking/">
+<article class="md-text"><h2 class="post-title">wsta 20 - evaluation and re-ranking</h2><div class="excerpt"><p>Hard to characterise the quality of a system’s results:
+
+a subjective problem
+query is not the information need
+
+human judgements: too expensive and slow
+Automatic evaluation
+Simplify assumption:
+r...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1087_%5B%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6%5Dtolua%E7%9B%B8%E5%85%B3/">
 <article class="md-text"><h2 class="post-title">tolua相关</h2><div class="excerpt"><p>
       
@@ -128,6 +138,9 @@
       
       
     </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1086_udacity%20deep%20learning%20notes%206-model%20evaluation/">
+<article class="md-text"><h2 class="post-title">udacity deep learning notes 6-model evaluation</h2><div class="excerpt"><p>This post is about some basic conceptions of model evaluation.
+For predicting two-categry data, there are 4 possible results: True Positives, False Negatives, False Positives and True Negatives. To...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1088_%5B%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6%5Dlua%E7%9B%B8%E5%85%B3/">
 <article class="md-text"><h2 class="post-title">lua相关</h2><div class="excerpt"><p>
       
@@ -142,19 +155,13 @@
       
       
     </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1085_wsta%2020%20-%20evaluation%20and%20re-ranking/">
-<article class="md-text"><h2 class="post-title">wsta 20 - evaluation and re-ranking</h2><div class="excerpt"><p>Hard to characterise the quality of a system’s results:
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-108_%E4%BD%BF%E7%94%A8Lua%E5%92%8COpenResty%E6%90%AD%E5%BB%BA%E9%AA%8C%E8%AF%81%E7%A0%81%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+<article class="md-text"><h2 class="post-title">使用Lua和OpenResty搭建验证码服务器</h2><div class="excerpt"><p>Lua下有个Lua-GD图形库，通过简单的Lua语句就能控制、生成图片。
+环境说明：
 
-a subjective problem
-query is not the information need
-
-human judgements: too expensive and slow
-Automatic evaluation
-Simplify assumption:
-r...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1086_udacity%20deep%20learning%20notes%206-model%20evaluation/">
-<article class="md-text"><h2 class="post-title">udacity deep learning notes 6-model evaluation</h2><div class="excerpt"><p>This post is about some basic conceptions of model evaluation.
-For predicting two-categry data, there are 4 possible results: True Positives, False Negatives, False Positives and True Negatives. To...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+操作系统：RHEL6.4
+RHEL系统默认已安装RPM包的Lua-5.1.4，但其只具有Lua基本功能，不提供 lua.h 等，但 Lua-GD 编译需要用到 lua.h，故 Lua 需要编译安装。
+Lua-GD 版本号格式为X.Y.XrW，其中X.Y.Z代表gd版本，W代表效力版本，所以 lua-gd ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1090_%5Bunity%20%E7%83%AD%E6%9B%B4%E6%96%B0%5Dtolua%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E8%B7%B5/">
 <article class="md-text"><h2 class="post-title">tolua原理及实践</h2><div class="excerpt"><p>
       
@@ -169,13 +176,6 @@ For predicting two-categry data, there are 4 possible results: True Positives, F
       
       
     </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-108_%E4%BD%BF%E7%94%A8Lua%E5%92%8COpenResty%E6%90%AD%E5%BB%BA%E9%AA%8C%E8%AF%81%E7%A0%81%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-<article class="md-text"><h2 class="post-title">使用Lua和OpenResty搭建验证码服务器</h2><div class="excerpt"><p>Lua下有个Lua-GD图形库，通过简单的Lua语句就能控制、生成图片。
-环境说明：
-
-操作系统：RHEL6.4
-RHEL系统默认已安装RPM包的Lua-5.1.4，但其只具有Lua基本功能，不提供 lua.h 等，但 Lua-GD 编译需要用到 lua.h，故 Lua 需要编译安装。
-Lua-GD 版本号格式为X.Y.XrW，其中X.Y.Z代表gd版本，W代表效力版本，所以 lua-gd ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.233Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

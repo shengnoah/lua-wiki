@@ -121,14 +121,13 @@ READ THE MANUAL强调一下，一定要看守手册Lua5.1手册
 123456789101112131415161718192021222324252627282930313233343536373839404142434445464...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.264Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-363_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">lua学习笔记（六）</h2><div class="excerpt"><p>Lua面向对象封装123456789101112131415161718192021222324252627282930People={isHumen=true}		-- 此处定义的元素都是相当于C++的静态成员变量-- 基类方法newfunction (o,n,a)	o=o or {}	setmetatable(o,self)	-- self相当于C++的this指针，但是这里指代的是元类...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.264Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-362_lua%E8%A1%A8%E7%B1%BB%E5%9E%8B/">
-<article class="md-text"><h2 class="post-title">lua表类型</h2><div class="excerpt"><p>Lua的表的定义:typedef struct Table &#123;
-  CommonHeader;
-  lu_byte flags;
-  lu_byte lsizenode;  /* log2 of size of `node&#39; array */
-  struct Table *metatable;
-  TValue *array;  /* array part */
-  No...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.264Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-35_2.6%20lua%20break%20%E4%B8%8E%20return/">
+<article class="md-text"><h2 class="post-title">2.6luabreak与return</h2><div class="excerpt"><p>和其他语言一样lua也提供对应的跳出关键字，不过lua不提供continue关键字。
+break语句break用于跳出循环，终止for、repeat、while 三种循环的执行，并跳出当前循环体，继续执行当前循环之后的语句,在循环外部不可用。
+returnreturn 只能写在语句块的最后，一旦执行了return 语句，该语句之后的所有语句都不会再执行。若要写在函数中间，则只能写在一个显式的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.264Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-341_Nginx+lua%E7%BB%84%E5%BB%BA%E5%9F%BA%E7%A1%80waf%E9%98%B2%E7%81%AB%E5%A2%99/">
+<article class="md-text"><h2 class="post-title">Nginx+lua组建基础waf防火墙</h2><div class="excerpt"><p>一、nginx+Lua环境部署1、系统基础信息123456192.168.83.129# cat /etc/redhat-releaseCentOS release 6.5 (Final)# uname -r2.6.32-431.el6.x86_64
+2、安装基础库12yum -y install gcc gcc-c++yum -y install openssl openssl-devel...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-33_lua%E8%A1%A8%E8%AE%BF%E9%97%AE%E8%B7%9F%E8%B8%AA/">
 <article class="md-text"><h2 class="post-title">lua表访问跟踪</h2><div class="excerpt"><p>当访问一个 table 或者更新 table 中的某个元素时，lua 首先会在 table 查找是否存在该元素，如果没有，就会查找 table 是否存在 index(访问) 或者 newindex(更新) 原方法。以访问为例，首先在 table 中查找某个字段，如果不存在，解释器会去查找 index 这个原方法，如果仍然没有，返回 nil。所以说，index 和 __newindex 是在 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-342_Redis%20lua%20%E8%84%9A%E6%9C%AC%E7%AE%80%E8%BF%B0/">
@@ -141,10 +140,13 @@ Lua与Redis数据类型的转换
 脚本执行过程分析
 
 Redis Lua运行环境Lua 具有原生的运行环境，提供了基本函数库，table函数库，OS函数库等。为了...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-340_Lua%20%E4%B8%AD%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0%20/">
-<article class="md-text"><h2 class="post-title">Lua 中的随机数</h2><div class="excerpt"><p>Lua 随机数算法用的是 libc 中的 rand, 也就是 LCG。然而这个算法的随机性一般。尤其是在一些平台上，当随机种子变化非常小的时候，产生的随机数变化也非常小。这样再经过 Lua 的精度取舍之后，产生的随机序列仍然很相似（伪随机的结果变成可预知性）。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-344_lua%20data%20struct/">
+<article class="md-text"><h2 class="post-title">lua data struct</h2><div class="excerpt"><p>TValue是lua中的通用数据结构，lua中的所有数据都可以使用这个结构表示。下面看一下与TValue定义相关的数据结构：
 
-lua-l 上也讨论过这个问题 msg00564，lua 的作者之一 @lhf 给出的解决方案是先弹出前面几个看起来「不怎么随机」...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+/*
+** &#123;======================================================
+** types and prototypes
+** =======================================...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-343_lua%E9%97%AD%E5%8C%85/">
 <article class="md-text"><h2 class="post-title">lua闭包</h2><div class="excerpt"><p>lua中有两种闭包, c闭包和lua闭包两种闭包的公共部分:
 #define ClosureHeader CommonHeader;
@@ -155,19 +157,18 @@ struct Table env 闭包的环境
 C闭包的结构
 struct CClosure&#123;
    Clo...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-344_lua%20data%20struct/">
-<article class="md-text"><h2 class="post-title">lua data struct</h2><div class="excerpt"><p>TValue是lua中的通用数据结构，lua中的所有数据都可以使用这个结构表示。下面看一下与TValue定义相关的数据结构：
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-345_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">lua学习笔记（二）</h2><div class="excerpt"><p>Lua变量12345678910111213141516171819202122232425Lua变量三种类型：全局变量（储存在名称为_G的table中）、局部变量、table中的域Lua中的变量全都是全局变量，即使在语句块或函数里，除非用local显式声明为局部变量局部变量作用域与C/C++概念相同变量默认值为nil]]-- test.lua文件脚本a=1			-- 全局变量local b...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-346_Lua%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">Lua语法基础（二）</h2><div class="excerpt"><p>
+函数1.1 函数声明
 
-/*
-** &#123;======================================================
-** types and prototypes
-** =======================================...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-347_redis%E7%BC%96%E5%86%99lua%E8%84%9A%E6%9C%AC/">
-<article class="md-text"><h2 class="post-title">redis编写lua脚本</h2><div class="excerpt"><p>由于redis并没有类似mysql或者mongo的乐观锁机制，并发控制成了一个棘手的问题这块是可以用redis的watch来做，但是如果能实现乐观锁，那就非常方便了
-redis使用lua的基础语法12345&gt; eval &#34;return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}&#34; 2 key1 key2 first second1) &#34;k...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-341_Nginx+lua%E7%BB%84%E5%BB%BA%E5%9F%BA%E7%A1%80waf%E9%98%B2%E7%81%AB%E5%A2%99/">
-<article class="md-text"><h2 class="post-title">Nginx+lua组建基础waf防火墙</h2><div class="excerpt"><p>一、nginx+Lua环境部署1、系统基础信息123456192.168.83.129# cat /etc/redhat-releaseCentOS release 6.5 (Final)# uname -r2.6.32-431.el6.x86_64
-2、安装基础库12yum -y install gcc gcc-c++yum -y install openssl openssl-devel...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+默认为全局局部函数使用local关键字声明1.2 参数
+　　
+…等同于Python中*args三个点表示可变参数
+1.3 获取参数长度的两种方式　　（1）将传入的参数… 直接写入新的table中 使用#table获得长度　　（2）直接使用select(“#”,…)获取长度
+1.4 函数定义格式 :
+[local] function function_name(…)f...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.263Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

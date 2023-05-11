@@ -110,16 +110,22 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-127_Unity%E4%B8%AD%E4%BD%BF%E7%94%A8sLua%E7%9A%84%20%E8%B6%85%E4%B8%B6%E7%AE%80%E5%8D%95%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B(%E4%B8%80)/">
-<article class="md-text"><h2 class="post-title">Unity中使用sLua的 超丶简单基础教程(一)</h2><div class="excerpt"><p>
-前言网上Unity使用lua的文章本来就少..slua又是个偏小众的lua库..文章更少..
-已有的文章又有点坑…比如方法名关键字写错啦..真的是坑多= =
-所以总结一片超简单教学= =
-这篇文章面向刚开始学习lua 想在unity项目中使用sLua库的同学..
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-125_nginx%20lua%20waf/">
+<article class="md-text"><h2 class="post-title">nginx lua waf</h2><div class="excerpt"><p>ngx_lua_waf是一个基于lua-nginx-module(openresty)的web应用防火墙###用途：
+防止sql注入，本地包含，部分溢出，fuzzing测试，xss,SSRF等web攻击
+防止svn/备份之类文件泄漏
+防止ApacheBench之类压力测试工具的攻击
+屏蔽常见的扫描黑客工具，扫描器
+屏蔽异常的网络请求
+屏蔽图片附件类目录php执行权限
+防止webshell上传...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-126_spark%20rdd,%20pipeline,%20lazyevaluation/">
+<article class="md-text"><h2 class="post-title">spark rdd, pipeline, lazyevaluation</h2><div class="excerpt"><p>一直以来写代码不求甚解，感觉这样不好，从今天开始起读各数据框架的源代码，学习学习再学习  
+今天看的是pyspark里lazy evaluation的处理，python和scala不同不是函数式的。那这是怎么办到的呢？  
+首先所有的数据集在spark内部都叫做rdd，这在pyspark里也有定义：  
+class RDD(object):
 
-正文导入sLua
-1.直接下载最新版:sLua库下载地址
-2.然后将解压后的Assets文件复制到你项目的Assets目录下,...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+&lt;span class=&quot;str...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-128_Lua%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
 <article class="md-text"><h2 class="post-title">Lua语法基础</h2><div class="excerpt"><p>
 函数是第一类值（和其他变量相同），意味着函数可以存储在变量中，可以作为函数的参数，也可以作为函数的返回值
@@ -131,25 +137,6 @@
 
 三元运算符 a and b or c
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-124_Lua%E5%AD%A6%E4%B9%A0/">
-<article class="md-text"><h2 class="post-title">Lua学习</h2><div class="excerpt"><p>
-轻量级嵌入式脚本语言
-动态类型语言
-
-
-语法数据类型
-nil boolean number string userdata function thread table使用type()返回类型
-
-Boolean  
-
-boolean和nil都被看做false
-0和空串被看做true
-
-
-Number  
-
-全部用浮点表示
-16进制表示也可以用2进制指数方式  0x2.2p2 等于(2+2/1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-129_%5BLua%5D%20Table%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0/">
 <article class="md-text"><h2 class="post-title">Table内部实现</h2><div class="excerpt"><p>Table 结构定义
 
@@ -161,18 +148,16 @@ http://mdgsf.github.io/c/2016/07/01/c-hashtable.html
 typedef unsigned char lu_byte;
 
 typedef struct Table &#123;  CommonHeader;  lu_byte ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-125_nginx%20lua%20waf/">
-<article class="md-text"><h2 class="post-title">nginx lua waf</h2><div class="excerpt"><p>ngx_lua_waf是一个基于lua-nginx-module(openresty)的web应用防火墙###用途：
-防止sql注入，本地包含，部分溢出，fuzzing测试，xss,SSRF等web攻击
-防止svn/备份之类文件泄漏
-防止ApacheBench之类压力测试工具的攻击
-屏蔽常见的扫描黑客工具，扫描器
-屏蔽异常的网络请求
-屏蔽图片附件类目录php执行权限
-防止webshell上传...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1179_yating%20wei%20presenting%20evaluating%20perceptual%20bias%20d/">
-<article class="md-text"><h2 class="post-title">yating wei presenting evaluating perceptual bias during geometric scaling of scatterplots at ieee vast 2019</h2><div class="excerpt"><p>Abstract
-      Scatterplots are frequently scaled to fit display areas in multi-view and multi-device data analysis environments. A common method used for scaling is to enlarge or shrink the entire...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.241Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-127_Unity%E4%B8%AD%E4%BD%BF%E7%94%A8sLua%E7%9A%84%20%E8%B6%85%E4%B8%B6%E7%AE%80%E5%8D%95%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B(%E4%B8%80)/">
+<article class="md-text"><h2 class="post-title">Unity中使用sLua的 超丶简单基础教程(一)</h2><div class="excerpt"><p>
+前言网上Unity使用lua的文章本来就少..slua又是个偏小众的lua库..文章更少..
+已有的文章又有点坑…比如方法名关键字写错啦..真的是坑多= =
+所以总结一片超简单教学= =
+这篇文章面向刚开始学习lua 想在unity项目中使用sLua库的同学..
+
+正文导入sLua
+1.直接下载最新版:sLua库下载地址
+2.然后将解压后的Assets文件复制到你项目的Assets目录下,...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.242Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-117_lua%20learning/">
 <article class="md-text"><h2 class="post-title">lua learning</h2><div class="excerpt"><p>https://www.runoob.com/lua/lua-miscellaneous-operator.html
 
@@ -187,6 +172,9 @@ userdata: 任意存储在变量中的C数据解雇
 thread: 表示执行的独立线路，用于执行协同程序
 table: 关联数据
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.241Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1179_yating%20wei%20presenting%20evaluating%20perceptual%20bias%20d/">
+<article class="md-text"><h2 class="post-title">yating wei presenting evaluating perceptual bias during geometric scaling of scatterplots at ieee vast 2019</h2><div class="excerpt"><p>Abstract
+      Scatterplots are frequently scaled to fit display areas in multi-view and multi-device data analysis environments. A common method used for scaling is to enlarge or shrink the entire...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.241Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1180_%E4%BD%BF%E7%94%A8%20git%20hook%20%E5%9C%A8%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%89%8D%E9%80%9A%E8%BF%87%20luacheck%20%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5%E5%BE%85%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81/">
 <article class="md-text"><h2 class="post-title">使用 git hook 在提交代码前通过 luacheck 自动检查待提交代码</h2><div class="excerpt"><p>
         
@@ -211,9 +199,11 @@ Preface
 
 示例 1：
 输入: [&#34;2&#34;, &#34;1&#34;, &#34;+&#34;, &#34;3&#34;, &#34;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.241Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1184_lua-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A8%A1%E6%8B%9F/">
-<article class="md-text"><h2 class="post-title">lua-面向对象模拟</h2><div class="excerpt"><p>Lua 语言本身是非常简单的（相对于 C#，C++，Java …）,由于 Lua 语言的创始人的初衷，就是设计一款简单而又小巧的语言，所以说 Lua语言本身是没有“类和对象”的概念的。
-类定义模拟1234567891011121314151617181920Person = {name, age, gender}	-- 模拟字段&lt;!-- more --&gt;Person.Id = 1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.241Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-1182_lua%20table.sort%E6%96%B9%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">lua table.sort方法</h2><div class="excerpt"><p>
+排序出现报错
+排序顺序不正确的现象
+报错1invalid order function for sorting出现了一次报错，但是在测试过程中没有复现，之后项目中出现了相同报错导致场景打不开。顺序不正确例子（功能：对一系列名称进行排序）：1234567891011121314local function (s1, s2)    -- s1,s2分为数字段和非数字段，依次进行对比，比如b1和...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.241Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

@@ -126,18 +126,18 @@ Nginx 变量漫谈（七）
 Nginx 变量漫谈（八）
 Nginx 配置指令的执行顺序（一）
 Nginx 配置指令的执行...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.085Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/agentzh-nginx-guide-06.html">
+<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（六）Nginx 内建变量用在“子请求”的上下文中时，其行为也会变得有些微妙。
+前面在 （三） 中我们已经知道，许多内建变量都不是简单的“存放值的容器”，它们一般会通过注册“存取处理程序”来表现得与众不同，而它们即使有存放值的容器，也只是用于缓存“存取处理程序”的计算结果。我们之前讨论过的 $args 变量正是通过它的“取处理程序”来返回当前请求的 URL 参数串。因为当...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/agentzh-nginx-guide-07.html">
+<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（七）在 （一） 中我们提到过，Nginx 变量的值只有一种类型，那就是字符串，但是变量也有可能压根就不存在有意义的值。没有值的变量也有两种特殊的值：一种是“不合法”（invalid），另一种是“没找到”（not found）。
+举例说来，当 Nginx 用户变量 $foo 创建了却未被赋值时，$foo 的值便是“不合法”；而如果当前请求的 URL 参数串中并没有提及 X...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/agentzh-nginx-guide-08.html">
 <article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（八）与 $arg_XXX 类似，我们在 （二） 中提到过的内建变量 $cookie_XXX 变量也会在名为 XXX 的 cookie 不存在时返回特殊值“没找到”：
 location /test &#123;
     content_by_lua &#39;
         if ngx.var.cookie_user == nil then
             n...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/agentzh-nginx-guide-07.html">
-<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（七）在 （一） 中我们提到过，Nginx 变量的值只有一种类型，那就是字符串，但是变量也有可能压根就不存在有意义的值。没有值的变量也有两种特殊的值：一种是“不合法”（invalid），另一种是“没找到”（not found）。
-举例说来，当 Nginx 用户变量 $foo 创建了却未被赋值时，$foo 的值便是“不合法”；而如果当前请求的 URL 参数串中并没有提及 X...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/agentzh-nginx-guide-06.html">
-<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（六）Nginx 内建变量用在“子请求”的上下文中时，其行为也会变得有些微妙。
-前面在 （三） 中我们已经知道，许多内建变量都不是简单的“存放值的容器”，它们一般会通过注册“存取处理程序”来表现得与众不同，而它们即使有存放值的容器，也只是用于缓存“存取处理程序”的计算结果。我们之前讨论过的 $args 变量正是通过它的“取处理程序”来返回当前请求的 URL 参数串。因为当...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/agentzh-nginx-guide-01.html">
 <article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>目录
 缘起

@@ -112,29 +112,14 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-701_Lua%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE/">
-<article class="md-text"><h2 class="post-title">Lua基础设置</h2><div class="excerpt"><p>#Lua
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-6_%5BLua_Trace%5D%201.%20Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20/">
+<article class="md-text"><h2 class="post-title">Lua_Trace</h2><div class="excerpt"><p>                    &lt;p&gt;摘要:[Lua_Trace] 1. Lua数据结构 - TString&lt;/p&gt;
+                &lt;br /&gt;
+                &lt;p&gt;
+此源码分析的版本为 : &lt;strong&gt;Lua 5.3.1&lt;/strong&gt;&lt;/p&gt;
 
-Lua 是一种轻量小巧的脚本语言，其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。详情参阅Lua 教程
 
-在LIMS系统中，无需进行lua环境的安装搭建，只需在编辑器(win系统推荐notepad++)中写好再粘贴到网页中即可，甚至可以直接在网页中直接编写。
-无论有没有写过Lua的经历，都推荐通读下此文章，进阶中提到的，也是期望您全部理解
-##基础
-###...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-702_react%20native%20%E6%8A%A5undefined%20is%20not%20an%20object(evaluatin/">
-<article class="md-text"><h2 class="post-title">react native 报undefined is not an object(evaluating this.state.currentPage)</h2><div class="excerpt"><p> 之前由于项目不忙，学习了一个多月的React Native，现将遇到的问题及解决方案记录一下
-
-  在方法中使用state中的属性的时候出现这样的错误，原因是此时的this指向的对象是当前的方法而不是这个对象类
-  解决方法有两个：
-  1.绑定这个对象类
-1onPress={this.onClick.bind(this)}
-  2.使用箭头函数
-1onPress={()=&gt;this...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-705_lua%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
-<article class="md-text"><h2 class="post-title">lua中的基本概念</h2><div class="excerpt"><p>lua中的基本概念包括：值和类型，环境变量及全局环境变量，错误处理，元表及元方法，垃圾回收，协程等。以前从来没有看过，现在仔细的深入了解一下。文章来源，lua官方文档第二章
-Lua是一个动态类型语言。也就是说值变量没有类型；只有值有。语言中没有类型定义。所有的值携带了自身类型。
-Lua中的所有值是第一类的值。这是说所有的值都可以被存储在变量内，或者作为参数传递给函数，或者作为函数返回值。
-有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-704_%E5%AE%89%E8%A3%85Nginx%20Lua%E7%8E%AF%E5%A2%83/">
 <article class="md-text"><h2 class="post-title">安装Nginx Lua环境</h2><div class="excerpt"><p>环境准备：
 
@@ -151,13 +136,22 @@ $ yum -y install openssl openssl-devel
 这是我总结的安装，供参考：
 
 需要最新版的Nginx，LuaJIT，ngx_devel_kit，lua-nginx-module等安装文件...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-708_lua/">
-<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>
-        之前项目中用到 openresty 作为 Web Api  的开发平台, 用 openresty 很适合开发以 http 接口形式
-提供的服务. openresty 可以使用 lua 进行逻辑控制,加上完备的组件driver(redis, mysql, rabbitmq 等),
-只需要写业务代码将各种数据读取,加工,输出,就是充当胶水的角色.
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-703_Write%20Redis%20Lua%20Script%20with%20ZeroBrane%20Studio/">
+<article class="md-text"><h2 class="post-title">Write Redis Lua Script with ZeroBrane Studio</h2><div class="excerpt"><p>分享如何使用 ZeroBrane Studio 協助 Redis 的 Lua Script 開發與除錯。Lua 是一個輕量級程式語言，是在1993年被發行出來，因為體積小、啟動效能快而後很廣泛的被使用在遊戲腳本、硬體腳本語言與任何與腳本相關的場合中。其他詳細內容可以參考https://www.lua.org/使用過的 Redis 的朋友可能多多少少有聽過 Redis 在 2.6 版之後可以透...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-702_react%20native%20%E6%8A%A5undefined%20is%20not%20an%20object(evaluatin/">
+<article class="md-text"><h2 class="post-title">react native 报undefined is not an object(evaluating this.state.currentPage)</h2><div class="excerpt"><p> 之前由于项目不忙，学习了一个多月的React Native，现将遇到的问题及解决方案记录一下
 
-最重要的一点是, openr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  在方法中使用state中的属性的时候出现这样的错误，原因是此时的this指向的对象是当前的方法而不是这个对象类
+  解决方法有两个：
+  1.绑定这个对象类
+1onPress={this.onClick.bind(this)}
+  2.使用箭头函数
+1onPress={()=&gt;this...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-705_lua%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+<article class="md-text"><h2 class="post-title">lua中的基本概念</h2><div class="excerpt"><p>lua中的基本概念包括：值和类型，环境变量及全局环境变量，错误处理，元表及元方法，垃圾回收，协程等。以前从来没有看过，现在仔细的深入了解一下。文章来源，lua官方文档第二章
+Lua是一个动态类型语言。也就是说值变量没有类型；只有值有。语言中没有类型定义。所有的值携带了自身类型。
+Lua中的所有值是第一类的值。这是说所有的值都可以被存储在变量内，或者作为参数传递给函数，或者作为函数返回值。
+有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-707_Lua%E5%AD%A6%E4%B9%A0/">
 <article class="md-text"><h2 class="post-title">Lua学习</h2><div class="excerpt"><p>因为Moongen的需要，学习了一些Lua知识，特此总结。
 现在更新到lua的模块与包。
@@ -177,8 +171,6 @@ thread
 table
 
 nilnil表示值无效，对于全局变...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-703_Write%20Redis%20Lua%20Script%20with%20ZeroBrane%20Studio/">
-<article class="md-text"><h2 class="post-title">Write Redis Lua Script with ZeroBrane Studio</h2><div class="excerpt"><p>分享如何使用 ZeroBrane Studio 協助 Redis 的 Lua Script 開發與除錯。Lua 是一個輕量級程式語言，是在1993年被發行出來，因為體積小、啟動效能快而後很廣泛的被使用在遊戲腳本、硬體腳本語言與任何與腳本相關的場合中。其他詳細內容可以參考https://www.lua.org/使用過的 Redis 的朋友可能多多少少有聽過 Redis 在 2.6 版之後可以透...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-709_Lua%E8%A1%A8%E8%BE%BE%E5%BC%8F%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
 <article class="md-text"><h2 class="post-title">Lua表达式 · 花生肉泥</h2><div class="excerpt"><p>算术运算符下表列出了lua语言中常用算术运算符(设定A的值为10，B的值为20)
 
@@ -232,6 +224,13 @@ A ^ 2 输出 100
 <article class="md-text"><h2 class="post-title">优化wireshark下Lua插件SMGP协议代码</h2><div class="excerpt"><p>@(Linux)[学习]
 [toc]
 写在前面由于wireshark对SMGP协议不支持，之前使用wireshark查看SMGP协议字段，一般都是拷贝下来HEX，一个字节一个字节对。眼睛都要花了！昨天检查问题的时候同事和我说wireshark可以支持Lua插件自己编写协议识别代码，然后给了我一个SMGP.Lua文件。我安装了一下，发现是可以识别，但是如果一个包里有多个协议包的时候只识别一个，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-708_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>
+        之前项目中用到 openresty 作为 Web Api  的开发平台, 用 openresty 很适合开发以 http 接口形式
+提供的服务. openresty 可以使用 lua 进行逻辑控制,加上完备的组件driver(redis, mysql, rabbitmq 等),
+只需要写业务代码将各种数据读取,加工,输出,就是充当胶水的角色.
+
+最重要的一点是, openr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.298Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-693_Lua%20%E6%B1%89%E5%AD%97%E6%8B%BC%E9%9F%B3%E9%A6%96%E5%AD%97%E6%AF%8D%E6%8F%90%E5%8F%96%20/">
 <article class="md-text"><h2 class="post-title">Lua 汉字拼音首字母提取</h2><div class="excerpt"><p>最近项目上有个需求，需要将一些联系人数据按照拼音首字母排序。google 了一番，竟然没有找到一个合适的 Lua 解决方案。倒是找到一个 lua-pinyin，粗略翻了下源码发现其是将所有的中文返回全部完整的拼音，原理是将所有汉字对应拼音创建好数据字典，载入 Lua，之后查询这个字典，返回对应的拼音。但是这对于我这个需求来说显然是太臃肿了，我只需要返回首字母就可以了，却载入一个巨大的字典，感...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.297Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>

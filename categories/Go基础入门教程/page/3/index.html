@@ -112,10 +112,16 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：Go基础入门教程</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/go4.3.html">
-<article class="md-text"><h2 class="post-title">go4.3</h2><div class="excerpt"><p>4.3 继续之前最后，当你试着用go写一些简单的项目之后，你会习惯在go语言的工作空间中组织代码的方式。最重要是的记住go语言中的包名和你的目录结构有密切关系（不仅仅在一个项目中，在整个工作空间都如此）。
-go语言处理类型的可见性方法是简单有效的。也是一致的。还有一些内容我们没有介绍，例如常量和全局变量，但是不用担心，它们的可见性也是遵循同样的规则。
-最后，如果你不熟悉go语言中的接口，你可...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/go5.5.html">
+<article class="md-text"><h2 class="post-title">go5.5</h2><div class="excerpt"><p>5.5 空接口和转换在大多数面向对象语言中，都有一种内置的基类，叫object，它是所有其他类的超类。但是go语言不支持继承，所以没有类似超类的概念。go拥有一个没有任何方法的空接口：interface&#123;&#125;。因为每种类型都实现了空接口的0个方法，并且接口都是隐式实现，所以每种类型都实现了空接口的条约。
+如果我们愿意，我们可以通过下面声明方式写一个add函数：
+123fun...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go5.6.html">
+<article class="md-text"><h2 class="post-title">go5.6</h2><div class="excerpt"><p>5.6 字符串和字节数组字符串和字节数组有密切关系，我们可以轻易的将它们转换成对方：
+123stra := &quot;the spice must flow&quot;byts := []byte(stra)strb := string(byts)
+
+事实上，这也是大多数类型的转换方式。一些函数明确指定一个int32或者int64或者相应的无符号类型。你可能会发现你自己不得不像下面一样：
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go5.7.html">
 <article class="md-text"><h2 class="post-title">go5.7</h2><div class="excerpt"><p>5.7 函数类型函数是一流的类型：
 1type Add func(a int, b int) int
@@ -125,25 +131,11 @@ go语言处理类型的可见性方法是简单有效的。也是一致的。还
 </a><a class="post-card post " href="/go5.8.html">
 <article class="md-text"><h2 class="post-title">go5.8</h2><div class="excerpt"><p>5.8 继续之前我们已经学习了go编程的很多内容。显而易见，我们看见了错误处理的行为和资源释放如链接或者打开文件。很多人不喜欢go语言的错误处理方式。它让人觉得这是一种退步。有些时候，我同意这种说法。然而，我也发现这会导致代码更易读。defer是一种不常见但很实用的资源管理手段。事实上，它不仅仅可以进行资源管理。你可以使用defer完成任何目的，例如当一个函数退出时打印日志记录。
 当然，我们...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go5.0.html">
-<article class="md-text"><h2 class="post-title">go5.0</h2><div class="excerpt"><p>5.0 go花絮在这章，我们会介绍一些go语言的特性，这些特性不适合使用在其他地方。
-链接
-目录
-上一章：继续之前
-下一节：错误处理
-
-</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.088Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go2.3.html">
 <article class="md-text"><h2 class="post-title">go2.3</h2><div class="excerpt"><p>2.3 构造函数结构体没有构造函数，你可以创建一个函数返回一个相应类型的实例代替（类似一个工厂）：
 123456func NewSaiyan(name string, power int) *Saiyan &#123;	return &amp;Saiyan&#123;		Name: name,		Power: power,	&#125;&#125;
 
 这种模式会导致开发者犯一些错误。另外，这...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
-</a><a class="post-card post " href="/go2.4.html">
-<article class="md-text"><h2 class="post-title">go2.4</h2><div class="excerpt"><p>2.4 new尽管没有构造函数，go有一个内置的函数new，可以用来分配一个类型需要的内存。new(X)和&amp;X&#123;&#125;是等效的：
-123goku := new(Saiyan)// 等效goku := &amp;Saiyan&#123;&#125;
-
-用那种方式取决于你，但是你会发现，当需要去初始化结构体字段时，大多数人更喜欢使用后者，因为后者更易读：
-12345678...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go2.5.html">
 <article class="md-text"><h2 class="post-title">go2.5</h2><div class="excerpt"><p>2.5 结构体字段在之前的例子中，我们已经知道Saiyan有2个字段Name和Power,类型分别是字符串型和整型。字段可以是任意的类型，包括其他结构体类型或者我们还没有接触过的类型如：数组、映射、接口和函数类型。
 例如，我们可以扩展Saiyan的定义：
@@ -151,6 +143,12 @@ go语言处理类型的可见性方法是简单有效的。也是一致的。还
 </a><a class="post-card post " href="/go2.6.html">
 <article class="md-text"><h2 class="post-title">go2.6</h2><div class="excerpt"><p>2.6 组合go支持组合，即一种结构体包含另外一个结构体。在一些语言中，这叫混入类或者特性。语言总是不能实现简明的组合机制。在java中：
 123456789101112131415161718public class Person &#123;    private String name;    public String getName() &#123;        return t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
+</a><a class="post-card post " href="/go2.4.html">
+<article class="md-text"><h2 class="post-title">go2.4</h2><div class="excerpt"><p>2.4 new尽管没有构造函数，go有一个内置的函数new，可以用来分配一个类型需要的内存。new(X)和&amp;X&#123;&#125;是等效的：
+123goku := new(Saiyan)// 等效goku := &amp;Saiyan&#123;&#125;
+
+用那种方式取决于你，但是你会发现，当需要去初始化结构体字段时，大多数人更喜欢使用后者，因为后者更易读：
+12345678...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.087Z">2023-04-26</time></span><span class="cap breadcrumb">Go基础入门教程</span></div></article>
 </a><a class="post-card post " href="/go2.8.html">
 <article class="md-text"><h2 class="post-title">go2.8</h2><div class="excerpt"><p>2.8 继续之前从实用性的方面来看，这章介绍了结构体，了解如何创建一个结构体实例的方法并指定接收者，并添加了指针到我们已经学习过的go类型系统中。接下来的一章主要基于我们已经学过的结构体知识和其内部工作机制。
 链接

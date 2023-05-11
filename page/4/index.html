@@ -110,18 +110,14 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-983_lua%20gc%E5%88%86%E6%9E%90/">
-<article class="md-text"><h2 class="post-title">lua gc分析</h2><div class="excerpt"><p>说明分析lua使用的gc算法，如何做到分步gc，以及测试结论
-gc算法分析lua gc采用的是标记-清除算法，即一次gc分两步：
-
-从根节点开始遍历gc对象，如果可达，则标记
-遍历所有的gc对象，清除没有被标记的对象
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-984_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">
+<article class="md-text"><h2 class="post-title">Lua string 哈希碰撞</h2><div class="excerpt"><p>Lua 中 40 字节以下的字符串会被内部化到一张表中(Lua 5.3)，这张表挂在 global state 结构下。对于短字符串，相同的串在同一虚拟机上只会存在一份，这被称为字符串的内部化。
 
 
-二色标记法lua 5.1之前采用的算法，二色回收法是最简单的标记-清除算法，缺点是gc的时候不能被打断，所以会严重卡住主线程
-三色标记法
+  其实字符串在 Lua VM 中是以两种内部形式保存的：短字符串及长字符串。其界限默认设置为40（字节）
 
-lua5.1开始采用了一种三色回...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+
+对于比较长的字符串（32字节以上），为了加快哈希过程，计算字符串哈希值是跳跃进行的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-966_nginx%20lua%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 <article class="md-text"><h2 class="post-title">nginx lua环境搭建</h2><div class="excerpt"><p>安装nginx及搭建本地测试环境下载最新版的nginx  
 $ cd /usr/local/src 
@@ -132,15 +128,22 @@ $ tar -zxvf nginx-1.11.3.tar.gz
 安装Luajit(最新版)
 $ cd /usr/local/src
 $ wget http://luajit.org...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-970_Centos7%E5%AE%89%E8%A3%85Nginx%E6%95%B4%E5%90%88Lua/">
-<article class="md-text"><h2 class="post-title">Centos7安装Nginx整合Lua</h2><div class="excerpt"><p>(adsbygoogle=window.adsbygoogle||[]).push({})背景Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。现在通常把lua迁入nginx中，根据lua脚本规则，强化nginx的能力。本文介绍在centos7中安装nginx整合lua。环境centos7安装关闭防...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-968_lua%20c%20api%20/">
+<article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C/C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C/C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 程序示例 #include &lt;stdio.h&gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-969_lua%E4%B8%89%E7%A7%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">
 <article class="md-text"><h2 class="post-title">lua三种字符串拼接性能分析</h2><div class="excerpt"><p>说明lua中提供了3中字符串拼接函数，测试在日常使用情况下，各种拼接字符串的性能对比。
 测试环境操作系统：Debian GNU/Linux 8CPU：Intel(R) Xeon(R) CPU E5-2640 v2 @ 2.00GHz内存：64Glua环境：LuaJIT-2.1.0-beta3 (测试的时候关闭jit)
  
 测试普通日常使用性能分析日常拼接字符串的时候一般都是多个已存在的变量，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-968_lua%20c%20api%20/">
-<article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C/C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C/C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 程序示例 #include &lt;stdio.h&gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-970_Centos7%E5%AE%89%E8%A3%85Nginx%E6%95%B4%E5%90%88Lua/">
+<article class="md-text"><h2 class="post-title">Centos7安装Nginx整合Lua</h2><div class="excerpt"><p>(adsbygoogle=window.adsbygoogle||[]).push({})背景Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。现在通常把lua迁入nginx中，根据lua脚本规则，强化nginx的能力。本文介绍在centos7中安装nginx整合lua。环境centos7安装关闭防...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-973_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>归并排序（Merge Sort，台湾译作：合并排序）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
+
+归并操作(Merge)，也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。归并排序有多路归并排序、两路归并排序, 可用于内排序，也可以用于外排序。这里仅对内排序的两路归并方法进行讨...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-967_lua/">
+<article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>lua-resty-lrucache深入解析lua-resty-lrucache是openresty里常用的缓存，是一个worker级别的缓存，也是一个最近最少使用的缓存，下面我们来具体分析它的实现过程。
+使用示例123456789101112131415161718192021local _M = {}local lrucache = require &#34;resty.lrucache...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-96_%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BALua%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
 <article class="md-text"><h2 class="post-title">如何搭建Lua开发环境</h2><div class="excerpt"><p>
                 
@@ -156,6 +159,15 @@ luarocks 2.3.0
 
 
 首先下载lua最新release版...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-971_lua%20table%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
+<article class="md-text"><h2 class="post-title">lua table深拷贝</h2><div class="excerpt"><p>深拷贝，只需要对table类型进行递归拷贝即可，其他类型直接用赋值拷贝或浅拷贝。
+
+还有，拷贝后的table应与原table具有相同的元表，and元表不需要递归拷贝。
+
+function deepcopy( src )
+    local lookup_table = &#123;&#125;
+    local function _copy( object )
+        if typ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-972_Evaluation%20of%20clustering/">
 <article class="md-text"><h2 class="post-title">Evaluation of clustering</h2><div class="excerpt"><p>聚类的目标high intra-cluster similarity and low inter-cluster similarity
 数据集有groundtruth时，如何评估聚类结果的优劣？
@@ -166,28 +178,6 @@ RI。实质是accuracy，同时惩罚了FP和FN两种错误。
 F-measure。为不同的错误类型（FP和FN）赋予不同的权重。
 
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-971_lua%20table%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
-<article class="md-text"><h2 class="post-title">lua table深拷贝</h2><div class="excerpt"><p>深拷贝，只需要对table类型进行递归拷贝即可，其他类型直接用赋值拷贝或浅拷贝。
-
-还有，拷贝后的table应与原table具有相同的元表，and元表不需要递归拷贝。
-
-function deepcopy( src )
-    local lookup_table = &#123;&#125;
-    local function _copy( object )
-        if typ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-974_xLua%E7%83%AD%E6%9B%B4%E6%96%B04%E4%B9%8BHotfix%EF%BC%88%E4%B8%8A%E7%AF%87%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">xLua热更新4之Hotfix（上篇）</h2><div class="excerpt"><p>思考并回答以下问题：
-
-xLua里面有一个热补丁的功能。就是你有的C#代码不用改，就可以加入热更新的功能。
-为什么叫热补丁呢？已有项目中的C#代码只需要增加一些配置，不用做其他任何调整就可使用上类似热更新的功能。由于和热更新也不同，所以叫热补丁。这也是xLua首创的一项功能。
-热补丁的优点有这些：
-
-侵入性小，老项目原有代码不做任何调整就可使用。
-出问题了才用Lua代码来打补丁，这时才会走到...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-973_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>归并排序（Merge Sort，台湾译作：合并排序）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
-
-归并操作(Merge)，也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。归并排序有多路归并排序、两路归并排序, 可用于内排序，也可以用于外排序。这里仅对内排序的两路归并方法进行讨...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

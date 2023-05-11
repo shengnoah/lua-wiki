@@ -110,15 +110,13 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-625_How%20NOT%20To%20Evaluate%20Your%20Dialogue%20System%20An%20Empiri/">
-<article class="md-text"><h2 class="post-title">How NOT To Evaluate Your Dialogue System An Empirical Study of Unsupervised Evaluation Metrics for Dialogue Response Generation</h2><div class="excerpt"><p>如何评价对话生成的质量而不使用人工标注是一个还未解决的问题。这篇文章将证明现在已有的这些评测指标和Twitter domain的人工评测质量只有一点点的相关性，而在Ubuntu domain上则是毫不相关。这些评测值通常来自于机器翻译、文本摘要，比如BLEU、METEOR和ROUGE。这些指标都假设了合法的回复都有明显特殊的词是和ground truth的回复有重复的。这是一个在对话领域中相...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-624_Lua/">
+<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>由于lua的编译速度相当快，而且这种迭代编译的过程仅仅在程序加载的时候进行一次，故而可以带来性能的提高；一些在系统初始化可以决定的参数（比如从配置文件中读出来的数据直接编译为常量置入程序中。
+1234567891011121314151617local select = selectlocal setmetatable = setmetatablelocal getfenv = getfen...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-626_Lua%E4%B8%ADtable%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9B%9B%E7%A7%8D%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F%EF%BD%9Cqiuzhong's%20blog/">
 <article class="md-text"><h2 class="post-title">Lua中table常用的四种遍历方式｜qiuzhong's blog</h2><div class="excerpt"><p>第一种遍历方式：for key, value in ipairs(table) do	end
 注：这种方式的遍历只会从key为1的地方开始，一直以key递增1的顺序来遍历，若找到一个递增不是1的key就结束遍历，无论后面是否仍然是顺序的key。请看下面例子：
 Sample_1:local tab1 = {	[1] = 1,	[2] = 2,	[3] = 3,	[4] = 4,} for ke...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-624_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>由于lua的编译速度相当快，而且这种迭代编译的过程仅仅在程序加载的时候进行一次，故而可以带来性能的提高；一些在系统初始化可以决定的参数（比如从配置文件中读出来的数据直接编译为常量置入程序中。
-1234567891011121314151617local select = selectlocal setmetatable = setmetatablelocal getfenv = getfen...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-627_%E6%B5%85%E8%B0%88Lua%E5%8D%8F%E7%A8%8B%20%5B%20%E5%A5%94%E8%B7%91%E7%9A%84%E8%9C%97%E7%89%9B%20%5D/">
 <article class="md-text"><h2 class="post-title">浅谈Lua协程 [ 奔跑的蜗牛 ]</h2><div class="excerpt"><p>
       撰写于 2018-05-09
@@ -145,6 +143,12 @@ Learn separate content representations and style representations using adversari
 这章看完PiL第二部分也就学完，前两部分占了全书一半多一点，偏重语法和语言本身的特性，而后半部分偏重应用，打算在学后半部分之前写个小总结，说说这段时间学Lua的一些感想。
 
 在Lua中有对象...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-630_Lua%E4%B8%ADipairs%E5%92%8Cpairs%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+<article class="md-text"><h2 class="post-title">Lua中ipairs和pairs的区别与使用</h2><div class="excerpt"><p>
+          
+            
+          &lt;a href=&quot;/2015/11/11/lua_cpp_toluapp_tutorial/&quot; rel=&quot;next&quot; title=&quot;tolua++安装&quot;&gt;
+            &lt;i class=&quot;fa fa-chevron-left...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-62_%E4%BD%BF%E7%94%A8tengine%20DSO%20%E6%9D%A5%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97%EF%BC%88Lua/">
 <article class="md-text"><h2 class="post-title">使用tengine DSO 来动态编译安装第三方模块（Lua</h2><div class="excerpt"><p>在使用nginx时，需要增加或者改动一个模块，都需要重新编译nginx文件。最近使用了tengine，它提供的DSO工具来动态加载模块。本例测试需要动态增加lua-nginx模块，记录一下安装过程。
 
@@ -162,6 +166,8 @@ Lua 环境推荐使用成熟快速的 luajit。
 5
 cd /root/Download/
 wget http://luajit.org/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-632_nginx+nginx_lua%E5%AE%9E%E7%8E%B0WAF%E9%98%B2%E6%8A%A4%E5%8A%9F%E8%83%BD/">
+<article class="md-text"><h2 class="post-title">nginx+nginx_lua实现WAF防护功能</h2><div class="excerpt"><p>Do one thing at a time, and do well.nginx_luanginx_lua模块是nginx的第三方模块，它可以将lua语言嵌入到nginx配置中，从而极大的扩展了nginx的能力，nginx以高并发而知名，而lua作为嵌入式语言轻便，两者的结合可以做到在nginx层就实现编程,而这里我们加入waf的lua过滤编程来实现waf。安装需要的程序包：nginxng...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-631_%E5%9F%BA%E4%BA%8E%20UGUI%20%E3%80%81%20toLua%20%E7%9A%84%20LuaFramework%20/">
 <article class="md-text"><h2 class="post-title">基于 UGUI 、 toLua 的 LuaFramework</h2><div class="excerpt"><p>怎么做到热更新的
 开始游戏时对比本地和服务器的files.txt,其中包含了每个AssetBundle的名字和MD5码，如果有文件不存在过MD5码不同则进行更新下载，进而实现更新内容。
@@ -176,14 +182,8 @@ luaframework的好处：
 使用过程：
 
   Unity项目标题栏Lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-632_nginx+nginx_lua%E5%AE%9E%E7%8E%B0WAF%E9%98%B2%E6%8A%A4%E5%8A%9F%E8%83%BD/">
-<article class="md-text"><h2 class="post-title">nginx+nginx_lua实现WAF防护功能</h2><div class="excerpt"><p>Do one thing at a time, and do well.nginx_luanginx_lua模块是nginx的第三方模块，它可以将lua语言嵌入到nginx配置中，从而极大的扩展了nginx的能力，nginx以高并发而知名，而lua作为嵌入式语言轻便，两者的结合可以做到在nginx层就实现编程,而这里我们加入waf的lua过滤编程来实现waf。安装需要的程序包：nginxng...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-630_Lua%E4%B8%ADipairs%E5%92%8Cpairs%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E4%BD%BF%E7%94%A8/">
-<article class="md-text"><h2 class="post-title">Lua中ipairs和pairs的区别与使用</h2><div class="excerpt"><p>
-          
-            
-          &lt;a href=&quot;/2015/11/11/lua_cpp_toluapp_tutorial/&quot; rel=&quot;next&quot; title=&quot;tolua++安装&quot;&gt;
-            &lt;i class=&quot;fa fa-chevron-left...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-625_How%20NOT%20To%20Evaluate%20Your%20Dialogue%20System%20An%20Empiri/">
+<article class="md-text"><h2 class="post-title">How NOT To Evaluate Your Dialogue System An Empirical Study of Unsupervised Evaluation Metrics for Dialogue Response Generation</h2><div class="excerpt"><p>如何评价对话生成的质量而不使用人工标注是一个还未解决的问题。这篇文章将证明现在已有的这些评测指标和Twitter domain的人工评测质量只有一点点的相关性，而在Ubuntu domain上则是毫不相关。这些评测值通常来自于机器翻译、文本摘要，比如BLEU、METEOR和ROUGE。这些指标都假设了合法的回复都有明显特殊的词是和ground truth的回复有重复的。这是一个在对话领域中相...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.290Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

@@ -112,35 +112,24 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：openresty</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/capture.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>ngx.location.capture() 传递消息体
-ngx.location.capture()用于请求的内部转发，在实现上是函数级别的调用，但是在capture前如果调用ngx.req.read_body()，body将被取出，captrue的目标location将不能获取到body，正确地使用示例：
-
-123ngx.req.read_body()local data = ngx.r...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/control_structrues.html">
+  <div class="post-list post"><a class="post-card post " href="/control_structrues.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>控制结构流程控制语句对于程序设计来说特别重要，它可以用于设定程序的逻辑结构。一般需要与条件判断语句结合使用。Lua 语言提供的控制结构有 if，while，repeat，for，并提供 break 关键字来满足更丰富的需求。本章主要介绍 Lua 语言的控制结构的使用。
 </p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/file.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>文件操作Lua I&#x2F;O 库提供两种不同的方式处理文件：隐式文件描述，显式文件描述。
-这些文件 I&#x2F;O 操作，在 OpenResty 的上下文中对事件循环是会产生阻塞效应。 OpenResty 比较擅长的是高并发网络处理，在这个环境中，任何文件的操作，都将阻塞其他并行执行的请求。实际中的应用，在 OpenResty 项目中应尽可能让网络处理部分、文件 I&#x2F;0 操作...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/dot_diff.html">
-<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>点号与冒号操作符的区别
-看下面示例代码：
-
-123local str = &quot;abcde&quot;print(&quot;case 1:&quot;, str:sub(1, 2))print(&quot;case 2:&quot;, str.sub(str, 1, 2))
-
-
-执行结果:
-
-12case 1: abcase 2: ab
-
-冒号操作会带入一个self参数，用来代表自己...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/dummy_var.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>虚变量当一个方法返回多个值时，有些返回值有时候用不到，要是声明很多变量来一一接收，显然不太合适（不是不能）。Lua 提供了一个虚变量(dummy variable)，以单个下划线（“_”）来命名，用它来丢弃不需要的数值，仅仅起到占位的作用。
 
 看一段示例代码：
 
 12345678910111213141516-- string.find (s,p) 从string 变量s的开头向后匹配 st...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/class.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>Lua 基础数据类型函数 type 能够返回一个值或一个变量所属的类型。
+12345print(type(&quot;hello world&quot;)) --&gt;output:stringprint(type(print))         --&gt;output:functionprint(type(true))          --&gt;output:booleanprin...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/file.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>文件操作Lua I&#x2F;O 库提供两种不同的方式处理文件：隐式文件描述，显式文件描述。
+这些文件 I&#x2F;O 操作，在 OpenResty 的上下文中对事件循环是会产生阻塞效应。 OpenResty 比较擅长的是高并发网络处理，在这个环境中，任何文件的操作，都将阻塞其他并行执行的请求。实际中的应用，在 OpenResty 项目中应尽可能让网络处理部分、文件 I&#x2F;0 操作...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/FFI.html">
+<article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>FFIFFI 库，是 LuaJIT 中最重要的一个扩展库。它允许从纯 Lua 代码调用外部C函数，使用 C 数据结构。有了它，就不用再像 Lua 标准 math 库一样，编写 Lua 扩展库。把开发者从开发 Lua 扩展 C 库（语言&#x2F;功能绑定库）的繁重工作中释放出来。
+FFI 库最大限度的省去了使用 C 手工编写繁重的 Lua&#x2F;C 绑定的需要。不需要学习一门独立&#x2...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.127Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/pra_flame_how.html">
 <article class="md-text"><h2 class="post-title">2023-04-26</h2><div class="excerpt"><p>如何定位问题一个正常的火焰图，应该呈现出如官网给出的样例（官网的火焰图是抓 C 级别函数）：
 从上图可以看出，正常业务下的火焰图形状类似的“山脉”，“山脉”的“海拔”表示 worker 中业务函数的调用深度，“山脉”的“长度”表示 worker 中业务函数占用 cpu 的比例。
@@ -166,12 +155,9 @@ Nginx 变量漫谈（七）
 Nginx 变量漫谈（八）
 Nginx 配置指令的执行顺序（一）
 Nginx 配置指令的执行...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.085Z">2023-04-26</time></span></div></article>
-</a><a class="post-card post " href="/agentzh-nginx-guide-08.html">
-<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（八）与 $arg_XXX 类似，我们在 （二） 中提到过的内建变量 $cookie_XXX 变量也会在名为 XXX 的 cookie 不存在时返回特殊值“没找到”：
-location /test &#123;
-    content_by_lua &#39;
-        if ngx.var.cookie_user == nil then
-            n...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
+</a><a class="post-card post " href="/agentzh-nginx-guide-06.html">
+<article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（六）Nginx 内建变量用在“子请求”的上下文中时，其行为也会变得有些微妙。
+前面在 （三） 中我们已经知道，许多内建变量都不是简单的“存放值的容器”，它们一般会通过注册“存取处理程序”来表现得与众不同，而它们即使有存放值的容器，也只是用于缓存“存取处理程序”的计算结果。我们之前讨论过的 $args 变量正是通过它的“取处理程序”来返回当前请求的 URL 参数串。因为当...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>
 </a><a class="post-card post " href="/agentzh-nginx-guide-07.html">
 <article class="md-text"><h2 class="post-title">Agentzh的Nginx教程</h2><div class="excerpt"><p>Nginx 变量漫谈（七）在 （一） 中我们提到过，Nginx 变量的值只有一种类型，那就是字符串，但是变量也有可能压根就不存在有意义的值。没有值的变量也有两种特殊的值：一种是“不合法”（invalid），另一种是“没找到”（not found）。
 举例说来，当 Nginx 用户变量 $foo 创建了却未被赋值时，$foo 的值便是“不合法”；而如果当前请求的 URL 参数串中并没有提及 X...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.084Z">2023-04-26</time></span></div></article>

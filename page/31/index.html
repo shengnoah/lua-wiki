@@ -110,7 +110,14 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-731_cocos2dx%20lua%20%E7%BB%91%E5%AE%9A%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-728_LUAWAF/">
+<article class="md-text"><h2 class="post-title">LUAWAF</h2><div class="excerpt"><p>LUAWAFLUAWAF是我编写的一个针对Nginx的Web应用提供安全防护的Web应用防火墙。
+支持平台目前WAF只支持Windows平台
+安装1，使用本软件最好直接在OpenResty官网下载OpenResty，OpenResty自身带有Nginx
+2，将该WAF下载到OpenResty的lua目录下，解压即可
+3，日志读写的文件必须给与相应的权限
+使用说明1，需要在nginx.conf...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-731_cocos2dx%20lua%20%E7%BB%91%E5%AE%9A%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98/">
 <article class="md-text"><h2 class="post-title">cocos2dx lua 绑定详解与实战</h2><div class="excerpt"><p>我们平时在开发cocos2dx lua游戏的时候的，会遇到这样的情况：
 
 在c++层定义了一些类，我们需要将这些类导出给Lua来使用，从而完成在c++层实现起来容易的需求，这个时候就需要将整个类作为模块导出。
@@ -119,27 +126,18 @@
 
 
 为了更好的理解这...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-725_Lua%20%E6%AD%A3%E7%A1%AE%E5%A4%84%E7%90%86%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%20/">
-<article class="md-text"><h2 class="post-title">Lua 正确处理可变参数</h2><div class="excerpt"><p>为了在 Lua 里处理可变参数，我们可能会写下面这样的代码：
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-726_%5B%E8%AF%91%5DPerformance%20evaluation%20of%20MQTT%20and%20CoAP%20via%20a%20c/">
+<article class="md-text"><h2 class="post-title">Performance evaluation of MQTT and CoAP via a common middleware</h2><div class="excerpt"><p>　　Performance evaluation of MQTT and CoAP via a common middleware（全文翻译）
 
-local function args(...)
-    if next(&#123;...&#125;) then
-        for _, v in ipairs&#123;...&#125; do
-            print(v)
-        end
-    else
-        print(&#34;...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-732_Luajit%E5%8F%8D%E7%BC%96%E8%AF%91%E4%B9%8B%E6%8E%A2%E7%B4%A2%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">Luajit反编译之探索记</h2><div class="excerpt"><p>
-  
-  由于工作需求，要反编译一个luajit编译过的文件。百度反编译luajit，得到的信息是目前没有此类成熟的反编译器。所以，如果你用luajit编译了代码，基本上不用担心被别人破解（2015.12）。
-
-虽然没有luaj反编译器，但是不代表反编译不可能。至少，人肉反编译是可以的，哈。因为我只需要反编译一个文件，所以采取人肉的方式，也许是可行的。
-
-首先，在github上面找到了唯一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+12345678910Dinesh ThangavelFaculty of Engineering National University of SingaporeXiaoping MaSense and Sense-Abilities, Inst...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.300Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-710_Lua%E5%85%83%E8%A1%A8%20%5B%20Chuang%20Yu%20%5D/">
 <article class="md-text"><h2 class="post-title">Lua元表</h2><div class="excerpt"><p>javascript语言本身不支持面向对象，ES2015中增加了class关键字，却不过是prototype语法糖而已，本质上prototype形式的面向对象只能算是一种“模拟”，这其中很重要的原因之一是js从来没有一套完美的深拷贝方案，子类只能借助原型链获取父类方法的引用，这不能算是严格意义的继承，当然也就算不上面向对象。
 和js一样，lua的面向对象需要通过table来模拟，有些行为很像...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-711_Lua%20Module%20%E5%AE%9E%E8%B7%B5%20%C2%B7%20Pan's%20paper/">
+<article class="md-text"><h2 class="post-title">Lua Module 实践 · Pan's paper</h2><div class="excerpt"><p>最近用openresty写接口，每个接口都要要链接数据库，写一个通用的模块来实现，顺便学习下lua module的相关知识。
+
+lua 模块Lua中的一个模块就是一个table，table元素包括变量，函数等。“因此创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table”。
+123456789101112131415161718192021...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-713_In%20place%20iterative%20policy%20evaluation/">
 <article class="md-text"><h2 class="post-title">In place iterative policy evaluation</h2><div class="excerpt"><p>
       	
@@ -148,11 +146,17 @@ local function args(...)
 
   使用两个数组，其中一个数组存储上一轮迭代的状态价值，另外一个数组存储本轮迭代中的状态价值，本轮迭代总是从上一轮迭代（老的）的状态价值取值，这样在迭代过程中老的状态价值不会受到影响。
   使用一个数组来存储状态价值，并在迭代时实时更新状态价值，这样在迭代过程中能够更早的利...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-711_Lua%20Module%20%E5%AE%9E%E8%B7%B5%20%C2%B7%20Pan's%20paper/">
-<article class="md-text"><h2 class="post-title">Lua Module 实践 · Pan's paper</h2><div class="excerpt"><p>最近用openresty写接口，每个接口都要要链接数据库，写一个通用的模块来实现，顺便学习下lua module的相关知识。
-
-lua 模块Lua中的一个模块就是一个table，table元素包括变量，函数等。“因此创建一个模块很简单，就是创建一个 table，然后把需要导出的常量、函数放入其中，最后返回这个 table”。
-123456789101112131415161718192021...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-715_lua_code_cache/">
+<article class="md-text"><h2 class="post-title">lua_code_cache</h2><div class="excerpt"><p>
+        
+lua_code_cache
+syntax: lua_code_cache on | off
+default: lua_code_cache on
+context: http, server, location, location if
+Enables or disables the Lua code cache for Lua code in *_by_lua_file...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-712_lua%E8%AF%BB%E5%8F%96redis%E6%95%B0%E6%8D%AE%E7%9A%84null%E5%88%A4%E6%96%AD/">
+<article class="md-text"><h2 class="post-title">lua读取redis数据的null判断</h2><div class="excerpt"><p>最近在配合移动端调试的时候，被抓去debug一个在清除redis缓存之后才会出现的网关错误。于是打开服务器上的log定位到类似错误:
+1[error] 7#7: *12030 lua entry thread aborted: runtime error: /data/share/apps/lua/access_check.lua:133: bad argument #1 to &#39;d...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-714_%E5%8D%81%E4%B8%83%E3%80%81%E8%80%83%E8%99%91%E4%BD%BF%E7%94%A8Lazy%20evaluation(%E7%BC%93%E5%BC%8F%E8%AF%84%E4%BC%B0)/">
 <article class="md-text"><h2 class="post-title">十七、考虑使用Lazy evaluation(缓式评估)</h2><div class="excerpt"><p>从效率上看，最好的运算是从未执行过的运算。
 拖延战术——缓式评估
@@ -165,9 +169,6 @@ lua 模块Lua中的一个模块就是一个table，table元素包括变量，函
 三、Lazy Fetching（缓式取出）
 当程序使用大型对象，内含许多字段。
 在产生对象时，只产生一个该...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-712_lua%E8%AF%BB%E5%8F%96redis%E6%95%B0%E6%8D%AE%E7%9A%84null%E5%88%A4%E6%96%AD/">
-<article class="md-text"><h2 class="post-title">lua读取redis数据的null判断</h2><div class="excerpt"><p>最近在配合移动端调试的时候，被抓去debug一个在清除redis缓存之后才会出现的网关错误。于是打开服务器上的log定位到类似错误:
-1[error] 7#7: *12030 lua entry thread aborted: runtime error: /data/share/apps/lua/access_check.lua:133: bad argument #1 to &#39;d...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-716_Lua%20%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 <article class="md-text"><h2 class="post-title">Lua 正则表达式</h2><div class="excerpt"><p>
                         
@@ -185,25 +186,6 @@ Lua字符串匹配
 string.find(s, pattern[, init[, plaub]])
 
 在字符串 s 中匹...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-717_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89table%E7%9A%84%E9%95%BF%E5%BA%A6/">
-<article class="md-text"><h2 class="post-title">Lua学习笔记（5）table的长度</h2><div class="excerpt"><p>lua-5.1.5
-
-疑问
-lua获取table长度的接口有很多：
-
-
-  table.getn()
-  table.maxn()
-  ’#’操作符
-
-
-
-  推荐一篇文章：浅析Lua中table的遍历
-
-
-但是也会出现神奇的情况，请看下面一小段代码：
-
-local t = &#123;111, x = 222, nil, 333, [10] = 555, &#123;&#125;, nil...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.299Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

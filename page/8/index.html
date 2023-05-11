@@ -119,17 +119,6 @@ LuaInterface.dll：在C#代码中操作Lua代码需要依赖该文件；luanet.d
 注意：LuaInterface需要...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-931_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">lua学习笔记（六）</h2><div class="excerpt"><p>Lua面向对象封装123456789101112131415161718192021222324252627282930People={isHumen=true}		-- 此处定义的元素都是相当于C++的静态成员变量-- 基类方法newfunction (o,n,a)	o=o or {}	setmetatable(o,self)	-- self相当于C++的this指针，但是这里指代的是元类...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-933_LuaTable%E5%88%A4%E7%A9%BA/">
-<article class="md-text"><h2 class="post-title">LuaTable判空</h2><div class="excerpt"><p>Lua判断表为空t = {}的逻辑1if next(a) == nil thennext(table[,index])
-运行程序来遍历表中的所有域。 第一个参数是要遍历的表，第二个参数是表中的某个键。 next 返回该键的下一个键及其关联的值。 如果用 nil 作为第二个参数调用 next 将返回初始键及其关联值。 当以最后一个键去调用，或是以 nil 调用一张空表时， next 返回 ni...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-934_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
-<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>冒泡排序（Bubble Sort，台湾译为：泡沫排序或气泡排序）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。
-
-算法步骤
-
-
-  有一个长度为n的序列，一共需要n次外循环
-  在一次外循环里，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-932_lua/">
 <article class="md-text"><h2 class="post-title">lua</h2><div class="excerpt"><p>元表（类似操作符重载）
 
@@ -144,6 +133,8 @@ Lua 提供的所有操作符都可以被重载：
 “div” / 操作 其行为类似于 “add” 操作
 “mod” % 操作 其行为类似于 “add” 操作
 “pow” ^ （幂）操作 其行为类似于 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-935_%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84lua%E5%AE%9E%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">归并排序算法的lua实现</h2><div class="excerpt"><p>12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758-- 归并排序算法学习--[[	1. 设置临时table, 用来存放排序之后的数组	2. 设定两个值i,j, 初始值分别为两个待排序数组的第一个key	3. 比较key为i,j对应...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-936_Lua%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 <article class="md-text"><h2 class="post-title">Lua数据类型</h2><div class="excerpt"><p>前言
 
@@ -159,18 +150,9 @@ Lua 提供的所有操作符都可以被重载：
 lua源码简介
 
   可以从lu...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-935_%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84lua%E5%AE%9E%E7%8E%B0/">
-<article class="md-text"><h2 class="post-title">归并排序算法的lua实现</h2><div class="excerpt"><p>12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758-- 归并排序算法学习--[[	1. 设置临时table, 用来存放排序之后的数组	2. 设定两个值i,j, 初始值分别为两个待排序数组的第一个key	3. 比较key为i,j对应...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-938_Lua%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">Lua安装</h2><div class="excerpt"><p>
-Lua并不象其它许多”大而全”的语言那样包括很多功能，比如网络通讯、图形界面等，它提供了非常易于使用的扩展接口和机制：由宿主语言(通常是C或C++)提供这些功能，Lua可以使用它们，就像是本来就内置的功能一样。
-
-
-
-一、安装
-centos7下安装
-
-安装依赖yum install libtermcap-devel ncurses-devel libevent-devel readline...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-933_LuaTable%E5%88%A4%E7%A9%BA/">
+<article class="md-text"><h2 class="post-title">LuaTable判空</h2><div class="excerpt"><p>Lua判断表为空t = {}的逻辑1if next(a) == nil thennext(table[,index])
+运行程序来遍历表中的所有域。 第一个参数是要遍历的表，第二个参数是表中的某个键。 next 返回该键的下一个键及其关联的值。 如果用 nil 作为第二个参数调用 next 将返回初始键及其关联值。 当以最后一个键去调用，或是以 nil 调用一张空表时， next 返回 ni...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-937_Nginx%20%E4%BD%BF%E7%94%A8%20lua/">
 <article class="md-text"><h2 class="post-title">Nginx 使用 lua</h2><div class="excerpt"><p>
   1. 软件版本
@@ -190,12 +172,45 @@ centos7下安装
   PHP   5.6.27
 
 ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-939_HMExpressionEvaluator%E2%80%94%E2%80%94%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E5%8F%88%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%BA%93/">
-<article class="md-text"><h2 class="post-title">HMExpressionEvaluator——一个使用简单又强大的表达式计算库</h2><div class="excerpt"><p> demo下载地址
-一. 简介
-一个数学表达式计算器，能实现和 UIWebView 的 stringByEvaluatingJavaScriptFromString: 一样的计算效果，但效率要高很多，可以在子线程中执行；
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-934_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>冒泡排序（Bubble Sort，台湾译为：泡沫排序或气泡排序）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。
 
-基本全面覆盖 NSExpression 的 expressionForFunction:arguments 中的所有function，使用要比 NSExpression ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+算法步骤
+
+
+  有一个长度为n的序列，一共需要n次外循环
+  在一次外循环里，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-938_Lua%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">Lua安装</h2><div class="excerpt"><p>
+Lua并不象其它许多”大而全”的语言那样包括很多功能，比如网络通讯、图形界面等，它提供了非常易于使用的扩展接口和机制：由宿主语言(通常是C或C++)提供这些功能，Lua可以使用它们，就像是本来就内置的功能一样。
+
+
+
+一、安装
+centos7下安装
+
+安装依赖yum install libtermcap-devel ncurses-devel libevent-devel readline...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-93_lua%20%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/">
+<article class="md-text"><h2 class="post-title">lua 脚本执行流程</h2><div class="excerpt"><p>
+  简介
+  LuaState
+  执行流程    
+      编译
+      执行
+    
+  
+  参考资料
+
+
+简介
+
+之所以写这篇文章，因为在看lua源码时候，感觉对lua脚本执行流程有一个全局认识对
+研究lua源码本身起着重要作用，故此在这里简单介绍一下lua脚本是何时被加载、又是
+何时执行的。
+
+LuaState
+
+想要更好的理解脚本执行流程，就必须先了解LuaState...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.319Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>

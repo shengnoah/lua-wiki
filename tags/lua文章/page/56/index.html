@@ -112,13 +112,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-474_Lua%E5%9F%BA%E7%A1%80/">
-<article class="md-text"><h2 class="post-title">Lua基础</h2><div class="excerpt"><p>Lua是一种灵活小巧的脚本语言，可以被嵌入应用程序中，为应用程序提供灵活的扩展和定制功能。
-
-注释单行注释12print(&#34;Hello World!&#34;)  -- 另一个单行注释
-多行注释1234--[[    多行注释    另一个多行注释--]]
-变量变量标识符Lua的变量标识符用大小写字母、下划线、数字等组成，必须用字母或下划线作为开头。最好不要使用下划线加大写字母的标示...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-473_cocos2dx%20lua%20(%E4%BC%AA)%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98%E5%BA%94%E7%94%A8/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-473_cocos2dx%20lua%20(%E4%BC%AA)%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98%E5%BA%94%E7%94%A8/">
 <article class="md-text"><h2 class="post-title">cocos2dx lua (伪)面向对象理解与实战应用</h2><div class="excerpt"><p>
 面向对象    
 
@@ -126,57 +120,6 @@
 &gt;&gt; 通过类的封装（encapsulation）隐藏内部细节
 &gt;&gt; 通过继承（inheritance）实现类的特化（specialization）／泛化（generalization）
 &gt;&gt; 通过多态（polymorphi...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-478_Lua%E4%B8%AD%E5%85%B3%E4%BA%8Etable%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
-<article class="md-text"><h2 class="post-title">Lua中关于table对象引用传递的注意事项</h2><div class="excerpt"><p>最近写了挺长一段时间的Lua，发现Lua这个语言真的是很随意，产生这种感觉的根本原因应该是它把“函数” 作为了“第一类值”，也就是说函数也可以作为变量的“值”，这使得Lua可以随处定义函数，进而改变逻辑的走向，整个流程任你摆布。
-
-虽说把一个函数来回设置方便了许多，但是同样带来了一些不容易发现的问题，如果搞不清定义域和引用关系，常常会导致程序错误，比如最近用Lua写按钮的触发事件时，使用公有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-479_Lua%20%E6%9C%89%E8%B6%A3%E7%9A%84%E8%AF%AD%E6%B3%95%E7%89%B9%E6%80%A7/">
-<article class="md-text"><h2 class="post-title">Lua 有趣的语法特性</h2><div class="excerpt"><p>
-使用函数作为函数返回
-table关联数组的多种访问形式
-table计数的问题
-函数其实也是变量
-local 和 global 函数在调用的时候会有所区别
-可变参数（5.1）
-参数默认值
-三元表达式
-不同变量类型比较时不存在自动转换
-只有 nil 和 false 是假，0,&#123;&#125;,&#34;&#34; 都是真
-for循环
-对象方法的调用
-函数多个返回值
-泛型调用和 unpa...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-475_lua%E4%B8%AD%E7%9A%84%E8%A1%A8%E5%8F%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-<article class="md-text"><h2 class="post-title">lua中的表及面向对象</h2><div class="excerpt"><p>在lua中，只有唯一的一种数据结构，表。通过表，却可以用来实现类一样的形式，其关键是对于表的元方法的使用，可以有很多奇妙的用处。
-Lua中，所有的值都可以有一个有一个元表(metatable)，元表中的元素定义了对于值特定操作的方法，就叫做元方法。当然，这些元表是有默认值的，但我们可以通过改变值元表中的元方法来进行特定操作行为的改变。
-可以通过setmetatable()函数来修改一个表的元...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-480_%5BLua%5D%20Coroutine%E5%8D%8F%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">Coroutine协程</h2><div class="excerpt"><p>Coroutine Manipulation
-
-coroutine.create (f)
-
-Creates a new coroutine, with body f. f must be a function. Returns this new coroutine, an object with type “thread”.
-
-创建一个新的协程。f必须是一个函数。返回值是这个新的协程，返回值...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-481_Openrestry(Nginx+Lua)%E4%B9%8BWAF%E5%AE%9E%E7%8E%B0/">
-<article class="md-text"><h2 class="post-title">Openrestry(Nginx+Lua)之WAF实现</h2><div class="excerpt"><p>
-      
-    
-    
-      
-        
-          
-      &lt;div class=&quot;page-date&quot;&gt;
-              &lt;span id=&quot;busuanzi_container_page_pv&quot;&gt; | 本文阅读量：&lt;span id=&quot;busuanzi_va...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-476_Lua%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E9%97%AD%E5%8C%85/">
-<article class="md-text"><h2 class="post-title">Lua中的函数和闭包</h2><div class="excerpt"><p>
-    
-    
-&lt;div class=&quot;wrap-content&quot;&gt;
-  
-  &lt;p&gt;当Lua&lt;strong&gt;编译一个函数的时候，会产生一个prototype&lt;/strong&gt;，这个prototype包含了这个函数的&lt;strong&gt;虚拟机器指令&lt;/strong&gt;、&lt;strong&gt;常量...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-47_nginx+lua%E5%8A%A8%E6%80%81%E6%94%B9%E5%8F%98upstream/">
-<article class="md-text"><h2 class="post-title">nginx+lua动态改变upstream</h2><div class="excerpt"><p>在做毕设的时候需要动态改变通过nginx代理的服务器数量。背景大概是我有一个generator不断产生负载打在nginx上，还有一个monitor根据generator生成负载的qps来动态决定需要多少台服务器刚好能够承担这个qps的请求，因此需要动态修改nginx中的upstream。以前在配置nginx的时候，upstream都是写死在nginx.conf文件中的，现在要动态改变upst...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-477_Lua%20%E5%AD%A6%E4%B9%A0%20chapter22%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter22</h2><div class="excerpt"><p>目录
 
@@ -199,6 +142,63 @@ Creates a new coroutine, with body f. f must be a function. Returns this new cor
 6
 7
 8...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-476_Lua%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E9%97%AD%E5%8C%85/">
+<article class="md-text"><h2 class="post-title">Lua中的函数和闭包</h2><div class="excerpt"><p>
+    
+    
+&lt;div class=&quot;wrap-content&quot;&gt;
+  
+  &lt;p&gt;当Lua&lt;strong&gt;编译一个函数的时候，会产生一个prototype&lt;/strong&gt;，这个prototype包含了这个函数的&lt;strong&gt;虚拟机器指令&lt;/strong&gt;、&lt;strong&gt;常量...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-475_lua%E4%B8%AD%E7%9A%84%E8%A1%A8%E5%8F%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+<article class="md-text"><h2 class="post-title">lua中的表及面向对象</h2><div class="excerpt"><p>在lua中，只有唯一的一种数据结构，表。通过表，却可以用来实现类一样的形式，其关键是对于表的元方法的使用，可以有很多奇妙的用处。
+Lua中，所有的值都可以有一个有一个元表(metatable)，元表中的元素定义了对于值特定操作的方法，就叫做元方法。当然，这些元表是有默认值的，但我们可以通过改变值元表中的元方法来进行特定操作行为的改变。
+可以通过setmetatable()函数来修改一个表的元...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-479_Lua%20%E6%9C%89%E8%B6%A3%E7%9A%84%E8%AF%AD%E6%B3%95%E7%89%B9%E6%80%A7/">
+<article class="md-text"><h2 class="post-title">Lua 有趣的语法特性</h2><div class="excerpt"><p>
+使用函数作为函数返回
+table关联数组的多种访问形式
+table计数的问题
+函数其实也是变量
+local 和 global 函数在调用的时候会有所区别
+可变参数（5.1）
+参数默认值
+三元表达式
+不同变量类型比较时不存在自动转换
+只有 nil 和 false 是假，0,&#123;&#125;,&#34;&#34; 都是真
+for循环
+对象方法的调用
+函数多个返回值
+泛型调用和 unpa...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-478_Lua%E4%B8%AD%E5%85%B3%E4%BA%8Etable%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+<article class="md-text"><h2 class="post-title">Lua中关于table对象引用传递的注意事项</h2><div class="excerpt"><p>最近写了挺长一段时间的Lua，发现Lua这个语言真的是很随意，产生这种感觉的根本原因应该是它把“函数” 作为了“第一类值”，也就是说函数也可以作为变量的“值”，这使得Lua可以随处定义函数，进而改变逻辑的走向，整个流程任你摆布。
+
+虽说把一个函数来回设置方便了许多，但是同样带来了一些不容易发现的问题，如果搞不清定义域和引用关系，常常会导致程序错误，比如最近用Lua写按钮的触发事件时，使用公有...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-47_nginx+lua%E5%8A%A8%E6%80%81%E6%94%B9%E5%8F%98upstream/">
+<article class="md-text"><h2 class="post-title">nginx+lua动态改变upstream</h2><div class="excerpt"><p>在做毕设的时候需要动态改变通过nginx代理的服务器数量。背景大概是我有一个generator不断产生负载打在nginx上，还有一个monitor根据generator生成负载的qps来动态决定需要多少台服务器刚好能够承担这个qps的请求，因此需要动态修改nginx中的upstream。以前在配置nginx的时候，upstream都是写死在nginx.conf文件中的，现在要动态改变upst...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-480_%5BLua%5D%20Coroutine%E5%8D%8F%E7%A8%8B/">
+<article class="md-text"><h2 class="post-title">Coroutine协程</h2><div class="excerpt"><p>Coroutine Manipulation
+
+coroutine.create (f)
+
+Creates a new coroutine, with body f. f must be a function. Returns this new coroutine, an object with type “thread”.
+
+创建一个新的协程。f必须是一个函数。返回值是这个新的协程，返回值...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-474_Lua%E5%9F%BA%E7%A1%80/">
+<article class="md-text"><h2 class="post-title">Lua基础</h2><div class="excerpt"><p>Lua是一种灵活小巧的脚本语言，可以被嵌入应用程序中，为应用程序提供灵活的扩展和定制功能。
+
+注释单行注释12print(&#34;Hello World!&#34;)  -- 另一个单行注释
+多行注释1234--[[    多行注释    另一个多行注释--]]
+变量变量标识符Lua的变量标识符用大小写字母、下划线、数字等组成，必须用字母或下划线作为开头。最好不要使用下划线加大写字母的标示...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-481_Openrestry(Nginx+Lua)%E4%B9%8BWAF%E5%AE%9E%E7%8E%B0/">
+<article class="md-text"><h2 class="post-title">Openrestry(Nginx+Lua)之WAF实现</h2><div class="excerpt"><p>
+      
+    
+    
+      
+        
+          
+      &lt;div class=&quot;page-date&quot;&gt;
+              &lt;span id=&quot;busuanzi_container_page_pv&quot;&gt; | 本文阅读量：&lt;span id=&quot;busuanzi_va...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.276Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

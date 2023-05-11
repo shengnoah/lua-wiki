@@ -110,7 +110,11 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-945_Evaluation%20measure%20of%20pose%20estimation/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-947_Rainmeter%20Lua%20%E8%84%9A%E6%9C%AC/">
+<article class="md-text"><h2 class="post-title">Rainmeter Lua 脚本</h2><div class="excerpt"><p>用Rainmeter也快10年了，从乐此不疲得写RM项目到现在的桌面怎么简洁怎么来，期间也发布过不少下载量超六位数Skin，也没有为Rainmeter写过啥，今天写一下Lua和Rainmeter的使用，也是让大家能运用这个高级脚本写出更好的Skin。
+
+Script（脚本）这个Measure已不是什么新的Measure了，但是几乎没有多少中使用到它。可能是它使用的脚本语言门槛比较高的缘故。R...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-945_Evaluation%20measure%20of%20pose%20estimation/">
 <article class="md-text"><h2 class="post-title">Evaluation measure of pose estimation</h2><div class="excerpt"><p>单人检测单人姿态估计的评估标准。
 PCKPCK(Percentage of Correct Keypoints)正确关键点的比例。
 PCK的思想是，关键点坐标pred与groundtrue之间的归一化距离小于一定阈值时，视为正确估计，以正确估计的关键点的比例作为评估标准。
@@ -120,24 +124,12 @@ PCK的思想是，关键点坐标pred与groundtrue之间的归一化距离小于
 阈值是多少
 
 以PCKh为例，PCKh采用头部长度（head seg...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-947_Rainmeter%20Lua%20%E8%84%9A%E6%9C%AC/">
-<article class="md-text"><h2 class="post-title">Rainmeter Lua 脚本</h2><div class="excerpt"><p>用Rainmeter也快10年了，从乐此不疲得写RM项目到现在的桌面怎么简洁怎么来，期间也发布过不少下载量超六位数Skin，也没有为Rainmeter写过啥，今天写一下Lua和Rainmeter的使用，也是让大家能运用这个高级脚本写出更好的Skin。
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-944_%E5%9C%A8%E5%8E%9F%E6%9C%89%E7%9A%84nginx%E4%B8%8A%E9%9D%A2%E5%AE%89%E8%A3%85Openresty%E5%92%8Clua%E7%9B%B8%E5%85%B3%E7%9A%84%E6%A8%A1%E5%9D%97/">
+<article class="md-text"><h2 class="post-title">在原有的nginx上面安装Openresty和lua相关的模块</h2><div class="excerpt"><p>突然有一天出了个需求，做文件防盗链的，而且需要通过nginx来做，这个时候必然想到了Openresty，Openresty本身其实已经安装有nginx了，但是要求在公司原有的nginx上面装一些Openresty里面的模块，这个时候就有点复杂了，但是最终还是研究出来了，庆幸啊，这里做一个笔记，以便下次安装使用。
+安装openresty
+下载openresty  
 
-Script（脚本）这个Measure已不是什么新的Measure了，但是几乎没有多少中使用到它。可能是它使用的脚本语言门槛比较高的缘故。R...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-946_skynet%20lua%E6%9C%8D%E5%8A%A1/">
-<article class="md-text"><h2 class="post-title">skynet lua服务</h2><div class="excerpt"><p>C模块的导出从skynet核心模块来看，它只认得C服务，每个服务被编译为动态库，在需要时由skynet加载。skynet提供发送消息和注册回调函数的接口，并保证消息的正确到达，并调用目标服务回调函数。其它东西，如消息调度，线程池等，对于用户来说都是透明的。
-skynet服务可以由lua编写，因此skynet将C模块核心接口通过skynet/lualib-src/lua-skynet.c导出为...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-948_Lua%E7%BC%96%E7%A8%8B9%E4%B9%8B%E6%A8%A1%E5%9D%97/">
-<article class="md-text"><h2 class="post-title">Lua编程9之模块</h2><div class="excerpt"><p>思考并回答以下问题：1.如何创建一个模块？2.私有函数如何声明？3.return tab1必须和模块同一名称吗？4.如何引用一个模块？别名如何使用？5.原生lua文件加载路径如何查看？6.xLua加载方式是怎样的？建议的加载Lua脚本方式是什么？7.什么是自定义Loader？如何自定义Loader？
-
-用Lua写代码不可能把所有代码都写一个文件里，不同文件之间如何引用呢？Lua中也有模块的机...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-94_%E6%9C%80%E8%BF%91%E5%85%B3%E4%BA%8ELua%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AF%87%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">最近关于Lua的学习篇总结（一）</h2><div class="excerpt"><p>
-            Contents
-        
-    &lt;/div&gt;
-    
-    &lt;h1 id=&quot;1-Lua在游戏的作用&quot;&gt;&lt;a href=&quot;#1-Lua在游戏的作用&quot; class=&quot;headerlink&quot; title=&quot;1.Lua在游戏的作用&quot;&gt;&lt;/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+下载地址：https://...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-949_Lua%E5%88%9D%E8%AF%86/">
 <article class="md-text"><h2 class="post-title">Lua初识</h2><div class="excerpt"><p>Lua初识Lua 数据类型8种基本类型:nil :表示无效值(条件表达式代表false)boolean:布尔 包含两个值:true和falsenumber: 表示双精度类型的实浮点数string: 字符串有””或者’’表示userdata: 任意存储中的C数据结构function: Lua或C编写的函数thread: 执行独立线路,执行协同程序table: 关联数据(associative ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-951_wrk%E6%90%AD%E9%85%8Dlua%E8%84%9A%E6%9C%AC%EF%BC%8C%E4%B8%AA%E6%80%A7%E5%8C%96%E5%8E%8B%E6%B5%8B/">
@@ -175,6 +167,17 @@ s...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&n
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-952_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>   我们要明确一个前提：Lua是动态型语言，变量是不需要类型定义，只需要为变量赋值。值可以存储在变量中，最为参数传递或结果返回。一 基本类型   Lua有8个基本类型：nil、boolean、number、string、userdata、function、thread、table
    1 nil      表示一个无效的值，在条件表达式中相当于false    2 boolean    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-948_Lua%E7%BC%96%E7%A8%8B9%E4%B9%8B%E6%A8%A1%E5%9D%97/">
+<article class="md-text"><h2 class="post-title">Lua编程9之模块</h2><div class="excerpt"><p>思考并回答以下问题：1.如何创建一个模块？2.私有函数如何声明？3.return tab1必须和模块同一名称吗？4.如何引用一个模块？别名如何使用？5.原生lua文件加载路径如何查看？6.xLua加载方式是怎样的？建议的加载Lua脚本方式是什么？7.什么是自定义Loader？如何自定义Loader？
+
+用Lua写代码不可能把所有代码都写一个文件里，不同文件之间如何引用呢？Lua中也有模块的机...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-94_%E6%9C%80%E8%BF%91%E5%85%B3%E4%BA%8ELua%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AF%87%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">最近关于Lua的学习篇总结（一）</h2><div class="excerpt"><p>
+            Contents
+        
+    &lt;/div&gt;
+    
+    &lt;h1 id=&quot;1-Lua在游戏的作用&quot;&gt;&lt;a href=&quot;#1-Lua在游戏的作用&quot; class=&quot;headerlink&quot; title=&quot;1.Lua在游戏的作用&quot;&gt;&lt;/...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.320Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-950_Lua%E7%83%AD%E6%9B%B4%E6%96%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20/">
 <article class="md-text"><h2 class="post-title">Lua热更新注意事项</h2><div class="excerpt"><p>lua热更新，是当下最成熟、最热门，也是使用最多的热更新方案，单说热更新的话，它是完美的解决方案，但要从性能上说，它其实比C#要差上不少，自然而然地，如何优化性能也就成了开发人员最头痛的问题。
 本文讲从一些数据调研出发，结合一些大牛的文章，对lua中性能优化的点进行汇总。

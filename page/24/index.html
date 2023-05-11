@@ -110,32 +110,33 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-784_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>table 操作
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-783_Lua%20%E5%AD%A6%E4%B9%A0%20chapter22%20/">
+<article class="md-text"><h2 class="post-title">Lua 学习 chapter22</h2><div class="excerpt"><p>目录
+
+  具有动态名称的全局变量
+  非全局环境
+  环境和模块
+  _ENV和load
 
 
 
-
-函数
-解释
+  只有疯狂过，你才知道自己究竟能不能成功。
 
 
+具有动态名称的全局变量
 
+在lua中，所有的全局变量都被存在_G中，通过_G[name]可以访问到任意一个全局变量。在lua中，全局变量不需要声明就可以直接使用，但是这个可能会造成非常难以查询的bug，所以我们可以对全局变量进行简单的封装。
 
-table.concat (table [, step [, start [, end]]])
-函数列出参数中指定table的数组部分从start位置到end位置的所有元素, 元素间以指定的分隔符(step)隔开
-
-
-table.insert (table, [pos,] value)
-在table的数组部分指定位置(pos)插入值为value的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+1...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-786_tolua%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">tolua++安装</h2><div class="excerpt"><p>
+          
+            
+          &lt;a href=&quot;/2015/11/11/lua_cpp_bind/&quot; rel=&quot;next&quot; title=&quot;C++与Lua本质原始交互API&quot;&gt;
+            &lt;i class=&quot;fa fa-chevron-left&quot...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-787_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>1   变量在使用前，必须在代码中进行声明，即创建改变量；    Lua的变量类型：全局变量、局部变量、表中的域；    Lua的变量全是全局变量，即便是语句块或者是函数里，除非使用local显示声明为局部变量；    局部变量的作用域从声明的位置开始，到所在语句块结束；    变量的默认值均为nil;
 2 赋值   Lua可以对多个变量同时赋值，变量列表和值列表的各个元素用逗号分开，赋值语...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-789_Lua%E7%AC%94%E8%AE%B0%E6%95%88%E7%8E%87%E6%80%A7%E8%83%BD/">
-<article class="md-text"><h2 class="post-title">Lua笔记效率性能</h2><div class="excerpt"><p>本文使用对比测评的方式比较了几种Lua中代码和方式，并做了简要的总结和分析。结合其中结论，可指导写出质量更高、性能更优的脚本。本文基于Lua5.1，大部分内容也同样适用于Lua5.2和5.3。本文中引用到的Lua源代码都取自Lua 5.1.5版本。
-
-评测方法主要有运行时间和产生GC两个指标，以下是获取运行时间和内存用量/GC的方法：
-获取运行时间为了更好地做比较，使用下边的方法来记录代码的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-788_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/">
 <article class="md-text"><h2 class="post-title">Lua学习笔记二</h2><div class="excerpt"><p>while1234while(条件)do  循环体end
 代码示例及结果：
@@ -151,12 +152,25 @@ for123for var=值1,值2,值2 do  循环体end
 有了前几天的基础，我们可以从顶向下来读 lua gc 部分的代码了。慢慢的，感觉我这个系列都可以叫跟着云风一起看Lua源码了，虽然自己看的是最新的5.3。挖个坑，之后应该会真的跟着云风大大的那本readinglua一起看完lua的最新源码。
 
 lua_gc我们知道，lua 对外的 API 中，一切和 gc 打交道的都通过 lua_gc 。C 语言构建系统时，一般不讲设计模式。但模式还是存...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-786_tolua%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">tolua++安装</h2><div class="excerpt"><p>
-          
-            
-          &lt;a href=&quot;/2015/11/11/lua_cpp_bind/&quot; rel=&quot;next&quot; title=&quot;C++与Lua本质原始交互API&quot;&gt;
-            &lt;i class=&quot;fa fa-chevron-left&quot...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-791_LuaFramework/">
+<article class="md-text"><h2 class="post-title">LuaFramework</h2><div class="excerpt"><p>思考并回答以下问题：
+
+在上一篇文章LuaFramework-1中，介绍了LuaFramework加载面板的方法，但这个方法并不适用于其它Prefab资源，在这套框架中非面板型资源的加载方法另有套路。
+创建一个预制体打开上次使用的工程，打开Main场景，创建一个名为ImgOrc的Image，图片就选例子用的兽人头像。在Assets/LuaFramework/CustomPrj目录下新建一个P...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-789_Lua%E7%AC%94%E8%AE%B0%E6%95%88%E7%8E%87%E6%80%A7%E8%83%BD/">
+<article class="md-text"><h2 class="post-title">Lua笔记效率性能</h2><div class="excerpt"><p>本文使用对比测评的方式比较了几种Lua中代码和方式，并做了简要的总结和分析。结合其中结论，可指导写出质量更高、性能更优的脚本。本文基于Lua5.1，大部分内容也同样适用于Lua5.2和5.3。本文中引用到的Lua源代码都取自Lua 5.1.5版本。
+
+评测方法主要有运行时间和产生GC两个指标，以下是获取运行时间和内存用量/GC的方法：
+获取运行时间为了更好地做比较，使用下边的方法来记录代码的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-792_%E9%87%87%E8%AE%BF%20Lua%20%E5%8F%91%E6%98%8E%E4%BA%BA/">
+<article class="md-text"><h2 class="post-title">采访 Lua 发明人</h2><div class="excerpt"><p>
+                        
+                            
+                                
+                                
+                            &lt;div class=&quot;entry&quot;&gt;
+
+           ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-790_Lua%20%E5%AD%A6%E4%B9%A0%20chapter2%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter2</h2><div class="excerpt"><p>目录
 
@@ -181,20 +195,6 @@ Eight Queen
 通过一个表来存储，键值表示行，值表示列。
 
 判断...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-791_LuaFramework/">
-<article class="md-text"><h2 class="post-title">LuaFramework</h2><div class="excerpt"><p>思考并回答以下问题：
-
-在上一篇文章LuaFramework-1中，介绍了LuaFramework加载面板的方法，但这个方法并不适用于其它Prefab资源，在这套框架中非面板型资源的加载方法另有套路。
-创建一个预制体打开上次使用的工程，打开Main场景，创建一个名为ImgOrc的Image，图片就选例子用的兽人头像。在Assets/LuaFramework/CustomPrj目录下新建一个P...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-792_%E9%87%87%E8%AE%BF%20Lua%20%E5%8F%91%E6%98%8E%E4%BA%BA/">
-<article class="md-text"><h2 class="post-title">采访 Lua 发明人</h2><div class="excerpt"><p>
-                        
-                            
-                                
-                                
-                            &lt;div class=&quot;entry&quot;&gt;
-
-           ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.306Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-773_%E7%94%A8%20lua%20%E6%A8%A1%E6%8B%9F%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%20%C2%B7%20dcf's%20blog/">
 <article class="md-text"><h2 class="post-title">用 lua 模拟面向对象 · dcf's blog</h2><div class="excerpt"><p>
   

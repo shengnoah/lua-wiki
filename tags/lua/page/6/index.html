@@ -112,26 +112,18 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/if-else-if-statement/">
-<article class="md-text"><h2 class="post-title">Lua中的 if...else 语句</h2><div class="excerpt"><p>#Lua 中的 if…else 语句  
-如果 if 语句后面跟上 else 语句，那么条件为假时就执行 else 语句的代码。  
-##语法  
-Lua 语言中 if…else 语句的语法如下所示：  
-1234567891011121314151617if(boolean_expression)then   --[ 如何条件为真，则执行此处代码。 --]else   --[ 如何条件为假...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/io/">
+  <div class="post-list post"><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/io/">
 <article class="md-text"><h2 class="post-title">Lua文件I/O</h2><div class="excerpt"><p>Lua 文件 I&#x2F;OLua 的 IO 库用于读取或操作文件。Lua IO 库提供两类文件操作，它们分别是隐式文件描述符(implict file descriptors)和显式文件描述符(explicit file descriptors)。
 在接下来的例子的，我们会用到一个示例文件 test.lua，文件内容如下：  
 123456-- sample test.lua-- sam...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/statement/">
-<article class="md-text"><h2 class="post-title">Lua中的if语句</h2><div class="excerpt"><p>#Lua 中的 if 语句  
-if　语句包括一个布尔表达式和一个或多个语句。　　
-##语法  
-Lua 语言 if 语句的语法如下：  
-123456789101112131415if(boolean_expression)then   --[如果布尔表达式为真，statement(s) 执行。--]end```  如果布尔表达式计算结果为真，则 if 语句内的代码块执行；如果布尔表达式计...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/iterators/">
-<article class="md-text"><h2 class="post-title">Lua迭代器</h2><div class="excerpt"><p>Lua 迭代器迭代器是用于遍历集合或容器中元素的一种结构。在 Lua 语言中，集合往往指的是可以用来创建各种数据结构的表。比如，数组就是用表来创建的。  
-通用迭代器通用迭代器可以访问集合中的键值对。下面是通用迭代器的一个简单例子：  
-12345678910array = &#123;&quot;Lua&quot;, &quot;Tutorial&quot;&#125;for key,va...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/collection/">
+<article class="md-text"><h2 class="post-title">Lua垃圾回收机制</h2><div class="excerpt"><p>Lua 垃圾回收机制Lua 通过特定算法的垃圾回收机制实现自动内存管理。由于自动内存管理机制的存在，作为程序开发人员：  
+
+    不需要关心对象的内存分配问题。
+    不再使用对象时，除了将引用它的变量设为 nil，不需要主动释放对象。
+  
+Lua 的垃圾回收器会不断运行去收集不再被 Lua 程序访问的对象。  
+所有的对象，包括表、userdata、函数、线程、字符串等都由自动内存...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/math-library/">
 <article class="md-text"><h2 class="post-title">Lua数学函数库</h2><div class="excerpt"><p>Lua 数学函数库在科学计算与工程计算领域，我们都需要用到大量的数学函数。在 Lua 的数学库提供了大量的数学函数，如下表所示：  
 
@@ -146,8 +138,31 @@ Lua 语言 if 语句的语法如下：
     
         2
         math.acos(x)：返回 x ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/statement/">
+<article class="md-text"><h2 class="post-title">Lua中的if语句</h2><div class="excerpt"><p>#Lua 中的 if 语句  
+if　语句包括一个布尔表达式和一个或多个语句。　　
+##语法  
+Lua 语言 if 语句的语法如下：  
+123456789101112131415if(boolean_expression)then   --[如果布尔表达式为真，statement(s) 执行。--]end```  如果布尔表达式计算结果为真，则 if 语句内的代码块执行；如果布尔表达式计...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/modules/">
 <article class="md-text"><h2 class="post-title">Lua模块</h2><div class="excerpt"><p>Lua 模块什么是模块？Lua 中的模块与库的概念相似，每个模块都有一个全局唯一名字，并且每个模块都包含一个表。使用一个模块时，可以使用 require 加载模块。模块中可以包括函数和变量，所有这些函数和变量被表存储于模块的表中。模块中的表的功能类似于命名空间，用于隔离不同模块中的相同的变量名。在使用模块的时候，我们应该遵守模块定义的规范，在 require 加载模块时返回模块中的包含函数和...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/iterators/">
+<article class="md-text"><h2 class="post-title">Lua迭代器</h2><div class="excerpt"><p>Lua 迭代器迭代器是用于遍历集合或容器中元素的一种结构。在 Lua 语言中，集合往往指的是可以用来创建各种数据结构的表。比如，数组就是用表来创建的。  
+通用迭代器通用迭代器可以访问集合中的键值对。下面是通用迭代器的一个简单例子：  
+12345678910array = &#123;&quot;Lua&quot;, &quot;Tutorial&quot;&#125;for key,va...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.094Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-tables/">
+<article class="md-text"><h2 class="post-title">Lua表</h2><div class="excerpt"><p>Lua 表在 Lua 语言中，表是唯一可以用来创建不同数据类型的数据结构，比如常见的数组和字典都是用表来创建的。 Lua 语言中经常到关联数组这种数据类型，它不仅可以用数值作为索引值，除了 nil 以外的字符串同样可以作为其索引。表没有固定的大小，当数据量增加时表会自动增大。  
+Lua 语言中的各种结构表示都用到了表，包括包（package）的表示。当我们使用方法 string.forma...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/lua-guide/2016-06-01-strings/">
+<article class="md-text"><h2 class="post-title">Lua字符串</h2><div class="excerpt"><p>Lua 字符串字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。
+
+    单引号字符串
+    双引号字符串
+    [[和]]之间的字符串
+  
+
+上面三种初始化方式的示例如下：  
+1234567891011string1 = &quot;Lua&quot;print(&quot;\&quot;String 1 is\&quot;&quot;,str...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/arrays/">
 <article class="md-text"><h2 class="post-title">数组</h2><div class="excerpt"><p>Lua 数组数组是一组有序的对象排列，既可以是一维的也可以是多维的。  
 在 Lua 语言中，数组是用整数索引表实现的。数组的大小并不固定，随着数组元素的增加，它可以动态地增加内存空间大小。  
@@ -157,15 +172,6 @@ Lua 语言 if 语句的语法如下：
 <article class="md-text"><h2 class="post-title">Lua基本语法</h2><div class="excerpt"><p>基本语法Lua 学起来非常简单。现在，让我们开始创建我们的第一个 Lua 程序吧！  
 第一个 Lua 程序Lua 提供交互式编程模式。在这个模式下，你可以一条一条地输入命令，然后立即就可以得到结果。你可以在 shell 中使用 lua -i 或者 lua 命令启动。输入命令后，按下回车键，就启动了交互模式，显示如下：  
 1234567$ lua -i $ Lua 5.1.4  Copyr...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/coroutines/">
-<article class="md-text"><h2 class="post-title">Lua协程</h2><div class="excerpt"><p>Lua 协程概述协程具有协同的性质，它允许两个或多个方法以某种可控的方式协同工作。在任何一个时刻，都只有一个协程在运行，只有当正在运行的协程主动挂起时它的执行才会被挂起（暂停）。 
-上面的定义可能看上去比较模糊。接下来让我讲得很清楚一点，假设我们有两个方法，一个是主程序方法，另一个是一个协程。当我们使用 resume 函数调用一个协程时，协程才开始执行。当在协程调用 yield 函数时，协程...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
-</a><a class="post-card post " href="/lua_guide/lua%E6%95%99%E7%A8%8B/break/">
-<article class="md-text"><h2 class="post-title">Break语句</h2><div class="excerpt"><p>#break 语句  
-程序在解释执行过程中，在循环内遇到 break 语句时，循环将立即结束。程序将循环语句的下一条语句开始执行。如果你是在嵌套循环（即，一个循环内还有一个循环语句）内使用 break 语句，break 只结束内层循环，并从该代码块后的第一条语句处开始执行。  
-##语法  
-break 语句的语法如下所示：  
-12345678break;```  ##流程图：  ![]...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.093Z">2023-04-26</time></span><span class="cap breadcrumb">lua_guide</span></div></article>
 </a></div>
   
 

@@ -112,12 +112,14 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-49_tolua++%E5%AE%89%E8%A3%85/">
-<article class="md-text"><h2 class="post-title">tolua++安装</h2><div class="excerpt"><p>
-          
-            
-          &lt;a href=&quot;/2015/11/11/lua_cpp_bind/&quot; rel=&quot;next&quot; title=&quot;C++与Lua本质原始交互API&quot;&gt;
-            &lt;i class=&quot;fa fa-chevron-left&quot...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-4_%5BLua_Trace%5D%201.%20Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20/">
+<article class="md-text"><h2 class="post-title">Lua_Trace 1. Lua数据结构</h2><div class="excerpt"><p>                    &lt;p&gt;摘要:[Lua_Trace] 1. Lua数据结构 - TValue&lt;/p&gt;
+                &lt;br /&gt;
+                &lt;p&gt;
+欲深入了解Lua，我认为先从数据结构开始是必要的，&lt;/p&gt;
+
+
+    本文将由Lua基础数据结构(TValue)讲起, 进...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-502_Lua%20%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/">
 <article class="md-text"><h2 class="post-title">Lua 初步学习</h2><div class="excerpt"><p>1 所谓的“交互式编程”   Lua提供了交互式编程模式,我们可以在命令行中输入程序并立即查看效果。   Lua 交互式编程模式可以通过命令 lua -i 或 lua 来启用
 2 所谓的“脚本式编程”   我们将代码写入.lua文件，然后执行，就是脚本式编程。   eg:   WangBingdeMacBook-Pro:~ wangbing$ cd /Users/wangbing/Deskt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
@@ -138,6 +140,10 @@ print( type(&#34;H...</p></div><div class="meta cap"><span class="cap" id="post-
                 &lt;/div&gt;
                 &lt;div class=&quot;pt-article-main&quot;&gt;
                     &lt;div class=&quot;pa...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-501_OpenResty%20Lua%20Stream%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90/">
+<article class="md-text"><h2 class="post-title">OpenResty Lua Stream实现分析</h2><div class="excerpt"><p>OpenResty（以下简称OR）是Lua应用的典范，其最大的亮点在于，使用Lua协程搭配上异步非阻塞的IO，这样开发者可以使用同步方式来编写代码，而底层IO调度、唤醒等操作留给C编写的引擎层。
+
+实际上，使用类协程的技术，让异步操作同步化，已经有很多相关的技术了，比如腾讯的libco、百度的brpc都是自己在C层面实现了类协程的机制，不过这一类技术用的最广泛的还是OR。市面上分析OR内部实...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-505_Lua%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
 <article class="md-text"><h2 class="post-title">Lua基础语法</h2><div class="excerpt"><p>注释
 单行注释两个减号，--
@@ -171,30 +177,6 @@ number
 
 string
 由一对双引号&#34; &#34;或单引...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-501_OpenResty%20Lua%20Stream%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90/">
-<article class="md-text"><h2 class="post-title">OpenResty Lua Stream实现分析</h2><div class="excerpt"><p>OpenResty（以下简称OR）是Lua应用的典范，其最大的亮点在于，使用Lua协程搭配上异步非阻塞的IO，这样开发者可以使用同步方式来编写代码，而底层IO调度、唤醒等操作留给C编写的引擎层。
-
-实际上，使用类协程的技术，让异步操作同步化，已经有很多相关的技术了，比如腾讯的libco、百度的brpc都是自己在C层面实现了类协程的机制，不过这一类技术用的最广泛的还是OR。市面上分析OR内部实...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-483_%E6%B5%85%E6%9E%90android%E6%89%8B%E6%B8%B8lua%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86%EF%BC%88%E5%90%8E%E7%BB%AD%EF%BC%89/">
-<article class="md-text"><h2 class="post-title">浅析android手游lua脚本的加密与解密（后续）</h2><div class="excerpt"><p>  趁着周末，把lua的后续文章也写完了。
-反编译对抗  众所周知，反汇编/反编译 工具在逆向人员工作中第一步被使用，其地位非常之高，而对于软件保护者来说，如何对抗 反汇编/反编译 就显得尤为重要。例如，动态调试中对OD的的检测、内核调试对windbg的破坏、加壳加花对IDA静态分析的阻碍、apktool的bug导致对修改后的apk反编译失败、修改PE头导致OD无法识别、修改 .Net dl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-487_Lua%20%E5%AD%A6%E4%B9%A0%20chapter4%20/">
-<article class="md-text"><h2 class="post-title">Lua 学习 chapter4</h2><div class="excerpt"><p>目录
-
-  字符串常量
-  强制类型转换
-  字符串的标准库
-  Unicode编码
-
-
-
-  I think you should do your best when you are work.
-
-
-字符串常量
-
-在lua中你可以使用一对双引号或者单引号来声明字符串常量。
-它们两个是等价的，唯一区别在于，使用双引号声明的字符串中出现单引号，单引号不需要转义。在单引号中出现双引号也是一样的。...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-485_Nginx%20Lua%20Backdoor%20/">
 <article class="md-text"><h2 class="post-title">Nginx Lua Backdoor</h2><div class="excerpt"><p>在先知看到了apache利用lua留后门，就想着用nginx也试试安装有ngx_lua模块，在openresty和tengine中是默认安装了ngx_lua模块的。我这里拿openresty举例，你可以在这里下载win平台打包好的。步骤找到conf/nginx.conf，在server块中添加路由1
 2
@@ -202,29 +184,20 @@ string
 4
 location = /a.php &#123;  
     default_t...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-489_Lua%E6%A0%87%E5%87%86%E5%BA%93/">
-<article class="md-text"><h2 class="post-title">Lua标准库</h2><div class="excerpt"><p>lua标准库之数学库
-数学库概念数学库由算术函数的标准集合组成；比如三角函数（sin、cos、tan、asin、acos、etc）幂指函数（exp、log、log10），舍入函数（floor、ceil）、max、min，加上一个变量pi，数学库也定义了一个幂操作符 ^ 
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-484_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">
+<article class="md-text"><h2 class="post-title">Lua string 哈希碰撞</h2><div class="excerpt"><p>Lua 中 40 字节以下的字符串会被内部化到一张表中(Lua 5.3)，这张表挂在 global state 结构下。对于短字符串，相同的串在同一虚拟机上只会存在一份，这被称为字符串的内部化。
 
 
-
-函数
-描述
-示例
-结果
+  其实字符串在 Lua VM 中是以两种内部形式保存的：短字符串及长字符串。其界限默认设置为40（字节）
 
 
-
-
-abs
-取绝对值
-math.abs(-15)
-15
-
-
-acos
-反余弦函数
-mat...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+对于比较长的字符串（32字节以上），为了加快哈希过程，计算字符串哈希值是跳跃进行的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-483_%E6%B5%85%E6%9E%90android%E6%89%8B%E6%B8%B8lua%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8A%A0%E5%AF%86%E4%B8%8E%E8%A7%A3%E5%AF%86%EF%BC%88%E5%90%8E%E7%BB%AD%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">浅析android手游lua脚本的加密与解密（后续）</h2><div class="excerpt"><p>  趁着周末，把lua的后续文章也写完了。
+反编译对抗  众所周知，反汇编/反编译 工具在逆向人员工作中第一步被使用，其地位非常之高，而对于软件保护者来说，如何对抗 反汇编/反编译 就显得尤为重要。例如，动态调试中对OD的的检测、内核调试对windbg的破坏、加壳加花对IDA静态分析的阻碍、apktool的bug导致对修改后的apk反编译失败、修改PE头导致OD无法识别、修改 .Net dl...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-486_Car%20Evaluation%E6%95%B0%E6%8D%AE%E9%9B%86/">
+<article class="md-text"><h2 class="post-title">Car Evaluation数据集</h2><div class="excerpt"><p>提供者：杜成玉下载地址：http://archive.ics.uci.edu/ml/machine-learning-databases/car/
+数据来源：https://www.jianshu.com/p/be23b3870d2e这是一个关于汽车测评的数据集，类别变量为汽车的测评，（unacc，ACC，good，vgood）分别代表（不可接受，可接受，好，非常好），而6个属性变量分别为「...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.277Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

@@ -112,31 +112,7 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-980_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-<article class="md-text"><h2 class="post-title">lua学习笔记</h2><div class="excerpt"><p>
-使用命令行参数-i来启动lua解释器，那么解释器就会在运行完指定的程序块后进入交互模式。
-12345test.luafunction ( ... )		print(&#34;foo&#34;)end
-1234lua -i test.luaLua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio foo()foo
-另一种运行程序块的方式是使用函数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-984_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">
-<article class="md-text"><h2 class="post-title">Lua string 哈希碰撞</h2><div class="excerpt"><p>Lua 中 40 字节以下的字符串会被内部化到一张表中(Lua 5.3)，这张表挂在 global state 结构下。对于短字符串，相同的串在同一虚拟机上只会存在一份，这被称为字符串的内部化。
-
-
-  其实字符串在 Lua VM 中是以两种内部形式保存的：短字符串及长字符串。其界限默认设置为40（字节）
-
-
-对于比较长的字符串（32字节以上），为了加快哈希过程，计算字符串哈希值是跳跃进行的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-985_PIL.9Lua%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/">
-<article class="md-text"><h2 class="post-title">PIL.9Lua中的闭包</h2><div class="excerpt"><p>Lua中的函数是 第一类的值加上合适的词法域。那么，函数是第一类值意味着什么呢？这是说，在Lua中，一个函数，就是一个和 数字或字符串一样具有某些权限的值。一个程序可以把函数存储在变量中（全局或者局部都可以）和表中，把函数作为参数传递给其他函数，或者以函数作为值返回。
-
-函数具有词法域又是什么意思呢？就是说函数可以访问他们包裹函数的变量。
-这两个特性给了Lua巨大的弹性；具体点说，一个程序在...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-982_lua%E8%AF%AD%E6%B3%95/">
-<article class="md-text"><h2 class="post-title">lua语法</h2><div class="excerpt"><p>lua特性开源，轻量级，c语言编写实现，实现面向对象有点绕，执行效率高
-lua开发环境
-linux
-123456789101112131415-- 下载lua包、解压wget -c http://www.lua.org/ftp/lua-5.3.0.tar.gztar zxvf lua-5.3.0.tar.gz-- 下载libreadline相关支持sudo apt-get install l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-983_lua%20gc%E5%88%86%E6%9E%90/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-983_lua%20gc%E5%88%86%E6%9E%90/">
 <article class="md-text"><h2 class="post-title">lua gc分析</h2><div class="excerpt"><p>说明分析lua使用的gc算法，如何做到分步gc，以及测试结论
 gc算法分析lua gc采用的是标记-清除算法，即一次gc分两步：
 
@@ -148,6 +124,42 @@ gc算法分析lua gc采用的是标记-清除算法，即一次gc分两步：
 三色标记法
 
 lua5.1开始采用了一种三色回...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-982_lua%E8%AF%AD%E6%B3%95/">
+<article class="md-text"><h2 class="post-title">lua语法</h2><div class="excerpt"><p>lua特性开源，轻量级，c语言编写实现，实现面向对象有点绕，执行效率高
+lua开发环境
+linux
+123456789101112131415-- 下载lua包、解压wget -c http://www.lua.org/ftp/lua-5.3.0.tar.gztar zxvf lua-5.3.0.tar.gz-- 下载libreadline相关支持sudo apt-get install l...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-981_C++%E4%B8%8ELua%E5%88%9D%E6%8E%A2/">
+<article class="md-text"><h2 class="post-title">C++与Lua初探</h2><div class="excerpt"><p>最近在工作中用到了Lua与C++的相互调用的知识，现在对两者的互相调用进行总结。
+
+我觉得要了解两者之间的调用关系，需要弄清三件事情：
+
+
+  lua栈是什么
+  C++如何调用lua
+  lua如何调用C++
+
+
+在弄清这三件事情之前，让我们先来看看怎么讲Lua嵌入到C++程序中。
+
+
+
+大致思路就是将Lua的源码打包成静态库，在程序编译的时候，将静态库也加入到编译选项中。
+
+具体步骤如下...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-985_PIL.9Lua%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/">
+<article class="md-text"><h2 class="post-title">PIL.9Lua中的闭包</h2><div class="excerpt"><p>Lua中的函数是 第一类的值加上合适的词法域。那么，函数是第一类值意味着什么呢？这是说，在Lua中，一个函数，就是一个和 数字或字符串一样具有某些权限的值。一个程序可以把函数存储在变量中（全局或者局部都可以）和表中，把函数作为参数传递给其他函数，或者以函数作为值返回。
+
+函数具有词法域又是什么意思呢？就是说函数可以访问他们包裹函数的变量。
+这两个特性给了Lua巨大的弹性；具体点说，一个程序在...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-984_Lua%20string%20%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%20/">
+<article class="md-text"><h2 class="post-title">Lua string 哈希碰撞</h2><div class="excerpt"><p>Lua 中 40 字节以下的字符串会被内部化到一张表中(Lua 5.3)，这张表挂在 global state 结构下。对于短字符串，相同的串在同一虚拟机上只会存在一份，这被称为字符串的内部化。
+
+
+  其实字符串在 Lua VM 中是以两种内部形式保存的：短字符串及长字符串。其界限默认设置为40（字节）
+
+
+对于比较长的字符串（32字节以上），为了加快哈希过程，计算字符串哈希值是跳跃进行的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.323Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-966_nginx%20lua%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 <article class="md-text"><h2 class="post-title">nginx lua环境搭建</h2><div class="excerpt"><p>安装nginx及搭建本地测试环境下载最新版的nginx  
 $ cd /usr/local/src 
@@ -158,30 +170,19 @@ $ tar -zxvf nginx-1.11.3.tar.gz
 安装Luajit(最新版)
 $ cd /usr/local/src
 $ wget http://luajit.org...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-970_Centos7%E5%AE%89%E8%A3%85Nginx%E6%95%B4%E5%90%88Lua/">
-<article class="md-text"><h2 class="post-title">Centos7安装Nginx整合Lua</h2><div class="excerpt"><p>(adsbygoogle=window.adsbygoogle||[]).push({})背景Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。现在通常把lua迁入nginx中，根据lua脚本规则，强化nginx的能力。本文介绍在centos7中安装nginx整合lua。环境centos7安装关闭防...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-968_lua%20c%20api%20/">
+<article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C/C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C/C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 程序示例 #include &lt;stdio.h&gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-969_lua%E4%B8%89%E7%A7%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">
 <article class="md-text"><h2 class="post-title">lua三种字符串拼接性能分析</h2><div class="excerpt"><p>说明lua中提供了3中字符串拼接函数，测试在日常使用情况下，各种拼接字符串的性能对比。
 测试环境操作系统：Debian GNU/Linux 8CPU：Intel(R) Xeon(R) CPU E5-2640 v2 @ 2.00GHz内存：64Glua环境：LuaJIT-2.1.0-beta3 (测试的时候关闭jit)
  
 测试普通日常使用性能分析日常拼接字符串的时候一般都是多个已存在的变量，...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-968_lua%20c%20api%20/">
-<article class="md-text"><h2 class="post-title">lua c api</h2><div class="excerpt"><p>一 概述 很多情况下有这种需求：在特定的框架中针对不同的业务做少量修改。使用 C/C++ 开发稳定的框架，调用针对不同业务开发的 Lua 函数可以实现需求。其实从 C/C++ 调用 Lua 函数非常简单，调用时将 Lua 函数压入栈、将函数参数压入栈，调用 lua_pcall 完成调用；调用后从栈获得调用函数返回结果。 二 示例 1. 程序示例 #include &lt;stdio.h&gt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-96_%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BALua%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-<article class="md-text"><h2 class="post-title">如何搭建Lua开发环境</h2><div class="excerpt"><p>
-                
-                
-摘要
-工欲善其事必先利其器，在开发Lua代码之前，我们必须要搭建好一个Lua开发环境。下面是在MAC上面搭建Lua环境的步骤。 Linux上面的步骤与其基本相似，而Windows与之有所差异，在最后将补充说明。
-环境清单
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-970_Centos7%E5%AE%89%E8%A3%85Nginx%E6%95%B4%E5%90%88Lua/">
+<article class="md-text"><h2 class="post-title">Centos7安装Nginx整合Lua</h2><div class="excerpt"><p>(adsbygoogle=window.adsbygoogle||[]).push({})背景Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。现在通常把lua迁入nginx中，根据lua脚本规则，强化nginx的能力。本文介绍在centos7中安装nginx整合lua。环境centos7安装关闭防...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-973_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+<article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>归并排序（Merge Sort，台湾译作：合并排序）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
 
-lua 5.3.3
-luarocks 2.3.0
-
-安装过程
-
-
-首先下载lua最新release版...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+归并操作(Merge)，也叫归并算法，指的是将两个已经排序的序列合并成一个序列的操作。归并排序算法依赖归并操作。归并排序有多路归并排序、两路归并排序, 可用于内排序，也可以用于外排序。这里仅对内排序的两路归并方法进行讨...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.322Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

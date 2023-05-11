@@ -112,18 +112,22 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-620_lua%E7%9A%84UTF/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-619_Lua%E4%B8%ADand,or%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95%EF%BD%9Cqiuzhong's%20blog/">
+<article class="md-text"><h2 class="post-title">Lua中and,or的一些特殊用法｜qiuzhong's blog</h2><div class="excerpt"><p>先说and：我们知道and是取与，与就是0 and 0 = 0、0 and 1 = 0、1 and 1 = 1，也就是说有一个为0值就为0，全为1表达式值才为1，所以，当and的第一个操作数为0的时候，我们就没有必要看后面的操作数了，此时表达式的值已经为0，我们就把第一个为0的操作数返回即可；如果第一个操作数为1，那么整个表达式的值就取决于第二个操作数了，第二个为0表达式值为0，第二个为1表...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-61_Programming%20in%20Lua(Thrid%20Edition)%E7%AC%94%E8%AE%B0/">
+<article class="md-text"><h2 class="post-title">Programming in Lua(Thrid Edition)笔记</h2><div class="excerpt"><p>8 Compilation, Execution, and Errors
+
+dofile()实现：1234function (filename)	local f = assert(loadfile(filename))	return f()end
+
+
+可简单一些：123function (filename)	assert(loadfile(filename))()end
+loadfile()...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-620_lua%E7%9A%84UTF/">
 <article class="md-text"><h2 class="post-title">lua的UTF</h2><div class="excerpt"><p>大家知道utf8的每个字符并不是定长，所以在处理中文字符截取是会出现很多麻烦，直接substring的话最后一个字符一般都会是乱码，而且长度也不对，lua没有截取UTF8中文字符的相关函数，我们只能自己写一个：
 取前200个中文字符  
 for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z1-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-619_Lua%E4%B8%ADand,or%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95%EF%BD%9Cqiuzhong's%20blog/">
-<article class="md-text"><h2 class="post-title">Lua中and,or的一些特殊用法｜qiuzhong's blog</h2><div class="excerpt"><p>先说and：我们知道and是取与，与就是0 and 0 = 0、0 and 1 = 0、1 and 1 = 1，也就是说有一个为0值就为0，全为1表达式值才为1，所以，当and的第一个操作数为0的时候，我们就没有必要看后面的操作数了，此时表达式的值已经为0，我们就把第一个为0的操作数返回即可；如果第一个操作数为1，那么整个表达式的值就取决于第二个操作数了，第二个为0表达式值为0，第二个为1表...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-621_%E4%BD%9C%E4%B8%9A_4%20leetcode%20399%20Evaluate%20Division/">
 <article class="md-text"><h2 class="post-title">作业_4 leetcode 399 Evaluate Division</h2><div class="excerpt"><p>题干Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the ans...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-618_study_lua/">
-<article class="md-text"><h2 class="post-title">study_lua</h2><div class="excerpt"><p>#Lua  学习
-##知识点1.requeire加载路径
-###加载机制对于自定义的模块，模块文件不是放在哪个文件目录都行，函数 require 有它自己的文件路径加载策略，它会尝试从 Lua 文件或 C 程序库中加载模块。require 用于搜索 Lua 文件的路径是存放在全局变量 package.path 中，当 Lua 启动后，会以环境变量 LUA_PATH 的值来初始这个环境变量。如...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.289Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-600_Lua/">
 <article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>名称ngx_http_lua_module - 将Lua的功能嵌入到Nginx HTTP服务器中。
 这个模块没有与Nginx源码一起发布。详见安装介绍
@@ -139,10 +143,6 @@ for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z1-
 概要123456789101112131415161718192021222324252627282930313...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-603_Lua%20hash/">
 <article class="md-text"><h2 class="post-title">Lua hash</h2><div class="excerpt"><p>一般哈希表处理冲突有两种方式，拉链法和开放地址法。拉链法就是哈希表的每个元素都是一个链表，如果有冲突的键就放在链表里面。而开放地址法是如果遇到了冲突，就在计算一个哈希值，直到没有冲突位置。拉链法的优点就是实现简单，缺点也是有的：链表会导致低的缓存命中率，并且分配链表节点本身也会对内存分配器产生压力（主要是大量小块内存分配会导致碎片），而且有个更严重的问题：不太好估计哈希表的装载因子，因此不太...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-602_Ubuntu18.04%20Nginx+Lua+GraphicsMagick%E5%9B%BE%E7%89%87%E7%BC%A9%E6%94%BE/">
-<article class="md-text"><h2 class="post-title">Ubuntu18.04 Nginx+Lua+GraphicsMagick图片缩放</h2><div class="excerpt"><p>自己搭建的图片服务器，有图片缩放的需求，大致思路是可以使用nginx调用lua，使用GraphicMagick的命令来做图片缩放
-说明文件夹规划lua.jaychang.cn(如/var/filebase)
-12345678910111213jaychang@nginx:~$ tree /var/filebase//var/filebase/├── avatar.png├── cache│ ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-604_Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20%E2%80%94%20Table%EF%BC%88%E4%B8%89%EF%BC%89/">
 <article class="md-text"><h2 class="post-title">Lua数据结构 — Table（三）</h2><div class="excerpt"><p>
             文章目录
@@ -152,12 +152,19 @@ for uchar in string.gfind(string.sub(data.response.docs[i].content,sp), ‘[%z1-
       &lt;/div&gt;
     
     &lt;p&gt;前面（一）、（二）里面其实已经把一些常用的数据类型（数值、布尔、字符串）说明了，这次要描述的是Table，Table在Lua里是一种常用的数据类型，是Lua里的精髓之一，其效率必须得...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-602_Ubuntu18.04%20Nginx+Lua+GraphicsMagick%E5%9B%BE%E7%89%87%E7%BC%A9%E6%94%BE/">
+<article class="md-text"><h2 class="post-title">Ubuntu18.04 Nginx+Lua+GraphicsMagick图片缩放</h2><div class="excerpt"><p>自己搭建的图片服务器，有图片缩放的需求，大致思路是可以使用nginx调用lua，使用GraphicMagick的命令来做图片缩放
+说明文件夹规划lua.jaychang.cn(如/var/filebase)
+12345678910111213jaychang@nginx:~$ tree /var/filebase//var/filebase/├── avatar.png├── cache│ ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-605_ulua%E7%83%AD%E6%9B%B4%E6%96%B0%E5%B0%8F%E8%AF%95/">
 <article class="md-text"><h2 class="post-title">ulua热更新小试</h2><div class="excerpt"><p>传说中的热更新在Unity中是怎样实现的:)
 写在前面　　热更新技术在游戏行业可以说是大名鼎鼎了，虽然苹果前段时间禁止了JSPatch等热更新技术，但目前来看，苹果并没有禁止游戏引擎的热更新技术。某种程度上说明了热更新在游戏中的重要性。而ulua作为一款优秀的unity3d热更新插件，完美解决了Unity游戏热更新的问题。
 什么是热更新　　热更新一般用于网络游戏中。其指的是在不重新下载客户端...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-606_lua%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A6%82%E8%BF%B0/">
-<article class="md-text"><h2 class="post-title">lua虚拟机概述</h2><div class="excerpt"><p>何为虚拟机用于模拟计算机运行的程序.是个中间层,它处于脚本语言和硬件之间的一个程序.每一门脚本语言都会有自己定义的opcode(”操作码”),可以理解为这门程序自己定义的”汇编语言”.一般的编译型语言,比如C等,经过编译器编译之后生成的都是与当前硬件环境相匹配的汇编代码;而脚本型的语言,经过前端的处理之后,生成的就是opcode,再将该opcode放在这门语言的虚拟机中执行.虚拟机是作为单独...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-601_Java%E5%B9%B6%E5%8F%91%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8%E9%99%90%E6%B5%81%20Redis%20+%20Lua%20%E5%AE%9E%E8%B7%B5/">
+<article class="md-text"><h2 class="post-title">Java并发：分布式应用限流 Redis + Lua 实践</h2><div class="excerpt"><p>任何限流都不是漫无目的的，也不是一个开关就可以解决的问题，常用的限流算法有：令牌桶，漏桶。在之前的文章中，也讲到过，但是那是基于单机场景来写。
+
+之前文章：接口限流算法：漏桶算法&amp;令牌桶算法
+然而再牛逼的机器，再优化的设计，对于特殊场景我们也是要特殊处理的。就拿秒杀来说，可能会有百万级别的用户进行抢购，而商品数量远远小于用户数量。如果这些请求都进入队列或者查询缓存，对于最终结果没有任...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.288Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

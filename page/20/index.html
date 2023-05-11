@@ -110,30 +110,23 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-832_Nginx%20%E4%BD%BF%E7%94%A8%20lua/">
-<article class="md-text"><h2 class="post-title">Nginx 使用 lua</h2><div class="excerpt"><p>
-  1. 软件版本
-  2. 环境准备
-  3. 软件安装
-  4.  配置lua脚本
-  5. 配置php
-  6. 配置日志，记录post请求的request_body 和response_body
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-82_Lua%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%886%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">Lua程序设计（6）</h2><div class="excerpt"><p>Lua中的数据结构：数组、链表、队列等
+
+数组：在Lua语言中使用整数来索引表就可以实现数组，因此数组的大小不用非得是固定的，而是可以按需增长的。
+在Lua语言中一般以1作为数组的起始索引。
+矩阵及多维数组：使用一个不规则数组：即数组的数组，一个所有元素均是另一个表的表。
+这种矩阵在创建时必须显式的创建每一行，一方面更加具体，另一方面增加了更多的灵活性。
+将两个索引合并为一个：我们通过将第一...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.310Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-814_Lua%E4%B8%AD%E7%9A%84%E5%8D%8F%E7%A8%8B/">
+<article class="md-text"><h2 class="post-title">Lua中的协程</h2><div class="excerpt"><p>Lua中的协程和其他变量一样，都是第一类值（first-class alue），可以被保存在变量中，可以被作为参数传递，可以被函数返回。
+协程有4种状态：挂起（suspended），运行（running），死亡（dead）和正常（normal）。
+Lua为协程提供了3个基础接口：create，resume和yield。
+
+#coroutine.create
 
 
-1. 软件版本
-
-
-  系统  centos6.7X86_64
-  nginx   1.11.5
-  lua-nginx-module  0.10.7
-  PHP   5.6.27
-
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.310Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-816_%E4%BD%BF%E7%94%A8LUA%E8%84%9A%E6%9C%AC%E7%BB%95%E8%BF%87Applocker%E7%9A%84%E6%B5%8B%E8%AF%95%E5%88%86%E6%9E%90/">
-<article class="md-text"><h2 class="post-title">使用LUA脚本绕过Applocker的测试分析</h2><div class="excerpt"><p> 0x00 前言
-在之前的文章《Bypass Windows AppLocker》曾对绕过Applocker的方法进行过学习，而最近看到一篇文章介绍了使用LUA脚本绕过Applocker的方法，学习之后产生了以下疑问：绕过原理是什么呢？能绕过哪种AppLocker的规则呢？适用条件又是什么呢？
-文章地址：
-https://homjxi0e.wordpress.com/2018/03/02/w...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+  创建一个新的协程，并为它的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-815_Lua%20%E5%AD%A6%E4%B9%A0%20chapter25%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter25</h2><div class="excerpt"><p>目录
 
@@ -153,15 +146,10 @@ https://homjxi0e.wordpress.com/2018/03/02/w...</p></div><div class="meta cap"><s
 
 
   source: 该字段用于说明函数定义的位置。如果函数定义在一个字符串中（通过调用load），那么source就是这个字符串：如果函数定义在一个文件中，那么sour...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-814_Lua%E4%B8%AD%E7%9A%84%E5%8D%8F%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">Lua中的协程</h2><div class="excerpt"><p>Lua中的协程和其他变量一样，都是第一类值（first-class alue），可以被保存在变量中，可以被作为参数传递，可以被函数返回。
-协程有4种状态：挂起（suspended），运行（running），死亡（dead）和正常（normal）。
-Lua为协程提供了3个基础接口：create，resume和yield。
-
-#coroutine.create
-
-
-  创建一个新的协程，并为它的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-819_Mac%E4%B8%8A%E6%90%AD%E5%BB%BAlua%E7%8E%AF%E5%A2%83%E5%B9%B6%E8%BF%9E%E6%8E%A5mysql/">
+<article class="md-text"><h2 class="post-title">Mac上搭建lua环境并连接mysql</h2><div class="excerpt"><p>Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。(以上摘抄自菜鸟教程)
+鉴于Lua的诸多优势，我想在接下来的开发中应用Lua去完成一些需要脚本实现的工作。本文将记录我在Mac上搭建Lua的开发环境搭建以及实现对mysql的数据库访问。
+1. Lua安装源码编译安装12345curl -R -O h...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-818_Lua%20%E5%AD%A6%E4%B9%A0%20chapter24%20/">
 <article class="md-text"><h2 class="post-title">Lua 学习 chapter24</h2><div class="excerpt"><p>目录
 
@@ -180,17 +168,11 @@ Lua为协程提供了3个基础接口：create，resume和yield。
 
 
 协程相关的函数都在c...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-820_Lua%E7%AC%94%E8%AE%B0%20%E8%BF%AD%E4%BB%A3%E5%99%A8/">
-<article class="md-text"><h2 class="post-title">Lua笔记 迭代器</h2><div class="excerpt"><p>Lua中的迭代器提供的是一种遍历表中所有元素的机制，它通常是函数的形式，每次调用函数，返回“下一个”值。Lua中的迭代器有两种实现方式，基于闭包（closure）或者基于协程（coroutine）。以下会通过一个实例来分别讨论两种迭代器的实现。
-
-为更好演示迭代器的功能并逐步实现一个迭代器函数，本文结合一个需求的场景，从一个字符串中拆出一个一个的UTF8字符，即每次调用迭代器函数会返回下一个...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-819_Mac%E4%B8%8A%E6%90%AD%E5%BB%BAlua%E7%8E%AF%E5%A2%83%E5%B9%B6%E8%BF%9E%E6%8E%A5mysql/">
-<article class="md-text"><h2 class="post-title">Mac上搭建lua环境并连接mysql</h2><div class="excerpt"><p>Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。(以上摘抄自菜鸟教程)
-鉴于Lua的诸多优势，我想在接下来的开发中应用Lua去完成一些需要脚本实现的工作。本文将记录我在Mac上搭建Lua的开发环境搭建以及实现对mysql的数据库访问。
-1. Lua安装源码编译安装12345curl -R -O h...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-824_Lua%20%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/">
-<article class="md-text"><h2 class="post-title">Lua 初步学习</h2><div class="excerpt"><p>1 所谓的“交互式编程”   Lua提供了交互式编程模式,我们可以在命令行中输入程序并立即查看效果。   Lua 交互式编程模式可以通过命令 lua -i 或 lua 来启用
-2 所谓的“脚本式编程”   我们将代码写入.lua文件，然后执行，就是脚本式编程。   eg:   WangBingdeMacBook-Pro:~ wangbing$ cd /Users/wangbing/Deskt...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-816_%E4%BD%BF%E7%94%A8LUA%E8%84%9A%E6%9C%AC%E7%BB%95%E8%BF%87Applocker%E7%9A%84%E6%B5%8B%E8%AF%95%E5%88%86%E6%9E%90/">
+<article class="md-text"><h2 class="post-title">使用LUA脚本绕过Applocker的测试分析</h2><div class="excerpt"><p> 0x00 前言
+在之前的文章《Bypass Windows AppLocker》曾对绕过Applocker的方法进行过学习，而最近看到一篇文章介绍了使用LUA脚本绕过Applocker的方法，学习之后产生了以下疑问：绕过原理是什么呢？能绕过哪种AppLocker的规则呢？适用条件又是什么呢？
+文章地址：
+https://homjxi0e.wordpress.com/2018/03/02/w...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-81_php+redis+lua/">
 <article class="md-text"><h2 class="post-title">php+redis+lua</h2><div class="excerpt"><p>发两个php+redis+lua的例子。
 一、直接在redis上运行命令demo1eval &#34;return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}&#34; 2 key1 key2 first second
@@ -198,6 +180,27 @@ Lua为协程提供了3个基础接口：create，resume和yield。
 eval 命令代表后面接的是lua脚本，需要redis使用lua解析器；
 2 代表接下来两个参数为为KEY的参数，即为 key1 key2；
 fir...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-821_Lua%E5%92%8CC++%E7%9A%84%E4%BA%A4%E4%BA%92%20/">
+<article class="md-text"><h2 class="post-title">Lua和C++的交互</h2><div class="excerpt"><p>目录
+
+  Lua堆栈
+  Lua堆栈操作
+  C++调用lua
+  Lua调用C++
+
+
+
+  There is something beautiful， just to find it.
+
+
+Lua堆栈
+
+要理解Lua和C++的交互，首先要清楚Lua堆栈。简单来说Lua和C++交互是通过一个无处不在的虚拟堆栈来的。
+
+在Lua中，lua堆栈是一个结构，堆栈的索引可以是整数或者负数，+1表...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-822_lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/">
+<article class="md-text"><h2 class="post-title">lua学习笔记（三）</h2><div class="excerpt"><p>Lua函数函数定义123456[local] function (argument1,argument2)    -- do something    [return result]		-- 可以返回多个值，每个值以逗号隔开end-- 函数名表示该函数的引用，与C/C++的函数指针类似
+可变参数1234567891011121314151617181920212223242526272829...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.309Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-823_StackExchange.Redis%E5%8A%A0%E8%BD%BDLua%E8%84%9A%E6%9C%AC%E8%BF%9B%E8%A1%8C%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E5%92%8C%E4%BF%AE%E6%94%B9/">
 <article class="md-text"><h2 class="post-title">StackExchange.Redis加载Lua脚本进行模糊查询的批量删除和修改</h2><div class="excerpt"><p>
   通过keys进行模糊查询后的批量操作

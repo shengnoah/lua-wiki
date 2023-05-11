@@ -112,7 +112,23 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：lua文章</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-288_Lua%20Learning%20Notes/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-287_Lua%E5%92%8CC++%E7%9A%84%E4%BA%A4%E4%BA%92%20/">
+<article class="md-text"><h2 class="post-title">Lua和C++的交互</h2><div class="excerpt"><p>目录
+
+  Lua堆栈
+  Lua堆栈操作
+  C++调用lua
+  Lua调用C++
+
+
+
+  There is something beautiful， just to find it.
+
+
+Lua堆栈
+要理解Lua和C++的交互，首先要清楚Lua堆栈。简单来说Lua和C++交互是通过一个无处不在的虚拟堆栈来的。
+在Lua中，lua堆栈是一个结构，堆栈的索引可以是整数或者负数，+1表示栈...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-288_Lua%20Learning%20Notes/">
 <article class="md-text"><h2 class="post-title">Lua Learning Notes</h2><div class="excerpt"><p>控制流
 if
 a, b = 10, 20
@@ -131,27 +147,6 @@ a = 0
 while a &lt;= 10 do
     print(a)
   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-287_Lua%E5%92%8CC++%E7%9A%84%E4%BA%A4%E4%BA%92%20/">
-<article class="md-text"><h2 class="post-title">Lua和C++的交互</h2><div class="excerpt"><p>目录
-
-  Lua堆栈
-  Lua堆栈操作
-  C++调用lua
-  Lua调用C++
-
-
-
-  There is something beautiful， just to find it.
-
-
-Lua堆栈
-要理解Lua和C++的交互，首先要清楚Lua堆栈。简单来说Lua和C++交互是通过一个无处不在的虚拟堆栈来的。
-在Lua中，lua堆栈是一个结构，堆栈的索引可以是整数或者负数，+1表示栈...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-290_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-<article class="md-text"><h2 class="post-title">Lua源码阅读：基本数据类型</h2><div class="excerpt"><p>关于Lua中基本数据类型的底层实现方式，本篇是IState。
-
-lStatelua_State在lState.h中定义了lua_State的结构体，这是每个 Lua 函数都会接受的表示当前状态的结构，最主要的成员包括运行栈 stack, 栈用于表示函数调用、传递参数及返回值：
-1234567891011121314151617181920212223242526272829303132333...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-289_C#%20%E4%B8%8E%20Lua%20/">
 <article class="md-text"><h2 class="post-title">C# 与 Lua</h2><div class="excerpt"><p>交互原理
 
@@ -169,36 +164,39 @@ Lua Call C#
 
   lua-&gt;wrap-&gt;C#
 先生成 W...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-290_Lua%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+<article class="md-text"><h2 class="post-title">Lua源码阅读：基本数据类型</h2><div class="excerpt"><p>关于Lua中基本数据类型的底层实现方式，本篇是IState。
+
+lStatelua_State在lState.h中定义了lua_State的结构体，这是每个 Lua 函数都会接受的表示当前状态的结构，最主要的成员包括运行栈 stack, 栈用于表示函数调用、传递参数及返回值：
+1234567891011121314151617181920212223242526272829303132333...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-28_Linux%20%E4%B8%8B%20lua%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AE%89%E8%A3%85%20luafilesystem/">
+<article class="md-text"><h2 class="post-title">Linux下lua开发环境安装及安装luafilesystem</h2><div class="excerpt"><p>火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。
+最近一直再折腾这个，干脆就稍微整理下。以防后面继续跳坑！
+安装：
+1.先安装 lua 的相关依赖安装 C 开发环境由于 gcc 包需要依赖 binutils 和 cpp 包，另外 make 包也是在编译中常用的，所以一共需要 9 个包来完成安装，因...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-291_%E8%8E%B1%E8%BF%AA%E6%80%9D%E4%BA%A7%E5%93%81ICEstick%20Evaluation%20Kit%20%E7%AE%80%E4%BB%8B/">
 <article class="md-text"><h2 class="post-title">莱迪思产品ICEstick Evaluation Kit 简介</h2><div class="excerpt"><p>本文在CSDN的地址：点这里
 USB驱动、拇指大小的评估板 —— iCEstick评估套件是一款易于使用、小体积的评估板，通过使用板上莱迪思半导体公司的iCE40 FPGA系列，您可以以极低的成本快速实现系统功能的开发。
 
 ##摘自官网##
 IrDA和Digilent PMOD™ 接口 —— 用户可以与一个IrDA收发器进行通信，一个Digilent PMOD™外设连接器可用于许多传感器扩展...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-28_Linux%20%E4%B8%8B%20lua%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AE%89%E8%A3%85%20luafilesystem/">
-<article class="md-text"><h2 class="post-title">Linux下lua开发环境安装及安装luafilesystem</h2><div class="excerpt"><p>火云邪神语录：天下武功，无坚不破，唯快不破！Nginx 的看家本领就是速度，Lua 的拿手好戏亦是速度，这两者的结合在速度上无疑有基因上的优势。
-最近一直再折腾这个，干脆就稍微整理下。以防后面继续跳坑！
-安装：
-1.先安装 lua 的相关依赖安装 C 开发环境由于 gcc 包需要依赖 binutils 和 cpp 包，另外 make 包也是在编译中常用的，所以一共需要 9 个包来完成安装，因...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.258Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-276_Lua/">
-<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>    &lt;p&gt;   我们要明确一个前提：Lua是动态型语言，变量是不需要类型定义，只需要为变量赋值。值可以存储在变量中，最为参数传递或结果返回。&lt;br&gt;一 基本类型&lt;br&gt;   Lua有8个基本类型：nil、boolean、number、string、userdata、function、thread、table&lt;/p&gt;
-
-   1 nil   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.257Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-274_lua%20%E5%85%83%E8%A1%A8%E5%AD%A6%E4%B9%A0/">
 <article class="md-text"><h2 class="post-title">lua 元表学习</h2><div class="excerpt"><p>Lua 中的每个值都有一个元表。table 和 userdata 可以有各自独立的原表，其他类型的值则共享其类型所属的单一元素。Lua 在创建新的 table 的时候不会创建元表。
 12t = {}print(getmetatable(t)) 
 可以使用 setmetatable 来修改或设置 table 的元表：
 123t1 = {}setmetatable(t,t1)print(getm...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.257Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-278_%E5%9F%BA%E4%BA%8Engx_lua%E7%9A%84%E5%88%86%E6%B5%81%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+<article class="md-text"><h2 class="post-title">基于ngx_lua的分流系统设计</h2><div class="excerpt"><p>    &lt;h3 id=&quot;导言&quot;&gt;&lt;a href=&quot;https://fankeke.github.io/#%E5%AF%BC%E8%A8%80&quot; class=&quot;headerlink&quot; title=&quot;导言&quot;&gt;&lt;/a&gt;导言&lt;/h3&gt;&lt;p&gt;为了在接入层面做到对请...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.257Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-275_Lua%E7%BC%96%E7%A8%8B4%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/">
 <article class="md-text"><h2 class="post-title">Lua编程4之表达式和语句</h2><div class="excerpt"><p>    &lt;p&gt;思考并回答以下问题：&lt;br&gt;1.如何创建一个空表？&lt;/p&gt;
 
 学习了数据类型和变量之后，就可以开始写代码的表达式，然后进一步写语句了。
 算术操作符Lua支持常规算术操作符有：二元的“+”、“-”、“*”、“/”、“^”(指数)、“%”(取模)，一元的“-”(负号)。所有这些操作符都可用于实数。
 然而需要特别说明的是取模操作符(%)，Lua中对...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.257Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-277_lua%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
-<article class="md-text"><h2 class="post-title">lua使用教程</h2><div class="excerpt"><p>    &lt;p&gt;闲来无趣，稍微看了一会lua…&lt;/p&gt;
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-276_Lua/">
+<article class="md-text"><h2 class="post-title">Lua</h2><div class="excerpt"><p>    &lt;p&gt;   我们要明确一个前提：Lua是动态型语言，变量是不需要类型定义，只需要为变量赋值。值可以存储在变量中，最为参数传递或结果返回。&lt;br&gt;一 基本类型&lt;br&gt;   Lua有8个基本类型：nil、boolean、number、string、userdata、function、thread、table&lt;/p&gt;
 
-运行1.命令行运行lua命令，在lua的shell中执行语句12345zhubenshuli@raspberrypi /var/www/lua_program $ luaLua 5.3.1  Copyright (C) 1994-2015 Lua.org, PUC-Rio&gt; ("hello world!")...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.257Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+   1 nil   ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.257Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 

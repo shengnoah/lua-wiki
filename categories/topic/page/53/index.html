@@ -112,25 +112,12 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/categories">分类：topic</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-514_Lua%E8%AF%AD%E5%8F%A5%E6%AE%B5%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
-<article class="md-text"><h2 class="post-title">Lua语句段 · 花生肉泥</h2><div class="excerpt"><p>chunk语句组chunk是一系列语句，lua执行的每一块语句，比如一个文件或者交互模式下的每一行都是一个chunk
-语句块显式的语句块对于控制变量的作用范围很有用，有时候，显式的语句块被用来在另一个语句块中插入retuen或是break
-赋值语句lua允许多重赋值，因此，赋值的语法定义是等号左边放一系列变量，而等号右边放一系列的表达式，两边的元素都用逗号间开1local a,b,c,d,e...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-513_openresty%E9%80%9A%E8%BF%87lua%E5%A2%9E%E5%8A%A0%E9%9A%8F%E6%9C%BAtraceid/">
-<article class="md-text"><h2 class="post-title">openresty通过lua增加随机traceid</h2><div class="excerpt"><p>在没有引入zipkin（或者阿里的鹰眼，百度的华佗）这种trace系统的时候，排查问题的一般思路都是按照请求链路来寻找问题源。因此如果能在请求链路中有一个唯一的标识就最好了，而在nginx/openresty做接入层的架构中，可以通过lua脚本生成一个随机traceid。随机数的生成原理，都是先初始化一个随机数种子，由于伪随机数的特性，种子的随机性就显得格外重要，而一般种子的生成都是通过时间...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-515_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/">
-<article class="md-text"><h2 class="post-title">Lua学习笔记二</h2><div class="excerpt"><p>while1234while(条件)do  循环体end
-代码示例及结果：
-123456a = 0while(a &lt; 10)do	print(a)	a = a + 1end
-123456789100123456789
-for123for var=值1,值2,值2 do  循环体end
-从值1变化到值2，每次变化以值3为步长，执行一次循环体。表达式3不指定时默认为1.
-代码示例及结果：
-...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-512_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-512_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/">
 <article class="md-text"><h2 class="post-title">Lua 排序算法</h2><div class="excerpt"><p>选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。
 
 选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则它不会被移动。选择排序每次交换一对元素，它们当中至少有一个将被...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-513_openresty%E9%80%9A%E8%BF%87lua%E5%A2%9E%E5%8A%A0%E9%9A%8F%E6%9C%BAtraceid/">
+<article class="md-text"><h2 class="post-title">openresty通过lua增加随机traceid</h2><div class="excerpt"><p>在没有引入zipkin（或者阿里的鹰眼，百度的华佗）这种trace系统的时候，排查问题的一般思路都是按照请求链路来寻找问题源。因此如果能在请求链路中有一个唯一的标识就最好了，而在nginx/openresty做接入层的架构中，可以通过lua脚本生成一个随机traceid。随机数的生成原理，都是先初始化一个随机数种子，由于伪随机数的特性，种子的随机性就显得格外重要，而一般种子的生成都是通过时间...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-511_LuaInterface%E7%AE%80%E4%BB%8B/">
 <article class="md-text"><h2 class="post-title">LuaInterface简介</h2><div class="excerpt"><p>LuaInterface
 https://www.cnblogs.com/sifenkesi/p/3901831.html
@@ -141,6 +128,47 @@ https://www.cnblogs.com/sifenkesi/p/3901831.html
 
 c#：
 12345678910111213141516171819202122...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-515_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/">
+<article class="md-text"><h2 class="post-title">Lua学习笔记二</h2><div class="excerpt"><p>while1234while(条件)do  循环体end
+代码示例及结果：
+123456a = 0while(a &lt; 10)do	print(a)	a = a + 1end
+123456789100123456789
+for123for var=值1,值2,值2 do  循环体end
+从值1变化到值2，每次变化以值3为步长，执行一次循环体。表达式3不指定时默认为1.
+代码示例及结果：
+...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-514_Lua%E8%AF%AD%E5%8F%A5%E6%AE%B5%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/">
+<article class="md-text"><h2 class="post-title">Lua语句段 · 花生肉泥</h2><div class="excerpt"><p>chunk语句组chunk是一系列语句，lua执行的每一块语句，比如一个文件或者交互模式下的每一行都是一个chunk
+语句块显式的语句块对于控制变量的作用范围很有用，有时候，显式的语句块被用来在另一个语句块中插入retuen或是break
+赋值语句lua允许多重赋值，因此，赋值的语法定义是等号左边放一系列变量，而等号右边放一系列的表达式，两边的元素都用逗号间开1local a,b,c,d,e...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.279Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-496_An%20Empirical%20Evaluation%20of%20Generic%20Convolutional%20a/">
+<article class="md-text"><h2 class="post-title">An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling</h2><div class="excerpt"><p>目录：
+
+  TCN 论文总结    
+      基础知识        
+          1. 时间序列
+          2. RNN, LSTM, GRU
+          3. CNN
+        
+      
+      TCN        
+          Causal Convolutions
+          Dilate Convolutions
+ ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-497_tolua++%E5%AE%89%E8%A3%85/">
+<article class="md-text"><h2 class="post-title">tolua++安装</h2><div class="excerpt"><p>
+          
+            
+          &lt;a href=&quot;/2015/11/10/kmp/&quot; rel=&quot;next&quot; title=&quot;KMP查找子字符串&quot;&gt;
+            &lt;i class=&quot;fa fa-chevron-left&quot;&gt;&lt;/i&gt; ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-498_Goto%20in%20LuaJIT%20/">
+<article class="md-text"><h2 class="post-title">Goto in LuaJIT</h2><div class="excerpt"><p>Lua 在 5.2 之后的版本，加入了 goto 这个关键字，用来控制程序跳转到指定 label。我们可以利用这个特性，来模拟 continue 的实现。需要注意的是 goto 只能跳转到 label，而 ::name:: 的格式就可以设置一个 label。
+
+for i=1,5 do
+    if i == 3 then
+        goto continue
+    end
+    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-499_Lua%20strings/">
 <article class="md-text"><h2 class="post-title">Lua strings</h2><div class="excerpt"><p>字符串或串(String)是由数字、字母、下划线组成的一串字符。Lua 语言中字符串可以使用以下三种方式来表示：
 
@@ -162,42 +190,12 @@ ASCII码值（十进制）
 
 a
 响铃(BEL)...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-496_An%20Empirical%20Evaluation%20of%20Generic%20Convolutional%20a/">
-<article class="md-text"><h2 class="post-title">An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling</h2><div class="excerpt"><p>目录：
-
-  TCN 论文总结    
-      基础知识        
-          1. 时间序列
-          2. RNN, LSTM, GRU
-          3. CNN
-        
-      
-      TCN        
-          Causal Convolutions
-          Dilate Convolutions
- ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-498_Goto%20in%20LuaJIT%20/">
-<article class="md-text"><h2 class="post-title">Goto in LuaJIT</h2><div class="excerpt"><p>Lua 在 5.2 之后的版本，加入了 goto 这个关键字，用来控制程序跳转到指定 label。我们可以利用这个特性，来模拟 continue 的实现。需要注意的是 goto 只能跳转到 label，而 ::name:: 的格式就可以设置一个 label。
-
-for i=1,5 do
-    if i == 3 then
-        goto continue
-    end
-    ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-497_tolua++%E5%AE%89%E8%A3%85/">
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-49_tolua++%E5%AE%89%E8%A3%85/">
 <article class="md-text"><h2 class="post-title">tolua++安装</h2><div class="excerpt"><p>
           
             
-          &lt;a href=&quot;/2015/11/10/kmp/&quot; rel=&quot;next&quot; title=&quot;KMP查找子字符串&quot;&gt;
-            &lt;i class=&quot;fa fa-chevron-left&quot;&gt;&lt;/i&gt; ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-4_%5BLua_Trace%5D%201.%20Lua%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20/">
-<article class="md-text"><h2 class="post-title">Lua_Trace 1. Lua数据结构</h2><div class="excerpt"><p>                    &lt;p&gt;摘要:[Lua_Trace] 1. Lua数据结构 - TValue&lt;/p&gt;
-                &lt;br /&gt;
-                &lt;p&gt;
-欲深入了解Lua，我认为先从数据结构开始是必要的，&lt;/p&gt;
-
-
-    本文将由Lua基础数据结构(TValue)讲起, 进...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+          &lt;a href=&quot;/2015/11/11/lua_cpp_bind/&quot; rel=&quot;next&quot; title=&quot;C++与Lua本质原始交互API&quot;&gt;
+            &lt;i class=&quot;fa fa-chevron-left&quot...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.278Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
 
