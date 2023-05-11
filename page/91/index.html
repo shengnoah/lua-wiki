@@ -45,7 +45,7 @@
 <meta property="og:description" content="LUA教程:Lua是一门精巧的语言，与其它语言配合使用，发挥更高的效能。特别是与C和C++语言的配合。著名的项目Openresty就是使用了Lua。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="糖果的实验室">
-<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门">
+<meta property="article:tag" content="lua教程,教程,lua,lua基础,lua入门,实验室">
 <meta name="twitter:card" content="summary">
   
   
@@ -88,7 +88,7 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/04/26/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85Conda%E7%9A%84%E6%AD%A5%E9%AA%A4/"><span class="title">CentOS8下安装Conda的步骤</span></a><a class="item title" href="/2023/04/26/%E5%9C%A8Mac%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%B0%86%E9%BB%98%E8%AE%A4%E7%9A%84GCC%E5%88%87%E6%8D%A2%E5%88%B0LLVM%E7%9A%84Clang/"><span class="title">在Mac系统上将默认的GCC切换到LLVM的Clang</span></a><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a><a class="item title" href="/2023/04/26/sec/suricata-lua-mysql/"><span class="title">Suricata如何用Lua处理MySQL协议的数d据</span></a></div></widget>
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/05/09/AI/AI%E5%B7%A5%E5%85%B7%E7%AE%B1--Backgroundremover%E4%BB%A3%E6%9B%BFPS%E5%BF%AB%E9%80%9F%E6%8A%A0%E5%9B%BE/"><span class="title">AI工具箱--Backgroundremover代替PS快速抠图</span></a><a class="item title" href="/2023/04/26/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85Conda%E7%9A%84%E6%AD%A5%E9%AA%A4/"><span class="title">CentOS8下安装Conda的步骤</span></a><a class="item title" href="/2023/04/26/%E5%9C%A8Mac%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%B0%86%E9%BB%98%E8%AE%A4%E7%9A%84GCC%E5%88%87%E6%8D%A2%E5%88%B0LLVM%E7%9A%84Clang/"><span class="title">在Mac系统上将默认的GCC切换到LLVM的Clang</span></a><a class="item title" href="/2023/04/26/Lazygit%E7%9A%84%E5%AE%89%E8%A3%85/"><span class="title">Lazygit的安装</span></a><a class="item title" href="/2023/04/26/sec/Lazygit%E7%9A%84%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"><span class="title">Lazygit的常用快捷键</span></a></div></widget>
 
 
 </div>
@@ -110,7 +110,28 @@
 
 <div class="nav-wrap"><nav class="sub post cap"><a class="active" href="/">近期发布</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
 
-  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-167_nginx+lua+kafka%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97%E7%BB%9F%E4%B8%80%E6%94%B6%E9%9B%86%E6%B1%87%E6%80%BB/">
+  <div class="post-list post"><a class="post-card post " href="/2023/04/26/zl/2016-01-01-166_lua%20%E5%AD%97%E8%8A%82%E7%A0%81(bytecode)/">
+<article class="md-text"><h2 class="post-title">lua 字节码(bytecode)</h2><div class="excerpt"><p>
+  lua字节码
+  字节码格式    
+      源码案例：
+      对应字节码：
+      指令解释：
+    
+  
+  指令分类
+  所有指令
+
+
+lua字节码
+
+lua虚拟机最终执行的是经过lua编译器编译的字节码，这里暂不关系Chunk生成字节码过程，
+只关系字节码本身，字节码的格式到底是什么样？具体的含义是什么？
+
+字节码格式
+
+lua字节码指令是由4个字节32位组成...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.246Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
+</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-167_nginx+lua+kafka%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97%E7%BB%9F%E4%B8%80%E6%94%B6%E9%9B%86%E6%B1%87%E6%80%BB/">
 <article class="md-text"><h2 class="post-title">nginx+lua+kafka实现日志统一收集汇总</h2><div class="excerpt"><p>一:场景描述对于线上大流量服务或者需要上报日志的nginx服务，每天会产生大量的日志，这些日志非常有价值。可用于计数上报、用户行为分析、接口质量、性能监控等需求。但传统nginx记录日志的方式数据会散落在各自nginx上，而且大流量日志本身对磁盘也是一种冲击。
 我们需要把这部分nginx日志统一收集汇总起来,收集过程和结果需要满足如下需求:
 
@@ -211,18 +232,6 @@ $$Precision = frac{relevant{space}items...</p></div><div class="meta cap"><span 
 大致思路就是将Lua的源码打包成静态库，在程序编译的时候，将静态库也加入到编译选项中。
 
 具体步骤如下...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
-</a><a class="post-card post " href="/2023/04/26/zl/2016-01-01-153_Lua%E8%A1%A8%E5%AD%98%E5%82%A8%E4%BC%98%E5%8C%96/">
-<article class="md-text"><h2 class="post-title">Lua表存储优化</h2><div class="excerpt"><p>用Python脚本实现对 Lua表的压缩
-
-
-
-问题在研发过程中，通常会定义一些Excel表格，规定行列值让策划填写，然后，转成lua的table文件，直接使用。
-但是，随着研发进行，项目迭代，表格将越来越大。
-如果表格中存在大量重复数据，或者表格中很多列数值重复，则可以通过数据压缩给表减减肥。
-解决利用python实现lua表的数据压缩
-
-excel表内存在大量 同列不同行 内容一致
-ex...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-04-26T05:16:12.245Z">2023-04-26</time></span><span class="cap breadcrumb">topic</span></div></article>
 </a></div>
   
   <div class='paginator-wrap dis-select'>
