@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lua.ren/2023/05/25/2023-05-25-allinone/</loc>
+    
+    <lastmod>2023-05-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lua.ren/wiki/exa/index.html</loc>
     
     <lastmod>2023-05-11</lastmod>
@@ -16411,7 +16420,7 @@
 
   <url>
     <loc>https://lua.ren/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -16419,448 +16428,455 @@
   
   <url>
     <loc>https://lua.ren/tags/openresty/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/lua/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/nginx/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/RESTY-HTTP/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/Graylog/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/datetime/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/fuser/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/django/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/nc/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/apisix/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/gateway/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/dashboard/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/tengine/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/OOM/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%BA%A2%E8%BD%B4/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E8%8C%B6%E8%BD%B4/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%96%84%E8%86%9C%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%A0%81%E5%86%9C%E9%94%AE%E7%9B%98%EF%BC%8C%E9%94%AE%E7%9B%98%E5%85%A5%E5%9D%91/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/niz/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E9%9D%99%E7%94%B5%E5%AE%B9%E9%94%AE%E7%9B%98%EF%BC%8Cplum/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%A0%81%E5%86%9C/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E9%9D%99%E7%94%B5%E5%AE%B9%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%99%E7%94%B5%E5%AE%B9%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/go/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/LUA%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/LUA/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/abc/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/basic/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/MoonScript%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/Graylog-SDK/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/MoonScript%E7%AE%80%E4%BB%8B/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/Lapis%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/JSON/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/OpenResty-Timer/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/RESTY-REDIS/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/HiLua/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/CJSON/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/LazyTable/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/ES/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/LUA-CJSON/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/Map%E6%8E%92%E5%BA%8F/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E5%BA%93/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/Lapis/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E9%A3%8E%E6%8E%A7%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/lua-json/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/lua%E5%BE%AA%E7%8E%AF/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/lua%E5%BE%AA%E7%8E%AF%E9%81%8D%E5%8E%86/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/mysql/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/lapis/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/moonscript/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/lua%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/c/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/lua%E6%96%87%E7%AB%A0/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/openResty/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/tags/orange/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lua.ren/tags/allinone/</loc>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -16869,175 +16885,182 @@
   
   <url>
     <loc>https://lua.ren/categories/topic/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/OPENRESTY/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/python/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/tools/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/AI/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/%E7%BD%91%E5%85%B3/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/%E5%8A%A8%E6%80%81%E5%BA%93/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/%E6%96%87%E7%AB%A0/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/%E9%9D%99%E7%94%B5%E5%AE%B9%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/Go%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/lua-guide/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/lua-guide/lua%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/lua-guide/LUA%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/Documents/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/MoonScript%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/MoonScript%E8%AF%AD%E6%B3%95/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/Lapis%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/HiLua%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/topic/mysql/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/Advanced/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/Guides/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lua.ren/categories/Concept/</loc>
-    <lastmod>2023-05-11</lastmod>
+    <lastmod>2023-05-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lua.ren/categories/allinone/</loc>
+    <lastmod>2023-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

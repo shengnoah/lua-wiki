@@ -1,3 +1,4 @@
+https://lua.ren/2023/05/25/2023-05-25-allinone/
 https://lua.ren/wiki/exa/index.html
 https://lua.ren/2023/05/09/AI/AI%E5%B7%A5%E5%85%B7%E7%AE%B1--Backgroundremover%E4%BB%A3%E6%9B%BFPS%E5%BF%AB%E9%80%9F%E6%8A%A0%E5%9B%BE/
 https://lua.ren/2023/04/26/CentOS8%E4%B8%8B%E5%AE%89%E8%A3%85Conda%E7%9A%84%E6%AD%A5%E9%AA%A4/
@@ -1886,6 +1887,7 @@ https://lua.ren/tags/c/
 https://lua.ren/tags/lua%E6%96%87%E7%AB%A0/
 https://lua.ren/tags/openResty/
 https://lua.ren/tags/orange/
+https://lua.ren/tags/allinone/
 https://lua.ren/categories/topic/
 https://lua.ren/categories/OPENRESTY/
 https://lua.ren/categories/python/
@@ -1911,3 +1913,4 @@ https://lua.ren/categories/topic/mysql/
 https://lua.ren/categories/Advanced/
 https://lua.ren/categories/Guides/
 https://lua.ren/categories/Concept/
+https://lua.ren/categories/allinone/
