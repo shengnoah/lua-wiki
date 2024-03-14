@@ -1,11 +1,295 @@
-<!DOCTYPE html><html lang="en"><head><!-- hexo injector head_begin start --><meta name="description" content="安全术"></meta><meta name="keywords" content="安全术,AIGC"></meta><meta name="author" content="shengnoah"></meta><!-- hexo injector head_begin end --><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><link href="/static/css/chunk-libs.eebac533.css" rel="stylesheet"><link href="/static/css/app.0d31776f.css" rel="stylesheet"><!-- hexo injector head_end start --><script rel="prefetch" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/components/prism-core.js" data-manual></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/themes/prism.min.css"/><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css"/><link rel="stylesheet" href="https://fonts.loli.net/css?family=Rubik" /><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.css"/><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body id="body-container"><noscript><strong>We're sorry but Aurora Blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script>(function(e){function t(t){for(var a,n,u=t[0],i=t[1],c=t[2],l=0,p=[];l<u.length;l++)n=u[l],Object.prototype.hasOwnProperty.call(o,n)&&o[n]&&p.push(o[n][0]),o[n]=0;for(a in i)Object.prototype.hasOwnProperty.call(i,a)&&(e[a]=i[a]);f&&f(t);while(p.length)p.shift()();return s.push.apply(s,c||[]),r()}function r(){for(var e,t=0;t<s.length;t++){for(var r=s[t],a=!0,n=1;n<r.length;n++){var u=r[n];0!==o[u]&&(a=!1)}a&&(s.splice(t--,1),e=i(i.s=r[0]))}return e}var a={},n={runtime:0},o={runtime:0},s=[];function u(e){return i.p+"static/js/"+({404:"404",about:"about",archives:"archives",categories:"categories",page:"page",post:"post",result:"result",tags:"tags"}[e]||e)+"."+{404:"00d640a8",about:"024aacd1",archives:"574ac664",categories:"90aa5475",page:"a02618ad",post:"cebfbaa4",result:"39470350",tags:"2ad613f5"}[e]+".js"}function i(t){if(a[t])return a[t].exports;var r=a[t]={i:t,l:!1,exports:{}};return e[t].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.e=function(e){var t=[],r={404:1,about:1,archives:1,categories:1,page:1,post:1,result:1,tags:1};n[e]?t.push(n[e]):0!==n[e]&&r[e]&&t.push(n[e]=new Promise((function(t,r){for(var a="static/css/"+({404:"404",about:"about",archives:"archives",categories:"categories",page:"page",post:"post",result:"result",tags:"tags"}[e]||e)+"."+{404:"1a6cd5bd",about:"32dfa3b0",archives:"c0d49bd5",categories:"10e2be12",page:"749ad047",post:"9f951a60",result:"10e2be12",tags:"10e2be12"}[e]+".css",o=i.p+a,s=document.getElementsByTagName("link"),u=0;u<s.length;u++){var c=s[u],l=c.getAttribute("data-href")||c.getAttribute("href");if("stylesheet"===c.rel&&(l===a||l===o))return t()}var p=document.getElementsByTagName("style");for(u=0;u<p.length;u++){c=p[u],l=c.getAttribute("data-href");if(l===a||l===o)return t()}var f=document.createElement("link");f.rel="stylesheet",f.type="text/css",f.onload=t,f.onerror=function(t){var a=t&&t.target&&t.target.src||o,s=new Error("Loading CSS chunk "+e+" failed.\n("+a+")");s.code="CSS_CHUNK_LOAD_FAILED",s.request=a,delete n[e],f.parentNode.removeChild(f),r(s)},f.href=o;var d=document.getElementsByTagName("head")[0];d.appendChild(f)})).then((function(){n[e]=0})));var a=o[e];if(0!==a)if(a)t.push(a[2]);else{var s=new Promise((function(t,r){a=o[e]=[t,r]}));t.push(a[2]=s);var c,l=document.createElement("script");l.charset="utf-8",l.timeout=120,i.nc&&l.setAttribute("nonce",i.nc),l.src=u(e);var p=new Error;c=function(t){l.onerror=l.onload=null,clearTimeout(f);var r=o[e];if(0!==r){if(r){var a=t&&("load"===t.type?"missing":t.type),n=t&&t.target&&t.target.src;p.message="Loading chunk "+e+" failed.\n("+a+": "+n+")",p.name="ChunkLoadError",p.type=a,p.request=n,r[1](p)}o[e]=void 0}};var f=setTimeout((function(){c({type:"timeout",target:l})}),12e4);l.onerror=l.onload=c,document.head.appendChild(l)}return Promise.all(t)},i.m=e,i.c=a,i.d=function(e,t,r){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},i.r=function(e){"undefined"!==typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(e,t){if(1&t&&(e=i(e)),8&t)return e;if(4&t&&"object"===typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(i.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var a in e)i.d(r,a,function(t){return e[t]}.bind(null,a));return r},i.n=function(e){var t=e&&e.__esModule?function(){return e["default"]}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="/",i.oe=function(e){throw console.error(e),e};var c=window["webpackJsonp"]=window["webpackJsonp"]||[],l=c.push.bind(c);c.push=t,c=c.slice();for(var p=0;p<c.length;p++)t(c[p]);var f=l;r()})([]);</script><script src="/static/js/chunk-libs.dc6146cd.js"></script><script src="/static/js/app.6d2c358d.js"></script><!-- hexo injector body_end start --><script src="/static/js/baidu.js"></script><!-- hexo injector body_end end --></body></html>
-<script>
-var _hmt = _hmt || [];
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>糖果AIGC实验室-LUA - AIGC</title><meta name="author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="copyright" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="AIGC">
+<meta property="og:type" content="website">
+<meta property="og:title" content="糖果AIGC实验室-LUA">
+<meta property="og:url" content="https://anquanshu.cn/page/38/index.html">
+<meta property="og:site_name" content="糖果AIGC实验室-LUA">
+<meta property="og:description" content="AIGC">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5">
+<meta property="article:tag" content="AIGC,LLM,糖果AIGC实验室">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://anquanshu.cn/page/38/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?14cc93bf3f08d31c458639d309dde522";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
-</script>
 
+
+
+</script><script>(function () {
+  var meta = document.createElement('meta');
+  meta.content = 'no-referrer';
+  meta.name = 'referrer';
+  document.getElementsByTagName('head')[0].appendChild(meta);
+})();</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"OCGZTJTHCQ","apiKey":"4dede33603574dcaed0e9d4641849158","indexName":"jianpan.vip","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '糖果AIGC实验室-LUA',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-03-14 19:47:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">667</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">180</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="糖果AIGC实验室-LUA"><span class="site-name">糖果AIGC实验室-LUA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/111/" title="《Lua游戏AI开发指南 --- Lua调用C/C++函数》">《Lua游戏AI开发指南 --- Lua调用C/C++函数》</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">作者：糖果
+
+
+
+
+
+
+
+
+
+Exposing C++ functions to Lua takes place through a process called function binding. Any bound functions exposed to Lua become accessible either as a global function or as a function available through a package. Packages in Lua are similar to namespaces in C++ and are implemented as a global table within Lua.
+通过暴漏C函数给Lua的过程，叫做函数绑定。任何绑定函数暴漏给Lua成为一个可访问的全局函数，或是作为可用的包函数。Lua中的Packages(包)类似于C中的命名空间，作为一个类似全局表被实现的。
+
+
+
+
+
+
+
+
+
+Function binding 
+Any function exposed to Lua must fit the lua_CF ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/114/" title="Openresty的Lua定时器（计划任务）">Openresty的Lua定时器（计划任务）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">在系统中有一类需求是：周期性的执行某些任务，利用定时的timer去实现这种操作。
+Openresty为Lua提供了这种机制实现的API，通过设定timer来完成这种类似计划任务功能。
+下面，就是一个典型的Openresty的timer API的使用例子：
+实现思路是，通过一个timer设定调用一个函数，在函数内部还有一个循环递归的timer调用，调用函数自身，实现周期性的函数执行。
+–此函数的主要的目的是6秒钟的时间，对redis中某Key，进行数值累加。
+123456789101112131415local handlerfunction handler(premature, params)--定时执行一个redis的累加计数操作。RedisCommon.add()--递归的timer，重复调用handler函数。local ok, err = ngx.timer.at(6, handler, &quot;params-data&quot;)        ngx.log(ngx.DEBUG, &quot;ok:&quot;, ok, &quot; err:&quot;, err)e ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/113/" title="WEB IDE环境运行Lua网页应用">WEB IDE环境运行Lua网页应用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">作者：糖果
+如Python和Ruby一样，Lua也可以创建WEB应用，之前提过的一个Lua WEB框架
+这次就在WEB IDE环境下，部署一下LuaWEB的运行环境，并创建一个Lua WEB应用。
+第一步：安装WEB服务器， Openresty。
+1).下载安装包
+1wget https://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz
+2).解压
+1tar xzvf ngx_openresty-1.7.10.1.tar.gz
+3).安装依赖包
+1234567sudo apt-get install libreadline-devsudo apt-get install libncurses5-devsudo apt-get install libpcre3-devsudo apt-get install libssl-devsudo apt-get install perlsudo apt-get install makesudo apt-get install build-essential
+3).配置与安装
+1234cd ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/112/" title="《Lua游戏AI开发指南 --- C/C++中调用Lua函数》">《Lua游戏AI开发指南 --- C/C++中调用Lua函数》</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">C/C++ calling Lua functions
+The sandbox hooks into the Lua script through three predefined global Lua functions:
+Sandbox_Initialize, Sandbox_Cleanup, and Sandbox_Update. When the sandbox is first
+attached to the corresponding Lua script, the Sandbox_Initialize function is called. Each
+update tick of the sandbox will also invoke the Sandbox_Update function in the Lua script.
+When the sandbox is being destroyed or reloaded, the Sandbox_Cleanup function will
+have an opportunity to perform any scrip ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/116/" title="配置VIM的插件补全功能---(在WEB IDE中)">配置VIM的插件补全功能---(在WEB IDE中)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">VIM提供了很多的第三方插件，足可以把VIM武装成强大的开发IDE，这次抛砖引玉，介绍一下在coding的WEB IDE环境下，家法配置VIM插件，补全插件。
+1.进入VIM管理目录。
+1cd ~/.vim
+2.创建工作目录。
+1mkdir neo
+3.下载插件。
+123wget https://github.com/Shougo/neocomplcache.vim/archive/master.zipunzip master.zip
+4.解压复制文件。
+12cd neocomplcache.vim-mastercp -r autoload doc plugin vest  ../ 
+5.配置.vimrc文件
+12vim ~/.vimrclet g:neocomplcache_enable_at_startup = 1
+如果是在coding有default环境下，按如上方法安装，再次打开VIM，就会看到自到补全效果。例如可以输入关键字:“function”。
+作者：糖果
+PS:转载到其它平台请注明作者姓名及原文链接，请勿用于商业用途。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/118/" title="以“99”结尾，奇数价格定价的来由。">以“99”结尾，奇数价格定价的来由。</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">the answer to the origin of this strategy is unclear. [3]  There are 3 different theories of its history:
+这个答案的最开始渊源并已经不很清楚了。关于这个，有三种不同的历史说法。
+1.Marketers (such as RH Macy) of mid 1800s tried to ambush their competitors in highly price sensitive goods.
+1800年代中叶市场人员（列如RH Macy公司）试图去伏击竞争对手的高价格紧俏货品，采用的一种手段。
+2.Melville Stone of Chicago Daily News priced his paper at 1 cent. However, given that cents were not in common use then, he coaxed local shops into odd pricing so that his customers will have the ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/115/" title="MoonScript脚本开发简介">MoonScript脚本开发简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">Coffescript是一种中间的脚本，可以把这种脚本翻译成JavaScript。而MoonScript，是可以翻译成lua语言的中间脚本。
+本文简单的介绍的：
+
+
+如何在VIM中，实现MoonScript语法高亮。
+
+
+如何简单的编译MoonScript脚本。
+
+
+1.安装MoonScript
+1sudo luarocks install moonscript
+2.创建.moon源文件
+app.moon
+1234lapis = require &quot;lapis&quot;   class extends lapis.Application     &quot;/&quot;: =&gt; &quot;Welcome to Lapis #&#123;require &quot;lapis.version&quot;&#125;!&quot; 
+3.安装MoonScript语法高亮的插件。
+3-1.下载vim的bundle插件管理程序。
+1git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+3-2. ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/119/" title="Lua Lapis的模板系统etlua">Lua Lapis的模板系统etlua</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">作者：糖果
+主流的WEB开发框架都有模板系统，或是支持第三方的模板插件。Lua Lapis也不例外，也有自己的模板系统，叫做etlua。
+说到模板系统，另外要提一下静态资源的问题，模板的话难免要使用css、js、image这种静态文件，为了扫除一部分障碍先说一下Openresty是如何设定静态目标的。（相对Django相对要简单很多。）
+123location /static/ &#123;                                                                                                                                                             alias static/;                                                                                                                                     ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/120/" title="DokuWiki系统介绍与部署安装">DokuWiki系统介绍与部署安装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">作者：糖果
+http://www.lua.ren
+DokuWiki
+这个Wiki系统之前都没有用过，因为最近一个机会使用了DokuWiki，感觉Wiki系统也大有内容。XML-RPC, Atom协议，Wiki的进化越来越强大。DokuWiki是一个轻量级的 Wiki系统。对说需求不是过于复杂的发布任务来说，足以满足。
+Doku是一个开源的PHP项目。
+在github上的连接:
+因为是PHP项目需要一个PHP的开发环境，这个暂略。
+不过因为安装过程中，会涉及到某些目录的权限修改问题，需要提一下Apache2, 我们采用的Web服务器是Apache，因为是Ubuntu系统，方便的使用了apt-get的安装方式。
+第一步：安装apahce2
+1sudo apt-get install apache2
+以apt-get安装的时候，创建了一个www-data的用户组。在安装dokuwiki的时候，需要把一些目录所属权限改成www-data。
+第二步：下载DokuWiki。
+把DokuWiki的源文件下载到/var/www/目录下。
+1git clone https://github.com/sp ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/topic/123/" title="如何在SAE上架设RPC服务与Openresty的Lua服务通信">如何在SAE上架设RPC服务与Openresty的Lua服务通信</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">作者：糖果
+有时候我们写的服务可能会部署到很同种不同类型的服务器上，有一些数据，可能不便于存在本地，需要一个数据中心，保存这些数据。
+我们要求是这样的：
+1．客户端服务要周期性的去服务器上拉取数据。（存在SAE MySQL中）。
+2．不使用长连接的方式通信，使用基于HTTP的协议。
+3．客户端与数据库交互不依赖服务器端采用什么数据库，抽象出一层数据访问层。
+基于以上三点：
+服务器端：我们将服务器服务架设到SAE的云端，使用SAE支持的Python语言，WEB框架使用的Django,通过RPC协议，为客户端提供服务。服务端的数据存储在SAE的MySQL数据库中，为使服务器端可以对外开发RPC服务接口，使用开源的RPC服务端解决方案RPC4Django。
+客户端：这里的客户端其是架设在另一台服务器的Openresty服务，使用Lua语言进行扩展，加入了定时拉取访问数据的流程演示模块，至于如何接定RPC接口，传输什么数据，看具体的实际业务，这里只是通过程序演示这个机制如何在SAE上完成变互的过程。
+客户访问端使用持术是用Openresty做服务器，用Lua Lapis框架写成应用。在客户访问 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/37/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/#content-inner">37</a><span class="page-number current">38</span><a class="page-number" href="/page/39/#content-inner">39</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/#content-inner">67</a><a class="extend next" rel="next" href="/page/39/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="author-info__description">AIGC</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">667</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">180</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">公众号：糖果的实验室 <img src="https://gitee.com/shengnoah/picture/raw/master/20231027182204.png"></img></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/hexo/NPM%E5%AE%89%E8%A3%85%E4%B8%8D%E9%AA%8C%E8%AF%81%E8%AF%81%E4%B9%A6/" title="NPM安装不验证证书"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NPM安装不验证证书"/></a><div class="content"><a class="title" href="/hexo/NPM%E5%AE%89%E8%A3%85%E4%B8%8D%E9%AA%8C%E8%AF%81%E8%AF%81%E4%B9%A6/" title="NPM安装不验证证书">NPM安装不验证证书</a><time datetime="2024-03-14T11:44:30.588Z" title="发表于 2024-03-14 19:44:30">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/graylog/Graylog%E4%B8%8ESIEM/" title="Graylog与SIEM"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Graylog与SIEM"/></a><div class="content"><a class="title" href="/graylog/Graylog%E4%B8%8ESIEM/" title="Graylog与SIEM">Graylog与SIEM</a><time datetime="2024-03-14T11:24:05.274Z" title="发表于 2024-03-14 19:24:05">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/lua_guide/functions1/" title="Lua函数测试"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lua函数测试"/></a><div class="content"><a class="title" href="/lua_guide/functions1/" title="Lua函数测试">Lua函数测试</a><time datetime="2024-03-14T09:11:39.440Z" title="发表于 2024-03-14 17:11:39">2024-03-14</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/huaggingface/DreamTalk%20When%20Expressive%20Talking%20Head%20Generation%20Meets%20Diffusion%20Probabilistic%20Models/" title="DreamTalk When Expressive Talking Head Generation Meets Diffusion Probabilistic Models">DreamTalk When Expressive Talking Head Generation Meets Diffusion Probabilistic Models</a><time datetime="2024-03-14T07:45:09.235Z" title="发表于 2024-03-14 15:45:09">2024-03-14</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/keyboard/MDA%E9%AB%98%E5%BA%A6%E9%94%AE%E5%B8%BD%E6%98%AF%E8%B0%81%E5%8F%91%E6%98%8E%E7%9A%84%EF%BC%9F/" title="MDA高度键帽是谁发明的？">MDA高度键帽是谁发明的？</a><time datetime="2024-03-14T07:45:09.146Z" title="发表于 2024-03-14 15:45:09">2024-03-14</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/"><span class="card-category-list-name">AIGC</span><span class="card-category-list-count">119</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/AI-gateway/"><span class="card-category-list-name">AI gateway</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/Amphion/"><span class="card-category-list-name">Amphion</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/AnimateAnyone/"><span class="card-category-list-name">AnimateAnyone</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/AudioCraft/"><span class="card-category-list-name">AudioCraft</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/ChatGLM/"><span class="card-category-list-name">ChatGLM</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/Gradio/"><span class="card-category-list-name">Gradio</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/Mixtral-8x7B/"><span class="card-category-list-name">Mixtral-8x7B</span><span class="card-category-list-count">1</span></a></li></ul></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%9B%BE%E4%B9%A6/" style="font-size: 1.18em; color: #999ca1">图书</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a> <a href="/tags/%E5%A4%B1%E4%B8%9A/" style="font-size: 1.1em; color: #999">失业</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/cpu/" style="font-size: 1.1em; color: #999">cpu</a> <a href="/tags/fishell/" style="font-size: 1.1em; color: #999">fishell</a> <a href="/tags/galah/" style="font-size: 1.1em; color: #999">galah</a> <a href="/tags/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/" style="font-size: 1.26em; color: #999fa8">安全运营</a> <a href="/tags/sigama/" style="font-size: 1.1em; color: #999">sigama</a> <a href="/tags/flink/" style="font-size: 1.1em; color: #999">flink</a> <a href="/tags/Quiver/" style="font-size: 1.1em; color: #999">Quiver</a> <a href="/tags/API/" style="font-size: 1.1em; color: #999">API</a> <a href="/tags/Web%E5%AE%89%E5%85%A8/" style="font-size: 1.18em; color: #999ca1">Web安全</a> <a href="/tags/lua-json/" style="font-size: 1.1em; color: #999">lua json</a> <a href="/tags/weibo/" style="font-size: 1.5em; color: #99a9bf">weibo</a> <a href="/tags/ATTCK/" style="font-size: 1.18em; color: #999ca1">ATTCK</a> <a href="/tags/%E4%B8%BB%E6%9D%BF/" style="font-size: 1.1em; color: #999">主板</a> <a href="/tags/langchain/" style="font-size: 1.1em; color: #999">langchain</a> <a href="/tags/rtx4090/" style="font-size: 1.1em; color: #999">rtx4090</a> <a href="/tags/ThreatIngestor/" style="font-size: 1.1em; color: #999">ThreatIngestor</a> <a href="/tags/Ruby/" style="font-size: 1.34em; color: #99a3b0">Ruby</a> <a href="/tags/SIEM/" style="font-size: 1.18em; color: #999ca1">SIEM</a> <a href="/tags/%E7%99%BE%E5%BA%A6AI/" style="font-size: 1.1em; color: #999">百度AI</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/" style="font-size: 1.18em; color: #999ca1">安全技术</a> <a href="/tags/AIGC/" style="font-size: 1.42em; color: #99a6b7">AIGC</a> <a href="/tags/OpenResty/" style="font-size: 1.1em; color: #999">OpenResty</a> <a href="/tags/ChatGPT/" style="font-size: 1.1em; color: #999">ChatGPT</a> <a href="/tags/huaggingface/" style="font-size: 1.1em; color: #999">huaggingface</a> <a href="/tags/ObsidianAddict/" style="font-size: 1.1em; color: #999">ObsidianAddict</a> <a href="/tags/lua%E5%BE%AA%E7%8E%AF/" style="font-size: 1.1em; color: #999">lua循环</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%B1%82%E8%81%8C/" style="font-size: 1.1em; color: #999">程序员求职</a> <a href="/tags/RE%E4%B8%8ECT%E6%A1%86%E6%9E%B6/" style="font-size: 1.1em; color: #999">RE与CT框架</a> <a href="/tags/%E7%94%B5%E8%84%91%E5%A4%96%E8%AE%BE/" style="font-size: 1.1em; color: #999">电脑外设</a> <a href="/tags/english/" style="font-size: 1.18em; color: #999ca1">english</a> <a href="/tags/Prompting-Guide/" style="font-size: 1.1em; color: #999">Prompting Guide</a> <a href="/tags/comfyui/" style="font-size: 1.1em; color: #999">comfyui</a> <a href="/tags/TTPs/" style="font-size: 1.1em; color: #999">TTPs</a> <a href="/tags/Mac/" style="font-size: 1.1em; color: #999">Mac</a> <a href="/tags/Suricata/" style="font-size: 1.1em; color: #999">Suricata</a> <a href="/tags/jupyter/" style="font-size: 1.1em; color: #999">jupyter</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">357</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2017/09/"><span class="card-archive-list-date">九月 2017</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2016/09/"><span class="card-archive-list-date">九月 2016</span><span class="card-archive-list-count">307</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">667</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-14T11:47:31.566Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><script>(function () {
+  var meta = document.createElement('meta');
+  meta.content = 'no-referrer';
+  meta.name = 'referrer';
+  document.getElementsByTagName('head')[0].appendChild(meta);
+})();</script></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></body></html>
