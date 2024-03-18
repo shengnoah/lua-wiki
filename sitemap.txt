@@ -1,3 +1,6 @@
+https://secbooks.cn/subpages/index.html
+https://secbooks.cn/aigc-tuku/index.html
+https://secbooks.cn/link/index.html
 https://secbooks.cn/categories/index.html
 https://secbooks.cn/tags/index.html
 https://secbooks.cn/topic/337/
