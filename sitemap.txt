@@ -1,3 +1,4 @@
+https://secbooks.cn/linux/Linux%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E7%AE%B1/
 https://secbooks.cn/subpages/index.html
 https://secbooks.cn/aigc-tuku/index.html
 https://secbooks.cn/link/index.html
@@ -10,7 +11,6 @@ https://secbooks.cn/topic/105/
 https://secbooks.cn/blog/edgelang/
 https://secbooks.cn/lua_guide/statement/
 https://secbooks.cn/sec/TheHive/%E7%94%A8TheHive%E5%AE%9E%E7%8E%B0SOAR/
-https://secbooks.cn/linux/Linux%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E7%AE%B1/
 https://secbooks.cn/hexo/NPM%E5%AE%89%E8%A3%85%E4%B8%8D%E9%AA%8C%E8%AF%81%E8%AF%81%E4%B9%A6/
 https://secbooks.cn/graylog/Graylog%E4%B8%8ESIEM/
 https://secbooks.cn/wiki/lua/index.html
