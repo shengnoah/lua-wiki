@@ -1,3 +1,5 @@
+https://secbooks.cn/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/
+https://secbooks.cn/linux/zip%E5%91%BD%E4%BB%A4/
 https://secbooks.cn/linux/Linux%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E7%AE%B1/
 https://secbooks.cn/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/
 https://secbooks.cn/aigc/sd/SD%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/
@@ -826,6 +828,10 @@ https://secbooks.cn/tags/nvidia/
 https://secbooks.cn/tags/gpustat/
 https://secbooks.cn/tags/nvidia-smi/
 https://secbooks.cn/tags/mongodb/
+https://secbooks.cn/tags/nc/
+https://secbooks.cn/tags/ncat/
+https://secbooks.cn/tags/nccopy/
+https://secbooks.cn/tags/zip/
 https://secbooks.cn/categories/AIGC/
 https://secbooks.cn/categories/%E7%BF%BB%E8%AF%91/
 https://secbooks.cn/categories/AIGC/rtx4090/
