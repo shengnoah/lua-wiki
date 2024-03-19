@@ -2,6 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://secbooks.cn/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    
+    <lastmod>2024-03-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/aigc/sd/SD%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2024-03-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/kanbanfiles/Nvidia%E5%B8%B8%E7%94%A8%E7%9A%84%E6%98%BE%E5%8D%A1%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E4%B8%8E%E9%A9%B1%E5%8A%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2024-03-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/linux/netstat%20%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2024-03-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/topic/124/</loc>
+    
+    <lastmod>2024-03-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://secbooks.cn/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2024-03-18</lastmod>
@@ -1119,15 +1164,6 @@
   
   <url>
     <loc>https://secbooks.cn/topic/390/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/topic/124/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -5150,15 +5186,6 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/kanbanfiles/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%98%BE%E5%8D%A1%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/kanbanfiles/CUDA%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2024-03-14</lastmod>
@@ -5583,15 +5610,6 @@
   
   <url>
     <loc>https://secbooks.cn/aigc/sd/DDColor%E8%80%81%E7%9B%B8%E7%89%87%E4%B8%8A%E8%89%B2/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/aigc/sd/SD%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -7003,6 +7021,62 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://secbooks.cn/tags/netstat/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/cuda/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/ubuntu20/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/ubuntu22/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/nvidia/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/gpustat/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/nvidia-smi/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/mongodb/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -7658,6 +7732,13 @@
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/langchain/</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/categories/nvidia/</loc>
     <lastmod>2024-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
