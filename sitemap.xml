@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lua.ren/linux/Linux%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E7%AE%B1/</loc>
+    
+    <lastmod>2024-03-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lua.ren/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/</loc>
     
     <lastmod>2024-03-19</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://lua.ren/linux/zip%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2024-03-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lua.ren/linux/Linux%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E7%AE%B1/</loc>
     
     <lastmod>2024-03-19</lastmod>
     
