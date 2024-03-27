@@ -2,6 +2,285 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://secbooks.cn/lua_guide/environment/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/oriented/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/access/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/facilities/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/handling/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/syntax/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/metatables/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/iterators/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/for/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/while/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/until/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/loop/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/variables/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/strings/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/library/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/types/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/arrays/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/functions/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/break/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/graylog/Graylog%E4%B8%8ESIEM/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/statement/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/collection/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/topic/147/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/topic/106/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/tables/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/debugging/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/loop/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/modules/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/lua_guide/coroutines/</loc>
+    
+    <lastmod>2024-03-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/kanbanfiles/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85conda/</loc>
+    
+    <lastmod>2024-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/kanbanfiles/Nvidia%E5%B8%B8%E7%94%A8%E7%9A%84%E6%98%BE%E5%8D%A1%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E4%B8%8E%E9%A9%B1%E5%8A%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2024-03-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://secbooks.cn/linux/Linux%E4%B8%8B%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7%E7%AE%B1/</loc>
     
     <lastmod>2024-03-20</lastmod>
@@ -39,15 +318,6 @@
   
   <url>
     <loc>https://secbooks.cn/aigc/sd/SD%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2024-03-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/kanbanfiles/Nvidia%E5%B8%B8%E7%94%A8%E7%9A%84%E6%98%BE%E5%8D%A1%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E4%B8%8E%E9%A9%B1%E5%8A%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2024-03-19</lastmod>
     
@@ -173,15 +443,6 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/lua_guide/statement/</loc>
-    
-    <lastmod>2024-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/sec/TheHive/%E7%94%A8TheHive%E5%AE%9E%E7%8E%B0SOAR/</loc>
     
     <lastmod>2024-03-18</lastmod>
@@ -192,15 +453,6 @@
   
   <url>
     <loc>https://secbooks.cn/hexo/NPM%E5%AE%89%E8%A3%85%E4%B8%8D%E9%AA%8C%E8%AF%81%E8%AF%81%E4%B9%A6/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/graylog/Graylog%E4%B8%8ESIEM/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -2720,15 +2972,6 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/topic/106/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/topic/264/</loc>
     
     <lastmod>2024-03-14</lastmod>
@@ -2892,15 +3135,6 @@
   
   <url>
     <loc>https://secbooks.cn/topic/300/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/topic/147/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -4115,79 +4349,7 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/lua_guide/break/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/coroutines/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/functions/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/lua_guide/overview/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/arrays/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/types/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/library/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/strings/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/debugging/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -4205,52 +4367,7 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/lua_guide/variables/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/lua/2016-06-01-TOC/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/loop/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/modules/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/until/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/while/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -4277,42 +4394,6 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/lua_guide/iterators/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/for/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/metatables/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/tables/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/lua/luatest/Table%E5%A4%8D%E5%88%B6/</loc>
     
     <lastmod>2024-03-14</lastmod>
@@ -4322,79 +4403,7 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/lua_guide/syntax/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/handling/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/loop/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/facilities/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/lua/2016-06-01-Home/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/access/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/collection/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/oriented/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://secbooks.cn/lua_guide/environment/</loc>
     
     <lastmod>2024-03-14</lastmod>
     
@@ -5132,15 +5141,6 @@
   </url>
   
   <url>
-    <loc>https://secbooks.cn/kanbanfiles/%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85conda/</loc>
-    
-    <lastmod>2024-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://secbooks.cn/kanbanfiles/%E5%8E%9F%E9%81%93%E8%80%B3%E6%9C%BA%E7%BB%8F%E5%85%B8%E7%9A%84%E5%9E%8B%E5%8F%B7%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F/</loc>
     
     <lastmod>2024-03-14</lastmod>
@@ -5773,7 +5773,7 @@
 
   <url>
     <loc>https://secbooks.cn/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -5781,1344 +5781,1351 @@
   
   <url>
     <loc>https://secbooks.cn/tags/weibo/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/AGI/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/rtx4090/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Web%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%94%B5%E5%AD%90%E5%B7%A5%E4%B8%9A%E5%87%BA%E7%89%88%E7%A4%BE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/OpenResty/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ClickHouse/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ElasticSearch/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/iptables/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/linux/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E8%BF%90%E7%BB%B4%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E4%BA%BA%E6%B0%91%E9%82%AE%E7%94%B5%E5%87%BA%E7%89%88%E7%A4%BE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%AE%89%E5%85%A8%E5%9B%BE%E4%B9%A6/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/OpenSSL/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Graylog/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/GROK/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/JSON/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Split/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Gradio/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/whisper/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%B4%A2%E5%BC%95/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/rsync/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/RAG/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/books/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%9B%BE%E4%B9%A6/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/GPT/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/flink/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/chromadb/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%AE%89%E5%85%A8%E6%95%B0%E6%8D%AE%E8%BF%90%E8%90%A5/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/AIGC/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/OOTDiffusion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/github/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/huaggingface/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/NPM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ChatGLM2/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/english/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/obsidian/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/hexo/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/picgo/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E4%B8%BB%E6%9D%BF/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/x79/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/x99/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/mount/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%A3%81%E7%9B%98/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/conda/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E4%BA%BA%E9%99%85%E5%85%B3%E7%B3%BB/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/jekyll/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/blog/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%99%BE%E5%BA%A6AI/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%BF%83%E9%87%8C%E5%AD%A6/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/cpu/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%86%85%E5%AD%98/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%A1%AC%E7%9B%98/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/zsh/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/fishell/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/fzf/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/riggrep/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/starship/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lazygit/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lsof/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Mac/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lua/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/LUA%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/LUA/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/abc/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/basic/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E9%94%AE%E7%9B%98%EF%BC%88%E8%AE%A1%E7%AE%97%E6%9C%BA%EF%BC%89/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E8%93%9D%E7%89%99%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%97%A0%E7%BA%BF%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E9%9D%99%E7%94%B5%E5%AE%B9%E5%BC%8F%E9%94%AE%E7%9B%98/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Ruby/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%94%B5%E8%84%91%E5%A4%96%E8%AE%BE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Cherry%EF%BC%88%E9%94%AE%E7%9B%98%EF%BC%89/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98%E9%80%89%E8%B4%AD/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/math/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%B9%B3%E6%96%B9%E5%B7%AE%E5%85%AC%E5%BC%8F/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%BC%A0%E9%87%8F/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ObsidianAddict/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E6%9E%81%E9%99%90/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%B9%B3%E6%96%B9%E5%92%8C%E5%85%AC%E5%BC%8F/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/dataview/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/database/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/templater/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ollama/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/news/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%A7%98%E7%B1%8D/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/AI-gateway/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Prompting-Guide/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Quiver/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/gitee/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Redis/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/python/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/galah/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ASCII%E6%94%BB%E5%87%BB/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/RE%E4%B8%8ECT%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ThreatIngestor/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/iftop/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/osv/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/dev/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/soc/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/SIEM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/OTX/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/OpenCTI/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/article/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/LLM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E4%BA%92%E8%81%94%E7%BD%91/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E5%A4%B1%E4%B8%9A/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%B1%82%E8%81%8C/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/OpenAI/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ChatGPT/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/libreoffice/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/pdf/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lapis/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lua-json/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lua%E5%BE%AA%E7%8E%AF/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lua%E5%BE%AA%E7%8E%AF%E9%81%8D%E5%8E%86/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/mysql/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/moonscript/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/lua%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/c/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/gpt4all/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/chatglm3/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/llamaindex-cli/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/book/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/InternLM2/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/llama/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/stablediffusion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/comfyui/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/photo/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/gfpgan/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/sora/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/nmap/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/clickhouse/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/music/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Mubert-API/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/%E6%8F%92%E4%BB%B6/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Amphion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/AudioCraft/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Riffusion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/TTS/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/SonicVisionLM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/WhisperFusion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/WavJourney/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/WhisperSpeech/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/AnimateAnyone/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Luna/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/cuDNN/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/prime-select/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/jupyter/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/CVE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ATTCK/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/TTPs/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/CAPEC/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Cortex/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/MISP/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/IOC/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/API/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/sigama/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/scirius/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/TheHive/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/SOAR/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Suricata/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Shuffle/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ChatGLM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/Mixtral-8x7B/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/langchain/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/n8n/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/netstat/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/cuda/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ubuntu20/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ubuntu22/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/nvidia/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/gpustat/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/nvidia-smi/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/mongodb/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/nc/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/ncat/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/nccopy/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/tags/zip/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://secbooks.cn/tags/miniconda/</loc>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -7127,665 +7134,665 @@
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E7%BF%BB%E8%AF%91/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/rtx4090/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/weibo/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E6%96%87%E7%AB%A0/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E4%B9%A6%E7%B1%8D/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/Gradio/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/linux/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/rag/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/books/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E5%87%BA%E7%89%88%E7%89%A9/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E8%AF%BE%E7%A8%8B/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/database/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/Sec/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/gihub/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/books/publish/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/huaggingface/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/database/vector/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/Sec/Graylog/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/Sec/AIGC/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/ChatGLM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/publish/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/obsidian/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E4%B8%BB%E6%9C%BA%E7%A1%AC%E4%BB%B6/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/conda/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/obsidian/hexo/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/ruby/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/linux/rsync/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/git/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/linux/lsof/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/Mac/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/lua-guide/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/lua-guide/lua%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/lua-guide/LUA%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E6%95%B0%E5%AD%A6/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/math/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/ollama/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/news/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/github/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%A7%98%E7%B1%8D/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/AI-gateway/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/prompting-guide/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/Quiver/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/gitee/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/Lua/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/python/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/python/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E7%BF%BB%E8%AF%91%E5%8E%9F%E6%96%87/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/honeypot/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/LLM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/Lua/Redis/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/python/%E5%8A%A0%E5%AF%86%E5%BA%93/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/english/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/classical/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/topic/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/topic/mysql/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/gpt4all/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/chatglm3/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/InternLM2/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/RAG/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/stablediffusion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/comfyui/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/llamaindex-cli/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/sd/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/gfpgan/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/kali/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/sora/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/sd/photo/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/music/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/github/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/kali/nmap/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/Amphion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/AudioCraft/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/Riffusion/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/TTS/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/SonicVisionLM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/audio/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/WhisperSpeech/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/music/Mubert-API/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/AnimateAnyone/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/cuDNN/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/python/conda/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/prime-select/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/audio/WavJourney/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/ChatGLM/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/Mixtral-8x7B/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/AIGC/langchain/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://secbooks.cn/categories/nvidia/</loc>
-    <lastmod>2024-03-20</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>糖果AIGC实验室-LUA | 糖果AIGC实验室-LUA</title><meta name="author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="copyright" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lua 元表 正如其名，元表也是表。不过，将元表与表相关联后，我们就可以通过设置元表的键和相关方法来改变表的行为。元方法的功能十分强大，使用元方法可以实现很多的功能，比如：  	修改表的操作符功能或为操作符添加新功能（译注：如果您学过 C++ 之类的面向对象的语言，应该比较好理解，其实它实现的是操作的重载）。 	使用元表中的 __index 方法，我们可以实现在表中查找键不存在时转而在元表中查找">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Lua元表 | 糖果AIGC实验室-LUA</title><meta name="author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="copyright" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lua 元表 正如其名，元表也是表。不过，将元表与表相关联后，我们就可以通过设置元表的键和相关方法来改变表的行为。元方法的功能十分强大，使用元方法可以实现很多的功能，比如：  	修改表的操作符功能或为操作符添加新功能（译注：如果您学过 C++ 之类的面向对象的语言，应该比较好理解，其实它实现的是操作的重载）。 	使用元表中的 __index 方法，我们可以实现在表中查找键不存在时转而在元表中查找">
 <meta property="og:type" content="article">
-<meta property="og:title" content="糖果AIGC实验室-LUA">
+<meta property="og:title" content="Lua元表">
 <meta property="og:url" content="https://secbooks.cn/lua_guide/metatables/index.html">
 <meta property="og:site_name" content="糖果AIGC实验室-LUA">
 <meta property="og:description" content="Lua 元表 正如其名，元表也是表。不过，将元表与表相关联后，我们就可以通过设置元表的键和相关方法来改变表的行为。元方法的功能十分强大，使用元方法可以实现很多的功能，比如：  	修改表的操作符功能或为操作符添加新功能（译注：如果您学过 C++ 之类的面向对象的语言，应该比较好理解，其实它实现的是操作的重载）。 	使用元表中的 __index 方法，我们可以实现在表中查找键不存在时转而在元表中查找">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
 <meta property="article:published_time" content="2024-03-14T07:45:09.086Z">
-<meta property="article:modified_time" content="2024-03-14T07:45:09.086Z">
+<meta property="article:modified_time" content="2024-03-27T04:13:10.462Z">
 <meta property="article:author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5">
 <meta property="article:tag" content="LUA教程">
 <meta name="twitter:card" content="summary">
@@ -67,12 +67,12 @@
     rightside: false,
   }
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '糖果AIGC实验室-LUA',
+  title: 'Lua元表',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-03-14 15:45:09'
+  postUpdate: '2024-03-27 12:13:10'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -176,7 +176,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">192</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="糖果AIGC实验室-LUA"><span class="site-name">糖果AIGC实验室-LUA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-14T07:45:09.086Z" title="发表于 2024-03-14 15:45:09">2024-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-14T07:45:09.086Z" title="更新于 2024-03-14 15:45:09">2024-03-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/lua-guide/">lua_guide</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="lua-元表"><a class="markdownIt-Anchor" href="#lua-元表"></a> Lua 元表</h1>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">193</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="糖果AIGC实验室-LUA"><span class="site-name">糖果AIGC实验室-LUA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Lua元表</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-14T07:45:09.086Z" title="发表于 2024-03-14 15:45:09">2024-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-27T04:13:10.462Z" title="更新于 2024-03-27 12:13:10">2024-03-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/lua-guide/">lua_guide</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Lua元表"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="lua-元表"><a class="markdownIt-Anchor" href="#lua-元表"></a> Lua 元表</h1>
 <p>正如其名，元表也是表。不过，将元表与表相关联后，我们就可以通过设置元表的键和相关方法来改变表的行为。元方法的功能十分强大，使用元方法可以实现很多的功能，比如：</p>
 <ul>
 	<li>修改表的操作符功能或为操作符添加新功能（译注：如果您学过 C++ 之类的面向对象的语言，应该比较好理解，其实它实现的是操作的重载）。</li>
@@ -188,203 +188,172 @@
 	<li>getmetatable(table)：此方法用于获取表的元表对象。</li>
 </ul>  
 <p>首先，让我们看一下如何将一个表设置为另一个表的元表。示例如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">mytable &#x3D; &#123;&#125;
-mymetatable &#x3D; &#123;&#125;
-setmetatable(mytable,mymetatable)
-&#96;&#96;&#96;  
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+mymetatable <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token function">setmetatable</span><span class="token punctuation">(</span>mytable<span class="token punctuation">,</span>mymetatable<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>上面的代码可以简写成如下的一行代码：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="__index"><a class="markdownIt-Anchor" href="#__index"></a> __index</h2>
+<p>下面的例子中，我们实现了在表中查找键不存在时转而在元表中查找该键的功能：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>key1 <span class="token operator">=</span> <span class="token string">"value1"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  __index <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>mytable<span class="token punctuation">,</span> key<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> key <span class="token operator">==</span> <span class="token string">"key2"</span> <span class="token keyword">then</span>
+      <span class="token keyword">return</span> <span class="token string">"metatablevalue"</span>
+    <span class="token keyword">else</span>
+      <span class="token keyword">return</span> mytable<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
-上面的代码可以简写成如下的一行代码：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>mytable = setmetatable({},{})</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## __index  
+<span class="token function">print</span><span class="token punctuation">(</span>mytable<span class="token punctuation">.</span>key1<span class="token punctuation">,</span>mytable<span class="token punctuation">.</span>key2<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行上面的程序，我们可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">value1	metatablevalue<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>接下来逐步解释上面例子运行的过程：</p>
+<ul>
+	<li>表 mytable 为 {key = "values1"}</li>
+	<li>为 mytable 设置了一个元表，该元表的键 __index 存储了一个函数，我们称这个函数为元方法。</li>
+	<li>这个元方法的工作也十分简单。它仅查找索引 “key2”,如果找到该索引值，则返回 "metatablevalue",否则返回 mytable 中索引对应的值。</li>
+</ul>
+<p>上面的程序同样可以简化成如下的形式：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>key1 <span class="token operator">=</span> <span class="token string">"value1"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> __index <span class="token operator">=</span> <span class="token punctuation">&#123;</span> key2 <span class="token operator">=</span> <span class="token string">"metatablevalue"</span> <span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>mytable<span class="token punctuation">.</span>key1<span class="token punctuation">,</span>mytable<span class="token punctuation">.</span>key2<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="__newindex"><a class="markdownIt-Anchor" href="#__newindex"></a> __newindex</h2>
+<p>为元表添加 __newindex 后，当访问的键在表中不存在时，此时添加新键值对的行为将由此元方法（__newindex）定义。下面的例子中，如果访问的索引在表中不存在则在元表中新加该索引值（注意，是添加在另外一个表 mymetatable 中而非在原表 mytable 中。），具体代码如下(译注：请注意此处 __newindex 的值并非一个方法而是一个表。)：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mymetatable <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>key1 <span class="token operator">=</span> <span class="token string">"value1"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> __newindex <span class="token operator">=</span> mymetatable <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
-下面的例子中，我们实现了在表中查找键不存在时转而在元表中查找该键的功能：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>mytable = setmetatable({key1 = “value1”}, {<br />
-__index = function(mytable, key)<br />
-if key == “key2” then<br />
-return “metatablevalue”<br />
-else<br />
-return mytable[key]<br />
-end<br />
-end<br />
-})</p>
-<p>print(mytable.key1,mytable.key2)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-运行上面的程序，我们可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>value1	metatablevalue</p>
-<pre class="line-numbers language-none"><code class="language-none">
-接下来逐步解释上面例子运行的过程：  
+<span class="token function">print</span><span class="token punctuation">(</span>mytable<span class="token punctuation">.</span>key1<span class="token punctuation">)</span>
 
-&lt;ul&gt;
-	&lt;li&gt;表 mytable 为 &#123;key &#x3D; &quot;values1&quot;&#125;&lt;&#x2F;li&gt;
-	&lt;li&gt;为 mytable 设置了一个元表，该元表的键 __index 存储了一个函数，我们称这个函数为元方法。&lt;&#x2F;li&gt;
-	&lt;li&gt;这个元方法的工作也十分简单。它仅查找索引 “key2”,如果找到该索引值，则返回 &quot;metatablevalue&quot;,否则返回 mytable 中索引对应的值。&lt;&#x2F;li&gt;
-&lt;&#x2F;ul&gt;
+mytable<span class="token punctuation">.</span>newkey <span class="token operator">=</span> <span class="token string">"new value 2"</span>
+<span class="token function">print</span><span class="token punctuation">(</span>mytable<span class="token punctuation">.</span>newkey<span class="token punctuation">,</span>mymetatable<span class="token punctuation">.</span>newkey<span class="token punctuation">)</span>
 
-上面的程序同样可以简化成如下的形式：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>mytable = setmetatable({key1 = “value1”}, { __index = { key2 = “metatablevalue” } })<br />
-print(mytable.key1,mytable.key2)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## __newindex  
+mytable<span class="token punctuation">.</span>key1 <span class="token operator">=</span> <span class="token string">"new  value 1"</span>
+<span class="token function">print</span><span class="token punctuation">(</span>mytable<span class="token punctuation">.</span>key1<span class="token punctuation">,</span>mymetatable<span class="token punctuation">.</span>newkey1<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的程序，我们可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">value1
+nil	new value <span class="token number">2</span>
+new  value <span class="token number">1</span>	nil<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可以看出，在上面的程序中，如果键存在于主表中，只会简单更新相应的键值。而如果键不在表中时，会在另外的表 mymetatable 中添加该键值对。<br />
+在接下来这个例子中，我们用 rawset 函数在相同的表（主表）中更新键值，而不再是将新的键添加到另外的表中。代码如下所示：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>key1 <span class="token operator">=</span> <span class="token string">"value1"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  __newindex <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>mytable<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+		<span class="token function">rawset</span><span class="token punctuation">(</span>mytable<span class="token punctuation">,</span> key<span class="token punctuation">,</span> <span class="token string">"\""</span><span class="token operator">..</span>value<span class="token operator">..</span><span class="token string">"\""</span><span class="token punctuation">)</span>
 
-为元表添加 __newindex 后，当访问的键在表中不存在时，此时添加新键值对的行为将由此元方法（__newindex）定义。下面的例子中，如果访问的索引在表中不存在则在元表中新加该索引值（注意，是添加在另外一个表 mymetatable 中而非在原表 mytable 中。），具体代码如下(译注：请注意此处 __newindex 的值并非一个方法而是一个表。)：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>mymetatable = {}<br />
-mytable = setmetatable({key1 = “value1”}, { __newindex = mymetatable })</p>
-<p>print(mytable.key1)</p>
-<p>mytable.newkey = “new value 2”<br />
-print(mytable.newkey,mymetatable.newkey)</p>
-<p>mytable.key1 = “new  value 1”<br />
-print(mytable.key1,mymetatable.newkey1)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的程序，我们可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>value1<br />
-nil	new value 2<br />
-new  value 1	nil</p>
-<pre class="line-numbers language-none"><code class="language-none">
-可以看出，在上面的程序中，如果键存在于主表中，只会简单更新相应的键值。而如果键不在表中时，会在另外的表 mymetatable 中添加该键值对。  
-在接下来这个例子中，我们用 rawset 函数在相同的表（主表）中更新键值，而不再是将新的键添加到另外的表中。代码如下所示：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>mytable = setmetatable({key1 = “value1”}, {<br />
-__newindex = function(mytable, key, value)<br />
-rawset(mytable, key, “&quot;”…value…“&quot;”)</p>
-<p>end<br />
-})</p>
-<p>mytable.key1 = “new value”<br />
-mytable.key2 = 4</p>
-<p>print(mytable.key1,mytable.key2)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的程序，我们可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>new value	“4”</p>
-<pre class="line-numbers language-none"><code class="language-none">
-rawset 函数设置值时不会使用元表中的 __newindex 元方法。同样的，Lua 中也存的一个 rawget 方法，该方法访问表中键值时也不会调用 __index 的元方法。  
+  <span class="token keyword">end</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
-## 为表添加操作符行为  
+mytable<span class="token punctuation">.</span>key1 <span class="token operator">=</span> <span class="token string">"new value"</span>
+mytable<span class="token punctuation">.</span>key2 <span class="token operator">=</span> <span class="token number">4</span>
 
-使用 + 操作符完成两个表组合的方法如下所示（译注：可以看出重载的意思了）：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>mytable = setmetatable({ 1, 2, 3 }, {<br />
-__add = function(mytable, newtable)<br />
-for i = 1, table.maxn(newtable) do<br />
-table.insert(mytable, table.maxn(mytable)+1,newtable[i])<br />
-end<br />
-return mytable<br />
-end<br />
-})</p>
-<p>secondtable = {4,5,6}</p>
-<p>mytable = mytable + secondtable<br />
-for k,v in ipairs(mytable) do<br />
-print(k,v)<br />
-end</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的的程序，我们可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>1	1<br />
-2	2<br />
-3	3<br />
-4	4<br />
-5	5<br />
-6	6</p>
-<pre class="line-numbers language-none"><code class="language-none">
-元表中 __add 键用于修改加法操作符的行为。其它操作对应的元表中的键值如下表所示。  
+<span class="token function">print</span><span class="token punctuation">(</span>mytable<span class="token punctuation">.</span>key1<span class="token punctuation">,</span>mytable<span class="token punctuation">.</span>key2<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的程序，我们可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">new value	<span class="token string">"4"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>rawset 函数设置值时不会使用元表中的 __newindex 元方法。同样的，Lua 中也存的一个 rawget 方法，该方法访问表中键值时也不会调用 __index 的元方法。</p>
+<h2 id="为表添加操作符行为"><a class="markdownIt-Anchor" href="#为表添加操作符行为"></a> 为表添加操作符行为</h2>
+<p>使用 + 操作符完成两个表组合的方法如下所示（译注：可以看出重载的意思了）：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  __add <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>mytable<span class="token punctuation">,</span> newtable<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> table<span class="token punctuation">.</span><span class="token function">maxn</span><span class="token punctuation">(</span>newtable<span class="token punctuation">)</span> <span class="token keyword">do</span>
+      table<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>mytable<span class="token punctuation">,</span> table<span class="token punctuation">.</span><span class="token function">maxn</span><span class="token punctuation">(</span>mytable<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>newtable<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+    <span class="token keyword">return</span> mytable
+  <span class="token keyword">end</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 
-&lt;table&gt;
-	&lt;tr&gt;
-		&lt;th&gt;键&lt;&#x2F;th&gt;
-		&lt;th&gt;描述&lt;&#x2F;th&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__add&lt;&#x2F;td&gt;
-		&lt;td&gt;改变加法操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__sub&lt;&#x2F;td&gt;
-		&lt;td&gt;改变减法操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__mul&lt;&#x2F;td&gt;
-		&lt;td&gt;改变乘法操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__div&lt;&#x2F;td&gt;
-		&lt;td&gt;改变除法操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__mod&lt;&#x2F;td&gt;
-		&lt;td&gt;改变模除操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__unm&lt;&#x2F;td&gt;
-		&lt;td&gt;改变一元减操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__concat&lt;&#x2F;td&gt;
-		&lt;td&gt;改变连接操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__eq&lt;&#x2F;td&gt;
-		&lt;td&gt;改变等于操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__lt&lt;&#x2F;td&gt;
-		&lt;td&gt;改变小于操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;__le&lt;&#x2F;td&gt;
-		&lt;td&gt;改变小于等于操作符的行为。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-&lt;&#x2F;table&gt;  
+secondtable <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">&#125;</span>
 
-## __call  
-
-使用 __call 可以使表具有像函数一样可调用的特性。下面的例子中涉及两个表，主表 mytable 和 传入的实参表结构 newtable，程序完成两个表中值的求和。
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>mytable = setmetatable({10}, {<br />
-__call = function(mytable, newtable)<br />
-sum = 0<br />
-for i = 1, table.maxn(mytable) do<br />
-sum = sum + mytable[i]<br />
-end<br />
-for i = 1, table.maxn(newtable) do<br />
-sum = sum + newtable[i]<br />
-end<br />
-return sum<br />
-end<br />
-})<br />
-newtable = {10,20,30}<br />
-print(mytable(newtable))</p>
-<pre class="line-numbers language-none"><code class="language-none">
-运行上面的代码，我们可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>70</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## __tostring  
-
-要改变 print 语句的行为，我们需要用到 __tostring 元方法。下面是一个简单的例子：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>mytable = setmetatable({ 10, 20, 30 }, {<br />
-__tostring = function(mytable)<br />
-sum = 0<br />
-for k, v in pairs(mytable) do<br />
-sum = sum + v<br />
-end<br />
-return &quot;The sum of values in the table is &quot; … sum<br />
-end<br />
-})<br />
-print(mytable)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-运行上面的代码，我们可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>The sum of values in the table is 60</p>
-<pre class="highlight"><code class="">
-如果你完全掌握了元表的用法，你就可以实现很多看上面很复杂的操作。如果不使用元表，就不仅仅是看上去很复杂了，而是真的非常复杂。所以，多做一些使用元表的练习，并熟练掌握所有元表的可选项，这会让你受益匪浅。</code></pre>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://secbooks.cn">糖果AIGC实验室 备案:辽ICP备16003836号-5</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://secbooks.cn/lua_guide/metatables/">https://secbooks.cn/lua_guide/metatables/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">null</a> 许可协议。转载请注明来自 <a href="https://secbooks.cn" target="_blank">糖果AIGC实验室-LUA</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LUA%E6%95%99%E7%A8%8B/">LUA教程</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/lua_guide/for/" title="Lua中的for循环"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Lua中的for循环</div></div></a></div><div class="next-post pull-right"><a href="/lua_guide/tables/" title="Lua表"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Lua表</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/lua_guide/loop/" title="LUA的Loop循环"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">LUA的Loop循环</div></div></a></div><div><a href="/lua_guide/variables/" title="Lua的变量"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua的变量</div></div></a></div><div><a href="/lua_guide/while/" title="Lua的while循环"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua的while循环</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="author-info__description">AIGC</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">192</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">公众号：糖果的实验室 <img src="https://gitee.com/shengnoah/picture/raw/master/20231027182204.png"></img></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lua-%E5%85%83%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text"> Lua 元表</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NC的文件复制功能"/></a><div class="content"><a class="title" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能">NC的文件复制功能</a><time datetime="2024-03-19T11:12:08.666Z" title="发表于 2024-03-19 19:12:08">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="zip命令"/></a><div class="content"><a class="title" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令">zip命令</a><time datetime="2024-03-19T10:43:43.120Z" title="发表于 2024-03-19 18:43:43">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="备份整个MongoDB数据库"/></a><div class="content"><a class="title" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库">备份整个MongoDB数据库</a><time datetime="2024-03-19T08:50:19.744Z" title="发表于 2024-03-19 16:50:19">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="netstat 命令"/></a><div class="content"><a class="title" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令">netstat 命令</a><time datetime="2024-03-19T07:36:46.509Z" title="发表于 2024-03-19 15:36:46">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用n8n集成Langchain不写一行代码完成对线上论文的总结"/></a><div class="content"><a class="title" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结">利用n8n集成Langchain不写一行代码完成对线上论文的总结</a><time datetime="2024-03-18T10:55:35.743Z" title="发表于 2024-03-18 18:55:35">2024-03-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><script>(function () {
+mytable <span class="token operator">=</span> mytable <span class="token operator">+</span> secondtable
+<span class="token keyword">for</span> k<span class="token punctuation">,</span>v <span class="token keyword">in</span> <span class="token function">ipairs</span><span class="token punctuation">(</span>mytable<span class="token punctuation">)</span> <span class="token keyword">do</span>
+<span class="token function">print</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的的程序，我们可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>	<span class="token number">1</span>
+<span class="token number">2</span>	<span class="token number">2</span>
+<span class="token number">3</span>	<span class="token number">3</span>
+<span class="token number">4</span>	<span class="token number">4</span>
+<span class="token number">5</span>	<span class="token number">5</span>
+<span class="token number">6</span>	<span class="token number">6</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>元表中 __add 键用于修改加法操作符的行为。其它操作对应的元表中的键值如下表所示。</p>
+<table>
+	<tr>
+		<th>键</th>
+		<th>描述</th>
+	</tr>
+	<tr>
+		<td>__add</td>
+		<td>改变加法操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__sub</td>
+		<td>改变减法操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__mul</td>
+		<td>改变乘法操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__div</td>
+		<td>改变除法操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__mod</td>
+		<td>改变模除操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__unm</td>
+		<td>改变一元减操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__concat</td>
+		<td>改变连接操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__eq</td>
+		<td>改变等于操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__lt</td>
+		<td>改变小于操作符的行为。</td>
+	</tr>
+	<tr>
+		<td>__le</td>
+		<td>改变小于等于操作符的行为。</td>
+	</tr>
+</table>  
+<h2 id="__call"><a class="markdownIt-Anchor" href="#__call"></a> __call</h2>
+<p>使用 __call 可以使表具有像函数一样可调用的特性。下面的例子中涉及两个表，主表 mytable 和 传入的实参表结构 newtable，程序完成两个表中值的求和。</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token number">10</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  __call <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>mytable<span class="token punctuation">,</span> newtable<span class="token punctuation">)</span>
+	sum <span class="token operator">=</span> <span class="token number">0</span>
+	<span class="token keyword">for</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> table<span class="token punctuation">.</span><span class="token function">maxn</span><span class="token punctuation">(</span>mytable<span class="token punctuation">)</span> <span class="token keyword">do</span>
+		sum <span class="token operator">=</span> sum <span class="token operator">+</span> mytable<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+	<span class="token keyword">end</span>
+    <span class="token keyword">for</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> table<span class="token punctuation">.</span><span class="token function">maxn</span><span class="token punctuation">(</span>newtable<span class="token punctuation">)</span> <span class="token keyword">do</span>
+		sum <span class="token operator">=</span> sum <span class="token operator">+</span> newtable<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+	<span class="token keyword">end</span>
+	<span class="token keyword">return</span> sum
+  <span class="token keyword">end</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+newtable <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">&#125;</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token function">mytable</span><span class="token punctuation">(</span>newtable<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行上面的代码，我们可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">70</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="__tostring"><a class="markdownIt-Anchor" href="#__tostring"></a> __tostring</h2>
+<p>要改变 print 语句的行为，我们需要用到 __tostring 元方法。下面是一个简单的例子：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">mytable <span class="token operator">=</span> <span class="token function">setmetatable</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  __tostring <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>mytable<span class="token punctuation">)</span>
+    sum <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> k<span class="token punctuation">,</span> v <span class="token keyword">in</span> <span class="token function">pairs</span><span class="token punctuation">(</span>mytable<span class="token punctuation">)</span> <span class="token keyword">do</span>
+		sum <span class="token operator">=</span> sum <span class="token operator">+</span> v
+	<span class="token keyword">end</span>
+    <span class="token keyword">return</span> <span class="token string">"The sum of values in the table is "</span> <span class="token operator">..</span> sum
+  <span class="token keyword">end</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>mytable<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行上面的代码，我们可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">The <span class="token function">sum</span> of values <span class="token keyword">in</span> the table is <span class="token number">60</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果你完全掌握了元表的用法，你就可以实现很多看上面很复杂的操作。如果不使用元表，就不仅仅是看上去很复杂了，而是真的非常复杂。所以，多做一些使用元表的练习，并熟练掌握所有元表的可选项，这会让你受益匪浅。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://secbooks.cn">糖果AIGC实验室 备案:辽ICP备16003836号-5</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://secbooks.cn/lua_guide/metatables/">https://secbooks.cn/lua_guide/metatables/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">null</a> 许可协议。转载请注明来自 <a href="https://secbooks.cn" target="_blank">糖果AIGC实验室-LUA</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LUA%E6%95%99%E7%A8%8B/">LUA教程</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/lua_guide/for/" title="Lua中的for循环"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Lua中的for循环</div></div></a></div><div class="next-post pull-right"><a href="/lua_guide/tables/" title="Lua表"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Lua表</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/lua_guide/loop/" title="LUA的Loop循环"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">LUA的Loop循环</div></div></a></div><div><a href="/lua_guide/variables/" title="Lua的变量"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua的变量</div></div></a></div><div><a href="/lua_guide/while/" title="Lua的while循环"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua的while循环</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="author-info__description">AIGC</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">193</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">公众号：糖果的实验室 <img src="https://gitee.com/shengnoah/picture/raw/master/20231027182204.png"></img></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lua-%E5%85%83%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text"> Lua 元表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#__index"><span class="toc-number">1.1.</span> <span class="toc-text"> __index</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#__newindex"><span class="toc-number">1.2.</span> <span class="toc-text"> __newindex</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E8%A1%A8%E6%B7%BB%E5%8A%A0%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%A1%8C%E4%B8%BA"><span class="toc-number">1.3.</span> <span class="toc-text"> 为表添加操作符行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#__call"><span class="toc-number">1.4.</span> <span class="toc-text"> __call</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#__tostring"><span class="toc-number">1.5.</span> <span class="toc-text"> __tostring</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NC的文件复制功能"/></a><div class="content"><a class="title" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能">NC的文件复制功能</a><time datetime="2024-03-19T11:12:08.666Z" title="发表于 2024-03-19 19:12:08">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="zip命令"/></a><div class="content"><a class="title" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令">zip命令</a><time datetime="2024-03-19T10:43:43.120Z" title="发表于 2024-03-19 18:43:43">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="备份整个MongoDB数据库"/></a><div class="content"><a class="title" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库">备份整个MongoDB数据库</a><time datetime="2024-03-19T08:50:19.744Z" title="发表于 2024-03-19 16:50:19">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="netstat 命令"/></a><div class="content"><a class="title" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令">netstat 命令</a><time datetime="2024-03-19T07:36:46.509Z" title="发表于 2024-03-19 15:36:46">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用n8n集成Langchain不写一行代码完成对线上论文的总结"/></a><div class="content"><a class="title" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结">利用n8n集成Langchain不写一行代码完成对线上论文的总结</a><time datetime="2024-03-18T10:55:35.743Z" title="发表于 2024-03-18 18:55:35">2024-03-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><script>(function () {
   var meta = document.createElement('meta');
   meta.content = 'no-referrer';
   meta.name = 'referrer';

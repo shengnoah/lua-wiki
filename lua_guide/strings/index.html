@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Lua字符串 | 糖果AIGC实验室-LUA</title><meta name="author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="copyright" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lua 字符串 字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。  	单引号字符串 	双引号字符串 	[[和]]之间的字符串    上面三种初始化方式的示例如下： string1 &#x3D; &quot;Lua&quot; print(&quot;\&quot;String 1 is\&quot;&quot;,string1) string2 &#x3D;">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Lua字符串 | 糖果AIGC实验室-LUA</title><meta name="author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="copyright" content="糖果AIGC实验室 备案:辽ICP备16003836号-5"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lua 字符串 字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。  	单引号字符串 	双引号字符串 	[[和]]之间的字符串    上面三种初始化方式的示例如下： string1 &#x3D; &quot;Lua&quot; print(&quot;\&quot;String 1 is\&quot;&quot;,string1) string2 &#x3D; &#39;Tutorial&#39; print(&quot;String 2 is&quot;,string2)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lua字符串">
 <meta property="og:url" content="https://secbooks.cn/lua_guide/strings/index.html">
 <meta property="og:site_name" content="糖果AIGC实验室-LUA">
-<meta property="og:description" content="Lua 字符串 字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。  	单引号字符串 	双引号字符串 	[[和]]之间的字符串    上面三种初始化方式的示例如下： string1 &#x3D; &quot;Lua&quot; print(&quot;\&quot;String 1 is\&quot;&quot;,string1) string2 &#x3D;">
+<meta property="og:description" content="Lua 字符串 字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。  	单引号字符串 	双引号字符串 	[[和]]之间的字符串    上面三种初始化方式的示例如下： string1 &#x3D; &quot;Lua&quot; print(&quot;\&quot;String 1 is\&quot;&quot;,string1) string2 &#x3D; &#39;Tutorial&#39; print(&quot;String 2 is&quot;,string2)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
 <meta property="article:published_time" content="2024-03-14T07:45:09.089Z">
-<meta property="article:modified_time" content="2024-03-14T07:45:09.090Z">
+<meta property="article:modified_time" content="2024-03-27T04:02:38.632Z">
 <meta property="article:author" content="糖果AIGC实验室 备案:辽ICP备16003836号-5">
 <meta property="article:tag" content="lua">
 <meta name="twitter:card" content="summary">
@@ -72,7 +72,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-03-14 15:45:09'
+  postUpdate: '2024-03-27 12:02:38'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -176,7 +176,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">192</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="糖果AIGC实验室-LUA"><span class="site-name">糖果AIGC实验室-LUA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Lua字符串</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-14T07:45:09.089Z" title="发表于 2024-03-14 15:45:09">2024-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-14T07:45:09.090Z" title="更新于 2024-03-14 15:45:09">2024-03-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/lua-guide/">lua_guide</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Lua字符串"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="lua-字符串"><a class="markdownIt-Anchor" href="#lua-字符串"></a> Lua 字符串</h1>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">193</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="糖果AIGC实验室-LUA"><span class="site-name">糖果AIGC实验室-LUA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Lua字符串</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-14T07:45:09.089Z" title="发表于 2024-03-14 15:45:09">2024-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-27T04:02:38.632Z" title="更新于 2024-03-27 12:02:38">2024-03-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/lua-guide/">lua_guide</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Lua字符串"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="lua-字符串"><a class="markdownIt-Anchor" href="#lua-字符串"></a> Lua 字符串</h1>
 <p>字符串就是一个由字符或控制字符组成的序列。字符串可以用以下三种方式任意一种进行初始化。</p>
 <ul>
 	<li>单引号字符串</li>
@@ -184,242 +184,204 @@
 	<li>[[和]]之间的字符串</li>
 </ul>  
 <p>上面三种初始化方式的示例如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">string1 &#x3D; &quot;Lua&quot;
-print(&quot;\&quot;String 1 is\&quot;&quot;,string1)
-string2 &#x3D; &#39;Tutorial&#39;
-print(&quot;String 2 is&quot;,string2)
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">string1 <span class="token operator">=</span> <span class="token string">"Lua"</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"\"String 1 is\""</span><span class="token punctuation">,</span>string1<span class="token punctuation">)</span>
+string2 <span class="token operator">=</span> <span class="token string">'Tutorial'</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"String 2 is"</span><span class="token punctuation">,</span>string2<span class="token punctuation">)</span>
 
-string3 &#x3D; [[&quot;Lua Tutorial&quot;]]
-print(&quot;String 3 is&quot;,string3)
-&#96;&#96;&#96;  
+string3 <span class="token operator">=</span> <span class="token string">[["Lua Tutorial"]]</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"String 3 is"</span><span class="token punctuation">,</span>string3<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行上面的程序，我们可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token string">"String 1"</span> is	Lua
+String <span class="token number">2</span> is	Tutorial
+String <span class="token number">3</span> is	<span class="token string">"Lua Tutorial"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>字符串中转义字符用于改变字符的一般正常的解释。在上面的例子中，输出双引号（“”）的时候，我们使用的是 &quot;。下表列出了转义序列及相应的使用方法：</p>
+<table>
+	<tr>
+		<th>转义序列</th>
+		<th>用法</th>
+	</tr>
+	<tr>
+		<td>\a</td>
+		<td>响铃</td>
+	</tr>
+	<tr>
+		<td>\b</td>
+		<td>退格</td>
+	</tr>
+	<tr>
+		<td>\f</td>
+		<td>换页</td>
+	</tr>
+	<tr>
+		<td>\n</td>
+		<td>换行</td>
+	</tr>
+	<tr>
+		<td>\r</td>
+		<td>回车</td>
+	</tr>
+	<tr>
+		<td>\t</td>
+		<td>制表符</td>
+	</tr>
+	<tr>
+		<td>\v</td>
+		<td>垂直制表符</td>
+	</tr>
+	<tr>
+		<td>\\</td>
+		<td>反斜线</td>
+	</tr>
+	<tr>
+		<td>\"</td>
+		<td>双引号</td>
+	</tr>
+	<tr>
+		<td>\'</td>
+		<td>单引号</td>
+	</tr>
+	<tr>
+		<td>\[</td>
+		<td>左方括号</td>
+	</tr>
+	<tr>
+		<td>\]</td>
+		<td>右方括号</td>
+	</tr>
+</table>
+<h2 id="字符串操作"><a class="markdownIt-Anchor" href="#字符串操作"></a> 字符串操作</h2>
+<p>Lua 支持如下的字符串操作方法：</p>
+<table>
+	<tr>
+		<th>S.N.</th>
+		<th>函数及其功能</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>string.upper(argument):将输入参数全部字符转换为大写并返回。</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>string.lower(argument):将输入参数全部字符转换为小写并返回。</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>string.gsub(maingString,findString,replaceString):将 mainString 中的所有 findString 用 replaceString 替换并返回结果。</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>string.strfind(mainString,findString,optionalStartIndex,optionalEndIndex):在主字符串中查找 findString 并返回 findString 在主字符串中的开始和结束位置，若查找失败则返回 nil。</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>string.reverse(arg):将输入字符串颠倒并返回。</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>string.format(...):返回格式化后的字符串。</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>string.char(arg) 和 string.byte(arg):前者返回输出参数的所代表的字符，后者返回输入参数（字符）的数值。</td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>string.len(arg):返回输入字符串的长度。</td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td>string.rep(string,n): 将输入字符串 string 重复 n　次后的新字符串返回。</td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td>..:连接两个字符串。</td>
+	</tr>
+</table>
+<p>接下来我们用一些例子来讲解如何使用上面这些函数。</p>
+<h2 id="大小写操作函数"><a class="markdownIt-Anchor" href="#大小写操作函数"></a> 大小写操作函数</h2>
+<p>下面的代码将字符串中字符全部转换成大写或小写：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">string1 <span class="token operator">=</span> <span class="token string">"Lua"</span><span class="token punctuation">;</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">upper</span><span class="token punctuation">(</span>string1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">lower</span><span class="token punctuation">(</span>string1<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的代码可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">LUA
+lua<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="替换子串"><a class="markdownIt-Anchor" href="#替换子串"></a> 替换子串</h2>
+<p>用一个字符串替换字符串的某子串的示例代码如下：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">string <span class="token operator">=</span> <span class="token string">"Lua Tutorial"</span>
+<span class="token comment">-- 替换字符串</span>
+newstring <span class="token operator">=</span> string<span class="token punctuation">.</span><span class="token function">gsub</span><span class="token punctuation">(</span>string<span class="token punctuation">,</span><span class="token string">"Tutorial"</span><span class="token punctuation">,</span><span class="token string">"Language"</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"The new string is"</span><span class="token punctuation">,</span>newstring<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的代码可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">The new string is	Lua Language<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="查找与颠倒"><a class="markdownIt-Anchor" href="#查找与颠倒"></a> 查找与颠倒</h2>
+<p>查找一个子串的索引与颠倒一个字符串函数的示例代码如下所示：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">string <span class="token operator">=</span> <span class="token string">"Lua Tutorial"</span>
+<span class="token comment">-- 替换字符串</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>string<span class="token punctuation">,</span><span class="token string">"Tutorial"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+reversedString <span class="token operator">=</span> string<span class="token punctuation">.</span><span class="token function">reverse</span><span class="token punctuation">(</span>string<span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"The new string is"</span><span class="token punctuation">,</span>reversedString<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的代码可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">5</span>	<span class="token number">12</span>
+The new string is	lairotuT auL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="格式化字符串"><a class="markdownIt-Anchor" href="#格式化字符串"></a> 格式化字符串</h2>
+<p>在编程过程中，我们经常需要将字符串以某种格式输出。此时，你就可以使用 string.format 函数格式化你的输出内容。如下所示：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">string1 <span class="token operator">=</span> <span class="token string">"Lua"</span>
+string2 <span class="token operator">=</span> <span class="token string">"Tutorial"</span>
+number1 <span class="token operator">=</span> <span class="token number">10</span>
+number2 <span class="token operator">=</span> <span class="token number">20</span>
+<span class="token comment">-- 基本字符串格式</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Basic formatting %s %s"</span><span class="token punctuation">,</span>string1<span class="token punctuation">,</span>string2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 日期格式化</span>
+date <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> month <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> year <span class="token operator">=</span> <span class="token number">2014</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"Date formatting %02d/%02d/%03d"</span><span class="token punctuation">,</span> date<span class="token punctuation">,</span> month<span class="token punctuation">,</span> year<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 符点数格式化</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"%.4f"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的代码可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Basic formatting Lua Tutorial
+Date formatting 02/01/2014
+<span class="token number">0.3333</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="字符与字节表示"><a class="markdownIt-Anchor" href="#字符与字节表示"></a> 字符与字节表示</h2>
+<p>字节表示函数用于将字符的内部表示转换为字符表示，而字符表示函数正好相反。 示例代码如下：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token comment">-- 字节转换</span>
+<span class="token comment">-- 第一个字符</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"Lua"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 第三个字符</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"Lua"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 倒数第一个字符</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"Lua"</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 第二个字符</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"Lua"</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 倒数第二个字符</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"Lua"</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-运行上面的程序，我们可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>“String 1” is	Lua<br />
-String 2 is	Tutorial<br />
-String 3 is	“Lua Tutorial”</p>
-<pre class="line-numbers language-none"><code class="language-none">
-字符串中转义字符用于改变字符的一般正常的解释。在上面的例子中，输出双引号（&quot;&quot;）的时候，我们使用的是 \&quot;。下表列出了转义序列及相应的使用方法：  
+<span class="token comment">-- 内部 ASCII 字值转换为字符</span>
+<span class="token function">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span><span class="token function">char</span><span class="token punctuation">(</span><span class="token number">97</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的代码可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">76</span>
+<span class="token number">97</span>
+<span class="token number">97</span>
+<span class="token number">117</span>
+<span class="token number">117</span>
+a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="其它常用函数"><a class="markdownIt-Anchor" href="#其它常用函数"></a> 其它常用函数</h2>
+<p>其它常用的字符串处理函数包括字符串连接，字符串长度函数以及重复字符串多次的函数。它们的使用方法示例如下：</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">string1 <span class="token operator">=</span> <span class="token string">"Lua"</span>
+string2 <span class="token operator">=</span> <span class="token string">"Tutorial"</span>
+<span class="token comment">-- 用 .. 连接两个字符串</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Concatenated string"</span><span class="token punctuation">,</span>string1<span class="token operator">..</span>string2<span class="token punctuation">)</span>
 
-&lt;table&gt;
-	&lt;tr&gt;
-		&lt;th&gt;转义序列&lt;&#x2F;th&gt;
-		&lt;th&gt;用法&lt;&#x2F;th&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\a&lt;&#x2F;td&gt;
-		&lt;td&gt;响铃&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\b&lt;&#x2F;td&gt;
-		&lt;td&gt;退格&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\f&lt;&#x2F;td&gt;
-		&lt;td&gt;换页&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\n&lt;&#x2F;td&gt;
-		&lt;td&gt;换行&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\r&lt;&#x2F;td&gt;
-		&lt;td&gt;回车&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\t&lt;&#x2F;td&gt;
-		&lt;td&gt;制表符&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\v&lt;&#x2F;td&gt;
-		&lt;td&gt;垂直制表符&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\\&lt;&#x2F;td&gt;
-		&lt;td&gt;反斜线&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\&quot;&lt;&#x2F;td&gt;
-		&lt;td&gt;双引号&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\&#39;&lt;&#x2F;td&gt;
-		&lt;td&gt;单引号&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\[&lt;&#x2F;td&gt;
-		&lt;td&gt;左方括号&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;\]&lt;&#x2F;td&gt;
-		&lt;td&gt;右方括号&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-&lt;&#x2F;table&gt;
+<span class="token comment">-- 字符串的长度</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Length of string1 is "</span><span class="token punctuation">,</span>string<span class="token punctuation">.</span><span class="token function">len</span><span class="token punctuation">(</span>string1<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-## 字符串操作  
-
-Lua 支持如下的字符串操作方法：  
-
-&lt;table&gt;
-	&lt;tr&gt;
-		&lt;th&gt;S.N.&lt;&#x2F;th&gt;
-		&lt;th&gt;函数及其功能&lt;&#x2F;th&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;1&lt;&#x2F;td&gt;
-		&lt;td&gt;string.upper(argument):将输入参数全部字符转换为大写并返回。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;2&lt;&#x2F;td&gt;
-		&lt;td&gt;string.lower(argument):将输入参数全部字符转换为小写并返回。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;3&lt;&#x2F;td&gt;
-		&lt;td&gt;string.gsub(maingString,findString,replaceString):将 mainString 中的所有 findString 用 replaceString 替换并返回结果。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;4&lt;&#x2F;td&gt;
-		&lt;td&gt;string.strfind(mainString,findString,optionalStartIndex,optionalEndIndex):在主字符串中查找 findString 并返回 findString 在主字符串中的开始和结束位置，若查找失败则返回 nil。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;5&lt;&#x2F;td&gt;
-		&lt;td&gt;string.reverse(arg):将输入字符串颠倒并返回。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;6&lt;&#x2F;td&gt;
-		&lt;td&gt;string.format(...):返回格式化后的字符串。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;7&lt;&#x2F;td&gt;
-		&lt;td&gt;string.char(arg) 和 string.byte(arg):前者返回输出参数的所代表的字符，后者返回输入参数（字符）的数值。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;8&lt;&#x2F;td&gt;
-		&lt;td&gt;string.len(arg):返回输入字符串的长度。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;9&lt;&#x2F;td&gt;
-		&lt;td&gt;string.rep(string,n): 将输入字符串 string 重复 n　次后的新字符串返回。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-	&lt;tr&gt;
-		&lt;td&gt;10&lt;&#x2F;td&gt;
-		&lt;td&gt;..:连接两个字符串。&lt;&#x2F;td&gt;
-	&lt;&#x2F;tr&gt;
-&lt;&#x2F;table&gt;
-
-接下来我们用一些例子来讲解如何使用上面这些函数。  
-
-## 大小写操作函数  
-
-下面的代码将字符串中字符全部转换成大写或小写：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>string1 = “Lua”;<br />
-print(string.upper(string1))<br />
-print(string.lower(string1))</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的代码可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>LUA<br />
-lua</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## 替换子串  
-
-用一个字符串替换字符串的某子串的示例代码如下：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>string = “Lua Tutorial”<br />
-– 替换字符串<br />
-newstring = string.gsub(string,“Tutorial”,“Language”)<br />
-print(“The new string is”,newstring)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的代码可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>The new string is	Lua Language</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## 查找与颠倒  
-
-查找一个子串的索引与颠倒一个字符串函数的示例代码如下所示：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>string = “Lua Tutorial”<br />
-– 替换字符串<br />
-print(string.find(string,“Tutorial”))<br />
-reversedString = string.reverse(string)<br />
-print(“The new string is”,reversedString)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的代码可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>5	12<br />
-The new string is	lairotuT auL</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## 格式化字符串  
-
-在编程过程中，我们经常需要将字符串以某种格式输出。此时，你就可以使用 string.format 函数格式化你的输出内容。如下所示：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>string1 = “Lua”<br />
-string2 = “Tutorial”<br />
-number1 = 10<br />
-number2 = 20<br />
-– 基本字符串格式<br />
-print(string.format(“Basic formatting %s %s”,string1,string2))<br />
-– 日期格式化<br />
-date = 2; month = 1; year = 2014<br />
-print(string.format(“Date formatting %02d/%02d/%03d”, date, month, year))<br />
-– 符点数格式化<br />
-print(string.format(“%.4f”,1/3))</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的代码可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>Basic formatting Lua Tutorial<br />
-Date formatting 02/01/2014<br />
-0.3333</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## 字符与字节表示  
-
-字节表示函数用于将字符的内部表示转换为字符表示，而字符表示函数正好相反。 示例代码如下：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>– 字节转换<br />
-– 第一个字符<br />
-print(string.byte(“Lua”))<br />
-– 第三个字符<br />
-print(string.byte(“Lua”,3))<br />
-– 倒数第一个字符<br />
-print(string.byte(“Lua”,-1))<br />
-– 第二个字符<br />
-print(string.byte(“Lua”,2))<br />
-– 倒数第二个字符<br />
-print(string.byte(“Lua”,-2))</p>
-<p>– 内部 ASCII 字值转换为字符<br />
-print(string.char(97))</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的代码可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>76<br />
-97<br />
-97<br />
-117<br />
-117<br />
-a</p>
-<pre class="line-numbers language-none"><code class="language-none">
-## 其它常用函数  
-
-其它常用的字符串处理函数包括字符串连接，字符串长度函数以及重复字符串多次的函数。它们的使用方法示例如下：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>string1 = “Lua”<br />
-string2 = “Tutorial”<br />
-– 用 … 连接两个字符串<br />
-print(“Concatenated string”,string1…string2)</p>
-<p>– 字符串的长度<br />
-print(&quot;Length of string1 is &quot;,string.len(string1))</p>
-<p>– 重复字符串<br />
-repeatedString = string.rep(string1,3)<br />
-print(repeatedString)</p>
-<pre class="line-numbers language-none"><code class="language-none">
-执行上面的代码可以得到如下的输出结果：  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>Concatenated string	LuaTutorial<br />
-Length of string1 is 	3<br />
-LuaLuaLua</p>
-<pre class="highlight"><code class=""></code></pre>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://secbooks.cn">糖果AIGC实验室 备案:辽ICP备16003836号-5</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://secbooks.cn/lua_guide/strings/">https://secbooks.cn/lua_guide/strings/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">null</a> 许可协议。转载请注明来自 <a href="https://secbooks.cn" target="_blank">糖果AIGC实验室-LUA</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/lua/">lua</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/lua_guide/statement/" title="Lua中的嵌套 if 语句"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Lua中的嵌套 if 语句</div></div></a></div><div class="next-post pull-right"><a href="/lua_guide/variables/" title="Lua的变量"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Lua的变量</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/lua_guide/statement/" title="Lua中的if语句"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua中的if语句</div></div></a></div><div><a href="/lua/2016-06-01-TOC/" title="2016-06-01-TOC"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">2016-06-01-TOC</div></div></a></div><div><a href="/lua_guide/arrays/" title="数组"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">数组</div></div></a></div><div><a href="/lua_guide/syntax/" title="Lua基本语法"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua基本语法</div></div></a></div><div><a href="/lua_guide/break/" title="Break语句"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Break语句</div></div></a></div><div><a href="/lua_guide/coroutines/" title="Lua协程"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua协程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="author-info__description">AIGC</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">192</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">公众号：糖果的实验室 <img src="https://gitee.com/shengnoah/picture/raw/master/20231027182204.png"></img></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lua-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.</span> <span class="toc-text"> Lua 字符串</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NC的文件复制功能"/></a><div class="content"><a class="title" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能">NC的文件复制功能</a><time datetime="2024-03-19T11:12:08.666Z" title="发表于 2024-03-19 19:12:08">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="zip命令"/></a><div class="content"><a class="title" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令">zip命令</a><time datetime="2024-03-19T10:43:43.120Z" title="发表于 2024-03-19 18:43:43">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="备份整个MongoDB数据库"/></a><div class="content"><a class="title" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库">备份整个MongoDB数据库</a><time datetime="2024-03-19T08:50:19.744Z" title="发表于 2024-03-19 16:50:19">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="netstat 命令"/></a><div class="content"><a class="title" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令">netstat 命令</a><time datetime="2024-03-19T07:36:46.509Z" title="发表于 2024-03-19 15:36:46">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用n8n集成Langchain不写一行代码完成对线上论文的总结"/></a><div class="content"><a class="title" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结">利用n8n集成Langchain不写一行代码完成对线上论文的总结</a><time datetime="2024-03-18T10:55:35.743Z" title="发表于 2024-03-18 18:55:35">2024-03-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><script>(function () {
+<span class="token comment">-- 重复字符串</span>
+repeatedString <span class="token operator">=</span> string<span class="token punctuation">.</span><span class="token function">rep</span><span class="token punctuation">(</span>string1<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>repeatedString<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行上面的代码可以得到如下的输出结果：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Concatenated string	LuaTutorial
+Length of string1 is 	<span class="token number">3</span>
+LuaLuaLua<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://secbooks.cn">糖果AIGC实验室 备案:辽ICP备16003836号-5</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://secbooks.cn/lua_guide/strings/">https://secbooks.cn/lua_guide/strings/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="null" target="_blank">null</a> 许可协议。转载请注明来自 <a href="https://secbooks.cn" target="_blank">糖果AIGC实验室-LUA</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/lua/">lua</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/lua_guide/statement/" title="Lua中的嵌套 if 语句"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Lua中的嵌套 if 语句</div></div></a></div><div class="next-post pull-right"><a href="/lua_guide/variables/" title="Lua的变量"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Lua的变量</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/lua_guide/statement/" title="Lua中的if语句"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua中的if语句</div></div></a></div><div><a href="/lua/2016-06-01-TOC/" title="2016-06-01-TOC"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">2016-06-01-TOC</div></div></a></div><div><a href="/lua_guide/arrays/" title="数组"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">数组</div></div></a></div><div><a href="/lua_guide/syntax/" title="Lua基本语法"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua基本语法</div></div></a></div><div><a href="/lua_guide/break/" title="Break语句"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Break语句</div></div></a></div><div><a href="/lua_guide/coroutines/" title="Lua协程"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Lua协程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="author-info__description">AIGC</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">634</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">193</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">95</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">公众号：糖果的实验室 <img src="https://gitee.com/shengnoah/picture/raw/master/20231027182204.png"></img></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lua-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.</span> <span class="toc-text"> Lua 字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text"> 字符串操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text"> 大小写操作函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E5%AD%90%E4%B8%B2"><span class="toc-number">1.3.</span> <span class="toc-text"> 替换子串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E4%B8%8E%E9%A2%A0%E5%80%92"><span class="toc-number">1.4.</span> <span class="toc-text"> 查找与颠倒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.</span> <span class="toc-text"> 格式化字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%8E%E5%AD%97%E8%8A%82%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.6.</span> <span class="toc-text"> 字符与字节表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.7.</span> <span class="toc-text"> 其它常用函数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NC的文件复制功能"/></a><div class="content"><a class="title" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能">NC的文件复制功能</a><time datetime="2024-03-19T11:12:08.666Z" title="发表于 2024-03-19 19:12:08">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="zip命令"/></a><div class="content"><a class="title" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令">zip命令</a><time datetime="2024-03-19T10:43:43.120Z" title="发表于 2024-03-19 18:43:43">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="备份整个MongoDB数据库"/></a><div class="content"><a class="title" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库">备份整个MongoDB数据库</a><time datetime="2024-03-19T08:50:19.744Z" title="发表于 2024-03-19 16:50:19">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="netstat 命令"/></a><div class="content"><a class="title" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令">netstat 命令</a><time datetime="2024-03-19T07:36:46.509Z" title="发表于 2024-03-19 15:36:46">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用n8n集成Langchain不写一行代码完成对线上论文的总结"/></a><div class="content"><a class="title" href="/sec/SORA/%E5%88%A9%E7%94%A8n8n%E9%9B%86%E6%88%90Langchain%E4%B8%8D%E5%86%99%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%8C%E6%88%90%E5%AF%B9%E7%BA%BF%E4%B8%8A%E8%AE%BA%E6%96%87%E7%9A%84%E6%80%BB%E7%BB%93/" title="利用n8n集成Langchain不写一行代码完成对线上论文的总结">利用n8n集成Langchain不写一行代码完成对线上论文的总结</a><time datetime="2024-03-18T10:55:35.743Z" title="发表于 2024-03-18 18:55:35">2024-03-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><script>(function () {
   var meta = document.createElement('meta');
   meta.content = 'no-referrer';
   meta.name = 'referrer';
