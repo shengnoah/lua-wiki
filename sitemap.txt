@@ -1,3 +1,4 @@
+https://lua.ren/jixie/%E7%A7%8D%E6%A4%8D%E5%A4%A7%E8%B5%9B/
 https://lua.ren/lua_guide/environment/
 https://lua.ren/lua_guide/oriented/
 https://lua.ren/lua_guide/access/
@@ -833,6 +834,7 @@ https://lua.ren/tags/ncat/
 https://lua.ren/tags/nccopy/
 https://lua.ren/tags/zip/
 https://lua.ren/tags/miniconda/
+https://lua.ren/tags/%E7%A7%8D%E8%8A%B1/
 https://lua.ren/categories/AIGC/
 https://lua.ren/categories/%E7%BF%BB%E8%AF%91/
 https://lua.ren/categories/AIGC/rtx4090/
@@ -928,3 +930,4 @@ https://lua.ren/categories/AIGC/ChatGLM/
 https://lua.ren/categories/AIGC/Mixtral-8x7B/
 https://lua.ren/categories/AIGC/langchain/
 https://lua.ren/categories/nvidia/
+https://lua.ren/categories/%E8%82%B2%E5%84%BF/
