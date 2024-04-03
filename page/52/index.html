@@ -70,7 +70,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-03-28 10:38:31'
+  postUpdate: '2024-04-03 11:56:42'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -174,188 +174,193 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">635</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">194</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">96</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="糖果AIGC实验室-LUA"><span class="site-name">糖果AIGC实验室-LUA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/topic/299/" title="extractor.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="extractor.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/299/" title="extractor.md">extractor.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: Concept
-redirect_from:
-- /docs/v0.4.0/concept/extractor/
-- /docs/latest/concept/extractor/
-title: “变量提取模块”
-sort_title: “3”
-变量提取模块，是一系列变量提取器的集合，一般格式如下：
-&quot;extractor&quot;: &#123;
-    &quot;type&quot;: 1,&#x2F;&#x2F;提取器类型，1指索引式提取，2指模板式提取
-    &quot;extractions&quot;: [
-        &#123;&#x2F;&#x2F;一个提取器
-            &quot;type&quot;: &quot;Query&quot;,
-            &quot;name&quot;: &quot;wd&quot;
-        &#125;,
-        &#123;
-            &quot;type&quot;: &quot;Header&quot;,
-            ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/topic/300/" title="handle.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="handle.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/300/" title="handle.md">handle.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: Concept
-redirect_from:
-- /docs/v0.4.0/concept/handle/
-- /docs/latest/concept/handle/
-title: “后续处理模块”
-sort_title: “4”
-后续处理模块，它包含了一些后续处理需要的配置、参数等信息，比如是否需要记录日志、响应状态码、要跳转到的URL、要代理的下游upstream server等等。详细请参看各个插件的配置。
-</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/topic/301/" title="judge.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="judge.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/301/" title="judge.md">judge.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: Concept
-redirect_from:
-- /docs/v0.4.0/concept/judge/
-- /docs/latest/concept/judge/
-title: “条件判断模块”
-sort_title: “2”
-条件判断模块，是一系列匹配条件和使用方式的集合。它由以下几部分组成
+    })(window)</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1769</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">195</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">96</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="糖果AIGC实验室-LUA"><span class="site-name">糖果AIGC实验室-LUA</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清單</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/zl/2016-01-01-51_nginx%20+%20lua%20%E5%BC%80%E5%8F%91%E4%B8%AD%E8%BF%87%E7%A8%8B%E4%B8%AD%20post%20body%20%E8%BF%87%E5%A4%A7%E8%BF%94%E5%9B%9E%204xx%20(%E7%BB%AD)/" title="nginx + lua 开发中过程中 post body 过大返回 4xx (续)"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nginx + lua 开发中过程中 post body 过大返回 4xx (续)"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-51_nginx%20+%20lua%20%E5%BC%80%E5%8F%91%E4%B8%AD%E8%BF%87%E7%A8%8B%E4%B8%AD%20post%20body%20%E8%BF%87%E5%A4%A7%E8%BF%94%E5%9B%9E%204xx%20(%E7%BB%AD)/" title="nginx + lua 开发中过程中 post body 过大返回 4xx (续)">nginx + lua 开发中过程中 post body 过大返回 4xx (续)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.795Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">背景随着业务发展会出现较大的 post body 数据，按照nginx + lua 开发中过程中 post body 过大返回 4xx提到的方式修改后，大部分情况下 post body 正常接收并处理落日志。但会偶现空日志的情况。
+问题分析经过多轮本地和沙盒压测，复现了问题。由于在出现空日志情况是 error 日志并没留下相关信息，随后做了如下处理：
+
+把 error 日志级别调到 debug，当问题复现时，error.log 中会有客户端过早断开连接类似的日子打出。
+在 access 日志中添加 request_time, status,等信息，发现出现空日志时，status=408，request_time 都比较长。
+
+因此，可以明确出现该问题是客户端链接超时造成的。
+解决方案为解决该问题，做如下优化：
+调整超时时间，和 buffer123client_body_timeout 10s;client_header_timeout 10s;client_body_in_single_buffer on; #这个 directive 让 Nginx 将所有的 request body ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/zl/2016-01-01-515_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="Lua学习笔记二"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lua学习笔记二"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-515_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="Lua学习笔记二">Lua学习笔记二</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.790Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">while1234while(条件)do  循环体end
+代码示例及结果：
+123456a = 0while(a &lt; 10)do	print(a)	a = a + 1end
+123456789100123456789
+for123for var=值1,值2,值2 do  循环体end
+从值1变化到值2，每次变化以值3为步长，执行一次循环体。表达式3不指定时默认为1.
+代码示例及结果：
+123for i = 0,10 do  print(i)end
+1234567891011012345678910
+变化范围包含值2
+for 遍历table:
+1234table = {&#34;a&#34;,&#34;b&#34;,&#34;c&#34;}for i,v in ipairs(table) do  print(i,v)end
+1231	a2	b3	c
+repeat…until123repeat  循环体until(条件语句)
+执行循环体，直到条件语句成立
+代码示例及结果：
+12345i = 0repeat  print(i)  i = i+1until(i&gt;10)
+123456 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/zl/2016-01-01-516_Lua%E4%BD%9C%E5%9B%BE%E6%95%99%E7%A8%8B%E4%B9%8Blua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="Lua作图教程之lua面向对象"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lua作图教程之lua面向对象"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-516_Lua%E4%BD%9C%E5%9B%BE%E6%95%99%E7%A8%8B%E4%B9%8Blua%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="Lua作图教程之lua面向对象">Lua作图教程之lua面向对象</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.790Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
+C++
+Java
+Objective-C
+Smalltalk
+C#
+Ruby
+
+面向对象特征
+1） 封装：指能够把一个实体的信息、功能、响应都装入一个单独的对象中的特性。
+2） 继承：继承的方法允许在不改动原程序的基础上对其进行扩充，这样使得原功能得以保存，而新功能也得以扩展。这有利于减少重复编码，提高软件的开发效率。
+3） 多态：同一操作作用于不同的对象，可以有不同的解释，产生不同的执行结果。在运行时，可以通过指向基类的指针，来调用实现派生类中的方法。
+4）抽象：抽象(Abstraction)是简化复杂的现实问题的途径，它可以为具体问题找到最恰当的类定义，并且可以在最恰当的继承级别解释问题。
+
+Lua 中面向对象我们知道，对象由属性和方法组成。LUA中最基本的结构是table，所以需要用table来描述对象的属性。
+lua中的function可以用来表示方法。那么LUA中的类可以通过table + function模拟出来。
+至于继承，可以通过metetable模拟出来（不推荐用，只模拟最基本的对象大部分时间够用了）。
+Lua中的表不仅在某种意义上是一种对象。像对象一样，表也有状态 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/zl/2016-01-01-517_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/" title="Lua学习笔记(二)"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lua学习笔记(二)"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-517_Lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/" title="Lua学习笔记(二)">Lua学习笔记(二)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.790Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
+变量
+赋值语句
+多变量赋值
 
 
-type: 0表示只有一个匹配条件，1表示对所有条件与操作，2表示对所有条件或操作，3表示按照另一个字段expression对所有条件求值
+索引
+循环
+控制语句
 
 
-expression: 当type为3时，此字段不为空，它的格式是一个lua的逻辑判断表达式。表达式中每个值的格式为v[index], 比如v[1]对应的就是第一个条件的值。示例：(v[1] or v[2]) and v[3]，即前两个条件至少一个为真并且第三个条件为真时，规则为真。
+流程控制
+函数
+可变参数
 
 
-conditions: 匹配条件集合
+运算符
+算术运算符
+关系运算符
+逻辑运算符
+其它运算符
+优先级
 
 
-</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/topic/302/" title="rule.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="rule.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/302/" title="rule.md">rule.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: Concept
-redirect_from:
-- /docs/v0.4.0/concept/rule/
-- /docs/latest/concept/rule/
-title: “规则”
-sort_title: “1”
-** 规则 ** 是Orange中的一个概念，它可能包括一个条件判断模块、一个变量提取模块和一个后续处理模块。一般情况下，插件的一条规则会包含条件判断模块和一个处理模块，根据需要选择是否使用变量提取模块，如分流插件就需要变量提取模块，但防火墙插件则不需要。
-下面通过一个具体的实例看一下它的组成。
- 格式
-以重定向插件的一条规则的结构为例，介绍如下(以json格式描述):
-&#123;
-    &quot;enable&quot;: true,
-    &quot;name&quot;: &quot;用户访问重定向&quot;,
-    &quot;id&quot;: &quot;F7F73D94-AEEB-4B61-9E59-AEDBF200B941&quot;,
-    &quot;time&quot;: &quot;2016-05-04 16: ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/topic/304/" title="api_server.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="api_server.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/304/" title="api_server.md">api_server.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: Advanced
-redirect_from:
-- /docs/latest/advanced/api_server/
-title: “如何使用Open API”
-sort_title: “2”
-Orange提供了各种API用于实现第三方需求， 如：
-
-
-根据API实现个性化的Dashboard
-
-
-通过API获取监控信息
-
-
-运维上的一些需求
-
-
-通过API增删改各种插件配置
-
-
-默认的API Server在7777端口监听，详细使用方法参看[API]（/docs/api/）部分。
-</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/topic/303/" title="waf.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="waf.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/303/" title="waf.md">waf.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: API
-redirect_from:
-- /docs/latest/api/waf/
-title: “WAF防火墙”
-sort_title: “9”
-flag: “2”
- 1) 开启或关闭此插件
-请求
-
-
-
-URI
-Method
+字符串
+转义字符
+字符串操作
+字符串格式化
+匹配模式
+模式
+捕获
 
 
 
 
-/waf/enable
-Post
+数组
+迭代器
+泛型for迭代器
+无状态迭代器
+多状态迭代器
+
+
+table
+操作方法
 
 
 
-参数
+变量使用前必须申明，即创建该变量。
+包括：全局变量，局部变量，表中的域。
+前文中提到过，Lua中所有的变量默认都是全局变量，有一种情况是例外的，那就是用local显示声明为局部变量的。
+试尝试：
+1234567891011a=1;local b = 2;function test()    c=3;    local d=4;endtest()print(&#34;a&#34;..a)print(&#34;b&#34;..b)print(&#34;c&#34;..c)print(d)
+
+这里经过试验可以轻易的得知，local定义的变量的使用范围就是在当前的代码块儿之内的。一旦超出的话就直接归nil！
+这里使用到了Lua中的一些语法，例如function与end，这里就 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/zl/2016-01-01-512_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/" title="Lua 排序算法"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lua 排序算法"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-512_Lua%20%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%20/" title="Lua 排序算法">Lua 排序算法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.789Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。
+选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则它不会被移动。选择排序每次交换一对元素，它们当中至少有一个将被移到其最终位置上，因此对n个元素的序列进行排序总共进行至多n-1次交换。在所有的完全依靠交换去移动元素的排序方法中，选择排序属于非常好的一种。
+算法步骤
+
+  首先在未排序序列中找到最小元素，存放到排序序列的起始位置
+  再从剩余未排序元素中继续寻找最小元素，然后放到已排序序列的末尾。
+  重复第二步，直到所有元素均排序完毕。
+
+动画演示
+
+Lua 实现
+local function selectionSort(arr)
+    for i = 1, #arr-1 do
+        local idx = i
+        -- 迭代剩下的元素，寻找最小的元素
+        for j = i ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/zl/2016-01-01-513_openresty%E9%80%9A%E8%BF%87lua%E5%A2%9E%E5%8A%A0%E9%9A%8F%E6%9C%BAtraceid/" title="openresty通过lua增加随机traceid"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="openresty通过lua增加随机traceid"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-513_openresty%E9%80%9A%E8%BF%87lua%E5%A2%9E%E5%8A%A0%E9%9A%8F%E6%9C%BAtraceid/" title="openresty通过lua增加随机traceid">openresty通过lua增加随机traceid</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.789Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">在没有引入zipkin（或者阿里的鹰眼，百度的华佗）这种trace系统的时候，排查问题的一般思路都是按照请求链路来寻找问题源。因此如果能在请求链路中有一个唯一的标识就最好了，而在nginx/openresty做接入层的架构中，可以通过lua脚本生成一个随机traceid。随机数的生成原理，都是先初始化一个随机数种子，由于伪随机数的特性，种子的随机性就显得格外重要，而一般种子的生成都是通过时间的倒序来选取lua 随机数生成方法首先我们看下通常lua的随机数生成方法math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
+math.random(m,n)
+通过时间字符串的逆序初始化随机种子，这里注意到有个sub函数做了截断，是因为math.randomseed will call the underlying C function srand which takes an unsigned integer valueLua will cast the value of the seed to this format. ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/zl/2016-01-01-514_Lua%E8%AF%AD%E5%8F%A5%E6%AE%B5%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/" title="Lua语句段 · 花生肉泥"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lua语句段 · 花生肉泥"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-514_Lua%E8%AF%AD%E5%8F%A5%E6%AE%B5%20%C2%B7%20%E8%8A%B1%E7%94%9F%E8%82%89%E6%B3%A5/" title="Lua语句段 · 花生肉泥">Lua语句段 · 花生肉泥</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.789Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">chunk语句组chunk是一系列语句，lua执行的每一块语句，比如一个文件或者交互模式下的每一行都是一个chunk
+语句块显式的语句块对于控制变量的作用范围很有用，有时候，显式的语句块被用来在另一个语句块中插入retuen或是break
+赋值语句lua允许多重赋值，因此，赋值的语法定义是等号左边放一系列变量，而等号右边放一系列的表达式，两边的元素都用逗号间开1local a,b,c,d,e = 1,2,3,4,5,6
+当变量个数和值的个数不一致时：if 变量个数 &gt; 值的个数     按变量个数补足nilif 变量个数 &lt; 值的个数     多余的值会被忽略备注：lua会先计算右边所有的值后才赋值，所以交换可以这么写，x,y = y,x123456789local a,b,c = 1print(a,b,c)local a,b,c,d,e = 1,2,3,4,5,6print(a,b,c,d,e)=====结果=====1     nil     nil1     2     3     4     5
+注意：如果要对多个变量赋值必须依次对每个变量赋值
+控制结构语句if w ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/zl/2016-01-01-510_Kafka%20cluaster%20partitions%20replicas%20group/" title="Kafka cluaster partitions replicas group"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kafka cluaster partitions replicas group"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-510_Kafka%20cluaster%20partitions%20replicas%20group/" title="Kafka cluaster partitions replicas group">Kafka cluaster partitions replicas group</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.788Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">Partition &amp; Replicas
+Kafka 集群默认自动分配解析
+
+  下面以一个Kafka集群中4个Broker举例，创建1个topic包含4个Partition，2 Replication；数据Producer流动如图所示：
 
 
-
-名称
-类型
-说明
-
-
-
-
-enable
-int
-0关闭1开启
-
-
-
-返回结果
-&#123;
-    &quot;msg&quot;:&quot;关闭成功&quot;,
-    &quot;success&quot;:true
-&#125;
- 2) 获取所有配置信息
-请求
-
-
-
-URI
-Method
-
-
-
-
-/waf/configs
-Get
+  
+    
+      Broker1
+      Broker2
+      Broker3
+      Broker4
+      BrokerX
+      BrokerX
+    
+  
+  
+    
+      P0
+      P1
+      P2
+      P3
+      N/A
+      N/A
+    
+    
+      P3
+      P0
+      P1
+      P2
+      N/A
+      N/A
+    
+  
 
 
+  当集群中新增2节点，Partition增加到6个时分布情况如下：
 
-参数
-无
-返回结果
-&#123;
-    &quot;data&quot;: &#123;
-        &quot;enable&quot;: true,
-        &quot;rules&quot;: [
-            &#123;
-                &quot;enable&quot;: true, ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/topic/305/" title="build_plugin.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="build_plugin.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/305/" title="build_plugin.md">build_plugin.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: Advanced
-redirect_from:
-- /docs/latest/advanced/build_plugin/
-title: “创建自定义插件”
-sort_title: “3”
-to be continued…
-</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/topic/307/" title="Socket 编程发展"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Socket 编程发展"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/307/" title="Socket 编程发展">Socket 编程发展</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content"> Socket 编程发展
-Linux Socket 编程领域，为了处理大量连接请求场景，需要使用非阻塞 I/O 和复用。select、poll 和 epoll 是 Linux API 提供的 I/O 复用方式，自从 Linux 2.6 中加入了 epoll 之后，高性能服务器领域得到广泛的应用，现在比较出名的 Nginx 就是使用 epoll 来实现 I/O 复用支持高并发，目前在高并发的场景下，Nginx 越来越收到欢迎。
-据 w3techs 在2015年8月10日的统计数据表明，在全球 Top 1000 的网站中，有 43.7% 的网站在使用 Nginx，这使得 Nginx 超越了 Apache，成为了高流量网站最信任的 Web 服务器足足有两年时间。已经确定在使用Nginx的站点有：Wikipedia，WordPress，Reddit，Tumblr，Pinterest，Dropbox，Slideshare，Stackexchange 等，可以持续罗列好几个小时，他们太多了。
-下图是统计数据：
 
- select 模型
-下面是 select 函数接口：
-int select (int ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/topic/306/" title="dashboard_usage.md"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="dashboard_usage.md"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/306/" title="dashboard_usage.md">dashboard_usage.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
- category: Advanced
-redirect_from:
-- /docs/latest/advanced/dashboard_usage/
-title: “如何使用Dashboard”
-sort_title: “1”
-启动Orange后，浏览器输入http://localhost:9999即可访问内置的Dashboard。
-从v0.1.1版本开始，Orange Dashboard(默认在9999端口监听)可开启授权验证，只有通过授权的账户才能使用控制台。
-请注意，目前仅当选择store为mysql时，才能使用该功能。
-其相关的配置在orange.conf中:
- &quot;dashboard&quot;: &#123;
-    &quot;auth&quot;: false, &#x2F;&#x2F;是否开启授权验证，开启时需要先登录才能使用Dashboard
-    &quot;session_secret&quot;: &quot;y0ji4pdj61aaf3f11c2e65cd2263d3e7e5&quot;, &#x2F;&#x2F; 用于加密cookie的盐，自 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/topic/308/" title="简介"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简介"></a></div><div class="recent-post-info"><a class="article-title" href="/topic/308/" title="简介">简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2016-09-17T14:50:18.000Z" title="发表于 2016-09-17 22:50:18">2016-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content"> 简介
-OpenResty（也称为 ngx_openresty）是一个全功能的 Web 应用服务器。它打包了标准的 Nginx 核心，很多的常用的第三方模块，以及它们的大多数依赖项。
-通过糅合众多设计良好的 Nginx 模块，OpenResty 有效地把 Nginx 服务器转变为一个强大的 Web 应用服务器，基于它开发人员可以使用 Lua 编程语言对 Nginx 核心以及现有的各种 Nginx C 模块进行脚本编程，构建出可以处理一万以上并发请求的极端高性能的 Web 应用。
-OpenResty 致力于将你的服务器端应用完全运行于 Nginx 服务器中，充分利用 Nginx 的事件模型来进行非阻塞 I/O 通信。不仅仅是和 HTTP 客户端间的网络通信是非阻塞的，与MySQL、PostgreSQL、Memcached 以及 Redis 等众多远方后端之间的网络通信也是非阻塞的。
-因为 OpenResty 软件包的维护者也是其中打包的许多 Nginx 模块的作者，所以 OpenResty 可以确保所包含的所有组件可以可靠地协同工作。
-OpenResty 最早是雅虎中国的一个公司项目，起 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/51/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/#content-inner">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/#content-inner">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/#content-inner">64</a><a class="extend next" rel="next" href="/page/53/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="author-info__description">AIGC</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">635</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">194</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">96</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">公众号：糖果的实验室 <img src="https://gitee.com/shengnoah/picture/raw/master/20231027182204.png"></img></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/jixie/%E7%A7%8D%E6%A4%8D%E5%A4%A7%E8%B5%9B/" title="种植大赛"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="种植大赛"/></a><div class="content"><a class="title" href="/jixie/%E7%A7%8D%E6%A4%8D%E5%A4%A7%E8%B5%9B/" title="种植大赛">种植大赛</a><time datetime="2024-03-28T01:59:58.532Z" title="发表于 2024-03-28 09:59:58">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NC的文件复制功能"/></a><div class="content"><a class="title" href="/linux/NC%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" title="NC的文件复制功能">NC的文件复制功能</a><time datetime="2024-03-19T11:12:08.666Z" title="发表于 2024-03-19 19:12:08">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="zip命令"/></a><div class="content"><a class="title" href="/linux/zip%E5%91%BD%E4%BB%A4/" title="zip命令">zip命令</a><time datetime="2024-03-19T10:43:43.120Z" title="发表于 2024-03-19 18:43:43">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="备份整个MongoDB数据库"/></a><div class="content"><a class="title" href="/database/mongodb/%E5%A4%87%E4%BB%BD%E6%95%B4%E4%B8%AAMongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" title="备份整个MongoDB数据库">备份整个MongoDB数据库</a><time datetime="2024-03-19T08:50:19.744Z" title="发表于 2024-03-19 16:50:19">2024-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="netstat 命令"/></a><div class="content"><a class="title" href="/linux/netstat%20%E5%91%BD%E4%BB%A4/" title="netstat 命令">netstat 命令</a><time datetime="2024-03-19T07:36:46.509Z" title="发表于 2024-03-19 15:36:46">2024-03-19</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+  
+    
+      Broker1
+      Broker2
+      Broker3
+      Broker4
+      Broker5
+      Broker6
+    
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/zl/2016-01-01-511_LuaInterface%E7%AE%80%E4%BB%8B/" title="LuaInterface简介"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LuaInterface简介"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-511_LuaInterface%E7%AE%80%E4%BB%8B/" title="LuaInterface简介">LuaInterface简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.788Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">LuaInterface
+https://www.cnblogs.com/sifenkesi/p/3901831.html
+二 使用1.C#中调用Lua下载LuaInterface。下载地址
+里面有两个文件：lua51.dll，LuaInterface.dll
+新建c#控制台，添加引用（引用右键-添加引用）：
+
+c#：
+12345678910111213141516171819202122232425262728293031323334353637383940using System;using System.Collections.Generic;using System.Linq;using System.Text;using System.Threading.Tasks;using LuaInterface;namespace {    class Program    {        static void Main(string[] args)        {                        Lua lua = new Lua();              ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/zl/2016-01-01-50_tolua++%E5%AE%89%E8%A3%85/" title="tolua++安装"><img class="post-bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tolua++安装"></a></div><div class="recent-post-info"><a class="article-title" href="/zl/2016-01-01-50_tolua++%E5%AE%89%E8%A3%85/" title="tolua++安装">tolua++安装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-03T03:47:35.787Z" title="发表于 2024-04-03 11:47:35">2024-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/topic/">topic</a></span></div><div class="content">
+          
+          &lt;a href=&quot;/2015/11/11/lua_cpp_bind/&quot; rel=&quot;next&quot; title=&quot;C++与Lua本质原始交互API&quot;&gt;
+            &lt;i class=&quot;fa fa-chevron-left&quot;&gt;&lt;/i&gt; 
+            &lt;p class=&quot;post-nav-pre-next-title&quot;&gt;
+              C++与Lua本质原始交互API
+            &lt;/p&gt; 
+          &lt;/a&gt;
+        
+      &lt;/div&gt;
+
+      &lt;span class=&quot;post-nav-divider&quot;&gt;&lt;/span&gt;
+
+      &lt;div class=&quot;post-nav-prev post-nav-item&quot;&gt ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/51/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/#content-inner">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/#content-inner">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/177/#content-inner">177</a><a class="extend next" rel="next" href="/page/53/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="author-info__description">AIGC</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1769</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">195</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">96</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">公众号：糖果的实验室 <img src="https://gitee.com/shengnoah/picture/raw/master/20231027182204.png"></img></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/" title="深入 Lua Garbage Collector(三)"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深入 Lua Garbage Collector(三)"/></a><div class="content"><a class="title" href="/zl/2016-01-01-99_%E6%B7%B1%E5%85%A5%20Lua%20Garbage%20Collector(%E4%B8%89)/" title="深入 Lua Garbage Collector(三)">深入 Lua Garbage Collector(三)</a><time datetime="2024-04-03T03:47:36.244Z" title="发表于 2024-04-03 11:47:36">2024-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/zl/2016-01-01-9_Evaluating%20Polynomials/" title="Evaluating Polynomials"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Evaluating Polynomials"/></a><div class="content"><a class="title" href="/zl/2016-01-01-9_Evaluating%20Polynomials/" title="Evaluating Polynomials">Evaluating Polynomials</a><time datetime="2024-04-03T03:47:36.244Z" title="发表于 2024-04-03 11:47:36">2024-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/zl/2016-01-01-999_%E6%B7%B1%E5%85%A5Lua%20/" title="深入Lua"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深入Lua"/></a><div class="content"><a class="title" href="/zl/2016-01-01-999_%E6%B7%B1%E5%85%A5Lua%20/" title="深入Lua">深入Lua</a><time datetime="2024-04-03T03:47:36.244Z" title="发表于 2024-04-03 11:47:36">2024-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/zl/2016-01-01-996_evaluation%20and%20selection%20%C2%B7%20ngc7293's%20blog/" title="evaluation and selection · ngc7293's blog"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="evaluation and selection · ngc7293's blog"/></a><div class="content"><a class="title" href="/zl/2016-01-01-996_evaluation%20and%20selection%20%C2%B7%20ngc7293's%20blog/" title="evaluation and selection · ngc7293's blog">evaluation and selection · ngc7293's blog</a><time datetime="2024-04-03T03:47:36.243Z" title="发表于 2024-04-03 11:47:36">2024-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/zl/2016-01-01-998_lua%20%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="lua 基础数据类型"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="lua 基础数据类型"/></a><div class="content"><a class="title" href="/zl/2016-01-01-998_lua%20%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="lua 基础数据类型">lua 基础数据类型</a><time datetime="2024-04-03T03:47:36.243Z" title="发表于 2024-04-03 11:47:36">2024-04-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
@@ -363,7 +368,7 @@ OpenResty 最早是雅虎中国的一个公司项目，起 ...</div></div></div>
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/"><span class="card-category-list-name">AIGC</span><span class="card-category-list-count">117</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/AI-gateway/"><span class="card-category-list-name">AI gateway</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/Amphion/"><span class="card-category-list-name">Amphion</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/AnimateAnyone/"><span class="card-category-list-name">AnimateAnyone</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/AudioCraft/"><span class="card-category-list-name">AudioCraft</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/ChatGLM/"><span class="card-category-list-name">ChatGLM</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/Gradio/"><span class="card-category-list-name">Gradio</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AIGC/Mixtral-8x7B/"><span class="card-category-list-name">Mixtral-8x7B</span><span class="card-category-list-count">1</span></a></li></ul></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/zsh/" style="font-size: 1.1em; color: #999">zsh</a> <a href="/tags/llamaindex-cli/" style="font-size: 1.2em; color: #999da3">llamaindex-cli</a> <a href="/tags/fishell/" style="font-size: 1.1em; color: #999">fishell</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/" style="font-size: 1.2em; color: #999da3">安全技术</a> <a href="/tags/Cortex/" style="font-size: 1.3em; color: #99a1ac">Cortex</a> <a href="/tags/SIEM/" style="font-size: 1.2em; color: #999da3">SIEM</a> <a href="/tags/%E5%AE%89%E5%85%A8%E5%9B%BE%E4%B9%A6/" style="font-size: 1.1em; color: #999">安全图书</a> <a href="/tags/python/" style="font-size: 1.2em; color: #999da3">python</a> <a href="/tags/WavJourney/" style="font-size: 1.1em; color: #999">WavJourney</a> <a href="/tags/templater/" style="font-size: 1.1em; color: #999">templater</a> <a href="/tags/news/" style="font-size: 1.1em; color: #999">news</a> <a href="/tags/gpustat/" style="font-size: 1.1em; color: #999">gpustat</a> <a href="/tags/Redis/" style="font-size: 1.1em; color: #999">Redis</a> <a href="/tags/OpenResty/" style="font-size: 1.1em; color: #999">OpenResty</a> <a href="/tags/Cherry%EF%BC%88%E9%94%AE%E7%9B%98%EF%BC%89/" style="font-size: 1.1em; color: #999">Cherry（键盘）</a> <a href="/tags/pdf/" style="font-size: 1.1em; color: #999">pdf</a> <a href="/tags/%E5%BC%A0%E9%87%8F/" style="font-size: 1.1em; color: #999">张量</a> <a href="/tags/%E7%B4%A2%E5%BC%95/" style="font-size: 1.1em; color: #999">索引</a> <a href="/tags/iptables/" style="font-size: 1.1em; color: #999">iptables</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 1.1em; color: #999">硬盘</a> <a href="/tags/cuda/" style="font-size: 1.2em; color: #999da3">cuda</a> <a href="/tags/chatglm3/" style="font-size: 1.1em; color: #999">chatglm3</a> <a href="/tags/CAPEC/" style="font-size: 1.1em; color: #999">CAPEC</a> <a href="/tags/ObsidianAddict/" style="font-size: 1.1em; color: #999">ObsidianAddict</a> <a href="/tags/Gradio/" style="font-size: 1.1em; color: #999">Gradio</a> <a href="/tags/nvidia-smi/" style="font-size: 1.1em; color: #999">nvidia-smi</a> <a href="/tags/mount/" style="font-size: 1.1em; color: #999">mount</a> <a href="/tags/stablediffusion/" style="font-size: 1.4em; color: #99a5b6">stablediffusion</a> <a href="/tags/comfyui/" style="font-size: 1.1em; color: #999">comfyui</a> <a href="/tags/LLM/" style="font-size: 1.5em; color: #99a9bf">LLM</a> <a href="/tags/blog/" style="font-size: 1.1em; color: #999">blog</a> <a href="/tags/abc/" style="font-size: 1.1em; color: #999">abc</a> <a href="/tags/%E9%94%AE%E7%9B%98%EF%BC%88%E8%AE%A1%E7%AE%97%E6%9C%BA%EF%BC%89/" style="font-size: 1.2em; color: #999da3">键盘（计算机）</a> <a href="/tags/picgo/" style="font-size: 1.1em; color: #999">picgo</a> <a href="/tags/%E5%86%85%E5%AD%98/" style="font-size: 1.1em; color: #999">内存</a> <a href="/tags/%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87/" style="font-size: 1.1em; color: #999">不支持中文</a> <a href="/tags/Luna/" style="font-size: 1.1em; color: #999">Luna</a> <a href="/tags/%E5%9B%BE%E4%B9%A6/" style="font-size: 1.2em; color: #999da3">图书</a> <a href="/tags/zip/" style="font-size: 1.1em; color: #999">zip</a> <a href="/tags/OpenAI/" style="font-size: 1.1em; color: #999">OpenAI</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">325</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2017/09/"><span class="card-archive-list-date">九月 2017</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2016/09/"><span class="card-archive-list-date">九月 2016</span><span class="card-archive-list-count">307</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">635</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-28T02:38:30.772Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><script>(function () {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/langchain/" style="font-size: 1.18em; color: #999ca1">langchain</a> <a href="/tags/github/" style="font-size: 1.42em; color: #99a6b7">github</a> <a href="/tags/nccopy/" style="font-size: 1.1em; color: #999">nccopy</a> <a href="/tags/zsh/" style="font-size: 1.1em; color: #999">zsh</a> <a href="/tags/GPT/" style="font-size: 1.1em; color: #999">GPT</a> <a href="/tags/x99/" style="font-size: 1.1em; color: #999">x99</a> <a href="/tags/lazygit/" style="font-size: 1.1em; color: #999">lazygit</a> <a href="/tags/%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87/" style="font-size: 1.1em; color: #999">不支持中文</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 1.1em; color: #999">正则表达式</a> <a href="/tags/chromadb/" style="font-size: 1.1em; color: #999">chromadb</a> <a href="/tags/templater/" style="font-size: 1.1em; color: #999">templater</a> <a href="/tags/music/" style="font-size: 1.18em; color: #999ca1">music</a> <a href="/tags/huaggingface/" style="font-size: 1.1em; color: #999">huaggingface</a> <a href="/tags/%E5%B9%B3%E6%96%B9%E5%92%8C%E5%85%AC%E5%BC%8F/" style="font-size: 1.1em; color: #999">平方和公式</a> <a href="/tags/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/" style="font-size: 1.34em; color: #99a3b0">安全运营</a> <a href="/tags/%E4%BA%BA%E9%99%85%E5%85%B3%E7%B3%BB/" style="font-size: 1.1em; color: #999">人际关系</a> <a href="/tags/clickhouse/" style="font-size: 1.1em; color: #999">clickhouse</a> <a href="/tags/sora/" style="font-size: 1.26em; color: #999fa8">sora</a> <a href="/tags/ThreatIngestor/" style="font-size: 1.1em; color: #999">ThreatIngestor</a> <a href="/tags/picgo/" style="font-size: 1.1em; color: #999">picgo</a> <a href="/tags/SOAR/" style="font-size: 1.26em; color: #999fa8">SOAR</a> <a href="/tags/Prompting-Guide/" style="font-size: 1.1em; color: #999">Prompting Guide</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/" style="font-size: 1.18em; color: #999ca1">安全技术</a> <a href="/tags/OTX/" style="font-size: 1.1em; color: #999">OTX</a> <a href="/tags/ubuntu22/" style="font-size: 1.1em; color: #999">ubuntu22</a> <a href="/tags/%E8%93%9D%E7%89%99%E9%94%AE%E7%9B%98/" style="font-size: 1.1em; color: #999">蓝牙键盘</a> <a href="/tags/%E4%BA%BA%E6%B0%91%E9%82%AE%E7%94%B5%E5%87%BA%E7%89%88%E7%A4%BE/" style="font-size: 1.1em; color: #999">人民邮电出版社</a> <a href="/tags/InternLM2/" style="font-size: 1.1em; color: #999">InternLM2</a> <a href="/tags/libreoffice/" style="font-size: 1.1em; color: #999">libreoffice</a> <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91/" style="font-size: 1.1em; color: #999">互联网</a> <a href="/tags/sigama/" style="font-size: 1.1em; color: #999">sigama</a> <a href="/tags/API/" style="font-size: 1.1em; color: #999">API</a> <a href="/tags/lua/" style="font-size: 1.5em; color: #99a9bf">lua</a> <a href="/tags/OpenSSL/" style="font-size: 1.1em; color: #999">OpenSSL</a> <a href="/tags/Suricata/" style="font-size: 1.1em; color: #999">Suricata</a> <a href="/tags/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/" style="font-size: 1.18em; color: #999ca1">机械键盘</a> <a href="/tags/GROK/" style="font-size: 1.1em; color: #999">GROK</a> <a href="/tags/%E4%B8%BB%E6%9D%BF/" style="font-size: 1.1em; color: #999">主板</a> <a href="/tags/%E5%AE%89%E5%85%A8%E5%9B%BE%E4%B9%A6/" style="font-size: 1.1em; color: #999">安全图书</a> <a href="/tags/%E9%9D%99%E7%94%B5%E5%AE%B9%E5%BC%8F%E9%94%AE%E7%9B%98/" style="font-size: 1.1em; color: #999">静电容式键盘</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">1135</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">324</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2017/09/"><span class="card-archive-list-date">九月 2017</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2016/09/"><span class="card-archive-list-date">九月 2016</span><span class="card-archive-list-count">307</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">1769</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-04-03T03:56:36.333Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 糖果AIGC实验室 备案:辽ICP备16003836号-5</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><script>(function () {
   var meta = document.createElement('meta');
   meta.content = 'no-referrer';
   meta.name = 'referrer';
